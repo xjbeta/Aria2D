@@ -1,0 +1,24 @@
+PODS:
+  - Starscream (1.1.2)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Starscream (~> 1.1.1)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+SPEC CHECKSUMS:
+  Starscream: 58a12fd35a3cb6aaa105716c2d42765f7c1c732f
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+PODFILE CHECKSUM: 2d1446d7aee6947d3644d7cfea31aeecf779558b
+
+COCOAPODS: 1.0.0.beta.2
