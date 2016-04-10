@@ -10,6 +10,10 @@
 		0108D4641C9E602F00ED2543 /* aria2D_aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 0108D4631C9E602F00ED2543 /* aria2D_aria2c */; };
 		0108D4651C9E603900ED2543 /* aria2D_aria2c in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0108D4631C9E602F00ED2543 /* aria2D_aria2c */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0108D46D1C9E83AB00ED2543 /* LeftSourceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0108D46C1C9E83AB00ED2543 /* LeftSourceListView.swift */; };
+		010BCD771CB8F1F5007779E5 /* TorrentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD751CB8F1F5007779E5 /* TorrentList.swift */; };
+		010BCD781CB8F1F5007779E5 /* TorrentList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BCD761CB8F1F5007779E5 /* TorrentList.xib */; };
+		010BCD7A1CB9CE3A007779E5 /* TorrentFileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD791CB9CE3A007779E5 /* TorrentFileList.swift */; };
+		010BCD7C1CB9D663007779E5 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD7B1CB9D663007779E5 /* Preferences.swift */; };
 		011A09311C7EEBC200A3B427 /* LeftSourceListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */; };
 		0126EA2E1C82989300B1DCA3 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */; };
 		014C85BB1CB3AB590071B11B /* DownloadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C85BA1CB3AB590071B11B /* DownloadListView.swift */; };
@@ -64,6 +68,10 @@
 /* Begin PBXFileReference section */
 		0108D4631C9E602F00ED2543 /* aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aria2D_aria2c; sourceTree = "<group>"; };
 		0108D46C1C9E83AB00ED2543 /* LeftSourceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListView.swift; sourceTree = "<group>"; };
+		010BCD751CB8F1F5007779E5 /* TorrentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentList.swift; sourceTree = "<group>"; };
+		010BCD761CB8F1F5007779E5 /* TorrentList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentList.xib; sourceTree = "<group>"; };
+		010BCD791CB9CE3A007779E5 /* TorrentFileList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentFileList.swift; sourceTree = "<group>"; };
+		010BCD7B1CB9D663007779E5 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListData.swift; sourceTree = "<group>"; };
 		0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		014C85BA1CB3AB590071B11B /* DownloadListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadListView.swift; sourceTree = "<group>"; };
@@ -112,6 +120,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010BCD7D1CB9D739007779E5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				018EB07A1C79D306006048A3 /* MainWindowController.swift */,
+				018EB0621C79AD16006048A3 /* DownloadList.swift */,
+				014C85BA1CB3AB590071B11B /* DownloadListView.swift */,
+				018EB0641C79AD16006048A3 /* CustomCell.swift */,
+				018EB0741C79B337006048A3 /* LeftSourceList.swift */,
+				0108D46C1C9E83AB00ED2543 /* LeftSourceListView.swift */,
+				011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */,
+				018EB0631C79AD16006048A3 /* TableViewMenu.swift */,
+				01FFADE51CAA37A700D70902 /* NewTaskWindow.swift */,
+				018EB0661C79AD16006048A3 /* SettingWindow.swift */,
+				010BCD751CB8F1F5007779E5 /* TorrentList.swift */,
+				014C85C21CB3C70A0071B11B /* MainMenu.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		014C85B91CB366FB0071B11B /* JSONDataAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +157,7 @@
 				01FFADE61CAA37A700D70902 /* NewTaskWindow.xib */,
 				014C85C41CB4E5A90071B11B /* SettingWindow.xib */,
 				018EB0441C79AA37006048A3 /* Main.storyboard */,
+				010BCD761CB8F1F5007779E5 /* TorrentList.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -159,18 +187,10 @@
 				018EB0571C79AC8C006048A3 /* Aria2c */,
 				018EB03E1C79AA37006048A3 /* AppDelegate.swift */,
 				0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */,
+				010BCD791CB9CE3A007779E5 /* TorrentFileList.swift */,
+				010BCD7B1CB9D663007779E5 /* Preferences.swift */,
 				014C85CA1CB5E31F0071B11B /* View */,
-				018EB07A1C79D306006048A3 /* MainWindowController.swift */,
-				018EB0621C79AD16006048A3 /* DownloadList.swift */,
-				014C85BA1CB3AB590071B11B /* DownloadListView.swift */,
-				018EB0641C79AD16006048A3 /* CustomCell.swift */,
-				018EB0741C79B337006048A3 /* LeftSourceList.swift */,
-				0108D46C1C9E83AB00ED2543 /* LeftSourceListView.swift */,
-				011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */,
-				018EB0631C79AD16006048A3 /* TableViewMenu.swift */,
-				01FFADE51CAA37A700D70902 /* NewTaskWindow.swift */,
-				018EB0661C79AD16006048A3 /* SettingWindow.swift */,
-				014C85C21CB3C70A0071B11B /* MainMenu.swift */,
+				010BCD7D1CB9D739007779E5 /* ViewController */,
 			);
 			path = Aria2D;
 			sourceTree = "<group>";
@@ -289,6 +309,7 @@
 				018EB0431C79AA37006048A3 /* Assets.xcassets in Resources */,
 				018EB0461C79AA37006048A3 /* Main.storyboard in Resources */,
 				018EB05F1C79ACA0006048A3 /* SessionFile.sh in Resources */,
+				010BCD781CB8F1F5007779E5 /* TorrentList.xib in Resources */,
 				01FFADE81CAA37A700D70902 /* NewTaskWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,12 +383,15 @@
 				014C85C31CB3C70A0071B11B /* MainMenu.swift in Sources */,
 				018EB0561C79AC81006048A3 /* WebsocketNotificationHandle.swift in Sources */,
 				018EB07C1C79D306006048A3 /* MainWindowController.swift in Sources */,
+				010BCD7C1CB9D663007779E5 /* Preferences.swift in Sources */,
 				018EB0531C79AC81006048A3 /* Aria2Websocket.swift in Sources */,
 				018EB0551C79AC81006048A3 /* Aria2cMethods.swift in Sources */,
 				018EB03F1C79AA37006048A3 /* AppDelegate.swift in Sources */,
 				0108D46D1C9E83AB00ED2543 /* LeftSourceListView.swift in Sources */,
 				0159F7C71CB0D52100F5F0DC /* Data.swift in Sources */,
+				010BCD7A1CB9CE3A007779E5 /* TorrentFileList.swift in Sources */,
 				0159F7CB1CB2073F00F5F0DC /* DataAPI.swift in Sources */,
+				010BCD771CB8F1F5007779E5 /* TorrentList.swift in Sources */,
 				018EB0521C79AC81006048A3 /* Aria2c.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +501,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "xjbeta.tiny-gmail.com.Aria2D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Debug;
 		};
@@ -491,6 +516,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "xjbeta.tiny-gmail.com.Aria2D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Release;
 		};

@@ -7,5 +7,5 @@
 #  Copyright © 2016年 xjbeta. All rights reserved.
 process=`ps aux | grep aria2D_aria2c | grep -v grep`;
 if [ "$process" == "" ]; then
-/Applications/aria2D.app/Contents/Resources/aria2D_aria2c --conf-path="/Applications/aria2D.app/Contents/Resources/aria2.conf" --dir="$HOME/Downloads/" -c -D
+./aria2D_aria2c --conf-path=$1 --dir=$2 -c -D
 fi

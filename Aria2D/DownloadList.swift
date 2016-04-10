@@ -283,10 +283,14 @@ extension DownloadList {
                         self.reloadDownloadingCell(DataAPI.sharedInstance.activeCount())
                     }
                 default:
-                    return
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.downloadListTableView.reloadData()
+                    }
                 }
-
-                
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.downloadListTableView.reloadData()
+                }
             }
 
         }

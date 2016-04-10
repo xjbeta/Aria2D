@@ -29,7 +29,7 @@ class DataManager: NSObject {
     
     
     enum Status {
-        case initialize, setData, update
+        case initialize, setData, update, reload
     }
 
     

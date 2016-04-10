@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="newTaskWindow" destination="F0z-JX-Cv5" id="VvH-Al-FrZ"/>
                 <outlet property="textField" destination="vne-OB-3yC" id="hgK-Bp-ldM"/>
+                <outlet property="view" destination="se5-gp-TjO" id="XQC-SW-vv5"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>

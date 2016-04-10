@@ -35,7 +35,7 @@ class Aria2Websocket: NSObject {
     func setWebSocketNotifications() {
         
         socket.onConnect = {
-//            print("onConnect")
+            print("onConnect")
             BackgroundTask.sharedInstance.sendAction({
                 Aria2cMethods.sharedInstance.TellStatus()
             })

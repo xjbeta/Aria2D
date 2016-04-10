@@ -20,9 +20,6 @@ class Aria2c: NSObject {
     func startAria2c() {
         shellTask("SessionFile")
         shellTask("StartAria2c")
-        
-//        print()
-        
     }
 
     
@@ -35,8 +32,15 @@ class Aria2c: NSObject {
         
         
         task.launchPath = "/bin/sh"
-        task.arguments  = [path!]
+        task.currentDirectoryPath = Preferences.sharedInstance.appPath + "/Contents/Resources/"
+        if shellFileName == "StartAria2c" {
+            task.arguments  = [path!, Preferences.sharedInstance.appPath + "/Contents/Resources/aria2.conf", Preferences.sharedInstance.downloadPath]
+        } else {
+            task.arguments  = [path!]
+        }
+        
         task.launch()
+        
     }
 
 

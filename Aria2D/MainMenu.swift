@@ -38,7 +38,7 @@ class MainMenu: NSViewController {
         
         BackgroundTask.sharedInstance.selectedIndexs.enumerateIndexesUsingBlock { index, _ in
             
-            
+            // 越界
             let status = DataAPI.sharedInstance.data()[index].status
             let gid = DataAPI.sharedInstance.data()[index].gid
             

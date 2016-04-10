@@ -92,7 +92,7 @@ class Aria2cMethods: NSObject {
     
     
     func addTorrent(path: String) {
-        let addTorrent = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2addTorrent\", \"method\":\"aria2.addTorrent\",\"params\":[\"\(path)\", [], {}]}"
+        let addTorrent = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2addTorrent\", \"method\":\"aria2.addTorrent\",\"params\":[\"\(path)\", [], {\"show-files\":\"true\"}]}"
         WriteToWebsocket(addTorrent)
     }
     

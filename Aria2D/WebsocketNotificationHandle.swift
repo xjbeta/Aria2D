@@ -35,6 +35,7 @@ class WebsocketNotificationHandle: NSObject {
             
             
             handleNotification(json)
+//            test(json)
 
             
             
@@ -45,6 +46,36 @@ class WebsocketNotificationHandle: NSObject {
 
         }
     }
+    
+    
+    func test(json:JSON) {
+        
+        switch json["id"].stringValue {
+        case "aria2tellStatus":
+            DataAPI.sharedInstance.setData(json)
+        case "aria2tellUpdate":
+            DataAPI.sharedInstance.update(json)
+            
+        case "aria2removeDownloadResult":
+            if json["result"].stringValue == "OK" {
+                print("aria2removeDownloadResult  GID#\(json)")
+            } else {
+                print(json)
+            }
+            Aria2cMethods.sharedInstance.TellStatus()
+            
+        case "aria2addUri":
+            print(json)
+            
+        case "aria2remove":
+            Aria2cMethods.sharedInstance.removeDownloadResult(json["result"].stringValue)
+            
+        default:
+            Aria2cMethods.sharedInstance.TellStatus()
+        }
+        
+    }
+    
     
     
     func handleNotification(json:JSON) {
