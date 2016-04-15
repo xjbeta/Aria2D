@@ -27,7 +27,6 @@ class DownloadList: NSViewController {
                 
                 
 //                show in Finder
-                
 //                NSWorkspace.sharedWorkspace().selectFile(path, inFileViewerRootedAtPath: "")
 //                let url = NSURL(fileURLWithPath: path)
 //                NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs([url])
@@ -35,59 +34,6 @@ class DownloadList: NSViewController {
             }
             return
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        downloadListTableView.selectedRowIndexes.enumerateIndexesUsingBlock{ index, _ in
-//            let gid = DataAPI.sharedInstance.data()[index].gid
-//
-//            
-//            if BackgroundTask.sharedInstance.selectedRow == 1 {
-//                let status = DataAPI.sharedInstance.data()[self.downloadListTableView.selectedRow].status
-//                print(status)
-//                if status == "active" {
-//                    Aria2cMethods.sharedInstance.pause(gid)
-//                } else if status == "paused" {
-//                    Aria2cMethods.sharedInstance.unpause(gid)
-//                }
-//                
-//                
-//                
-//            } else {
-//                
-//                let data = DataAPI.sharedInstance.data()[index]
-//
-//                
-//                let path = "/users/" + NSUserName() + "/downloads/" + data.name
-////                open file with Finder
-////                NSWorkspace.sharedWorkspace().openFile(path, withApplication: "Finder")
-//                NSWorkspace.sharedWorkspace().openFile(path, withApplication: "Finder", andDeactivate: true)
-//                
-//                
-////                show in Finder
-//                
-////                NSWorkspace.sharedWorkspace().selectFile(path, inFileViewerRootedAtPath: "")
-////                let url = NSURL(fileURLWithPath: path)
-////                NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs([url])
-//
-//            }
-//            
-//            
-//        }
-        
-
-        
-        
-        
         
 
         
@@ -103,8 +49,6 @@ class DownloadList: NSViewController {
         webSocketNoticeSet()
         downloadListTableView.reloadData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DownloadList.changeSelectRow(_:)), name: "LeftSourceListSelection", object: nil)
-        
-        
         downloadListTableView.selectionHighlightStyle = .Regular
     }
 

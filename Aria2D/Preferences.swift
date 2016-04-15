@@ -23,14 +23,37 @@ class Preferences: NSObject {
     
     let prefs = NSUserDefaults.standardUserDefaults()
     
-    var isFirstLaunch = false
-    
     func test() {
         downloadPath = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, .UserDomainMask, true)[0]
         
         
         NSUserDefaults.standardUserDefaults().synchronize()
     }
+    
+    func firstLaunchSetting() {
+        
+//        when application is first launch   prefs.boolForKey("isFirstLaunch") == false
+        if prefs.boolForKey("isFirstLaunch") == false {
+            prefs.setBool(true, forKey: "isFirstLaunch")
+//            isFirstLaunch
+        } else {
+//            isn't FirstLaunch
+            
+        }
+        
+    }
+
+    
+    
+    
+//    func downloadPath() -> String {
+//        if let path = prefs.stringForKey("downloadPath"){
+//            return path
+//        }else{
+//            return NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, .UserDomainMask, true)[0]
+//        }
+//    }
+    
     
     
 }

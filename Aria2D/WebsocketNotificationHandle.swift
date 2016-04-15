@@ -34,8 +34,8 @@ class WebsocketNotificationHandle: NSObject {
             
             
             
-            handleNotification(json)
-//            test(json)
+//            handleNotification(json)
+            test(json)
 
             
             
@@ -66,9 +66,10 @@ class WebsocketNotificationHandle: NSObject {
             
         case "aria2addUri":
             print(json)
-            
+             Aria2cMethods.sharedInstance.TellStatus()
         case "aria2remove":
             Aria2cMethods.sharedInstance.removeDownloadResult(json["result"].stringValue)
+             Aria2cMethods.sharedInstance.TellStatus()
             
         default:
             Aria2cMethods.sharedInstance.TellStatus()

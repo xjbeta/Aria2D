@@ -9,7 +9,10 @@
 import Cocoa
 
 class TorrentFileList: NSObject {
-
+    
+    // aria2c ./xxxx.torrent -S
+    //".torrent", ".meta4" and ".metalink"
+    
     func get(path: NSURL) {
         
     }

@@ -22,6 +22,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Aria2c.sharedInstance.startAria2c()
         Aria2Websocket.sharedInstance.setWebSocketNotifications()
         BackgroundTask.sharedInstance.suspend()
+        
+        Preferences.sharedInstance.firstLaunchSetting()
+        
     }
     
     

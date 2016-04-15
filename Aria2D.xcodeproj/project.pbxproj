@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0108D4641C9E602F00ED2543 /* aria2D_aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 0108D4631C9E602F00ED2543 /* aria2D_aria2c */; };
-		0108D4651C9E603900ED2543 /* aria2D_aria2c in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0108D4631C9E602F00ED2543 /* aria2D_aria2c */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0108D46D1C9E83AB00ED2543 /* LeftSourceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0108D46C1C9E83AB00ED2543 /* LeftSourceListView.swift */; };
 		010BCD771CB8F1F5007779E5 /* TorrentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD751CB8F1F5007779E5 /* TorrentList.swift */; };
 		010BCD781CB8F1F5007779E5 /* TorrentList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BCD761CB8F1F5007779E5 /* TorrentList.xib */; };
 		010BCD7A1CB9CE3A007779E5 /* TorrentFileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD791CB9CE3A007779E5 /* TorrentFileList.swift */; };
 		010BCD7C1CB9D663007779E5 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD7B1CB9D663007779E5 /* Preferences.swift */; };
 		011A09311C7EEBC200A3B427 /* LeftSourceListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */; };
+		011BFFD51CC134400095E85B /* aria2D_aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 011BFFD41CC134400095E85B /* aria2D_aria2c */; };
 		0126EA2E1C82989300B1DCA3 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */; };
 		014C85BB1CB3AB590071B11B /* DownloadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C85BA1CB3AB590071B11B /* DownloadListView.swift */; };
 		014C85C31CB3C70A0071B11B /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C85C21CB3C70A0071B11B /* MainMenu.swift */; };
@@ -56,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				0108D4651C9E603900ED2543 /* aria2D_aria2c in CopyFiles */,
 				01502BEF1C7C2E6D00C6A79C /* aria2.conf in CopyFiles */,
 				01502BF01C7C2E6D00C6A79C /* StartAria2c.sh in CopyFiles */,
 				01502BF11C7C2E6D00C6A79C /* SessionFile.sh in CopyFiles */,
@@ -66,13 +64,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0108D4631C9E602F00ED2543 /* aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aria2D_aria2c; sourceTree = "<group>"; };
 		0108D46C1C9E83AB00ED2543 /* LeftSourceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListView.swift; sourceTree = "<group>"; };
 		010BCD751CB8F1F5007779E5 /* TorrentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentList.swift; sourceTree = "<group>"; };
 		010BCD761CB8F1F5007779E5 /* TorrentList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentList.xib; sourceTree = "<group>"; };
 		010BCD791CB9CE3A007779E5 /* TorrentFileList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentFileList.swift; sourceTree = "<group>"; };
 		010BCD7B1CB9D663007779E5 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListData.swift; sourceTree = "<group>"; };
+		011BFFD41CC134400095E85B /* aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aria2D_aria2c; sourceTree = "<group>"; };
 		0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		014C85BA1CB3AB590071B11B /* DownloadListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadListView.swift; sourceTree = "<group>"; };
 		014C85C21CB3C70A0071B11B /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
@@ -200,9 +198,9 @@
 			children = (
 				014C85B91CB366FB0071B11B /* JSONDataAPI */,
 				018EB04D1C79AC81006048A3 /* Aria2c.swift */,
-				018EB0501C79AC81006048A3 /* Aria2cMethods.swift */,
 				018EB04E1C79AC81006048A3 /* Aria2Websocket.swift */,
 				018EB0511C79AC81006048A3 /* WebsocketNotificationHandle.swift */,
+				018EB0501C79AC81006048A3 /* Aria2cMethods.swift */,
 				014C85C81CB5DFC90071B11B /* GID.swift */,
 			);
 			name = Aria2c;
@@ -213,8 +211,8 @@
 			children = (
 				018EB0421C79AA37006048A3 /* Assets.xcassets */,
 				018EB0471C79AA37006048A3 /* Info.plist */,
-				0108D4631C9E602F00ED2543 /* aria2D_aria2c */,
 				018EB0591C79ACA0006048A3 /* aria2.conf */,
+				011BFFD41CC134400095E85B /* aria2D_aria2c */,
 				018EB05A1C79ACA0006048A3 /* StartAria2c.sh */,
 				018EB05B1C79ACA0006048A3 /* SessionFile.sh */,
 			);
@@ -245,12 +243,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 018EB04A1C79AA37006048A3 /* Build configuration list for PBXNativeTarget "Aria2D" */;
 			buildPhases = (
-				A89556CE783134E86DA72503 /* Check Pods Manifest.lock */,
+				A89556CE783134E86DA72503 /* 📦 Check Pods Manifest.lock */,
 				018EB0371C79AA37006048A3 /* Sources */,
 				018EB0381C79AA37006048A3 /* Frameworks */,
 				018EB0391C79AA37006048A3 /* Resources */,
-				D8E8AD87F900F32471856D08 /* Embed Pods Frameworks */,
-				D469960B992106A43D6BDA0A /* Copy Pods Resources */,
+				D8E8AD87F900F32471856D08 /* 📦 Embed Pods Frameworks */,
+				D469960B992106A43D6BDA0A /* 📦 Copy Pods Resources */,
 				018EB06D1C79ADB1006048A3 /* CopyFiles */,
 			);
 			buildRules = (
@@ -301,9 +299,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				018EB05E1C79ACA0006048A3 /* StartAria2c.sh in Resources */,
-				0108D4641C9E602F00ED2543 /* aria2D_aria2c in Resources */,
 				014C85C51CB4E5A90071B11B /* SettingWindow.xib in Resources */,
 				018EB07D1C79D306006048A3 /* MainWindow.xib in Resources */,
+				011BFFD51CC134400095E85B /* aria2D_aria2c in Resources */,
 				018EB0731C79ADFD006048A3 /* CustomCell.xib in Resources */,
 				018EB05D1C79ACA0006048A3 /* aria2.conf in Resources */,
 				018EB0431C79AA37006048A3 /* Assets.xcassets in Resources */,
@@ -317,14 +315,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A89556CE783134E86DA72503 /* Check Pods Manifest.lock */ = {
+		A89556CE783134E86DA72503 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,14 +330,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D469960B992106A43D6BDA0A /* Copy Pods Resources */ = {
+		D469960B992106A43D6BDA0A /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,14 +345,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D8E8AD87F900F32471856D08 /* Embed Pods Frameworks */ = {
+		D8E8AD87F900F32471856D08 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
