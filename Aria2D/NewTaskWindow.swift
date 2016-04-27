@@ -32,7 +32,7 @@ class NewTaskWindow: NSWindowController, NSWindowDelegate {
                 if let path = openPanel.URL {
                     if let data = NSData(contentsOfURL: path) {
                         let base64 = data.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-                        Aria2cMethods.sharedInstance.addTorrent(base64)
+                        Aria2cAPI.sharedInstance.addTorrent(base64)
                     }
                 }
             }
@@ -54,17 +54,12 @@ class NewTaskWindow: NSWindowController, NSWindowDelegate {
         
     }
     @IBAction func actionButton(sender: AnyObject) {
-        
-        
-        print("__\(textField.stringValue)__")
-        
-        BackgroundTask.sharedInstance.sendAction({
-            Aria2cMethods.sharedInstance.addUri(self.textField.stringValue)
-        })
-        
-        
+        startTask()
     }
     
+    @IBAction func textFieldEnter(sender: AnyObject) {
+        startTask()
+    }
 
     override var windowNibName:String! {
         return "NewTaskWindow"
@@ -76,6 +71,25 @@ class NewTaskWindow: NSWindowController, NSWindowDelegate {
         self.newTaskWindow.titlebarAppearsTransparent = true
         self.newTaskWindow.makeKeyAndOrderFront(nil)
         
+        
     }
+    
+}
+
+
+
+extension NewTaskWindow {
+    
+    
+    func startTask() {
+//        print("__\(textField.stringValue)__")
+        BackgroundTask.sharedInstance.sendAction({
+            Aria2cAPI.sharedInstance.addUri(self.textField.stringValue)
+        })
+        
+        self.newTaskWindow.close()
+    }
+    
+    
     
 }

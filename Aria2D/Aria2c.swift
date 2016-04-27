@@ -11,11 +11,6 @@ import Cocoa
 
 class Aria2c: NSObject {
     
-    static let sharedInstance = Aria2c()
-    
-    private override init() {
-        
-    }
     
     func startAria2c() {
         shellTask("SessionFile")

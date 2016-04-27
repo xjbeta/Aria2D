@@ -11,10 +11,10 @@ import Starscream
 
 
 class Aria2Websocket: NSObject {
-    var onConnect: ((Void) -> Void)?
+    var onConnect: (() -> Void)?
     var onDisconnect: ((NSError?) -> Void)?
     var onData: ((NSData) -> Void)?
-
+    
     
     static let sharedInstance = Aria2Websocket()
 
@@ -22,35 +22,28 @@ class Aria2Websocket: NSObject {
     
     
     private override init() {
-        socket.queue = dispatch_queue_create("com.vluxe.starscream.Aria2D", nil)
-        
+        socket.queue = dispatch_queue_create("com.xjbeta.starscream.Aria2D", nil)
     }
     
     
-    
-    
-    
-    
-    
+    let websocketNotificationHandle = WebsocketNotificationHandle()
+
     func setWebSocketNotifications() {
         
         socket.onConnect = {
-            print("onConnect")
             BackgroundTask.sharedInstance.sendAction({
-                Aria2cMethods.sharedInstance.TellStatus()
+                Aria2cAPI.sharedInstance.tellStatus()
             })
             self.onConnect?()
         }
-        //websocketDidDisconnect
         socket.onDisconnect = { error in
             print("websocket is disconnected: \(error?.localizedDescription)")
             self.onDisconnect?(error)
-            
-            
+            DataAPI.sharedInstance.resetData()
         }
         //websocketDidReceiveMessage
         socket.onText = { text in
-            WebsocketNotificationHandle.sharedInstance.handle(text)
+            self.websocketNotificationHandle.handle(text)
         }
         //websocketDidReceiveData
         socket.onData = { data in
@@ -64,7 +57,6 @@ class Aria2Websocket: NSObject {
     
 
 
-    
 
 
     func isConnected() -> Bool {

@@ -27,8 +27,8 @@ class LeftSourceList: NSViewController {
 
 
         
-        let downloading = Object(name: "正在下载", icon: NSImage(named: "NSPrivateChaptersTemplate"))
-        let completed = Object(name: "已完成", icon: NSImage(named: "NSMenuOnStateTemplate"))
+        let downloading = Object(name: "Downloading", icon: NSImage(named: "NSPrivateChaptersTemplate"))
+        let completed = Object(name: "Completed", icon: NSImage(named: "NSMenuOnStateTemplate"))
 
         list.object.append(downloading)
         list.object.append(completed)

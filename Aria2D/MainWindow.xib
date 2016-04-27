@@ -75,6 +75,40 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <scrollView wantsLayer="YES" canDrawConcurrently="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPV-59-rh6">
+                        <rect key="frame" x="4" y="8" width="138" height="180"/>
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="sbo-ej-37v">
+                            <rect key="frame" x="0.0" y="0.0" width="138" height="180"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" selectable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Wko-G2-Mh8">
+                                    <rect key="frame" x="0.0" y="0.0" width="138" height="180"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="minSize" width="138" height="180"/>
+                                    <size key="maxSize" width="1937" height="10000000"/>
+                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="138" height="180"/>
+                                    <size key="maxSize" width="1937" height="10000000"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="aNp-Uc-hjB" id="czV-dF-JiA"/>
+                                    </connections>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        </clipView>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="PMM-br-EDI"/>
+                        </constraints>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="R5n-CO-zES">
+                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="6A4-X8-yG7">
+                            <rect key="frame" x="-100" y="-100" width="15" height="180"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                     <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPv-U8-1Gl">
                         <rect key="frame" x="-1" y="-1" width="147" height="562"/>
                         <clipView key="contentView" drawsBackground="NO" id="BWF-Et-6oh">
@@ -82,7 +116,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="TWW-AZ-a44" id="j7h-Lc-JZX" customClass="LeftSourceListView" customModule="Aria2D" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="145" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="145" height="360"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -151,7 +185,7 @@
                             </subviews>
                             <nil key="backgroundColor"/>
                         </clipView>
-                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="22" bottom="0.0"/>
+                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="22" bottom="180"/>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="PPK-cq-y5z">
                             <rect key="frame" x="1" y="119" width="238" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -166,9 +200,12 @@
                     <constraint firstItem="QPv-U8-1Gl" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="-1" id="Awr-Zf-g3l"/>
                     <constraint firstItem="DqP-5h-jPC" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="CrO-7N-aS3"/>
                     <constraint firstAttribute="trailing" secondItem="DqP-5h-jPC" secondAttribute="trailing" id="ICe-yt-Nc9"/>
+                    <constraint firstAttribute="bottom" secondItem="rPV-59-rh6" secondAttribute="bottom" constant="8" id="OCx-oA-ieU"/>
                     <constraint firstItem="QPv-U8-1Gl" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="-1" id="T8F-sQ-LRP"/>
+                    <constraint firstItem="rPV-59-rh6" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="4" id="TGq-Xx-5G8"/>
                     <constraint firstAttribute="bottom" secondItem="QPv-U8-1Gl" secondAttribute="bottom" constant="-1" id="Yf6-pd-OMY"/>
                     <constraint firstItem="dhx-gd-267" firstAttribute="leading" secondItem="QPv-U8-1Gl" secondAttribute="trailing" id="nFu-sY-GzU"/>
+                    <constraint firstItem="dhx-gd-267" firstAttribute="leading" secondItem="rPV-59-rh6" secondAttribute="trailing" constant="4" id="qZA-j0-Knv"/>
                     <constraint firstAttribute="bottom" secondItem="DqP-5h-jPC" secondAttribute="bottom" id="tb2-jH-4X2"/>
                     <constraint firstItem="DqP-5h-jPC" firstAttribute="width" secondItem="se5-gp-TjO" secondAttribute="width" multiplier="8.3:10" id="xV0-MG-tfV"/>
                 </constraints>
@@ -188,6 +225,12 @@
             <connections>
                 <outlet property="leftSourceList" destination="j7h-Lc-JZX" id="Y15-Oj-yyx"/>
                 <outlet property="view" destination="j7h-Lc-JZX" id="lBs-i0-6S4"/>
+            </connections>
+        </customObject>
+        <customObject id="aNp-Uc-hjB" customClass="LogText" customModule="Aria2D" customModuleProvider="target">
+            <connections>
+                <outlet property="textView" destination="Wko-G2-Mh8" id="hmp-0C-VwQ"/>
+                <outlet property="view" destination="Wko-G2-Mh8" id="hM9-mN-axn"/>
             </connections>
         </customObject>
     </objects>

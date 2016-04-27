@@ -19,10 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillFinishLaunching(notification: NSNotification) {
-        Aria2c.sharedInstance.startAria2c()
         Aria2Websocket.sharedInstance.setWebSocketNotifications()
         BackgroundTask.sharedInstance.suspend()
-        
         Preferences.sharedInstance.firstLaunchSetting()
         
     }
@@ -30,6 +28,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
 
     func applicationWillTerminate(aNotification: NSNotification) {
+        
+        
+        
+        
     }
 
     
@@ -49,8 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
-    
-    
+
 
 }
 

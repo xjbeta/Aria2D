@@ -23,7 +23,7 @@ class DownloadList: NSViewController {
                 let path = "/users/" + NSUserName() + "/downloads/" + data.name
 //                open file with Finder
 //                NSWorkspace.sharedWorkspace().openFile(path, withApplication: "Finder")
-                NSWorkspace.sharedWorkspace().openFile(path, withApplication: "Finder", andDeactivate: true)
+                NSWorkspace.sharedWorkspace().openFile(path, withApplication: "Finder", andDeactivate: false)
                 
                 
 //                show in Finder
@@ -46,10 +46,10 @@ class DownloadList: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        webSocketNoticeSet()
         downloadListTableView.reloadData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DownloadList.changeSelectRow(_:)), name: "LeftSourceListSelection", object: nil)
-        downloadListTableView.selectionHighlightStyle = .Regular
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DownloadList.updateDownloadList), name: "updateDownloadList", object: nil)
+        
     }
 
     
@@ -129,19 +129,18 @@ extension DownloadList {
         view.totalLength.stringValue = data.totalLength
         view.fileIcon.image = NSWorkspace.sharedWorkspace().iconForFileType(data.fileType)
 
-        
         if BackgroundTask.sharedInstance.selectedRow == 1 {
             view.progressIndicator.hidden = false
             
             view.progressIndicator.doubleValue = data.progressIndicator
             view.percentage.stringValue = data.percentage
             
-            if data.status == "active" {
+            if data.status == .active {
                 view.time.stringValue = data.time
                 view.status.stringValue = data.speed
             } else {
                 view.time.stringValue = ""
-                view.status.stringValue = data.status
+                view.status.stringValue = data.statusValue()
             }
             
             
@@ -150,7 +149,7 @@ extension DownloadList {
             view.progressIndicator.hidden = true
             view.time.stringValue = ""
             view.percentage.stringValue = ""
-            view.status.stringValue = data.status
+            view.status.stringValue = data.statusValue()
             
         }
 
@@ -193,51 +192,32 @@ extension DownloadList {
 
     // MARK: - SetWebSocketNotice
     
-    func webSocketNoticeSet() {
+    func updateDownloadList() {
         
         
-        Aria2Websocket.sharedInstance.onConnect = {
+        if BackgroundTask.sharedInstance.selectedRow == 1 {
             
-            
-            
-            
-        }
-        Aria2Websocket.sharedInstance.onDisconnect = { error in
-            DataAPI.sharedInstance.resetData()
-        }
-        
-        Aria2Websocket.sharedInstance.onData = { data in
-            
-            
-            
-        }
-        
-        
-        WebsocketNotificationHandle.sharedInstance.updateTable = {
-            
-            if BackgroundTask.sharedInstance.selectedRow == 1 {
-                
-                switch DataAPI.sharedInstance.status() {
-                case .setData:
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.downloadListTableView.reloadData()
-                    }
-                case .update:
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.reloadDownloadingCell(DataAPI.sharedInstance.activeCount())
-                    }
-                default:
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.downloadListTableView.reloadData()
-                    }
+            switch DataAPI.sharedInstance.status() {
+            case .setData:
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.downloadListTableView.reloadData()
                 }
-            } else {
+            case .update:
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.reloadDownloadingCell(DataAPI.sharedInstance.activeCount())
+                }
+            default:
                 dispatch_async(dispatch_get_main_queue()) {
                     self.downloadListTableView.reloadData()
                 }
             }
-
+        } else {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.downloadListTableView.reloadData()
+            }
         }
+        
+
     }
     
     

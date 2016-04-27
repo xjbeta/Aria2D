@@ -19,8 +19,8 @@ class DataAPI: NSObject {
     private let dataManager = DataManager()
     
     
-    func status() -> DataManager.Status {
-        return dataManager.status
+    func status() -> DataManager.DataStatus {
+        return dataManager.dataStatus
     }
     
     
@@ -49,6 +49,11 @@ class DataAPI: NSObject {
         }
         return []
     }
+    
+    
+    
+    
+    
     
     func resetData() {
         dataManager.resetData()

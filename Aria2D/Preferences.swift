@@ -14,14 +14,17 @@ class Preferences: NSObject {
     
     private override init() {
     }
+    let prefs = NSUserDefaults.standardUserDefaults()
     
     var appPath = NSBundle.mainBundle().bundlePath
-    
     var confFilePath = false
+    
     
     var downloadPath = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, .UserDomainMask, true)[0]
     
-    let prefs = NSUserDefaults.standardUserDefaults()
+    var closeAria2cWhenExit = NSUserDefaults.standardUserDefaults().boolForKey("closeAria2cWhenExit")
+    
+    
     
     func test() {
         downloadPath = NSSearchPathForDirectoriesInDomains(.DownloadsDirectory, .UserDomainMask, true)[0]
@@ -34,8 +37,11 @@ class Preferences: NSObject {
         
 //        when application is first launch   prefs.boolForKey("isFirstLaunch") == false
         if prefs.boolForKey("isFirstLaunch") == false {
-            prefs.setBool(true, forKey: "isFirstLaunch")
 //            isFirstLaunch
+            prefs.setBool(true, forKey: "isFirstLaunch")
+//            prefs.setBool(false, forKey: "exit")
+            
+
         } else {
 //            isn't FirstLaunch
             
@@ -43,6 +49,14 @@ class Preferences: NSObject {
         
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

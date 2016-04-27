@@ -10,6 +10,73 @@ import Cocoa
 
 class MainMenu: NSViewController {
 
+    var newTaskWindow: NewTaskWindow!
+    var settingWindow: SettingWindow!
+    
+    @IBOutlet weak var pauseAllButton: NSMenuItem!
+    @IBOutlet weak var unPauseAllButton: NSMenuItem!
+    
+    @IBOutlet weak var pauseOrUnpauseButton: NSMenuItem!
+    
+
+    
+    
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(MainMenu.nextTag(_:)) {
+            if BackgroundTask.sharedInstance.selectedRow == 1 {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        if menuItem.action == #selector(MainMenu.previousTag(_:)) {
+            if BackgroundTask.sharedInstance.selectedRow == 1 {
+                return false
+            } else {
+                return true
+            }
+            
+        }
+        
+        
+        if menuItem.action == #selector(MainMenu.pauseOrUnpause(_:)) {
+            if BackgroundTask.sharedInstance.selectedRow == 1 && BackgroundTask.sharedInstance.selectedIndexs.count > 0 {
+                return true
+            } else {
+                return false
+            }
+            
+        }
+        
+        
+        if menuItem.action == #selector(MainMenu.pauseAll(_:)) {
+            if BackgroundTask.sharedInstance.selectedRow == 1 {
+                return true
+            } else {
+                return false
+            }
+            
+        }
+        if menuItem.action == #selector(MainMenu.unPauseAll(_:)) {
+            if BackgroundTask.sharedInstance.selectedRow == 1 {
+                return true
+            } else {
+                return false
+            }
+            
+        }
+        
+        
+        return true
+    }
+    
+    
+}
+
+//MARK: Button Action
+extension MainMenu {
+    
     @IBAction func about(sender: AnyObject) {
     }
     
@@ -26,12 +93,12 @@ class MainMenu: NSViewController {
     @IBAction func nextTag(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("nextTag", object: self)
     }
-
+    
     @IBAction func previousTag(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("previousTag", object: self)
     }
     @IBAction func refresh(sender: AnyObject) {
-        Aria2cMethods.sharedInstance.TellStatus()
+        Aria2cAPI.sharedInstance.tellStatus()
     }
     
     @IBAction func delete(sender: AnyObject) {
@@ -42,52 +109,79 @@ class MainMenu: NSViewController {
             let status = DataAPI.sharedInstance.data()[index].status
             let gid = DataAPI.sharedInstance.data()[index].gid
             
-            if status == "complete" || status == "error" {
-                Aria2cMethods.sharedInstance.removeDownloadResult(gid)
+            if status == .complete || status == .error {
+                Aria2cAPI.sharedInstance.removeDownloadResult(gid)
             } else {
-                Aria2cMethods.sharedInstance.remove(gid)
+                Aria2cAPI.sharedInstance.remove(gid)
             }
             
             
         }
     }
     
-    @IBAction func pause(sender: AnyObject) {
+    
+    
+    @IBAction func pauseOrUnpause(sender: AnyObject) {
         if BackgroundTask.sharedInstance.selectedRow == 1 {
-            BackgroundTask.sharedInstance.selectedIndexs.enumerateIndexesUsingBlock { index, _ in
-                let gid = DataAPI.sharedInstance.data()[index].gid
-                Aria2cMethods.sharedInstance.pause(gid)
+            if maxCount() == "pause" {
+                pauseOrUnpauseButton.title = "pause"
+                BackgroundTask.sharedInstance.selectedIndexs.enumerateIndexesUsingBlock { index, _ in
+                    DataAPI.sharedInstance.data()[index].gid.pause()
+                }
+                
+                
+            } else if maxCount() == "unpause" {
+                pauseOrUnpauseButton.title = "unpause"
+                BackgroundTask.sharedInstance.selectedIndexs.enumerateIndexesUsingBlock { index, _ in
+                    DataAPI.sharedInstance.data()[index].gid.unpause()
+                }
             }
         }
+        
+        
+        
     }
     
     
-    @IBAction func unpause(sender: AnyObject) {
-        if BackgroundTask.sharedInstance.selectedRow == 1 {
-            BackgroundTask.sharedInstance.selectedIndexs.enumerateIndexesUsingBlock { index, _ in
-                let gid = DataAPI.sharedInstance.data()[index].gid
-                Aria2cMethods.sharedInstance.unpause(gid)
-            }
-        }
+    @IBAction func pauseAll(sender: AnyObject) {
+        Aria2cAPI.sharedInstance.pauseAll()
+    }
+    @IBAction func unPauseAll(sender: AnyObject) {
+        Aria2cAPI.sharedInstance.unPauseAll()
     }
     
-    var newTaskWindow: NewTaskWindow!
-    var settingWindow: SettingWindow!
-    
-    @IBOutlet weak var pauseButton: NSMenuItem!
-    @IBOutlet weak var unPauseButton: NSMenuItem!
-    
-    
-    func setButton(notification: NSNotification) {
-        let row = notification.userInfo!["selectedRow"] as? Int
-        if row == 1 {
-            pauseButton.enabled = true
-            unPauseButton.enabled = true
-        } else {
-            pauseButton.enabled = false
-            unPauseButton.enabled = false
+    @IBAction func showInFinder(sender: AnyObject) {
+        
+        BackgroundTask.sharedInstance.selectedIndexs.enumerateIndexesUsingBlock { index, _ in
+            //            let path = DataAPI.sharedInstance.data()[index].
+            
+            
         }
+        
+        
+        
+    }
+    
+}
+
+
+
+
+
+//MARK: Private
+private extension MainMenu {
+    
+    func maxCount() -> String {
+        let taskStatusCount = BackgroundTask.sharedInstance.taskStatusCount
+        let x = taskStatusCount.active + taskStatusCount.waiting
+        let y = taskStatusCount.paused
+        
+        var maxCount: String
+        maxCount = x >= y ? "pause" : "unpause"
+
+        return maxCount
     }
     
     
 }
+

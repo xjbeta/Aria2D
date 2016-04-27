@@ -10,10 +10,6 @@ import Cocoa
 
 class Aria2cMethods: NSObject {
     
-    static let sharedInstance = Aria2cMethods()
-    
-    private override init() {
-    }
     /*
     
     https://aria2.github.io/manual/en/html/aria2c.html#methods
@@ -52,6 +48,8 @@ class Aria2cMethods: NSObject {
     forceShutdown //强制退出
     saveSession //保存当前 session
     */
+    
+    
 
     
     
@@ -60,7 +58,11 @@ class Aria2cMethods: NSObject {
         
         let tellUpdate = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2tellUpdate\", \"method\":\"aria2.tellActive\",\"params\":[[\"gid\",\"completedLength\",\"totalLength\",\"downloadSpeed\"]]}"
         
-
+        let shutdown  = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2shutdown\", \"method\":\"aria2.shutdown\"}"
+        
+        
+        let pauseAll = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2pauseAll\", \"method\":\"aria2.pauseAll\"}"
+        let unPauseAll = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2unpauseAll\", \"method\":\"aria2.unpauseAll\"}"
         
         
     }
@@ -70,16 +72,18 @@ class Aria2cMethods: NSObject {
     
     
     
-    func TellStatus() {
+    func tellStatus() {
         WriteToWebsocket(methods.tellStatus)
     }
     
-    func TellActiveSec() {
+    func tellActiveSec() {
         WriteToWebsocket(methods.tellUpdate)
     }
     
+    func shutdown() {
+        WriteToWebsocket(methods.shutdown)
+    }
     
-
     
     
     
@@ -98,14 +102,14 @@ class Aria2cMethods: NSObject {
     
     
     
-    func pause(gid: String) {
+    func pause(gid: GID) {
         let pause = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2pause\", \"method\":\"aria2.pause\",\"params\":[\"\(gid)\", [\"\(gid)\"]]}"
         WriteToWebsocket(pause)
 
     }
     
     
-    func unpause(gid: String) {
+    func unpause(gid: GID) {
         let unpause = "{\"jsonrpc\": \"2.0\", \"id\": \"aria2unpause\", \"method\":\"aria2.unpause\",\"params\":[\"\(gid)\"]}"
         WriteToWebsocket(unpause)
         
@@ -132,9 +136,13 @@ class Aria2cMethods: NSObject {
     
     
     
+    func pauseAll() {
+        WriteToWebsocket(methods.pauseAll)
+    }
     
-    
-    
+    func unPauseAll() {
+        WriteToWebsocket(methods.unPauseAll)
+    }
 
 
 }

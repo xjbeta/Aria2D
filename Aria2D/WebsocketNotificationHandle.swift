@@ -10,36 +10,18 @@ import Cocoa
 import SwiftyJSON
 
 class WebsocketNotificationHandle: NSObject {
-    
-    static let sharedInstance = WebsocketNotificationHandle()
-    
-    
-    private override init() {
-    }
-    
-    var updateTable: (() -> Void)?
-    
-    
 
     
-    
-    
+
     func handle(text: String) {
         
         
         if let dataFromString = text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             let json = JSON(data: dataFromString)
-//            print(json)
             
+            handleNotification(json)
             
-            
-            
-//            handleNotification(json)
-            test(json)
-
-            
-            
-            self.updateTable?()
+            NSNotificationCenter.defaultCenter().postNotificationName("updateDownloadList", object: self, userInfo: nil)
             
             
             
@@ -48,7 +30,7 @@ class WebsocketNotificationHandle: NSObject {
     }
     
     
-    func test(json:JSON) {
+    private func test(json:JSON) {
         
         switch json["id"].stringValue {
         case "aria2tellStatus":
@@ -62,24 +44,24 @@ class WebsocketNotificationHandle: NSObject {
             } else {
                 print(json)
             }
-            Aria2cMethods.sharedInstance.TellStatus()
+            Aria2cAPI.sharedInstance.tellStatus()
             
         case "aria2addUri":
             print(json)
-             Aria2cMethods.sharedInstance.TellStatus()
+             Aria2cAPI.sharedInstance.tellStatus()
         case "aria2remove":
-            Aria2cMethods.sharedInstance.removeDownloadResult(json["result"].stringValue)
-             Aria2cMethods.sharedInstance.TellStatus()
+            Aria2cAPI.sharedInstance.removeDownloadResult(json["result"].stringValue)
+             Aria2cAPI.sharedInstance.tellStatus()
             
         default:
-            Aria2cMethods.sharedInstance.TellStatus()
+            Aria2cAPI.sharedInstance.tellStatus()
         }
         
     }
     
     
     
-    func handleNotification(json:JSON) {
+    private func handleNotification(json:JSON) {
         switch json["id"].stringValue {
         case "aria2tellStatus":
             DataAPI.sharedInstance.setData(json)
@@ -96,13 +78,14 @@ class WebsocketNotificationHandle: NSObject {
             } else {
                 print(json)
             }
-            Aria2cMethods.sharedInstance.TellStatus()
+            Aria2cAPI.sharedInstance.tellStatus()
             
         case "aria2addUri":
             print(json)
             
         case "aria2remove":
-            Aria2cMethods.sharedInstance.removeDownloadResult(json["result"].stringValue)
+//            (json["result"].stringValue as GID).removeDownloadResult()
+            json["result"].gidValue.removeDownloadResult()
             break
             
             
@@ -110,6 +93,11 @@ class WebsocketNotificationHandle: NSObject {
             print("aria2unpause  \(json)")
         case "aria2pause":
             print("aria2pause  \(json)")
+            
+        case "aria2unpauseAll":
+            print("aria2unpauseAll\(json["result"].stringValue)")
+        case "aria2pauseAll":
+            print("aria2unpauseAll\(json["result"].stringValue)")
             
             
             

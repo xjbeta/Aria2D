@@ -9,20 +9,21 @@
 import Cocoa
 import SwiftyJSON
 
+
+
 class Data: NSObject {
     
-    var gid: String
-    var name: String
-    var totalLength: String
-    var fileType: String
-    var status: String
-    var percentage: String
-    var progressIndicator: Double
-    var time: String
-    var speed: String
+    var gid: GID
+    var name: Name
+    var totalLength: TotalLength
+    var fileType: FileType
+    var status: Status
+    var percentage: Percentage
+    var progressIndicator: ProgressIndicator
+    var time: Time
+    var speed: Speed
     
-    
-    init(gid: String, name: String, totalLength: String, fileType: String, status: String, percentage: String, progressIndicator: Double, time: String, speed: String) {
+    init(gid: GID, name: Name, totalLength: TotalLength, fileType: FileType, status: Status, percentage: Percentage, progressIndicator: ProgressIndicator, time: Time, speed: Speed) {
 
         self.gid = gid
         self.name = name
@@ -35,9 +36,27 @@ class Data: NSObject {
         self.speed = speed
     }
     
-
+    func statusValue() -> String {
+        switch status {
+        case .active:
+            return "active"
+        case .complete:
+            return "complete"
+        case .error:
+            return "error"
+        case .paused:
+            return "paused"
+        case .removed:
+            return "removed"
+        case .waiting:
+            return "waiting"
+        }
+    }
     
 }
+
+
+
 
 
 

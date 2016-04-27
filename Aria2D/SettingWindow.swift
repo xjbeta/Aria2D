@@ -12,6 +12,15 @@ class SettingWindow: NSWindowController {
 
     @IBOutlet var settingWindow: NSWindow!
     
+
+    
+    @IBOutlet weak var closeAria2cWhenExitButton: NSButton!
+
+    @IBAction func closeAria2cWhenExit(sender: AnyObject) {
+        print(closeAria2cWhenExitButton.state)
+    }
+    
+    
     override var windowNibName:String! {
         
         return "SettingWindow"
@@ -21,11 +30,12 @@ class SettingWindow: NSWindowController {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-
-        
         self.settingWindow.titlebarAppearsTransparent = true
         self.settingWindow.makeKeyAndOrderFront(nil)
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        
+        
+//        closeAria2cWhenExitButton.state
+        
     }
     
     

@@ -30,18 +30,20 @@ class CustomCell: NSTableCellView {
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
+        
+        
     }
     
     
-//    override var backgroundStyle:NSBackgroundStyle{
-//        didSet{
-//            if backgroundStyle == .Dark{
-//                self.layer?.backgroundColor = NSColor(red: 0.35, green: 0.75, blue: 0.91, alpha: 1).CGColor
-//            } else {
-//                self.layer?.backgroundColor = NSColor.clearColor().CGColor
-//            }
-//        }
-//    }
+    override var backgroundStyle:NSBackgroundStyle{
+        didSet{
+            if backgroundStyle == .Dark{
+                self.layer?.backgroundColor = NSColor(red: 0.35, green: 0.75, blue: 0.91, alpha: 1).CGColor
+            } else {
+                self.layer?.backgroundColor = NSColor.clearColor().CGColor
+            }
+        }
+    }
     
     override var mouseDownCanMoveWindow: Bool {
         return true

@@ -25,10 +25,10 @@ class DataManager: NSObject {
     
     
     
-    var status = Status.initialize
+    var dataStatus = DataStatus.initialize
     
     
-    enum Status {
+    enum DataStatus {
         case initialize, setData, update, reload
     }
 
@@ -48,7 +48,7 @@ extension DataManager {
     func setData(json: JSON) {
         
         resetData()
-        status = .setData
+        dataStatus = .setData
         for result in json["result"][0][0].arrayValue {
             
             
@@ -80,7 +80,8 @@ extension DataManager {
             
             switch status {
             case "complete":
-                completeList.append(dataFormat(result))
+//                completeList.append(dataFormat(result))
+                completeList.insert(dataFormat(result), atIndex: 0)
             case "error":
                 errorList.append(dataFormat(result))
             case "remove":
@@ -106,7 +107,7 @@ extension DataManager {
         guard json["result"].arrayValue.count == activeList.count else {
             return
         }
-        status = .update
+        dataStatus = .update
         
         for (index, value) in json["result"].arrayValue.enumerate() {
             let completedLength    = value["completedLength"]
@@ -148,7 +149,7 @@ extension DataManager {
         guard index < downloadingList.count else { return }
         let object = downloadingList[index]
         object.time = ""
-        object.status = "paused"
+        object.status = .paused
         pausedList.append(object)
     }
     
@@ -229,31 +230,29 @@ private extension DataManager {
     func dataFormat(json: JSON) -> Data {
         
         
-        var gid: String
-        var name: String
-        var totalLength: String
-        var fileType: String
-        var status: String
-        var percentage: String
-        var progressIndicator: Double
-        var time: String
-        var speed: String
+        var gid: GID
+        var name: Name
+        var totalLength: TotalLength
+        var fileType: FileType
+        var status: Status
+        var percentage: Percentage
+        var progressIndicator: ProgressIndicator
+        var time: Time
+        var speed: Speed
         
         
-        let dir             = json["dir"].stringValue
-        let path            = json["files"][0]["path"].stringValue
+        let dir = json["dir"].stringValue
+        let path = json["files"][0]["path"].stringValue
         let completedLength = json["completedLength"]
         let totalLengthByte = json["totalLength"]
-        let downloadSpeed   = json["downloadSpeed"]
+        let downloadSpeed = json["downloadSpeed"]
         
         
-        if json["bittorrent"] != nil {
-            print("bittorrent")
-        }
-        
+
         
         
         
+        status = json["status"].statusValue
         totalLength = byteConverter(totalLengthByte.uIntValue)
         gid = json["gid"].stringValue
         name = downloadTaskNameConverter(dir, path: path)
@@ -269,26 +268,45 @@ private extension DataManager {
             percentage = "\(strFormat(per))%"
         }
         
-        if json["status"].stringValue == "active" {
-            status = "active"
+        if status == .active {
             speed = "\(byteConverter(downloadSpeed.uIntValue))/s"
         } else {
-            status = json["status"].stringValue
             speed = ""
         }
+        time = timeFormat(totalLengthByte.uIntValue - completedLength.uIntValue, speed: downloadSpeed.uIntValue)
         
         
-        if json["bittorrent"] != nil {
+        guard json["bittorrent"] == nil else {
+            
+            print(json)
             
             
             
+            if json["bittorrent"]["info"]["name"].stringValue == "" {
+                name = json["files"][0]["path"].stringValue
+            } else {
+                name = json["bittorrent"]["info"]["name"].stringValue
+            }
+            
+            fileType = NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon))
+            
+            return Data(gid: gid,
+                        name: name,
+                        totalLength: totalLength,
+                        fileType: fileType,
+                        status: status,
+                        percentage: percentage,
+                        progressIndicator: progressIndicator,
+                        time: time,
+                        speed: speed)
         }
+        
         
         
         
 
         
-        time = timeFormat(totalLengthByte.uIntValue - completedLength.uIntValue, speed: downloadSpeed.uIntValue)
+        
         
         return Data(gid: gid,
                     name: name,

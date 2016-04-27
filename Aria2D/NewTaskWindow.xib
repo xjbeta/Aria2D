@@ -21,16 +21,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="450" height="205"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a9n-wf-j6K">
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a9n-wf-j6K" customClass="NewTaskTextField" customModule="Aria2D" customModuleProvider="target">
                         <rect key="frame" x="20" y="39" width="410" height="161"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="161" id="5wJ-hh-uxM"/>
                         </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="vne-OB-3yC">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="vne-OB-3yC">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="textFieldEnter:" target="-2" id="hkI-m4-32u"/>
+                        </connections>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kLp-yq-OsX">
                         <rect key="frame" x="14" y="3" width="84" height="32"/>

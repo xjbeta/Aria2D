@@ -105,34 +105,46 @@
                                                 <action selector="paste:" target="Ady-hI-5gd" id="AUp-vz-jGx"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Paste and Match Style" keyEquivalent="V" id="xKH-S1-rmH">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="pasteAsPlainText:" target="Ady-hI-5gd" id="KL8-hh-h6w"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="Select All" keyEquivalent="a" id="BTp-4E-Ixu">
                                             <connections>
                                                 <action selector="selectAll:" target="Ady-hI-5gd" id="ghV-TA-DcV"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="sBr-Pa-uvz"/>
-                                        <menuItem title="Pause" keyEquivalent="p" id="BtS-l0-eXT">
-                                            <connections>
-                                                <action selector="pause:" target="YeI-lu-vMk" id="8sB-uU-4gv"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Unpause" keyEquivalent="u" id="ifh-Dz-uhv">
-                                            <connections>
-                                                <action selector="unpause:" target="YeI-lu-vMk" id="9MM-U6-DjJ"/>
-                                            </connections>
-                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Task" id="64R-PK-AEY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Task" id="Zy3-gx-Fzk">
+                                    <items>
                                         <menuItem title="Delete" id="pa3-QI-u2k">
                                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
                                             <connections>
                                                 <action selector="delete:" target="YeI-lu-vMk" id="807-qd-3pn"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Pause/Unpause" keyEquivalent="s" id="xGQ-pp-Kft">
+                                            <connections>
+                                                <action selector="pauseOrUnpause:" target="YeI-lu-vMk" id="Ed9-Yg-PUJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="sBr-Pa-uvz"/>
+                                        <menuItem title="PauseAll" keyEquivalent="p" id="t8r-S0-n6I">
+                                            <connections>
+                                                <action selector="pauseAll:" target="YeI-lu-vMk" id="ZRR-Mz-IUd"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="UnpauseAll" keyEquivalent="u" id="xZg-25-Spt">
+                                            <connections>
+                                                <action selector="unPauseAll:" target="YeI-lu-vMk" id="CAs-WD-UJ6"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="R11-yc-bMM"/>
+                                        <menuItem title="Show in Finder" keyEquivalent="f" id="lLk-y0-g1U">
+                                            <connections>
+                                                <action selector="showInFinder:" target="YeI-lu-vMk" id="MQp-op-spW"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -190,8 +202,9 @@ CA
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Aria2D" customModuleProvider="target"/>
                 <customObject id="YeI-lu-vMk" customClass="MainMenu" customModule="Aria2D" customModuleProvider="target">
                     <connections>
-                        <outlet property="pauseButton" destination="BtS-l0-eXT" id="ZRH-YU-PgW"/>
-                        <outlet property="unPauseButton" destination="ifh-Dz-uhv" id="PXL-9B-68m"/>
+                        <outlet property="pauseAllButton" destination="t8r-S0-n6I" id="tVc-WD-fhD"/>
+                        <outlet property="pauseOrUnpauseButton" destination="xGQ-pp-Kft" id="vnh-Di-jAS"/>
+                        <outlet property="unPauseAllButton" destination="xZg-25-Spt" id="ASt-sf-Ztb"/>
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
