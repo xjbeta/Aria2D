@@ -49,47 +49,43 @@ extension DataManager {
         
         resetData()
         dataStatus = .setData
-        for result in json["result"][0][0].arrayValue {
-            
-            
-            activeList.append(dataFormat(result))
-        }
+
+        json["result"][0][0].arrayValue.forEach { activeList.append(dataFormat($0)) }
         
         downloadingList += activeList
         
-        for result in json["result"][1][0].arrayValue {
-            
-            let status = result["status"].stringValue
+        
+        json["result"][1][0].arrayValue.forEach {
+            let status = $0["status"].stringValue
             switch status {
             case "waiting":
-                waitingList.append(dataFormat(result))
+                waitingList.append(dataFormat($0))
             case "paused":
-                pausedList.append(dataFormat(result))
+                pausedList.append(dataFormat($0))
             default:
                 break
             }
-            
-            
         }
+        
+        
+
         downloadingList += waitingList
         downloadingList += pausedList
         
-        for result in json["result"][2][0].arrayValue {
-            
-            let status = result["status"].stringValue
-            
+        json["result"][2][0].arrayValue.forEach {
+            let status = $0["status"].stringValue
             switch status {
             case "complete":
-//                completeList.append(dataFormat(result))
-                completeList.insert(dataFormat(result), atIndex: 0)
+                completeList.insert(dataFormat($0), atIndex: 0)
             case "error":
-                errorList.append(dataFormat(result))
+                errorList.append(dataFormat($0))
             case "remove":
-                removedList.append(dataFormat(result))
+                removedList.append(dataFormat($0))
             default:
                 break
             }
         }
+        
         downloadingList += errorList
         
         

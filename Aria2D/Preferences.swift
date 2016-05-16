@@ -39,7 +39,7 @@ class Preferences: NSObject {
         if prefs.boolForKey("isFirstLaunch") == false {
 //            isFirstLaunch
             prefs.setBool(true, forKey: "isFirstLaunch")
-//            prefs.setBool(false, forKey: "exit")
+
             
 
         } else {
@@ -52,9 +52,7 @@ class Preferences: NSObject {
     
     
     
-    
-    
-    
+
     
     
     

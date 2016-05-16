@@ -90,15 +90,7 @@ extension DownloadList: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     
-    
-    
-//    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-//        
-//        return true
-//        
-//    }
-    
-    
+
 
     func tableViewSelectionDidChange(notification: NSNotification) {
         BackgroundTask.sharedInstance.selectedIndexs = downloadListTableView.selectedRowIndexes

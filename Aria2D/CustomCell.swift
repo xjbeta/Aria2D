@@ -20,7 +20,6 @@ class CustomCell: NSTableCellView {
     
     @IBOutlet weak var time: NSTextField!
     
-    
     @IBOutlet weak var percentage: NSTextField!
     
     @IBOutlet weak var status: NSTextField!
@@ -34,16 +33,16 @@ class CustomCell: NSTableCellView {
         
     }
     
-    
-    override var backgroundStyle:NSBackgroundStyle{
-        didSet{
-            if backgroundStyle == .Dark{
-                self.layer?.backgroundColor = NSColor(red: 0.35, green: 0.75, blue: 0.91, alpha: 1).CGColor
-            } else {
-                self.layer?.backgroundColor = NSColor.clearColor().CGColor
-            }
-        }
-    }
+//    
+//    override var backgroundStyle:NSBackgroundStyle{
+//        didSet{
+//            if backgroundStyle == .Dark{
+//                self.layer?.backgroundColor = NSColor(red: 0.35, green: 0.75, blue: 0.91, alpha: 1).CGColor
+//            } else {
+//                self.layer?.backgroundColor = NSColor.clearColor().CGColor
+//            }
+//        }
+//    }
     
     override var mouseDownCanMoveWindow: Bool {
         return true

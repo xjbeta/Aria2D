@@ -11,7 +11,15 @@ import Cocoa
 class MainMenu: NSViewController {
 
     var newTaskWindow: NewTaskWindow!
-    var settingWindow: SettingWindow!
+    
+    lazy var preferencesWindow: PreferencesWindow = {
+        let wcSB = NSStoryboard(name: "Preferences", bundle: NSBundle.mainBundle())
+        // or whichever bundle
+        return wcSB.instantiateInitialController() as! PreferencesWindow
+    }()
+    
+    
+    
     
     @IBOutlet weak var pauseAllButton: NSMenuItem!
     @IBOutlet weak var unPauseAllButton: NSMenuItem!
@@ -81,8 +89,7 @@ extension MainMenu {
     }
     
     @IBAction func preferences(sender: AnyObject) {
-        settingWindow = SettingWindow()
-        settingWindow.showWindow(self)
+        preferencesWindow.showWindow(self)
     }
     
     @IBAction func addTask(sender: AnyObject) {

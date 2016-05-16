@@ -12,13 +12,11 @@
 		010BCD781CB8F1F5007779E5 /* TorrentList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BCD761CB8F1F5007779E5 /* TorrentList.xib */; };
 		010BCD7C1CB9D663007779E5 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BCD7B1CB9D663007779E5 /* Preferences.swift */; };
 		011A09311C7EEBC200A3B427 /* LeftSourceListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */; };
-		011BFFD51CC134400095E85B /* aria2D_aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 011BFFD41CC134400095E85B /* aria2D_aria2c */; };
 		011BFFDB1CC8513B0095E85B /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BFFDA1CC8513B0095E85B /* SwiftyJSONExtension.swift */; };
 		011BFFDD1CC8648B0095E85B /* DataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BFFDC1CC8648B0095E85B /* DataObject.swift */; };
 		0126EA2E1C82989300B1DCA3 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */; };
 		014C85BB1CB3AB590071B11B /* DownloadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C85BA1CB3AB590071B11B /* DownloadListView.swift */; };
 		014C85C31CB3C70A0071B11B /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C85C21CB3C70A0071B11B /* MainMenu.swift */; };
-		014C85C51CB4E5A90071B11B /* SettingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C85C41CB4E5A90071B11B /* SettingWindow.xib */; };
 		014F36151CCC9FDB00C907E5 /* NewTaskTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F36141CCC9FDB00C907E5 /* NewTaskTextField.swift */; };
 		01502BEF1C7C2E6D00C6A79C /* aria2.conf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 018EB0591C79ACA0006048A3 /* aria2.conf */; };
 		01502BF01C7C2E6D00C6A79C /* StartAria2c.sh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 018EB05A1C79ACA0006048A3 /* StartAria2c.sh */; };
@@ -28,6 +26,8 @@
 		0159F7CB1CB2073F00F5F0DC /* DataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159F7CA1CB2073F00F5F0DC /* DataAPI.swift */; };
 		01764E021CCEE6D500D70F98 /* LogText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01764E011CCEE6D500D70F98 /* LogText.swift */; };
 		01764E041CD029B900D70F98 /* Aria2cAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01764E031CD029B900D70F98 /* Aria2cAPI.swift */; };
+		01764E0F1CD2FBD800D70F98 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01764E0E1CD2FBD800D70F98 /* Preferences.xib */; };
+		01764E111CD2FC1900D70F98 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01764E101CD2FC1900D70F98 /* PreferencesWindow.swift */; };
 		018EB03F1C79AA37006048A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB03E1C79AA37006048A3 /* AppDelegate.swift */; };
 		018EB0431C79AA37006048A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018EB0421C79AA37006048A3 /* Assets.xcassets */; };
 		018EB0461C79AA37006048A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018EB0441C79AA37006048A3 /* Main.storyboard */; };
@@ -40,11 +40,16 @@
 		018EB05F1C79ACA0006048A3 /* SessionFile.sh in Resources */ = {isa = PBXBuildFile; fileRef = 018EB05B1C79ACA0006048A3 /* SessionFile.sh */; };
 		018EB0681C79AD16006048A3 /* DownloadList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB0621C79AD16006048A3 /* DownloadList.swift */; };
 		018EB06A1C79AD16006048A3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB0641C79AD16006048A3 /* CustomCell.swift */; };
-		018EB06C1C79AD16006048A3 /* SettingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB0661C79AD16006048A3 /* SettingWindow.swift */; };
 		018EB0731C79ADFD006048A3 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018EB0721C79ADFD006048A3 /* CustomCell.xib */; };
 		018EB0751C79B337006048A3 /* LeftSourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB0741C79B337006048A3 /* LeftSourceList.swift */; };
 		018EB07C1C79D306006048A3 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB07A1C79D306006048A3 /* MainWindowController.swift */; };
 		018EB07D1C79D306006048A3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018EB07B1C79D306006048A3 /* MainWindow.xib */; };
+		01E6AF621CE8A2F100BC23D9 /* aria2D_aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 01E6AF611CE8A2F100BC23D9 /* aria2D_aria2c */; };
+		01E6AF631CE8A30100BC23D9 /* aria2D_aria2c in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01E6AF611CE8A2F100BC23D9 /* aria2D_aria2c */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01E6AF661CE8B7F900BC23D9 /* MenuItemWithPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6AF651CE8B7F900BC23D9 /* MenuItemWithPath.swift */; };
+		01EB21FE1CD7314200E27E6C /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EB21FD1CD7314200E27E6C /* Preferences.storyboard */; };
+		01EB22001CD8ADC100E27E6C /* PreferencesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB21FF1CD8ADC100E27E6C /* PreferencesTabView.swift */; };
+		01EB56FF1CDB79A1005BD83C /* Generalview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB56FE1CDB79A1005BD83C /* Generalview.swift */; };
 		01FFADE71CAA37A700D70902 /* NewTaskWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFADE51CAA37A700D70902 /* NewTaskWindow.swift */; };
 		01FFADE81CAA37A700D70902 /* NewTaskWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FFADE61CAA37A700D70902 /* NewTaskWindow.xib */; };
 		B19CF09AD13E6592F6D0AFAD /* Pods_Aria2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCA95A8B8DD99E6B224690D /* Pods_Aria2D.framework */; };
@@ -57,6 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				01E6AF631CE8A30100BC23D9 /* aria2D_aria2c in CopyFiles */,
 				01502BEF1C7C2E6D00C6A79C /* aria2.conf in CopyFiles */,
 				01502BF01C7C2E6D00C6A79C /* StartAria2c.sh in CopyFiles */,
 				01502BF11C7C2E6D00C6A79C /* SessionFile.sh in CopyFiles */,
@@ -71,19 +77,19 @@
 		010BCD761CB8F1F5007779E5 /* TorrentList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentList.xib; sourceTree = "<group>"; };
 		010BCD7B1CB9D663007779E5 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		011A09301C7EEBC200A3B427 /* LeftSourceListData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListData.swift; sourceTree = "<group>"; };
-		011BFFD41CC134400095E85B /* aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aria2D_aria2c; sourceTree = "<group>"; };
 		011BFFDA1CC8513B0095E85B /* SwiftyJSONExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSONExtension.swift; sourceTree = "<group>"; };
 		011BFFDC1CC8648B0095E85B /* DataObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObject.swift; sourceTree = "<group>"; };
 		0126EA2D1C82989300B1DCA3 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		014C85BA1CB3AB590071B11B /* DownloadListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadListView.swift; sourceTree = "<group>"; };
 		014C85C21CB3C70A0071B11B /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		014C85C41CB4E5A90071B11B /* SettingWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingWindow.xib; sourceTree = "<group>"; };
 		014F36141CCC9FDB00C907E5 /* NewTaskTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskTextField.swift; sourceTree = "<group>"; };
 		0159F7C61CB0D52100F5F0DC /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		0159F7C81CB0D82500F5F0DC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0159F7CA1CB2073F00F5F0DC /* DataAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAPI.swift; sourceTree = "<group>"; };
 		01764E011CCEE6D500D70F98 /* LogText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogText.swift; sourceTree = "<group>"; };
 		01764E031CD029B900D70F98 /* Aria2cAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2cAPI.swift; sourceTree = "<group>"; };
+		01764E0E1CD2FBD800D70F98 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		01764E101CD2FC1900D70F98 /* PreferencesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		018EB03B1C79AA37006048A3 /* Aria2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018EB03E1C79AA37006048A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		018EB0421C79AA37006048A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,11 +104,16 @@
 		018EB05B1C79ACA0006048A3 /* SessionFile.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SessionFile.sh; sourceTree = "<group>"; };
 		018EB0621C79AD16006048A3 /* DownloadList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadList.swift; sourceTree = "<group>"; };
 		018EB0641C79AD16006048A3 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		018EB0661C79AD16006048A3 /* SettingWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingWindow.swift; sourceTree = "<group>"; };
 		018EB0721C79ADFD006048A3 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		018EB0741C79B337006048A3 /* LeftSourceList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceList.swift; sourceTree = "<group>"; };
 		018EB07A1C79D306006048A3 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		018EB07B1C79D306006048A3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		01E6AF611CE8A2F100BC23D9 /* aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aria2D_aria2c; sourceTree = "<group>"; };
+		01E6AF641CE8A48700BC23D9 /* Aria2D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Aria2D.entitlements; path = Aria2D/Aria2D.entitlements; sourceTree = "<group>"; };
+		01E6AF651CE8B7F900BC23D9 /* MenuItemWithPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemWithPath.swift; sourceTree = "<group>"; };
+		01EB21FD1CD7314200E27E6C /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		01EB21FF1CD8ADC100E27E6C /* PreferencesTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTabView.swift; sourceTree = "<group>"; };
+		01EB56FE1CDB79A1005BD83C /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
 		01FFADE51CAA37A700D70902 /* NewTaskWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskWindow.swift; sourceTree = "<group>"; };
 		01FFADE61CAA37A700D70902 /* NewTaskWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewTaskWindow.xib; sourceTree = "<group>"; };
 		364DEB4464A9B89A1CFC143C /* Pods-Aria2D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria2D.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,10 +139,9 @@
 				014F36121CCC9F8000C907E5 /* DownloadList */,
 				014F36131CCC9F8E00C907E5 /* LeftSourceList */,
 				01764E091CD033B500D70F98 /* Preferences */,
+				01764E121CD2FF3A00D70F98 /* NewTask */,
 				018EB07A1C79D306006048A3 /* MainWindowController.swift */,
 				01764E011CCEE6D500D70F98 /* LogText.swift */,
-				01FFADE51CAA37A700D70902 /* NewTaskWindow.swift */,
-				014F36141CCC9FDB00C907E5 /* NewTaskTextField.swift */,
 				010BCD751CB8F1F5007779E5 /* TorrentList.swift */,
 				014C85C21CB3C70A0071B11B /* MainMenu.swift */,
 			);
@@ -156,8 +166,9 @@
 				018EB07B1C79D306006048A3 /* MainWindow.xib */,
 				018EB0721C79ADFD006048A3 /* CustomCell.xib */,
 				01FFADE61CAA37A700D70902 /* NewTaskWindow.xib */,
-				014C85C41CB4E5A90071B11B /* SettingWindow.xib */,
 				018EB0441C79AA37006048A3 /* Main.storyboard */,
+				01EB21FD1CD7314200E27E6C /* Preferences.storyboard */,
+				01764E0E1CD2FBD800D70F98 /* Preferences.xib */,
 				010BCD761CB8F1F5007779E5 /* TorrentList.xib */,
 			);
 			name = View;
@@ -204,15 +215,28 @@
 		01764E091CD033B500D70F98 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				018EB0661C79AD16006048A3 /* SettingWindow.swift */,
+				01764E101CD2FC1900D70F98 /* PreferencesWindow.swift */,
+				01EB21FF1CD8ADC100E27E6C /* PreferencesTabView.swift */,
 				010BCD7B1CB9D663007779E5 /* Preferences.swift */,
+				01EB56FE1CDB79A1005BD83C /* Generalview.swift */,
+				01E6AF651CE8B7F900BC23D9 /* MenuItemWithPath.swift */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		01764E121CD2FF3A00D70F98 /* NewTask */ = {
+			isa = PBXGroup;
+			children = (
+				01FFADE51CAA37A700D70902 /* NewTaskWindow.swift */,
+				014F36141CCC9FDB00C907E5 /* NewTaskTextField.swift */,
+			);
+			name = NewTask;
 			sourceTree = "<group>";
 		};
 		018EB0321C79AA37006048A3 = {
 			isa = PBXGroup;
 			children = (
+				01E6AF641CE8A48700BC23D9 /* Aria2D.entitlements */,
 				018EB0601C79ACAA006048A3 /* Resources */,
 				01B135011CC8BF9100134DA8 /* Source */,
 				018EB03C1C79AA37006048A3 /* Products */,
@@ -267,7 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				018EB0591C79ACA0006048A3 /* aria2.conf */,
-				011BFFD41CC134400095E85B /* aria2D_aria2c */,
+				01E6AF611CE8A2F100BC23D9 /* aria2D_aria2c */,
 				018EB05A1C79ACA0006048A3 /* StartAria2c.sh */,
 				018EB05B1C79ACA0006048A3 /* SessionFile.sh */,
 			);
@@ -314,6 +338,7 @@
 				D8E8AD87F900F32471856D08 /* 📦 Embed Pods Frameworks */,
 				D469960B992106A43D6BDA0A /* 📦 Copy Pods Resources */,
 				018EB06D1C79ADB1006048A3 /* CopyFiles */,
+				0171FFFD1CE2D2AA0049F4DF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -336,6 +361,11 @@
 				TargetAttributes = {
 					018EB03A1C79AA37006048A3 = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -363,14 +393,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				018EB05E1C79ACA0006048A3 /* StartAria2c.sh in Resources */,
-				014C85C51CB4E5A90071B11B /* SettingWindow.xib in Resources */,
 				018EB07D1C79D306006048A3 /* MainWindow.xib in Resources */,
-				011BFFD51CC134400095E85B /* aria2D_aria2c in Resources */,
+				01EB21FE1CD7314200E27E6C /* Preferences.storyboard in Resources */,
 				018EB0731C79ADFD006048A3 /* CustomCell.xib in Resources */,
 				018EB05D1C79ACA0006048A3 /* aria2.conf in Resources */,
 				018EB0431C79AA37006048A3 /* Assets.xcassets in Resources */,
 				018EB0461C79AA37006048A3 /* Main.storyboard in Resources */,
+				01764E0F1CD2FBD800D70F98 /* Preferences.xib in Resources */,
 				018EB05F1C79ACA0006048A3 /* SessionFile.sh in Resources */,
+				01E6AF621CE8A2F100BC23D9 /* aria2D_aria2c in Resources */,
 				010BCD781CB8F1F5007779E5 /* TorrentList.xib in Resources */,
 				01FFADE81CAA37A700D70902 /* NewTaskWindow.xib in Resources */,
 			);
@@ -379,6 +410,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0171FFFD1CE2D2AA0049F4DF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n#coding utf-8\nif [ \"$CONFIGURATION\" != \"Debug\" ]\nthen\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nappVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$INFOPLIST_FILE\")\n\nbuildNumber=`echo $buildNumber|sed  's/.*\\./''/'`\n\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $appVersion.$buildNumber\" \"$INFOPLIST_FILE\"\nfi";
+		};
 		A89556CE783134E86DA72503 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,13 +475,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				018EB06C1C79AD16006048A3 /* SettingWindow.swift in Sources */,
 				0159F7C91CB0D82500F5F0DC /* DataManager.swift in Sources */,
 				018EB0751C79B337006048A3 /* LeftSourceList.swift in Sources */,
+				01EB22001CD8ADC100E27E6C /* PreferencesTabView.swift in Sources */,
 				018EB06A1C79AD16006048A3 /* CustomCell.swift in Sources */,
 				011BFFDD1CC8648B0095E85B /* DataObject.swift in Sources */,
 				014C85BB1CB3AB590071B11B /* DownloadListView.swift in Sources */,
 				01764E021CCEE6D500D70F98 /* LogText.swift in Sources */,
+				01764E111CD2FC1900D70F98 /* PreferencesWindow.swift in Sources */,
 				0126EA2E1C82989300B1DCA3 /* BackgroundTask.swift in Sources */,
 				014F36151CCC9FDB00C907E5 /* NewTaskTextField.swift in Sources */,
 				011A09311C7EEBC200A3B427 /* LeftSourceListData.swift in Sources */,
@@ -445,8 +490,10 @@
 				01FFADE71CAA37A700D70902 /* NewTaskWindow.swift in Sources */,
 				018EB0681C79AD16006048A3 /* DownloadList.swift in Sources */,
 				014C85C31CB3C70A0071B11B /* MainMenu.swift in Sources */,
+				01EB56FF1CDB79A1005BD83C /* Generalview.swift in Sources */,
 				018EB0561C79AC81006048A3 /* WebsocketNotificationHandle.swift in Sources */,
 				018EB07C1C79D306006048A3 /* MainWindowController.swift in Sources */,
+				01E6AF661CE8B7F900BC23D9 /* MenuItemWithPath.swift in Sources */,
 				010BCD7C1CB9D663007779E5 /* Preferences.swift in Sources */,
 				018EB0531C79AC81006048A3 /* Aria2Websocket.swift in Sources */,
 				018EB0551C79AC81006048A3 /* Aria2cMethods.swift in Sources */,
@@ -559,6 +606,7 @@
 			baseConfigurationReference = 364DEB4464A9B89A1CFC143C /* Pods-Aria2D.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Aria2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -574,6 +622,7 @@
 			baseConfigurationReference = FDF291021C8083B949270C02 /* Pods-Aria2D.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Aria2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

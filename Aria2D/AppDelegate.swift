@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         mainWindowController.showWindow(nil)
+        
+        
  
     }
     
@@ -51,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
-
+    
 
 }
 
