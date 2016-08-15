@@ -1,6 +1,0 @@
-framework module Pods_Aria2D {
-  umbrella header "Pods-Aria2D-umbrella.h"
-
-  export *
-  module * { export * }
-}
