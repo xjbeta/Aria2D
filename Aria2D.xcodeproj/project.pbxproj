@@ -1,0 +1,838 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		010B59181D3CF66600550A43 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B59171D3CF66600550A43 /* MainMenu.swift */; };
+		0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D42E1E04E36E003EBFCD /* NotificationName.swift */; };
+		0115D4311E04E423003EBFCD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4301E04E423003EBFCD /* Color.swift */; };
+		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
+		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
+		011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */; };
+		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
+		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
+		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
+		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
+		0137D2701E9A220F00CEE540 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137D26F1E9A220F00CEE540 /* StatusViewController.swift */; };
+		013817671D238E0100E0F926 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817661D238E0100E0F926 /* MainWindowController.swift */; };
+		013817691D238E0D00E0F926 /* LeftSourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817681D238E0D00E0F926 /* LeftSourceList.swift */; };
+		013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */; };
+		013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9F1E51B305008D370D /* SetServersViewController.swift */; };
+		0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDC01D21FAD800FB4324 /* AppDelegate.swift */; };
+		0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0147EDC61D21FAD800FB4324 /* Main.storyboard */; };
+		0147EDD41D220A7800FB4324 /* LeftSourceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDD31D220A7800FB4324 /* LeftSourceListView.swift */; };
+		0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */; };
+		0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */; };
+		0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */; };
+		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
+		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
+		016B696C1E4822AB004FEAE1 /* TokenStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B696B1E4822AB004FEAE1 /* TokenStatusButton.swift */; };
+		016C403C1D9E8D2800EB27A2 /* TaskUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */; };
+		016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */; };
+		016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */; };
+		016C98F91DB1C0A000955C09 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C98F81DB1C0A000955C09 /* HUD.swift */; };
+		016CDC961E6E7127000F9F88 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CDC951E6E7127000F9F88 /* PreviewViewController.swift */; };
+		016CDC991E6E79B5000F9F88 /* MovableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CDC981E6E79B5000F9F88 /* MovableImageView.swift */; };
+		016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */; };
+		016FDC751E7A70DA00E01B35 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */; };
+		016FDC771E7B953E00E01B35 /* CompatibleScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */; };
+		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
+		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
+		017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C20081D979448005F035A /* DownloadsTableRowView.swift */; };
+		017E882F1D82575A000412DA /* LoginButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E882E1D82575A000412DA /* LoginButtonCell.swift */; };
+		017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */; };
+		01804B261D7B179A00936E09 /* ViewForImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01804B251D7B179A00936E09 /* ViewForImage.swift */; };
+		0182D0FD1D2DF23000810419 /* LeftSourceListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */; };
+		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
+		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
+		018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E894A1D34FF5B000C71B0 /* DataObjects.swift */; };
+		018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E895F1D34FFA8000C71B0 /* Aria2c.swift */; };
+		018E89621D34FFB1000C71B0 /* ViewControllersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */; };
+		018E89641D34FFCC000C71B0 /* EnumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89631D34FFCC000C71B0 /* EnumList.swift */; };
+		018E896E1D350075000C71B0 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896A1D350075000C71B0 /* PreferencesWindow.swift */; };
+		018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */; };
+		018E89701D350075000C71B0 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896C1D350075000C71B0 /* Preferences.swift */; };
+		018E89711D350075000C71B0 /* Generalview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* Generalview.swift */; };
+		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
+		01903A3C1D5CB86D008A3E6E /* BaiduLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */; };
+		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
+		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
+		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
+		01BC4F931E4324D100417221 /* SetPCSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F921E4324D100417221 /* SetPCSViewController.swift */; };
+		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
+		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
+		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
+		01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */; };
+		01EB1CB61D60971600F2925F /* Baidu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB51D60971600F2925F /* Baidu.swift */; };
+		01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB71D60997600F2925F /* LoginButton.swift */; };
+		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
+		01EB1CC61D634F4A00F2925F /* BaiduFileListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCell.swift */; };
+		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
+		01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */; };
+		06292BF1B108C188AD6FB4C5 /* Pods_Aria2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0104DAA41D54CEB5002C3B6D /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		010B59171D3CF66600550A43 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		0115D42C1E01751D003EBFCD /* Aria2D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Aria2D.entitlements; sourceTree = SOURCE_ROOT; };
+		0115D42E1E04E36E003EBFCD /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		0115D4301E04E423003EBFCD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
+		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Aria2.swift; path = Aria2cAPI/Aria2.swift; sourceTree = "<group>"; };
+		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
+		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01250C9B1D54D7180017353F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Other/Transformer.swift; sourceTree = "<group>"; };
+		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../DataAPI/Log.swift; sourceTree = "<group>"; };
+		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
+		0137D26F1E9A220F00CEE540 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		013817661D238E0100E0F926 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		013817681D238E0D00E0F926 /* LeftSourceList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceList.swift; sourceTree = "<group>"; };
+		013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListArrayController.swift; sourceTree = "<group>"; };
+		013ABB9F1E51B305008D370D /* SetServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetServersViewController.swift; sourceTree = "<group>"; };
+		0147EDBD1D21FAD800FB4324 /* Aria2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0147EDC01D21FAD800FB4324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0147EDC71D21FAD800FB4324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0147EDC91D21FAD800FB4324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0147EDD31D220A7800FB4324 /* LeftSourceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListView.swift; sourceTree = "<group>"; };
+		0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableCellView.swift; sourceTree = "<group>"; };
+		0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
+		0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableView.swift; sourceTree = "<group>"; };
+		0154156A1E371583007ECB29 /* URLSecurityScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
+		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
+		016B696B1E4822AB004FEAE1 /* TokenStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStatusButton.swift; sourceTree = "<group>"; };
+		016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskUrl.swift; sourceTree = "<group>"; };
+		016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2DWindow.swift; sourceTree = "<group>"; };
+		016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2D.swift; sourceTree = "<group>"; };
+		016C98F81DB1C0A000955C09 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		016CDC951E6E7127000F9F88 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		016CDC981E6E79B5000F9F88 /* MovableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovableImageView.swift; sourceTree = "<group>"; };
+		016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteFileFormatter.swift; sourceTree = "<group>"; };
+		016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsViewController.swift; path = ../../../Preferences/Views/OptionsViewController.swift; sourceTree = "<group>"; };
+		016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompatibleScroller.swift; path = ../../../Preferences/Views/CompatibleScroller.swift; sourceTree = "<group>"; };
+		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		017C20081D979448005F035A /* DownloadsTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableRowView.swift; sourceTree = "<group>"; };
+		017E882E1D82575A000412DA /* LoginButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButtonCell.swift; sourceTree = "<group>"; };
+		017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewWithBackgroundColor.swift; sourceTree = "<group>"; };
+		01804B251D7B179A00936E09 /* ViewForImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewForImage.swift; sourceTree = "<group>"; };
+		0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListModule.swift; sourceTree = "<group>"; };
+		018B0A4E1D6451E5004F8967 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/Aria2D-ehzxusjnvnpoapfwthxmzkqqobpq/Build/Products/Debug/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitTimer.swift; path = ../WaitTimer.swift; sourceTree = "<group>"; };
+		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		018E894A1D34FF5B000C71B0 /* DataObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
+		018E895F1D34FFA8000C71B0 /* Aria2c.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Aria2c.swift; path = Aria2cAPI/Aria2c.swift; sourceTree = "<group>"; };
+		018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllersManager.swift; path = Aria2D/Source/ViewControllersManager.swift; sourceTree = SOURCE_ROOT; };
+		018E89631D34FFCC000C71B0 /* EnumList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumList.swift; path = ../EnumList.swift; sourceTree = "<group>"; };
+		018E896A1D350075000C71B0 /* PreferencesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesTabViewController.swift; path = ../PreferencesTabViewController.swift; sourceTree = "<group>"; };
+		018E896C1D350075000C71B0 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		018E896D1D350075000C71B0 /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
+		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduLoginViewController.swift; sourceTree = "<group>"; };
+		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
+		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
+		01BC4F921E4324D100417221 /* SetPCSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPCSViewController.swift; sourceTree = "<group>"; };
+		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
+		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleClickTextField.swift; path = ../../Preferences/Views/DoubleClickTextField.swift; sourceTree = "<group>"; };
+		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSplitView.swift; path = MainSpilt/MainSplitView.swift; sourceTree = "<group>"; };
+		01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduSettingView.swift; sourceTree = "<group>"; };
+		01EB1CB51D60971600F2925F /* Baidu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baidu.swift; sourceTree = "<group>"; };
+		01EB1CB71D60997600F2925F /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
+		01EB1CC51D634F4A00F2925F /* BaiduFileListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCell.swift; sourceTree = "<group>"; };
+		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
+		01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduDlinksProgress.swift; sourceTree = "<group>"; };
+		305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria2D.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D.debug.xcconfig"; sourceTree = "<group>"; };
+		500B685E38D95F5CFF066678 /* Pods-Aria2D.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria2D.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D.release.xcconfig"; sourceTree = "<group>"; };
+		769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aria2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0147EDBA1D21FAD800FB4324 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
+				06292BF1B108C188AD6FB4C5 /* Pods_Aria2D.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0115D42D1E04E346003EBFCD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0115D42E1E04E36E003EBFCD /* NotificationName.swift */,
+				0115D4301E04E423003EBFCD /* Color.swift */,
+				0154156A1E371583007ECB29 /* URLSecurityScope.swift */,
+				016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */,
+				0115D4321E04F09F003EBFCD /* SubString.swift */,
+				01BC4F941E443A6500417221 /* SafeSubscript.swift */,
+				012A1BB11E174860007C4B46 /* Transformer.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		012C3AEB1E10102C00ABFE4C /* Aria2 */ = {
+			isa = PBXGroup;
+			children = (
+				0115D4341E06AD99003EBFCD /* Aria2.swift */,
+				016A3E371E8A9FA100CC1999 /* Aria2Option.swift */,
+				012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */,
+				018E895F1D34FFA8000C71B0 /* Aria2c.swift */,
+			);
+			name = Aria2;
+			sourceTree = "<group>";
+		};
+		012C3AEC1E10104600ABFE4C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				012C3AE51E1001CA00ABFE4C /* Log.swift */,
+				018E89631D34FFCC000C71B0 /* EnumList.swift */,
+				018B9B571D72B2EA0087B71E /* WaitTimer.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		0137D26E1E9A19D200CEE540 /* StatusWindow */ = {
+			isa = PBXGroup;
+			children = (
+				0137D26F1E9A220F00CEE540 /* StatusViewController.swift */,
+			);
+			name = StatusWindow;
+			sourceTree = "<group>";
+		};
+		0147EDB41D21FAD800FB4324 = {
+			isa = PBXGroup;
+			children = (
+				0165AF611D963CDF00469601 /* Aria2D */,
+				6ACACE787527AEFD90491354 /* Frameworks */,
+				E10A820F0C3021B680637631 /* Pods */,
+				0147EDBE1D21FAD800FB4324 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0147EDBE1D21FAD800FB4324 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0147EDBD1D21FAD800FB4324 /* Aria2D.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0147EDBF1D21FAD800FB4324 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
+				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
+				016C98F71DB1C04F00955C09 /* MainWindow */,
+				01713BD71D9BA998000240A2 /* NewTask */,
+				018E89721D350079000C71B0 /* Preferences */,
+				0182E60C1EAEE90000E08454 /* Log */,
+				010B59171D3CF66600550A43 /* MainMenu.swift */,
+				0147EDC61D21FAD800FB4324 /* Main.storyboard */,
+			);
+			name = View;
+			path = Source/View;
+			sourceTree = "<group>";
+		};
+		0147EDD51D220BED00FB4324 /* LeftSourceList */ = {
+			isa = PBXGroup;
+			children = (
+				013817681D238E0D00E0F926 /* LeftSourceList.swift */,
+				0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */,
+				0147EDD31D220A7800FB4324 /* LeftSourceListView.swift */,
+				01804B251D7B179A00936E09 /* ViewForImage.swift */,
+			);
+			path = LeftSourceList;
+			sourceTree = "<group>";
+		};
+		0147EDE01D2381F100FB4324 /* Downloads */ = {
+			isa = PBXGroup;
+			children = (
+				016CDC971E6E712A000F9F88 /* PreviewView */,
+				016FDC781E7B9BD600E01B35 /* OptionsWindow */,
+				0137D26E1E9A19D200CEE540 /* StatusWindow */,
+				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
+				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
+				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
+				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
+				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
+				01EB1CC51D634F4A00F2925F /* BaiduFileListCell.swift */,
+				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
+				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
+			);
+			name = Downloads;
+			path = DownloadList;
+			sourceTree = "<group>";
+		};
+		0165AF611D963CDF00469601 /* Aria2D */ = {
+			isa = PBXGroup;
+			children = (
+				018E892A1D34FEB7000C71B0 /* Resources */,
+				018E89471D34FF48000C71B0 /* Source */,
+				0147EDBF1D21FAD800FB4324 /* View */,
+			);
+			path = Aria2D;
+			sourceTree = "<group>";
+		};
+		016B696D1E482BAA004FEAE1 /* SetPCSView */ = {
+			isa = PBXGroup;
+			children = (
+				01BC4F921E4324D100417221 /* SetPCSViewController.swift */,
+				016B696B1E4822AB004FEAE1 /* TokenStatusButton.swift */,
+			);
+			name = SetPCSView;
+			path = BaiduLogin;
+			sourceTree = "<group>";
+		};
+		016C405A1DA27C6200EB27A2 /* AboutAria2D */ = {
+			isa = PBXGroup;
+			children = (
+				016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */,
+				016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */,
+			);
+			path = AboutAria2D;
+			sourceTree = "<group>";
+		};
+		016C98F71DB1C04F00955C09 /* MainWindow */ = {
+			isa = PBXGroup;
+			children = (
+				013817661D238E0100E0F926 /* MainWindowController.swift */,
+				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
+				016C98F81DB1C0A000955C09 /* HUD.swift */,
+				0147EDD51D220BED00FB4324 /* LeftSourceList */,
+				01EB1CBB1D61FC1D00F2925F /* RightDownloadList */,
+			);
+			path = MainWindow;
+			sourceTree = "<group>";
+		};
+		016CDC971E6E712A000F9F88 /* PreviewView */ = {
+			isa = PBXGroup;
+			children = (
+				016CDC951E6E7127000F9F88 /* PreviewViewController.swift */,
+				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
+				016CDC981E6E79B5000F9F88 /* MovableImageView.swift */,
+			);
+			name = PreviewView;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		016FDC781E7B9BD600E01B35 /* OptionsWindow */ = {
+			isa = PBXGroup;
+			children = (
+				016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */,
+				016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */,
+				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
+			);
+			name = OptionsWindow;
+			sourceTree = "<group>";
+		};
+		01713BD71D9BA998000240A2 /* NewTask */ = {
+			isa = PBXGroup;
+			children = (
+				01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */,
+				016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */,
+			);
+			path = NewTask;
+			sourceTree = "<group>";
+		};
+		01789B1C1D9D207E00A5B789 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
+				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
+				016B696D1E482BAA004FEAE1 /* SetPCSView */,
+				017E88301D83A720000412DA /* BaiduLogin */,
+				018E896D1D350075000C71B0 /* Generalview.swift */,
+				01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */,
+				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
+				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		017E88301D83A720000412DA /* BaiduLogin */ = {
+			isa = PBXGroup;
+			children = (
+				01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */,
+				01EB1CB71D60997600F2925F /* LoginButton.swift */,
+				017E882E1D82575A000412DA /* LoginButtonCell.swift */,
+			);
+			path = BaiduLogin;
+			sourceTree = "<group>";
+		};
+		0182E60C1EAEE90000E08454 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
+				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
+			);
+			name = Log;
+			path = Preferences/Views;
+			sourceTree = "<group>";
+		};
+		018E892A1D34FEB7000C71B0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0115D42C1E01751D003EBFCD /* Aria2D.entitlements */,
+				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
+				0147EDC91D21FAD800FB4324 /* Info.plist */,
+			);
+			name = Resources;
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		018E89471D34FF48000C71B0 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
+				01EB1CB51D60971600F2925F /* Baidu.swift */,
+				018E896C1D350075000C71B0 /* Preferences.swift */,
+				012C3AEB1E10102C00ABFE4C /* Aria2 */,
+				018E89541D34FF60000C71B0 /* Data */,
+				012C3AEC1E10104600ABFE4C /* Other */,
+				0115D42D1E04E346003EBFCD /* Extensions */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		018E89541D34FF60000C71B0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				018E89491D34FF5B000C71B0 /* DataManager.swift */,
+				018E894A1D34FF5B000C71B0 /* DataObjects.swift */,
+			);
+			name = Data;
+			path = DataAPI;
+			sourceTree = "<group>";
+		};
+		018E89721D350079000C71B0 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
+				01789B1C1D9D207E00A5B789 /* Views */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		01EB1CBB1D61FC1D00F2925F /* RightDownloadList */ = {
+			isa = PBXGroup;
+			children = (
+				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
+				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
+				0147EDE01D2381F100FB4324 /* Downloads */,
+			);
+			path = RightDownloadList;
+			sourceTree = "<group>";
+		};
+		6ACACE787527AEFD90491354 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				018B0A4E1D6451E5004F8967 /* SwiftyJSON.framework */,
+				01903A351D5CB6E0008A3E6E /* WebKit.framework */,
+				01250C9B1D54D7180017353F /* Quartz.framework */,
+				0104DAA41D54CEB5002C3B6D /* QuickLook.framework */,
+				769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E10A820F0C3021B680637631 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */,
+				500B685E38D95F5CFF066678 /* Pods-Aria2D.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0147EDBC1D21FAD800FB4324 /* Aria2D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0147EDCC1D21FAD800FB4324 /* Build configuration list for PBXNativeTarget "Aria2D" */;
+			buildPhases = (
+				3535D77D97F88D4924C467E8 /* [CP] Check Pods Manifest.lock */,
+				0147EDB91D21FAD800FB4324 /* Sources */,
+				0147EDBA1D21FAD800FB4324 /* Frameworks */,
+				0147EDBB1D21FAD800FB4324 /* Resources */,
+				43CCF6E27746A47330F824B0 /* [CP] Embed Pods Frameworks */,
+				5BFD54490A8A9C59893B9D5C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Aria2D;
+			productName = Aria2D;
+			productReference = 0147EDBD1D21FAD800FB4324 /* Aria2D.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0147EDB51D21FAD800FB4324 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = xjbeta;
+				TargetAttributes = {
+					0147EDBC1D21FAD800FB4324 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = S3WK2RE7QY;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 0147EDB81D21FAD800FB4324 /* Build configuration list for PBXProject "Aria2D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0147EDB41D21FAD800FB4324;
+			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0147EDBC1D21FAD800FB4324 /* Aria2D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0147EDBB1D21FAD800FB4324 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
+				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3535D77D97F88D4924C467E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		43CCF6E27746A47330F824B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BFD54490A8A9C59893B9D5C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0147EDB91D21FAD800FB4324 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016CDC991E6E79B5000F9F88 /* MovableImageView.swift in Sources */,
+				012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */,
+				018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */,
+				01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */,
+				0147EDD41D220A7800FB4324 /* LeftSourceListView.swift in Sources */,
+				0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */,
+				013817671D238E0100E0F926 /* MainWindowController.swift in Sources */,
+				012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */,
+				018E89621D34FFB1000C71B0 /* ViewControllersManager.swift in Sources */,
+				016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */,
+				018E896E1D350075000C71B0 /* PreferencesWindow.swift in Sources */,
+				0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */,
+				01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */,
+				0115D4331E04F09F003EBFCD /* SubString.swift in Sources */,
+				016FDC751E7A70DA00E01B35 /* OptionsViewController.swift in Sources */,
+				01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */,
+				016C403C1D9E8D2800EB27A2 /* TaskUrl.swift in Sources */,
+				01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */,
+				0115D4311E04E423003EBFCD /* Color.swift in Sources */,
+				018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */,
+				0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */,
+				016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */,
+				011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */,
+				017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */,
+				016C98F91DB1C0A000955C09 /* HUD.swift in Sources */,
+				018E89641D34FFCC000C71B0 /* EnumList.swift in Sources */,
+				018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */,
+				0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */,
+				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
+				016CDC961E6E7127000F9F88 /* PreviewViewController.swift in Sources */,
+				0182D0FD1D2DF23000810419 /* LeftSourceListModule.swift in Sources */,
+				01BC4F931E4324D100417221 /* SetPCSViewController.swift in Sources */,
+				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,
+				017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */,
+				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
+				01804B261D7B179A00936E09 /* ViewForImage.swift in Sources */,
+				016B696C1E4822AB004FEAE1 /* TokenStatusButton.swift in Sources */,
+				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
+				016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */,
+				010B59181D3CF66600550A43 /* MainMenu.swift in Sources */,
+				01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */,
+				01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */,
+				01903A3C1D5CB86D008A3E6E /* BaiduLoginViewController.swift in Sources */,
+				0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */,
+				016FDC771E7B953E00E01B35 /* CompatibleScroller.swift in Sources */,
+				012A1BB21E174860007C4B46 /* Transformer.swift in Sources */,
+				013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */,
+				018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */,
+				013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */,
+				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
+				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
+				018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */,
+				0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */,
+				016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */,
+				018E89701D350075000C71B0 /* Preferences.swift in Sources */,
+				0137D2701E9A220F00CEE540 /* StatusViewController.swift in Sources */,
+				018E89711D350075000C71B0 /* Generalview.swift in Sources */,
+				01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */,
+				01EB1CB61D60971600F2925F /* Baidu.swift in Sources */,
+				017E882F1D82575A000412DA /* LoginButtonCell.swift in Sources */,
+				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
+				013817691D238E0D00E0F926 /* LeftSourceList.swift in Sources */,
+				01EB1CC61D634F4A00F2925F /* BaiduFileListCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0147EDC61D21FAD800FB4324 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0147EDC71D21FAD800FB4324 /* Base */,
+			);
+			name = Main.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0147EDCA1D21FAD800FB4324 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
+			};
+			name = Debug;
+		};
+		0147EDCB1D21FAD800FB4324 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0.1;
+			};
+			name = Release;
+		};
+		0147EDCD1D21FAD800FB4324 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Aria2D.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S3WK2RE7QY;
+				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resource/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies -D DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "xjbeta.tiny-gmail.com.Aria2D";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
+			};
+			name = Debug;
+		};
+		0147EDCE1D21FAD800FB4324 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500B685E38D95F5CFF066678 /* Pods-Aria2D.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Aria2D.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S3WK2RE7QY;
+				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resource/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
+				PRODUCT_BUNDLE_IDENTIFIER = "xjbeta.tiny-gmail.com.Aria2D";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0147EDB81D21FAD800FB4324 /* Build configuration list for PBXProject "Aria2D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0147EDCA1D21FAD800FB4324 /* Debug */,
+				0147EDCB1D21FAD800FB4324 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0147EDCC1D21FAD800FB4324 /* Build configuration list for PBXNativeTarget "Aria2D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0147EDCD1D21FAD800FB4324 /* Debug */,
+				0147EDCE1D21FAD800FB4324 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0147EDB51D21FAD800FB4324 /* Project object */;
+}
