@@ -70,6 +70,16 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .useForce)
 		}
 	}
+	var completeNotice: Bool {
+		get {
+			return defaults(.completeNotice) as? Bool ?? true
+		}
+		set {
+			defaultsSet(newValue, forKey: .completeNotice)
+		}
+	}
+	
+	
 	
 //	var bookmarkUrl: URL
 	

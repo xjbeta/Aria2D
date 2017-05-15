@@ -96,6 +96,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <binding destination="BHh-wy-fJc" name="value" keyPath="self.completeNotice" id="Ihw-56-iVz"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>

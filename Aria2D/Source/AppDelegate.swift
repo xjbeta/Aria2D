@@ -14,24 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkLogin(nil)
 		Preferences.shared.checkPlistFile()
-		
-		test()
     }
-	
-	func test() {
-		let notification = NSUserNotification()
-		
-		notification.title = "Title"
-		notification.subtitle = "Subtitle"
-		notification.informativeText = "Informative text"
-		
-		notification.soundName = NSUserNotificationDefaultSoundName
-		
-//		notification.deliveryDate = NSDate(timeIntervalSinceNow: 5) as Date
-		NSUserNotificationCenter.default.scheduleNotification(notification)
-	}
-	
-	
 	
     func applicationWillTerminate(_ aNotification: Notification) {
 

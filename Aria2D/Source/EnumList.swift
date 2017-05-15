@@ -20,6 +20,8 @@ enum preferenceKeys: String {
 	
 	case developerMode = "app_developerMode"
 	case useForce = "app_useForce"
+	case completeNotice = "app_completeNotice"
+	
 	
 	case useInternalAria2c = "aria2c_useInternalAria2c"
 	case aria2cHost = "aria2c_aria2cHost"

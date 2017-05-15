@@ -109,8 +109,16 @@ class Aria2Websocket: NSObject {
 				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
 				ViewControllersManager.shared.showHUD(.downloadStart)
 			case .onDownloadComplete, .onBtDownloadComplete:
-				json["params"][0]["gid"].gidValue.onDownloadComplete()
+				let gid = json["params"][0]["gid"].gidValue
+				gid.onDownloadComplete()
 				ViewControllersManager.shared.showHUD(.downloadCompleted)
+				if !NSApp.isActive && Preferences.shared.completeNotice {
+					showNotification(gid)
+				}
+				
+				
+				
+				
 //			case .onDownloadPause:
 //				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
 //			case .onDownloadError:
@@ -134,6 +142,46 @@ class Aria2Websocket: NSObject {
 		}
 	}
 
+	
+	func showNotification(_ gid: GID) {
+		Aria2.shared.initData([gid], update: true) {
+			let json = $0["result"][0][0]
+			let path = URL(fileURLWithPath: json["bittorrent"].exists() ?
+				json["dir"].stringValue + "/" + json["bittorrent"]["info"]["name"].stringValue :
+				json["files"][0]["path"].stringValue)
+			let totalLength = json["totalLength"].int64Value
+			let formatter = ByteCountFormatter()
+			
+			let notification = NSUserNotification()
+			notification.title = "Completed"
+			notification.subtitle = path.lastPathComponent
+			notification.informativeText = formatter.string(fromByteCount: Int64(totalLength))
+			notification.soundName = NSUserNotificationDefaultSoundName
+			
+			let folderIcon = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+			notification.contentImage = folderIcon
+			NSUserNotificationCenter.default.deliver(notification)
+		}
+		
+		
+		
+//		if let obj = DataManager.shared.data(TaskObject.self).filter({
+//			$0.gid == gid
+//		}).first {
+//			let path = URL(fileURLWithPath: obj.path)
+//			let formatter = ByteCountFormatter()
+//			
+//			
+//			let notification = NSUserNotification()
+//			notification.title = "Download Completed"
+//			notification.subtitle = path.lastPathComponent
+////			notification.informativeText = formatter.string(fromByteCount: Int64(obj.totalLength))
+//			notification.soundName = NSUserNotificationDefaultSoundName
+//			NSUserNotificationCenter.default.deliver(notification)
+//
+//		}
+	}
+	
 	
 	var isSuspend = Bool()
 	private var timer: DispatchSourceTimer?
@@ -174,3 +222,4 @@ class Aria2Websocket: NSObject {
 	}
 
 }
+
