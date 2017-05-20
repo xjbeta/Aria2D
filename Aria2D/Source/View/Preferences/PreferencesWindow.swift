@@ -20,11 +20,6 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
 		window?.contentView?.wantsLayer = true
     }
 	
-	func windowDidBecomeMain(_ notification: Notification) {
-		
-	}
-	
 
-	
 
 }

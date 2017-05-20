@@ -657,7 +657,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="13" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOG-es-cz5">
-                                <rect key="frame" x="66" y="23.5" width="319" height="127"/>
+                                <rect key="frame" x="66" y="24" width="319" height="127"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9f4-RZ-ty0">
                                         <rect key="frame" x="13" y="105" width="306" height="22"/>
@@ -1431,7 +1431,7 @@ CA
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RVJ-FA-rsL">
-                                <rect key="frame" x="9.5" y="161.5" width="145" height="28"/>
+                                <rect key="frame" x="9" y="161.5" width="145" height="28"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RpO-iu-Eoq">
                                         <rect key="frame" x="-2" y="0.0" width="149" height="28"/>
@@ -1455,7 +1455,7 @@ CA
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glM-lB-En1">
-                                <rect key="frame" x="127.5" y="144.5" width="27" height="17"/>
+                                <rect key="frame" x="127" y="144.5" width="27" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="info" id="Npr-Pt-dem">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

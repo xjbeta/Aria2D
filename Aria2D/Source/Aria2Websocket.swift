@@ -157,29 +157,10 @@ class Aria2Websocket: NSObject {
 			notification.subtitle = path.lastPathComponent
 			notification.informativeText = formatter.string(fromByteCount: Int64(totalLength))
 			notification.soundName = NSUserNotificationDefaultSoundName
-			
-			let folderIcon = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
-			notification.contentImage = folderIcon
+
 			NSUserNotificationCenter.default.deliver(notification)
 		}
-		
-		
-		
-//		if let obj = DataManager.shared.data(TaskObject.self).filter({
-//			$0.gid == gid
-//		}).first {
-//			let path = URL(fileURLWithPath: obj.path)
-//			let formatter = ByteCountFormatter()
-//			
-//			
-//			let notification = NSUserNotification()
-//			notification.title = "Download Completed"
-//			notification.subtitle = path.lastPathComponent
-////			notification.informativeText = formatter.string(fromByteCount: Int64(obj.totalLength))
-//			notification.soundName = NSUserNotificationDefaultSoundName
-//			NSUserNotificationCenter.default.deliver(notification)
-//
-//		}
+
 	}
 	
 	
