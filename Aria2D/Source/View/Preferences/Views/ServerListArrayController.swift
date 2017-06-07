@@ -13,21 +13,21 @@ import Cocoa
 @objc(Aria2ConnectionSettings)
 class Aria2ConnectionSettings: NSObject, NSCoding {
 
-	dynamic var wsLabel: String {
+	@objc dynamic var wsLabel: String {
 		get {
 			return enabledSSLorTLS ? "wss://" : "ws://"
 		}
 		set {}
 	}
 	
-	dynamic var name: String {
+	@objc dynamic var name: String {
 		get {
 			return host == "" ? "NewServer" : "\(host):\(port)"
 		}
 		set {}
 	}
 	
-	dynamic var host: String {
+	@objc dynamic var host: String {
 		didSet {
 			name = host == "" ? "NewServer" : "\(host):\(port)"
 		}
@@ -125,15 +125,11 @@ struct Aria2Servers {
 	}
 	
 	mutating func set(_ contents: [Aria2ConnectionSettings]) {
-		var s = self
-		s.contents = contents
-		self = s
+		self.contents = contents
 	}
 	
 	mutating func set(_ customPath: String) {
-		let s = self
-		s.contents[safe: getSelectedIndex()]?.customPath = customPath
-		self = s
+		contents[safe: getSelectedIndex()]?.customPath = customPath
 	}
 	
 	
@@ -161,10 +157,8 @@ struct Aria2Servers {
 	
 	mutating func select(at index: Int) {
 		if index < contents.count {
-			var s = self
-			s.selectedIndex = index
-			s.selectedID = contents[index].id
-			self = s
+			selectedIndex = index
+			selectedID = contents[index].id
 		}
 	}
 	

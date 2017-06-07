@@ -16,8 +16,8 @@ class DownloadsViewController: NSViewController {
 	
 	@IBAction func cellDoubleAction(_ sender: Any) {
 		switch ViewControllersManager.shared.selectedRow {
-//		case .completed:
-//			ViewControllersManager.shared.openSelected()
+		case .completed:
+			ViewControllersManager.shared.openSelected()
 		case .baidu:
 			if downloadsTableView.selectedRowIndexes.count == 1 {
 				let row = downloadsTableView.selectedRowIndexes.first!
@@ -51,10 +51,10 @@ class DownloadsViewController: NSViewController {
 		initNotification()
 	}
 	
-	let showPreviewViewController = "showPreviewViewController"
-	let showBaiduDlinksProgress = "showBaiduDlinksProgress"
-	let showOptionsWindow = "showOptionsWindow"
-	let showStatusWindow = "showStatusWindow"
+	let showPreviewViewController = NSStoryboardSegue.Identifier(rawValue: "showPreviewViewController")
+	let showBaiduDlinksProgress = NSStoryboardSegue.Identifier(rawValue: "showBaiduDlinksProgress")
+	let showOptionsWindow = NSStoryboardSegue.Identifier(rawValue: "showOptionsWindow")
+	let showStatusWindow = NSStoryboardSegue.Identifier(rawValue: "showStatusWindow")
 	
 	/*
 	override func keyDown(with event: NSEvent) {
@@ -131,16 +131,16 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			if let cell = tableView.make(withIdentifier: "DownloadsTableCellView", owner: self) as? DownloadsTableCellView {
+			if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DownloadsTableCellView"), owner: self) as? DownloadsTableCellView {
 				if let data = DataManager.shared.data(TaskObject.self)[safe: row] {
-					cell.setData(data)
+					cell.setData(data as! TaskObject)
 				}
 				return cell
 			}
 		case .baidu:
-			if let cell = tableView.make(withIdentifier: "BaiduFileListCell", owner: self) as? BaiduFileListCell {
+			if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BaiduFileListCell"), owner: self) as? BaiduFileListCell {
 				if let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)[safe: row] {
-					cell.setData(data)
+					cell.setData(data as! BaiduFileObject)
 				}
 				return cell
 			}
@@ -158,7 +158,8 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 	
 	
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-		return downloadsTableView.make(withIdentifier: "DownloadsTableRowView", owner: self) as? DownloadsTableRowView
+		return downloadsTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("DownloadsTableRowView"), owner: self) as? DownloadsTableRowView
+		
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
@@ -167,7 +168,7 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 	
 }
 
-
+// MARK: - MenuDelegate
 extension DownloadsViewController: NSMenuDelegate {
 	func menuWillOpen(_ menu: NSMenu) {
 		downloadsTableView.setSelectedIndexs()
@@ -194,7 +195,7 @@ extension DownloadsViewController {
 	}
 
 	
-	func getDlinks() {
+	@objc func getDlinks() {
 		let group = DispatchGroup()
 		let data = selectedObjects(BaiduFileObject.self).filter {
 			!$0.isBackButton && !$0.isDir
@@ -215,7 +216,9 @@ extension DownloadsViewController {
 		var dlinks = [[Any]](repeating: [], count: data.count)
 		data.map {
 			$0.path
-			}.enumerated().forEach { i, path in
+			}.enumerated().forEach { (arg) in
+				
+				let (i, path) = arg
 				group.enter()
 				Baidu.shared.getDownloadUrls(FromPCS: path) {
 					dlinks[i] = [$0, URL(fileURLWithPath: path).lastPathComponent]
@@ -229,15 +232,15 @@ extension DownloadsViewController {
 		}
 	}
 	
-	func showOptions(_ notification: Notification) {
+	@objc func showOptions(_ notification: Notification) {
 		performSegue(withIdentifier: showOptionsWindow, sender: self)
 	}
 	
-	func showStatus(_ notification: Notification) {
+	@objc func showStatus(_ notification: Notification) {
 		performSegue(withIdentifier: showStatusWindow, sender: self)
 	}
 	
-	func deleteBaiduFile() {
+	@objc func deleteBaiduFile() {
 		selectedObjects(BaiduFileObject.self).forEach {
 			Baidu.shared.delete($0.path)
 		}

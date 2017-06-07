@@ -23,9 +23,8 @@ enum preferenceKeys: String {
 	case completeNotice = "app_completeNotice"
 	
 	
-	case useInternalAria2c = "aria2c_useInternalAria2c"
-	case aria2cHost = "aria2c_aria2cHost"
-	case aria2cPort = "aria2c_aria2cPort"
+	case autoStartAria2c = "aria2c_autoStartAria2c"
+	case aria2cOptions = "aria2c_options"
 	
 	case dir = "--dir"
 	case maxConcurrentDownloads = "--max-concurrent-downloads"

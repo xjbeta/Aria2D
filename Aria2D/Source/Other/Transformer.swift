@@ -10,7 +10,8 @@ import Foundation
 
 
 // Int <-> NsNumber
-@objc(IntToNumberTransformer) class IntToNumberTransformer: ValueTransformer {
+@objc(IntToNumberTransformer)
+class IntToNumberTransformer: ValueTransformer {
 	override func transformedValue(_ value: Any?) -> Any? {
 		if let i = value as? Int {
 			return NSNumber(value: i)
@@ -20,14 +21,15 @@ import Foundation
 	}
 	override func reverseTransformedValue(_ value: Any?) -> Any? {
 		if let i = value as? NSNumber {
-			return Int(i)
+			return Int(exactly: i)
 		} else {
 			return nil
 		}
 	}
 }
 
-@objc(StringToNSStringTransformer) class StringToNSStringTransformer: ValueTransformer {
+@objc(StringToNSStringTransformer)
+class StringToNSStringTransformer: ValueTransformer {
 	override func transformedValue(_ value: Any?) -> Any? {
 		return value as? NSString ?? ""
 	}

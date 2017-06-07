@@ -42,7 +42,7 @@ class TaskUrl: NSTextField {
 	
 	
 	
-	func changeStringValue() {
+	@objc func changeStringValue() {
 		stringValue = "magnet:?xt=urn:btih:"
 		currentEditor()?.moveToEndOfLine(self)
 		hideButton()

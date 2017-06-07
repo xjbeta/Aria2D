@@ -6,74 +6,24 @@
 //  Copyright © 2016年 xjbeta. All rights reserved.
 //
 
-/*
-
 
 import Cocoa
 
 class Aria2c: NSObject {
-	
-	lazy var defaultConf: String = {
-		return ""
-	}()
-	
-	func start() {
-		startAria2()
-		createSessionFile()
-	}
-	var confPath: String {
-		var url = try! FileManager.default.url(for: .documentDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
-		url.appendPathComponent("aria2D.conf")
-		return url.path
-	}
-	
-	func test() {
-		
-		let task = Process()
-		task.launchPath = "/bin/sh"
-		task.currentDirectoryPath = Bundle.main.resourcePath!
-		
-		if let path = Bundle.main.path(forResource: "CheckVersion", ofType: "sh") {
-			task.arguments  = [path]
-		}
-		task.launch()
-		
-	}
-	
-	
-	func version(_ aria2cPath: String, block: @escaping (_ version: String) -> Void) {
-		let path = URL(fileURLWithPath: aria2cPath).deletingLastPathComponent()
-		let _ = path.addSecurityScope()
-		
-		let task = Process()
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		
-		task.launchPath = "/bin/sh"
-		task.currentDirectoryPath = URL(fileURLWithPath: aria2cPath).deletingLastPathComponent().path
-		
-		if let path = Bundle.main.path(forResource: "CheckVersion", ofType: "sh") {
-			task.arguments  = [path, aria2cPath]
-		}
-		task.launch()
-		//        connect Aria2Websocket when task complete
-		task.terminationHandler = { _ in
-			let data = pipe.fileHandleForReading.readDataToEndOfFile()
-			if let output = String(data: data, encoding: .utf8) {
-				let t = output.replacingOccurrences(of: "\n", with: " ").components(separatedBy: " ")
-				if t.first == "aria2" && t.index(of: "version") == 1 {
-					if let version = t[safe: 2] {
-						block(version)
-					}
+	func autoStart() {
+		guard Preferences.shared.autoStartAria2c else { return }
+		createFiles()
+		aria2cPid {
+			let lastPID = Preferences.shared.aria2cOptions.lastPID
+			if $0 == "" {
+				self.startAria2()
+			} else if lastPID != "", $0 != lastPID {
+				self.killLastAria2c {
+					self.startAria2()
 				}
-				
 			}
 		}
-		
-		path.removeSecurityScope()
 	}
-	
-	
 }
 
 
@@ -83,50 +33,122 @@ class Aria2c: NSObject {
 private extension Aria2c {
 	
 	var sessionPath: String {
-		var url = try! FileManager.default.url(for: .documentDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
-		url.appendPathComponent("aria2D.session")
-		return url.path
+		do {
+			var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
+			url.appendPathComponent(Bundle.main.bundleIdentifier!)
+			url.appendPathComponent("Aria2D.session")
+			return url.path
+		} catch { }
+		return ""
 	}
+	
 
 	
-	
-	
-	func createSessionFile() {
+	func createFiles() {
 		if !FileManager.default.fileExists(atPath: sessionPath) {
 			FileManager.default.createFile(atPath: sessionPath, contents: nil, attributes: nil)
 		}
+		let confPath = Preferences.shared.aria2cOptions.defaultAria2cConf
 		if !FileManager.default.fileExists(atPath: confPath) {
-			let contents = "enable-rpc=true\nrpc-allow-origin-all=true\nrpc-listen-all=true"
-			FileManager.default.createFile(atPath: confPath, contents: contents.data(using: .utf8), attributes: nil)
+			if let path = Bundle.main.path(forResource: "Aria2D", ofType: "conf") {
+				let url = URL(fileURLWithPath: confPath)
+				do {
+					try FileManager.default.copyItem(at: URL(fileURLWithPath: path), to: url)
+				} catch { }
+			}
 		}
-		
 	}
 	
 	
-	
+	// aria2c ...... -D
 	func startAria2() {
 		let task = Process()
-		task.launchPath = "/bin/sh"
-		task.currentDirectoryPath = Bundle.main.resourcePath!
+		let stdoutPipe = Pipe()
+		let stderrPipe = Pipe()
+		task.standardOutput = stdoutPipe
+		task.standardError = stderrPipe
+		stderrPipe.fileHandleForReading.readabilityHandler = {
+			if let output = String(data: $0.availableData, encoding: String.Encoding.utf8) {
+				
+				Log(output)
+			}
+		}
+		stdoutPipe.fileHandleForReading.readabilityHandler = {
+			if let output = String(data: $0.availableData, encoding: String.Encoding.utf8) {
+				
+				Log(output)
+			}
+		}
 		
-		if let path = Bundle.main.path(forResource: "StartAria2c", ofType: "sh") {
-			task.arguments  = [path,
-			                   "--enable-rpc=true",
-			                   "--rpc-listen-port=\(defaultValue.port.rawValue)",
-				"--rpc-listen-all=true",
-				"--rpc-allow-origin-all",
-				"--daemon=true",
-				"--save-session-interval=10",
-				//                                   "--rpc-secret=secret",
-				"--input-file=\(sessionPath)",
-				"--save-session=\(sessionPath)",
-				"--allow-overwrite=true",
-				"--auto-save-interval=10"] + Preferences.shared.options
+		
+		
+		do {
+			var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
+			url.appendPathComponent(Bundle.main.bundleIdentifier!)
+			task.currentDirectoryPath = url.path
+			
+		} catch { }
+		
+		let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
+		let confPath = Preferences.shared.aria2cOptions.path(for: .aria2cConf)
+		
+		if FileManager.default.fileExists(atPath: aria2cPath),
+			FileManager.default.fileExists(atPath: confPath) {
+			task.launchPath = aria2cPath
+//			var args = ["--conf-path=\(confPath)", "-D"]
+			var args = ["--conf-path=\(confPath)"]
+			if Preferences.shared.aria2cOptions.selectedAria2cConf == .default🙂 {
+				args.append("--input-file=\(sessionPath)")
+				args.append("--save-session=\(sessionPath)")
+			}
+			task.arguments = args
 		}
 		task.launch()
-		//        connect Aria2Websocket when task complete
+		
 		task.terminationHandler = { _ in
-			Aria2Websocket.shared.connect()
+
+			
+//			let data = pipe.fileHandleForReading.readDataToEndOfFile()
+//			if let output = String(data: data, encoding: .utf8) {
+//				if output.contains("Exception") {
+//					Log(output)
+//				} else {
+//					Preferences.shared.aria2cOptions.lastLaunchPath = aria2cPath
+//					self.aria2cPid {
+//						Preferences.shared.aria2cOptions.lastPID = $0
+//					}
+//				}
+//			}
+		}
+	}
+	
+	// pgrep -f "path"
+	func aria2cPid(_ block: @escaping (_ pid: String) -> Void) {
+		let lastLaunchPath = Preferences.shared.aria2cOptions.lastLaunchPath
+		let task = Process()
+		let pipe = Pipe()
+		task.standardOutput = pipe
+		task.launchPath = "/usr/bin/pgrep"
+		task.arguments  = ["-f", lastLaunchPath]
+		task.launch()
+		
+		task.terminationHandler = { _ in
+			let data = pipe.fileHandleForReading.readDataToEndOfFile()
+			if let output = String(data: data, encoding: .utf8) {
+				block(output)
+			}
+		}
+	}
+	
+	// kill -9 "pid"
+	func killLastAria2c(_ block: @escaping () -> Void) {
+		let lastLaunchPath = Preferences.shared.aria2cOptions.lastLaunchPath
+		let task = Process()
+		task.launchPath = "/usr/bin/kill"
+		task.arguments  = ["-9", lastLaunchPath]
+		task.launch()
+		task.terminationHandler = { _ in
+			block()
 		}
 	}
 	
@@ -134,4 +156,3 @@ private extension Aria2c {
 	
 	
 }
-*/

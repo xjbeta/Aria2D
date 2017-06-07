@@ -26,7 +26,7 @@ class NewTaskViewController: NSViewController {
 	
 	@IBOutlet var showOptionsButton: NSButton!
 	@IBAction func showOptions(_ sender: Any) {
-		let show = showOptionsButton.state == NSOnState
+		let show = showOptionsButton.state == .on
 		NSAnimationContext.runAnimationGroup({
 			$0.duration = 0.15
 			self.optionsView.isHidden = false
@@ -76,7 +76,7 @@ class NewTaskViewController: NSViewController {
 		openPanel.allowsMultipleSelection = false
 		if let window = view.window {
 			openPanel.beginSheetModal(for: window) { result in
-				if result == NSFileHandlingPanelOKButton, let path = openPanel.url {
+				if result == .OK, let path = openPanel.url {
 					do {
 						self.torrentData = try Data(contentsOf: path).base64EncodedString()
 						self.setTorrentPath(path)
@@ -103,7 +103,7 @@ class NewTaskViewController: NSViewController {
 	
 	func setTorrentPath(_ url: URL) {
 		DispatchQueue.main.async {
-			let image = NSWorkspace.shared().icon(forFileType: url.pathExtension)
+			let image = NSWorkspace.shared.icon(forFileType: url.pathExtension)
 			image.size = NSSize(width: 17, height: 17)
 			self.fileInfoButton.image = image
 			self.fileInfoButton.title = url.lastPathComponent
@@ -112,21 +112,3 @@ class NewTaskViewController: NSViewController {
 	
 }
 
-extension NewTaskViewController: NSRuleEditorDelegate {
-	
-	func ruleEditor(_ editor: NSRuleEditor, numberOfChildrenForCriterion criterion: Any?, with rowType: NSRuleEditorRowType) -> Int {
-		return 5
-	}
-	
-	func ruleEditor(_ editor: NSRuleEditor, child index: Int, forCriterion criterion: Any?, with rowType: NSRuleEditorRowType) -> Any {
-		
-		return ""
-	}
-	
-	func ruleEditor(_ editor: NSRuleEditor, displayValueForCriterion criterion: Any, inRow row: Int) -> Any {
-		
-		return ""
-	}
-	
-	
-}

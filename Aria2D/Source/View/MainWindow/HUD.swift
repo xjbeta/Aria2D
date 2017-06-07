@@ -33,7 +33,7 @@ class HUD: NSObject {
 		removeHUD = WaitTimer(timeOut: .milliseconds(1200)) {
 			self.disappearAnimation(self.hud.backView)
 		}
-		hud = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "HUDViewController") as! HUDViewController
+		hud = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "HUDViewController")) as! HUDViewController
 	}
 	
 	
@@ -132,7 +132,7 @@ class HUDBackView: NSView {
 	override func draw(_ dirtyRect: NSRect) {
 		super.draw(dirtyRect)
 		NSColor.black.setFill()
-		NSRectFill(dirtyRect)
+		dirtyRect.fill()
 	}
 	
 	required init?(coder: NSCoder) {

@@ -18,7 +18,7 @@ class LeftSourceList: NSViewController {
 	@IBOutlet var progressIndicator: NSProgressIndicator!
 	
 	
-	let showNewTaskViewController = "showNewTaskViewController"
+	let showNewTaskViewController = NSStoryboardSegue.Identifier(rawValue: "showNewTaskViewController")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -43,7 +43,7 @@ class LeftSourceList: NSViewController {
 	
 	
 	
-	func showNewTask() {
+	@objc func showNewTask() {
 		if Aria2Websocket.shared.isConnected {
 			performSegue(withIdentifier: showNewTaskViewController, sender: self)
 		}
@@ -77,7 +77,7 @@ extension LeftSourceList: NSOutlineViewDelegate {
 	
 	func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
 		if let item = item as? LeftSourceListBaseObject,
-			let view = outlineView.make(withIdentifier: item.cellID, owner: self) as? NSTableCellView{
+			let view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: item.cellID), owner: self) as? NSTableCellView{
 			
 			view.textField?.stringValue = item.name
 			view.imageView?.image = item.icon

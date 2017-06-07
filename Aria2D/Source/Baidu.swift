@@ -42,9 +42,9 @@ class Baidu: NSObject {
 	}
 
 	let userAgent = ["User-Agent": "netdisk"]
+
 	
-	
-	dynamic var mainPath: String = {
+	@objc dynamic var mainPath: String = {
 		return Preferences.shared.baiduFolder == "" ? "/" : Preferences.shared.baiduFolder
 	}()
 	

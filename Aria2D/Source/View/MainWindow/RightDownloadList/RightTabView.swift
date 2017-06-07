@@ -15,6 +15,8 @@ class RightTabView: NSTabViewController {
     @IBOutlet var downloadTab: NSTabViewItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+		let title = self.title ?? ""
+		title.sort()
         ViewControllersManager.shared.selectedRowDidSet = {
             self.setSelectedTab()
         }
@@ -28,7 +30,7 @@ class RightTabView: NSTabViewController {
         switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			updateTab()
-			setNotificationToken(DataManager.shared.data(TaskObject.self))
+			setNotificationToken()
 		case .baidu:
 			tabView.selectTabViewItem(downloadTab)
 			notificationToken?.stop()
@@ -44,14 +46,14 @@ class RightTabView: NSTabViewController {
 	var notificationToken: NotificationToken? = nil
 	var oldCountValue = -1
 	
-	func setNotificationToken<T: Object>(_ data: Results<T>) {
-		notificationToken = data.addNotificationBlock { _ in
+	func setNotificationToken() {
+		let obj = DataManager.shared.data(TaskObject.self)
+		notificationToken = obj.addNotificationBlock { _ in
 			if data.count > 0 && self.oldCountValue == 0 {
 				self.updateTab()
 			} else if data.count == 0 && self.oldCountValue > 0 {
 				self.updateTab()
 			}
-			
 			self.oldCountValue = data.count
 		}
 	}

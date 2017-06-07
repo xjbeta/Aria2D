@@ -60,18 +60,27 @@ class Aria2Websocket: NSObject {
 			timer.cancel()
 			self.timer = nil
 		}
-		socket.disconnect()
+		if socket.isConnected {
+			socket.disconnect()
+		}
+		
 		let url = Preferences.shared.aria2Servers.serverURL()
-		guard url != nil else { return }
+		guard url?.host != nil else { return }
 		socket = WebSocket(url: url!)
 		socket.callbackQueue = DispatchQueue(label: "com.xjbeta.Aria2D.starscream")
-		socket.onConnect = {
+		socket.onConnect = { _ in
 			self.isConnected = true
 			Aria2.shared.initData()
-			Aria2.shared.getVersion {
-				self.connectedServerInfo.version = "Version: \($0.0)"
-				self.connectedServerInfo.enabledFeatures = $0.1
+//			Aria2.shared.getVersion { info in
+//				self.connectedServerInfo.version = "Version: \($0.0)"
+//				self.connectedServerInfo.enabledFeatures = $0.1
+//			}
+			Aria2.shared.getVersion { (v, str) in
+				self.connectedServerInfo.version = "Version: \(v)"
+				self.connectedServerInfo.enabledFeatures = str
 			}
+			
+			
 			Aria2.shared.getGlobalOption()
 			self.connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
 			ViewControllersManager.shared.showHUD(.connected)
@@ -167,11 +176,12 @@ class Aria2Websocket: NSObject {
 	var isSuspend = Bool()
 	private var timer: DispatchSourceTimer?
 	
+	private var timerQueue = DispatchQueue(label: "com.xjbeta.Aria2D.connectWebSocketQueue")
 	
 	private func startTimer() {
-		timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "com.xjbeta.Aria2D.connectWebSocketQueue"))
+		timer = DispatchSource.makeTimerSource(flags: [], queue: timerQueue)
 		if let timer = timer {
-			timer.scheduleRepeating(deadline: DispatchTime.now(), interval: .seconds(1))
+			timer.scheduleRepeating(deadline: .now(), interval: .seconds(1))
 			timer.setEventHandler {
 				if !self.isConnected {
 					self.socket.connect()
@@ -185,20 +195,21 @@ class Aria2Websocket: NSObject {
 		}
 	}
 	
+
 	
 	
 	func suspendTimer() {
-		if !isSuspend, let timer = timer {
-			timer.suspend()
+		if !isSuspend, timer != nil {
+			timer?.suspend()
 			isSuspend = true
-			return
 		}
 	}
 	
 	func resumeTimer() {
-		if isSuspend, let timer = timer {
-			timer.resume()
+		if isSuspend, timer != nil {
+			timer?.resume()
 			isSuspend = false
+//			Aria2.shared.initData()
 		}
 	}
 

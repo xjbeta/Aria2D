@@ -111,7 +111,7 @@ class PreviewViewController: NSViewController {
 		showLoadingProgressIndicator(true)
 		if let data = dataSource?.dataOfPreviewObjects()[safe: selectedIndex] {
 			titleTextField.stringValue = URL(fileURLWithPath: data.path).lastPathComponent
-			let folderIcon = NSWorkspace.shared().icon(forFileType: URL(fileURLWithPath: data.path).pathExtension)
+			let folderIcon = NSWorkspace.shared.icon(forFileType: URL(fileURLWithPath: data.path).pathExtension)
 			folderIcon.size = NSSize(width: 255, height: 255)
 			iconImage.image = folderIcon
 			view.needsDisplay = true

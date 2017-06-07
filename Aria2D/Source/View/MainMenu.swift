@@ -70,10 +70,17 @@ class MainMenu: NSObject {
 			return mainWindowFront
 		}
 		
-//		if menuItem.title == "Log" {
-//			return Preferences.shared.developerMode
-//		}
+		if menuItem.action == #selector(activateApp) {
+			if !string_check(nil).boolValue {
+				menuItem.title = "Activate Aria2D"
+			} else {
+				menuItem.title = "Activated"
+			}
+			
+//			return !_my_secret_activation_check(nil).boolValue
+		}
 		
+
         return true
     }
 
@@ -116,8 +123,18 @@ class MainMenu: NSObject {
 	@IBAction func showStatus(_ sender: Any) {
 		ViewControllersManager.shared.showStatus()
 	}
-	@IBAction func showConfigFolder(_ sender: Any) {
-		NSWorkspace.shared().activateFileViewerSelecting([URL(fileURLWithPath: NSHomeDirectory())])
+
+	@IBAction func feedback(_ sender: Any) {
+		DevMateKit.showFeedbackDialog(nil, in: .sheetMode)
 	}
+	
+	@IBAction func activateApp(_ sender: Any) {
+		NotificationCenter.default.post(name: .activateApp, object: self)
+	}
+	
+	@IBAction func checkForUpdate(_ sender: Any) {
+		DM_SUUpdater.shared().checkForUpdates(sender)
+	}
+	
 }
 

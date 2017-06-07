@@ -20,7 +20,7 @@ struct WebSocketLog {
 class LogViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 	@IBOutlet var recordLog: NSButton!
 	@IBAction func recordLog(_ sender: Any) {
-		Preferences.shared.recordWebSocketLog = recordLog.state == NSOnState
+		Preferences.shared.recordWebSocketLog = recordLog.state == .on
 	}
 	@IBAction func refresh(_ sender: Any) {
 		webSocketLog = ViewControllersManager.shared.webSocketLog
@@ -38,7 +38,7 @@ class LogViewController: NSViewController, NSTableViewDelegate, NSTableViewDataS
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		recordLog.state = Preferences.shared.recordWebSocketLog ? NSOnState : NSOffState
+		recordLog.state = Preferences.shared.recordWebSocketLog ? .on : .off
 		webSocketLog = ViewControllersManager.shared.webSocketLog
 		logTableView.reloadData()
     }
@@ -51,7 +51,7 @@ class LogViewController: NSViewController, NSTableViewDelegate, NSTableViewDataS
 	
 	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 		if let identifier = tableColumn?.identifier, let log = webSocketLog[safe: row] {
-			switch identifier {
+			switch identifier.rawValue {
 			case "LogTableTime":
 				let date = Date(timeIntervalSince1970: log.time)
 				let formatter = DateFormatter()

@@ -39,6 +39,7 @@ class Aria2: NSObject {
 		}
 	}
 	
+	let aria2c = Aria2c()
 
 	func initData(_ gids: [GID], update: Bool = true, block: @escaping (_ json: JSON) -> Void = { _ in}) {
 		guard effectiveGIDs(gids).count > 0 else { return }
@@ -508,8 +509,8 @@ extension WebSocket {
 	           method: String,
 	           completion: @escaping (_ result: WebSocketResult) -> Void) {
 		let time = Date().timeIntervalSince1970
-		WaitingList.shared.add(id) {
-			if let json = $0.0 as? JSON {
+		WaitingList.shared.add(id) { (data, success) in
+			if let json = data as? JSON {
 				// Save log
 				if Preferences.shared.recordWebSocketLog, JSON(dic)["method"].stringValue != Aria2Method.tellActive {
 					var log = WebSocketLog()
@@ -524,12 +525,12 @@ extension WebSocket {
 						}
 						return str
 					}()
-					log.success = !$0.1
+					log.success = !success
 					log.time = time
 					ViewControllersManager.shared.webSocketLog.append(log)
 				}
 				
-				if !$0.1 {
+				if !success {
 					if json["error"].exists() {
 						completion(.receiveError(message: json["error"]["message"].stringValue))
 						return

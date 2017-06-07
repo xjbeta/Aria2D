@@ -21,7 +21,7 @@ class LoadingView: NSView {
 		label.textColor = .customHightlightColor
 		versionLabel.textColor = .customHightlightColor
 		featuresLabel.textColor = .customHightlightColor
-		NSRectFill(dirtyRect)
+		dirtyRect.fill()
 	}
 	
 	func initVersionInfo() {
@@ -31,7 +31,7 @@ class LoadingView: NSView {
 	}
 	
 
-	func updateVersionInfo() {
+	@objc func updateVersionInfo() {
 		DispatchQueue.main.async {
 			let info = Aria2Websocket.shared.connectedServerInfo
 			self.versionLabel.stringValue = info.version

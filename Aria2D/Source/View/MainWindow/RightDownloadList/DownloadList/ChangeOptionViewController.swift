@@ -40,7 +40,7 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 	@IBAction func help(_ sender: Any) {
 		let baseURL = "https://aria2.github.io/manual/en/html/aria2c.html#cmdoption--"
 		if let url = URL(string: baseURL + option.rawValue) {
-			NSWorkspace.shared().open(url)
+			NSWorkspace.shared.open(url)
 		}
 	}
 	
@@ -147,9 +147,9 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 	@IBOutlet var visualEffectView: NSVisualEffectView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        visualEffectView.material = .popover
-		changeButton.isEnabled = false
-		show(.string) {}
+//        visualEffectView.material = .popover
+//		changeButton.isEnabled = false
+//		show(.string) {}
     }
 	
 	

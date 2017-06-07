@@ -28,5 +28,7 @@ extension Notification.Name {
 	
 	static let updateToken = Notification.Name("com.xjbeta.Aria2D.SetPCSViewController.updateToken")
 	static let updateUserInfo = Notification.Name("com.xjbeta.Aria2D.BaiduSettingView.updateUserInfo")
+	
+	static let activateApp = Notification.Name("com.xjbeta.Aria2D.MainMenu.activateApp")
 
 }

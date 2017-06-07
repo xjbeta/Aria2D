@@ -67,7 +67,7 @@ class ViewControllersManager: NSObject {
 	func showSelectedInFinder() {
 		let urls = selectedUrls()
 		if urls.count > 0 {
-			NSWorkspace.shared().activateFileViewerSelecting(urls)
+			NSWorkspace.shared.activateFileViewerSelecting(urls)
 		}
 	}
 	
@@ -82,7 +82,7 @@ class ViewControllersManager: NSObject {
 			}.filter {
 				FileManager.default.fileExists(atPath: $0.path)
 			}.forEach {
-			NSWorkspace.shared().open($0)
+				NSWorkspace.shared.open($0)
 		}
 	}
 	

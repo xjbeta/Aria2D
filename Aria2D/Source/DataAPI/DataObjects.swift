@@ -21,18 +21,18 @@ public typealias Speed = String
 
 class TaskObject: Object {
 	
-    dynamic var gid: GID = ""
-    dynamic var path: Path = ""
-    dynamic var totalLength: TotalLength = 0
-    dynamic var status: Status = ""
-    dynamic var percentage: Percentage = ""
-    dynamic var progressIndicator: ProgressIndicator = 0
-    dynamic var time: Time = ""
-    dynamic var speed: Speed = ""
-    dynamic var date: Double = 0
-    dynamic var sortInt: Int = -1
-    dynamic var connections: Int = -1
-	dynamic var isBitTorrent = false
+    @objc dynamic var gid: GID = ""
+    @objc dynamic var path: Path = ""
+    @objc dynamic var totalLength: TotalLength = 0
+    @objc dynamic var status: Status = ""
+    @objc dynamic var percentage: Percentage = ""
+    @objc dynamic var progressIndicator: ProgressIndicator = 0
+    @objc dynamic var time: Time = ""
+    @objc dynamic var speed: Speed = ""
+    @objc dynamic var date: Double = 0
+    @objc dynamic var sortInt: Int = -1
+    @objc dynamic var connections: Int = -1
+	@objc dynamic var isBitTorrent = false
     
 	convenience init(gid: GID,
 	                 path: Path,
@@ -75,16 +75,16 @@ class TaskObject: Object {
 
 class BaiduFileObject: Object {
 	
-	dynamic var path = ""
-	dynamic var size = 0
-	dynamic var isDir = false
-	dynamic var server_mtime = 0.0
-	dynamic var fs_id = -1
-	dynamic var md5 = ""
-	dynamic var displayDir = ""
+	@objc dynamic var path = ""
+	@objc dynamic var size = 0
+	@objc dynamic var isDir = false
+	@objc dynamic var server_mtime = 0.0
+	@objc dynamic var fs_id = -1
+	@objc dynamic var md5 = ""
+	@objc dynamic var displayDir = ""
 	
-	dynamic var backParentDir = ""
-	dynamic var isBackButton = false
+	@objc dynamic var backParentDir = ""
+	@objc dynamic var isBackButton = false
 	
 	convenience init(path: String, size: Int, isDir: Bool, server_mtime: Double, fs_id: Int, md5: String, displayDir: String) {
 		self.init()

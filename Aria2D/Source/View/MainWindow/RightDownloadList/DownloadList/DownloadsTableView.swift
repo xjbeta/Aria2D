@@ -100,14 +100,14 @@ class DownloadsTableView: NSTableView {
 	
 	
 	func setRealmNotification() {
-		switch ViewControllersManager.shared.selectedRow {
-		case .downloading, .completed, .removed:
-			setNotificationToken(DataManager.shared.data(TaskObject.self, path: nil))
-		case .baidu:
-			setNotificationToken(DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath))
-		default:
-			break
-		}
+//		switch ViewControllersManager.shared.selectedRow {
+//		case .downloading, .completed, .removed:
+//			setNotificationToken(DataManager.shared.data(TaskObject.self, path: nil))
+//		case .baidu:
+//			setNotificationToken(DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath))
+//		default:
+//			break
+//		}
 	}
 	
 	func initNotification() {
@@ -123,7 +123,6 @@ class DownloadsTableView: NSTableView {
 				self.rowHeight = 40
 			default:
 				self.rowHeight = 50
-				
 			}
 			self.setRealmNotification()
 		}
@@ -137,8 +136,7 @@ class DownloadsTableView: NSTableView {
 	
 	
 	func setSelectedIndexs() {
-		let seleectedIndexs: IndexSet = {
-			
+		let selectedIndexs: IndexSet = {
 			if clickedRow != -1 {
 				if selectedRowIndexes.contains(clickedRow) {
 					return selectedRowIndexes
@@ -149,7 +147,9 @@ class DownloadsTableView: NSTableView {
 				return selectedRowIndexes
 			}
 		}()
-		ViewControllersManager.shared.selectedIndexs = seleectedIndexs
+		
+		
+		ViewControllersManager.shared.selectedIndexs = selectedIndexs
 	}
 	
 	
@@ -191,32 +191,33 @@ class DownloadsTableView: NSTableView {
 	var shouldUpdate = false
 	
 	var notificationToken: NotificationToken? = nil
-	private func setNotificationToken<T: Object>(_ data: Results<T>) {
-		notificationToken?.stop()
-
-		
-		notificationToken = data.addNotificationBlock {
-			switch $0 {
-			case .initial:
-				self.reloadData()
-				self.oldKeys = self.newKeys()
-//			case .update(_, let deletions, let insertions, let modifications):
-			case .update(_, let deletions, let insertions, _):
-				
-				if deletions.count == 0, insertions.count == 0 {
-					return
-				}
-				
-				if self.tableviewUpdating {
-					self.shouldUpdate = true
-				} else {
-					self.updateRows()
-				}
-			case .error:
-				break
-			}
-		}
-	}
+	
+//	private func setNotificationToken<T: Object>(_ data: Results<T>) {
+//		
+//		notificationToken?.stop()
+//		
+//		notificationToken = data.addNotificationBlock {
+//			switch $0 {
+//			case .initial:
+//				self.reloadData()
+//				self.oldKeys = self.newKeys()
+////			case .update(_, let deletions, let insertions, let modifications):
+//			case .update(_, let deletions, let insertions, _):
+//				
+//				if deletions.count == 0, insertions.count == 0 {
+//					return
+//				}
+//				
+//				if self.tableviewUpdating {
+//					self.shouldUpdate = true
+//				} else {
+//					self.updateRows()
+//				}
+//			case .error:
+//				break
+//			}
+//		}
+//	}
 	
 	
 

@@ -23,7 +23,8 @@ class LoginButtonCell: NSButtonCell {
 	
 	
 	func setDefaultImage() {
-		let defaultUserImage = NSImage(named: "DefaultUserImage")
+		let defaultUserImage = NSImage(named: NSImage.Name(rawValue: "DefaultUserImage"))
+		
 		defaultUserImage?.size = NSSize(width: 70, height: 70)
 		image = defaultUserImage
 	}
@@ -32,7 +33,7 @@ class LoginButtonCell: NSButtonCell {
 		let pstyle = NSMutableParagraphStyle()
 		pstyle.alignment = .center
 		var font = NSFont()
-		font = NSFont.systemFont(ofSize: 13, weight: NSFontWeightSemibold)
-		return NSAttributedString(string: title, attributes:[NSForegroundColorAttributeName: NSColor.white, NSParagraphStyleAttributeName: pstyle, NSFontAttributeName: font])
+		font = NSFont.systemFont(ofSize: 13, weight: NSFont.Weight.semibold)
+		return NSAttributedString(string: title, attributes:[NSAttributedStringKey.foregroundColor: NSColor.white, NSAttributedStringKey.paragraphStyle: pstyle, NSAttributedStringKey.font: font])
 	}
 }

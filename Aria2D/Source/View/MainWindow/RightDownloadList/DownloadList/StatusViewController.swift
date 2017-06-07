@@ -21,12 +21,13 @@ class StatusViewController: NSViewController {
 					outlineView.animator().expandItem(item)
 				}
 			} else {
-				let pasteboard = NSPasteboard.general()
+				
+				let pasteboard = NSPasteboard.general
 				pasteboard.clearContents()
 				if let i = item as? DicObject {
-					pasteboard.writeObjects([i.value.stringValue as NSPasteboardWriting])
+					pasteboard.writeObjects([i.value.stringValue as NSString])
 				} else if let i = item as? ArrayObject {
-					pasteboard.writeObjects([i.value.stringValue as NSPasteboardWriting])
+					pasteboard.writeObjects([i.value.stringValue as NSString])
 				}
 				
 				
@@ -135,13 +136,14 @@ extension StatusViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-		if tableColumn?.identifier == statusViewStatusCell {
+		let identifier = tableColumn?.identifier.rawValue
+		if identifier == statusViewStatusCell {
 			if let obj = item as? DicObject {
 				return obj.key
 			} else if let obj = item as? ArrayObject {
 				return obj.index
 			}
-		} else if tableColumn?.identifier == statusViewValueCell {
+		} else if identifier == statusViewValueCell {
 			if let obj = item as? DicObject {
 				if obj.key.contains("Length") {
 					return UnitNumber(obj.value.stringValue).stringValue

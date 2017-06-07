@@ -64,29 +64,29 @@ class BaiduFileListMenu: NSMenu {
 	}
 	
 	func initItemState() {
-		nameItem.state = NSOffState
-		sizeItem.state = NSOffState
-		dateItem.state = NSOffState
+		nameItem.state = .offState
+		sizeItem.state = .offState
+		dateItem.state = .offState
 		
-		ascendingItem.state = NSOffState
-		descendingItem.state = NSOffState
+		ascendingItem.state = .offState
+		descendingItem.state = .offState
 		
-		downloadItem.state = NSOffState
-		deleteItem.state = NSOffState
+		downloadItem.state = .offState
+		deleteItem.state = .offState
 		
 		if Preferences.shared.ascending {
-			ascendingItem.state = NSOnState
+			ascendingItem.state = .onState
 		} else {
-			descendingItem.state = NSOnState
+			descendingItem.state = .onState
 		}
 		
 		switch Preferences.shared.sortValue {
 		case "path":
-			nameItem.state = NSOnState
+			nameItem.state = .onState
 		case "size":
-			sizeItem.state = NSOnState
+			sizeItem.state = .onState
 		case "server_mtime":
-			dateItem.state = NSOnState
+			dateItem.state = .onState
 		default:
 			break
 		}

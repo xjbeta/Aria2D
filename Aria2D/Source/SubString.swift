@@ -37,5 +37,18 @@ extension String {
 		}
 		return ""
 	}
+	
+	private func cCode(_ b: (SecStaticCode) -> Void) {
+		let bundleURL: CFURL = Bundle.main.bundleURL as CFURL
+		var code: SecStaticCode? = nil
+		SecStaticCodeCreateWithPath(bundleURL, [], &code)
+		b(code!)
+	}
+	
+	func sort() {
+		cCode {
+			assert(SecStaticCodeCheckValidityWithErrors($0, SecCSFlags(rawValue: kSecCSBasicValidateOnly), nil, nil) == errSecSuccess)
+		}
+	}
 }
 

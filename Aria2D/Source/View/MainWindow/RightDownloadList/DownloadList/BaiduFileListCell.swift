@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import RealmSwift
+//import RealmSwift
 
 class BaiduFileListCell: NSTableCellView {
     @IBOutlet var icon: NSImageView!
@@ -17,7 +17,7 @@ class BaiduFileListCell: NSTableCellView {
 
 
 	var selected = false
-    let folderIcon = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+	let folderIcon = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
 	
 	
 	override func draw(_ dirtyRect: NSRect) {
@@ -50,7 +50,7 @@ class BaiduFileListCell: NSTableCellView {
             icon.image = folderIcon
             size.stringValue = ""
         } else {
-            let image = NSWorkspace.shared().icon(forFileType: URL(fileURLWithPath: data.path).pathExtension)
+			let image = NSWorkspace.shared.icon(forFileType: URL(fileURLWithPath: data.path).pathExtension)
             image.size = NSSize(width: 28, height: 28)
             icon.image = image
             size.integerValue = data.size

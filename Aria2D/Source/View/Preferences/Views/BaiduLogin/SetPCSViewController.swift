@@ -13,7 +13,7 @@ class SetPCSViewController: NSViewController, WKNavigationDelegate {
 	@IBOutlet var viewForWeb: NSView!
 	@IBOutlet var getTokenButton: NSButton!
 	@IBOutlet var stackView: NSStackView!
-	@IBOutlet var tokenStatusCheck: TokenStatusButton!
+	@IBOutlet var tokenStatusCheck: NSButton!
 	
 	@IBOutlet var folderTextField: NSTextField!
 	@IBAction func getToken(_ sender: Any) {
@@ -88,9 +88,9 @@ class SetPCSViewController: NSViewController, WKNavigationDelegate {
 		onViewControllerDismiss?()
 	}
 	
-	func initTokenStatusCheck() {
+	@objc func initTokenStatusCheck() {
 		DispatchQueue.main.async {
-			self.tokenStatusCheck.state = Baidu.shared.isTokenEffective ? 0 : 1
+			self.tokenStatusCheck.state = Baidu.shared.isTokenEffective ? .on : .off
 			self.folderTextField.stringValue = Preferences.shared.baiduFolder
 		}
 	}

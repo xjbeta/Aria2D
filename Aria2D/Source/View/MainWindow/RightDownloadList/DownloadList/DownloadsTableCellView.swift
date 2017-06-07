@@ -24,7 +24,7 @@ class DownloadsTableCellView: NSTableCellView {
 	var rowNumber = -1
 	var notificationToken: NotificationToken? = nil
 	
-	let folderIcon = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+	let folderIcon = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
 	
 	override var isOpaque: Bool {
 		return true
@@ -69,7 +69,7 @@ class DownloadsTableCellView: NSTableCellView {
 			if data.isBitTorrent, path.pathExtension == "" {
 				image = folderIcon
 			} else {
-				image = NSWorkspace.shared().icon(forFileType: path.pathExtension)
+				image = NSWorkspace.shared.icon(forFileType: path.pathExtension)
 			}
 			image.size = NSSize(width: 35, height: 35)
 			return image

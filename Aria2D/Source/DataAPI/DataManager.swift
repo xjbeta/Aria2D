@@ -207,7 +207,7 @@ class DataManager: NSObject {
     
     
     
-// MARK: - Get Data
+ //MARK: - Get Data
     func data<T: Object>(_ type: T.Type, path: String? = nil) -> Results<T> {
 		
 		let realm = try! Realm(configuration: realmConfiguration)
@@ -232,6 +232,7 @@ class DataManager: NSObject {
             return realm.objects(type).filter("status == 'nil'")
         }
     }
+	
 	
     func activeCount() -> Int {
 		let realm = try! Realm(configuration: realmConfiguration)

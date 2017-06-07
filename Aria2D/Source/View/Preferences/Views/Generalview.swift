@@ -28,7 +28,7 @@ class Generalview: NSViewController {
         openPanel.canCreateDirectories = true
 		if let window = view.window {
 			openPanel.beginSheetModal(for: window) { result in
-				if result == NSFileHandlingPanelOKButton {
+				if result == .OK {
 					if let url = self.openPanel.url {
 						Preferences.shared.aria2Servers.set(url.path)
 						self.setPopbutton()
@@ -103,9 +103,9 @@ class Generalview: NSViewController {
 		options.update(.optimizeConcurrentDownloads, value: !oldState) { success in
 			DispatchQueue.main.async {
 				if !success {
-					self.optimizeConcurrentDownloadsButton.state = oldState ? NSOnState : NSOffState
+					self.optimizeConcurrentDownloadsButton.state = oldState ? .on : .off
 				} else {
-					self.optimizeConcurrentDownloadsButton.state = self.options.optimizeConcurrentDownloads ? NSOnState : NSOffState
+					self.optimizeConcurrentDownloadsButton.state = self.options.optimizeConcurrentDownloads ? .on : .off
 				}
 			}
 		}
@@ -126,10 +126,11 @@ class Generalview: NSViewController {
 	
 	override func viewWillDisappear() {
 		super.viewWillDisappear()
-		controlTextDidEndEditing(Notification(name: .NSControlTextDidEndEditing, object: maxOverallDownloadLimitTextField, userInfo: nil))
-		controlTextDidEndEditing(Notification(name: .NSControlTextDidEndEditing, object: maxOverallUploadLimitTextField, userInfo: nil))
-		controlTextDidEndEditing(Notification(name: .NSControlTextDidEndEditing, object: maxConcurrentDownloadsComboBox, userInfo: nil))
-		controlTextDidEndEditing(Notification(name: .NSControlTextDidEndEditing, object: downloadDirTextField, userInfo: nil))
+		
+//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: maxOverallDownloadLimitTextField, userInfo: nil))
+//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: maxOverallUploadLimitTextField, userInfo: nil))
+//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: maxConcurrentDownloadsComboBox, userInfo: nil))
+//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: downloadDirTextField, userInfo: nil))
 	}
 	
 	
@@ -154,12 +155,12 @@ class Generalview: NSViewController {
 			downloadDir.title = dirURL.lastPathComponent
 		}
 		
-		let image = NSWorkspace.shared().icon(forFile: dirURL.path)
+		let image = NSWorkspace.shared.icon(forFile: dirURL.path)
 		image.size = NSSize(width: 16, height: 16)
 		downloadDir.image = image
 	}
 
-	func setControlsStatus() {
+	@objc func setControlsStatus() {
 		DispatchQueue.main.async {
 			let enable = Aria2Websocket.shared.isConnected
 			self.controlsView.subviews.forEach {
@@ -176,12 +177,12 @@ class Generalview: NSViewController {
 		}
 	}
 	
-	func updateOption() {
+	@objc func updateOption() {
 		DispatchQueue.main.async {
 			self.initDir()
 			let options = self.options
 			self.maxConcurrentDownloadsComboBox.integerValue = options.maxConcurrentDownloads
-			self.optimizeConcurrentDownloadsButton.state = options.optimizeConcurrentDownloads ? NSOnState : NSOffState
+			self.optimizeConcurrentDownloadsButton.state = options.optimizeConcurrentDownloads ? .on : .off
 			self.maxOverallDownloadLimitTextField.integerValue = options.maxOverallDownloadLimit
 			self.maxOverallUploadLimitTextField.integerValue = options.maxOverallUploadLimit
 		}
@@ -189,7 +190,7 @@ class Generalview: NSViewController {
 	
 	
 
-	let showSetServersViewController = "showSetServersViewController"
+	let showSetServersViewController = NSStoryboardSegue.Identifier(rawValue: "showSetServersViewController")
 	
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		if segue.identifier == showSetServersViewController {
@@ -236,8 +237,9 @@ extension Generalview: NSMenuDelegate {
 		}
 		Preferences.shared.aria2Servers.get().map {
 			NSMenuItem(title: $0.name, action: nil, keyEquivalent: "")
-			}.enumerated().forEach {
-				selectMenu.insertItem($1, at: $0)
+			}.enumerated().forEach { (arg) in
+				let (i, item) = arg
+				selectMenu.insertItem(item, at: i)
 		}
 		
 		menuPopupButton.selectItem(at: selectServerIndex)

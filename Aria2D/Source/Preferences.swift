@@ -103,148 +103,38 @@ class Preferences: NSObject {
 	}
 
 	
-// MARK: - Aria2Preferences
-	
-/*
-	var options: [String] {
-		return ["\(keys.dir.rawValue)=\(dir.path)",
-				"\(keys.maxConcurrentDownloads.rawValue)=\(maxConcurrentDownloads)",
-				"\(keys.checkIntegrity.rawValue)=\(checkIntegrity)",
-				"\(keys.continueOfAria2.rawValue)=\(continueOfAria2)",
-				"\(keys.maxOverallUploadLimit.rawValue)=\(maxOverallUploadLimit)",
-				"\(keys.maxOverallDownloadLimit.rawValue)=\(maxOverallDownloadLimit)",
-				"\(keys.maxConnectionPerServer.rawValue)=\(maxConnectionPerServer)",
-				"\(keys.split.rawValue)=\(split)",
-				"\(keys.optimizeConcurrentDownloads.rawValue)=\(optimizeConcurrentDownloads)"]
+// MARK: - Aria2c Options
+	var autoStartAria2c: Bool {
+		get {
+			return defaults(.autoStartAria2c) as? Bool ?? true
+		}
+		set {
+			defaultsSet(newValue, forKey: .autoStartAria2c)
+		}
 	}
-	
 
-	var dir: URL {
+	private lazy var defaultAria2cOptions: Aria2cOptions = {
+		let s = Aria2cOptions()
+		Preferences.shared.aria2cOptions = s
+		return s
+	}()
+	
+	
+	var aria2cOptions: Aria2cOptions {
 		get {
-			if let pathStr = defaults(keys.downloadDir) as? String {
-				let path = URL(fileURLWithPath: pathStr)
-				var upperPath = path
-				upperPath.deleteLastPathComponent()
-				if FileManager.default.fileExists(atPath: upperPath.path), let path = path.addSecurityScope() {
-					return path
-				}
+			if let data = defaults(.aria2cOptions) as? Data,
+				let aria2cOptions = Aria2cOptions(data: data) {
+				return aria2cOptions
+			} else {
+				return Aria2cOptions()
 			}
-			return defaultDownloadPath
 		}
 		set {
-			let oldValue = dir
-			oldValue.removeSecurityScope()
-			if let url = newValue.addSecurityScope() {
-				defaultsSet(url.path, forKey: .downloadDir)
-			}
-			
+			defaultsSet(newValue.encode(), forKey: .aria2cOptions)
 		}
 	}
-	
-	var maxConcurrentDownloads: Int {
-		get {
-			return defaults(.maxConcurrentDownloads) as? Int ?? 3
-		}
-		set {
-			Aria2.shared.changeGlobalOption(keys.maxConcurrentDownloads.keyValue, value: "\(newValue)")
-		}
-	}
-	
-	var checkIntegrity: Bool {
-		get {
-			return defaults(.checkIntegrity) as? Bool ?? false
-		}
-		set {
-			defaultsSet(newValue, forKey: .checkIntegrity)
-		}
-	}
-	
-	
-	var continueOfAria2: Bool {
-		get {
-			return defaults(.continueOfAria2) as? Bool ?? true
-		}
-		set {
-			defaultsSet(newValue, forKey: .continueOfAria2)
-		}
-	}
-	
-	var maxOverallUploadLimit: Int {
-		get {
-			return (defaults(.maxOverallUploadLimit) as? Int ?? 0) / 1000
-		}
-		set {
-			Aria2.shared.changeGlobalOption(keys.maxOverallUploadLimit.keyValue, value: "\(newValue * 1000)")
-		}
-	}
-	
-	
-	var maxOverallDownloadLimit: Int {
-		get {
-			return (defaults(.maxOverallDownloadLimit) as? Int ?? 0) / 1000
-		}
-		set {
-			Aria2.shared.changeGlobalOption(keys.maxOverallDownloadLimit.keyValue, value: "\(newValue * 1000)")
-		}
-	}
-	
-	var maxConnectionPerServer: Int {
-		get {
-			return defaults(.maxConnectionPerServer) as? Int ?? 1
-		}
-		set {
-			defaultsSet(newValue, forKey: .maxConnectionPerServer)
-		}
-	}
-	
-	var split: Int {
-		get {
-			return defaults(.split) as? Int ?? 5
-		}
-		set {
-			defaultsSet(newValue, forKey: .split)
-		}
-	}
-	
-	var optimizeConcurrentDownloads: Bool {
-		get {
-			return defaults(.optimizeConcurrentDownloads) as? Bool ?? false
-		}
-		set {
-			Aria2.shared.changeGlobalOption(keys.optimizeConcurrentDownloads.keyValue, value: "\(newValue)")
-		}
-	}
-	
-// MARK: - Aria2c Connections
 
-	var useInternalAria2c: Bool {
-		get {
-			return defaults(.useInternalAria2c) as? Bool ?? true
-		}
-		set {
-			defaultsSet(newValue, forKey: .useInternalAria2c)
-		}
-	}
-	
-	var aria2cHost: String {
-		get {
-			return defaults(.aria2cHost) as? String ?? defaultValue.localHost.rawValue
-		}
-		set {
-			defaultsSet(newValue, forKey: .aria2cHost)
-		}
-	}
-	
-	
-	var aria2cPort: Int {
-		get {
-			return defaults(.aria2cPort) as? Int ?? Int(defaultValue.port.rawValue)!
-		}
-		set {
-			defaultsSet(newValue, forKey: .aria2cPort)
-		}
-	}
-*/
+
 // MARK: - Baidu
 	var baiduAPIKey: String {
 		get {

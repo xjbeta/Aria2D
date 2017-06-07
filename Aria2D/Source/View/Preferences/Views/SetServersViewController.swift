@@ -10,7 +10,7 @@ import Cocoa
 
 class SetServersViewController: NSViewController {
 	@IBOutlet var tableview: NSTableView!
-	dynamic var serverListContent: [Aria2ConnectionSettings] = [] {
+	@objc dynamic var serverListContent: [Aria2ConnectionSettings] = [] {
 		didSet {
 			if serverListContent.count == 0 {
 				serverListContent = [Aria2ConnectionSettings()]

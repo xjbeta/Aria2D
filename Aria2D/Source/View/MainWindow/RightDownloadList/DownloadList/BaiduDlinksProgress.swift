@@ -45,7 +45,9 @@ class BaiduDlinksProgress: NSViewController {
 			dlinks = [[Any]](repeating: [], count: data.count)
 			data.map {
 				$0.path
-				}.enumerated().forEach { i, path in
+				}.enumerated().forEach { (arg) in
+					
+					let (i, path) = arg
 					group.enter()
 					Baidu.shared.getDownloadUrls(FromPCS: path) {
 						self.dlinks[i] = [$0, URL(fileURLWithPath: path).lastPathComponent]

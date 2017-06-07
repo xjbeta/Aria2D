@@ -44,30 +44,30 @@ class OptionsViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 	                                 .rpcSaveUploadMetadata]
 
 	
-	let showChangeOptionView = "showChangeOptionView"
+	let showChangeOptionView = NSStoryboardSegue.Identifier(rawValue: "showChangeOptionView")
 	
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		if segue.identifier == showChangeOptionView {
-			if let vc = segue.destinationController as? ChangeOptionViewController {
-				vc.presentViewController(vc,
-				                         asPopoverRelativeTo: optionsTableView.rect(ofRow: optionsTableView.selectedRow),
-				                         of: optionsTableView,
-				                         preferredEdge: .minX,
-				                         behavior: .transient)
+//			if let vc = segue.destinationController as? ChangeOptionViewController {
+//				vc.presentViewController(vc,
+//				                         asPopoverRelativeTo: optionsTableView.rect(ofRow: optionsTableView.selectedRow),
+//				                         of: optionsTableView,
+//				                         preferredEdge: .minX,
+//				                         behavior: .transient)
 				
-				if let option = optionKeys[safe: optionsTableView.selectedRow] {
-					vc.optionKey.stringValue = option.rawValue
-					vc.optionValue = options[option.rawValue].stringValue
-					vc.option = option
-					vc.gid = self.gid
-					vc.changeComplete = {
-						Aria2.shared.getOption(self.gid) {
-							self.options = $0
-						}
-						Aria2.shared.initData([self.gid])
-					}
-				}
-			}
+//				if let option = optionKeys[safe: optionsTableView.selectedRow] {
+//					vc.optionKey.stringValue = option.rawValue
+//					vc.optionValue = options[option.rawValue].stringValue
+//					vc.option = option
+//					vc.gid = self.gid
+//					vc.changeComplete = {
+//						Aria2.shared.getOption(self.gid) {
+//							self.options = $0
+//						}
+//						Aria2.shared.initData([self.gid])
+//					}
+//				}
+//			}
 		}
 	}
 	
@@ -79,7 +79,7 @@ class OptionsViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 	
 	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 		if let identifier = tableColumn?.identifier {
-			switch identifier {
+			switch identifier.rawValue {
 			case "OptionsTableViewOptionCell":
 				return optionKeys[safe: row]?.rawValue
 			case "OptionsTableViewValueCell":

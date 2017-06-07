@@ -58,10 +58,10 @@ class BaiduSettingView: NSViewController {
 	}
 
 	
-	let showPCSView = "showPCSView"
-	let showLoginView = "showLoginView"
+	let showPCSView = NSStoryboardSegue.Identifier(rawValue: "showPCSView")
+	let showLoginView = NSStoryboardSegue.Identifier(rawValue: "showLoginView")
 	
-	func initUserInfo() {
+	@objc func initUserInfo() {
 		if Baidu.shared.isLogin {
 			Baidu.shared.getUserInfo { name, image, capacity in
 				DispatchQueue.main.async {
@@ -85,7 +85,7 @@ class BaiduSettingView: NSViewController {
 	}
 	
 	func defaultUserImage() -> NSImage? {
-		let defaultUserImage = NSImage(named: "DefaultUserImage")
+		let defaultUserImage = NSImage(named: NSImage.Name(rawValue: "DefaultUserImage"))
 		defaultUserImage?.size = NSSize(width: 70, height: 70)
 		return defaultUserImage
 	}

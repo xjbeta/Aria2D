@@ -21,8 +21,8 @@ class MainWindowController: NSWindowController {
 			initNotification()
 			hud.delegate = self
 		}
-		
-    }
+	}
+
 	
 	func initNotification() {
 		NotificationCenter.default.addObserver(forName: .showHUD, object: nil, queue: .main) {
@@ -40,6 +40,9 @@ class MainWindowController: NSWindowController {
 	deinit {
 		NotificationCenter.default.removeObserver(self)
 	}
+	
+
+	
 }
 
 extension MainWindowController: HUDDelegate {
@@ -47,3 +50,4 @@ extension MainWindowController: HUDDelegate {
 		return self.window
 	}
 }
+

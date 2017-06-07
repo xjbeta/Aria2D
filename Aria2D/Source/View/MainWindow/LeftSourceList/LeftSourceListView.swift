@@ -66,19 +66,19 @@ class LeftSourceListView: NSOutlineView {
 		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .developerModeChanged, object: nil)
     }
     
-	func resetLeftOutlineView() {
+	@objc func resetLeftOutlineView() {
 		DispatchQueue.main.async {
 			self.setDefaultData()
 		}
 	}
 		
-    func nextTag() {
+    @objc func nextTag() {
         if selectedRow < numberOfRows {
             selectRowIndexes(IndexSet(integer: selectedRow + 1), byExtendingSelection: false)
         }
     }
     
-    func previousTag() {
+    @objc func previousTag() {
         if selectedRow >= 1 {
             selectRowIndexes(IndexSet(integer: selectedRow - 1), byExtendingSelection: false)
         }

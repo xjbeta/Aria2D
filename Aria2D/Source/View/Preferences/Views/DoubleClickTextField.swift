@@ -18,7 +18,7 @@ class DoubleClickTextField: NSTextField {
 	
 	override func mouseUp(with event: NSEvent) {
 		if event.clickCount == 2 {
-			let pasteboard = NSPasteboard.general()
+			let pasteboard = NSPasteboard.general
 			pasteboard.clearContents()
 			pasteboard.writeObjects([stringValue as NSString])
 		} else {
