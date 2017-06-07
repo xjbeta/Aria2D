@@ -47,8 +47,8 @@ class RightTabView: NSTabViewController {
 	var oldCountValue = -1
 	
 	func setNotificationToken() {
-		let obj = DataManager.shared.data(TaskObject.self)
-		notificationToken = obj.addNotificationBlock { _ in
+		let data = DataManager.shared.data(TaskObject.self)
+		notificationToken = data.addNotificationBlock { _ in
 			if data.count > 0 && self.oldCountValue == 0 {
 				self.updateTab()
 			} else if data.count == 0 && self.oldCountValue > 0 {

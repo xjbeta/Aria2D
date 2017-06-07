@@ -27,7 +27,7 @@ class SetPCSViewController: NSViewController, WKNavigationDelegate {
 	
 	var webView: WKWebView!
 	
-	var baiduAPIKey: String {
+	@objc var baiduAPIKey: String {
 		get {
 			return Preferences.shared.baiduAPIKey
 		}
@@ -36,7 +36,7 @@ class SetPCSViewController: NSViewController, WKNavigationDelegate {
 		}
 	}
 	
-	var baiduSecretKey: String {
+	@objc var baiduSecretKey: String {
 		get {
 			return Preferences.shared.baiduSecretKey
 		}

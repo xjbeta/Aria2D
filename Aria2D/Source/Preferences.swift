@@ -51,7 +51,7 @@ class Preferences: NSObject {
 	}
 	
 	
-	var developerMode: Bool {
+	@objc var developerMode: Bool {
 		get {
 			return defaults(.developerMode) as? Bool ?? false
 		}
@@ -62,7 +62,7 @@ class Preferences: NSObject {
 	}
 	
 	
-	var useForce: Bool {
+	@objc var useForce: Bool {
 		get {
 			return defaults(.useForce) as? Bool ?? true
 		}
@@ -70,7 +70,7 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .useForce)
 		}
 	}
-	var completeNotice: Bool {
+	@objc var completeNotice: Bool {
 		get {
 			return defaults(.completeNotice) as? Bool ?? true
 		}

@@ -10,7 +10,7 @@ import Cocoa
 
 class MainMenu: NSObject {
 	
-	var enableLogItem: Bool {
+	@objc var enableLogItem: Bool {
 		return Preferences.shared.developerMode
 	}
     

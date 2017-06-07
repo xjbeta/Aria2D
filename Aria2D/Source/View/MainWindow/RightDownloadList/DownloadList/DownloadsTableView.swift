@@ -18,8 +18,6 @@ class DownloadsTableView: NSTableView {
     override var mouseDownCanMoveWindow: Bool {
         return true
     }
-
-
 	
 	override func drawBackground(inClipRect clipRect: NSRect) {
 		let h = rowHeight + intercellSpacing.height
@@ -39,7 +37,7 @@ class DownloadsTableView: NSTableView {
 				                  y: rectOriginY,
 				                  width: clipRect.size.width,
 				                  height: h - r)
-				NSRectFill(rect)
+				rect.fill()
 				drawingRow += 1
 				rectOriginY += (h - r)
 			}
@@ -49,7 +47,7 @@ class DownloadsTableView: NSTableView {
 								  y: rectOriginY,
 								  width: clipRect.size.width,
 								  height: h)
-				NSRectFill(rect)
+				rect.fill()
 				drawingRow += 1
 				rectOriginY += h
 			}
@@ -66,7 +64,7 @@ class DownloadsTableView: NSTableView {
 				                  y: rectOriginY - (h + r),
 				                  width: clipRect.size.width,
 				                  height: h + r)
-				NSRectFill(rect)
+				rect.fill()
 				drawingRow -= 1
 				rectOriginY = rect.origin.y
 			}
@@ -78,7 +76,7 @@ class DownloadsTableView: NSTableView {
 				                  y: rectOriginY - h,
 				                  width: clipRect.size.width,
 				                  height: h)
-				NSRectFill(rect)
+				rect.fill()
 				drawingRow -= 1
 				rectOriginY -= h
 			}
@@ -91,7 +89,7 @@ class DownloadsTableView: NSTableView {
 			while rectOriginY < clipRect.size.height {
 				((drawingRow % 2) == 0 ? color1 : color2).setFill()
 				let rect = NSRect(x: 0, y: rectOriginY, width: clipRect.size.width, height: h)
-				NSRectFill(rect)
+				rect.fill()
 				drawingRow += 1
 				rectOriginY += h
 			}
@@ -100,23 +98,70 @@ class DownloadsTableView: NSTableView {
 	
 	
 	func setRealmNotification() {
-//		switch ViewControllersManager.shared.selectedRow {
-//		case .downloading, .completed, .removed:
-//			setNotificationToken(DataManager.shared.data(TaskObject.self, path: nil))
-//		case .baidu:
-//			setNotificationToken(DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath))
-//		default:
-//			break
-//		}
+		
+		switch ViewControllersManager.shared.selectedRow {
+		case .downloading, .completed, .removed:
+			let data = DataManager.shared.data(TaskObject.self, path: nil)
+			notificationToken?.stop()
+			
+			notificationToken = data.addNotificationBlock {
+				switch $0 {
+				case .initial:
+					self.reloadData()
+					self.oldKeys = self.newKeys()
+				//			case .update(_, let deletions, let insertions, let modifications):
+				case .update(_, let deletions, let insertions, _):
+					
+					if deletions.count == 0, insertions.count == 0 {
+						return
+					}
+					if self.tableviewUpdating {
+						self.shouldUpdate = true
+					} else {
+						self.updateRows()
+					}
+				case .error:
+					break
+				}
+			}
+		case .baidu:
+			let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)
+			notificationToken?.stop()
+			
+			notificationToken = data.addNotificationBlock {
+				switch $0 {
+				case .initial:
+					self.reloadData()
+					self.oldKeys = self.newKeys()
+				//			case .update(_, let deletions, let insertions, let modifications):
+				case .update(_, let deletions, let insertions, _):
+					
+					if deletions.count == 0, insertions.count == 0 {
+						return
+					}
+					if self.tableviewUpdating {
+						self.shouldUpdate = true
+					} else {
+						self.updateRows()
+					}
+				case .error:
+					break
+				}
+			}
+		default:
+			break
+		}
+		
+		
+		
 	}
 	
 	func initNotification() {
 		NotificationCenter.default.addObserver(self, selector: #selector(changeSelectRow), name: .leftSourceListSelection, object: nil)
-		
 		NotificationCenter.default.addObserver(self, selector: #selector(shouldReloadData), name: .refreshDownloadList, object: nil)
 	}
 	
-	func changeSelectRow() {
+	@objc func changeSelectRow() {
 		DispatchQueue.main.async {
 			switch ViewControllersManager.shared.selectedRow {
 			case .baidu:
@@ -128,7 +173,7 @@ class DownloadsTableView: NSTableView {
 		}
 	}
 	
-	func shouldReloadData() {
+	@objc func shouldReloadData() {
 		DispatchQueue.main.async {
 			self.reloadData()
 		}
@@ -192,32 +237,6 @@ class DownloadsTableView: NSTableView {
 	
 	var notificationToken: NotificationToken? = nil
 	
-//	private func setNotificationToken<T: Object>(_ data: Results<T>) {
-//		
-//		notificationToken?.stop()
-//		
-//		notificationToken = data.addNotificationBlock {
-//			switch $0 {
-//			case .initial:
-//				self.reloadData()
-//				self.oldKeys = self.newKeys()
-////			case .update(_, let deletions, let insertions, let modifications):
-//			case .update(_, let deletions, let insertions, _):
-//				
-//				if deletions.count == 0, insertions.count == 0 {
-//					return
-//				}
-//				
-//				if self.tableviewUpdating {
-//					self.shouldUpdate = true
-//				} else {
-//					self.updateRows()
-//				}
-//			case .error:
-//				break
-//			}
-//		}
-//	}
 	
 	
 

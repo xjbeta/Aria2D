@@ -32,13 +32,13 @@ class Aria2ConnectionSettings: NSObject, NSCoding {
 			name = host == "" ? "NewServer" : "\(host):\(port)"
 		}
 	}
-	var port: Int {
+	@objc var port: Int {
 		didSet {
 			name = host == "" ? "NewServer" : "\(host):\(port)"
 		}
 	}
 	
-	var enabledSSLorTLS: Bool = false {
+	@objc var enabledSSLorTLS: Bool = false {
 		didSet {
 			if enabledSSLorTLS != oldValue {
 				wsLabel = enabledSSLorTLS ? "wss://" : "ws://"
@@ -46,11 +46,11 @@ class Aria2ConnectionSettings: NSObject, NSCoding {
 		}
 	}
 	
-	var customPath: String?
+	@objc var customPath: String?
 
-	var secretToken: String
-	var rpcPath: String
-	var remark: String?
+	@objc var secretToken: String
+	@objc var rpcPath: String
+	@objc var remark: String?
 
 	var websocketURL: URL? {
 		get {

@@ -208,16 +208,15 @@ class DataManager: NSObject {
     
     
  //MARK: - Get Data
-    func data<T: Object>(_ type: T.Type, path: String? = nil) -> Results<T> {
-		
+    func data<T, R: Results<T>>(_ type: T.Type, path: String? = nil) -> R {
 		let realm = try! Realm(configuration: realmConfiguration)
         switch ViewControllersManager.shared.selectedRow {
         case .downloading:
-            return realm.objects(type).filter("status != 'complete'").filter("status != 'removed'").sorted(byKeyPath: "date").sorted(byKeyPath: "sortInt")
+            return realm.objects(type).filter("status != 'complete'").filter("status != 'removed'").sorted(byKeyPath: "date").sorted(byKeyPath: "sortInt") as! R
         case .completed:
-            return realm.objects(type).filter("status == 'complete'").sorted(byKeyPath: "date", ascending: false)
+            return realm.objects(type).filter("status == 'complete'").sorted(byKeyPath: "date", ascending: false) as! R
 		case .removed:
-			return realm.objects(type).filter("status == 'removed'").sorted(byKeyPath: "date", ascending: false)
+			return realm.objects(type).filter("status == 'removed'").sorted(byKeyPath: "date", ascending: false) as! R
         case .baidu:
 			let ascending = Preferences.shared.ascending
 			let sortValue = Preferences.shared.sortValue
@@ -227,9 +226,9 @@ class DataManager: NSObject {
 			if sortValue != "path" {
 				sortDescriptors.append(SortDescriptor(keyPath: "path", ascending: true))
 			}
-			return realm.objects(type).sorted(by: sortDescriptors)
+			return realm.objects(type).sorted(by: sortDescriptors) as! R
         default:
-            return realm.objects(type).filter("status == 'nil'")
+            return realm.objects(type).filter("status == 'nil'") as! R
         }
     }
 	

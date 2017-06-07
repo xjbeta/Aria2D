@@ -56,6 +56,7 @@ class DownloadsViewController: NSViewController {
 	let showOptionsWindow = NSStoryboardSegue.Identifier(rawValue: "showOptionsWindow")
 	let showStatusWindow = NSStoryboardSegue.Identifier(rawValue: "showStatusWindow")
 	
+		
 	/*
 	override func keyDown(with event: NSEvent) {
 		if event.keyCode == 49 &&
@@ -133,14 +134,14 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		case .downloading, .completed, .removed:
 			if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DownloadsTableCellView"), owner: self) as? DownloadsTableCellView {
 				if let data = DataManager.shared.data(TaskObject.self)[safe: row] {
-					cell.setData(data as! TaskObject)
+					cell.setData(data)
 				}
 				return cell
 			}
 		case .baidu:
 			if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BaiduFileListCell"), owner: self) as? BaiduFileListCell {
 				if let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)[safe: row] {
-					cell.setData(data as! BaiduFileObject)
+					cell.setData(data)
 				}
 				return cell
 			}

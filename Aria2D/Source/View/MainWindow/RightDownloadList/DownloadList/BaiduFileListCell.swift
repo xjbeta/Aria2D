@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-//import RealmSwift
+import RealmSwift
 
 class BaiduFileListCell: NSTableCellView {
     @IBOutlet var icon: NSImageView!

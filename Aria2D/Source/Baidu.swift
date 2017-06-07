@@ -126,7 +126,7 @@ extension Baidu {
 		let params = ["method": "info",
 		              "access_token": Preferences.shared.baiduToken]
 		Just.get("https://pcs.baidu.com/rest/2.0/pcs/quota?", params: params) {
-			self.isTokenEffective = JSON($0.json ?? [])["error_code"].exists()
+			self.isTokenEffective = !JSON($0.json ?? [])["error_code"].exists()
 			block?(self.isTokenEffective)
 		}
 	}

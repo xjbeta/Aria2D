@@ -80,27 +80,31 @@ class HUD: NSObject {
 	
 	
 	private func appearAnimation(_ view: NSView) {
-		view.isHidden = false
-		view.alphaValue = 0
-		NSAnimationContext.runAnimationGroup({
-			$0.duration = 0.3
-			$0.allowsImplicitAnimation = true
-			view.animator().alphaValue = 0.8
-		}) {
-			
+		DispatchQueue.main.async {
+			view.isHidden = false
+			view.alphaValue = 0
+			NSAnimationContext.runAnimationGroup({
+				$0.duration = 0.3
+				$0.allowsImplicitAnimation = true
+				view.animator().alphaValue = 0.8
+			}) {
+				
+			}
 		}
 	}
 	
 	private func disappearAnimation(_ view: NSView) {
-		view.alphaValue = 0.8
-		NSAnimationContext.runAnimationGroup({
-			$0.duration = 0.3
-			$0.allowsImplicitAnimation = true
-			view.animator().alphaValue = 0
-		}) {
-			view.isHidden = true
+		DispatchQueue.main.async {
 			view.alphaValue = 0.8
-			view.removeFromSuperview()
+			NSAnimationContext.runAnimationGroup({
+				$0.duration = 0.3
+				$0.allowsImplicitAnimation = true
+				view.animator().alphaValue = 0
+			}) {
+				view.isHidden = true
+				view.alphaValue = 0.8
+				view.removeFromSuperview()
+			}
 		}
 	}
 	

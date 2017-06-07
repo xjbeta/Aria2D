@@ -81,7 +81,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
 		
 	}
 	
-	var autoStartAria2c: Bool {
+	@objc var autoStartAria2c: Bool {
 		get {
 			return Preferences.shared.autoStartAria2c
 		}

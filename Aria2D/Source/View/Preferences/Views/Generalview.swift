@@ -46,7 +46,7 @@ class Generalview: NSViewController {
 		menuPopupButton.selectItem(at: selectServerIndex)
 	}
 	
-	var selectServerIndex: Int {
+	@objc var selectServerIndex: Int {
 		get {
 			return Preferences.shared.aria2Servers.getSelectedIndex()
 		}
