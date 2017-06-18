@@ -64,29 +64,29 @@ class BaiduFileListMenu: NSMenu {
 	}
 	
 	func initItemState() {
-		nameItem.state = .offState
-		sizeItem.state = .offState
-		dateItem.state = .offState
+		nameItem.state = .off
+		sizeItem.state = .off
+		dateItem.state = .off
 		
-		ascendingItem.state = .offState
-		descendingItem.state = .offState
+		ascendingItem.state = .off
+		descendingItem.state = .off
 		
-		downloadItem.state = .offState
-		deleteItem.state = .offState
+		downloadItem.state = .off
+		deleteItem.state = .off
 		
 		if Preferences.shared.ascending {
-			ascendingItem.state = .onState
+			ascendingItem.state = .on
 		} else {
-			descendingItem.state = .onState
+			descendingItem.state = .on
 		}
 		
 		switch Preferences.shared.sortValue {
 		case "path":
-			nameItem.state = .onState
+			nameItem.state = .on
 		case "size":
-			sizeItem.state = .onState
+			sizeItem.state = .on
 		case "server_mtime":
-			dateItem.state = .onState
+			dateItem.state = .on
 		default:
 			break
 		}
@@ -97,11 +97,11 @@ class BaiduFileListMenu: NSMenu {
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
 		if menuItem.action == #selector(download) {
 			return Aria2Websocket.shared.isConnected
-				&& !Baidu.shared.isTokenEffective
+				&& Baidu.shared.isTokenEffective
 				&& selectedIndexs.count > 0
 		}
 		if menuItem.action == #selector(delete) {
-			return !Baidu.shared.isTokenEffective
+			return Baidu.shared.isTokenEffective
 				&& selectedIndexs.count > 0
 		}
 		

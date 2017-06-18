@@ -21,11 +21,11 @@ class BaiduSettingView: NSViewController {
 		if let title = loginButtonTitles(raw: loginButtom.title) {
 			switch title {
 			case .login:
-				performSegue(withIdentifier: showLoginView, sender: self)
+				performSegue(withIdentifier: .showLoginView, sender: self)
 			case .logout:
 				Baidu.shared.logout {}
 			case .setPCS:
-				performSegue(withIdentifier: showPCSView, sender: self)
+				performSegue(withIdentifier: .showPCSView, sender: self)
 			case .out:
 				break
 			}
@@ -36,13 +36,13 @@ class BaiduSettingView: NSViewController {
 
 	
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-		if segue.identifier == showLoginView {
+		if segue.identifier == .showLoginView {
 			if let vc = segue.destinationController as? BaiduLoginViewController {
 				vc.onViewControllerDismiss = {
 					self.view.window?.makeFirstResponder(self.loginButtom)
 				}
 			}
-		} else if segue.identifier == showPCSView {
+		} else if segue.identifier == .showPCSView {
 			if let vc = segue.destinationController as? SetPCSViewController {
 				vc.onViewControllerDismiss = {
 					self.view.window?.makeFirstResponder(self.loginButtom)
@@ -58,8 +58,7 @@ class BaiduSettingView: NSViewController {
 	}
 
 	
-	let showPCSView = NSStoryboardSegue.Identifier(rawValue: "showPCSView")
-	let showLoginView = NSStoryboardSegue.Identifier(rawValue: "showLoginView")
+	
 	
 	@objc func initUserInfo() {
 		if Baidu.shared.isLogin {

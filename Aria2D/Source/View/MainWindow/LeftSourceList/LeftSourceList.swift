@@ -17,9 +17,6 @@ class LeftSourceList: NSViewController {
 	@IBOutlet var viewForImage: ViewForImage!
 	@IBOutlet var progressIndicator: NSProgressIndicator!
 	
-	
-	let showNewTaskViewController = NSStoryboardSegue.Identifier(rawValue: "showNewTaskViewController")
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		visualEffect.material = .ultraDark
@@ -45,7 +42,7 @@ class LeftSourceList: NSViewController {
 	
 	@objc func showNewTask() {
 		if Aria2Websocket.shared.isConnected {
-			performSegue(withIdentifier: showNewTaskViewController, sender: self)
+			performSegue(withIdentifier: .showNewTaskViewController, sender: self)
 		}
 	}
 	

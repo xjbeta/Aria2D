@@ -56,7 +56,7 @@ class WaitTimer: NSObject {
 		commitTimer?.scheduleRepeating(deadline: .now() + timeOut, interval: 0)
     }
     
-    private func stop() {
+	func stop() {
         if commitTimer != nil {
             commitTimer?.cancel()
             commitTimer = nil

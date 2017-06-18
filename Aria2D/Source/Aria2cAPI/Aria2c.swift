@@ -10,23 +10,52 @@
 import Cocoa
 
 class Aria2c: NSObject {
+	
 	func autoStart() {
 		guard Preferences.shared.autoStartAria2c else { return }
 		createFiles()
+		
 		aria2cPid {
 			let lastPID = Preferences.shared.aria2cOptions.lastPID
-			if $0 == "" {
-				self.startAria2()
+			let lastLaunch = Preferences.shared.aria2cOptions.lastLaunch
+			
+			if Preferences.shared.restartAria2c {
+				// should restart
+				self.killLastAria2c {
+					Preferences.shared.restartAria2c = false
+					self.startAria2()
+				}
+			} else if lastPID != "", $0 == lastPID {
+				// do nothing
+				return
+			} else if $0 == "", lastLaunch != "" {
+				if lastPID == "" {
+					// should kill test
+					self.aria2cPid(lastLaunch.replacingOccurrences(of: " -D", with: "")) {
+						self.killLastAria2c($0) {
+							Preferences.shared.aria2cOptions.resetLastConf()
+							self.startAria2()
+						}
+					}
+				} else {
+					Preferences.shared.aria2cOptions.resetLastConf()
+					self.startAria2()
+				}
+				
 			} else if lastPID != "", $0 != lastPID {
+				// should kill launched
 				self.killLastAria2c {
 					self.startAria2()
 				}
 			}
 		}
 	}
+	func autoClose() {
+		guard !Preferences.shared.autoStartAria2c else { return }
+		self.killLastAria2c { }
+	}
+	
 }
-
-
 
 
 
@@ -42,9 +71,20 @@ private extension Aria2c {
 		return ""
 	}
 	
+	var logPath: String {
+		do {
+			var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
+			url.appendPathComponent(Bundle.main.bundleIdentifier!)
+			url.appendPathComponent("Aria2D.log")
+			return url.path
+		} catch { }
+		return ""
+	}
+	
 
 	
 	func createFiles() {
+		guard Preferences.shared.aria2cOptions.selectedAria2cConf == .default🙂 else { return }
 		if !FileManager.default.fileExists(atPath: sessionPath) {
 			FileManager.default.createFile(atPath: sessionPath, contents: nil, attributes: nil)
 		}
@@ -61,33 +101,14 @@ private extension Aria2c {
 	
 	
 	// aria2c ...... -D
-	func startAria2() {
+	func startAria2(_ test: Bool = false) {
 		let task = Process()
-		let stdoutPipe = Pipe()
-		let stderrPipe = Pipe()
-		task.standardOutput = stdoutPipe
-		task.standardError = stderrPipe
-		stderrPipe.fileHandleForReading.readabilityHandler = {
-			if let output = String(data: $0.availableData, encoding: String.Encoding.utf8) {
-				
-				Log(output)
-			}
-		}
-		stdoutPipe.fileHandleForReading.readabilityHandler = {
-			if let output = String(data: $0.availableData, encoding: String.Encoding.utf8) {
-				
-				Log(output)
-			}
-		}
-		
-		
-		
 		do {
 			var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
 			url.appendPathComponent(Bundle.main.bundleIdentifier!)
 			task.currentDirectoryPath = url.path
-			
 		} catch { }
+		
 		
 		let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
 		let confPath = Preferences.shared.aria2cOptions.path(for: .aria2cConf)
@@ -95,41 +116,41 @@ private extension Aria2c {
 		if FileManager.default.fileExists(atPath: aria2cPath),
 			FileManager.default.fileExists(atPath: confPath) {
 			task.launchPath = aria2cPath
-//			var args = ["--conf-path=\(confPath)", "-D"]
-			var args = ["--conf-path=\(confPath)"]
+			var args = ["--conf-path=\(confPath)", "--log=\(logPath)"]
+			args.append("-D")
+			
 			if Preferences.shared.aria2cOptions.selectedAria2cConf == .default🙂 {
 				args.append("--input-file=\(sessionPath)")
 				args.append("--save-session=\(sessionPath)")
 			}
 			task.arguments = args
-		}
-		task.launch()
-		
-		task.terminationHandler = { _ in
-
 			
-//			let data = pipe.fileHandleForReading.readDataToEndOfFile()
-//			if let output = String(data: data, encoding: .utf8) {
-//				if output.contains("Exception") {
-//					Log(output)
-//				} else {
-//					Preferences.shared.aria2cOptions.lastLaunchPath = aria2cPath
-//					self.aria2cPid {
-//						Preferences.shared.aria2cOptions.lastPID = $0
-//					}
-//				}
-//			}
+			task.launch()
+			
+			task.terminationHandler = { _ in
+				args.insert(task.launchPath ?? "", at: 0)
+				let path = args.joined(separator: " ")
+				self.aria2cPid(path) {
+					Preferences.shared.aria2cOptions.lastLaunch = path
+					if $0 == "\(task.processIdentifier + 1)" {
+						Preferences.shared.aria2cOptions.lastPID = $0
+					} else {
+						NotificationCenter.default.post(name: .showAria2CheckAlert, object: self, userInfo: ["args": path])
+					}
+				}
+			}
 		}
 	}
 	
+	
 	// pgrep -f "path"
-	func aria2cPid(_ block: @escaping (_ pid: String) -> Void) {
-		let lastLaunchPath = Preferences.shared.aria2cOptions.lastLaunchPath
+	func aria2cPid(_ arg: String = "", block: @escaping (_ pid: String) -> Void) {
+		let lastLaunch = arg == "" ? Preferences.shared.aria2cOptions.lastLaunch : arg
 		let task = Process()
 		let pipe = Pipe()
 		task.standardOutput = pipe
 		task.launchPath = "/usr/bin/pgrep"
-		task.arguments  = ["-f", lastLaunchPath]
+		task.arguments  = ["-f", "\(lastLaunch)"]
 		task.launch()
 		
 		task.terminationHandler = { _ in
@@ -141,18 +162,9 @@ private extension Aria2c {
 	}
 	
 	// kill -9 "pid"
-	func killLastAria2c(_ block: @escaping () -> Void) {
-		let lastLaunchPath = Preferences.shared.aria2cOptions.lastLaunchPath
-		let task = Process()
-		task.launchPath = "/usr/bin/kill"
-		task.arguments  = ["-9", lastLaunchPath]
-		task.launch()
-		task.terminationHandler = { _ in
-			block()
-		}
+	func killLastAria2c(_ pid: String = "", block: @escaping () -> Void) {
+		NSAppleScript(source: "do shell script \"kill -KILL \(pid == "" ? Preferences.shared.aria2cOptions.lastPID : pid)\"")?.executeAndReturnError(nil)
+		Preferences.shared.aria2cOptions.resetLastConf()
+		block()
 	}
-	
-
-	
-	
 }

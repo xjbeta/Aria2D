@@ -191,24 +191,16 @@
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DWA-zy-GIn">
-                                        <rect key="frame" x="214" y="5" width="112" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Launch" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Arg-Ju-oot">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="launchAria2c:" target="gh3-nU-zKU" id="EL0-FG-uHU"/>
-                                        </connections>
-                                    </button>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pmF-wE-SdI">
-                                        <rect key="frame" x="28" y="14" width="61" height="18"/>
+                                        <rect key="frame" x="28" y="14" width="184" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iBh-7W-lt8">
+                                        <buttonCell key="cell" type="check" title="Restart aria2c at next boot" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iBh-7W-lt8">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <binding destination="gh3-nU-zKU" name="value" keyPath="self.restartAria2c" id="MBV-Oz-nMn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </customView>
@@ -218,7 +210,6 @@
                         <outlet property="aria2cConfPathPopUpButton" destination="4ZF-K1-H4p" id="QLB-QG-zT9"/>
                         <outlet property="aria2cConfsView" destination="3Bd-33-FwY" id="d4Y-S4-W3v"/>
                         <outlet property="aria2cPathPopUpButton" destination="J3L-bF-6Hc" id="k3S-bb-aUI"/>
-                        <outlet property="launchAria2cButton" destination="DWA-zy-GIn" id="m1J-4Z-lgd"/>
                     </connections>
                 </viewController>
                 <customObject id="neY-WK-K0Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1129,16 +1120,16 @@
                                                 <segue destination="p6F-pq-ght" kind="show" id="aQZ-dl-6lN"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
-                                            <connections>
-                                                <segue destination="yBd-gG-NgR" kind="show" id="BoF-Ia-18p"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="Check For Update" id="A91-B0-y3r">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="checkForUpdate:" target="6ga-g5-iZP" id="Ztl-I7-k0T"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="yBd-gG-NgR" kind="show" id="BoF-Ia-18p"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -1600,7 +1591,7 @@ CA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ces-KS-MPm">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ces-KS-MPm" customClass="FeaturesTextField" customModule="Aria2D" customModuleProvider="target">
                                 <rect key="frame" x="201" y="8" width="92" height="14"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="enabledFeatures" id="0Ll-Vy-uub">
                                     <font key="font" metaFont="smallSystem"/>
@@ -1691,6 +1682,7 @@ CA
                                 <action selector="download:" target="H9X-fo-5n4" id="Eej-dV-Dzi"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="jQy-3d-0td"/>
                         <menuItem title="Delete" id="Bgi-kd-Pfp">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -1783,7 +1775,7 @@ CA
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="DownloadsTableCellView" id="ng5-Ma-jfp" customClass="DownloadsTableCellView" customModule="Aria2D" customModuleProvider="target">
+                                                        <tableCellView identifier="downloadsTableCell" id="ng5-Ma-jfp" customClass="DownloadsTableCellView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="662" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                             <subviews>
@@ -1933,7 +1925,7 @@ CA
                                                                 <outlet property="totalLength" destination="Voa-Jr-LBN" id="4mA-Xt-KEh"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="BaiduFileListCell" id="QDW-gl-nMG" customClass="BaiduFileListCell" customModule="Aria2D" customModuleProvider="target">
+                                                        <tableCellView identifier="baiduFileListCell" id="QDW-gl-nMG" customClass="BaiduFileListCellView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="53" width="662" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                             <subviews>
@@ -2426,46 +2418,36 @@ DQ
             <point key="canvasLocation" x="-452" y="1236"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="Q44-NZ-aJq">
+        <scene sceneID="sFU-2K-d7K">
             <objects>
-                <customObject id="yD8-Ft-aHQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController identifier="HUDViewController" storyboardIdentifier="HUDViewController" showSeguePresentationStyle="single" id="8Rc-Ft-akm" customClass="HUDViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="qFX-fx-n4d">
-                        <rect key="frame" x="0.0" y="0.0" width="199" height="76"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <viewController identifier="HUDViewController" storyboardIdentifier="HUDViewController" id="fAR-5M-ULQ" customClass="HUDViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <customView key="view" id="vS3-rd-9Lt" customClass="HUDBackView" customModule="Aria2D" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="125" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="vS3-rd-9Lt" customClass="HUDBackView" customModule="Aria2D" customModuleProvider="target">
-                                <rect key="frame" x="81" y="18" width="38" height="20"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H7D-rd-Xy6">
-                                        <rect key="frame" x="3" y="3" width="33" height="14"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="HUD" id="Ud8-Q1-meG">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="H7D-rd-Xy6" firstAttribute="centerX" secondItem="vS3-rd-9Lt" secondAttribute="centerX" id="57a-XN-MCS"/>
-                                    <constraint firstItem="H7D-rd-Xy6" firstAttribute="centerY" secondItem="vS3-rd-9Lt" secondAttribute="centerY" id="6Hb-rr-SQx"/>
-                                    <constraint firstAttribute="height" constant="20" id="PYf-pe-Gfc"/>
-                                    <constraint firstItem="H7D-rd-Xy6" firstAttribute="width" secondItem="vS3-rd-9Lt" secondAttribute="width" multiplier="3:4" id="ads-B7-yTM"/>
-                                </constraints>
-                            </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H7D-rd-Xy6">
+                                <rect key="frame" x="14" y="3" width="97" height="14"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="HUD" id="Ud8-Q1-meG">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vS3-rd-9Lt" secondAttribute="bottom" constant="18" id="ZjB-KK-0M9"/>
-                            <constraint firstItem="vS3-rd-9Lt" firstAttribute="centerX" secondItem="qFX-fx-n4d" secondAttribute="centerX" id="g16-Tc-8Qa"/>
+                            <constraint firstItem="H7D-rd-Xy6" firstAttribute="centerX" secondItem="vS3-rd-9Lt" secondAttribute="centerX" id="57a-XN-MCS"/>
+                            <constraint firstItem="H7D-rd-Xy6" firstAttribute="centerY" secondItem="vS3-rd-9Lt" secondAttribute="centerY" id="6Hb-rr-SQx"/>
+                            <constraint firstAttribute="height" constant="20" id="PYf-pe-Gfc"/>
+                            <constraint firstItem="H7D-rd-Xy6" firstAttribute="width" secondItem="vS3-rd-9Lt" secondAttribute="width" multiplier="3:4" id="ads-B7-yTM"/>
                         </constraints>
-                    </view>
+                    </customView>
                     <connections>
-                        <outlet property="backView" destination="vS3-rd-9Lt" id="VsY-rL-B88"/>
-                        <outlet property="textlLabel" destination="H7D-rd-Xy6" id="IBn-1A-MvX"/>
+                        <outlet property="textlLabel" destination="H7D-rd-Xy6" id="Zyj-bv-cxm"/>
                     </connections>
                 </viewController>
+                <customObject id="xC5-hO-mRd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-414.5" y="2160"/>
+            <point key="canvasLocation" x="-501.5" y="2105"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="xN2-6e-0y0">

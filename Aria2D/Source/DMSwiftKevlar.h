@@ -15,3 +15,4 @@ typedef CFDictionaryRef (*DMKCopyLicenseUserInfoFunc)(void);
 static DMKCopyLicenseUserInfoFunc string_info = &DMKCopyLicenseUserInfo;
 
 void InvalidateAppLicense(void);
+

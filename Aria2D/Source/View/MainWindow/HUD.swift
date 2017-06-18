@@ -19,61 +19,60 @@ enum hudMessage: String {
 }
 
 
-
-protocol HUDDelegate {
-	func windowOfView() -> NSWindow?
-}
-
 class HUD: NSObject {
 	
-	var delegate: HUDDelegate?
-	
-	override init() {
-		super.init()
-		removeHUD = WaitTimer(timeOut: .milliseconds(1200)) {
-			self.disappearAnimation(self.hud.backView)
+	convenience init(_ view: NSView) {
+		self.init()
+		self.view = view
+		
+		hud = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: .hudViewController) as? HUDViewController
+		if let hud = hud {
+			view.addSubview(hud.view)
+			view.addConstraints([NSLayoutConstraint(item: hud.view,
+			                                        attribute: .bottom,
+			                                        relatedBy: .equal,
+			                                        toItem: view,
+			                                        attribute: .bottom,
+			                                        multiplier: 1,
+			                                        constant: -18),
+			                     NSLayoutConstraint(item: hud.view,
+			                                        attribute: .centerX,
+			                                        relatedBy: .equal,
+			                                        toItem: view,
+			                                        attribute: .centerX,
+			                                        multiplier: 1,
+			                                        constant: 0)])
+			
+			removeHUD = WaitTimer(timeOut: .milliseconds(1200)) {
+				self.disappearAnimation(hud.view)
+			}
 		}
-		hud = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "HUDViewController")) as! HUDViewController
+		
 	}
 	
 	
-	private var hud = HUDViewController()
+	
 	private var removeHUD = WaitTimer(timeOut: .seconds(0)) {
 	}
 	
+	private var hud: HUDViewController?
+	private var view: NSView?
+	
 	
 	func showHUD(_ message: hudMessage) {
-		if let view = delegate?.windowOfView()?.contentView {
-			if isDisplayed(in: view) {
+		
+		if let hud = hud {
+			if hud.view.isHidden {
+				hud.view.wantsLayer = true
 				hud.textlLabel.stringValue = message.rawValue
+				
+				appearAnimation(hud.view)
 				removeHUD.run()
 			} else {
-				hud.view.wantsLayer = true
-				hud.backView.wantsLayer = true
 				hud.textlLabel.stringValue = message.rawValue
-				view.addSubview(hud.backView)
-				view.addConstraints([NSLayoutConstraint(item: hud.backView,
-				                                           attribute: .bottom,
-				                                           relatedBy: .equal,
-				                                           toItem: view,
-				                                           attribute: .bottom,
-				                                           multiplier: 1,
-				                                           constant: -18),
-				                        NSLayoutConstraint(item: hud.backView,
-				                                           attribute: .centerX,
-				                                           relatedBy: .equal,
-				                                           toItem: view,
-				                                           attribute: .centerX,
-				                                           multiplier: 1,
-				                                           constant: 0)])
-				appearAnimation(hud.backView)
 				removeHUD.run()
 			}
-			
-			
-			
 		}
-
 	}
 	
 
@@ -85,37 +84,23 @@ class HUD: NSObject {
 			view.alphaValue = 0
 			NSAnimationContext.runAnimationGroup({
 				$0.duration = 0.3
-				$0.allowsImplicitAnimation = true
 				view.animator().alphaValue = 0.8
-			}) {
-				
-			}
+			}) { }
 		}
 	}
 	
 	private func disappearAnimation(_ view: NSView) {
 		DispatchQueue.main.async {
+			view.isHidden = false
 			view.alphaValue = 0.8
 			NSAnimationContext.runAnimationGroup({
 				$0.duration = 0.3
-				$0.allowsImplicitAnimation = true
 				view.animator().alphaValue = 0
 			}) {
 				view.isHidden = true
-				view.alphaValue = 0.8
-				view.removeFromSuperview()
 			}
 		}
 	}
-	
-	private func isDisplayed(in view: NSView?) -> Bool {
-		return view?.subviews.filter {
-			$0 is HUDBackView
-			}.count ?? 0 > 0
-	}
-	
-	
-	
 }
 
 
@@ -123,7 +108,6 @@ class HUDViewController: NSViewController {
 	
 	@IBOutlet var textlLabel: NSTextField!
 	
-	@IBOutlet var backView: HUDBackView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do view setup here.

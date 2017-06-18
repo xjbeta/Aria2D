@@ -20,19 +20,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}()
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-		Aria2.shared.aria2c.autoStart()
+		
+		
+		DispatchQueue.global().async {
+			#if DEBUG
+				DMKitDebugAddDevMateMenu()
+			#endif
+			self.setDevMate()
+			Aria2.shared.aria2c.autoStart()
+		}
 		// Acknowledgements
+//		Bundle.main.path(forResource: "Pods-Aria2D-acknowledgements", ofType: "markdown")
 		
-		Bundle.main.path(forResource: "Pods-Aria2D-acknowledgements", ofType: "markdown")
 		
-		#if DEBUG
-			DMKitDebugAddDevMateMenu()
-		#endif
         Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkLogin(nil)
 		Preferences.shared.checkPlistFile()
 		
-		setDevMate()
+		
 	}
 	
 	
@@ -54,6 +59,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationWillResignActive(_ notification: Notification) {
 		Aria2Websocket.shared.suspendTimer()
 	}
+	
+	func applicationWillTerminate(_ notification: Notification) {
+		Aria2.shared.aria2c.autoClose()
+	}
 }
 
 extension AppDelegate: DevMateKitDelegate {
@@ -61,27 +70,24 @@ extension AppDelegate: DevMateKitDelegate {
 	func setDevMate() {
 		//DevMate
 		DevMateKit.sendTrackingReport(nil, delegate: self)
-		DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
+		
+//		DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
 		
 		let kevlarError = DMKevlarError.testError
 		if !string_check(nil).boolValue || kevlarError != .noError {
 			DevMateKit.setupTimeTrial(nil, withTimeInterval: kDMTrialWeek)
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(activateApp), name: .activateApp, object: nil)
+		
 	}
 	
-	
-	
-	func feedbackController(_ controller: DMFeedbackController!, parentWindowFor mode: DMFeedbackMode) -> NSWindow! {
+	@objc func feedbackController(_ controller: DMFeedbackController!, parentWindowFor mode: DMFeedbackMode) -> NSWindow? {
 		return self.window
 	}
 	
-	func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow! {
+	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
 		return self.window
 	}
-	
-//	update
-	
 	
 	@objc func activateApp() {
 		// Swift does't work with macros, so check our Examples project on GitHub (https://github.com/DevMate/DevMateKit)

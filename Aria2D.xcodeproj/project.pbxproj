@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010B59181D3CF66600550A43 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B59171D3CF66600550A43 /* MainMenu.swift */; };
+		010BC6DC1EF26267007228D1 /* FeaturesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC6DB1EF26267007228D1 /* FeaturesTextField.swift */; };
 		0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D42E1E04E36E003EBFCD /* NotificationName.swift */; };
 		0115D4311E04E423003EBFCD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4301E04E423003EBFCD /* Color.swift */; };
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
@@ -62,6 +63,7 @@
 		018E89711D350075000C71B0 /* Generalview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* Generalview.swift */; };
 		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
 		01903A3C1D5CB86D008A3E6E /* BaiduLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */; };
+		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
 		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
@@ -73,7 +75,7 @@
 		01EB1CB61D60971600F2925F /* Baidu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB51D60971600F2925F /* Baidu.swift */; };
 		01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB71D60997600F2925F /* LoginButton.swift */; };
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
-		01EB1CC61D634F4A00F2925F /* BaiduFileListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCell.swift */; };
+		01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
 		01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */; };
 		06292BF1B108C188AD6FB4C5 /* Pods_Aria2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */; };
@@ -82,6 +84,7 @@
 /* Begin PBXFileReference section */
 		0104DAA41D54CEB5002C3B6D /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		010B59171D3CF66600550A43 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		010BC6DB1EF26267007228D1 /* FeaturesTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesTextField.swift; sourceTree = "<group>"; };
 		0115D42E1E04E36E003EBFCD /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		0115D4301E04E423003EBFCD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
@@ -146,6 +149,7 @@
 		018E896D1D350075000C71B0 /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
 		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduLoginViewController.swift; sourceTree = "<group>"; };
+		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
@@ -158,7 +162,7 @@
 		01EB1CB51D60971600F2925F /* Baidu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baidu.swift; sourceTree = "<group>"; };
 		01EB1CB71D60997600F2925F /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
-		01EB1CC51D634F4A00F2925F /* BaiduFileListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCell.swift; sourceTree = "<group>"; };
+		01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCellView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
 		01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduDlinksProgress.swift; sourceTree = "<group>"; };
 		305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria2D.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				0115D42E1E04E36E003EBFCD /* NotificationName.swift */,
+				019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */,
 				0115D4301E04E423003EBFCD /* Color.swift */,
 				0154156A1E371583007ECB29 /* URLSecurityScope.swift */,
 				016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */,
@@ -234,8 +239,8 @@
 		0147EDB41D21FAD800FB4324 = {
 			isa = PBXGroup;
 			children = (
-				012624611ED174AC007FF8AA /* Kevlar */,
 				0165AF611D963CDF00469601 /* Aria2D */,
+				012624611ED174AC007FF8AA /* Kevlar */,
 				6ACACE787527AEFD90491354 /* Frameworks */,
 				E10A820F0C3021B680637631 /* Pods */,
 				0147EDBE1D21FAD800FB4324 /* Products */,
@@ -288,7 +293,7 @@
 				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
 				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
 				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
-				01EB1CC51D634F4A00F2925F /* BaiduFileListCell.swift */,
+				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
 				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
 				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
 			);
@@ -456,6 +461,7 @@
 			children = (
 				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
 				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
+				010BC6DB1EF26267007228D1 /* FeaturesTextField.swift */,
 				0147EDE01D2381F100FB4324 /* Downloads */,
 			);
 			path = RightDownloadList;
@@ -630,6 +636,7 @@
 				01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */,
 				0147EDD41D220A7800FB4324 /* LeftSourceListView.swift in Sources */,
 				0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */,
+				010BC6DC1EF26267007228D1 /* FeaturesTextField.swift in Sources */,
 				013817671D238E0100E0F926 /* MainWindowController.swift in Sources */,
 				012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */,
 				018E89621D34FFB1000C71B0 /* ViewControllersManager.swift in Sources */,
@@ -672,6 +679,7 @@
 				012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */,
 				012A1BB21E174860007C4B46 /* Transformer.swift in Sources */,
 				013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */,
+				019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */,
 				018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */,
 				013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */,
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
@@ -687,7 +695,7 @@
 				017E882F1D82575A000412DA /* LoginButtonCell.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
 				013817691D238E0D00E0F926 /* LeftSourceList.swift in Sources */,
-				01EB1CC61D634F4A00F2925F /* BaiduFileListCell.swift in Sources */,
+				01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,6 +826,7 @@
 				CODE_SIGN_ENTITLEMENTS = Aria2D/Aria2D.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H7NSMSBU6A;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -884,6 +893,7 @@
 				CODE_SIGN_ENTITLEMENTS = Aria2D/Aria2D.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H7NSMSBU6A;
 				HEADER_SEARCH_PATHS = (

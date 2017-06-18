@@ -68,7 +68,7 @@ class Aria2Websocket: NSObject {
 		guard url?.host != nil else { return }
 		socket = WebSocket(url: url!)
 		socket.callbackQueue = DispatchQueue(label: "com.xjbeta.Aria2D.starscream")
-		socket.onConnect = { _ in
+		socket.onConnect = {
 			self.isConnected = true
 			Aria2.shared.initData()
 //			Aria2.shared.getVersion { info in
@@ -209,7 +209,7 @@ class Aria2Websocket: NSObject {
 		if isSuspend, timer != nil {
 			timer?.resume()
 			isSuspend = false
-//			Aria2.shared.initData()
+			Aria2.shared.initData()
 		}
 	}
 

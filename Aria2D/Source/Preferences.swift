@@ -112,6 +112,16 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .autoStartAria2c)
 		}
 	}
+	var restartAria2c: Bool {
+		get {
+			return defaults(.restartAria2c) as? Bool ?? false
+		}
+		set {
+			defaultsSet(newValue, forKey: .restartAria2c)
+		}
+	}
+	
+	
 
 	private lazy var defaultAria2cOptions: Aria2cOptions = {
 		let s = Aria2cOptions()

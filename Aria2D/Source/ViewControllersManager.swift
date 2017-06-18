@@ -20,7 +20,7 @@ class ViewControllersManager: NSObject {
 	
 	// MainWindow HUD
 	func showHUD(_ message: hudMessage) {
-		NotificationCenter.default.post(name: .showHUD, object: nil, userInfo: [ "message": message])
+		NotificationCenter.default.post(name: .showHUD, object: nil, userInfo: ["message": message])
 	}
 	
 	

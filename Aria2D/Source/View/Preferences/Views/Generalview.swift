@@ -42,7 +42,7 @@ class Generalview: NSViewController {
 	@IBOutlet var selectMenu: NSMenu!
 	@IBOutlet var menuPopupButton: NSPopUpButton!
 	@IBAction func setServers(_ sender: Any) {
-		performSegue(withIdentifier: showSetServersViewController, sender: self)
+		performSegue(withIdentifier: .showSetServersViewController, sender: self)
 		menuPopupButton.selectItem(at: selectServerIndex)
 	}
 	
@@ -127,10 +127,10 @@ class Generalview: NSViewController {
 	override func viewWillDisappear() {
 		super.viewWillDisappear()
 		
-//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: maxOverallDownloadLimitTextField, userInfo: nil))
-//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: maxOverallUploadLimitTextField, userInfo: nil))
-//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: maxConcurrentDownloadsComboBox, userInfo: nil))
-//		self.controlTextDidEndEditing(Notification(name: .NSControl.textDidEndEditingNotification, object: downloadDirTextField, userInfo: nil))
+		controlTextDidEndEditing(Notification(name: NSControl.textDidEndEditingNotification, object: maxOverallDownloadLimitTextField, userInfo: nil))
+		controlTextDidEndEditing(Notification(name: NSControl.textDidEndEditingNotification, object: maxOverallUploadLimitTextField, userInfo: nil))
+		controlTextDidEndEditing(Notification(name: NSControl.textDidEndEditingNotification, object: maxConcurrentDownloadsComboBox, userInfo: nil))
+		controlTextDidEndEditing(Notification(name: NSControl.textDidEndEditingNotification, object: downloadDirTextField, userInfo: nil))
 	}
 	
 	
@@ -190,10 +190,10 @@ class Generalview: NSViewController {
 	
 	
 
-	let showSetServersViewController = NSStoryboardSegue.Identifier(rawValue: "showSetServersViewController")
+	
 	
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-		if segue.identifier == showSetServersViewController {
+		if segue.identifier == .showSetServersViewController {
 			if let vc = segue.destinationController as? SetServersViewController {
 				vc.serverListContent = Preferences.shared.aria2Servers.get()
 				vc.onViewControllerDismiss = {

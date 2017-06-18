@@ -24,6 +24,7 @@ enum preferenceKeys: String {
 	
 	
 	case autoStartAria2c = "aria2c_autoStartAria2c"
+	case restartAria2c = "aria2c_restartAria2c"
 	case aria2cOptions = "aria2c_options"
 	
 	case dir = "--dir"

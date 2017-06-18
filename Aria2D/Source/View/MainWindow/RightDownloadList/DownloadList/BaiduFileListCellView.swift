@@ -9,7 +9,7 @@
 import Cocoa
 import RealmSwift
 
-class BaiduFileListCell: NSTableCellView {
+class BaiduFileListCellView: NSTableCellView {
     @IBOutlet var icon: NSImageView!
     @IBOutlet var fileName: NSTextField!
     @IBOutlet var size: NSTextField!

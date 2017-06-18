@@ -15,8 +15,8 @@ class MovableImageView: NSImageView {
 
         // Drawing code here.
     }
-	override var mouseDownCanMoveWindow: Bool {
-		return true
-	}
-    
+//	override var mouseDownCanMoveWindow: Bool {
+//		return true
+//	}
+//    
 }

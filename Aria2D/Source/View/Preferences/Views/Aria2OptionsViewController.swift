@@ -73,14 +73,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
 			}
 		}
 	}
-	@IBOutlet var launchAria2cButton: NSButton!
-	@IBAction func launchAria2c(_ sender: Any) {
-		launchAria2cButton.isEnabled = false
-//		Aria2.shared.aria2c.
-		
-		
-	}
-	
+
 	@objc var autoStartAria2c: Bool {
 		get {
 			return Preferences.shared.autoStartAria2c
@@ -88,6 +81,15 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
 		set {
 			Preferences.shared.autoStartAria2c = newValue
 			initConfsView()
+		}
+	}
+	
+	@objc var restartAria2c: Bool {
+		get {
+			return Preferences.shared.restartAria2c
+		}
+		set {
+			Preferences.shared.restartAria2c = newValue
 		}
 	}
 	
@@ -258,9 +260,14 @@ struct Aria2cOptions {
 	var selectedAria2cConf: aria2cConfPaths = .default🙂
 	
 	var lastPID = ""
-	var lastLaunchPath = ""
+	var lastLaunch = ""
 	
 	init() {
+	}
+	
+	mutating func resetLastConf() {
+		lastPID = ""
+		lastLaunch = ""
 	}
 	
 	func path(for selectablePaths: selectablePaths) -> String {
@@ -314,7 +321,7 @@ struct Aria2cOptions {
 			customAria2cConf = coding.customAria2cConf
 			selectedAria2cConf = coding.selectedAria2cConf
 			lastPID = coding.lastPID
-			lastLaunchPath = coding.lastLaunchPath
+			lastLaunch = coding.lastLaunchPath
 		} else {
 			return nil
 		}
@@ -341,7 +348,7 @@ struct Aria2cOptions {
 			customAria2cConf = aria2cOptions.customAria2cConf
 			selectedAria2cConf = aria2cOptions.selectedAria2cConf
 			lastPID = aria2cOptions.lastPID
-			lastLaunchPath = aria2cOptions.lastLaunchPath
+			lastLaunchPath = aria2cOptions.lastLaunch
 		}
 		
 		required init?(coder aDecoder: NSCoder) {

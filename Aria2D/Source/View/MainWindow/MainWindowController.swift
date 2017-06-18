@@ -10,7 +10,7 @@ import Cocoa
 
 class MainWindowController: NSWindowController {
 	
-	let hud = HUD()
+	var hud: HUD?
 	
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -18,8 +18,10 @@ class MainWindowController: NSWindowController {
 			window.titlebarAppearsTransparent = true
 			window.titleVisibility = .hidden
 			window.isMovableByWindowBackground = true
+			if let view = window.contentView {
+				hud = HUD(view)
+			}
 			initNotification()
-			hud.delegate = self
 		}
 	}
 
@@ -30,12 +32,37 @@ class MainWindowController: NSWindowController {
 				self.showHUD(message: userInfo["message"] as? hudMessage ?? .error)
 			}
 		}
+		
+		NotificationCenter.default.addObserver(forName: .showAria2CheckAlert, object: nil, queue: .main) {
+			if let userInfo = $0.userInfo as? [String: String], let args = userInfo["args"] {
+				self.showAria2CheckAlert(args)
+			}
+		}
 	}
 	
 	
 	func showHUD(message: hudMessage) {
-		hud.showHUD(message)
+		hud?.showHUD(message)
 	}
+	
+	// check aria2c
+	func showAria2CheckAlert(_ args: String) {
+		
+		if let window = window {
+			let alert = NSAlert()
+			alert.messageText = "Aria2c didn't started."
+			alert.informativeText = "Check the configs in Terminal."
+			alert.addButton(withTitle: "Check")
+			alert.addButton(withTitle: "Cancel")
+			
+			alert.beginSheetModal(for: window) {
+				if $0 == .alertFirstButtonReturn {
+					NSAppleScript(source: "tell application \"Terminal\" \n activate \n do script \"\(args)\" \n end tell")?.executeAndReturnError(nil)
+				}
+			}
+		}
+	}
+	
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
@@ -44,10 +71,3 @@ class MainWindowController: NSWindowController {
 
 	
 }
-
-extension MainWindowController: HUDDelegate {
-	func windowOfView() -> NSWindow? {
-		return self.window
-	}
-}
-

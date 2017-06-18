@@ -50,8 +50,8 @@ class LogViewController: NSViewController, NSTableViewDelegate, NSTableViewDataS
 	}
 	
 	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		if let identifier = tableColumn?.identifier, let log = webSocketLog[safe: row] {
-			switch identifier.rawValue {
+		if let identifier = tableColumn?.identifier.rawValue, let log = webSocketLog[safe: row] {
+			switch identifier {
 			case "LogTableTime":
 				let date = Date(timeIntervalSince1970: log.time)
 				let formatter = DateFormatter()

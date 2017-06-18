@@ -23,20 +23,20 @@ class Baidu: NSObject {
 			NotificationCenter.default.post(name: .resetLeftOutlineView, object: self)
 		}
 	}
-	var isTokenEffective = true {
+	var isTokenEffective = false {
 		didSet {
 			if isTokenEffective {
-				Preferences.shared.baiduFolder = ""
-				Preferences.shared.baiduToken = ""
-				mainPath = "/"
-				selectedPath = mainPath
-				NotificationCenter.default.post(name: .updateToken, object: self)
-			} else {
 				checkAppsFolder {
 					if $0 {
 						self.getAppsFolderPath()
 					}
 				}
+			} else {
+				Preferences.shared.baiduFolder = ""
+				Preferences.shared.baiduToken = ""
+				mainPath = "/"
+				selectedPath = mainPath
+				NotificationCenter.default.post(name: .updateToken, object: self)
 			}
 		}
 	}
@@ -97,7 +97,7 @@ class Baidu: NSObject {
 	func logout(_ block:@escaping () -> Void) {
 		Just.get("https://wappass.baidu.com/passport?logout") { _ in
 			self.isLogin = false
-			self.isTokenEffective = true
+			self.isTokenEffective = false
 			block()
 		}
 	}
@@ -146,7 +146,6 @@ extension Baidu {
 	
 	func getDownloadUrls(FromPCS path: String, block: @escaping (_ dlinks: [String]) -> Void) {
 		let URLString = ["https://pcs.baidu.com/rest/2.0/pcs/file?",
-//		                 "https://d.pcs.baidu.com/rest/2.0/pcs/file?",
 		                 "https://www.baidupcs.com/rest/2.0/pcs/file?",
 		                 "https://www.baidupcs.com/rest/2.0/pcs/stream?",
 		                 "https://c.pcs.baidu.com/rest/2.0/pcs/file?"]

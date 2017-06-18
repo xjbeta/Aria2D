@@ -51,10 +51,7 @@ class DownloadsViewController: NSViewController {
 		initNotification()
 	}
 	
-	let showPreviewViewController = NSStoryboardSegue.Identifier(rawValue: "showPreviewViewController")
-	let showBaiduDlinksProgress = NSStoryboardSegue.Identifier(rawValue: "showBaiduDlinksProgress")
-	let showOptionsWindow = NSStoryboardSegue.Identifier(rawValue: "showOptionsWindow")
-	let showStatusWindow = NSStoryboardSegue.Identifier(rawValue: "showStatusWindow")
+
 	
 		
 	/*
@@ -73,16 +70,16 @@ class DownloadsViewController: NSViewController {
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		
 		
-		if segue.identifier == showPreviewViewController {
+		if segue.identifier == .showPreviewViewController {
 			if let vc = segue.destinationController as? PreviewViewController {
 				vc.dataSource = self
 				vc.delegate = self
 			}
-		} else if segue.identifier == showBaiduDlinksProgress {
+		} else if segue.identifier == .showBaiduDlinksProgress {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
 				vc.dataSource = self
 			}
-		} else if segue.identifier == showOptionsWindow {
+		} else if segue.identifier == .showOptionsWindow {
 			if let wc = segue.destinationController as? NSWindowController,
 				let vc = wc.contentViewController as? OptionsViewController,
 				let gid = self.selectedObjects(TaskObject.self).first?.gid {
@@ -92,7 +89,7 @@ class DownloadsViewController: NSViewController {
 					vc.gid = gid
 				}
 			}
-		} else if segue.identifier == showStatusWindow {
+		} else if segue.identifier == .showStatusWindow {
 			if let wc = segue.destinationController as? NSWindowController,
 				let vc = wc.contentViewController as? StatusViewController,
 				let gid = self.selectedObjects(TaskObject.self).first?.gid {
@@ -132,14 +129,14 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DownloadsTableCellView"), owner: self) as? DownloadsTableCellView {
+			if let cell = tableView.makeView(withIdentifier: .downloadsTableCell, owner: self) as? DownloadsTableCellView {
 				if let data = DataManager.shared.data(TaskObject.self)[safe: row] {
 					cell.setData(data)
 				}
 				return cell
 			}
 		case .baidu:
-			if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BaiduFileListCell"), owner: self) as? BaiduFileListCell {
+			if let cell = tableView.makeView(withIdentifier: .baiduFileListCell, owner: self) as? BaiduFileListCellView {
 				if let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)[safe: row] {
 					cell.setData(data)
 				}
@@ -208,7 +205,7 @@ extension DownloadsViewController {
 		case 1...5:
 			download(data: data, group: group)
 		default:
-			performSegue(withIdentifier: showBaiduDlinksProgress, sender: self)
+			performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
 		}
 		
 	}
@@ -234,11 +231,11 @@ extension DownloadsViewController {
 	}
 	
 	@objc func showOptions(_ notification: Notification) {
-		performSegue(withIdentifier: showOptionsWindow, sender: self)
+		performSegue(withIdentifier: .showOptionsWindow, sender: self)
 	}
 	
 	@objc func showStatus(_ notification: Notification) {
-		performSegue(withIdentifier: showStatusWindow, sender: self)
+		performSegue(withIdentifier: .showStatusWindow, sender: self)
 	}
 	
 	@objc func deleteBaiduFile() {

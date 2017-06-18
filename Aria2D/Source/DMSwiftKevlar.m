@@ -8,10 +8,9 @@
 
 #import "DMSwiftKevlar.h"
 
-void InvalidateAppLicense(void)
-{
-    @autoreleasepool
-    {
+void InvalidateAppLicense(void) {
+    @autoreleasepool {
         [NSApp invalidateLicense];
     }
 }
+
