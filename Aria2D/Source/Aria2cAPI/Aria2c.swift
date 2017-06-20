@@ -32,7 +32,7 @@ class Aria2c: NSObject {
 				if lastPID == "" {
 					// should kill test
 					self.aria2cPid(lastLaunch.replacingOccurrences(of: " -D", with: "")) {
-						self.killLastAria2c($0) {
+						self.killAria2c($0) {
 							Preferences.shared.aria2cOptions.resetLastConf()
 							self.startAria2()
 						}
@@ -162,8 +162,24 @@ private extension Aria2c {
 	}
 	
 	// kill -9 "pid"
-	func killLastAria2c(_ pid: String = "", block: @escaping () -> Void) {
-		NSAppleScript(source: "do shell script \"kill -KILL \(pid == "" ? Preferences.shared.aria2cOptions.lastPID : pid)\"")?.executeAndReturnError(nil)
+	func killLastAria2c(_ block: @escaping () -> Void) {
+		if Preferences.shared.aria2cOptions.lastPID != "" {
+			killAria2c(Preferences.shared.aria2cOptions.lastPID) {
+				block()
+			}
+		} else if Preferences.shared.aria2cOptions.lastLaunch != "" {
+			aria2cPid(Preferences.shared.aria2cOptions.lastLaunch) {
+				self.killAria2c($0) {
+					block()
+				}
+			}
+		} else {
+			block()
+		}
+	}
+	
+	func killAria2c(_ pid: String, block: @escaping () -> Void) {
+		NSAppleScript(source: "do shell script \"kill -KILL \(pid)\"")?.executeAndReturnError(nil)
 		Preferences.shared.aria2cOptions.resetLastConf()
 		block()
 	}
