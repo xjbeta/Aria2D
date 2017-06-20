@@ -14,24 +14,17 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	lazy var window: NSWindow? = {
-		return NSApp.windows.filter {
-			$0.windowController is MainWindowController
-		}.first
+		return NSApplication.shared.mainWindow
 	}()
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-		
-		
-		DispatchQueue.global().async {
-			#if DEBUG
-				DMKitDebugAddDevMateMenu()
-			#endif
-			self.setDevMate()
-			Aria2.shared.aria2c.autoStart()
-		}
+		#if DEBUG
+			DMKitDebugAddDevMateMenu()
+		#endif
 		// Acknowledgements
 //		Bundle.main.path(forResource: "Pods-Aria2D-acknowledgements", ofType: "markdown")
-		
+		self.setDevMate()
+		Aria2.shared.aria2c.autoStart()
 		
         Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkLogin(nil)
@@ -75,7 +68,7 @@ extension AppDelegate: DevMateKitDelegate {
 		
 		let kevlarError = DMKevlarError.testError
 		if !string_check(nil).boolValue || kevlarError != .noError {
-			DevMateKit.setupTimeTrial(nil, withTimeInterval: kDMTrialWeek)
+			DevMateKit.setupTimeTrial(self, withTimeInterval: kDMTrialWeek)
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(activateApp), name: .activateApp, object: nil)
 		
@@ -87,6 +80,15 @@ extension AppDelegate: DevMateKitDelegate {
 	
 	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
 		return self.window
+	}
+	
+	@objc func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
+		ioProposedMode.pointee = DMActivationMode.sheet
+//		handlerSetter({ result in
+//			print("Controller end result: \(result.description)")
+//		})
+		
+		return true
 	}
 	
 	@objc func activateApp() {
