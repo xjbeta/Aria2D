@@ -1029,7 +1029,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nou-um-MhN">
-                                <rect key="frame" x="26" y="26" width="140" height="140"/>
+                                <rect key="frame" x="26" y="37" width="140" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="Lll-G4-uV1"/>
                                     <constraint firstAttribute="height" constant="140" id="ZYK-nV-uEN"/>
@@ -1094,7 +1094,7 @@
                             <constraint firstItem="N2F-no-fP9" firstAttribute="top" secondItem="rfy-Vd-zAN" secondAttribute="bottom" constant="40" id="0B1-t2-Bbb"/>
                             <constraint firstItem="W90-4j-ZHL" firstAttribute="leading" secondItem="Nou-um-MhN" secondAttribute="trailing" constant="26" id="5Qb-OA-MWs"/>
                             <constraint firstItem="rfy-Vd-zAN" firstAttribute="top" secondItem="W90-4j-ZHL" secondAttribute="bottom" id="Bf6-1S-R9n"/>
-                            <constraint firstItem="Nou-um-MhN" firstAttribute="top" secondItem="cQc-pp-0Sk" secondAttribute="top" constant="26" id="Dk3-Wr-Rkh"/>
+                            <constraint firstItem="Nou-um-MhN" firstAttribute="centerY" secondItem="cQc-pp-0Sk" secondAttribute="centerY" constant="-11" id="DX6-EA-GPh"/>
                             <constraint firstItem="W90-4j-ZHL" firstAttribute="top" secondItem="cQc-pp-0Sk" secondAttribute="top" id="MSl-uG-zy7"/>
                             <constraint firstItem="Nou-um-MhN" firstAttribute="leading" secondItem="cQc-pp-0Sk" secondAttribute="leading" constant="26" id="jGz-lk-Xio"/>
                             <constraint firstItem="N2F-no-fP9" firstAttribute="leading" secondItem="W90-4j-ZHL" secondAttribute="leading" id="jpX-Lj-3hC"/>
