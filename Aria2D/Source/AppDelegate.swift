@@ -21,8 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		#if DEBUG
 			DMKitDebugAddDevMateMenu()
 		#endif
-		// Acknowledgements
-//		Bundle.main.path(forResource: "Pods-Aria2D-acknowledgements", ofType: "markdown")
+		
 		self.setDevMate()
 		Aria2.shared.aria2c.autoStart()
 		

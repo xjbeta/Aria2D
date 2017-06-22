@@ -51,6 +51,8 @@
 		017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */; };
 		01804B261D7B179A00936E09 /* ViewForImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01804B251D7B179A00936E09 /* ViewForImage.swift */; };
 		0182D0FD1D2DF23000810419 /* LeftSourceListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */; };
+		0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0104DAA41D54CEB5002C3B6D /* QuickLook.framework */; };
+		0188A2771EFBAF9000F1B37C /* Aria2D-acknowledgements.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
 		018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E894A1D34FF5B000C71B0 /* DataObjects.swift */; };
@@ -136,6 +138,7 @@
 		017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewWithBackgroundColor.swift; sourceTree = "<group>"; };
 		01804B251D7B179A00936E09 /* ViewForImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewForImage.swift; sourceTree = "<group>"; };
 		0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListModule.swift; sourceTree = "<group>"; };
+		0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Aria2D-acknowledgements.pdf"; sourceTree = "<group>"; };
 		018B0A4E1D6451E5004F8967 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/Aria2D-ehzxusjnvnpoapfwthxmzkqqobpq/Build/Products/Debug/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitTimer.swift; path = ../WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
 				06292BF1B108C188AD6FB4C5 /* Pods_Aria2D.framework in Frameworks */,
 			);
@@ -304,9 +308,7 @@
 		0165AF611D963CDF00469601 /* Aria2D */ = {
 			isa = PBXGroup;
 			children = (
-				014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
-				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89471D34FF48000C71B0 /* Source */,
 				0147EDBF1D21FAD800FB4324 /* View */,
@@ -413,6 +415,9 @@
 		018E892A1D34FEB7000C71B0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */,
+				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
+				0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
 				0147EDC91D21FAD800FB4324 /* Info.plist */,
 			);
@@ -568,9 +573,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
+				0188A2771EFBAF9000F1B37C /* Aria2D-acknowledgements.pdf in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
+				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
 				014D3B501ED5C36F00E3ABC0 /* Aria2D_aria2c in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
