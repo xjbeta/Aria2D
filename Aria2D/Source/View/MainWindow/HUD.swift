@@ -27,6 +27,7 @@ class HUD: NSObject {
 		
 		hud = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: .hudViewController) as? HUDViewController
 		if let hud = hud {
+			hud.view.isHidden = true
 			view.addSubview(hud.view)
 			view.addConstraints([NSLayoutConstraint(item: hud.view,
 			                                        attribute: .bottom,
