@@ -1594,7 +1594,7 @@ CA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ces-KS-MPm" customClass="FeaturesTextField" customModule="Aria2D" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ces-KS-MPm">
                                 <rect key="frame" x="201" y="8" width="92" height="14"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="enabledFeatures" id="0Ll-Vy-uub">
                                     <font key="font" metaFont="smallSystem"/>
