@@ -33,12 +33,10 @@ class Aria2c: NSObject {
 					// should kill test
 					self.aria2cPid(lastLaunch.replacingOccurrences(of: " -D", with: "")) {
 						self.killAria2c($0) {
-							Preferences.shared.aria2cOptions.resetLastConf()
 							self.startAria2()
 						}
 					}
 				} else {
-					Preferences.shared.aria2cOptions.resetLastConf()
 					self.startAria2()
 				}
 				
@@ -47,6 +45,8 @@ class Aria2c: NSObject {
 				self.killLastAria2c {
 					self.startAria2()
 				}
+			} else if $0 == "", lastPID == "", lastLaunch == "" {
+				self.startAria2()
 			}
 		}
 	}
@@ -102,12 +102,19 @@ private extension Aria2c {
 	
 	// aria2c ...... -D
 	func startAria2(_ test: Bool = false) {
+		Preferences.shared.aria2cOptions.resetLastConf()
 		let task = Process()
 		do {
 			var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
 			url.appendPathComponent(Bundle.main.bundleIdentifier!)
 			task.currentDirectoryPath = url.path
 		} catch { }
+		
+		let outputPipe = Pipe()
+		let errorPipe = Pipe()
+		task.standardOutput = outputPipe
+		task.standardError = errorPipe
+		
 		
 		
 		let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
@@ -132,10 +139,12 @@ private extension Aria2c {
 				let path = args.joined(separator: " ")
 				self.aria2cPid(path) {
 					Preferences.shared.aria2cOptions.lastLaunch = path
+//					Log($0)
+//					Log("\(task.processIdentifier + 1)")
 					if $0 == "\(task.processIdentifier + 1)" {
 						Preferences.shared.aria2cOptions.lastPID = $0
 					} else {
-						NotificationCenter.default.post(name: .showAria2CheckAlert, object: self, userInfo: ["args": path])
+						ViewControllersManager.shared.showAria2cAlert(String(data: errorPipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8))
 					}
 				}
 			}
@@ -154,9 +163,8 @@ private extension Aria2c {
 		task.launch()
 		
 		task.terminationHandler = { _ in
-			let data = pipe.fileHandleForReading.readDataToEndOfFile()
-			if let output = String(data: data, encoding: .utf8) {
-				block(output)
+			if let output = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) {
+				block(output.replacingOccurrences(of: "\n", with: ""))
 			}
 		}
 	}

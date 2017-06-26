@@ -1350,9 +1350,6 @@ CA
                         <rect key="contentRect" x="196" y="240" width="800" height="520"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <value key="minSize" type="size" width="800" height="520"/>
-                        <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="bpW-bs-bzt"/>
-                        </connections>
                     </window>
                     <connections>
                         <segue destination="fKD-PV-6TC" kind="relationship" relationship="window.shadowedContentViewController" id="Syv-zw-2WM"/>

@@ -23,6 +23,7 @@ class MainWindowController: NSWindowController {
 			}
 			initNotification()
 		}
+		ViewControllersManager.shared.showAria2cAlert()
 	}
 
 	
@@ -32,12 +33,6 @@ class MainWindowController: NSWindowController {
 				self.showHUD(message: userInfo["message"] as? hudMessage ?? .error)
 			}
 		}
-		
-		NotificationCenter.default.addObserver(forName: .showAria2CheckAlert, object: nil, queue: .main) {
-			if let userInfo = $0.userInfo as? [String: String], let args = userInfo["args"] {
-				self.showAria2CheckAlert(args)
-			}
-		}
 	}
 	
 	
@@ -45,29 +40,11 @@ class MainWindowController: NSWindowController {
 		hud?.showHUD(message)
 	}
 	
-	// check aria2c
-	func showAria2CheckAlert(_ args: String) {
-		
-		if let window = window {
-			let alert = NSAlert()
-			alert.messageText = "Aria2c didn't started."
-			alert.informativeText = "Check the configs in Terminal."
-			alert.addButton(withTitle: "Check")
-			alert.addButton(withTitle: "Cancel")
-			
-			alert.beginSheetModal(for: window) {
-				if $0 == .alertFirstButtonReturn {
-					NSAppleScript(source: "tell application \"Terminal\" \n activate \n do script \"\(args)\" \n end tell")?.executeAndReturnError(nil)
-				}
-			}
-		}
-	}
 	
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
 	}
-	
-
-	
 }
+
+

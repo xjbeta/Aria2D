@@ -13,25 +13,20 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	lazy var window: NSWindow? = {
-		return NSApplication.shared.mainWindow
-	}()
+	var window: NSWindow? {
+		return NSApp.mainWindow
+	}
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		#if DEBUG
 			DMKitDebugAddDevMateMenu()
 		#endif
-		
 		self.setDevMate()
-		Aria2.shared.aria2c.autoStart()
-		
-        Aria2Websocket.shared.initSocket()
+		Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkLogin(nil)
 		Preferences.shared.checkPlistFile()
-		
-		
+		Aria2.shared.aria2c.autoStart()
 	}
-	
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if !flag {
@@ -48,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationWillBecomeActive(_ notification: Notification) {
 		Aria2Websocket.shared.resumeTimer()
 	}
+	
 	func applicationWillResignActive(_ notification: Notification) {
 		Aria2Websocket.shared.suspendTimer()
 	}
@@ -63,7 +59,7 @@ extension AppDelegate: DevMateKitDelegate {
 		//DevMate
 		DevMateKit.sendTrackingReport(nil, delegate: self)
 		
-//		DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
+		//		DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
 		
 		let kevlarError = DMKevlarError.testError
 		if !string_check(nil).boolValue || kevlarError != .noError {
@@ -82,11 +78,10 @@ extension AppDelegate: DevMateKitDelegate {
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
-		ioProposedMode.pointee = DMActivationMode.sheet
-//		handlerSetter({ result in
-//			print("Controller end result: \(result.description)")
-//		})
-		
+		ioProposedMode.pointee = .sheet
+		handlerSetter { _ in
+			ViewControllersManager.shared.showAria2cAlert()
+		}
 		return true
 	}
 	

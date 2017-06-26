@@ -71,10 +71,6 @@ class Aria2Websocket: NSObject {
 		socket.onConnect = {
 			self.isConnected = true
 			Aria2.shared.initData()
-//			Aria2.shared.getVersion { info in
-//				self.connectedServerInfo.version = "Version: \($0.0)"
-//				self.connectedServerInfo.enabledFeatures = $0.1
-//			}
 			Aria2.shared.getVersion { (v, str) in
 				self.connectedServerInfo.version = "Version: \(v)"
 				self.connectedServerInfo.enabledFeatures = str

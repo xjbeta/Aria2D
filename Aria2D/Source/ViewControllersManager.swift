@@ -23,6 +23,38 @@ class ViewControllersManager: NSObject {
 		NotificationCenter.default.post(name: .showHUD, object: nil, userInfo: ["message": message])
 	}
 	
+	private var aria2cAlertStr: String? = nil
+	func showAria2cAlert(_ str: String? = nil) {
+		let info = str ?? aria2cAlertStr ?? ""
+		guard info != "" else { return }
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+			if let mainWindow = NSApp.mainWindow, mainWindow.sheets.count == 0 {
+					let alert = NSAlert()
+					alert.messageText = "Aria2c didn't started."
+					alert.informativeText = info
+					alert.addButton(withTitle: "OK")
+					alert.addButton(withTitle: "Cancel")
+					alert.alertStyle = .warning
+					alert.beginSheetModal(for: mainWindow) {
+						if $0 == .alertFirstButtonReturn {
+							
+						}
+					}
+				
+				self.aria2cAlertStr = nil
+			} else {
+				self.aria2cAlertStr = info
+			}
+		}
+		
+		/*
+		func runScript() {
+			NSAppleScript(source: "tell application \"Terminal\" \n activate \n do script \"echo test your aria2c confs\" \n tell application \"System Events\" \n keystroke \"\(args)\" \n end tell \n end tell")?.executeAndReturnError(nil)
+		}
+		*/
+	}
+	
+	
 	
 	// LeftSourceList Indicator
 	private var waitingCount = 0
