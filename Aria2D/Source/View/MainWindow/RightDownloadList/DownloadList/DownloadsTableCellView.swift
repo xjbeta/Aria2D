@@ -53,9 +53,8 @@ class DownloadsTableCellView: NSTableCellView {
 		let path = URL(fileURLWithPath: data.path)
 		filePath = path
 		downloadTaskName.stringValue = {
-			let name = path.lastPathComponent
-			if name != "Data" {
-				return name
+			if data.path != "" {
+				return path.lastPathComponent
 			} else {
 				if data.totalLength != 0 {
 					Aria2.shared.getFiles([data.gid])
@@ -64,7 +63,7 @@ class DownloadsTableCellView: NSTableCellView {
 			}
 		}()
 		
-		let image: NSImage = {
+		fileIcon.image = {
 			var image = NSImage()
 			if data.isBitTorrent, path.pathExtension == "" {
 				image = folderIcon
@@ -74,7 +73,6 @@ class DownloadsTableCellView: NSTableCellView {
 			image.size = NSSize(width: 35, height: 35)
 			return image
 		}()
-		fileIcon.image = image
 		
 		totalLength.integerValue = data.totalLength
 		switch ViewControllersManager.shared.selectedRow {
