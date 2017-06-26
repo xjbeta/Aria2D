@@ -61,8 +61,7 @@ extension AppDelegate: DevMateKitDelegate {
 		
 		//		DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
 		
-		let kevlarError = DMKevlarError.testError
-		if !string_check(nil).boolValue || kevlarError != .noError {
+		if !string_check(nil).boolValue {
 			DevMateKit.setupTimeTrial(self, withTimeInterval: kDMTrialWeek)
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(activateApp), name: .activateApp, object: nil)
@@ -88,8 +87,7 @@ extension AppDelegate: DevMateKitDelegate {
 	@objc func activateApp() {
 		// Swift does't work with macros, so check our Examples project on GitHub (https://github.com/DevMate/DevMateKit)
 		// to see how to create _my_secret_activation_check variable
-		let kevlarError = DMKevlarError.testError
-		if !string_check(nil).boolValue || kevlarError != .noError {
+		if !string_check(nil).boolValue {
 			DevMateKit.runActivationDialog(self, in: .sheet)
 		} else if let window = self.window {
 			let license = string_info()?.takeUnretainedValue()
