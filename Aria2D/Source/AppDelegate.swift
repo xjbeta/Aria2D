@@ -89,19 +89,26 @@ extension AppDelegate: DevMateKitDelegate {
 		// to see how to create _my_secret_activation_check variable
 		if !string_check(nil).boolValue {
 			DevMateKit.runActivationDialog(self, in: .sheet)
-		} else if let window = self.window {
-			let license = string_info()?.takeUnretainedValue()
+		} else if let window = self.window, let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
+			
 			let licenseSheet = NSAlert()
 			licenseSheet.messageText = "Your application is already activated."
-			licenseSheet.informativeText = "\(license.debugDescription)"
+			
+//			Log(license)
+			
+			licenseSheet.informativeText = "This product is licensed to:\n    email: \(license["email"] as? String ?? "")\n    activation id: \(license["activation_number"] as? String ?? "")"
 			licenseSheet.addButton(withTitle: "OK")
 			licenseSheet.addButton(withTitle: "Invalidate License")
 			
-			licenseSheet.beginSheetModal(for: window) {
-				if $0 == .alertSecondButtonReturn {
-					InvalidateAppLicense()
+			DispatchQueue.main.async {
+				licenseSheet.beginSheetModal(for: window) {
+					if $0 == .alertSecondButtonReturn {
+						InvalidateAppLicense()
+					}
 				}
 			}
+			
+			
 		}
 	}
 }
