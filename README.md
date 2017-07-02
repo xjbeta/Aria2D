@@ -6,11 +6,12 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 ![Aria2D](https://i.imgur.com/i6NdSsG.png)
 [Website](https://xjbeta.github.io/Aria2D) · [Releases](https://github.com/xjbeta/Aria2D/releases)
 # Features
-- Native macOS client (swift)
-- Auto start aria2c (Internal/ Local)
-- Multi-server support
-- Complete notification
-- Something for BaiDu PCS Developer (You must have a **PCS API KEY**)
+* Design for macOS El Capitan/ Sierra (10.11+).
+* Written in swift 4.
+* Download complete notification.
+* Convenient settings.
+* Support multiple servers.
+* Support lnternal/local aria2c.
 
 # Thenks
 - [Realm](https://realm.io/)
