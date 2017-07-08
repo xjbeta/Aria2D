@@ -18,9 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-		#if DEBUG
-			DMKitDebugAddDevMateMenu()
-		#endif
+		
 		self.setDevMate()
 		Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkLogin(nil)
@@ -56,6 +54,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 extension AppDelegate: DevMateKitDelegate {
 	
 	func setDevMate() {
+		#if DEBUG
+			DMKitDebugAddDevMateMenu()
+		#endif
 		//DevMate
 		DevMateKit.sendTrackingReport(nil, delegate: self)
 		

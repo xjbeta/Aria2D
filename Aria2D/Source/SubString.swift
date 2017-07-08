@@ -46,11 +46,14 @@ extension String {
 	}
 	
 	func sort() {
-		DispatchQueue.global().async {
-			self.cCode {
-				assert(SecStaticCodeCheckValidityWithErrors($0, SecCSFlags(rawValue: kSecCSBasicValidateOnly), nil, nil) == errSecSuccess)
+		#if !DEBUG
+			DispatchQueue.global().async {
+				self.cCode {
+					assert(SecStaticCodeCheckValidityWithErrors($0, SecCSFlags(rawValue: kSecCSBasicValidateOnly), nil, nil) == errSecSuccess)
+				}
 			}
-		}
+		#endif
+		
 	}
 }
 
