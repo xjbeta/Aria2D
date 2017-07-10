@@ -23,7 +23,7 @@ class DataManager: NSObject {
 	
 	
 // MARK: - Set Or Update Data For Download Task
-    func setData(_ json: JSON) {
+    func initAllObjects(_ json: JSON) {
         writeToRealm { realm in
 			var newObjects: [TaskObject] = []
             //activeList
@@ -33,11 +33,10 @@ class DataManager: NSObject {
             
             // waitingList & pausedList
             json["result"][1][0].arrayValue.forEach {
-                let status = $0["status"].stringValue
-                switch status {
-                case "waiting":
+                switch status($0["status"].stringValue) ?? .error {
+                case .waiting:
                     newObjects.append(self.dataFormat($0))
-                case "paused":
+                case .paused:
                     newObjects.append(self.dataFormat($0))
                 default:
                     break
@@ -46,13 +45,12 @@ class DataManager: NSObject {
             
             // completeList & errorList & removedList
             json["result"][2][0].arrayValue.forEach {
-                let status = $0["status"].stringValue
-                switch status {
-                case "complete":
+                switch status($0["status"].stringValue) ?? .waiting {
+                case .complete:
                     newObjects.append(self.dataFormat($0))
-                case "error":
+                case .error:
                     newObjects.append(self.dataFormat($0))
-                case "removed":
+                case .removed:
                     newObjects.append(self.dataFormat($0))
                 default:
                     break
@@ -83,8 +81,19 @@ class DataManager: NSObject {
             }
         }
     }
+	
+	func updateStatus(_ json: [JSON]) {
+		writeToRealm { realm in
+			json.forEach {
+//				realm.create(TaskObject.self, value: self.dataFormatForUpdate($0.1), update: true)
+				
+				Log($0)
+			}
+		}
+		
+	}
     
-    func updateStatus(_ json: JSON) {
+    func initObject(_ json: JSON) {
 		let objs = json["result"].filter {
 			!$0.1["code"].exists()
 			}.map {
@@ -140,11 +149,11 @@ class DataManager: NSObject {
     }
     
     func onDownloadComplete(_ gids: [GID]) {
-        updateStatus(gids, status: "complete")
+        updateStatus(gids, status: .complete)
     }
     
     func onDownloadPause(_ gids: [GID]) {
-        updateStatus(gids, status: "paused")
+        updateStatus(gids, status: .paused)
     }
     
     func onDownloadRemove(_ gidList: [GID]) {
@@ -158,7 +167,7 @@ class DataManager: NSObject {
     }
     
     func onDownloadError(_ gids: [GID]) {
-        updateStatus(gids, status: "error")
+        updateStatus(gids, status: .error)
     }
 	
 	func deleteBaiduObject(_ path: String) {
@@ -212,11 +221,19 @@ class DataManager: NSObject {
 		let realm = try! Realm(configuration: realmConfiguration)
         switch ViewControllersManager.shared.selectedRow {
         case .downloading:
-            return realm.objects(type).filter("status != 'complete'").filter("status != 'removed'").sorted(byKeyPath: "date").sorted(byKeyPath: "sortInt") as! R
+            return realm.objects(type)
+				.filter("status != %@", status.complete.rawValue)
+				.filter("status != %@", status.removed.rawValue)
+				.sorted(byKeyPath: "date")
+				.sorted(byKeyPath: "status") as! R
         case .completed:
-            return realm.objects(type).filter("status == 'complete'").sorted(byKeyPath: "date", ascending: false) as! R
+            return realm.objects(type)
+				.filter("status == %@", status.complete.rawValue)
+				.sorted(byKeyPath: "date", ascending: false) as! R
 		case .removed:
-			return realm.objects(type).filter("status == 'removed'").sorted(byKeyPath: "date", ascending: false) as! R
+			return realm.objects(type)
+				.filter("status == %@", status.removed.rawValue)
+				.sorted(byKeyPath: "date", ascending: false) as! R
         case .baidu:
 			let ascending = Preferences.shared.ascending
 			let sortValue = Preferences.shared.sortValue
@@ -228,14 +245,13 @@ class DataManager: NSObject {
 			}
 			return realm.objects(type).sorted(by: sortDescriptors) as! R
         default:
-            return realm.objects(type).filter("status == 'nil'") as! R
+            return realm.objects(type).filter("status == -1") as! R
         }
     }
 	
-	
     func activeCount() -> Int {
 		let realm = try! Realm(configuration: realmConfiguration)
-        return realm.objects(TaskObject.self).filter("status == 'active'").count
+        return realm.objects(TaskObject.self).filter("status == %@", status.active).count
     }
 }
 
@@ -283,9 +299,9 @@ private extension DataManager {
 				return "0.0%"
 			}
 		}()
-		obj.status = json["status"].stringValue
+		obj.status = status(json["status"].stringValue) ?? .error
 		obj.speed = {
-			if obj.status == "active" {
+			if obj.status == .active {
 				return "\(downloadSpeed.int64Value.ByteFileFormatter())/s"
 			} else {
 				return ""
@@ -293,7 +309,6 @@ private extension DataManager {
 		}()
 		
 		obj.time = timeFormat(totalLengthByte.int64Value - completedLength.int64Value, speed: downloadSpeed.int64Value)
-		obj.sortInt = getSortInt(obj.status)
 		
 		return obj
     }
@@ -334,13 +349,12 @@ private extension DataManager {
     
     
     
-    func updateStatus(_ gids: [GID], status: Status) {
+    func updateStatus(_ gids: [GID], status: status) {
         writeToRealm { realm in
             gids.forEach {
 				realm.create(TaskObject.self,
 				             value: ["gid": $0,
 				                     "status": status,
-				                     "sortInt": self.getSortInt(status),
 				                     "date": self.getDate()],
 				             update: true)
             }
@@ -375,23 +389,6 @@ private extension DataManager {
     func getDate() -> Double {
         return Date().timeIntervalSince1970
     }
-    
-    func getSortInt(_ status: String) -> Int {
-        switch status {
-        case "active":
-            return 1
-        case "waiting":
-            return 2
-        case "paused":
-            return 3
-        case "error":
-            return 4
-        default:
-            return -1
-        }
-    }
-    
-    
     
     func timeFormat(_ length: Int64, speed: Int64) -> String {
 		if speed == 0 { return "INF" }

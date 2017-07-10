@@ -13,37 +13,66 @@ import SwiftyJSON
 public typealias GID = String
 public typealias Path = String
 public typealias TotalLength = Int
-public typealias Status = String
 public typealias Percentage = String
 public typealias ProgressIndicator = Double
 public typealias Time = String
 public typealias Speed = String
+@objc enum status: Int {
+	case active
+	case waiting
+	case paused
+	case error
+	case complete
+	case removed
+	
+	init?(_ str: String) {
+		switch str {
+		case "active": self.init(rawValue: 0)
+		case "waiting": self.init(rawValue: 1)
+		case "paused": self.init(rawValue: 2)
+		case "error": self.init(rawValue: 3)
+		case "complete": self.init(rawValue: 4)
+		case "removed": self.init(rawValue: 5)
+		default:
+			self.init(rawValue: -1)
+		}
+	}
+	
+	func string() -> String {
+		switch self {
+		case .active: return "active"
+		case .waiting: return "waiting"
+		case .paused: return "paused"
+		case .error: return "error"
+		case .complete: return "complete"
+		case .removed: return "removed"
+		}
+	}
+}
 
 class TaskObject: Object {
 	
     @objc dynamic var gid: GID = ""
     @objc dynamic var path: Path = ""
     @objc dynamic var totalLength: TotalLength = 0
-    @objc dynamic var status: Status = ""
+    @objc dynamic var status: status = .removed
     @objc dynamic var percentage: Percentage = ""
     @objc dynamic var progressIndicator: ProgressIndicator = 0
     @objc dynamic var time: Time = ""
     @objc dynamic var speed: Speed = ""
     @objc dynamic var date: Double = 0
-    @objc dynamic var sortInt: Int = -1
     @objc dynamic var connections: Int = -1
 	@objc dynamic var isBitTorrent = false
     
 	convenience init(gid: GID,
 	                 path: Path,
 	                 totalLength: TotalLength,
-	                 status: Status,
+	                 status: status,
 	                 percentage: Percentage,
 	                 progressIndicator: ProgressIndicator,
 	                 time: Time,
 	                 speed: Speed,
 	                 date: Double,
-	                 sortInt: Int,
 	                 connections: Int,
 	                 isBitTorrent: Bool) {
         self.init()
@@ -56,7 +85,6 @@ class TaskObject: Object {
         self.time = time
         self.speed = speed
         self.date = date
-        self.sortInt = sortInt
 		self.connections = connections
 		self.isBitTorrent = isBitTorrent
     }

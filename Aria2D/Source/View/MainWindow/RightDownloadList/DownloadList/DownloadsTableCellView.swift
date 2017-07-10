@@ -77,15 +77,15 @@ class DownloadsTableCellView: NSTableCellView {
 		totalLength.integerValue = data.totalLength
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading:
-			if data.status == "active" {
+			if data.status == .active {
 				time.stringValue = data.time
 				status.stringValue = data.speed
 			} else {
 				time.stringValue = ""
-				status.stringValue = data.status
+				status.stringValue = data.status.string()
 			}
 			
-			if data.progressIndicator == 0 && data.status != "active" {
+			if data.progressIndicator == 0 && data.status != .active {
 				progressIndicator.isHidden = true
 				percentage.stringValue = ""
 			} else {
@@ -97,7 +97,7 @@ class DownloadsTableCellView: NSTableCellView {
 			progressIndicator.isHidden = true
 			time.stringValue = ""
 			percentage.stringValue = ""
-			status.stringValue = data.status
+			status.stringValue = data.status.string()
 		default:
 			break
 		}

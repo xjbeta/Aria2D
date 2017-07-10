@@ -163,10 +163,10 @@ class ViewControllersManager: NSObject {
 					DataManager.shared.data(TaskObject.self)[$0]
 				}
 				let canPauseList = dataList.filter {
-					$0.status == "active" || $0.status == "waiting"
+					$0.status == .active || $0.status == .waiting
 				}
 				let pausedList = dataList.filter {
-					$0.status == "paused"
+					$0.status == .paused
 				}
 				if canPauseList.count >= pausedList.count {
 					return true
@@ -182,10 +182,10 @@ class ViewControllersManager: NSObject {
 				DataManager.shared.data(TaskObject.self)[$0]
 			}
 			let canPauseList = dataList.filter {
-				$0.status == "active" || $0.status == "waiting"
+				$0.status == .active || $0.status == .waiting
 			}
 			let pausedList = dataList.filter {
-				$0.status == "paused"
+				$0.status == .paused
 			}
 			if canPauseList.count >= pausedList.count {
 				Aria2.shared.pause(canPauseList.map { $0.gid })
@@ -203,7 +203,7 @@ class ViewControllersManager: NSObject {
 			let data = DataManager.shared.data(TaskObject.self)[$0]
 			let status = data.status
 			let gid = data.gid
-			if status == "complete" || status == "error" || status == "removed" {
+			if status == .complete || status == .error || status == .removed {
 				gidForRemoveDownloadResult.append(gid)
 			} else {
 				gidForRemove.append(gid)
