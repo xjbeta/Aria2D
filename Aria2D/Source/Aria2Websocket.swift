@@ -42,8 +42,7 @@ class Aria2Websocket: NSObject {
 		didSet {
 			if isConnected != oldValue {
 				NotificationCenter.default.post(name: .updateConnectStatus, object: self)
-			}
-			
+			}	
 		}
 	}
 	

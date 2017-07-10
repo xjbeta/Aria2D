@@ -32,7 +32,7 @@ class Aria2: NSObject {
 			.writeToWebsocket {
 				switch $0 {
 				case .success(let json):
-					DataManager.shared.setData(json)
+					DataManager.shared.initAllObjects(json)
 				default:
 					break
 				}
@@ -53,7 +53,7 @@ class Aria2: NSObject {
 				switch $0 {
 				case .success(let json):
 					if update {
-						DataManager.shared.updateStatus(json)
+						DataManager.shared.initObject(json)
 					}
 					block(json)
 				default:
@@ -179,7 +179,7 @@ class Aria2: NSObject {
 
 
 	func pause(_ gids: [GID]) {
-		guard effectiveGIDs(gids).count > 0 else { return }
+        guard effectiveGIDs(gids).count > 0 else { return }
 		let method = Preferences.shared.useForce ? Aria2Method.forcePause : Aria2Method.pause
 		let params = gids.map {
 			Aria2WebsocketParams(method: method, params: [$0]).object()
@@ -351,7 +351,7 @@ class Aria2: NSObject {
 		
 	}
 	
-	func changeOption(_ gid: GID, key: String, value: String , block: @escaping (_ result: WebSocketResult) -> Void) {
+	func changeOption(_ gid: GID, key: String, value: String , block: @escaping (_ result: webSocketResult) -> Void) {
 		Aria2WebsocketObject(method: Aria2Method.changeOption,
 		                     params: [gid, [key: value]])
 			.writeToWebsocket {
@@ -376,7 +376,7 @@ fileprivate extension Aria2 {
 			self.jsonrpc = jsonrpc
 		}
 		
-		func writeToWebsocket(_ methodName: String = #function, block: @escaping (_ result: WebSocketResult) -> Void) {
+		func writeToWebsocket(_ methodName: String = #function, block: @escaping (_ result: webSocketResult) -> Void) {
 
 			
 			let str: [String: Any] = {
@@ -507,7 +507,7 @@ extension WebSocket {
 	func write(_ dic: [String: Any],
 	           withID id: String,
 	           method: String,
-	           completion: @escaping (_ result: WebSocketResult) -> Void) {
+	           completion: @escaping (_ result: webSocketResult) -> Void) {
 		let time = Date().timeIntervalSince1970
 		WaitingList.shared.add(id) { (data, success) in
 			if let json = data as? JSON {
@@ -559,7 +559,7 @@ extension WebSocket {
 	}
 }
 
-enum WebSocketResult {
+enum webSocketResult {
 	case success(json: JSON)
 	case timeOut
 	case receiveError(message: String)
