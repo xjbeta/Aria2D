@@ -1,0 +1,5 @@
+github "DevMate/DevMateKit"
+github "JustHTTP/Just"
+github "SwiftyJSON/SwiftyJSON"
+github "daltoniam/Starscream"
+github "realm/realm-cocoa"

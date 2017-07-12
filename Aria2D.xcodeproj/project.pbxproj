@@ -16,8 +16,26 @@
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
 		012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */ = {isa = PBXBuildFile; fileRef = 012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
+		012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; };
+		012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDD1F1461BC009E4110 /* Just.framework */; };
+		012ADEE51F1461BC009E4110 /* Just.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDD1F1461BC009E4110 /* Just.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012ADEE61F1461BC009E4110 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; };
+		012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; };
+		012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012ADEEA1F1461BC009E4110 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE01F1461BC009E4110 /* Starscream.framework */; };
+		012ADEEB1F1461BC009E4110 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE01F1461BC009E4110 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012ADEEC1F1461BC009E4110 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */; };
+		012ADEED1F1461BC009E4110 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012ADEF31F1461CD009E4110 /* Just.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */; };
+		012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */; };
+		012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */; };
+		012ADEF61F1461CD009E4110 /* Starscream.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */; };
+		012ADEF71F1461CD009E4110 /* SwiftyJSON.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF21F1461CD009E4110 /* SwiftyJSON.framework.dSYM */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
+		0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130D74D1F13E9F500F11DBC /* JSONModels.swift */; };
 		0137D2701E9A220F00CEE540 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137D26F1E9A220F00CEE540 /* StatusViewController.swift */; };
 		013817671D238E0100E0F926 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817661D238E0100E0F926 /* MainWindowController.swift */; };
 		013817691D238E0D00E0F926 /* LeftSourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817681D238E0D00E0F926 /* LeftSourceList.swift */; };
@@ -72,7 +90,6 @@
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
-		01EA28D21EFE94EA000062A9 /* Pods_Aria2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */; };
 		01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */; };
 		01EB1CB61D60971600F2925F /* Baidu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB51D60971600F2925F /* Baidu.swift */; };
 		01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB71D60997600F2925F /* LoginButton.swift */; };
@@ -81,6 +98,39 @@
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
 		01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		012C057B1F13E6D600EA5BD1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */,
+				012ADEE51F1461BC009E4110 /* Just.framework in Embed Frameworks */,
+				012ADEED1F1461BC009E4110 /* SwiftyJSON.framework in Embed Frameworks */,
+				012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */,
+				012ADEEB1F1461BC009E4110 /* Starscream.framework in Embed Frameworks */,
+				012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01D82A141F145E59003754E4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				012ADEF31F1461CD009E4110 /* Just.framework.dSYM in CopyFiles */,
+				012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in CopyFiles */,
+				012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in CopyFiles */,
+				012ADEF61F1461CD009E4110 /* Starscream.framework.dSYM in CopyFiles */,
+				012ADEF71F1461CD009E4110 /* SwiftyJSON.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0104DAA41D54CEB5002C3B6D /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -98,8 +148,20 @@
 		012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSwiftKevlar.h; sourceTree = "<group>"; };
 		012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSwiftKevlar.m; sourceTree = "<group>"; };
 		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Other/Transformer.swift; sourceTree = "<group>"; };
+		012ADEDC1F1461BC009E4110 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
+		012ADEDD1F1461BC009E4110 /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = Carthage/Build/Mac/Just.framework; sourceTree = "<group>"; };
+		012ADEDE1F1461BC009E4110 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
+		012ADEDF1F1461BC009E4110 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
+		012ADEE01F1461BC009E4110 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
+		012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
+		012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Just.framework.dSYM; path = Carthage/Build/Mac/Just.framework.dSYM; sourceTree = "<group>"; };
+		012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
+		012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
+		012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
+		012ADEF21F1461CD009E4110 /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = Carthage/Build/Mac/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../DataAPI/Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
+		0130D74D1F13E9F500F11DBC /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
 		0137D26F1E9A220F00CEE540 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		013817661D238E0100E0F926 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		013817681D238E0D00E0F926 /* LeftSourceList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceList.swift; sourceTree = "<group>"; };
@@ -137,7 +199,6 @@
 		01804B251D7B179A00936E09 /* ViewForImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewForImage.swift; sourceTree = "<group>"; };
 		0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListModule.swift; sourceTree = "<group>"; };
 		0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Aria2D-acknowledgements.pdf"; sourceTree = "<group>"; };
-		018B0A4E1D6451E5004F8967 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/Aria2D-ehzxusjnvnpoapfwthxmzkqqobpq/Build/Products/Debug/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitTimer.swift; path = ../WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		018E894A1D34FF5B000C71B0 /* DataObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
@@ -156,7 +217,6 @@
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
 		01BC4F921E4324D100417221 /* SetPCSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPCSViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
-		01C6FD301EE7DCF200868BAC /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Aria2D-ehzxusjnvnpoapfwthxmzkqqobpq/Build/Products/Debug/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleClickTextField.swift; path = ../../Preferences/Views/DoubleClickTextField.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSplitView.swift; path = MainSpilt/MainSplitView.swift; sourceTree = "<group>"; };
 		01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduSettingView.swift; sourceTree = "<group>"; };
@@ -166,9 +226,6 @@
 		01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCellView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
 		01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduDlinksProgress.swift; sourceTree = "<group>"; };
-		305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria2D.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D.debug.xcconfig"; sourceTree = "<group>"; };
-		500B685E38D95F5CFF066678 /* Pods-Aria2D.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria2D.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D.release.xcconfig"; sourceTree = "<group>"; };
-		769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aria2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,9 +233,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01EA28D21EFE94EA000062A9 /* Pods_Aria2D.framework in Frameworks */,
 				0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
+				012ADEEC1F1461BC009E4110 /* SwiftyJSON.framework in Frameworks */,
+				012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */,
+				012ADEEA1F1461BC009E4110 /* Starscream.framework in Frameworks */,
+				012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */,
+				012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */,
+				012ADEE61F1461BC009E4110 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +306,6 @@
 				0165AF611D963CDF00469601 /* Aria2D */,
 				012624611ED174AC007FF8AA /* Kevlar */,
 				6ACACE787527AEFD90491354 /* Frameworks */,
-				E10A820F0C3021B680637631 /* Pods */,
 				0147EDBE1D21FAD800FB4324 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -261,8 +322,8 @@
 			isa = PBXGroup;
 			children = (
 				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
-				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
 				016C98F71DB1C04F00955C09 /* MainWindow */,
+				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
 				01713BD71D9BA998000240A2 /* NewTask */,
 				018E89721D350079000C71B0 /* Preferences */,
 				0182E60C1EAEE90000E08454 /* Log */,
@@ -445,6 +506,7 @@
 			children = (
 				018E89491D34FF5B000C71B0 /* DataManager.swift */,
 				018E894A1D34FF5B000C71B0 /* DataObjects.swift */,
+				0130D74D1F13E9F500F11DBC /* JSONModels.swift */,
 			);
 			name = Data;
 			path = DataAPI;
@@ -472,24 +534,23 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01C6FD301EE7DCF200868BAC /* RealmSwift.framework */,
+				012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */,
+				012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */,
+				012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */,
+				012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */,
+				012ADEF21F1461CD009E4110 /* SwiftyJSON.framework.dSYM */,
+				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
+				012ADEDD1F1461BC009E4110 /* Just.framework */,
+				012ADEDE1F1461BC009E4110 /* Realm.framework */,
+				012ADEDF1F1461BC009E4110 /* RealmSwift.framework */,
+				012ADEE01F1461BC009E4110 /* Starscream.framework */,
+				012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */,
 				01610DE41EDFF7B200BAEF02 /* Security.framework */,
-				018B0A4E1D6451E5004F8967 /* SwiftyJSON.framework */,
 				01903A351D5CB6E0008A3E6E /* WebKit.framework */,
 				01250C9B1D54D7180017353F /* Quartz.framework */,
 				0104DAA41D54CEB5002C3B6D /* QuickLook.framework */,
-				769784F50E6E4FACDB992CC9 /* Pods_Aria2D.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E10A820F0C3021B680637631 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */,
-				500B685E38D95F5CFF066678 /* Pods-Aria2D.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,12 +560,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0147EDCC1D21FAD800FB4324 /* Build configuration list for PBXNativeTarget "Aria2D" */;
 			buildPhases = (
-				3535D77D97F88D4924C467E8 /* [CP] Check Pods Manifest.lock */,
 				0147EDB91D21FAD800FB4324 /* Sources */,
 				0147EDBA1D21FAD800FB4324 /* Frameworks */,
 				0147EDBB1D21FAD800FB4324 /* Resources */,
-				43CCF6E27746A47330F824B0 /* [CP] Embed Pods Frameworks */,
-				5BFD54490A8A9C59893B9D5C /* [CP] Copy Pods Resources */,
+				012C057B1F13E6D600EA5BD1 /* Embed Frameworks */,
+				01D82A141F145E59003754E4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -580,73 +640,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		3535D77D97F88D4924C467E8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Aria2D-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n# print error to STDERR\necho \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\nexit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		43CCF6E27746A47330F824B0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-frameworks.sh",
-				"${PODS_ROOT}/DevMateKit/DevMateKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DevMateKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5BFD54490A8A9C59893B9D5C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-resources.sh",
-				"${PODS_ROOT}/DevMateKit/DevMateKit.framework",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aria2D/Pods-Aria2D-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		0147EDB91D21FAD800FB4324 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -655,6 +648,7 @@
 				016CDC991E6E79B5000F9F88 /* MovableImageView.swift in Sources */,
 				012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */,
 				018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */,
+				0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */,
 				01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */,
 				0147EDD41D220A7800FB4324 /* LeftSourceListView.swift in Sources */,
 				0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */,
@@ -840,7 +834,6 @@
 		};
 		0147EDCD1D21FAD800FB4324 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 305520C5FDCE7C77BBB43C68 /* Pods-Aria2D.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -848,21 +841,13 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = H7NSMSBU6A;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PODS_ROOT)/DevMateKit/DevMateKit.framework/Frameworks",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Just\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Starscream\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON\"",
-					"\"${PODS_ROOT}/DevMateKit\"",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/DevMateKit\"",
 					"\"$(PROJECT_DIR)/Kevlar\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resource/Info.plist";
@@ -892,21 +877,20 @@
 					"-framework",
 					IOKit,
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xfrontend -debug-time-function-bodies -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xjbeta.Aria2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Aria2D/Resource/Aria2D-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		0147EDCE1D21FAD800FB4324 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 500B685E38D95F5CFF066678 /* Pods-Aria2D.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -914,11 +898,13 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = H7NSMSBU6A;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/DevMateKit\"",
 					"\"$(PROJECT_DIR)/Kevlar\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resource/Info.plist";
@@ -948,13 +934,13 @@
 					"-framework",
 					IOKit,
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xjbeta.Aria2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Aria2D/Resource/Aria2D-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
