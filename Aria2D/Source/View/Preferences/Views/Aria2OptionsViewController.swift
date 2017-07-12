@@ -332,6 +332,8 @@ struct Aria2cOptions {
 		return NSKeyedArchiver.archivedData(withRootObject: Encoding(self))
 	}
 	
+//	@objc(Encoding)
+	@objc(_TtCV6Aria2D13Aria2cOptionsP33_AF457B311616EC08278CC3017ADC7BED8Encoding)
 	private class Encoding: NSObject, NSCoding {
 		
 		var customAria2c = ""

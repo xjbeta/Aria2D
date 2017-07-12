@@ -176,14 +176,14 @@ class Aria2Websocket: NSObject {
 	private func startTimer() {
 		timer = DispatchSource.makeTimerSource(flags: [], queue: timerQueue)
 		if let timer = timer {
-			timer.scheduleRepeating(deadline: .now(), interval: .seconds(1))
+			timer.schedule(deadline: .now(), repeating: .seconds(1))
 			timer.setEventHandler {
 				if !self.isConnected {
 					self.socket.connect()
 				} else {
-					if DataManager.shared.activeCount() > 0 {
-						Aria2.shared.updateActiveTasks()
-					}
+                    if DataManager.shared.activeCount() > 0 {
+                        Aria2.shared.updateActiveTasks()
+                    }
 				}
 			}
 			timer.resume()

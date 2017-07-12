@@ -183,6 +183,8 @@ struct Aria2Servers {
 		return NSKeyedArchiver.archivedData(withRootObject: Encoding(self))
 	}
 	
+//	@objc(Encoding)
+	@objc(_TtCV6Aria2D12Aria2ServersP33_171DF4024EB981219431F6BE240222578Encoding)
 	private class Encoding: NSObject, NSCoding {
 		var contents: [Aria2ConnectionSettings] = []
 		var selectedID = ""

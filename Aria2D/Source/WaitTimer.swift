@@ -41,7 +41,7 @@ class WaitTimer: NSObject {
     
     private func startTimer() {
 		commitTimer = DispatchSource.makeTimerSource(flags: [], queue: queue)
-		commitTimer?.scheduleRepeating(deadline: .now() + timeOut, interval: 0)
+		commitTimer?.schedule(deadline: .now() + timeOut, repeating: 0)
         commitTimer?.setEventHandler {
             self.commit()
             self.stop()
@@ -53,7 +53,7 @@ class WaitTimer: NSObject {
     
     
     private func resetTimer() {
-		commitTimer?.scheduleRepeating(deadline: .now() + timeOut, interval: 0)
+		commitTimer?.schedule(deadline: .now() + timeOut, repeating: 0)
     }
     
 	func stop() {
