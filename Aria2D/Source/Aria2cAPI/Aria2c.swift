@@ -123,7 +123,8 @@ private extension Aria2c {
 		if FileManager.default.fileExists(atPath: aria2cPath),
 			FileManager.default.fileExists(atPath: confPath) {
 			task.launchPath = aria2cPath
-			var args = ["--conf-path=\(confPath)", "--log=\(logPath)"]
+//			var args = ["--conf-path=\(confPath)", "--log=\(logPath)"]
+			var args = ["--conf-path=\(confPath)"]
 			args.append("-D")
 			
 			if Preferences.shared.aria2cOptions.selectedAria2cConf == .default🙂 {

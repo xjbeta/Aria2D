@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SwiftyJSON
 
 class BaiduSettingView: NSViewController {
 	

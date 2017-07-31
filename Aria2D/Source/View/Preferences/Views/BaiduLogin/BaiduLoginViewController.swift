@@ -8,7 +8,6 @@
 
 import Cocoa
 import WebKit
-import SwiftyJSON
 
 class BaiduLoginViewController: NSViewController {
 
