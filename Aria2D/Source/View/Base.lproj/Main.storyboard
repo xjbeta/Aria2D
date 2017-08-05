@@ -1763,7 +1763,6 @@ CA
                     </connections>
                 </menu>
                 <dateFormatter formatterBehavior="custom10_4" dateStyle="short" timeStyle="short" dateFormat="yy/MM/dd HH:mm" id="2Cb-eO-VUI"/>
-                <byteCountFormatter id="gxW-I4-gn3"/>
                 <customObject id="0YZ-pn-WTA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController showSeguePresentationStyle="single" id="cjb-Aj-3qj" customClass="DownloadsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5zW-kZ-8rg" customClass="ViewWithBackgroundColor" customModule="Aria2D" customModuleProvider="target">
@@ -1836,9 +1835,6 @@ CA
                                                                                         <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="deviceWhite"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
-                                                                                    <connections>
-                                                                                        <outlet property="formatter" destination="gxW-I4-gn3" id="N76-rw-8cs"/>
-                                                                                    </connections>
                                                                                 </textField>
                                                                             </subviews>
                                                                             <constraints>
@@ -1981,9 +1977,6 @@ CA
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
-                                                                            <connections>
-                                                                                <outlet property="formatter" destination="gxW-I4-gn3" id="aw3-04-ykx"/>
-                                                                            </connections>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyG-3M-edE">
                                                                             <rect key="frame" x="513" y="6.5" width="139" height="19"/>

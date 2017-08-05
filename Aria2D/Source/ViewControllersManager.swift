@@ -105,12 +105,10 @@ class ViewControllersManager: NSObject {
 	
 	func openSelected() {
 		guard Preferences.shared.aria2Servers.isLocal else { return }
-        DataManager.shared.data(TaskObject.self).map {
-            URL(fileURLWithPath: $0.path)
-			}.enumerated().filter {
-				selectedIndexs.contains($0.offset)
-			}.map {
-				$0.element
+		DataManager.shared.data(Aria2Object.self).enumerated().filter {
+			selectedIndexs.contains($0.offset)
+			}.flatMap {
+			$0.element.path()
 			}.filter {
 				FileManager.default.fileExists(atPath: $0.path)
 			}.forEach {
@@ -119,19 +117,18 @@ class ViewControllersManager: NSObject {
 	}
 	
 	func selectedUrls() -> [URL] {
-        var urls = DataManager.shared.data(TaskObject.self).map {
-            URL(fileURLWithPath: $0.path)
-            }.enumerated().filter {
-                selectedIndexs.contains($0.offset)
-			}.map {
-				$0.element
+		var urls = DataManager.shared.data(Aria2Object.self).enumerated().filter {
+			selectedIndexs.contains($0.offset)
+			}.flatMap {
+				$0.element.path()
 		}
+		
 		urls = urls.map {
 			URL(fileURLWithPath: $0.path + ".aria2")
 			} + urls
-        return urls.filter {
-            FileManager.default.fileExists(atPath: $0.path)
-        }
+		return urls.filter {
+			FileManager.default.fileExists(atPath: $0.path)
+		}
 	}
 	
 	

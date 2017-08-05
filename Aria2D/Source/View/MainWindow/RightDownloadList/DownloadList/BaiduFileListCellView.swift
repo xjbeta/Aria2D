@@ -41,9 +41,7 @@ class BaiduFileListCellView: NSTableCellView {
 		
         fileName.stringValue = URL(fileURLWithPath: data.path).lastPathComponent
 		
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yy-MM-dd HH:mm"
-		dateModified.objectValue = dateFormatter.string(for: data.serverMtime)
+		dateModified.objectValue = data.serverMtime
 		
         if data.isdir {
             folderIcon.size = NSSize(width: 28, height: 28)
@@ -53,7 +51,7 @@ class BaiduFileListCellView: NSTableCellView {
 			let image = NSWorkspace.shared.icon(forFileType: URL(fileURLWithPath: data.path).pathExtension)
             image.size = NSSize(width: 28, height: 28)
             icon.image = image
-            size.integerValue = data.size
+			size.stringValue = data.size.ByteFileFormatter()
         }
 		fsid = "\(data.fsID)"
     }

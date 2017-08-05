@@ -233,7 +233,7 @@ class PCSFile: Object, Decodable {
 	@objc dynamic var fsID: Int = -1
 	@objc dynamic var path: String = ""
 	@objc dynamic var name: String = ""
-	@objc dynamic var size: Int = 0
+	@objc dynamic var size: Int64 = 0
 	@objc dynamic var isdir: Bool = false
 	@objc dynamic var serverMtime: Date = Date()
 	@objc dynamic var md5: String = ""
@@ -266,7 +266,7 @@ class PCSFile: Object, Decodable {
 		fsID = try values.decode(Int.self, forKey: .fsID)
 		path = try values.decode(String.self, forKey: .path)
 		name = try values.decode(String.self, forKey: .name)
-		size = try values.decode(Int.self, forKey: .size)
+		size = try values.decode(Int64.self, forKey: .size)
 		isdir = try values.decode(Int.self, forKey: .isdir) == 1
 		serverMtime = Date(timeIntervalSince1970: try values.decode(Double.self, forKey: .serverMtime))
 		md5 = try values.decodeIfPresent(String.self, forKey: .md5) ?? ""

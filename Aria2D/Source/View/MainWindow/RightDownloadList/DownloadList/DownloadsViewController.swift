@@ -250,7 +250,6 @@ extension DownloadsViewController {
 		}
 	}
 
-
 	func selectedObjects<T: Object>(_ type: T.Type) -> [T] {
 		return DataManager.shared.data(type).enumerated().filter {
 			ViewControllersManager.shared.selectedIndexs.contains($0.offset)

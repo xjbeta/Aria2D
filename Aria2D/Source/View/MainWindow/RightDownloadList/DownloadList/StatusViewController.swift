@@ -149,12 +149,19 @@ extension StatusViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
 			}
 		} else if identifier == statusViewValueCell {
 			if let obj = item as? DicObject {
-				if obj.key.contains("Length") {
-                    return UnitNumber(obj.value.stringValue).stringValue
+				if obj.key.contains("Length"),
+					let str = obj.value as? String,
+					let int = Int64(str) {
+					return int.ByteFileFormatter()
+				} else if obj.key.contains("Speed"),
+					let str = obj.value as? String,
+					let int = Int64(str) {
+					return "\(int.ByteFileFormatter())/s"
+				} else {
+					return obj.value as? String
 				}
-                return obj.value.string
 			} else if let obj = item as? ArrayObject {
-                return obj.value.array?.count ?? obj.value.dictionary?.count ?? obj.value
+				return obj.array?.count ?? ""
 			}
 		}
 		return ""

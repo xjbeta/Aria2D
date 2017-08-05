@@ -63,7 +63,7 @@ class DownloadsTableCellView: NSTableCellView {
 			image.size = NSSize(width: 35, height: 35)
 			return image
 		}()
-		totalLength.integerValue = Int(obj.totalLength)
+		totalLength.stringValue = obj.totalLength.ByteFileFormatter()
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading:
 			if obj.status == .active {
