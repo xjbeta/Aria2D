@@ -26,13 +26,10 @@
 		012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012ADEEA1F1461BC009E4110 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE01F1461BC009E4110 /* Starscream.framework */; };
 		012ADEEB1F1461BC009E4110 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE01F1461BC009E4110 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEEC1F1461BC009E4110 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */; };
-		012ADEED1F1461BC009E4110 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012ADEF31F1461CD009E4110 /* Just.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */; };
 		012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */; };
 		012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */; };
 		012ADEF61F1461CD009E4110 /* Starscream.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */; };
-		012ADEF71F1461CD009E4110 /* SwiftyJSON.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF21F1461CD009E4110 /* SwiftyJSON.framework.dSYM */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130D74D1F13E9F500F11DBC /* JSONModels.swift */; };
@@ -80,6 +77,7 @@
 		018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */; };
 		018E89701D350075000C71B0 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896C1D350075000C71B0 /* Preferences.swift */; };
 		018E89711D350075000C71B0 /* Generalview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* Generalview.swift */; };
+		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
 		01903A3C1D5CB86D008A3E6E /* BaiduLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
@@ -108,7 +106,6 @@
 			files = (
 				012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */,
 				012ADEE51F1461BC009E4110 /* Just.framework in Embed Frameworks */,
-				012ADEED1F1461BC009E4110 /* SwiftyJSON.framework in Embed Frameworks */,
 				012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */,
 				012ADEEB1F1461BC009E4110 /* Starscream.framework in Embed Frameworks */,
 				012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */,
@@ -126,7 +123,6 @@
 				012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in CopyFiles */,
 				012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in CopyFiles */,
 				012ADEF61F1461CD009E4110 /* Starscream.framework.dSYM in CopyFiles */,
-				012ADEF71F1461CD009E4110 /* SwiftyJSON.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,12 +149,10 @@
 		012ADEDE1F1461BC009E4110 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		012ADEDF1F1461BC009E4110 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
 		012ADEE01F1461BC009E4110 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
-		012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
 		012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Just.framework.dSYM; path = Carthage/Build/Mac/Just.framework.dSYM; sourceTree = "<group>"; };
 		012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
 		012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
-		012ADEF21F1461CD009E4110 /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = Carthage/Build/Mac/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../DataAPI/Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		0130D74D1F13E9F500F11DBC /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
@@ -209,6 +203,7 @@
 		018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesTabViewController.swift; path = ../PreferencesTabViewController.swift; sourceTree = "<group>"; };
 		018E896C1D350075000C71B0 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		018E896D1D350075000C71B0 /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
+		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduLoginViewController.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
@@ -235,7 +230,6 @@
 			files = (
 				0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
-				012ADEEC1F1461BC009E4110 /* SwiftyJSON.framework in Frameworks */,
 				012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */,
 				012ADEEA1F1461BC009E4110 /* Starscream.framework in Frameworks */,
 				012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */,
@@ -258,6 +252,7 @@
 				0115D4321E04F09F003EBFCD /* SubString.swift */,
 				01BC4F941E443A6500417221 /* SafeSubscript.swift */,
 				012A1BB11E174860007C4B46 /* Transformer.swift */,
+				018F5C3B1F298E1900B2150A /* JSONDecoder.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -538,13 +533,11 @@
 				012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */,
 				012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */,
 				012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */,
-				012ADEF21F1461CD009E4110 /* SwiftyJSON.framework.dSYM */,
 				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
 				012ADEDD1F1461BC009E4110 /* Just.framework */,
 				012ADEDE1F1461BC009E4110 /* Realm.framework */,
 				012ADEDF1F1461BC009E4110 /* RealmSwift.framework */,
 				012ADEE01F1461BC009E4110 /* Starscream.framework */,
-				012ADEE11F1461BC009E4110 /* SwiftyJSON.framework */,
 				01610DE41EDFF7B200BAEF02 /* Security.framework */,
 				01903A351D5CB6E0008A3E6E /* WebKit.framework */,
 				01250C9B1D54D7180017353F /* Quartz.framework */,
@@ -659,6 +652,7 @@
 				018E896E1D350075000C71B0 /* PreferencesWindow.swift in Sources */,
 				0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */,
 				01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */,
+				018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */,
 				0115D4331E04F09F003EBFCD /* SubString.swift in Sources */,
 				016FDC751E7A70DA00E01B35 /* OptionsViewController.swift in Sources */,
 				01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */,
@@ -855,20 +849,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-framework",
-					"\"DevMateKit\"",
-					"-framework",
-					"\"Just\"",
-					"-framework",
-					"\"Realm\"",
-					"-framework",
-					"\"RealmSwift\"",
-					"-framework",
-					"\"Starscream\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-ObjC",
 					"\"$(PROJECT_DIR)/Kevlar/libkevlar.a\"",
 					"-lc++",
@@ -912,20 +892,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-framework",
-					"\"DevMateKit\"",
-					"-framework",
-					"\"Just\"",
-					"-framework",
-					"\"Realm\"",
-					"-framework",
-					"\"RealmSwift\"",
-					"-framework",
-					"\"Starscream\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-ObjC",
 					"\"$(PROJECT_DIR)/Kevlar/libkevlar.a\"",
 					"-lc++",

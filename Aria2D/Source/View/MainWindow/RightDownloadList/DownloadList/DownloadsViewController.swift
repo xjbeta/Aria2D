@@ -21,8 +21,8 @@ class DownloadsViewController: NSViewController {
 		case .baidu:
 			if downloadsTableView.selectedRowIndexes.count == 1 {
 				let row = downloadsTableView.selectedRowIndexes.first!
-				let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)[row]
-				if data.isDir {
+				let data = DataManager.shared.data(PCSFile.self)[row]
+				if data.isdir {
 					Baidu.shared.selectedPath = data.path
 				}
 				if data.isBackButton {
@@ -42,7 +42,7 @@ class DownloadsViewController: NSViewController {
 
 	var dlinksProgress: BaiduDlinksProgress!
 	
-	var previewViewController: PreviewViewController?
+//	var previewViewController: PreviewViewController?
 	
 	
 	override func viewDidLoad() {
@@ -70,19 +70,22 @@ class DownloadsViewController: NSViewController {
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		
 		
-		if segue.identifier == .showPreviewViewController {
-			if let vc = segue.destinationController as? PreviewViewController {
-				vc.dataSource = self
-				vc.delegate = self
-			}
-		} else if segue.identifier == .showBaiduDlinksProgress {
+//		if segue.identifier == .showPreviewViewController {
+//			if let vc = segue.destinationController as? PreviewViewController {
+//				vc.dataSource = self
+//				vc.delegate = self
+//			}
+//		} else
+			
+			
+		if segue.identifier == .showBaiduDlinksProgress {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
 				vc.dataSource = self
 			}
 		} else if segue.identifier == .showOptionsWindow {
 			if let wc = segue.destinationController as? NSWindowController,
 				let vc = wc.contentViewController as? OptionsViewController,
-				let gid = self.selectedObjects(TaskObject.self).first?.gid {
+				let gid = self.selectedObjects(Aria2Object.self).first?.gid {
 				
 				Aria2.shared.getOption(gid) {
 					vc.options = $0
@@ -92,9 +95,13 @@ class DownloadsViewController: NSViewController {
 		} else if segue.identifier == .showStatusWindow {
 			if let wc = segue.destinationController as? NSWindowController,
 				let vc = wc.contentViewController as? StatusViewController,
-				let gid = self.selectedObjects(TaskObject.self).first?.gid {
-				Aria2.shared.initData([gid], update: false) {
-					vc.json = $0["result"][0][0]
+				let gid = self.selectedObjects(Aria2Object.self).first?.gid {
+				Aria2.shared.initData(gid) {
+					if let json = try? JSONSerialization.jsonObject(with: $0, options: .mutableContainers),
+						let dic = json as? [String: Any],
+						let result = dic["result"] as? [String: Any] {
+						vc.result = result
+					}
 				}
 			}
 		}
@@ -115,10 +122,10 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			downloadsTableView.menu = downloadsTableViewMenu
-			return DataManager.shared.data(TaskObject.self).count
+			return DataManager.shared.data(Aria2Object.self).count
 		case .baidu:
 			downloadsTableView.menu = baiduFileListMenu
-			return DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath).count
+			return DataManager.shared.data(PCSFile.self).count
 		default:
 			return 0
 		}
@@ -130,14 +137,14 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			if let cell = tableView.makeView(withIdentifier: .downloadsTableCell, owner: self) as? DownloadsTableCellView {
-				if let data = DataManager.shared.data(TaskObject.self)[safe: row] {
+				if let data = DataManager.shared.data(Aria2Object.self)[safe: row] {
 					cell.setData(data)
 				}
 				return cell
 			}
 		case .baidu:
 			if let cell = tableView.makeView(withIdentifier: .baiduFileListCell, owner: self) as? BaiduFileListCellView {
-				if let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)[safe: row] {
+				if let data = DataManager.shared.data(PCSFile.self)[safe: row] {
 					cell.setData(data)
 				}
 				return cell
@@ -195,8 +202,8 @@ extension DownloadsViewController {
 	
 	@objc func getDlinks() {
 		let group = DispatchGroup()
-		let data = selectedObjects(BaiduFileObject.self).filter {
-			!$0.isBackButton && !$0.isDir
+		let data = selectedObjects(PCSFile.self).filter {
+			!$0.isBackButton && !$0.isdir
 		}
 		
 		switch data.count {
@@ -210,12 +217,11 @@ extension DownloadsViewController {
 		
 	}
 	
-	func download(data: [BaiduFileObject], group: DispatchGroup) {
+	func download(data: [PCSFile], group: DispatchGroup) {
 		var dlinks = [[Any]](repeating: [], count: data.count)
 		data.map {
 			$0.path
 			}.enumerated().forEach { (arg) in
-				
 				let (i, path) = arg
 				group.enter()
 				Baidu.shared.getDownloadUrls(FromPCS: path) {
@@ -239,14 +245,14 @@ extension DownloadsViewController {
 	}
 	
 	@objc func deleteBaiduFile() {
-		selectedObjects(BaiduFileObject.self).forEach {
+		selectedObjects(PCSFile.self).forEach {
 			Baidu.shared.delete($0.path)
 		}
 	}
 
 
 	func selectedObjects<T: Object>(_ type: T.Type) -> [T] {
-		return DataManager.shared.data(type, path: nil).enumerated().filter {
+		return DataManager.shared.data(type).enumerated().filter {
 			ViewControllersManager.shared.selectedIndexs.contains($0.offset)
 			}.map {
 				$0.element
@@ -257,25 +263,26 @@ extension DownloadsViewController {
 }
 
 extension DownloadsViewController: BaiduDlinksDataSource {
-	func selectedObjects() -> [BaiduFileObject] {
-		return selectedObjects(BaiduFileObject.self).filter {
-			!$0.isBackButton && !$0.isDir
+	func selectedObjects() -> [PCSFile] {
+		return selectedObjects(PCSFile.self).filter {
+			!$0.isBackButton && !$0.isdir
 		}
 	}
 }
-extension DownloadsViewController: PreviewViewDataSource, PreviewViewDelegate {
-	func dataOfPreviewObjects() -> [TaskObject] {
-		return DataManager.shared.data(TaskObject.self).enumerated().filter {
-			downloadsTableView.selectedRowIndexes.contains($0.offset)
-			}.map {
-				$0.element
-		}
-	}
-	func selectedRowIndexes() -> IndexSet {
-		return downloadsTableView.selectedRowIndexes
-	}
-	
-	func preview(handel event: NSEvent) {
-		self.downloadsTableView.keyDown(with: event)
-	}
-}
+//extension DownloadsViewController: PreviewViewDataSource, PreviewViewDelegate {
+//	func dataOfPreviewObjects() -> [TaskObject] {
+//		return DataManager.shared.data(TaskObject.self).enumerated().filter {
+//			downloadsTableView.selectedRowIndexes.contains($0.offset)
+//			}.map {
+//				$0.element
+//		}
+//	}
+//	func selectedRowIndexes() -> IndexSet {
+//		return downloadsTableView.selectedRowIndexes
+//	}
+//	
+//	func preview(handel event: NSEvent) {
+//		self.downloadsTableView.keyDown(with: event)
+//	}
+//}
+

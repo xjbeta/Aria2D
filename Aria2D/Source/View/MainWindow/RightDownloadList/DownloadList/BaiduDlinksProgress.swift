@@ -10,7 +10,7 @@ import Cocoa
 import Just
 
 protocol BaiduDlinksDataSource {
-	func selectedObjects() -> [BaiduFileObject]
+	func selectedObjects() -> [PCSFile]
 }
 
 
@@ -46,7 +46,6 @@ class BaiduDlinksProgress: NSViewController {
 			data.map {
 				$0.path
 				}.enumerated().forEach { (arg) in
-					
 					let (i, path) = arg
 					group.enter()
 					Baidu.shared.getDownloadUrls(FromPCS: path) {

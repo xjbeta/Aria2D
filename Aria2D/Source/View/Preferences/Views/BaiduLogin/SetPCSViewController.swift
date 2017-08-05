@@ -17,8 +17,7 @@ class SetPCSViewController: NSViewController, WKNavigationDelegate {
 	
 	@IBOutlet var folderTextField: NSTextField!
 	@IBAction func getToken(_ sender: Any) {
-		Preferences.shared.baiduFolder = ""
-		Preferences.shared.baiduToken = ""		
+		Baidu.shared.isTokenEffective = false
 		showWebView()
 		let url = URL(string: "https://openapi.baidu.com/oauth/2.0/authorize?response_type=token&client_id=\(baiduAPIKey)&redirect_uri=oob&scope=netdisk")
 		let request = URLRequest(url: url!)

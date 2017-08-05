@@ -48,7 +48,7 @@ struct Aria2Method {
 }
 
 
-struct Aria2Option: RawRepresentable, Hashable {
+struct Aria2Option: RawRepresentable, Hashable, Codable {
 	typealias RawValue = String
 	
 	var rawValue: RawValue

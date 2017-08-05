@@ -7,9 +7,7 @@
 //
 
 import Cocoa
-import SwiftyJSON
 import Starscream
-import Just
 
 class Aria2: NSObject {
 	static let shared = Aria2()
@@ -21,6 +19,8 @@ class Aria2: NSObject {
 		Aria2.shared.initData()
 	}
 	
+
+	
 	func initData() {
 		Aria2WebsocketObject(method: Aria2Method.multicall,
 		                     params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
@@ -31,31 +31,56 @@ class Aria2: NSObject {
 		                                                    params: [0, 1000]).object()]])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					DataManager.shared.initAllObjects(json)
+				case .success(let data):
+					struct InitDataResult: Decodable {
+						var result: [[[Aria2Object]]]
+					}
+					if let objs = data.decode(InitDataResult.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
+						DataManager.shared.initAllObjects(objs)
+					}
 				default:
 					break
 				}
 		}
 	}
 	
-	let aria2c = Aria2c()
-
-	func initData(_ gids: [GID], update: Bool = true, block: @escaping (_ json: JSON) -> Void = { _ in}) {
-		guard effectiveGIDs(gids).count > 0 else { return }
-		let params = gids.map {
-			Aria2WebsocketParams(method: Aria2Method.tellStatus,
-			                     params: [$0]).object()
-		}
+	
+	func sortData() {
 		Aria2WebsocketObject(method: Aria2Method.multicall,
-		                     params: [params])
+		                     params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
+		                                                    params: [["gid"]]).object(),
+		                               Aria2WebsocketParams(method: Aria2Method.tellWaiting,
+		                                                    params: [0, 1000, ["gid"]]).object(),
+		                               Aria2WebsocketParams(method: Aria2Method.tellStopped,
+		                                                    params: [0, 1000, ["gid"]]).object()]])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					if update {
-						DataManager.shared.initObject(json)
+				case .success(let data):
+					
+					struct GIDList: Decodable {
+						var result: [[[[String: String]]]]
 					}
-					block(json)
+					
+					if let gids = data.decode(GIDList.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }).map ({ $0["gid"] }).flatMap ({ $0 }) {
+						DataManager.shared.sortAllObjects(gids)
+					}
+				default:
+					break
+				}
+		}
+	}
+	
+	
+	
+	let aria2c = Aria2c()
+
+	func initData(_ gid: String, block: @escaping (_ result: Data) -> Void = { _ in}) {
+		Aria2WebsocketObject(method: Aria2Method.tellStatus,
+		                     params: [gid])
+			.writeToWebsocket {
+				switch $0 {
+				case .success(let data):
+					block(data)
 				default:
 					break
 				}
@@ -67,20 +92,83 @@ class Aria2: NSObject {
 	func updateActiveTasks() {
 		Aria2WebsocketObject(method: Aria2Method.tellActive,
 		                     params: [["gid",
+		                               "status",
 									   "completedLength",
 									   "totalLength",
 									   "downloadSpeed",
+									   "uploadLength",
 									   "connections"]])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					DataManager.shared.updateActive(json)
+				case .success(let data):
+					struct Result: Decodable {
+						let result: [Aria2Status]
+					}
+					if let result = data.decode(Result.self)?.result {
+						DataManager.shared.updateStatus(result)
+					}
 				default:
 					break
 				}
 		}
 	}
-
+	
+	func updateStatus(_ gids: [String], block: (([Aria2Status]) -> Void)? = nil) {
+		guard effectiveGIDs(gids).count > 0 else { return }
+		let params = gids.map {
+			Aria2WebsocketParams(method: Aria2Method.tellStatus,
+			                     params: [$0, ["gid",
+			                                   "status",
+			                                   "completedLength",
+			                                   "totalLength",
+			                                   "downloadSpeed",
+			                                   "uploadLength",
+			                                   "connections",
+			                                   "bittorrent",
+			                                   "dir"]]).object()
+		}
+		
+		Aria2WebsocketObject(method: Aria2Method.multicall,
+		                     params: [params])
+			.writeToWebsocket {
+				switch $0 {
+				case .success(let data):
+					
+					struct Result: Decodable {
+						struct ResultObj: Decodable {
+							let error: ErrorResult?
+							let dic: [Aria2Status]?
+							init(from decoder: Decoder) throws {
+								let unkeyedContainer = try decoder.singleValueContainer()
+								error = try? unkeyedContainer.decode(ErrorResult.self)
+								dic = try? unkeyedContainer.decode([Aria2Status].self)
+							}
+						}
+						var result: [ResultObj]
+						
+						func errorObjs() -> [ErrorResult] {
+							return result.map {
+								$0.error
+								}.flatMap { $0 }
+						}
+						
+						func initObjs() -> [Aria2Status] {
+							return result.map {
+								$0.dic
+								}.flatMap { $0 }.flatMap { $0 }
+						}
+					}
+					if let result = data.decode(Result.self) {
+						DataManager.shared.updateStatus(result.initObjs())
+						DataManager.shared.updateError(result.errorObjs())
+					}
+					self.sortData()
+				default:
+					break
+				}
+		}
+	}
+	
 	func shutdown() {
 		saveSession {
 			Aria2WebsocketObject(method: Aria2Method.shutdown,
@@ -97,35 +185,42 @@ class Aria2: NSObject {
 		}
 	}
 
-	func getFiles(_ gids: [GID]) {
-		guard effectiveGIDs(gids).count > 0 else { return }
-		let params = gids.map {
-			Aria2WebsocketParams(method: Aria2Method.getFiles,
-			                     params: [$0]).object()
-		}
-		Aria2WebsocketObject(method: Aria2Method.multicall,
-		                     params: [params])
+	func getFiles(_ gid: String) {
+		Aria2WebsocketObject(method: Aria2Method.getFiles,
+		                     params: [gid])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					DataManager.shared.updateFiles(gids, json: json["result"])
+				case .success(let data):
+					struct Result: Decodable {
+						let result: [Aria2File]
+					}
+					if let re = data.decode(Result.self)?.result {
+						DataManager.shared.updateFiles(gid, files: re)
+					}
 				default:
 					break
 				}
 		}
 	}
+	
 
 	func addUri(_ uri: String, options: [String: String] = [:]) {
 		var opt = options
-		if let path = Preferences.shared.aria2Servers.getServer().customPath, opt["dir"] == nil {
+		if let path = Preferences.shared.aria2Servers.getServer().customPath,
+			opt["dir"] == nil {
 			opt["dir"] = path
 		}
 		Aria2WebsocketObject(method: Aria2Method.addUri,
 		                     params: [[uri], opt])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					json["result"].gidValue.initData()
+				case .success(let data):
+					struct Result: Decodable {
+						let result: String
+					}
+					if let gid = data.decode(Result.self)?.result {
+						self.updateStatus([gid])
+					}
 				default:
 					break
 				}
@@ -150,8 +245,14 @@ class Aria2: NSObject {
 		                     params: [uri, options])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					json["result"].gidValue.initData()
+				case .success(let data):
+					struct Result: Decodable {
+						let result: String
+					}
+					if let result = data.decode(Result.self)?.result {
+						self.updateStatus([result])
+					}
+					break
 				default:
 					break
 				}
@@ -168,8 +269,13 @@ class Aria2: NSObject {
 		                     params: [data, [], opt])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					Log(json)
+				case .success(let data):
+					struct Result: Decodable {
+						let result: String
+					}
+					if let result = data.decode(Result.self)?.result {
+						self.updateStatus([result])
+					}
 				default:
 					break
 				}
@@ -178,8 +284,7 @@ class Aria2: NSObject {
 
 
 
-	func pause(_ gids: [GID]) {
-        guard effectiveGIDs(gids).count > 0 else { return }
+	func pause(_ gids: [String]) {
 		let method = Preferences.shared.useForce ? Aria2Method.forcePause : Aria2Method.pause
 		let params = gids.map {
 			Aria2WebsocketParams(method: method, params: [$0]).object()
@@ -187,27 +292,26 @@ class Aria2: NSObject {
 		Aria2WebsocketObject(method: Aria2Method.multicall,
 		                     params: [params])
 			.writeToWebsocket { _ in
-				self.initData(gids)
+				self.updateStatus(gids)
 		}
 	}
 
 
-	func unpause(_ gids: [GID]) {
-		guard effectiveGIDs(gids).count > 0 else { return }
+	func unpause(_ gids: [String]) {
 		let params = gids.map {
 			Aria2WebsocketParams(method: Aria2Method.unpause, params: [$0]).object()
 		}
 		Aria2WebsocketObject(method: Aria2Method.multicall,
 		                     params: [params])
 			.writeToWebsocket { _ in
-				self.initData(gids)
+				self.updateStatus(gids)
 		}
 	}
 
 
 
-	func removeDownloadResult(_ gids: [GID]) {
-		guard effectiveGIDs(gids).count > 0 else { return }
+	func removeDownloadResult(_ gids: [String]) {
+		guard gids.count > 0 else { return }
 		let params = gids.map {
 			Aria2WebsocketParams(method: Aria2Method.removeDownloadResult, params: [$0]).object()
 		}
@@ -215,15 +319,8 @@ class Aria2: NSObject {
 		                     params: [params])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					let successGids = gids.filter {
-						json["result"][$0][0].stringValue == "OK"
-					}
-					guard successGids.count == gids.count else {
-						self.refresh.run()
-						return
-					}
-					DataManager.shared.onDownloadRemove(gids)
+				case .success:
+					self.sortData()
 				default:
 					break
 				}
@@ -231,8 +328,8 @@ class Aria2: NSObject {
 	}
 
 
-	func remove(_ gids: [GID]) {
-		guard effectiveGIDs(gids).count > 0 else { return }
+	func remove(_ gids: [String]) {
+		guard gids.count > 0 else { return }
 		let method = Preferences.shared.useForce ? Aria2Method.forceRemove : Aria2Method.remove
 		let params = gids.map {
 			Aria2WebsocketParams(method: method, params: [$0]).object()
@@ -242,30 +339,39 @@ class Aria2: NSObject {
 			.writeToWebsocket {
 				switch $0 {
 				case .success:
-					self.initData(gids)
+					self.updateStatus(gids)
 				default:
 					break
 				}
-				
 		}
 	}
 
 
 
 	func pauseAll() {
+		let gids = DataManager.shared.data(Aria2Object.self).filter {
+			$0.status == .active && $0.status == .waiting
+			}.map {
+				$0.gid
+		} as [String]
 		let method = Preferences.shared.useForce ? Aria2Method.forcePauseAll : Aria2Method.pauseAll
 		Aria2WebsocketObject(method: method,
 		                     params: [])
 			.writeToWebsocket { _ in
-				self.refresh.run()
+				self.updateStatus(gids)
 		}
 	}
 
 	func unPauseAll() {
+		let gids = DataManager.shared.data(Aria2Object.self).filter {
+			$0.status == .paused
+			}.map {
+				$0.gid
+		} as [String]
 		Aria2WebsocketObject(method: Aria2Method.unpauseAll,
 		                     params: [])
 			.writeToWebsocket { _ in
-				self.refresh.run()
+				self.updateStatus(gids)
 		}
 	}
 
@@ -274,8 +380,12 @@ class Aria2: NSObject {
 		                     params: [[key.rawValue: value]])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					if json["result"].stringValue == "OK" {
+				case .success(let data):
+					struct Result: Codable {
+						let result: String
+					}
+					if let result = data.decode(Result.self)?.result,
+						result == "OK" {
 						Aria2Websocket.shared.aria2GlobalOption[key] = value
 						completion(true)
 					} else {
@@ -291,12 +401,8 @@ class Aria2: NSObject {
 		                     params: [])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					if let dic = json["result"].dictionaryObject as? [String: String] {
-						var options: [Aria2Option: String] = [:]
-						for i in dic {
-							options[Aria2Option(rawValue: i.key)] = i.value
-						}
+				case .success(let data):
+					if let options = data.decode(OptionResult.self)?.result {
 						Aria2Websocket.shared.aria2GlobalOption = options
 					}
 				default:
@@ -311,47 +417,51 @@ class Aria2: NSObject {
 		                     params: [])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					let features = json["result"]["enabledFeatures"].arrayValue.map {
-						"✓ " + $0.stringValue
-					}.joined(separator: "\n")
-					block(json["result"]["version"].stringValue, features)
+				case .success(let data):
+					struct Result: Decodable {
+						var result: Aria2Version
+					}
+					if let result = data.decode(Result.self)?.result {
+						block(result.version, result.enabledFeatures.map({ "✓ " + $0 }).joined(separator: "\n"))
+					}
 				default:
 					break
 				}
 		}
 	}
 	
-	func getOption(_ gid: GID, block: @escaping (_ options: JSON) -> Void) {
+	func getOption(_ gid: String, block: @escaping (_ options: [Aria2Option: String]) -> Void) {
 		
 		Aria2WebsocketObject(method: Aria2Method.getOption,
 		                     params: [gid])
 			.writeToWebsocket {
 				switch $0 {
-				case .success(let json):
-					block(json["result"])
+				case .success(let data):
+					if let options = data.decode(OptionResult.self)?.result {
+						block(options)
+					}
 				default:
 					break
 				}
 		}
 	}
 	
-	func getPeer(_ gid: GID, block: @escaping (_ peer: JSON) -> Void) {
-		Aria2WebsocketObject(method: Aria2Method.getPeers,
-		                     params: [gid])
-			.writeToWebsocket {
-				
-				switch $0 {
-				case .success(let json):
-					block(json["result"])
-				default:
-					break
-				}
-		}
-		
-	}
+//	func getPeer(_ gid: String, block: @escaping (_ peer: Data) -> Void) {
+//		Aria2WebsocketObject(method: Aria2Method.getPeers,
+//		                     params: [gid])
+//			.writeToWebsocket {
+//
+//				switch $0 {
+//				case .success(let json):
+////					block(json["result"])
+//					break
+//				default:
+//					break
+//				}
+//		}
+//	}
 	
-	func changeOption(_ gid: GID, key: String, value: String , block: @escaping (_ result: webSocketResult) -> Void) {
+	func changeOption(_ gid: String, key: String, value: String , block: @escaping (_ result: webSocketResult) -> Void) {
 		Aria2WebsocketObject(method: Aria2Method.changeOption,
 		                     params: [gid, [key: value]])
 			.writeToWebsocket {
@@ -439,7 +549,7 @@ fileprivate extension Aria2 {
 	}
 
 	
-	func effectiveGIDs(_ gids: [GID]) -> [GID] {
+	func effectiveGIDs(_ gids: [String]) -> [String] {
 		return gids.filter { $0.characters.count == 16 }
 	}
 	
@@ -458,12 +568,6 @@ extension String {
 	}
 }
 
-
-
-
-
-
-
 extension WebSocket {
 
 	private class WaitingList: NSObject {
@@ -472,35 +576,42 @@ extension WebSocket {
 		fileprivate override init() {
 		}
 		
-		private var contents: [String : Any] = [:]
-		private let defaultValue = "defaultValue"
-		private var semaphores: [String : DispatchSemaphore] = [:]
+		private var contents: [String: Data] = [:]
+		private var semaphores: [String: DispatchSemaphore] = [:]
+		private var lock = NSLock()
 		
-		func add(_ key: String, block: @escaping (_ value: Any, _ timeOut: Bool) -> Void) {
-			contents[key] = defaultValue
+		func add(_ key: String, block: @escaping (_ value: Data, _ timeOut: Bool) -> Void) {
 			let semaphore = DispatchSemaphore(value: 0)
-			self.semaphores[key] = semaphore
+			semaphores[key] = semaphore
 			DispatchQueue.global().async {
-				switch semaphore.wait(timeout: .now() + .seconds(5)) {
+				switch semaphore.wait(timeout: .now() + .seconds(60)) {
 				case .success:
-					block(self.contents[key] as Any, false)
+					block(self.contents[key] ?? Data(), false)
 				case .timedOut:
-					block("", true)
-					self.remove(key)
+					block(Data(), true)
 				}
+				WaitingList.shared.remove(key)
 			}
 		}
 		
-		func update(_ key: String, value: Any) {
-			if contents[key] as? String == defaultValue,
-				let semaphore = semaphores[key] {
-				contents[key] = value
-				semaphore.signal()
-			}
+		func update(_ key: String, value: Data) {
+			lock.lock()
+			contents[key] = value
+			semaphores[key]?.signal()
+			lock.unlock()
 		}
 		
 		private func remove(_ key: String) {
-			contents.removeValue(forKey: key)
+			lock.lock()
+			defer {
+				lock.unlock()
+			}
+			if !contents.isEmpty {
+				contents.removeValue(forKey: key)
+			}
+			if !semaphores.isEmpty {
+				semaphores.removeValue(forKey: key)
+			}
 		}       
 	}
 	
@@ -509,58 +620,40 @@ extension WebSocket {
 	           method: String,
 	           completion: @escaping (_ result: webSocketResult) -> Void) {
 		let time = Date().timeIntervalSince1970
-		WaitingList.shared.add(id) { (data, success) in
-			if let json = data as? JSON {
-				// Save log
-				if Preferences.shared.recordWebSocketLog, JSON(dic)["method"].stringValue != Aria2Method.tellActive {
-					var log = WebSocketLog()
-					let sendJSON = JSON(dic)
-					log.method = method
-					log.sendJSON = "\(sendJSON)"
-					log.receivedJSON = {
-						// delete urls in json
-						var str = "\(json)"
-						while str.contains("\"uri\" : \"") {
-							str = str.delete(between: "\"uris\" : [", and: "],")
-						}
-						return str
-					}()
-					log.success = !success
-					log.time = time
-					ViewControllersManager.shared.webSocketLog.append(log)
-				}
-				
-				if !success {
-					if json["error"].exists() {
-						completion(.receiveError(message: json["error"]["message"].stringValue))
-						return
-					} else {
-						completion(.success(json: json))
-						return
-					}
-				} else {
-					completion(.timeOut)
-					return
-				}
+		WaitingList.shared.add(id) { (data, timeOut) in
+			// Save log
+			if Preferences.shared.developerMode,
+				Preferences.shared.recordWebSocketLog {
+				var log = WebSocketLog()
+				log.method = method
+				log.sendJSON = "\(dic)"
+				log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
+				log.success = !timeOut
+				log.time = time
+				ViewControllersManager.shared.webSocketLog.append(log)
 			}
-			completion(.somethingError)
+			
+			if !timeOut {
+				completion(.success(data: data))
+			} else {
+				completion(.timeOut)
+			}
 		}
 		do {
-			let data = try JSON(dic).rawData()
-			self.write(data: data)
+			self.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
 		} catch {
 			completion(.somethingError)
 			return
 		}
 	}
 	
-	func received(_ value: Any, withID id: String) {
+	func received(_ value: Data, withID id: String) {
 		WaitingList.shared.update(id, value: value)
 	}
 }
 
 enum webSocketResult {
-	case success(json: JSON)
+	case success(data: Data)
 	case timeOut
 	case receiveError(message: String)
 	case somethingError

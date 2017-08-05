@@ -23,12 +23,18 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 			                          key: option.rawValue,
 			                          value: changeValue) {
 										switch $0 {
-										case .success(let json):
-											if json["result"].stringValue == "OK" {
+										case .success(let data):
+											struct Result: Codable {
+												let result: String
+											}
+											if let result = try? JSONDecoder().decode(Result.self, from: data).result,
+												result == "OK" {
 												DispatchQueue.main.async {
 													self.changeComplete?()
 													self.dismiss(self)
 												}
+											} else {
+												
 											}
 										default:
 											return
@@ -147,9 +153,9 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 	@IBOutlet var visualEffectView: NSVisualEffectView!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        visualEffectView.material = .popover
-//		changeButton.isEnabled = false
-//		show(.string) {}
+        visualEffectView.material = .popover
+		changeButton.isEnabled = false
+		show(.string) {}
     }
 	
 	

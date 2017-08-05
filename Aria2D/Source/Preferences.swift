@@ -18,7 +18,7 @@ class Preferences: NSObject {
     let prefs = UserDefaults.standard
 
 	
-	let keys = preferenceKeys.self
+	let keys = PreferenceKeys.self
 	
 	private lazy var defaultAria2Servers: Aria2Servers = {
 		let s = Aria2Servers()
@@ -194,11 +194,11 @@ class Preferences: NSObject {
 
 private extension Preferences {
 	
-	func defaults(_ key: preferenceKeys) -> Any? {
+	func defaults(_ key: PreferenceKeys) -> Any? {
 		return prefs.value(forKey: key.rawValue) as Any?
 	}
 	
-	func defaultsSet(_ value: Any, forKey key: preferenceKeys) {
+	func defaultsSet(_ value: Any, forKey key: PreferenceKeys) {
 		prefs.setValue(value, forKey: key.rawValue)
 	}
 }

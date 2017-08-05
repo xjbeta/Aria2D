@@ -1,5 +1,4 @@
 github "DevMate/DevMateKit" "v1.7.1"
 github "JustHTTP/Just" "0.6.0"
-github "SwiftyJSON/SwiftyJSON" "3.1.4"
 github "daltoniam/Starscream" "2.1.0"
-github "realm/realm-cocoa" "v2.8.3"
+github "realm/realm-cocoa" "b76e4956bc6e7351c562ec27ef5452a534692dbe"

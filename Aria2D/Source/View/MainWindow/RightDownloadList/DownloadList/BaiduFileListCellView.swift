@@ -27,7 +27,7 @@ class BaiduFileListCellView: NSTableCellView {
 	var fsid = ""
 	
 	
-    func setData(_ data: BaiduFileObject) {
+    func setData(_ data: PCSFile) {
         
         guard !data.isBackButton else {
             fileName.stringValue = ".."
@@ -35,17 +35,17 @@ class BaiduFileListCellView: NSTableCellView {
             dateModified.stringValue = ""
             folderIcon.size = NSSize(width: 28, height: 28)
             icon.image = folderIcon
-			fsid = "\(data.fs_id)"
+			fsid = "\(data.fsID)"
             return
         }
-        
+		
         fileName.stringValue = URL(fileURLWithPath: data.path).lastPathComponent
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yy-MM-dd HH:mm"
-        dateModified.objectValue = dateFormatter.string(from: Date(timeIntervalSince1970: data.server_mtime))
+		dateModified.objectValue = dateFormatter.string(for: data.serverMtime)
 		
-        if data.isDir {
+        if data.isdir {
             folderIcon.size = NSSize(width: 28, height: 28)
             icon.image = folderIcon
             size.stringValue = ""
@@ -55,7 +55,7 @@ class BaiduFileListCellView: NSTableCellView {
             icon.image = image
             size.integerValue = data.size
         }
-		fsid = "\(data.fs_id)"
+		fsid = "\(data.fsID)"
     }
 	
 }

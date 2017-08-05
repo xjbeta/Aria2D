@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SwiftyJSON
 
 class StatusViewController: NSViewController {
 
@@ -21,16 +20,13 @@ class StatusViewController: NSViewController {
 					outlineView.animator().expandItem(item)
 				}
 			} else {
-				
 				let pasteboard = NSPasteboard.general
 				pasteboard.clearContents()
-				if let i = item as? DicObject {
-					pasteboard.writeObjects([i.value.stringValue as NSString])
-				} else if let i = item as? ArrayObject {
-					pasteboard.writeObjects([i.value.stringValue as NSString])
+				if let i = item as? DicObject, let value = i.value as? NSString {
+					pasteboard.writeObjects([value])
+				} else if let i = item as? ArrayObject, let value = i.value as? NSString {
+					pasteboard.writeObjects([value])
 				}
-				
-				
 			}
 		}
 	}
@@ -42,7 +38,7 @@ class StatusViewController: NSViewController {
 	let statusViewStatusCell = "StatusViewStatusCell"
 	let statusViewValueCell = "StatusViewValueCell"
 	
-	var json = JSON([]) {
+	var result: [String: Any] = [:] {
 		didSet {
 			DispatchQueue.main.async {
 				self.outlineView.reloadData()
@@ -54,28 +50,36 @@ class StatusViewController: NSViewController {
 	
 	struct DicObject {
 		let key: String
-		let value: JSON
-		init(_ key: String, value: JSON) {
-			self.key = key
-			if key == "uris" {
-				self.value = JSON(Array(Set(value.map {
-					$0.1["uri"].stringValue
-				})).sorted())
-			} else if key == "files", value.array?.count == 1, let v = value.array?[safe: 0] {
-				self.value = v
-			} else if key == "announceList" {
-				self.value = JSON(value.arrayValue.map {
-					$0[0].stringValue
-				})
-			} else {
-				self.value = value
-			}
+		let value: Any
+		var array: [Any]? {
+			return value as? [Any]
 		}
+		
+		var dictionary: [String: Any]? {
+			return value as? [String: Any]
+		}
+		
+		init(_ key: String, value: Any) {
+			self.key = key
+			self.value = value
+		}
+		
+		
+		
 	}
 	struct ArrayObject {
 		let index: Int
-		let value: JSON
-		init(_ i: Int, value: JSON) {
+		let value: Any
+		
+		var array: [Any]? {
+			return value as? [Any]
+		}
+		
+		var dictionary: [String: Any]? {
+			return value as? [String: Any]
+		}
+		
+		init(_ i: Int, value: Any) {
 			index = i
 			self.value = value
 		}
@@ -88,50 +92,50 @@ extension StatusViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
 	
 	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
 		if let obj = item as? DicObject {
-			return obj.value.array != nil && obj.value.array?.count != 0
-				|| obj.value.dictionary != nil && obj.value.dictionary?.count != 0
+			return obj.array != nil  && obj.array?.count != 0
+				|| obj.dictionary != nil && obj.dictionary?.count != 0
 		} else if let obj = item as? ArrayObject {
-			return obj.value.array != nil && obj.value.array?.count != 0
-				|| obj.value.dictionary != nil && obj.value.dictionary?.count != 0
+			return obj.array != nil && obj.array?.count != 0
+				|| obj.dictionary != nil && obj.dictionary?.count != 0
 		}
 		return false
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
 		if let obj = item as? DicObject {
-			return obj.value.dictionary?.count ?? obj.value.array?.count ?? 0
+			return obj.dictionary?.count ?? obj.array?.count ?? 0
 		} else if let obj = item as? ArrayObject {
-			return obj.value.dictionary?.count ?? obj.value.array?.count ?? 0
+			return obj.dictionary?.count ?? obj.array?.count ?? 0
 		} else {
-			return json.dictionary?.count ?? json.array?.count ?? 0
+			return result.count
 		}
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-		func returnObj(_ dic: [String : JSON]?) -> Any {
+		func returnObj(_ dic: [String : Any]?) -> Any {
 			if let keys = dic?.keys.sorted(),
 				let key = keys[safe: index] {
 				return DicObject(key, value: dic?[key] ?? "")
 			}
 			return ""
 		}
-		
+
 		if item == nil {
-			return returnObj(json.dictionary)
+			return returnObj(result)
 		} else if let obj = item as? DicObject {
-			if let dicObj = obj.value.dictionary {
+			if let dicObj = obj.dictionary {
 				return returnObj(dicObj)
-			} else if let arrayObj = obj.value.array {
+			} else if let arrayObj = obj.array {
 				return ArrayObject(index, value: arrayObj[safe: index] ?? "")
 			}
 		} else if let obj = item as? ArrayObject {
-			if let dicObj = obj.value.dictionary {
+			if let dicObj = obj.dictionary {
 				return returnObj(dicObj)
-			} else if let arrayObj = obj.value.array {
+			} else if let arrayObj = obj.array {
 				return ArrayObject(index, value: arrayObj[safe: index] ?? "")
 			}
 		}
-		
+
 		return ""
 	}
 	
@@ -146,11 +150,11 @@ extension StatusViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
 		} else if identifier == statusViewValueCell {
 			if let obj = item as? DicObject {
 				if obj.key.contains("Length") {
-					return UnitNumber(obj.value.stringValue).stringValue
+                    return UnitNumber(obj.value.stringValue).stringValue
 				}
-				return obj.value.string
+                return obj.value.string
 			} else if let obj = item as? ArrayObject {
-				return obj.value.array?.count ?? obj.value.dictionary?.count ?? obj.value
+                return obj.value.array?.count ?? obj.value.dictionary?.count ?? obj.value
 			}
 		}
 		return ""
@@ -163,7 +167,6 @@ extension StatusViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
 		} else if let _ = item as? ArrayObject {
 			return true
 		}
-		
 		return false
 	}
 	

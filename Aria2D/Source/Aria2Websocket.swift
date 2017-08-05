@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SwiftyJSON
 import Starscream
 
 struct ConnectedServerInfo {
@@ -79,12 +78,6 @@ class Aria2Websocket: NSObject {
 			Aria2.shared.getGlobalOption()
 			self.connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
 			ViewControllersManager.shared.showHUD(.connected)
-			
-			if true {
-				Aria2.shared.getPeer("4a569e7e0fcbf020") {
-					Log($0)
-				}
-			}
 
 		}
 		socket.onDisconnect = {
@@ -92,53 +85,47 @@ class Aria2Websocket: NSObject {
 			self.connectedServerInfo.version = $0?.localizedFailureReason ?? ""
 			self.connectedServerInfo.enabledFeatures = ""
 			self.aria2GlobalOption = [:]
-			DataManager.shared.deleteAllTaskObject()
+			DataManager.shared.deleteAllAria2Objects()
 		}
 		socket.onText = {
-			self.handle($0)
+			if let data = $0.data(using: .utf8) {
+				self.handle(data)
+			}
 		}
+
 		socket.connect()
 		startTimer()
 	}
 
-	
-	func handle(_ text: String) {
-		let json = JSON(parseJSON: text)
-		if json["id"].exists(),
-			json["id"].stringValue.characters.count == 36 {
-			socket.received(json, withID: json["id"].stringValue)
-		} else if let method = aria2Notice(raw: json["method"].stringValue) {
-			switch method {
+	func handle(_ data: Data) {
+		if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
+			json.id.count == 36 {
+			socket.received(data, withID: json.id)
+		} else if let json = try? JSONDecoder().decode(JSONNotice.self, from: data) {
+			let gids = json.params.map { $0.gid }
+			switch json.method {
 			case .onDownloadStart:
-				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
+				Aria2.shared.updateStatus(gids)
 				ViewControllersManager.shared.showHUD(.downloadStart)
+			case .onDownloadPause:
+				Aria2.shared.updateStatus(gids)
+			case .onDownloadError:
+				Aria2.shared.updateStatus(gids)
 			case .onDownloadComplete, .onBtDownloadComplete:
-				let gid = json["params"][0]["gid"].gidValue
-				gid.onDownloadComplete()
-				ViewControllersManager.shared.showHUD(.downloadCompleted)
+				Aria2.shared.updateStatus(gids)
 				if !NSApp.isActive && Preferences.shared.completeNotice {
-					showNotification(gid)
+					gids.forEach {
+						showNotification($0)
+					}
 				}
-				
-				
-				
-				
-//			case .onDownloadPause:
-//				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
-//			case .onDownloadError:
-//				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
-//			case .onDownloadStop:
-//				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
-			default:
-				Aria2.shared.initData([json["params"][0]["gid"].gidValue])
+				ViewControllersManager.shared.showHUD(.downloadCompleted)
+			case .onDownloadStop:
+				Aria2.shared.updateStatus(gids)
 			}
-			
-			// Save log
-			if Preferences.shared.recordWebSocketLog{
+			if Preferences.shared.developerMode ,Preferences.shared.recordWebSocketLog {
 				var log = WebSocketLog()
-				log.method = method.rawValue
-				log.sendJSON = ""
-				log.receivedJSON = "\(json)"
+				log.method = json.method.rawValue
+				log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
 				log.success = true
 				log.time = Date().timeIntervalSince1970
 				ViewControllersManager.shared.webSocketLog.append(log)
@@ -147,23 +134,19 @@ class Aria2Websocket: NSObject {
 	}
 
 	
-	func showNotification(_ gid: GID) {
-		Aria2.shared.initData([gid], update: true) {
-			let json = $0["result"][0][0]
-			let path = URL(fileURLWithPath: json["bittorrent"].exists() ?
-				json["dir"].stringValue + "/" + json["bittorrent"]["info"]["name"].stringValue :
-				json["files"][0]["path"].stringValue)
-			let totalLength = json["totalLength"].int64Value
+	func showNotification(_ gid: String) {
+		let notification = NSUserNotification()
+		notification.title = "Completed"
+		let obj = DataManager.shared.data(Aria2Object.self).filter({ $0.gid == gid }).first
+		notification.subtitle = obj?.path()?.lastPathComponent ?? "Unknown"
+		
+		if let totalLength = obj?.totalLength {
 			let formatter = ByteCountFormatter()
-			
-			let notification = NSUserNotification()
-			notification.title = "Completed"
-			notification.subtitle = path.lastPathComponent
-			notification.informativeText = formatter.string(fromByteCount: Int64(totalLength))
-			notification.soundName = NSUserNotificationDefaultSoundName
-
-			NSUserNotificationCenter.default.deliver(notification)
+			notification.informativeText = formatter.string(fromByteCount: totalLength)
 		}
+		
+		notification.soundName = NSUserNotificationDefaultSoundName
+		NSUserNotificationCenter.default.deliver(notification)
 
 	}
 	

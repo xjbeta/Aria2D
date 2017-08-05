@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SwiftyJSON
 import Just
 
 class Baidu: NSObject {
@@ -86,7 +85,10 @@ class Baidu: NSObject {
 	//MARK: - Login And LogOut
 	func checkLogin(_ block: ((_ isLogin: Bool) -> Void)?) {
 		Just.post("https://pan.baidu.com/api/quota", headers: userAgent) {
-			self.isLogin = JSON($0.json ?? [])["errno"].intValue == 0
+			if let errno = $0.content?.decode(PCSErrno.self)?.errno {
+				self.isLogin = errno == 0
+			}
+			
 			block?(self.isLogin)
 			if self.isLogin {
 				self.checkToken(nil)
@@ -107,11 +109,12 @@ class Baidu: NSObject {
 		ViewControllersManager.shared.waiting = true
 		let encodePath = path.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? "/"
 		Just.get("https://pan.baidu.com/api/list?dir=" + encodePath, headers: userAgent) {
-			let json = JSON($0.json ?? [])
-			if json["errno"].intValue == 0 {
-				DataManager.shared.setData(forBaidu: json, forPath: path)
-			} else if json["errno"].intValue == -9 {
-				self.selectedPath = self.mainPath
+			if let json = $0.content?.decode(PCSFileList.self) {
+				if json.errno == 0 {
+					DataManager.shared.setData(forBaidu: json.list, forPath: path)
+				} else if json.errno == -9 {
+					self.selectedPath = self.mainPath
+				}
 			}
 			ViewControllersManager.shared.waiting = false
 		}
@@ -126,7 +129,11 @@ extension Baidu {
 		let params = ["method": "info",
 		              "access_token": Preferences.shared.baiduToken]
 		Just.get("https://pcs.baidu.com/rest/2.0/pcs/quota?", params: params) {
-			self.isTokenEffective = !JSON($0.json ?? [])["error_code"].exists()
+			if let error = $0.content?.decode(PCSError.self) {
+				self.isTokenEffective = !error.isError
+			} else {
+				self.isTokenEffective = false
+			}
 			block?(self.isTokenEffective)
 		}
 	}
@@ -134,11 +141,11 @@ extension Baidu {
 	func delete(_ path: String) {
 		let encodePath = path.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? "/"
 		Just.post("https://pcs.baidu.com/rest/2.0/pcs/file?method=delete&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)") {
-			let json = JSON($0.json ?? [])
-			if json["error_code"].exists() {
-				self.getFileList(forPath: self.selectedPath)
-			} else {
-				DataManager.shared.deleteBaiduObject(path)
+			if let error = $0.content?.decode(PCSError.self),
+				!error.isError {
+					DataManager.shared.deletePCSFile(path)
+				} else {
+					self.getFileList(forPath: self.selectedPath)
 			}
 		}
 	}
@@ -163,23 +170,22 @@ extension Baidu {
 
 	func getAppsFolderPath() {
 		Just.get("https://pan.baidu.com/api/list?dir=/apps", headers: userAgent) {
-			let json = JSON($0.json ?? [])
-			if json["errno"] == 0 {
-				let folders = json["list"].filter {
-					$0.1["isdir"] == 1
+			if let json = $0.content?.decode(PCSFileList.self),
+				json.errno == 0 {
+				json.list.filter {
+					$0.isdir == true
 					}.map {
-						$0.1["path"].stringValue
-					}
-				folders.forEach { path in
+						$0.path
+				}.forEach { path in
 					let encodePath = path.addingPercentEncoding(withAllowedCharacters: self.allowedCharacterSet) ?? ""
-					
 					Just.post("https://pcs.baidu.com/rest/2.0/pcs/file?method=list&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)", headers: self.userAgent) {
-						let json = JSON($0.json ?? [])
-						if !json["error_code"].exists(), Preferences.shared.baiduFolder != path {
-							Preferences.shared.baiduFolder = path
-							self.selectedPath = path
-							self.mainPath = path
-							NotificationCenter.default.post(name: .updateToken, object: self)
+						if let error = $0.content?.decode(PCSError.self),
+							!error.isError,
+							Preferences.shared.baiduFolder != path {
+								Preferences.shared.baiduFolder = path
+								self.selectedPath = path
+								self.mainPath = path
+								NotificationCenter.default.post(name: .updateToken, object: self)
 						}
 					}
 				}
@@ -190,20 +196,12 @@ extension Baidu {
 	func checkAppsFolder(_ block: @escaping (_ effective: Bool) -> Void) {
 		let encodePath = Preferences.shared.baiduFolder.addingPercentEncoding(withAllowedCharacters: self.allowedCharacterSet) ?? ""
 		Just.post("https://pcs.baidu.com/rest/2.0/pcs/file?method=list&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)", headers: self.userAgent) {
-			let json = JSON($0.json ?? [])
-			let effective = json["error_code"].exists()
-			block(effective)
+			if let error = $0.content?.decode(PCSError.self) {
+				block(error.isError)
+			} else {
+				block(true)
+			}
 		}
 	}
 	
-	
-	func getToken() {
-		
-		
-		
-		
-	}
-	
-	
 }
-

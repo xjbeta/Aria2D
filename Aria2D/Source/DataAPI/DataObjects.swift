@@ -8,181 +8,272 @@
 
 import Foundation
 import RealmSwift
-import SwiftyJSON
+import Realm
 
-public typealias GID = String
-public typealias Path = String
-public typealias TotalLength = Int
-public typealias Percentage = String
-public typealias ProgressIndicator = Double
-public typealias Time = String
-public typealias Speed = String
-@objc enum status: Int {
-	case active
-	case waiting
-	case paused
-	case error
-	case complete
-	case removed
-	
-	init?(_ str: String) {
-		switch str {
-		case "active": self.init(rawValue: 0)
-		case "waiting": self.init(rawValue: 1)
-		case "paused": self.init(rawValue: 2)
-		case "error": self.init(rawValue: 3)
-		case "complete": self.init(rawValue: 4)
-		case "removed": self.init(rawValue: 5)
-		default:
-			self.init(rawValue: -1)
+final class Aria2Object: Object, Decodable {
+	private let _files = List<Aria2File>()
+	var files: [Aria2File] {
+		get {
+			return _files.map { $0 }
+		}
+		set {
+			_files.removeAll()
+			_files.append(objectsIn: newValue.map(Aria2File.init))
 		}
 	}
 	
-	func string() -> String {
-		switch self {
-		case .active: return "active"
-		case .waiting: return "waiting"
-		case .paused: return "paused"
-		case .error: return "error"
-		case .complete: return "complete"
-		case .removed: return "removed"
-		}
+	
+	@objc dynamic var gid: String = ""
+	@objc dynamic var status: Status = .error
+	@objc dynamic var totalLength: Int64 = 0
+	@objc dynamic var completedLength: Int64 = 0 
+	@objc dynamic var uploadLength: Int64 = 0
+	@objc dynamic var downloadSpeed: Int64 = 0
+	@objc dynamic var pieceLength: Int64 = 0
+	@objc dynamic var connections: Int = 0
+	@objc dynamic var dir: String = ""
+	@objc dynamic var date: Double = 0
+
+	
+	//	let uploadSpeed: String
+	//	let infoHash: String = ""
+	//	let numSeeders: String
+	//	let seeder: Bool
+	//	let numPieces: String
+	//	let errorCode: String
+	//	let errorMessage: String
+	//	let followedBy: String
+	//	let following: String
+	//	let belongsTo: String
+	
+	//	let verifiedLength: String
+	//	let verifyIntegrityPending: String
+	
+	@objc dynamic var bittorrent: Bittorrent?
+	
+	private enum CodingKeys: String, CodingKey {
+		case files,
+		gid,
+		status,
+		totalLength,
+		completedLength,
+		uploadLength,
+		downloadSpeed,
+		pieceLength,
+		connections,
+		dir,
+		bittorrent
 	}
-}
-
-class TaskObject: Object {
 	
-    @objc dynamic var gid: GID = ""
-    @objc dynamic var path: Path = ""
-    @objc dynamic var totalLength: TotalLength = 0
-    @objc dynamic var status: status = .removed
-    @objc dynamic var percentage: Percentage = ""
-    @objc dynamic var progressIndicator: ProgressIndicator = 0
-    @objc dynamic var time: Time = ""
-    @objc dynamic var speed: Speed = ""
-    @objc dynamic var date: Double = 0
-    @objc dynamic var connections: Int = -1
-	@objc dynamic var isBitTorrent = false
-    
-	convenience init(gid: GID,
-	                 path: Path,
-	                 totalLength: TotalLength,
-	                 status: status,
-	                 percentage: Percentage,
-	                 progressIndicator: ProgressIndicator,
-	                 time: Time,
-	                 speed: Speed,
-	                 date: Double,
-	                 connections: Int,
-	                 isBitTorrent: Bool) {
-        self.init()
-        self.gid = gid
-        self.path = path
-        self.totalLength = totalLength
-        self.status = status
-        self.percentage = percentage
-        self.progressIndicator = progressIndicator
-        self.time = time
-        self.speed = speed
-        self.date = date
-		self.connections = connections
-		self.isBitTorrent = isBitTorrent
-    }
-    
-    override class func primaryKey() -> String? {
-        return "gid"
-    }
-    
-    override static func indexedProperties() -> [String] {
-        return ["gid"]
-    }
-}
-
-
-
-
-class BaiduFileObject: Object {
 	
-	@objc dynamic var path = ""
-	@objc dynamic var size = 0
-	@objc dynamic var isDir = false
-	@objc dynamic var server_mtime = 0.0
-	@objc dynamic var fs_id = -1
-	@objc dynamic var md5 = ""
-	@objc dynamic var displayDir = ""
-	
-	@objc dynamic var backParentDir = ""
-	@objc dynamic var isBackButton = false
-	
-	convenience init(path: String, size: Int, isDir: Bool, server_mtime: Double, fs_id: Int, md5: String, displayDir: String) {
+	required convenience init(from decoder: Decoder) throws {
 		self.init()
-		self.path = path
-		self.size = size
-		self.isDir = isDir
-		self.server_mtime = server_mtime
-		self.fs_id = fs_id
-		self.md5 = md5
-		self.displayDir = displayDir
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		files = try values.decode([Aria2File].self, forKey: .files)
+		gid = try values.decode(String.self, forKey: .gid)
+		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
+		totalLength = Int64(try values.decode(String.self, forKey: .totalLength)) ?? 0
+		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
+		uploadLength = Int64(try values.decode(String.self, forKey: .uploadLength)) ?? 0
+		downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
+		pieceLength = Int64(try values.decode(String.self, forKey: .pieceLength)) ?? 0
+		connections = Int(try values.decode(String.self, forKey: .connections)) ?? 0
+		dir = try values.decode(String.self, forKey: .dir)
+		bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
+		date = Date().timeIntervalSince1970
 	}
-	
+
+	func updateDate() {
+		date = Date().timeIntervalSince1970
+	}
 	
 	override class func primaryKey() -> String? {
-		return "fs_id"
+		return "gid"
 	}
 	
 	override static func indexedProperties() -> [String] {
-		return ["fs_id"]
-	}
-}
-
-extension GID {
-	func pause() {
-		Aria2.shared.pause([self])
-	}
-	
-	func unpause() {
-		Aria2.shared.unpause([self])
-	}
-	
-	func removeDownloadResult() {
-		Aria2.shared.removeDownloadResult([self])
-	}
-	
-	func remove() {
-		Aria2.shared.remove([self])
-	}
-	
-	func initData() {
-		Aria2.shared.initData([self])
-	}
-	
-	func onDownloadPause() {
-		DataManager.shared.onDownloadPause([self])
-	}
-	func onDownloadComplete() {
-		DataManager.shared.onDownloadComplete([self])
-	}
-	func onDownloadError() {
-		DataManager.shared.onDownloadError([self])
+		return ["gid"]
 	}
 }
 
 
-extension JSON {
-    //Non-optional gid
-    public var gidValue: GID {
-        get {
-            switch self.type {
-            case .string:
-                return self.object as? GID ?? ""
-            case .number:
-                return self.object as? GID ?? ""
-            default:
-                return ""
-            }
-        }
-        set {
-            self.object = NSString(string:newValue)
-        }
-    }
+class Aria2File: Object, Decodable {
+	@objc dynamic var index: Int = -1
+	@objc dynamic var path: String = ""
+	@objc dynamic var length: Int64 = 0
+	@objc dynamic var completedLength: Int64 = 0
+	@objc dynamic var selected: Bool = false
+	private let _uris = List<Aria2Uri>()
+//	@objc dynamic var uris: [String] = []
+
+	var uris: [Aria2Uri] {
+		get {
+			return _uris.map { $0 }
+		}
+		set {
+			_uris.removeAll()
+			_uris.append(objectsIn: newValue.map(Aria2Uri.init))
+		}
+	}
+
+
+	
+	private enum CodingKeys: String, CodingKey {
+		case index,
+		path,
+		length,
+		completedLength,
+		selected,
+		uris
+	}
+	
+	required convenience init(from decoder: Decoder) throws {
+		self.init()
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		index = Int(try values.decode(String.self, forKey: .index)) ?? -1
+		path = try values.decode(String.self, forKey: .path)
+		length = Int64(try values.decode(String.self, forKey: .length)) ?? 0
+		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
+		selected = try values.decode(String.self, forKey: .selected) == "true"
+
+		uris = try values.decode([Aria2Uri].self, forKey: .uris)
+//			.map { $0.uri }
+	}
+	
+	func dic() -> [String: Any] {
+		var dic: [String: Any] = [:]
+		dic["index"] = index
+		dic["path"] = path
+		dic["length"] = length
+		dic["completedLength"] = completedLength
+		dic["selected"] = selected
+		//		dic["index"] = index
+		
+		return dic
+	}
+}
+
+
+class Aria2Uri: Object, Codable {
+	@objc dynamic var status: String = ""
+	@objc dynamic var uri: String = ""
+	
+	private enum CodingKeys: String, CodingKey {
+		case status,
+		uri
+	}
+	
+	required convenience init(from decoder: Decoder) throws {
+		self.init()
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		status = try values.decode(String.self, forKey: .status)
+		uri = try values.decode(String.self, forKey: .uri)
+	}
+}
+
+
+
+
+class Bittorrent: Object, Decodable {
+//	class Info: Object, Decodable {
+//		@objc dynamic var name: String = ""
+//
+//		private enum CodingKeys: String, CodingKey {
+//			case name
+//		}
+//
+//		required convenience init(from decoder: Decoder) throws {
+//			self.init()
+//			let values = try decoder.container(keyedBy: CodingKeys.self)
+//			name = try values.decode(String.self, forKey: .name)
+//		}
+//	}
+
+
+	@objc enum FileMode: Int, Decodable {
+		case multi, single, error
+		init?(_ str: String) {
+			switch str {
+			case "multi": self.init(rawValue: 0)
+			case "single": self.init(rawValue: 1)
+			default:
+				self.init(rawValue: 2)
+			}
+		}
+	}
+
+
+	//	announceList
+	@objc dynamic var name: String? = nil
+	@objc dynamic var mode: FileMode = .error
+
+	private enum CodingKeys: String, CodingKey {
+		case name = "info",
+		mode
+	}
+
+	required convenience init(from decoder: Decoder) throws {
+		self.init()
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		if let dic = try values.decodeIfPresent([String: String].self, forKey: .name) {
+			name = dic["name"]
+		}
+		if let str = try values.decodeIfPresent(String.self, forKey: .mode) {
+			mode = FileMode(str) ?? .error
+		}
+	}
+}
+
+
+
+
+
+class PCSFile: Object, Decodable {
+	
+	@objc dynamic var fsID: Int = -1
+	@objc dynamic var path: String = ""
+	@objc dynamic var name: String = ""
+	@objc dynamic var size: Int = 0
+	@objc dynamic var isdir: Bool = false
+	@objc dynamic var serverMtime: Date = Date()
+	@objc dynamic var md5: String = ""
+	
+	@objc dynamic var displayDir: String = ""
+	@objc dynamic var backParentDir: String = ""
+	@objc dynamic var isBackButton = false
+	
+	override class func primaryKey() -> String? {
+		return "fsID"
+	}
+	
+	override static func indexedProperties() -> [String] {
+		return ["fsID"]
+	}
+	
+	private enum CodingKeys: String, CodingKey {
+		case fsID = "fs_id",
+		path,
+		name = "server_filename",
+		size,
+		isdir,
+		serverMtime = "server_mtime",
+		md5
+	}
+	
+	required convenience init(from decoder: Decoder) throws {
+		self.init()
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		fsID = try values.decode(Int.self, forKey: .fsID)
+		path = try values.decode(String.self, forKey: .path)
+		name = try values.decode(String.self, forKey: .name)
+		size = try values.decode(Int.self, forKey: .size)
+		isdir = try values.decode(Int.self, forKey: .isdir) == 1
+		serverMtime = Date(timeIntervalSince1970: try values.decode(Double.self, forKey: .serverMtime))
+		md5 = try values.decodeIfPresent(String.self, forKey: .md5) ?? ""
+
+
+		displayDir = ""
+		backParentDir = ""
+		isBackButton = false
+	}
 }

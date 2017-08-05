@@ -27,7 +27,6 @@ class LoadingView: NSView {
 	func initVersionInfo() {
 		updateVersionInfo()
 		NotificationCenter.default.addObserver(self, selector: #selector(updateVersionInfo), name: .updateVersionInfo, object: nil)
-
 	}
 	
 

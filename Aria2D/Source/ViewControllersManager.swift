@@ -79,7 +79,7 @@ class ViewControllersManager: NSObject {
     // LeftSourceList
     var selectedRowDidSet: (() -> Void)?
     
-    var selectedRow: leftSourceListRow = .none {
+    var selectedRow: LeftSourceListRow = .none {
         willSet {
             if newValue == .baidu {
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
@@ -105,8 +105,8 @@ class ViewControllersManager: NSObject {
 	
 	func openSelected() {
 		guard Preferences.shared.aria2Servers.isLocal else { return }
-		DataManager.shared.data(TaskObject.self).map {
-			URL(fileURLWithPath: $0.path)
+        DataManager.shared.data(TaskObject.self).map {
+            URL(fileURLWithPath: $0.path)
 			}.enumerated().filter {
 				selectedIndexs.contains($0.offset)
 			}.map {
@@ -119,19 +119,19 @@ class ViewControllersManager: NSObject {
 	}
 	
 	func selectedUrls() -> [URL] {
-		var urls = DataManager.shared.data(TaskObject.self).map {
-			URL(fileURLWithPath: $0.path)
-			}.enumerated().filter {
-				selectedIndexs.contains($0.offset)
+        var urls = DataManager.shared.data(TaskObject.self).map {
+            URL(fileURLWithPath: $0.path)
+            }.enumerated().filter {
+                selectedIndexs.contains($0.offset)
 			}.map {
 				$0.element
 		}
 		urls = urls.map {
 			URL(fileURLWithPath: $0.path + ".aria2")
 			} + urls
-		return urls.filter {
-			FileManager.default.fileExists(atPath: $0.path)
-		}
+        return urls.filter {
+            FileManager.default.fileExists(atPath: $0.path)
+        }
 	}
 	
 	
@@ -160,7 +160,7 @@ class ViewControllersManager: NSObject {
 		get {
 			if selectedRow == .downloading {
 				let dataList = selectedIndexs.map {
-					DataManager.shared.data(TaskObject.self)[$0]
+					DataManager.shared.data(Aria2Object.self)[$0]
 				}
 				let canPauseList = dataList.filter {
 					$0.status == .active || $0.status == .waiting
@@ -179,7 +179,7 @@ class ViewControllersManager: NSObject {
 	func pauseOrUnpause() {
 		if selectedRow == .downloading {
 			let dataList = selectedIndexs.map {
-				DataManager.shared.data(TaskObject.self)[$0]
+				DataManager.shared.data(Aria2Object.self)[$0]
 			}
 			let canPauseList = dataList.filter {
 				$0.status == .active || $0.status == .waiting
@@ -196,11 +196,11 @@ class ViewControllersManager: NSObject {
 	}
 	
 	func deleteTask() {
-		var gidForRemoveDownloadResult = [GID]()
-		var gidForRemove = [GID]()
+		var gidForRemoveDownloadResult: [String] = []
+		var gidForRemove: [String] = []
 		
 		ViewControllersManager.shared.selectedIndexs.forEach {
-			let data = DataManager.shared.data(TaskObject.self)[$0]
+			let data = DataManager.shared.data(Aria2Object.self)[$0]
 			let status = data.status
 			let gid = data.gid
 			if status == .complete || status == .error || status == .removed {

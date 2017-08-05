@@ -10,7 +10,7 @@ import Foundation
 
 
 
-enum preferenceKeys: String {
+enum PreferenceKeys: String {
 	case isFirstLaunch = "app_isFirstLaunch"
 	case downloadDir = "app_downloadDir"
 	case ascending = "app_baidu_ascending"
@@ -55,7 +55,7 @@ enum preferenceKeys: String {
 
 
 
-enum aria2Notice: String {
+enum Aria2Notice: String, Codable {
     case onDownloadStart = "aria2.onDownloadStart"
     case onDownloadPause = "aria2.onDownloadPause"
     case onDownloadStop = "aria2.onDownloadStop"
@@ -73,7 +73,7 @@ enum aria2Notice: String {
 }
 
 
-enum leftSourceListRow: String {
+enum LeftSourceListRow: String {
     case downloading
     case completed
     case baidu
@@ -81,17 +81,37 @@ enum leftSourceListRow: String {
     case none
 }
 
-enum taskStatus: String {
-	case active = "active"
-	case waiting = "waiting"
-	case paused = "paused"
-	case error = "error"
-	case complete = "complete"
-	case removed = "removed"
-	init?(raw: String) {
-		self.init(rawValue: raw)
+
+@objc enum Status: Int, Codable {
+	case active
+	case waiting
+	case paused
+	case error
+	case complete
+	case removed
+	
+	init?(_ str: String) {
+		switch str {
+		case "active": self.init(rawValue: 0)
+		case "waiting": self.init(rawValue: 1)
+		case "paused": self.init(rawValue: 2)
+		case "error": self.init(rawValue: 3)
+		case "complete": self.init(rawValue: 4)
+		case "removed": self.init(rawValue: 5)
+		default:
+			self.init(rawValue: -1)
+		}
 	}
 	
+	func string() -> String {
+		switch self {
+		case .active: return "active"
+		case .waiting: return "waiting"
+		case .paused: return "paused"
+		case .error: return "error"
+		case .complete: return "complete"
+		case .removed: return "removed"
+		}
+	}
 }
-
 

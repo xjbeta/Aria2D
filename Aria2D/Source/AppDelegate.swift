@@ -108,8 +108,6 @@ extension AppDelegate: DevMateKitDelegate {
 					}
 				}
 			}
-			
-			
 		}
 	}
 }

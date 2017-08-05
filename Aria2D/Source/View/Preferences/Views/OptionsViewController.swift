@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SwiftyJSON
 
 class OptionsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
@@ -22,14 +21,12 @@ class OptionsViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 		}
 	}
 	
-	var options: JSON = [] {
+	var options: [Aria2Option: String] = [:] {
 		didSet {
+			self.optionKeys = self.options.keys.sorted(by: { $0.rawValue < $1.rawValue })
 			DispatchQueue.main.async {
-				self.optionKeys = self.options.map {
-					Aria2Option(rawValue: $0.0)
-				}.sorted(by: { $0.rawValue < $1.rawValue })
 				self.optionsTableView.reloadData()
-				self.view.window?.title = self.options[Aria2Option.out.rawValue].stringValue
+				self.view.window?.title = self.options[Aria2Option.out] ?? ""
 			}
 		}
 	}
@@ -57,14 +54,14 @@ class OptionsViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 				
 				if let option = optionKeys[safe: optionsTableView.selectedRow] {
 					vc.optionKey.stringValue = option.rawValue
-					vc.optionValue = options[option.rawValue].stringValue
+					vc.optionValue = options[option] ?? ""
 					vc.option = option
 					vc.gid = self.gid
 					vc.changeComplete = {
 						Aria2.shared.getOption(self.gid) {
 							self.options = $0
 						}
-						Aria2.shared.initData([self.gid])
+						Aria2.shared.updateStatus([self.gid])
 					}
 				}
 			}
@@ -83,8 +80,8 @@ class OptionsViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 			case "OptionsTableViewOptionCell":
 				return optionKeys[safe: row]?.rawValue
 			case "OptionsTableViewValueCell":
-				if let key = optionKeys[safe: row]?.rawValue {
-					return options[key].stringValue
+				if let key = optionKeys[safe: row] {
+					return options[key]
 				}
 			default:
 				break

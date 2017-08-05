@@ -47,7 +47,7 @@ class RightTabView: NSTabViewController {
 	var oldCountValue = -1
 	
 	func setNotificationToken() {
-		let data = DataManager.shared.data(TaskObject.self)
+		let data = DataManager.shared.data(Aria2Object.self)
 		notificationToken = data.addNotificationBlock { _ in
 			if data.count > 0 && self.oldCountValue == 0 {
 				self.updateTab()
@@ -59,7 +59,7 @@ class RightTabView: NSTabViewController {
 	}
 	
 	func updateTab() {
-		if DataManager.shared.data(TaskObject.self).count == 0 {
+		if DataManager.shared.data(Aria2Object.self).count == 0 {
 			tabView.selectTabViewItem(loadingTab)
 		} else {
 			tabView.selectTabViewItem(downloadTab)

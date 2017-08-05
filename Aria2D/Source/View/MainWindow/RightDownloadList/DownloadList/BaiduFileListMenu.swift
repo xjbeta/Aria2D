@@ -29,7 +29,7 @@ class BaiduFileListMenu: NSMenu {
 		case sizeItem:
 			Preferences.shared.sortValue = "size"
 		case dateItem:
-			Preferences.shared.sortValue = "server_mtime"
+			Preferences.shared.sortValue = "serverMtime"
 		default:
 			break
 		}
@@ -85,7 +85,7 @@ class BaiduFileListMenu: NSMenu {
 			nameItem.state = .on
 		case "size":
 			sizeItem.state = .on
-		case "server_mtime":
+		case "serverMtime":
 			dateItem.state = .on
 		default:
 			break

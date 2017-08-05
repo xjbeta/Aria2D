@@ -2095,7 +2095,7 @@ CA
                                                 <rect key="frame" x="0.0" y="25" width="410" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="B2q-R2-dXF"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="m9E-ZP-dGq"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="410" id="m9E-ZP-dGq"/>
                                                 </constraints>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingMiddle" inset="2" id="sj1-t3-Ehm">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

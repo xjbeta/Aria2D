@@ -98,12 +98,10 @@ class DownloadsTableView: NSTableView {
 	
 	
 	func setRealmNotification() {
-		
+		notificationToken?.stop()
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			let data = DataManager.shared.data(TaskObject.self, path: nil)
-			notificationToken?.stop()
-			
+			let data = DataManager.shared.data(Aria2Object.self)
 			notificationToken = data.addNotificationBlock {
 				switch $0 {
 				case .initial:
@@ -125,9 +123,7 @@ class DownloadsTableView: NSTableView {
 				}
 			}
 		case .baidu:
-			let data = DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath)
-			notificationToken?.stop()
-			
+			let data = DataManager.shared.data(PCSFile.self)
 			notificationToken = data.addNotificationBlock {
 				switch $0 {
 				case .initial:
@@ -204,12 +200,12 @@ class DownloadsTableView: NSTableView {
 	private func newKeys() -> [String] {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			return DataManager.shared.data(TaskObject.self, path: nil).map {
+			return DataManager.shared.data(Aria2Object.self).map {
 				$0.gid
 			}
 		case .baidu:
-			return DataManager.shared.data(BaiduFileObject.self, path: Baidu.shared.selectedPath).map {
-				"\($0.fs_id)"
+			return DataManager.shared.data(PCSFile.self).map {
+				"\($0.fsID)"
 			}
 		default:
 			return []
