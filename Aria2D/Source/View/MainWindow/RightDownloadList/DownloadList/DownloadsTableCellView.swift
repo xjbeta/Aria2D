@@ -73,7 +73,7 @@ class DownloadsTableCellView: NSTableCellView {
 				time.stringValue = ""
 				status.stringValue = obj.status.string()
 			}
-			if obj.status == .active, obj.totalLength != 0, obj.completedLength != 0 {
+			if obj.status != .complete, obj.totalLength != 0 {
 				progressIndicator.isHidden = false
 				progressIndicator.doubleValue = Double(obj.completedLength) / Double(obj.totalLength) * 100
 				percentage.stringValue = "\(percentageFormat(progressIndicator.doubleValue))%"
@@ -150,7 +150,7 @@ extension Aria2Object {
 		if let name = bittorrent?.name, dir != "", name != "" {
 			return URL(fileURLWithPath: dir + name)
 		}
-		if let path = files.first?.path {
+		if let path = files.first?.path, path != "" {
 			return URL(fileURLWithPath: path)
 		}
 		return nil
