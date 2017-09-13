@@ -134,16 +134,16 @@
 		0115D42E1E04E36E003EBFCD /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		0115D4301E04E423003EBFCD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
-		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Aria2.swift; path = Aria2cAPI/Aria2.swift; sourceTree = "<group>"; };
+		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Aria2.swift; path = Aria2.swift; sourceTree = "<group>"; };
 		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01250C9B1D54D7180017353F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
-		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Aria2D-Bridging-Header.h"; path = "../Resource/Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
+		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Aria2D-Bridging-Header.h"; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
 		012624621ED174AC007FF8AA /* DMKevlarApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
 		012624631ED174AC007FF8AA /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
 		012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSwiftKevlar.h; sourceTree = "<group>"; };
 		012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSwiftKevlar.m; sourceTree = "<group>"; };
-		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Other/Transformer.swift; sourceTree = "<group>"; };
+		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		012ADEDC1F1461BC009E4110 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
 		012ADEDD1F1461BC009E4110 /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = Carthage/Build/Mac/Just.framework; sourceTree = "<group>"; };
 		012ADEDE1F1461BC009E4110 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
 		012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
-		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../DataAPI/Log.swift; sourceTree = "<group>"; };
+		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		0130D74D1F13E9F500F11DBC /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
 		0137D26F1E9A220F00CEE540 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		016CF8F41ED41618001336F1 /* Aria2D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Aria2D.entitlements; sourceTree = "<group>"; };
 		016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
 		016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteFileFormatter.swift; sourceTree = "<group>"; };
-		016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsViewController.swift; path = ../../../Preferences/Views/OptionsViewController.swift; sourceTree = "<group>"; };
-		016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompatibleScroller.swift; path = ../../../Preferences/Views/CompatibleScroller.swift; sourceTree = "<group>"; };
+		016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsViewController.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompatibleScroller.swift; path = CompatibleScroller.swift; sourceTree = "<group>"; };
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		017C20081D979448005F035A /* DownloadsTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableRowView.swift; sourceTree = "<group>"; };
@@ -193,14 +193,14 @@
 		01804B251D7B179A00936E09 /* ViewForImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewForImage.swift; sourceTree = "<group>"; };
 		0182D0FC1D2DF23000810419 /* LeftSourceListModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSourceListModule.swift; sourceTree = "<group>"; };
 		0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Aria2D-acknowledgements.pdf"; sourceTree = "<group>"; };
-		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitTimer.swift; path = ../WaitTimer.swift; sourceTree = "<group>"; };
+		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitTimer.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		018E894A1D34FF5B000C71B0 /* DataObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
-		018E895F1D34FFA8000C71B0 /* Aria2c.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Aria2c.swift; path = Aria2cAPI/Aria2c.swift; sourceTree = "<group>"; };
-		018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllersManager.swift; path = Aria2D/Source/ViewControllersManager.swift; sourceTree = SOURCE_ROOT; };
-		018E89631D34FFCC000C71B0 /* EnumList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumList.swift; path = ../EnumList.swift; sourceTree = "<group>"; };
+		018E895F1D34FFA8000C71B0 /* Aria2c.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Aria2c.swift; path = Aria2c.swift; sourceTree = "<group>"; };
+		018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllersManager.swift; path = ViewControllersManager.swift; sourceTree = "<group>"; };
+		018E89631D34FFCC000C71B0 /* EnumList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumList.swift; path = EnumList.swift; sourceTree = "<group>"; };
 		018E896A1D350075000C71B0 /* PreferencesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
-		018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesTabViewController.swift; path = ../PreferencesTabViewController.swift; sourceTree = "<group>"; };
+		018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesTabViewController.swift; path = PreferencesTabViewController.swift; sourceTree = "<group>"; };
 		018E896C1D350075000C71B0 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		018E896D1D350075000C71B0 /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
@@ -212,8 +212,8 @@
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
 		01BC4F921E4324D100417221 /* SetPCSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPCSViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
-		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleClickTextField.swift; path = ../../Preferences/Views/DoubleClickTextField.swift; sourceTree = "<group>"; };
-		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSplitView.swift; path = MainSpilt/MainSplitView.swift; sourceTree = "<group>"; };
+		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleClickTextField.swift; path = DoubleClickTextField.swift; sourceTree = "<group>"; };
+		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSplitView.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
 		01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduSettingView.swift; sourceTree = "<group>"; };
 		01EB1CB51D60971600F2925F /* Baidu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baidu.swift; sourceTree = "<group>"; };
 		01EB1CB71D60997600F2925F /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
@@ -244,17 +244,18 @@
 		0115D42D1E04E346003EBFCD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0115D42E1E04E36E003EBFCD /* NotificationName.swift */,
-				019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */,
-				0115D4301E04E423003EBFCD /* Color.swift */,
-				0154156A1E371583007ECB29 /* URLSecurityScope.swift */,
 				016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */,
-				0115D4321E04F09F003EBFCD /* SubString.swift */,
-				01BC4F941E443A6500417221 /* SafeSubscript.swift */,
-				012A1BB11E174860007C4B46 /* Transformer.swift */,
+				0115D4301E04E423003EBFCD /* Color.swift */,
+				019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */,
 				018F5C3B1F298E1900B2150A /* JSONDecoder.swift */,
+				0115D42E1E04E36E003EBFCD /* NotificationName.swift */,
+				01BC4F941E443A6500417221 /* SafeSubscript.swift */,
+				0115D4321E04F09F003EBFCD /* SubString.swift */,
+				012A1BB11E174860007C4B46 /* Transformer.swift */,
+				0154156A1E371583007ECB29 /* URLSecurityScope.swift */,
 			);
 			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		012624611ED174AC007FF8AA /* Kevlar */ = {
@@ -275,13 +276,14 @@
 				018E895F1D34FFA8000C71B0 /* Aria2c.swift */,
 			);
 			name = Aria2;
+			path = Aria2;
 			sourceTree = "<group>";
 		};
 		012C3AEC1E10104600ABFE4C /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				012C3AE51E1001CA00ABFE4C /* Log.swift */,
 				018E89631D34FFCC000C71B0 /* EnumList.swift */,
+				012C3AE51E1001CA00ABFE4C /* Log.swift */,
 				018B9B571D72B2EA0087B71E /* WaitTimer.swift */,
 			);
 			path = Other;
@@ -293,14 +295,15 @@
 				0137D26F1E9A220F00CEE540 /* StatusViewController.swift */,
 			);
 			name = StatusWindow;
+			path = StatusWindow;
 			sourceTree = "<group>";
 		};
 		0147EDB41D21FAD800FB4324 = {
 			isa = PBXGroup;
 			children = (
 				0165AF611D963CDF00469601 /* Aria2D */,
-				012624611ED174AC007FF8AA /* Kevlar */,
 				6ACACE787527AEFD90491354 /* Frameworks */,
+				012624611ED174AC007FF8AA /* Kevlar */,
 				0147EDBE1D21FAD800FB4324 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -316,17 +319,17 @@
 		0147EDBF1D21FAD800FB4324 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
-				016C98F71DB1C04F00955C09 /* MainWindow */,
 				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
+				0182E60C1EAEE90000E08454 /* Log */,
+				016C98F71DB1C04F00955C09 /* MainWindow */,
 				01713BD71D9BA998000240A2 /* NewTask */,
 				018E89721D350079000C71B0 /* Preferences */,
-				0182E60C1EAEE90000E08454 /* Log */,
-				010B59171D3CF66600550A43 /* MainMenu.swift */,
 				0147EDC61D21FAD800FB4324 /* Main.storyboard */,
+				010B59171D3CF66600550A43 /* MainMenu.swift */,
+				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
 			);
 			name = View;
-			path = Source/View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		0147EDD51D220BED00FB4324 /* LeftSourceList */ = {
@@ -343,29 +346,29 @@
 		0147EDE01D2381F100FB4324 /* Downloads */ = {
 			isa = PBXGroup;
 			children = (
-				016CDC971E6E712A000F9F88 /* PreviewView */,
 				016FDC781E7B9BD600E01B35 /* OptionsWindow */,
+				016CDC971E6E712A000F9F88 /* PreviewView */,
 				0137D26E1E9A19D200CEE540 /* StatusWindow */,
-				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
-				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
+				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
+				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
+				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
+				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
 				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
 				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
-				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
-				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
-				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
-				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
+				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
+				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
 			);
 			name = Downloads;
-			path = DownloadList;
+			path = Downloads;
 			sourceTree = "<group>";
 		};
 		0165AF611D963CDF00469601 /* Aria2D */ = {
 			isa = PBXGroup;
 			children = (
-				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89471D34FF48000C71B0 /* Source */,
 				0147EDBF1D21FAD800FB4324 /* View */,
+				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
 			);
 			path = Aria2D;
 			sourceTree = "<group>";
@@ -376,7 +379,7 @@
 				01BC4F921E4324D100417221 /* SetPCSViewController.swift */,
 			);
 			name = SetPCSView;
-			path = BaiduLogin;
+			path = SetPCSView;
 			sourceTree = "<group>";
 		};
 		016C405A1DA27C6200EB27A2 /* AboutAria2D */ = {
@@ -391,11 +394,11 @@
 		016C98F71DB1C04F00955C09 /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
-				013817661D238E0100E0F926 /* MainWindowController.swift */,
-				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
-				016C98F81DB1C0A000955C09 /* HUD.swift */,
 				0147EDD51D220BED00FB4324 /* LeftSourceList */,
 				01EB1CBB1D61FC1D00F2925F /* RightDownloadList */,
+				016C98F81DB1C0A000955C09 /* HUD.swift */,
+				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
+				013817661D238E0100E0F926 /* MainWindowController.swift */,
 			);
 			path = MainWindow;
 			sourceTree = "<group>";
@@ -403,22 +406,23 @@
 		016CDC971E6E712A000F9F88 /* PreviewView */ = {
 			isa = PBXGroup;
 			children = (
-				016CDC951E6E7127000F9F88 /* PreviewViewController.swift */,
 				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
 				016CDC981E6E79B5000F9F88 /* MovableImageView.swift */,
+				016CDC951E6E7127000F9F88 /* PreviewViewController.swift */,
 			);
 			name = PreviewView;
-			path = ..;
+			path = PreviewView;
 			sourceTree = "<group>";
 		};
 		016FDC781E7B9BD600E01B35 /* OptionsWindow */ = {
 			isa = PBXGroup;
 			children = (
-				016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */,
-				016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */,
 				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
+				016FDC761E7B953E00E01B35 /* CompatibleScroller.swift */,
+				016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */,
 			);
 			name = OptionsWindow;
+			path = OptionsWindow;
 			sourceTree = "<group>";
 		};
 		01713BD71D9BA998000240A2 /* NewTask */ = {
@@ -433,15 +437,15 @@
 		01789B1C1D9D207E00A5B789 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
-				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
-				016B696D1E482BAA004FEAE1 /* SetPCSView */,
 				017E88301D83A720000412DA /* BaiduLogin */,
-				018E896D1D350075000C71B0 /* Generalview.swift */,
+				016B696D1E482BAA004FEAE1 /* SetPCSView */,
 				016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */,
 				01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */,
-				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
+				018E896D1D350075000C71B0 /* Generalview.swift */,
+				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
 				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
+				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
+				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -459,39 +463,39 @@
 		0182E60C1EAEE90000E08454 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
 				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
+				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
 			);
 			name = Log;
-			path = Preferences/Views;
+			path = Log;
 			sourceTree = "<group>";
 		};
 		018E892A1D34FEB7000C71B0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */,
-				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
 				0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */,
+				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
+				014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
 				0147EDC91D21FAD800FB4324 /* Info.plist */,
 			);
 			name = Resources;
-			path = Resource;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		018E89471D34FF48000C71B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */,
-				012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */,
-				0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */,
-				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
-				01EB1CB51D60971600F2925F /* Baidu.swift */,
-				018E896C1D350075000C71B0 /* Preferences.swift */,
 				012C3AEB1E10102C00ABFE4C /* Aria2 */,
 				018E89541D34FF60000C71B0 /* Data */,
-				012C3AEC1E10104600ABFE4C /* Other */,
 				0115D42D1E04E346003EBFCD /* Extensions */,
+				012C3AEC1E10104600ABFE4C /* Other */,
+				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
+				0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */,
+				01EB1CB51D60971600F2925F /* Baidu.swift */,
+				012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */,
+				012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */,
+				018E896C1D350075000C71B0 /* Preferences.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -504,14 +508,14 @@
 				0130D74D1F13E9F500F11DBC /* JSONModels.swift */,
 			);
 			name = Data;
-			path = DataAPI;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		018E89721D350079000C71B0 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
 				01789B1C1D9D207E00A5B789 /* Views */,
+				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -519,9 +523,9 @@
 		01EB1CBB1D61FC1D00F2925F /* RightDownloadList */ = {
 			isa = PBXGroup;
 			children = (
-				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
-				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
 				0147EDE01D2381F100FB4324 /* Downloads */,
+				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
+				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
 			);
 			path = RightDownloadList;
 			sourceTree = "<group>";
