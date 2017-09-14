@@ -78,7 +78,7 @@ class Aria2Websocket: NSObject {
 	func showNotification(_ gid: String) {
 		let notification = NSUserNotification()
 		notification.title = "Completed"
-        let obj = DataManager.shared.data(Aria2Object.self).filter({ $0.gid == gid }).first
+		let obj = DataManager.shared.aria2Object(gid: gid)
 		notification.subtitle = obj?.path()?.lastPathComponent ?? "Unknown"
 		
 		if let totalLength = obj?.totalLength {
