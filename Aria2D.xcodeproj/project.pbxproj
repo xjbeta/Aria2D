@@ -313,7 +313,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0147EDBF1D21FAD800FB4324 /* View */ = {
+		0147EDBF1D21FAD800FB4324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
@@ -329,7 +329,7 @@
 				013817661D238E0100E0F926 /* MainWindowController.swift */,
 				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0147EDD51D220BED00FB4324 /* LeftSourceList */ = {
@@ -366,7 +366,7 @@
 			children = (
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89471D34FF48000C71B0 /* Source */,
-				0147EDBF1D21FAD800FB4324 /* View */,
+				0147EDBF1D21FAD800FB4324 /* Views */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
 			);
 			path = Aria2D;
