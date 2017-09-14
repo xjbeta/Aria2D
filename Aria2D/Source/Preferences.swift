@@ -57,7 +57,7 @@ class Preferences: NSObject {
 		}
 		set {
 			defaultsSet(newValue, forKey: .developerMode)
-			NotificationCenter.default.post(name: .developerModeChanged, object: self)
+			NotificationCenter.default.post(name: .developerModeChanged, object: nil)
 		}
 	}
 	

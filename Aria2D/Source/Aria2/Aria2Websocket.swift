@@ -33,21 +33,21 @@ class Aria2Websocket: NSObject {
 
 	var connectedServerInfo = ConnectedServerInfo() {
 		didSet {
-			NotificationCenter.default.post(name: .updateVersionInfo, object: self)
+			NotificationCenter.default.post(name: .updateVersionInfo, object: nil)
 		}
 	}
 	
 	var isConnected = false {
 		didSet {
 			if isConnected != oldValue {
-				NotificationCenter.default.post(name: .updateConnectStatus, object: self)
+				NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
 			}	
 		}
 	}
 	
 	var aria2GlobalOption = [Aria2Option: String]() {
 		didSet {
-			NotificationCenter.default.post(name: .updateGlobalOption, object: self)
+			NotificationCenter.default.post(name: .updateGlobalOption, object: nil)
 		}
 	}
 	

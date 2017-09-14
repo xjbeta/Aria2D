@@ -93,7 +93,7 @@ class ViewControllersManager: NSObject {
 	// DownloadsTableView selectedIndexs
     var selectedIndexs = IndexSet()
 	func showOptions() {
-		NotificationCenter.default.post(name: .showOptionsWindow, object: self)
+		NotificationCenter.default.post(name: .showOptionsWindow, object: nil)
 	}
 	
 	func showSelectedInFinder() {
@@ -133,7 +133,7 @@ class ViewControllersManager: NSObject {
 	
 	
 	func showStatus() {
-		NotificationCenter.default.post(name: .showStatusWindow, object: self)
+		NotificationCenter.default.post(name: .showStatusWindow, object: nil)
 	}
 	
 	// LogViewController

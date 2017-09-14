@@ -18,8 +18,8 @@ class Baidu: NSObject {
 	
 	var isLogin = false {
 		didSet {
-			NotificationCenter.default.post(name: .updateUserInfo, object: self)
-			NotificationCenter.default.post(name: .resetLeftOutlineView, object: self)
+			NotificationCenter.default.post(name: .updateUserInfo, object: nil)
+			NotificationCenter.default.post(name: .resetLeftOutlineView, object: nil)
 		}
 	}
 	var isTokenEffective = false {
@@ -35,7 +35,7 @@ class Baidu: NSObject {
 				Preferences.shared.baiduToken = ""
 				mainPath = "/"
 				selectedPath = mainPath
-				NotificationCenter.default.post(name: .updateToken, object: self)
+				NotificationCenter.default.post(name: .updateToken, object: nil)
 			}
 		}
 	}
@@ -185,7 +185,7 @@ extension Baidu {
 								Preferences.shared.baiduFolder = path
 								self.selectedPath = path
 								self.mainPath = path
-								NotificationCenter.default.post(name: .updateToken, object: self)
+								NotificationCenter.default.post(name: .updateToken, object: nil)
 						}
 					}
 				}

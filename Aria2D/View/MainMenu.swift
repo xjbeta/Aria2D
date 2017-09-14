@@ -86,15 +86,15 @@ class MainMenu: NSObject {
 
     
     @IBAction func addTask(_ sender: Any) {
-        NotificationCenter.default.post(name: .newTask, object: self)
+        NotificationCenter.default.post(name: .newTask, object: nil)
     }
     
     @IBAction func nextTag(_ sender: Any) {
-        NotificationCenter.default.post(name: .nextTag, object: self)
+        NotificationCenter.default.post(name: .nextTag, object: nil)
     }
     
     @IBAction func previousTag(_ sender: Any) {
-        NotificationCenter.default.post(name: .previousTag, object: self)
+        NotificationCenter.default.post(name: .previousTag, object: nil)
     }
     @IBAction func refresh(_ sender: Any) {
 		ViewControllersManager.shared.refresh()
@@ -129,7 +129,7 @@ class MainMenu: NSObject {
 	}
 	
 	@IBAction func activateApp(_ sender: Any) {
-		NotificationCenter.default.post(name: .activateApp, object: self)
+		NotificationCenter.default.post(name: .activateApp, object: nil)
 	}
 	
 	@IBAction func checkForUpdate(_ sender: Any) {
