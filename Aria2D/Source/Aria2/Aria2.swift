@@ -583,7 +583,9 @@ extension WebSocket {
 		
 		func add(_ key: String, block: @escaping (_ value: Data, _ timeOut: Bool) -> Void) {
 			let semaphore = DispatchSemaphore(value: 0)
+            lock.lock()
 			semaphores[key] = semaphore
+            lock.unlock()
 			DispatchQueue.global().async {
 				switch semaphore.wait(timeout: .now() + .seconds(60)) {
 				case .success:
