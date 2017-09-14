@@ -128,13 +128,12 @@ class DataManager: NSObject {
     func setData(forBaidu files: [PCSFile], forPath path: String) {
 		var fileObjects: [PCSFile] = files
 		// set the button back to parent directory
-        if path != Baidu.shared.mainPath,
-            let backParentDir = NSURL(fileURLWithPath: path).deletingLastPathComponent?.path {
+		if path != Baidu.shared.mainPath {
 			let object = PCSFile()
 			object.isBackButton = true
 			object.displayDir = path
 			object.fsID = -2333
-            object.backParentDir = backParentDir
+            object.backParentDir = (path as NSString).deletingLastPathComponent
 			fileObjects.append(object)
 		}
 
