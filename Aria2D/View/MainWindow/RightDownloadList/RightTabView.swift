@@ -33,11 +33,11 @@ class RightTabView: NSTabViewController {
 			setNotificationToken()
 		case .baidu:
 			tabView.selectTabViewItem(downloadTab)
-			notificationToken?.stop()
+			notificationToken?.invalidate()
 			notificationToken = nil
         default:
             tabView.selectTabViewItem(loadingTab)
-			notificationToken?.stop()
+			notificationToken?.invalidate()
 			notificationToken = nil
         }
 		
@@ -48,7 +48,7 @@ class RightTabView: NSTabViewController {
 	
 	func setNotificationToken() {
 		let data = DataManager.shared.data(Aria2Object.self)
-		notificationToken = data.addNotificationBlock { _ in
+		notificationToken = data.observe { _ in
 			if data.count > 0 && self.oldCountValue == 0 {
 				self.updateTab()
 			} else if data.count == 0 && self.oldCountValue > 0 {
@@ -68,7 +68,7 @@ class RightTabView: NSTabViewController {
 	
 	
 	deinit {
-		notificationToken?.stop()
+		notificationToken?.invalidate()
 	}
 	
 }

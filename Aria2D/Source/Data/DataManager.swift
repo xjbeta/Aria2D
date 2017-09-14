@@ -163,22 +163,22 @@ class DataManager: NSObject {
     
     
  //MARK: - Get Data
-    func data<T, R: Results<T>>(_ type: T.Type) -> R {
+    func data<T: Object>(_ type: T.Type) -> Results<T> {
         switch ViewControllersManager.shared.selectedRow {
         case .downloading:
             return realm.objects(type)
 				.filter("status != %@", Status.complete.rawValue)
 				.filter("status != %@", Status.removed.rawValue)
 				.sorted(byKeyPath: "date")
-				.sorted(byKeyPath: "status") as! R
+				.sorted(byKeyPath: "status")
         case .completed:
             return realm.objects(type)
 				.filter("status == %@", Status.complete.rawValue)
-				.sorted(byKeyPath: "date") as! R
+				.sorted(byKeyPath: "date")
 		case .removed:
 			return realm.objects(type)
 				.filter("status == %@", Status.removed.rawValue)
-				.sorted(byKeyPath: "date") as! R
+				.sorted(byKeyPath: "date")
         case .baidu:
 			let ascending = Preferences.shared.ascending
 			let sortValue = Preferences.shared.sortValue
@@ -188,9 +188,9 @@ class DataManager: NSObject {
 			}
 			return re.sorted(byKeyPath: sortValue, ascending: ascending)
 				.sorted(byKeyPath: "isdir", ascending: false)
-				.sorted(byKeyPath: "isBackButton", ascending: false) as! R
+				.sorted(byKeyPath: "isBackButton", ascending: false)
         default:
-            return realm.objects(type).filter("status == -1") as! R
+            return realm.objects(type).filter("status == -1")
         }
     }
 	

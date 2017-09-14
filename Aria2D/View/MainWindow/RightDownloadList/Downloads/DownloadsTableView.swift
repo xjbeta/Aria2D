@@ -98,11 +98,11 @@ class DownloadsTableView: NSTableView {
 	
 	
 	func setRealmNotification() {
-		notificationToken?.stop()
+		notificationToken?.invalidate()
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			let data = DataManager.shared.data(Aria2Object.self)
-			notificationToken = data.addNotificationBlock {
+			notificationToken = data.observe {
 				switch $0 {
 				case .initial:
 					self.reloadData()
@@ -124,7 +124,7 @@ class DownloadsTableView: NSTableView {
 			}
 		case .baidu:
 			let data = DataManager.shared.data(PCSFile.self)
-			notificationToken = data.addNotificationBlock {
+			notificationToken = data.observe {
 				switch $0 {
 				case .initial:
 					self.reloadData()
@@ -294,7 +294,7 @@ class DownloadsTableView: NSTableView {
 	}
 
     deinit {
-		notificationToken?.stop()
+		notificationToken?.invalidate()
 		NotificationCenter.default.removeObserver(self)
     }
 }

@@ -26,7 +26,7 @@ class DownloadsTableCellView: NSTableCellView {
     func setData(_ obj: Aria2Object) {
 		gid = obj.gid
 		setText(obj)
-		notificationToken = obj.addNotificationBlock {
+		notificationToken = obj.observe {
 			switch $0 {
 			case .change:
 				if let data = DataManager.shared.data(Aria2Object.self).filter ({
@@ -136,7 +136,7 @@ class DownloadsTableCellView: NSTableCellView {
 	}
 	
 	deinit {
-		notificationToken?.stop()
+		notificationToken?.invalidate()
 		gid = ""
 	}
 	
