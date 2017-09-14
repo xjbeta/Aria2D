@@ -609,21 +609,22 @@ struct UnitNumber {
 		rawValue = UInt64(int)
 	}
 	init(_ string: String) {
+        let intStr = string.dropLast()
 		if let int = UInt64(string) {
 			if int > UINT64_MAX {
 				rawValue = UINT64_MAX
 			} else {
 				rawValue = int
 			}
-		} else if let int = UInt64(string.substring(to: string.index(before: string.endIndex))),
+		} else if let int = UInt64(intStr),
 			let last = string.characters.last {
 			var value: UInt64 = 0
 			switch last {
-			case Character("K"):
+			case "K":
 				value = unit.K.rawValue
-			case Character("M"):
+			case "M":
 				value = unit.M.rawValue
-			case Character("G"):
+			case "G":
 				value = unit.G.rawValue
 			default:
 				value = 0

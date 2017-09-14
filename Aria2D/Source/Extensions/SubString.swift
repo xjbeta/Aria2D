@@ -10,10 +10,11 @@ import Foundation
 
 extension String {
 	func subString(from startString: String, to endString: String) -> String {
-		if let startIndex = self.range(of: startString) {
-			var str = self.substring(from: startIndex.upperBound)
-			if let endIndex = str.range(of: endString) {
-				str = str.substring(to: endIndex.lowerBound)
+        var str = self
+        if let startIndex = self.range(of: startString)?.upperBound {
+            str.removeSubrange(str.startIndex ..< startIndex)
+            if let endIndex = str.range(of: endString)?.lowerBound {
+                str.removeSubrange(endIndex ..< str.endIndex)
 				return str
 			}
 		}
@@ -21,19 +22,20 @@ extension String {
 	}
 	
 	func subString(from startString: String) -> String {
-		if let startIndex = self.range(of: startString) {
-			return self.substring(from: startIndex.upperBound)
+        var str = self
+        if let startIndex = self.range(of: startString)?.upperBound {
+            str.removeSubrange(self.startIndex ..< startIndex)
+            return str
 		}
 		return ""
 	}
 	
 	
 	func delete(between startString: String, and endString: String) -> String {
-		if let start = self.range(of: startString) {
-			let str = self.substring(from: start.upperBound)
-			if let end = str.range(of: endString) {
-				return self.substring(to: start.lowerBound) + str.substring(from: end.upperBound)
-			}
+        var str = self
+        if let start = self.range(of: startString), let end = self.range(of: endString) {
+            str.removeSubrange(start.upperBound ..< end.lowerBound)
+            return str
 		}
 		return ""
 	}
