@@ -171,7 +171,7 @@ class DataManager: NSObject {
         case .completed:
             return realm.objects(type)
 				.filter("status == %@", Status.complete.rawValue)
-                .sorted(byKeyPath: "date")
+				.sorted(byKeyPath:"date", ascending: false)
 		case .removed:
 			return realm.objects(type)
 				.filter("status == %@", Status.removed.rawValue)
