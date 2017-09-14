@@ -10,14 +10,14 @@ import Cocoa
 
 class BaiduSettingView: NSViewController {
 	
-	@IBOutlet var loginButtom: LoginButton!
+	@IBOutlet var loginButton: LoginButton!
 	@IBOutlet var userName: NSTextField!
 	@IBOutlet var capacityInfo: NSTextField!
 	@IBOutlet var stackView: NSStackView!
 	@IBOutlet var loginView: NSStackView!
 	
 	@IBAction func login(_ sender: Any) {
-		if let title = loginButtonTitles(raw: loginButtom.title) {
+		if let title = loginButtonTitles(raw: loginButton.title) {
 			switch title {
 			case .login:
 				performSegue(withIdentifier: .showLoginView, sender: self)
@@ -29,6 +29,7 @@ class BaiduSettingView: NSViewController {
 				break
 			}
 		}
+        loginButton.mouseLocation = .out
 		return
 	}
 	
@@ -38,13 +39,13 @@ class BaiduSettingView: NSViewController {
 		if segue.identifier == .showLoginView {
 			if let vc = segue.destinationController as? BaiduLoginViewController {
 				vc.onViewControllerDismiss = {
-					self.view.window?.makeFirstResponder(self.loginButtom)
+					self.view.window?.makeFirstResponder(self.loginButton)
 				}
 			}
 		} else if segue.identifier == .showPCSView {
 			if let vc = segue.destinationController as? SetPCSViewController {
 				vc.onViewControllerDismiss = {
-					self.view.window?.makeFirstResponder(self.loginButtom)
+					self.view.window?.makeFirstResponder(self.loginButton)
 				}
 			}
 		}
@@ -52,11 +53,10 @@ class BaiduSettingView: NSViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		view.window?.makeFirstResponder(self.loginButton)
 		initUserInfo()
 		NotificationCenter.default.addObserver(self, selector: #selector(initUserInfo), name: .updateUserInfo, object: nil)
 	}
-
-	
 	
 	
 	@objc func initUserInfo() {
@@ -64,20 +64,20 @@ class BaiduSettingView: NSViewController {
 			Baidu.shared.getUserInfo { name, image, capacity in
 				DispatchQueue.main.async {
 					self.userName.stringValue = name
-					self.loginButtom.image = image
+					self.loginButton.image = image
 					self.capacityInfo.stringValue = capacity
 					self.stackView.showViews(animated: true)
-					self.loginButtom.needsDisplay = true
+					self.loginButton.needsDisplay = true
 				}
 			}
 		} else {
 			DispatchQueue.main.async {
 				self.userName.stringValue = ""
-				self.loginButtom.image = self.defaultUserImage()
+				self.loginButton.image = self.defaultUserImage()
 				self.capacityInfo.stringValue = ""
 				self.stackView.hideViews(animated: true)
-				self.loginButtom.isHighlighted = false
-				self.loginButtom.mouseLocation = .out
+				self.loginButton.isHighlighted = false
+				self.loginButton.mouseLocation = .out
 			}
 		}
 	}

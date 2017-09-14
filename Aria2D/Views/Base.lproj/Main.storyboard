@@ -548,7 +548,7 @@
                     </view>
                     <connections>
                         <outlet property="capacityInfo" destination="IK6-07-gT6" id="7yc-ro-Lym"/>
-                        <outlet property="loginButtom" destination="NTY-Kb-u2n" id="Pzi-c9-Bhk"/>
+                        <outlet property="loginButton" destination="NTY-Kb-u2n" id="Pzi-c9-Bhk"/>
                         <outlet property="loginView" destination="3Oq-vx-3SR" id="KT5-T1-cZa"/>
                         <outlet property="stackView" destination="P65-s3-d9R" id="6hU-dJ-b5u"/>
                         <outlet property="userName" destination="KwG-Rc-Pvg" id="x6w-YS-4t9"/>
