@@ -21,8 +21,6 @@ class DataManager: NSObject {
 		return try! Realm(configuration: realmConfiguration)
 	}
 	
-	fileprivate let realmQueue = DispatchQueue(label: "com.xjbeta.Aria2D.realmQueue")
-	
 	
 	func initAllObjects(_ objs: [Aria2Object]) {
 		writeToRealm { realm in
@@ -117,11 +115,11 @@ class DataManager: NSObject {
     }
 
 	
-	func deletePCSFile(_ path: String) {
+    func deletePCSFile(_ path: String) {
 		writeToRealm {
-			if let obj = $0.objects(PCSFile.self).filter("path == '\(path)'").first {
-				$0.delete(obj)
-			}
+            if let obj = $0.objects(PCSFile.self).filter("path == '\(path)'").first {
+                $0.delete(obj)
+            }
 		}
 	}
     
@@ -130,13 +128,13 @@ class DataManager: NSObject {
     func setData(forBaidu files: [PCSFile], forPath path: String) {
 		var fileObjects: [PCSFile] = files
 		// set the button back to parent directory
-		if path != Baidu.shared.mainPath,
-			let backParentDir = NSURL(fileURLWithPath: path).deletingLastPathComponent?.path {
+        if path != Baidu.shared.mainPath,
+            let backParentDir = NSURL(fileURLWithPath: path).deletingLastPathComponent?.path {
 			let object = PCSFile()
 			object.isBackButton = true
 			object.displayDir = path
 			object.fsID = -2333
-			object.backParentDir = backParentDir
+            object.backParentDir = backParentDir
 			fileObjects.append(object)
 		}
 
@@ -174,7 +172,7 @@ class DataManager: NSObject {
         case .completed:
             return realm.objects(type)
 				.filter("status == %@", Status.complete.rawValue)
-				.sorted(byKeyPath: "date")
+                .sorted(byKeyPath: "date")
 		case .removed:
 			return realm.objects(type)
 				.filter("status == %@", Status.removed.rawValue)
@@ -203,11 +201,11 @@ class DataManager: NSObject {
 
 // MARK: - Private Function For TaskObject
 private extension DataManager {
-	
+    
 	func writeToRealm(block: @escaping (_ realm: Realm) -> Void) {
-		realmQueue.async {
+		DispatchQueue(label: "io.realm.realm.background").async {
 			autoreleasepool {
-				try? self.realm.write{
+				try? self.realm.write {
 					block(self.realm)
 				}
 			}
