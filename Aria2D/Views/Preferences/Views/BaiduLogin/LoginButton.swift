@@ -48,20 +48,6 @@ class LoginButton: NSButton {
 		}
 	}
 	
-
-	override func becomeFirstResponder() -> Bool {
-		isFirstResponder = super.becomeFirstResponder()
-		return super.becomeFirstResponder()
-	}
-	
-	override func resignFirstResponder() -> Bool {
-		isFirstResponder = !super.resignFirstResponder()
-		self.mouseExited(with: NSEvent())
-		return super.resignFirstResponder()
-	}
-	
-	private var isFirstResponder: Bool = false
-	
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 		layer?.cornerRadius = 35
@@ -74,10 +60,8 @@ class LoginButton: NSButton {
 	
 	override func mouseEntered(with event: NSEvent) {
 		super.mouseExited(with: event)
-		if isFirstResponder {
-			setTitle(with: event)
-			isHighlighted = true
-		}
+		setTitle(with: event)
+		isHighlighted = true
 	}
 	
     override func mouseExited(with event: NSEvent) {
@@ -88,10 +72,8 @@ class LoginButton: NSButton {
 	
 	override func mouseMoved(with event: NSEvent) {
 		super.mouseMoved(with: event)
-		if isFirstResponder {
-			setTitle(with: event)
-			isHighlighted = true
-		}
+		setTitle(with: event)
+		isHighlighted = true
 	}
 
 	func setTitle(with event: NSEvent) {
@@ -105,7 +87,7 @@ class LoginButton: NSButton {
             removeTrackingArea($0)
         }
         addTrackingArea(NSTrackingArea(rect: bounds,
-                                       options: [.mouseEnteredAndExited, .activeInKeyWindow, .mouseMoved],
+                                       options: [.mouseEnteredAndExited, .activeWhenFirstResponder, .mouseMoved],
                                        owner: self,
                                        userInfo: nil))
     }
