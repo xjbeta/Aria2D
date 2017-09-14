@@ -161,6 +161,11 @@ class DataManager: NSObject {
     
     
  //MARK: - Get Data
+	
+	func aria2Object(gid: String) -> Aria2Object? {
+		return realm.object(ofType: Aria2Object.self, forPrimaryKey: gid)
+	}
+	
     func data<T: Object>(_ type: T.Type) -> Results<T> {
         switch ViewControllersManager.shared.selectedRow {
         case .downloading:
@@ -201,7 +206,6 @@ class DataManager: NSObject {
 
 // MARK: - Private Function For TaskObject
 private extension DataManager {
-    
 	func writeToRealm(block: @escaping (_ realm: Realm) -> Void) {
 		DispatchQueue(label: "io.realm.realm.background").async {
 			autoreleasepool {
