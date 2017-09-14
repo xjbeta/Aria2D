@@ -19,13 +19,12 @@ class DownloadsViewController: NSViewController {
 		case .completed:
 			ViewControllersManager.shared.openSelected()
 		case .baidu:
-            if downloadsTableView.selectedRowIndexes.count == 1 {
-                let row = downloadsTableView.selectedRowIndexes.first!
+			if downloadsTableView.selectedRowIndexes.count == 1,
+                let row = downloadsTableView.selectedRowIndexes.first {
                 let data = DataManager.shared.data(PCSFile.self)[row]
 				if data.isdir {
 					Baidu.shared.selectedPath = data.path
-                }
-                if data.isBackButton {
+				} else if data.isBackButton {
 					Baidu.shared.selectedPath = data.backParentDir
 				}
 			}
