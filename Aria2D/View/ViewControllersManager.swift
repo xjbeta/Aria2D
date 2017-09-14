@@ -79,7 +79,7 @@ class ViewControllersManager: NSObject {
     // LeftSourceList
     var selectedRowDidSet: (() -> Void)?
     
-    var selectedRow: LeftSourceListRow = .none {
+    var selectedRow: SidebarItem = .none {
         willSet {
             if newValue == .baidu {
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)

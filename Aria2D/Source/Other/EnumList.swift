@@ -73,7 +73,7 @@ enum Aria2Notice: String, Codable {
 }
 
 
-enum LeftSourceListRow: String {
+enum SidebarItem: String {
     case downloading
     case completed
     case baidu
