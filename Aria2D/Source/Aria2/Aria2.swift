@@ -185,7 +185,7 @@ class Aria2: NSObject {
 		}
 	}
 
-	func getFiles(_ gid: String) {
+    func getFiles(_ gid: String, block: @escaping () -> Void = {}) {
 		Aria2WebsocketObject(method: Aria2Method.getFiles,
 		                     params: [gid])
 			.writeToWebsocket {
@@ -196,6 +196,7 @@ class Aria2: NSObject {
 					}
 					if let re = data.decode(Result.self)?.result {
 						DataManager.shared.updateFiles(gid, files: re)
+                        block()
 					}
 				default:
 					break
