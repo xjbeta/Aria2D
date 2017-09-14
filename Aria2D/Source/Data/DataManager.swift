@@ -115,11 +115,12 @@ class DataManager: NSObject {
     }
 
 	
-    func deletePCSFile(_ path: String) {
+	func deletePCSFile(_ paths: [String]) {
 		writeToRealm {
-            if let obj = $0.objects(PCSFile.self).filter("path == '\(path)'").first {
-                $0.delete(obj)
+            let objs = $0.objects(PCSFile.self).filter {
+                paths.contains($0.path)
             }
+            $0.delete(objs)
 		}
 	}
     
@@ -171,7 +172,7 @@ class DataManager: NSObject {
         case .completed:
             return realm.objects(type)
 				.filter("status == %@", Status.complete.rawValue)
-				.sorted(byKeyPath:"date", ascending: false)
+                .sorted(byKeyPath:"date", ascending: false)
 		case .removed:
 			return realm.objects(type)
 				.filter("status == %@", Status.removed.rawValue)

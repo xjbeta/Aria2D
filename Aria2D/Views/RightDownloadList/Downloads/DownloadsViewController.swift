@@ -19,13 +19,13 @@ class DownloadsViewController: NSViewController {
 		case .completed:
 			ViewControllersManager.shared.openSelected()
 		case .baidu:
-			if downloadsTableView.selectedRowIndexes.count == 1 {
-				let row = downloadsTableView.selectedRowIndexes.first!
-				let data = DataManager.shared.data(PCSFile.self)[row]
+            if downloadsTableView.selectedRowIndexes.count == 1 {
+                let row = downloadsTableView.selectedRowIndexes.first!
+                let data = DataManager.shared.data(PCSFile.self)[row]
 				if data.isdir {
 					Baidu.shared.selectedPath = data.path
-				}
-				if data.isBackButton {
+                }
+                if data.isBackButton {
 					Baidu.shared.selectedPath = data.backParentDir
 				}
 			}
@@ -42,67 +42,67 @@ class DownloadsViewController: NSViewController {
 
 	var dlinksProgress: BaiduDlinksProgress!
 	
-//	var previewViewController: PreviewViewController?
-	
+//    var previewViewController: PreviewViewController?
+    
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		ViewControllersManager.shared.selectedRow = .downloading
+        ViewControllersManager.shared.selectedRow = .downloading
 		initNotification()
 	}
 	
 
-	
-		
-	/*
-	override func keyDown(with event: NSEvent) {
-		if event.keyCode == 49 &&
-			downloadsTableView.selectedRowIndexes.count > 0 &&
-			ViewControllersManager.shared.selectedRow != .baidu {
-			performSegue(withIdentifier: showPreviewViewController, sender: self)
-		} else {
-			super.keyDown(with: event)
-		}
-	}
-	*/
+    
+        
+    /*
+    override func keyDown(with event: NSEvent) {
+        if event.keyCode == 49 &&
+            downloadsTableView.selectedRowIndexes.count > 0 &&
+            ViewControllersManager.shared.selectedRow != .baidu {
+            performSegue(withIdentifier: showPreviewViewController, sender: self)
+        } else {
+            super.keyDown(with: event)
+        }
+    }
+    */
 
 
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-		
-		
-//		if segue.identifier == .showPreviewViewController {
-//			if let vc = segue.destinationController as? PreviewViewController {
-//				vc.dataSource = self
-//				vc.delegate = self
-//			}
-//		} else
-			
+        
+        
+//        if segue.identifier == .showPreviewViewController {
+//            if let vc = segue.destinationController as? PreviewViewController {
+//                vc.dataSource = self
+//                vc.delegate = self
+//            }
+//        } else
+            
 			
 		if segue.identifier == .showBaiduDlinksProgress {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
 				vc.dataSource = self
 			}
-		} else if segue.identifier == .showOptionsWindow {
-			if let wc = segue.destinationController as? NSWindowController,
-				let vc = wc.contentViewController as? OptionsViewController,
-				let gid = self.selectedObjects(Aria2Object.self).first?.gid {
-				
-				Aria2.shared.getOption(gid) {
-					vc.options = $0
-					vc.gid = gid
-				}
-			}
-		} else if segue.identifier == .showStatusWindow {
-			if let wc = segue.destinationController as? NSWindowController,
-				let vc = wc.contentViewController as? StatusViewController,
-				let gid = self.selectedObjects(Aria2Object.self).first?.gid {
-				Aria2.shared.initData(gid) {
-					if let json = try? JSONSerialization.jsonObject(with: $0, options: .mutableContainers),
-						let dic = json as? [String: Any],
-						let result = dic["result"] as? [String: Any] {
-						vc.result = result
-					}
-				}
+        } else if segue.identifier == .showOptionsWindow {
+            if let wc = segue.destinationController as? NSWindowController,
+                let vc = wc.contentViewController as? OptionsViewController,
+                let gid = self.selectedObjects(Aria2Object.self).first?.gid {
+                
+                Aria2.shared.getOption(gid) {
+                    vc.options = $0
+                    vc.gid = gid
+                }
+            }
+        } else if segue.identifier == .showStatusWindow {
+            if let wc = segue.destinationController as? NSWindowController,
+                let vc = wc.contentViewController as? StatusViewController,
+                let gid = self.selectedObjects(Aria2Object.self).first?.gid {
+                Aria2.shared.initData(gid) {
+                    if let json = try? JSONSerialization.jsonObject(with: $0, options: .mutableContainers),
+                        let dic = json as? [String: Any],
+                        let result = dic["result"] as? [String: Any] {
+                        vc.result = result
+                    }
+                }
 			}
 		}
 	}
@@ -194,8 +194,8 @@ extension DownloadsViewController {
 		downloadsTableView.setRealmNotification()
 		NotificationCenter.default.addObserver(self, selector: #selector(getDlinks), name: .getDlinks, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(deleteBaiduFile), name: .deleteFile, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(showOptions), name: .showOptionsWindow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(showStatus), name: .showStatusWindow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showOptions), name: .showOptionsWindow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showStatus), name: .showStatusWindow, object: nil)
 		
 	}
 
@@ -236,18 +236,16 @@ extension DownloadsViewController {
 		}
 	}
 	
-	@objc func showOptions(_ notification: Notification) {
-		performSegue(withIdentifier: .showOptionsWindow, sender: self)
-	}
-	
-	@objc func showStatus(_ notification: Notification) {
-		performSegue(withIdentifier: .showStatusWindow, sender: self)
+    @objc func showOptions(_ notification: Notification) {
+        performSegue(withIdentifier: .showOptionsWindow, sender: self)
+    }
+    
+    @objc func showStatus(_ notification: Notification) {
+        performSegue(withIdentifier: .showStatusWindow, sender: self)
 	}
 	
 	@objc func deleteBaiduFile() {
-		selectedObjects(PCSFile.self).forEach {
-			Baidu.shared.delete($0.path)
-		}
+        Baidu.shared.delete(selectedObjects(PCSFile.self).filter({ !$0.isBackButton }).map({ $0.path }))
 	}
 
 	func selectedObjects<T: Object>(_ type: T.Type) -> [T] {
@@ -269,19 +267,19 @@ extension DownloadsViewController: BaiduDlinksDataSource {
 	}
 }
 //extension DownloadsViewController: PreviewViewDataSource, PreviewViewDelegate {
-//	func dataOfPreviewObjects() -> [TaskObject] {
-//		return DataManager.shared.data(TaskObject.self).enumerated().filter {
-//			downloadsTableView.selectedRowIndexes.contains($0.offset)
-//			}.map {
-//				$0.element
-//		}
-//	}
-//	func selectedRowIndexes() -> IndexSet {
-//		return downloadsTableView.selectedRowIndexes
-//	}
-//	
-//	func preview(handel event: NSEvent) {
-//		self.downloadsTableView.keyDown(with: event)
-//	}
+//    func dataOfPreviewObjects() -> [TaskObject] {
+//        return DataManager.shared.data(TaskObject.self).enumerated().filter {
+//            downloadsTableView.selectedRowIndexes.contains($0.offset)
+//            }.map {
+//                $0.element
+//        }
+//    }
+//    func selectedRowIndexes() -> IndexSet {
+//        return downloadsTableView.selectedRowIndexes
+//    }
+//    
+//    func preview(handel event: NSEvent) {
+//        self.downloadsTableView.keyDown(with: event)
+//    }
 //}
 

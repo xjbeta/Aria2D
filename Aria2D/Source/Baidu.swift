@@ -52,10 +52,7 @@ class Baidu: NSObject {
 			getFileList(forPath: selectedPath)
 		}
 	}
-	
-	
-	let allowedCharacterSet = CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[] ").inverted
-	
+
 	func updateCookie(_ block: @escaping () -> Void) {
 		Just.get("https://pan.baidu.com") { _ in
 			block()
@@ -87,8 +84,9 @@ class Baidu: NSObject {
 		Just.post("https://pan.baidu.com/api/quota", headers: userAgent) {
 			if let errno = $0.content?.decode(PCSErrno.self)?.errno {
 				self.isLogin = errno == 0
+			} else {
+				self.isLogin = false
 			}
-			
 			block?(self.isLogin)
 			if self.isLogin {
 				self.checkToken(nil)
@@ -107,12 +105,12 @@ class Baidu: NSObject {
 	//MARK: - GetFileList
 	func getFileList(forPath path: String) {
 		ViewControllersManager.shared.waiting = true
-		let encodePath = path.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? "/"
-		Just.get("https://pan.baidu.com/api/list?dir=" + encodePath, headers: userAgent) {
+        Just.get("https://pan.baidu.com/api/list", params: ["dir": path], headers: userAgent) {
+        
 			if let json = $0.content?.decode(PCSFileList.self) {
 				if json.errno == 0 {
 					DataManager.shared.setData(forBaidu: json.list, forPath: path)
-				} else if json.errno == -9 {
+				} else {
 					self.selectedPath = self.mainPath
 				}
 			}
@@ -138,29 +136,42 @@ extension Baidu {
 		}
 	}
 	
-	func delete(_ path: String) {
-		let encodePath = path.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? "/"
-		Just.post("https://pcs.baidu.com/rest/2.0/pcs/file?method=delete&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)") {
-			if let error = $0.content?.decode(PCSError.self),
-				!error.isError {
-					DataManager.shared.deletePCSFile(path)
-				} else {
-					self.getFileList(forPath: self.selectedPath)
-			}
-		}
-	}
-	
-	
+    func delete(_ paths: [String]) {
+        struct Path: Encodable {
+            let path: String
+        }
+        
+        struct List: Encodable {
+            let list: [Path]
+        }
+        
+        if let data = try? JSONEncoder().encode(List(list: paths.map({ Path(path: $0) }))),
+            let paramStr = String(data: data, encoding: .utf8) {
+            Just.post("https://pcs.baidu.com/rest/2.0/pcs/file",
+                      params: ["method": "delete",
+                               "access_token": "\(Preferences.shared.baiduToken)",
+                        "param": paramStr]) {
+                        if let error = $0.content?.decode(PCSError.self),
+                            !error.isError {
+                            DataManager.shared.deletePCSFile(paths)
+                        } else {
+                            self.getFileList(forPath: self.selectedPath)
+                        }
+            }
+        }
+    }
+    
 	func getDownloadUrls(FromPCS path: String, block: @escaping (_ dlinks: [String]) -> Void) {
 		let URLString = ["https://pcs.baidu.com/rest/2.0/pcs/file?",
 		                 "https://www.baidupcs.com/rest/2.0/pcs/file?",
 		                 "https://www.baidupcs.com/rest/2.0/pcs/stream?",
 		                 "https://c.pcs.baidu.com/rest/2.0/pcs/file?"]
 		
-		
-		let encodePath = path.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? "/"
-		let params = "method=download&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)"
-		
+        var reserved = CharacterSet.urlQueryAllowed
+        reserved.remove(charactersIn: ": #[]@!$&'()*+, ;=")
+        
+        let encodePath = path.addingPercentEncoding(withAllowedCharacters: reserved) ?? "/"
+        let params = "method=download&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)"
 		
 		let urls = URLString.map {
 			$0 + params
@@ -177,8 +188,12 @@ extension Baidu {
 					}.map {
 						$0.path
 				}.forEach { path in
-					let encodePath = path.addingPercentEncoding(withAllowedCharacters: self.allowedCharacterSet) ?? ""
-					Just.post("https://pcs.baidu.com/rest/2.0/pcs/file?method=list&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)", headers: self.userAgent) {
+
+                    Just.post("https://pcs.baidu.com/rest/2.0/pcs/file",
+                              params: ["method": "list",
+                                       "access_token": "\(Preferences.shared.baiduToken)",
+                                "path": path],
+                              headers: self.userAgent) {
 						if let error = $0.content?.decode(PCSError.self),
 							!error.isError,
 							Preferences.shared.baiduFolder != path {
@@ -194,8 +209,11 @@ extension Baidu {
 	}
 	
 	func checkAppsFolder(_ block: @escaping (_ effective: Bool) -> Void) {
-		let encodePath = Preferences.shared.baiduFolder.addingPercentEncoding(withAllowedCharacters: self.allowedCharacterSet) ?? ""
-		Just.post("https://pcs.baidu.com/rest/2.0/pcs/file?method=list&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)", headers: self.userAgent) {
+        Just.post("https://pcs.baidu.com/rest/2.0/pcs/file",
+                  params: ["method": "list",
+                           "access_token": "\(Preferences.shared.baiduToken)",
+                    "path": Preferences.shared.baiduFolder],
+                  headers: self.userAgent) {
 			if let error = $0.content?.decode(PCSError.self) {
 				block(error.isError)
 			} else {
@@ -203,5 +221,4 @@ extension Baidu {
 			}
 		}
 	}
-	
 }
