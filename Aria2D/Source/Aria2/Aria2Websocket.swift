@@ -66,78 +66,19 @@ class Aria2Websocket: NSObject {
 		guard url?.host != nil else { return }
 		socket = WebSocket(url: url!)
 		socket.callbackQueue = DispatchQueue(label: "com.xjbeta.Aria2D.starscream")
-		socket.onConnect = {
-			self.isConnected = true
-			Aria2.shared.initData()
-			Aria2.shared.getVersion { (v, str) in
-				self.connectedServerInfo.version = "Version: \(v)"
-				self.connectedServerInfo.enabledFeatures = str
-			}
-			
-			
-			Aria2.shared.getGlobalOption()
-			self.connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
-			ViewControllersManager.shared.showHUD(.connected)
-
-		}
-		socket.onDisconnect = {
-			self.isConnected = false
-			self.connectedServerInfo.version = $0?.localizedFailureReason ?? ""
-			self.connectedServerInfo.enabledFeatures = ""
-			self.aria2GlobalOption = [:]
-			DataManager.shared.deleteAllAria2Objects()
-		}
-		socket.onText = {
-			if let data = $0.data(using: .utf8) {
-				self.handle(data)
-			}
-		}
+		socket.delegate = self
 
 		socket.connect()
 		startTimer()
 	}
 
-	func handle(_ data: Data) {
-		if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
-			json.id.count == 36 {
-			socket.received(data, withID: json.id)
-		} else if let json = try? JSONDecoder().decode(JSONNotice.self, from: data) {
-			let gids = json.params.map { $0.gid }
-			switch json.method {
-			case .onDownloadStart:
-				Aria2.shared.updateStatus(gids)
-				ViewControllersManager.shared.showHUD(.downloadStart)
-			case .onDownloadPause:
-				Aria2.shared.updateStatus(gids)
-			case .onDownloadError:
-				Aria2.shared.updateStatus(gids)
-			case .onDownloadComplete, .onBtDownloadComplete:
-				Aria2.shared.updateStatus(gids)
-				if !NSApp.isActive && Preferences.shared.completeNotice {
-					gids.forEach {
-						showNotification($0)
-					}
-				}
-				ViewControllersManager.shared.showHUD(.downloadCompleted)
-			case .onDownloadStop:
-				Aria2.shared.updateStatus(gids)
-			}
-			if Preferences.shared.developerMode ,Preferences.shared.recordWebSocketLog {
-				var log = WebSocketLog()
-				log.method = json.method.rawValue
-				log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
-				log.success = true
-				log.time = Date().timeIntervalSince1970
-				ViewControllersManager.shared.webSocketLog.append(log)
-			}
-		}
-	}
+
 
 	
 	func showNotification(_ gid: String) {
 		let notification = NSUserNotification()
 		notification.title = "Completed"
-		let obj = DataManager.shared.data(Aria2Object.self).filter({ $0.gid == gid }).first
+        let obj = DataManager.shared.data(Aria2Object.self).filter({ $0.gid == gid }).first
 		notification.subtitle = obj?.path()?.lastPathComponent ?? "Unknown"
 		
 		if let totalLength = obj?.totalLength {
@@ -192,4 +133,69 @@ class Aria2Websocket: NSObject {
 	}
 
 }
-
+extension Aria2Websocket: WebSocketDelegate {
+	func websocketDidConnect(socket: WebSocket) {
+		isConnected = true
+		Aria2.shared.initData()
+		Aria2.shared.getVersion { (v, str) in
+			self.connectedServerInfo.version = "Version: \(v)"
+			self.connectedServerInfo.enabledFeatures = str
+		}
+		
+		
+		Aria2.shared.getGlobalOption()
+		self.connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
+		ViewControllersManager.shared.showHUD(.connected)
+	}
+	
+	func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+		isConnected = false
+		connectedServerInfo.version = error?.localizedFailureReason ?? ""
+		connectedServerInfo.enabledFeatures = ""
+		aria2GlobalOption = [:]
+		DataManager.shared.deleteAllAria2Objects()
+	}
+	
+	func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+		if let data = text.data(using: .utf8) {
+			if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
+				json.id.count == 36 {
+				socket.received(data, withID: json.id)
+			} else if let json = try? JSONDecoder().decode(JSONNotice.self, from: data) {
+				let gids = json.params.map { $0.gid }
+				switch json.method {
+				case .onDownloadStart:
+					Aria2.shared.updateStatus(gids)
+					ViewControllersManager.shared.showHUD(.downloadStart)
+				case .onDownloadPause:
+					Aria2.shared.updateStatus(gids)
+				case .onDownloadError:
+					Aria2.shared.updateStatus(gids)
+				case .onDownloadComplete, .onBtDownloadComplete:
+					Aria2.shared.updateStatus(gids)
+					if !NSApp.isActive && Preferences.shared.completeNotice {
+						gids.forEach {
+							showNotification($0)
+						}
+					}
+					ViewControllersManager.shared.showHUD(.downloadCompleted)
+				case .onDownloadStop:
+					Aria2.shared.updateStatus(gids)
+				}
+				if Preferences.shared.developerMode ,Preferences.shared.recordWebSocketLog {
+					var log = WebSocketLog()
+					log.method = json.method.rawValue
+					log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
+					log.success = true
+					log.time = Date().timeIntervalSince1970
+					ViewControllersManager.shared.webSocketLog.append(log)
+				}
+			}
+		}
+	}
+	
+	func websocketDidReceiveData(socket: WebSocket, data: Data) {
+		
+	}
+	
+}
