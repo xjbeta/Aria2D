@@ -15,3 +15,15 @@ extension Int64 {
 		return formatter.string(fromByteCount: self)
 	}
 }
+
+
+extension Double {
+    func percentageFormat() -> String {
+        var str = String(format: "%.1f", Float(self))
+        if str.hasSuffix(".0") {
+            let range = str.characters.index(str.endIndex, offsetBy: -2)..<str.endIndex
+            str.removeSubrange(range)
+        }
+        return str
+    }
+}
