@@ -52,8 +52,6 @@
 		016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */; };
 		016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */; };
 		016C98F91DB1C0A000955C09 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C98F81DB1C0A000955C09 /* HUD.swift */; };
-		016CDC961E6E7127000F9F88 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CDC951E6E7127000F9F88 /* PreviewViewController.swift */; };
-		016CDC991E6E79B5000F9F88 /* MovableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CDC981E6E79B5000F9F88 /* MovableImageView.swift */; };
 		016CF8F61ED52E5C001336F1 /* Aria2OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */; };
 		016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */; };
 		016FDC751E7A70DA00E01B35 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC741E7A70DA00E01B35 /* OptionsViewController.swift */; };
@@ -178,8 +176,6 @@
 		016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2DWindow.swift; sourceTree = "<group>"; };
 		016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2D.swift; sourceTree = "<group>"; };
 		016C98F81DB1C0A000955C09 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
-		016CDC951E6E7127000F9F88 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		016CDC981E6E79B5000F9F88 /* MovableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovableImageView.swift; sourceTree = "<group>"; };
 		016CF8F41ED41618001336F1 /* Aria2D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Aria2D.entitlements; sourceTree = "<group>"; };
 		016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
 		016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteFileFormatter.swift; sourceTree = "<group>"; };
@@ -347,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				016FDC781E7B9BD600E01B35 /* OptionsWindow */,
-				016CDC971E6E712A000F9F88 /* PreviewView */,
 				0137D26E1E9A19D200CEE540 /* StatusWindow */,
 				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
 				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
@@ -357,6 +352,7 @@
 				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
 				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
 				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
+				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
 			);
 			path = Downloads;
 			sourceTree = "<group>";
@@ -387,16 +383,6 @@
 				016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */,
 			);
 			path = AboutAria2D;
-			sourceTree = "<group>";
-		};
-		016CDC971E6E712A000F9F88 /* PreviewView */ = {
-			isa = PBXGroup;
-			children = (
-				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
-				016CDC981E6E79B5000F9F88 /* MovableImageView.swift */,
-				016CDC951E6E7127000F9F88 /* PreviewViewController.swift */,
-			);
-			path = PreviewView;
 			sourceTree = "<group>";
 		};
 		016FDC781E7B9BD600E01B35 /* OptionsWindow */ = {
@@ -623,7 +609,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016CDC991E6E79B5000F9F88 /* MovableImageView.swift in Sources */,
 				012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */,
 				018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */,
 				0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */,
@@ -654,7 +639,6 @@
 				018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */,
 				0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
-				016CDC961E6E7127000F9F88 /* PreviewViewController.swift in Sources */,
 				0182D0FD1D2DF23000810419 /* LeftSourceListModule.swift in Sources */,
 				01BC4F931E4324D100417221 /* SetPCSViewController.swift in Sources */,
 				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,

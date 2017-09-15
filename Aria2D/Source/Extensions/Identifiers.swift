@@ -8,8 +8,6 @@
 
 import Foundation
 extension NSStoryboardSegue.Identifier {
-	
-	static let showPreviewViewController = NSStoryboardSegue.Identifier(rawValue: "showPreviewViewController")
 	static let showBaiduDlinksProgress = NSStoryboardSegue.Identifier(rawValue: "showBaiduDlinksProgress")
 	static let showOptionsWindow = NSStoryboardSegue.Identifier(rawValue: "showOptionsWindow")
 	static let showStatusWindow = NSStoryboardSegue.Identifier(rawValue: "showStatusWindow")

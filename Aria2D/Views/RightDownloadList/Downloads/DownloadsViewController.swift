@@ -41,42 +41,14 @@ class DownloadsViewController: NSViewController {
 
 	var dlinksProgress: BaiduDlinksProgress!
 	
-//    var previewViewController: PreviewViewController?
-    
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
         ViewControllersManager.shared.selectedRow = .downloading
 		initNotification()
 	}
-	
-
-    
-        
-    /*
-    override func keyDown(with event: NSEvent) {
-        if event.keyCode == 49 &&
-            downloadsTableView.selectedRowIndexes.count > 0 &&
-            ViewControllersManager.shared.selectedRow != .baidu {
-            performSegue(withIdentifier: showPreviewViewController, sender: self)
-        } else {
-            super.keyDown(with: event)
-        }
-    }
-    */
-
 
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        
-        
-//        if segue.identifier == .showPreviewViewController {
-//            if let vc = segue.destinationController as? PreviewViewController {
-//                vc.dataSource = self
-//                vc.delegate = self
-//            }
-//        } else
-            
-			
+
 		if segue.identifier == .showBaiduDlinksProgress {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
 				vc.dataSource = self
@@ -265,20 +237,3 @@ extension DownloadsViewController: BaiduDlinksDataSource {
 		}
 	}
 }
-//extension DownloadsViewController: PreviewViewDataSource, PreviewViewDelegate {
-//    func dataOfPreviewObjects() -> [TaskObject] {
-//        return DataManager.shared.data(TaskObject.self).enumerated().filter {
-//            downloadsTableView.selectedRowIndexes.contains($0.offset)
-//            }.map {
-//                $0.element
-//        }
-//    }
-//    func selectedRowIndexes() -> IndexSet {
-//        return downloadsTableView.selectedRowIndexes
-//    }
-//    
-//    func preview(handel event: NSEvent) {
-//        self.downloadsTableView.keyDown(with: event)
-//    }
-//}
-
