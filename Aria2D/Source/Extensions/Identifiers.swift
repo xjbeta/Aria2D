@@ -23,7 +23,8 @@ extension NSUserInterfaceItemIdentifier {
 	
 	static let downloadsTableCell = NSUserInterfaceItemIdentifier(rawValue: "downloadsTableCell")
 	static let baiduFileListCell = NSUserInterfaceItemIdentifier(rawValue: "baiduFileListCell")
-	
+    static let receivedJSONTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "ReceivedJSONTableCellView")
+    
 }
 
 extension NSStoryboard.SceneIdentifier {

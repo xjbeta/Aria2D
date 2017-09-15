@@ -49,25 +49,34 @@ class LogViewController: NSViewController, NSTableViewDelegate, NSTableViewDataS
 		return webSocketLog.count
 	}
 	
-	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		if let identifier = tableColumn?.identifier.rawValue, let log = webSocketLog[safe: row] {
-			switch identifier {
+	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+		if let identifier = tableColumn?.identifier,
+            let log = webSocketLog[safe: row] {
+            var text = ""
+			switch identifier.rawValue {
 			case "LogTableTime":
 				let date = Date(timeIntervalSince1970: log.time)
 				let formatter = DateFormatter()
 				formatter.dateFormat = "HH:mm:ss"				
-				return formatter.string(from: date)
+				text = formatter.string(from: date)
 			case "LogTableMethod":
-				return log.method
+				text = log.method
 			case "LogTableSuccess":
-				return "\(log.success)"
+				text = "\(log.success)"
 			case "LogTableSendJSON":
-				return log.sendJSON
+				text = log.sendJSON
 			case "LogTableReceivedJSON":
-				return log.receivedJSON
+                if let cell = tableView.makeView(withIdentifier: .receivedJSONTableCellView, owner: nil) as? ReceivedJSONTableCellView {
+                    cell.text = log.receivedJSON
+                    return cell
+                }
 			default:
-				break
+				return nil
 			}
+            if let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
+                cell.textField?.stringValue = text
+                return cell
+            }
 		}
 		return nil
 	}
