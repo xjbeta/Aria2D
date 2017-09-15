@@ -166,12 +166,6 @@ class Generalview: NSViewController {
 			self.controlsView.subviews.forEach {
 				if let control = $0 as? NSControl {
 					control.isEnabled = enable
-				} else if let stackView = $0 as? NSStackView {
-					stackView.arrangedSubviews.forEach {
-						if let control = $0 as? NSControl {
-							control.isEnabled = enable
-						}
-					}
 				}
 			}
 		}
