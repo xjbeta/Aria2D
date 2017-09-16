@@ -1593,7 +1593,7 @@ CA
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="AwJ-gN-o0G">
                                                                             <rect key="frame" x="456" y="4" width="110" height="32"/>
                                                                             <subviews>
-                                                                                <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="VM6-LB-Kra">
+                                                                                <progressIndicator maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="VM6-LB-Kra">
                                                                                     <rect key="frame" x="0.0" y="13" width="110" height="20"/>
                                                                                 </progressIndicator>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="eHu-ST-xug">
