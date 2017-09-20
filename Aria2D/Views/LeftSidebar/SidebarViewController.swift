@@ -16,6 +16,8 @@ class SidebarViewController: NSViewController {
 	
 	var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
+    var newTaskViewFile = ""
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initIndicator()
@@ -39,13 +41,27 @@ class SidebarViewController: NSViewController {
 
 	
 	func initNotification() {
-		NotificationCenter.default.addObserver(self, selector: #selector(showNewTask), name: .newTask, object: nil)
+        NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
+            if let userInfo = $0.userInfo as? [String: String], let file = userInfo["file"] {
+                self.newTaskViewFile = file
+            }
+            self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
+        }
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .resetLeftOutlineView, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .developerModeChanged, object: nil)
 	}
 	
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let vc = segue.destinationController as? NewTaskViewController {
+            if newTaskViewFile != "" {
+                vc.fileURL = URL(fileURLWithPath: newTaskViewFile)
+            }
+            newTaskViewFile = ""
+        }
+    }
 	
 	func setDefaultData() {
 		if Baidu.shared.isLogin && Preferences.shared.developerMode {
@@ -91,9 +107,7 @@ class SidebarViewController: NSViewController {
 	
 	
 	@objc func showNewTask() {
-		if Aria2Websocket.shared.isConnected {
-			performSegue(withIdentifier: .showNewTaskViewController, sender: self)
-		}
+        performSegue(withIdentifier: .showNewTaskViewController, sender: self)
 	}
 	
 

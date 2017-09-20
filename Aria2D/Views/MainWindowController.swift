@@ -8,16 +8,17 @@
 
 import Cocoa
 
-class MainWindowController: NSWindowController {
+class MainWindowController: NSWindowController, NSDraggingDestination {
 	
 	var hud: HUD?
-	
+
     override func windowDidLoad() {
         super.windowDidLoad()
 		if let window = window {
 			window.titlebarAppearsTransparent = true
 			window.titleVisibility = .hidden
 			window.isMovableByWindowBackground = true
+            window.registerForDraggedTypes([NSPasteboard.PasteboardType(kUTTypeURL as String)])
 			if let view = window.contentView {
 				hud = HUD(view)
 			}
@@ -35,6 +36,25 @@ class MainWindowController: NSWindowController {
 		}
 	}
 	
+    func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        if let urls = sender.draggingPasteboard().readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
+            return urls.contains {
+                $0.pathExtension == "torrent"
+            } ? .copy : []
+        }
+        return []
+    }
+
+    func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        if let urls = sender.draggingPasteboard().readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
+            if let url = urls.filter({ $0.pathExtension == "torrent" }).first {
+                ViewControllersManager.shared.openTorrent(url.path)
+                return true
+            }
+        }
+        return false
+    }
+    
 	
 	func showHUD(message: hudMessage) {
 		hud?.showHUD(message)

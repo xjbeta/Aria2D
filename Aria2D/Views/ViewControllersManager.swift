@@ -17,6 +17,12 @@ class ViewControllersManager: NSObject {
         super.init()
     }
 	
+    
+    // NewTask Window
+    func openTorrent(_ file: String) {
+        NotificationCenter.default.post(name: .newTask, object: nil, userInfo: ["file": file])
+    }
+    
 	
 	// MainWindow HUD
 	func showHUD(_ message: hudMessage) {

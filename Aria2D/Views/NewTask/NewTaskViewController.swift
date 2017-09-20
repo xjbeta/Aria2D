@@ -53,20 +53,42 @@ class NewTaskViewController: NSViewController {
 	let enableOptions = false
 	
 	var torrentTask = false
-	var torrentData = ""
+    
+    
+    var fileURL: URL? = nil {
+        didSet {
+            if let url = fileURL {
+                self.setTorrentPath(url)
+                self.showTorrentPath(true)
+            }
+        }
+    }
+    var torrentData: String {
+        get {
+            do {
+                if let url = fileURL {
+                    return try Data(contentsOf: url).base64EncodedString()
+                }
+            } catch { }
+            return ""
+        }
+    }
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		showOptionsStackView.isHidden = !enableOptions
-		showTorrentPath(false)
 		preferredContentSize = view.frame.size
 		
 		// init optionsView
 		optionsView.isHidden = true
 		optionsViewHeight.constant = 0
+        if let url = fileURL {
+            setTorrentPath(url)
+            showTorrentPath(true)
+        } else {
+            showTorrentPath(false)
+        }
 		
-		
-//		optionsRuleEditor.setCriteria([1, 2, 3], andDisplayValues: [1, 2, 3], forRowAt: 0)
     }
 	
 	func selectTorrentFile() {
@@ -77,13 +99,7 @@ class NewTaskViewController: NSViewController {
 		if let window = view.window {
 			openPanel.beginSheetModal(for: window) { result in
 				if result == .OK, let path = openPanel.url {
-					do {
-						self.torrentData = try Data(contentsOf: path).base64EncodedString()
-						self.setTorrentPath(path)
-						self.showTorrentPath(true)
-					} catch {
-						return
-					}
+                    self.fileURL = path
 				}
 			}
 		}

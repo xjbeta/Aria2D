@@ -61,6 +61,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationWillTerminate(_ notification: Notification) {
 		Aria2.shared.aria2c.autoClose()
 	}
+    
+    func application(_ sender: NSApplication, openFiles filenames: [String]) {
+        if let file = filenames.first {
+            ViewControllersManager.shared.openTorrent(file)
+        }
+    }
+    
 }
 
 extension AppDelegate: DevMateKitDelegate {
