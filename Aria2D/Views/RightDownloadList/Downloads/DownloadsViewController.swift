@@ -126,13 +126,6 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		return nil
 	}
 	
-	func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-		rowView.canDrawSubviewsIntoLayer = true
-	}
-	
-
-	
-	
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
 		return downloadsTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("DownloadsTableRowView"), owner: self) as? DownloadsTableRowView
 		
