@@ -1,4 +1,6 @@
 github "DevMate/DevMateKit" "v1.7.1"
 github "JustHTTP/Just" "0.6.0"
-github "daltoniam/Starscream" "2.1.0"
+github "daltoniam/Starscream" "3.0.1"
+github "daltoniam/common-crypto-spm" "1.1.0"
+github "daltoniam/zlib-spm" "1.1.0"
 github "realm/realm-cocoa" "b76e4956bc6e7351c562ec27ef5452a534692dbe"

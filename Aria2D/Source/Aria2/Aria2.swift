@@ -517,7 +517,7 @@ fileprivate extension Aria2 {
 				return str
 			}()
 			
-			Aria2Websocket.shared.socket.write(str, withID: id, method: methodName) {
+			Aria2Websocket.shared.write(str, withID: id, method: methodName) {
 				block($0)
 			}
 		}
@@ -569,91 +569,6 @@ extension String {
 	}
 }
 
-extension WebSocket {
-
-	private class WaitingList: NSObject {
-		static let shared = WaitingList()
-		
-		fileprivate override init() {
-		}
-		
-		private var contents: [String: Data] = [:]
-		private var semaphores: [String: DispatchSemaphore] = [:]
-		private var lock = NSLock()
-		
-		func add(_ key: String, block: @escaping (_ value: Data, _ timeOut: Bool) -> Void) {
-			let semaphore = DispatchSemaphore(value: 0)
-            lock.lock()
-			semaphores[key] = semaphore
-            lock.unlock()
-			DispatchQueue.global().async {
-				switch semaphore.wait(timeout: .now() + .seconds(60)) {
-				case .success:
-					block(self.contents[key] ?? Data(), false)
-				case .timedOut:
-					block(Data(), true)
-				}
-				WaitingList.shared.remove(key)
-			}
-		}
-		
-		func update(_ key: String, value: Data) {
-			lock.lock()
-			contents[key] = value
-			semaphores[key]?.signal()
-			lock.unlock()
-		}
-		
-		private func remove(_ key: String) {
-			lock.lock()
-			defer {
-				lock.unlock()
-			}
-			if !contents.isEmpty {
-				contents.removeValue(forKey: key)
-			}
-			if !semaphores.isEmpty {
-				semaphores.removeValue(forKey: key)
-			}
-		}       
-	}
-	
-	func write(_ dic: [String: Any],
-	           withID id: String,
-	           method: String,
-	           completion: @escaping (_ result: webSocketResult) -> Void) {
-		let time = Date().timeIntervalSince1970
-		WaitingList.shared.add(id) { (data, timeOut) in
-			// Save log
-			if Preferences.shared.developerMode,
-				Preferences.shared.recordWebSocketLog {
-				var log = WebSocketLog()
-				log.method = method
-				log.sendJSON = "\(dic)"
-				log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
-				log.success = !timeOut
-				log.time = time
-				ViewControllersManager.shared.webSocketLog.append(log)
-			}
-			
-			if !timeOut {
-				completion(.success(data: data))
-			} else {
-				completion(.timeOut)
-			}
-		}
-		do {
-			self.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
-		} catch {
-			completion(.somethingError)
-			return
-		}
-	}
-	
-	func received(_ value: Data, withID id: String) {
-		WaitingList.shared.update(id, value: value)
-	}
-}
 
 enum webSocketResult {
 	case success(data: Data)
