@@ -17,9 +17,5 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
         window?.titleVisibility = .hidden
 		//Set color
 		window?.backgroundColor = .customBackgroundColor
-		window?.contentView?.wantsLayer = true
     }
-	
-
-
 }

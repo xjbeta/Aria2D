@@ -31,20 +31,21 @@ class PreferencesTabViewController: NSTabViewController {
 	
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, willSelect: tabViewItem)
-		if let item = tabViewItem {
-			if (item.view as? ViewWithBackgroundColor)?.size == nil {
-				(item.view as? ViewWithBackgroundColor)?.size = item.view?.frame.size
-			}
-		}
+        if let item = tabViewItem {
+            if (item.view as? ViewWithBackgroundColor)?.size == nil {
+                (item.view as? ViewWithBackgroundColor)?.size = item.view?.frame.size
+            }
+        }
 	}
 	
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, didSelect: tabViewItem)
-		
-        if let window = self.view.window,
-			let item = tabViewItem,
-			let size = (item.view as? ViewWithBackgroundColor)?.size {
-			window.autoResize(toFill: size)
+        if let size = (tabViewItem?.view as? ViewWithBackgroundColor)?.size {
+            if let window = self.view.window {
+                window.autoResize(toFill: size)
+            } else {
+                self.view.setFrameSize(size)
+            }
         }
     }
 	
