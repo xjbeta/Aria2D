@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			
 			NSApp.terminate(self)
 		}
-		
+        
 		
 		self.setDevMate()
 		Aria2Websocket.shared.initSocket()
@@ -63,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
     
     func application(_ sender: NSApplication, openFiles filenames: [String]) {
-        if let file = filenames.first {
+        if let file = filenames.filter({ FileManager.default.fileExists(atPath: $0) }).first {
             ViewControllersManager.shared.openTorrent(file)
         }
     }
