@@ -49,6 +49,15 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .recordWebSocketLog)
 		}
 	}
+    
+    var hideActiveLog: Bool {
+        get {
+            return defaults(.hideActiveLog) as? Bool ?? true
+        }
+        set {
+            defaultsSet(newValue, forKey: .hideActiveLog)
+        }
+    }
 	
 	
 	@objc var developerMode: Bool {

@@ -17,6 +17,7 @@ enum PreferenceKeys: String {
 	case sortValue = "app_baidu_sortValue"
 	case aria2ServersData = "app_aria2ServersData"
 	case recordWebSocketLog = "app_recordWebSocketLog"
+    case hideActiveLog = "app_hideActiveLog"
 	
 	case developerMode = "app_developerMode"
 	case useForce = "app_useForce"
