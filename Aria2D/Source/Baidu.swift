@@ -15,6 +15,15 @@ class Baidu: NSObject {
 	private override init() {
 		
 	}
+    
+    let cdnList = ["https://pcs.baidu.com",
+                   "https://www.baidupcs.com",
+                   "https://c.pcs.baidu.com",
+                   "https://d.pcs.baidu.com",
+                   "https://nj.baidupcs.com",
+                   "https://bj.baidupcs.com",
+                   "https://qd.baidupcs.com",
+                   "https://ipv6.baidupcs.com"]
 	
 	var isLogin = false {
 		didSet {
@@ -162,11 +171,13 @@ extension Baidu {
     }
     
 	func getDownloadUrls(FromPCS path: String, block: @escaping (_ dlinks: [String]) -> Void) {
-		let URLString = ["https://pcs.baidu.com/rest/2.0/pcs/file?",
-		                 "https://www.baidupcs.com/rest/2.0/pcs/file?",
-		                 "https://www.baidupcs.com/rest/2.0/pcs/stream?",
-		                 "https://c.pcs.baidu.com/rest/2.0/pcs/file?"]
-		
+        
+        let URLString = cdnList.map {
+            $0 + "/rest/2.0/pcs/file?"
+            } + cdnList.map {
+                $0 + "/rest/2.0/pcs/stream?"
+        }
+
         var reserved = CharacterSet.urlQueryAllowed
         reserved.remove(charactersIn: ": #[]@!$&'()*+, ;=")
         
