@@ -108,7 +108,7 @@ class SetPCSViewController: NSViewController, WKNavigationDelegate {
 		if let str = webView.url?.absoluteString {
 			if str.contains("https://openapi.baidu.com/oauth/2.0/login_success") {
 				let token = str.subString(from: "access_token=", to: "&")
-				if token.characters.count == 71 {
+				if token.count == 71 {
 					Preferences.shared.baiduToken = token
 					Baidu.shared.checkToken(nil)
 					hideWebView()

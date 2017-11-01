@@ -617,7 +617,7 @@ struct UnitNumber {
 				rawValue = int
 			}
 		} else if let int = UInt64(intStr),
-			let last = string.characters.last {
+			let last = string.last {
 			var value: UInt64 = 0
 			switch last {
 			case "K":

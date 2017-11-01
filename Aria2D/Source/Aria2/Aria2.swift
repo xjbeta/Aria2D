@@ -233,7 +233,7 @@ class Aria2: NSObject {
 
 		var options: [String: String] = ["out": name,
 			"continue": "true",
-			"split": "50",
+            "split": "50",
 			"max-connection-per-server": "16",
 			"min-split-size": "1M",
 			"user-agent": "netdisk"]
@@ -498,7 +498,7 @@ fileprivate extension Aria2 {
 					str["jsonrpc"] = jsonrpc
 				}
 				
-				if Preferences.shared.aria2Servers.getSelectedToken().characters.count > 0 {
+				if Preferences.shared.aria2Servers.getSelectedToken().count > 0 {
 					let token = "token:\(Preferences.shared.aria2Servers.getSelectedToken())"
 					if var params = params {
 						if method != Aria2Method.multicall {
@@ -531,7 +531,7 @@ fileprivate extension Aria2 {
 			self.params = params
 		}
 		func object() -> [String: Any] {
-			if Preferences.shared.aria2Servers.getSelectedToken().characters.count > 0 {
+			if Preferences.shared.aria2Servers.getSelectedToken().count > 0 {
 				let token = "token:\(Preferences.shared.aria2Servers.getSelectedToken())"
 				if var p = params {
 					p.insert(token, at: 0)
@@ -551,7 +551,7 @@ fileprivate extension Aria2 {
 
 	
 	func effectiveGIDs(_ gids: [String]) -> [String] {
-		return gids.filter { $0.characters.count == 16 }
+		return gids.filter { $0.count == 16 }
 	}
 	
 }
@@ -562,8 +562,8 @@ extension String {
 //		base64 Encoded
 		let base64 = self.data(using: .utf8)?.base64EncodedString() ?? ""
 //		Percent Encoded
-		if base64.characters.last == "=" {
-			return String(base64.characters.dropLast()) + "%3D"
+		if base64.last == "=" {
+			return String(base64.dropLast()) + "%3D"
 		}
 		return ""
 	}
