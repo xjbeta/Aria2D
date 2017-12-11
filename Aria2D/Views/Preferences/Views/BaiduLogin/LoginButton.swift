@@ -24,6 +24,15 @@ class LoginButton: NSButton {
 		case button, top, out
 	}
 	
+    var shouldHighlight = true {
+        didSet {
+            if !shouldHighlight {
+                mouseLocation = .out
+                isHighlighted = false
+            }
+        }
+    }
+    
 	var mouseLocation: mouseLocations = .out {
 		didSet {
 			if mouseLocation != oldValue {
@@ -60,6 +69,7 @@ class LoginButton: NSButton {
 	
 	override func mouseEntered(with event: NSEvent) {
 		super.mouseExited(with: event)
+        guard shouldHighlight else { return }
 		setTitle(with: event)
 		isHighlighted = true
 	}
@@ -72,6 +82,7 @@ class LoginButton: NSButton {
 	
 	override func mouseMoved(with event: NSEvent) {
 		super.mouseMoved(with: event)
+        guard shouldHighlight else { return }
 		setTitle(with: event)
 		isHighlighted = true
 	}
@@ -87,9 +98,10 @@ class LoginButton: NSButton {
             removeTrackingArea($0)
         }
         addTrackingArea(NSTrackingArea(rect: bounds,
-                                       options: [.mouseEnteredAndExited, .activeWhenFirstResponder, .mouseMoved],
+                                       options: [.mouseEnteredAndExited, .activeInKeyWindow, .mouseMoved],
                                        owner: self,
                                        userInfo: nil))
+        
     }
 	
 }

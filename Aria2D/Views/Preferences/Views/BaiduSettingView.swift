@@ -32,33 +32,28 @@ class BaiduSettingView: NSViewController {
         loginButton.mouseLocation = .out
 		return
 	}
-	
-
-	
-	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-		if segue.identifier == .showLoginView {
-			if let vc = segue.destinationController as? BaiduLoginViewController {
-				vc.onViewControllerDismiss = {
-					self.view.window?.makeFirstResponder(self.loginButton)
-				}
-			}
-		} else if segue.identifier == .showPCSView {
-			if let vc = segue.destinationController as? SetPCSViewController {
-				vc.onViewControllerDismiss = {
-					self.view.window?.makeFirstResponder(self.loginButton)
-				}
-			}
-		}
-	}
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        loginButton.shouldHighlight = false
+        if let vc = segue.destinationController as? SetPCSViewController {
+            vc.onViewControllerDismiss = {
+                self.loginButton.shouldHighlight = true
+            }
+        } else if let vc = segue.destinationController as? BaiduLoginViewController {
+            vc.onViewControllerDismiss = {
+                self.loginButton.shouldHighlight = true
+            }
+        }
+    }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.window?.makeFirstResponder(self.loginButton)
+        view.window?.makeFirstResponder(self.loginButton)
 		initUserInfo()
 		NotificationCenter.default.addObserver(self, selector: #selector(initUserInfo), name: .updateUserInfo, object: nil)
 	}
-	
-	
+    
+    
 	@objc func initUserInfo() {
 		if Baidu.shared.isLogin {
 			Baidu.shared.getUserInfo { name, image, capacity in
