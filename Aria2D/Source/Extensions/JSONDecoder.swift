@@ -18,6 +18,7 @@ extension Data {
 		} catch let error {
 			Log(methodName)
 			Log(error)
+            Log(String(data: self, encoding: .utf8))
 			return nil
 		}
 	}
