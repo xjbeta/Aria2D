@@ -87,6 +87,7 @@ class ViewControllersManager: NSObject {
     
     var selectedRow: SidebarItem = .none {
         willSet {
+            selectedIndexs = IndexSet()
             if newValue == .baidu {
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
             }
@@ -98,9 +99,9 @@ class ViewControllersManager: NSObject {
 
 	// DownloadsTableView selectedIndexs
     var selectedIndexs = IndexSet()
-	func showOptions() {
-		NotificationCenter.default.post(name: .showOptionsWindow, object: nil)
-	}
+    func showOptions() {
+        NotificationCenter.default.post(name: .showOptionsWindow, object: nil)
+    }
 	
 	func showSelectedInFinder() {
 		let urls = selectedUrls()
@@ -138,9 +139,9 @@ class ViewControllersManager: NSObject {
 	}
 	
 	
-	func showStatus() {
-		NotificationCenter.default.post(name: .showStatusWindow, object: nil)
-	}
+    func showStatus() {
+        NotificationCenter.default.post(name: .showStatusWindow, object: nil)
+    }
 	
 	// LogViewController
 	var webSocketLog: [WebSocketLog] = []
