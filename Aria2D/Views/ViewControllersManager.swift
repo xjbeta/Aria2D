@@ -83,17 +83,12 @@ class ViewControllersManager: NSObject {
 	
 	
     // LeftSourceList
-    var selectedRowDidSet: (() -> Void)?
-    
     var selectedRow: SidebarItem = .none {
         willSet {
             selectedIndexs = IndexSet()
             if newValue == .baidu {
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
             }
-        }
-        didSet {
-            selectedRowDidSet?()
         }
     }
 
