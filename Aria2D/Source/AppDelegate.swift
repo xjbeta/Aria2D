@@ -88,8 +88,8 @@ extension AppDelegate: DevMateKitDelegate {
 		
 	}
 	
-	@objc func feedbackController(_ controller: DMFeedbackController!, parentWindowFor mode: DMFeedbackMode) -> NSWindow? {
-		return self.window
+    @objc func feedbackController(_ controller: DMFeedbackController, parentWindowFor mode: DMFeedbackMode) -> NSWindow {
+        return self.window!
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
