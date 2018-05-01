@@ -233,7 +233,7 @@ class Aria2: NSObject {
 
 		var options: [String: String] = ["out": name,
 			"continue": "true",
-            "split": "50",
+			"split": "255",
 			"max-connection-per-server": "16",
 			"min-split-size": "1M",
 			"user-agent": "netdisk"]
