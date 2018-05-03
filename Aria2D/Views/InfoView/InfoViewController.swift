@@ -97,7 +97,7 @@ class InfoViewController: NSViewController {
             notificationToken = obj.observe { objectChange in
                 switch objectChange {
                 case .change(let properties):
-                    let propertieKeys = properties.flatMap({ Aria2Object.CodingKeys(rawValue: $0.name) })
+                    let propertieKeys = properties.compactMap({ Aria2Object.CodingKeys(rawValue: $0.name) })
                     
                     if propertieKeys.contains(where: [.status, .downloadSpeed, .uploadSpeed, .bittorrent].contains) {
                         switch obj.status {

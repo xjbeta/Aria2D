@@ -61,7 +61,7 @@ class Aria2: NSObject {
 						var result: [[[[String: String]]]]
 					}
 					
-					if let gids = data.decode(GIDList.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }).map ({ $0["gid"] }).flatMap ({ $0 }) {
+                    if let gids = data.decode(GIDList.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }).map ({ $0["gid"] }).compactMap ({ $0 }) {
 						DataManager.shared.sortAllObjects(gids)
 					}
 				default:
@@ -149,13 +149,13 @@ class Aria2: NSObject {
 						func errorObjs() -> [ErrorResult] {
 							return result.map {
 								$0.error
-								}.flatMap { $0 }
+                                }.compactMap { $0 }
 						}
 						
 						func initObjs() -> [Aria2Status] {
 							return result.map {
 								$0.dic
-								}.flatMap { $0 }.flatMap { $0 }
+                                }.compactMap { $0 }.flatMap { $0 }
 						}
 					}
 					if let result = data.decode(Result.self) {

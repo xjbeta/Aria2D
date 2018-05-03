@@ -111,7 +111,7 @@ class ViewControllersManager: NSObject {
 		guard Preferences.shared.aria2Servers.isLocal else { return }
 		DataManager.shared.data(Aria2Object.self).enumerated().filter {
 			selectedIndexs.contains($0.offset)
-			}.flatMap {
+            }.compactMap {
 			$0.element.path()
 			}.filter {
 				FileManager.default.fileExists(atPath: $0.path)
@@ -123,7 +123,7 @@ class ViewControllersManager: NSObject {
 	func selectedUrls() -> [URL] {
 		var urls = DataManager.shared.data(Aria2Object.self).enumerated().filter {
 			selectedIndexs.contains($0.offset)
-			}.flatMap {
+            }.compactMap {
 				$0.element.path()
 		}
 		

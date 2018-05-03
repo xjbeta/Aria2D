@@ -107,7 +107,7 @@ class DataManager: NSObject {
     
     func onDownloadRemove(_ gidList: [String]) {
         writeToRealm { realm in
-			let objs = gidList.flatMap {
+            let objs = gidList.compactMap {
 				realm.object(ofType: Aria2Object.self, forPrimaryKey: $0)
 			}
 			realm.delete(objs)
