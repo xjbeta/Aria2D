@@ -48,12 +48,10 @@ class BaiduSettingView: NSViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        view.window?.makeFirstResponder(self.loginButton)
 		initUserInfo()
 		NotificationCenter.default.addObserver(self, selector: #selector(initUserInfo), name: .updateUserInfo, object: nil)
 	}
-    
-    
+
 	@objc func initUserInfo() {
 		if Baidu.shared.isLogin {
 			Baidu.shared.getUserInfo { name, image, capacity in
