@@ -11,8 +11,10 @@
 			<array>
 				<string>torrent</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string></string>
 			<key>CFBundleTypeName</key>
-			<string>Aria2D</string>
+			<string>Torrent file</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
