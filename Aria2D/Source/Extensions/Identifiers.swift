@@ -9,8 +9,7 @@
 import Foundation
 extension NSStoryboardSegue.Identifier {
 	static let showBaiduDlinksProgress = NSStoryboardSegue.Identifier(rawValue: "showBaiduDlinksProgress")
-	static let showOptionsWindow = NSStoryboardSegue.Identifier(rawValue: "showOptionsWindow")
-	static let showStatusWindow = NSStoryboardSegue.Identifier(rawValue: "showStatusWindow")
+    static let showInfoWindow = NSStoryboardSegue.Identifier(rawValue: "showInfoWindow")
 	static let showNewTaskViewController = NSStoryboardSegue.Identifier(rawValue: "showNewTaskViewController")
 	static let showChangeOptionView = NSStoryboardSegue.Identifier(rawValue: "showChangeOptionView")
 	static let showSetServersViewController = NSStoryboardSegue.Identifier(rawValue: "showSetServersViewController")
@@ -25,7 +24,10 @@ extension NSUserInterfaceItemIdentifier {
 	static let downloadsTableCell = NSUserInterfaceItemIdentifier(rawValue: "downloadsTableCell")
 	static let baiduFileListCell = NSUserInterfaceItemIdentifier(rawValue: "baiduFileListCell")
     static let receivedJSONTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "ReceivedJSONTableCellView")
-    
+    static let statusDicTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusDicTableCellView")
+    static let statusSpaceTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusSpaceTableCellView")
+    static let statusBitfieldTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusBitfieldTableCellView")
+    static let statusCollectionViewItem = NSUserInterfaceItemIdentifier(rawValue: "StatusCollectionViewItem")
 }
 
 extension NSStoryboard.SceneIdentifier {

@@ -83,6 +83,8 @@ class ViewControllersManager: NSObject {
 	
 	
     // LeftSourceList
+    var selectedRowDidSet: (() -> Void)?
+
     var selectedRow: SidebarItem = .none {
         willSet {
             selectedIndexs = IndexSet()
@@ -90,13 +92,13 @@ class ViewControllersManager: NSObject {
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
             }
         }
+        didSet {
+            selectedRowDidSet?()
+        }
     }
 
 	// DownloadsTableView selectedIndexs
     var selectedIndexs = IndexSet()
-    func showOptions() {
-        NotificationCenter.default.post(name: .showOptionsWindow, object: nil)
-    }
 	
 	func showSelectedInFinder() {
 		let urls = selectedUrls()
@@ -134,8 +136,8 @@ class ViewControllersManager: NSObject {
 	}
 	
 	
-    func showStatus() {
-        NotificationCenter.default.post(name: .showStatusWindow, object: nil)
+    func showInfo() {
+        NotificationCenter.default.post(name: .showInfoWindow, object: nil)
     }
 	
 	// LogViewController

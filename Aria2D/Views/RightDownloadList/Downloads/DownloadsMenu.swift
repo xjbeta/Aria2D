@@ -37,11 +37,7 @@ class DownloadsMenu: NSMenu {
 				&& (selectedRow == .downloading || selectedRow == .completed || selectedRow == .removed)
 		}
 		
-		if menuItem.action == #selector(showOptions) {
-			return selectedIndexs.count > 0 && mainWindowFront
-		}
-		
-		if menuItem.action == #selector(showStatus) {
+        if menuItem.action == #selector(showInfo) {
 			return selectedIndexs.count > 0 && mainWindowFront
 		}
 		
@@ -72,13 +68,9 @@ class DownloadsMenu: NSMenu {
 		Aria2.shared.unPauseAll()
 	}
 	
-	@IBAction func showOptions(_ sender: Any) {
-		ViewControllersManager.shared.showOptions()
-	}
-	
-	@IBAction func showStatus(_ sender: Any) {
-		ViewControllersManager.shared.showStatus()
-	}
+    @IBAction func showInfo(_ sender: Any) {
+        ViewControllersManager.shared.showInfo()
+    }
 
 	@IBAction func showInFinder(_ sender: Any) {
 		ViewControllersManager.shared.showSelectedInFinder()

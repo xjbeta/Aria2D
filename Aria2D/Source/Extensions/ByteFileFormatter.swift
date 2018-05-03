@@ -24,6 +24,6 @@ extension Double {
             let range = str.index(str.endIndex, offsetBy: -2)..<str.endIndex
             str.removeSubrange(range)
         }
-        return str
+        return str + "%"
     }
 }

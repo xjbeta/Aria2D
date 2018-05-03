@@ -21,8 +21,7 @@ extension Notification.Name {
 	static let updateGlobalOption = Notification.Name("com.xjbeta.Aria2D.Aria2Websocket.updateGlobalOption")
 	
 	static let deleteFile = Notification.Name("com.xjbeta.Aria2D.BaiduFileListMenu.deleteFile")
-	static let showOptionsWindow = Notification.Name("com.xjbeta.Aria2D.BaiduFileListMenu.showOptionsWindow")
-	static let showStatusWindow = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.showStatusWindow")
+    static let showInfoWindow = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.showInfoWindow")
 	static let resetLeftOutlineView = Notification.Name("com.xjbeta.Aria2D.LeftSourceListView.resetLeftOutlineView")
 	static let developerModeChanged = Notification.Name("com.xjbeta.Aria2D.Preferences.developerModeChanged")
 	

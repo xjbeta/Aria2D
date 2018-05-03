@@ -16,7 +16,7 @@ class DataManager: NSObject {
 
 	}
 	
-	fileprivate var realm: Realm {
+	var realm: Realm {
 		let realmConfiguration = Realm.Configuration(inMemoryIdentifier: "InMemoryRealm")
 		return try! Realm(configuration: realmConfiguration)
 	}

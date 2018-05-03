@@ -216,3 +216,41 @@ struct OptionResult: Decodable {
 		}
 	}
 }
+
+@objc(Aria2Peer)
+class Aria2Peer: NSObject, Decodable {
+    @objc dynamic let peerId: String
+    let ip: String
+    let port: Int
+    let amChoking: Bool
+    let peerChoking: Bool
+    @objc dynamic let downloadSpeed: Int64
+    @objc dynamic let uploadSpeed: Int64
+    let seeder: Bool
+    
+    @objc dynamic let ipWithPort: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case peerId,
+        ip,
+        port,
+        amChoking,
+        peerChoking,
+        downloadSpeed,
+        uploadSpeed,
+        seeder
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        peerId = try values.decode(String.self, forKey: .peerId)
+        ip = try values.decode(String.self, forKey: .ip)
+        port = Int(try values.decode(String.self, forKey: .port)) ?? 0
+        amChoking = try values.decode(String.self, forKey: .amChoking) == "true"
+        peerChoking = try values.decode(String.self, forKey: .peerChoking) == "true"
+        downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
+        uploadSpeed = Int64(try values.decode(String.self, forKey: .uploadSpeed)) ?? 0
+        seeder = try values.decode(String.self, forKey: .seeder) == "true"
+        ipWithPort = ip + ":" + "\(port)"
+    }
+}

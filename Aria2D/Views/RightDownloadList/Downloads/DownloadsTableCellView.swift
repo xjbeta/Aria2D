@@ -64,11 +64,11 @@ class DownloadsTableCellView: NSTableCellView {
 			if obj.status != .complete, obj.totalLength != 0 {
 				progressIndicator.isHidden = false
 				progressIndicator.doubleValue = Double(obj.completedLength) / Double(obj.totalLength) * 100
-				percentage.stringValue = "\(progressIndicator.doubleValue.percentageFormat())%"
+				percentage.stringValue = progressIndicator.doubleValue.percentageFormat()
 			} else if obj.status == .active, obj.totalLength == 0 || obj.completedLength == 0 {
 				progressIndicator.isHidden = false
 				progressIndicator.doubleValue = 0
-				percentage.stringValue = "\(progressIndicator.doubleValue.percentageFormat())%"
+				percentage.stringValue = progressIndicator.doubleValue.percentageFormat()
 				
 			} else {
 				progressIndicator.isHidden = true
@@ -125,36 +125,6 @@ class DownloadsTableCellView: NSTableCellView {
 	deinit {
 		notificationToken?.invalidate()
 		gid = ""
-	}
-	
-}
-
-
-
-extension Aria2Object {
-	
-	func path() -> URL? {
-		if let name = bittorrent?.name, dir != "", name != "" {
-			return URL(fileURLWithPath: dir + name)
-		}
-		if let path = files.first?.path, path != "" {
-			return URL(fileURLWithPath: path)
-		}
-		return nil
-	}
-	
-	func nameString() -> String {
-		return path()?.lastPathComponent ?? "Unknown"
-	}
-	
-	func fileIcon() -> NSImage {
-		var image = NSImage()
-		if files.count > 1 || bittorrent?.mode == .multi {
-			image = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
-		} else {
-			image = NSWorkspace.shared.icon(forFileType: URL(fileURLWithPath: nameString()).pathExtension)
-		}
-		return image
 	}
 	
 }

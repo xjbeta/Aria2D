@@ -57,5 +57,51 @@ extension String {
 			}
 		#endif
 	}
+    
+//MARK: - String Path
+    var pathComponents: [String] {
+        get {
+            return (self.standardizingPath as NSString).pathComponents
+        }
+    }
+    
+    var lastPathComponent: String {
+        get {
+            return (self as NSString).lastPathComponent
+        }
+    }
+    
+    var standardizingPath: String {
+        get {
+            return (self as NSString).standardizingPath
+        }
+    }
+    
+    mutating func deleteLastPathComponent() {
+        self = (self.standardizingPath as NSString).deletingLastPathComponent
+    }
+    
+    mutating func deletePathExtension() {
+        self = (self.standardizingPath as NSString).deletingPathExtension
+    }
+    
+    mutating func appendingPathComponent(_ str: String) {
+        self = (self.standardizingPath as NSString).appendingPathComponent(str)
+    }
+    
+    func isChildPath(of url: String) -> Bool {
+        guard self.pathComponents.count > url.pathComponents.count else {
+            return false
+        }
+        var t = self.pathComponents
+        t.removeSubrange(url.pathComponents.count ..< self.pathComponents.count)
+        return t == url.pathComponents
+    }
+    
+    func isChildItem(of url: String) -> Bool {
+        var pathComponents = self.pathComponents
+        pathComponents.removeLast()
+        return pathComponents == url.pathComponents
+    }
 }
 
