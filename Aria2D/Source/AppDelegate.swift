@@ -50,13 +50,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 	
-	func applicationWillBecomeActive(_ notification: Notification) {
-		Aria2Websocket.shared.resumeTimer()
-	}
-	
-	func applicationWillResignActive(_ notification: Notification) {
-		Aria2Websocket.shared.suspendTimer()
-	}
 	
 	func applicationWillTerminate(_ notification: Notification) {
 		Aria2.shared.aria2c.autoClose()
