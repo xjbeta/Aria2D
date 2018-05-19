@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Starscream
 
 class Aria2: NSObject {
 	static let shared = Aria2()

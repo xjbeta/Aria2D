@@ -18,6 +18,8 @@
 		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
 		011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */; };
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
+		011F830C20ADC22200CA18E5 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 011F830B20ADC22100CA18E5 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		011F830E20ADC23000CA18E5 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */; };
 		012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */ = {isa = PBXBuildFile; fileRef = 012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; };
@@ -28,12 +30,9 @@
 		012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; };
 		012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEEA1F1461BC009E4110 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE01F1461BC009E4110 /* Starscream.framework */; };
-		012ADEEB1F1461BC009E4110 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEE01F1461BC009E4110 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEF31F1461CD009E4110 /* Just.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */; };
-		012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */; };
-		012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */; };
-		012ADEF61F1461CD009E4110 /* Starscream.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */; };
+		012ADEF31F1461CD009E4110 /* Just.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */; };
+		012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */; };
+		012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
@@ -112,23 +111,24 @@
 				012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */,
 				012ADEE51F1461BC009E4110 /* Just.framework in Embed Frameworks */,
 				012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */,
-				012ADEEB1F1461BC009E4110 /* Starscream.framework in Embed Frameworks */,
 				012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */,
+				011F830C20ADC22200CA18E5 /* SocketRocket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01D82A141F145E59003754E4 /* CopyFiles */ = {
+		01D82A141F145E59003754E4 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				012ADEF31F1461CD009E4110 /* Just.framework.dSYM in CopyFiles */,
-				012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in CopyFiles */,
-				012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in CopyFiles */,
-				012ADEF61F1461CD009E4110 /* Starscream.framework.dSYM in CopyFiles */,
+				012ADEF31F1461CD009E4110 /* Just.framework.dSYM in Copy Files */,
+				012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in Copy Files */,
+				012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in Copy Files */,
+				011F830E20ADC23000CA18E5 /* SocketRocket.framework.dSYM in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -147,6 +147,8 @@
 		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2.swift; sourceTree = "<group>"; };
 		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		011F830B20ADC22100CA18E5 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
+		011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
 		01250C9B1D54D7180017353F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
 		012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSwiftKevlar.h; sourceTree = "<group>"; };
@@ -156,11 +158,9 @@
 		012ADEDD1F1461BC009E4110 /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = Carthage/Build/Mac/Just.framework; sourceTree = "<group>"; };
 		012ADEDE1F1461BC009E4110 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		012ADEDF1F1461BC009E4110 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
-		012ADEE01F1461BC009E4110 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Just.framework.dSYM; path = Carthage/Build/Mac/Just.framework.dSYM; sourceTree = "<group>"; };
 		012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
 		012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
-		012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -241,7 +241,6 @@
 				0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
 				012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */,
-				012ADEEA1F1461BC009E4110 /* Starscream.framework in Frameworks */,
 				012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */,
 				012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */,
 				010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */,
@@ -281,8 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				0115D4341E06AD99003EBFCD /* Aria2.swift */,
-				016A3E371E8A9FA100CC1999 /* Aria2Option.swift */,
 				012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */,
+				016A3E371E8A9FA100CC1999 /* Aria2Option.swift */,
 				018E895F1D34FFA8000C71B0 /* Aria2c.swift */,
 			);
 			path = Aria2;
@@ -525,12 +524,12 @@
 				012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */,
 				012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */,
 				012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */,
-				012ADEF11F1461CD009E4110 /* Starscream.framework.dSYM */,
+				011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */,
+				011F830B20ADC22100CA18E5 /* SocketRocket.framework */,
 				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
 				012ADEDD1F1461BC009E4110 /* Just.framework */,
 				012ADEDE1F1461BC009E4110 /* Realm.framework */,
 				012ADEDF1F1461BC009E4110 /* RealmSwift.framework */,
-				012ADEE01F1461BC009E4110 /* Starscream.framework */,
 				01610DE41EDFF7B200BAEF02 /* Security.framework */,
 				01903A351D5CB6E0008A3E6E /* WebKit.framework */,
 				01250C9B1D54D7180017353F /* Quartz.framework */,
@@ -550,7 +549,7 @@
 				0147EDBA1D21FAD800FB4324 /* Frameworks */,
 				0147EDBB1D21FAD800FB4324 /* Resources */,
 				012C057B1F13E6D600EA5BD1 /* Embed Frameworks */,
-				01D82A141F145E59003754E4 /* CopyFiles */,
+				01D82A141F145E59003754E4 /* Copy Files */,
 			);
 			buildRules = (
 			);

@@ -220,7 +220,7 @@ extension Generalview: NSMenuDelegate {
 	
 	func initSocket() {
 		DispatchQueue.main.async {
-			if Aria2Websocket.shared.socket.currentURL != Preferences.shared.aria2Servers.serverURL() {
+			if Aria2Websocket.shared.socket.url != Preferences.shared.aria2Servers.serverURL() {
 				Aria2Websocket.shared.initSocket()
 			}
 		}

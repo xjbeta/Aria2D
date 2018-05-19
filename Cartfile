@@ -1,4 +1,4 @@
 github "DevMate/DevMateKit"
 github "JustHTTP/Just"
-github "daltoniam/Starscream"
 github "realm/realm-cocoa"
+github "facebook/SocketRocket" "master"
