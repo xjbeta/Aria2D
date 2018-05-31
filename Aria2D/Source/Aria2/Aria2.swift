@@ -18,31 +18,42 @@ class Aria2: NSObject {
 		Aria2.shared.initData()
 	}
 	
+    func initData() {
+        let block: ((webSocketResult) -> Void) = {
+            switch $0 {
+            case .success(let data):
+                struct InitDataResult: Decodable {
+                    var result: [[[Aria2Object]]]
+                }
+                if let objs = data.decode(InitDataResult.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
+                    DataManager.shared.initAllObjects(objs)
+                }
+            default:
+                break
+            }
+        }
 
-	
-	func initData() {
-		Aria2WebsocketObject(method: Aria2Method.multicall,
-		                     params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-		                                                    params: nil).object(),
-		                               Aria2WebsocketParams(method: Aria2Method.tellWaiting,
-		                                                    params: [0, 1000]).object(),
-		                               Aria2WebsocketParams(method: Aria2Method.tellStopped,
-		                                                    params: [0, 1000]).object()]])
-			.writeToWebsocket {
-				switch $0 {
-				case .success(let data):
-					struct InitDataResult: Decodable {
-						var result: [[[Aria2Object]]]
-					}
-					if let objs = data.decode(InitDataResult.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
-						DataManager.shared.initAllObjects(objs)
-					}
-				default:
-					break
-				}
-		}
-	}
-	
+        var params: [Any]? = []
+
+        switch ViewControllersManager.shared.selectedRow {
+        case .downloading:
+            params = [[Aria2WebsocketParams(method: Aria2Method.tellActive,
+                                            params: nil ).object(),
+                       Aria2WebsocketParams(method: Aria2Method.tellWaiting,
+                                            params: [0, 1000]).object()]]
+        case .removed, .completed:
+            params = [[Aria2WebsocketParams(method: Aria2Method.tellStopped,
+                                 params: [0, 1000]).object()]]
+        default:
+            break
+        }
+
+        Aria2WebsocketObject(method: Aria2Method.multicall,
+                             params: params)
+            .writeToWebsocket {
+                block($0)
+        }
+    }
 	
 	func sortData() {
 		Aria2WebsocketObject(method: Aria2Method.multicall,

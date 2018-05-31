@@ -80,7 +80,7 @@ class Aria2Websocket: NSObject {
         socket = SRWebSocket(url: url!)
         socket.delegate = self
 		socket.open()
-//        startTimer()
+        startTimer()
 	}
 
 
@@ -200,13 +200,13 @@ class Aria2Websocket: NSObject {
             // Save log
             if Preferences.shared.developerMode,
                 Preferences.shared.recordWebSocketLog {
-                var log = WebSocketLog()
+                let log = WebSocketLog()
                 log.method = method
                 log.sendJSON = "\(dic)"
                 log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
                 log.success = !timeOut
                 log.time = time
-                ViewControllersManager.shared.webSocketLog.append(log)
+                ViewControllersManager.shared.addLog(log)
             }
             
             if !timeOut {
@@ -251,7 +251,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
     
     func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
         isConnected = false
-//        connectedServerInfo.version = error?.localizedDescription ?? ""
+        connectedServerInfo.version = reason ?? ""
         connectedServerInfo.enabledFeatures = ""
         aria2GlobalOption = [:]
         DataManager.shared.deleteAllAria2Objects()
@@ -284,12 +284,12 @@ extension Aria2Websocket: SRWebSocketDelegate {
                     Aria2.shared.updateStatus(gids)
                 }
                 if Preferences.shared.developerMode ,Preferences.shared.recordWebSocketLog {
-                    var log = WebSocketLog()
+                    let log = WebSocketLog()
                     log.method = json.method.rawValue
                     log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
                     log.success = true
                     log.time = Date().timeIntervalSince1970
-                    ViewControllersManager.shared.webSocketLog.append(log)
+                    ViewControllersManager.shared.addLog(log)
                 }
             }
         }

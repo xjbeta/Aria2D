@@ -8,13 +8,13 @@
 
 import Foundation
 import Cocoa
+import RealmSwift
 
 class ViewControllersManager: NSObject {
 
     static let shared = ViewControllersManager()
     
     private override init() {
-        super.init()
     }
 	
     
@@ -86,13 +86,17 @@ class ViewControllersManager: NSObject {
     var selectedRowDidSet: (() -> Void)?
 
     var selectedRow: SidebarItem = .none {
-        willSet {
-            selectedIndexs = IndexSet()
-            if newValue == .baidu {
-                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
-            }
-        }
         didSet {
+            selectedIndexs = IndexSet()
+            switch selectedRow {
+            case .downloading, .removed, .completed:
+                Aria2.shared.initData()
+            case .baidu:
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
+            default:
+                break
+            }
+            
             selectedRowDidSet?()
         }
     }
@@ -141,7 +145,37 @@ class ViewControllersManager: NSObject {
     }
 	
 	// LogViewController
-	var webSocketLog: [WebSocketLog] = []
+    
+    func addLog(_ log: WebSocketLog) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(log)
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
+    }
+
+    func deleteAllLog() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(realm.objects(WebSocketLog.self))
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
+    }
+
+    func getLogs() -> Results<WebSocketLog> {
+        do {
+            let realm = try Realm()
+            return realm.objects(WebSocketLog.self).sorted(byKeyPath: "time")
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
+    }
 	
 	// Front Window
 	enum frontWindow {
@@ -225,4 +259,13 @@ class ViewControllersManager: NSObject {
 			break
 		}
 	}
+}
+
+
+class WebSocketLog: Object {
+    @objc dynamic var time: TimeInterval = 0
+    @objc dynamic var method = ""
+    @objc dynamic var success = false
+    @objc dynamic var sendJSON = ""
+    @objc dynamic var receivedJSON = ""
 }

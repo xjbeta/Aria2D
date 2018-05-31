@@ -52,6 +52,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	
 	func applicationWillTerminate(_ notification: Notification) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
 		Aria2.shared.aria2c.autoClose()
 	}
     

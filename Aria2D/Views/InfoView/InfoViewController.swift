@@ -90,7 +90,7 @@ class InfoViewController: NSViewController {
             update(obj, block: .status)
             update(obj, block: .announces)
             
-            notificationTT = obj._files.observe { _ in
+            notificationTT = obj.files.observe { _ in
                 self.updateFilesOutlineView(ThreadSafeReference(to: obj))
             }
             
@@ -184,7 +184,7 @@ class InfoViewController: NSViewController {
 //            updateFilesOutlineView()
         case .announces:
             DispatchQueue.main.async {
-                self.announces = obj.bittorrent?.announceList
+                self.announces = obj.bittorrent?.announceList.map { $0 }
             }
         }
     }
@@ -433,99 +433,98 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
         
         DispatchQueue.global(qos: .background).async {
 
-            let realmConfiguration = Realm.Configuration(inMemoryIdentifier: "InMemoryRealm")
-            let realm = try! Realm(configuration: realmConfiguration)
-            
-            guard let obj = realm.resolve(objRef) else {
-                return
-            }
-            
-            if self.fileNodes == nil {
-                self.fileNodes = FileNode(obj.dir, isLeaf: false)
-            }
-            
-            let rootPathComponents = self.fileNodes!.path.pathComponents
-            var groupChildrens: [FileNode] = []
-            
-            let filesSemaphore = DispatchSemaphore(value: 1)
-            
-            obj.files.map { Aria2File(value: $0) }.forEach { file in
-                filesSemaphore.wait()
-                guard file.path != "" else {
-                    filesSemaphore.signal()
+            do {
+                let realm = try Realm()
+                
+                guard let obj = realm.resolve(objRef) else {
                     return
                 }
                 
-                var pathComponents = file.path.pathComponents
-                
-                guard var currentNode = self.fileNodes else { return }
-                
-                if file.path.isChildPath(of: currentNode.path) {
-                    pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+                if self.fileNodes == nil {
+                    self.fileNodes = FileNode(obj.dir, isLeaf: false)
                 }
                 
-                let semaphore = DispatchSemaphore(value: 1)
+                let rootPathComponents = self.fileNodes!.path.pathComponents
+                var groupChildrens: [FileNode] = []
                 
-                pathComponents.forEach { _ in
-                    semaphore.wait()
-                    let str = pathComponents.first!
-                    let group = DispatchGroup()
-                    var child = currentNode.getChild(str)
-                    group.enter()
-                    if child == nil {
-                        var path = currentNode.path
-                        path.appendingPathComponent(str)
-                        
-                        let node = pathComponents.count != 1 ? FileNode(path, isLeaf: false) : FileNode(path, file: file, isLeaf: true)
-                        
-                        DispatchQueue.main.async {
-                            currentNode.children.append(node)
-                            if pathComponents.count != 1 {
-                                groupChildrens.append(node)
-                            }
-                            child = currentNode.getChild(str)
-                            group.leave()
-                        }
-                    } else if let child = child, child.isLeaf {
-                        DispatchQueue.main.async {
-                            child.updateData(file)
-                            group.leave()
-                        }
-                    } else {
-                        group.leave()
+                let filesSemaphore = DispatchSemaphore(value: 1)
+                
+                obj.files.map { Aria2File(value: $0) }.forEach { file in
+                    filesSemaphore.wait()
+                    guard file.path != "" else {
+                        filesSemaphore.signal()
+                        return
                     }
                     
-                    group.notify(queue: .global(qos: .background)) {
-                        if let child = child {
-                            currentNode = child
+                    var pathComponents = file.path.pathComponents
+                    
+                    guard var currentNode = self.fileNodes else { return }
+                    
+                    if file.path.isChildPath(of: currentNode.path) {
+                        pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+                    }
+                    
+                    let semaphore = DispatchSemaphore(value: 1)
+                    
+                    pathComponents.forEach { _ in
+                        semaphore.wait()
+                        let str = pathComponents.first!
+                        let group = DispatchGroup()
+                        var child = currentNode.getChild(str)
+                        group.enter()
+                        if child == nil {
+                            var path = currentNode.path
+                            path.appendingPathComponent(str)
+                            
+                            let node = pathComponents.count != 1 ? FileNode(path, isLeaf: false) : FileNode(path, file: file, isLeaf: true)
+                            
+                            DispatchQueue.main.async {
+                                currentNode.children.append(node)
+                                if pathComponents.count != 1 {
+                                    groupChildrens.append(node)
+                                }
+                                child = currentNode.getChild(str)
+                                group.leave()
+                            }
+                        } else if let child = child, child.isLeaf {
+                            DispatchQueue.main.async {
+                                child.updateData(file)
+                                group.leave()
+                            }
+                        } else {
+                            group.leave()
                         }
-                        pathComponents.removeFirst()
-                        semaphore.signal()
-                        if pathComponents.count == 0 {
-                            filesSemaphore.signal()
+                        
+                        group.notify(queue: .global(qos: .background)) {
+                            if let child = child {
+                                currentNode = child
+                            }
+                            pathComponents.removeFirst()
+                            semaphore.signal()
+                            if pathComponents.count == 0 {
+                                filesSemaphore.signal()
+                            }
                         }
                     }
                 }
-            }
-            
-            
-            // update node state
-            var count = groupChildrens.map({$0.path.pathComponents.count}).max() ?? 0
-            while count > rootPathComponents.count {
-                groupChildrens.filter {
-                    $0.path.pathComponents.count == count
-                    }.forEach { child in
-                        DispatchQueue.main.async {
-                            child.updateStateWithChildren()
-                        }
+                
+                
+                // update node state
+                var count = groupChildrens.map({$0.path.pathComponents.count}).max() ?? 0
+                while count > rootPathComponents.count {
+                    groupChildrens.filter {
+                        $0.path.pathComponents.count == count
+                        }.forEach { child in
+                            DispatchQueue.main.async {
+                                child.updateStateWithChildren()
+                            }
+                    }
+                    count -= 1
                 }
-                count -= 1
+            } catch let error as NSError {
+                fatalError("Error opening realm: \(error)")
             }
         }
-        
-        
-        
-
     }
     
     func outlineView(_ outlineView: NSOutlineView, dataCellFor tableColumn: NSTableColumn?, item: Any) -> NSCell? {

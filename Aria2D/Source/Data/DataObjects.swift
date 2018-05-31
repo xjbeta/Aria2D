@@ -10,18 +10,8 @@ import Foundation
 import RealmSwift
 
 class Aria2Object: Object, Decodable {
-    let _files = List<Aria2File>()
-	var files: [Aria2File] {
-		get {
-			return _files.map { $0 }
-		}
-		set {
-			_files.removeAll()
-			_files.append(objectsIn: newValue.map(Aria2File.init))
-		}
-	}
-	
-	
+    var files = List<Aria2File>()
+
 	@objc dynamic var gid: String = ""
 	@objc dynamic var status: Status = .error
 	@objc dynamic var totalLength: Int64 = 0
@@ -72,7 +62,9 @@ class Aria2Object: Object, Decodable {
 	required convenience init(from decoder: Decoder) throws {
 		self.init()
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		files = try values.decode([Aria2File].self, forKey: .files)
+        if let files = try values.decodeIfPresent([Aria2File].self, forKey: .files) {
+            self.files.append(objectsIn: files)
+        }
 		gid = try values.decode(String.self, forKey: .gid)
 		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
 		totalLength = Int64(try values.decode(String.self, forKey: .totalLength)) ?? 0
@@ -135,19 +127,7 @@ class Aria2File: Object, Decodable {
 	@objc dynamic var length: Int64 = 0
 	@objc dynamic var completedLength: Int64 = 0
 	@objc dynamic var selected: Bool = false
-	private let _uris = List<Aria2Uri>()
-
-	var uris: [Aria2Uri] {
-		get {
-			return _uris.map { $0 }
-		}
-		set {
-			_uris.removeAll()
-			_uris.append(objectsIn: newValue.map(Aria2Uri.init))
-		}
-	}
-
-
+	var uris = List<Aria2Uri>()
 	
 	private enum CodingKeys: String, CodingKey {
 		case index,
@@ -237,18 +217,8 @@ class Bittorrent: Object, Decodable {
 	//	announceList
 	@objc dynamic var name: String? = nil
 	@objc dynamic var mode: FileMode = .error
-    let _announceList = List<String>()
+    var announceList = List<String>()
     
-    var announceList: [String] {
-        get {
-            return _announceList.map { $0 }
-        }
-        set {
-            _announceList.removeAll()
-            _announceList.append(objectsIn: newValue)
-        }
-    }
-
 	private enum CodingKeys: String, CodingKey {
 		case name = "info",
 		mode,
@@ -265,7 +235,7 @@ class Bittorrent: Object, Decodable {
 			mode = FileMode(str) ?? .error
 		}
         if let str = try values.decodeIfPresent([[String]].self, forKey: .announceList) {
-            announceList = str.flatMap({$0})
+            announceList.append(objectsIn: str.flatMap {$0})
         }
 	}
 }
