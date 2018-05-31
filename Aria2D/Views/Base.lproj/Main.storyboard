@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment version="101100" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="14113"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -1534,19 +1534,16 @@ CA
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8u-sM-XJ1">
                                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="40" id="GFW-iB-qHL"/>
-                                                                                <constraint firstAttribute="height" constant="40" id="tHt-yP-nsN"/>
+                                                                                <constraint firstAttribute="height" constant="40" id="23h-wN-XXl"/>
+                                                                                <constraint firstAttribute="width" constant="40" id="D1c-VH-yUt"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="0OK-zU-4mc"/>
                                                                         </imageView>
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Zj-oE4">
-                                                                            <rect key="frame" x="44" y="2" width="408" height="36"/>
+                                                                            <rect key="frame" x="44" y="4" width="428" height="33"/>
                                                                             <subviews>
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BsB-ch-qD8">
-                                                                                    <rect key="frame" x="-2" y="19" width="404" height="17"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="kE0-75-xlQ"/>
-                                                                                    </constraints>
+                                                                                    <rect key="frame" x="-2" y="16" width="71" height="17"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Task Name" id="JZB-1X-bKi">
                                                                                         <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1557,7 +1554,7 @@ CA
                                                                                     </connections>
                                                                                 </textField>
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Voa-Jr-LBN">
-                                                                                    <rect key="frame" x="-2" y="0.0" width="404" height="17"/>
+                                                                                    <rect key="frame" x="-2" y="0.0" width="70" height="14"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Total Length" id="3N2-HC-YgG">
                                                                                         <font key="font" metaFont="smallSystem"/>
                                                                                         <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="deviceWhite"/>
@@ -1565,10 +1562,6 @@ CA
                                                                                     </textFieldCell>
                                                                                 </textField>
                                                                             </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="Voa-Jr-LBN" firstAttribute="height" secondItem="BsB-ch-qD8" secondAttribute="height" id="VXT-01-Clj"/>
-                                                                                <constraint firstItem="Voa-Jr-LBN" firstAttribute="width" secondItem="BsB-ch-qD8" secondAttribute="width" id="pfp-sB-FBn"/>
-                                                                            </constraints>
                                                                             <visibilityPriorities>
                                                                                 <integer value="1000"/>
                                                                                 <integer value="1000"/>
@@ -1579,7 +1572,7 @@ CA
                                                                             </customSpacing>
                                                                         </stackView>
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="AwJ-gN-o0G">
-                                                                            <rect key="frame" x="456" y="4" width="110" height="32"/>
+                                                                            <rect key="frame" x="476" y="4" width="110" height="32"/>
                                                                             <subviews>
                                                                                 <progressIndicator maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="VM6-LB-Kra">
                                                                                     <rect key="frame" x="0.0" y="13" width="110" height="20"/>
@@ -1615,9 +1608,9 @@ CA
                                                                                 </stackView>
                                                                             </subviews>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="110" id="47L-GA-EW5"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="eHu-ST-xug" secondAttribute="trailing" id="TNi-mr-klS"/>
-                                                                                <constraint firstItem="eHu-ST-xug" firstAttribute="leading" secondItem="AwJ-gN-o0G" secondAttribute="leading" id="wVX-wI-4Fl"/>
+                                                                                <constraint firstAttribute="width" constant="110" id="GnM-Z4-RSY"/>
+                                                                                <constraint firstItem="eHu-ST-xug" firstAttribute="leading" secondItem="AwJ-gN-o0G" secondAttribute="leading" id="awe-Jg-Mug"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="eHu-ST-xug" secondAttribute="trailing" id="pHj-8Y-NWx"/>
                                                                             </constraints>
                                                                             <visibilityPriorities>
                                                                                 <integer value="1000"/>
@@ -1629,9 +1622,9 @@ CA
                                                                             </customSpacing>
                                                                         </stackView>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIQ-lh-ckD">
-                                                                            <rect key="frame" x="568" y="12" width="84" height="17"/>
+                                                                            <rect key="frame" x="588" y="12" width="64" height="17"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="FYn-Qs-VOn"/>
+                                                                                <constraint firstAttribute="width" constant="60" id="CNy-uo-Fzy"/>
                                                                             </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Status" id="wgc-as-BQd">
                                                                                 <font key="font" metaFont="system"/>
