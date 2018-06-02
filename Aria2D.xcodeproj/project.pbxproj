@@ -69,8 +69,6 @@
 		017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C20081D979448005F035A /* DownloadsTableRowView.swift */; };
 		017E882F1D82575A000412DA /* LoginButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E882E1D82575A000412DA /* LoginButtonCell.swift */; };
 		017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */; };
-		0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0104DAA41D54CEB5002C3B6D /* QuickLook.framework */; };
-		0188A2771EFBAF9000F1B37C /* Aria2D-acknowledgements.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
 		018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E894A1D34FF5B000C71B0 /* DataObjects.swift */; };
@@ -134,7 +132,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0104DAA41D54CEB5002C3B6D /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		010B59171D3CF66600550A43 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		010CCDCC209EB67600F6B45B /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
 		010CCDCD209EB67600F6B45B /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
@@ -149,7 +146,6 @@
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011F830B20ADC22100CA18E5 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
 		011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
-		01250C9B1D54D7180017353F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
 		012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSwiftKevlar.h; sourceTree = "<group>"; };
 		012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSwiftKevlar.m; sourceTree = "<group>"; };
@@ -184,7 +180,6 @@
 		0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableView.swift; sourceTree = "<group>"; };
 		014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Aria2D_aria2c; sourceTree = "<group>"; };
 		014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aria2D.conf; sourceTree = "<group>"; };
-		014E599F1F6E43BC0023244B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0154156A1E371583007ECB29 /* URLSecurityScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
 		01610DE41EDFF7B200BAEF02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
@@ -202,7 +197,6 @@
 		017C20081D979448005F035A /* DownloadsTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableRowView.swift; sourceTree = "<group>"; };
 		017E882E1D82575A000412DA /* LoginButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButtonCell.swift; sourceTree = "<group>"; };
 		017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewWithBackgroundColor.swift; sourceTree = "<group>"; };
-		0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Aria2D-acknowledgements.pdf"; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		018E894A1D34FF5B000C71B0 /* DataObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
@@ -238,7 +232,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0188A26F1EFBA98000F1B37C /* QuickLook.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
 				012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */,
 				012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */,
@@ -462,7 +455,6 @@
 		018E892A1D34FEB7000C71B0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0188A2751EFBAD6C00F1B37C /* Aria2D-acknowledgements.pdf */,
 				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
 				014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
@@ -520,7 +512,6 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				014E599F1F6E43BC0023244B /* QuartzCore.framework */,
 				012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */,
 				012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */,
 				012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */,
@@ -532,8 +523,6 @@
 				012ADEDF1F1461BC009E4110 /* RealmSwift.framework */,
 				01610DE41EDFF7B200BAEF02 /* Security.framework */,
 				01903A351D5CB6E0008A3E6E /* WebKit.framework */,
-				01250C9B1D54D7180017353F /* Quartz.framework */,
-				0104DAA41D54CEB5002C3B6D /* QuickLook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -615,7 +604,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0188A2771EFBAF9000F1B37C /* Aria2D-acknowledgements.pdf in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
