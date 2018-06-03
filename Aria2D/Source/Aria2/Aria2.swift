@@ -45,7 +45,7 @@ class Aria2: NSObject {
             params = [[Aria2WebsocketParams(method: Aria2Method.tellStopped,
                                  params: [0, 1000]).object()]]
         default:
-            break
+            return
         }
 
         Aria2WebsocketObject(method: Aria2Method.multicall,

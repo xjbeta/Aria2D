@@ -171,8 +171,8 @@ class DataManager: NSObject {
             switch ViewControllersManager.shared.selectedRow {
             case .downloading:
                 return realm.objects(type)
-                    .filter("status != %@", Status.complete.rawValue)
-                    .filter("status != %@", Status.removed.rawValue)
+                    .filter("status == %@ OR status == %@ OR status == %@",
+                            Status.active.rawValue, Status.waiting.rawValue, Status.paused.rawValue)
                     .sorted(byKeyPath: "date")
                     .sorted(byKeyPath: "status")
             case .completed:
@@ -181,8 +181,10 @@ class DataManager: NSObject {
                     .sorted(byKeyPath:"date", ascending: false)
             case .removed:
                 return realm.objects(type)
-                    .filter("status == %@", Status.removed.rawValue)
+                    .filter("status == %@ OR status == %@",
+                            Status.removed.rawValue, Status.error.rawValue)
                     .sorted(byKeyPath: "date")
+                    .sorted(byKeyPath: "status")
             case .baidu:
                 let ascending = Preferences.shared.ascending
                 let sortValue = Preferences.shared.sortValue
