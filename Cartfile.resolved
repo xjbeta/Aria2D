@@ -1,4 +1,4 @@
 github "DevMate/DevMateKit" "v1.8.2"
 github "JustHTTP/Just" "0.6.0"
 github "facebook/SocketRocket" "0a023409b138039d1ab5ac5431fe61c5f334e86b"
-github "realm/realm-cocoa" "v3.7.1"
+github "realm/realm-cocoa" "v3.7.2"
