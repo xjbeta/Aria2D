@@ -16,7 +16,6 @@ extension Notification.Name {
 	static let getDlinks = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.getDlinks")
 	static let newTask = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.newTask")
 	static let showHUD = Notification.Name("com.xjbeta.Aria2D.MainWindow.showHUD")
-	static let updateVersionInfo = Notification.Name("com.xjbeta.Aria2D.Aria2Websocket.updateVersionInfo")
 	static let updateConnectStatus = Notification.Name("com.xjbeta.Aria2D.Aria2Websocket.updateConnectStatus")
 	static let updateGlobalOption = Notification.Name("com.xjbeta.Aria2D.Aria2Websocket.updateGlobalOption")
 	

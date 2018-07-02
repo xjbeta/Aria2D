@@ -15,47 +15,25 @@ struct ConnectedServerInfo {
 	var enabledFeatures = ""
 }
 
-extension SRWebSocket {
-    var isConnected: Bool {
-        get {
-            return readyState.rawValue == 1
-        }
-    }
-}
-
-
 class Aria2Websocket: NSObject {
 	
-    
-    
     static let shared = Aria2Websocket()
 	private override init() {
 	}
 	
+    var socket: SRWebSocket? = nil
     
-    
-	var socket = SRWebSocket(url: URL(string: "ws://localhost:8080")!)
+    var isConnected: Bool {
+        get {
+            return socket?.readyState == .OPEN
+        }
+    }
 	
-
 	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
 		Aria2.shared.initData()
 	}
-	
-	
 
-	var connectedServerInfo = ConnectedServerInfo() {
-		didSet {
-			NotificationCenter.default.post(name: .updateVersionInfo, object: nil)
-		}
-	}
-	
-	var isConnected = false {
-		didSet {
-			if isConnected != oldValue {
-				NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
-			}	
-		}
-	}
+	var connectedServerInfo = ConnectedServerInfo()
 	
 	var aria2GlobalOption = [Aria2Option: String]() {
 		didSet {
@@ -63,28 +41,24 @@ class Aria2Websocket: NSObject {
 		}
 	}
 	
-
-	
 	func initSocket() {
 		if let timer = timer {
 			timer.cancel()
 			self.timer = nil
 		}
-		if socket.isConnected {
-			socket.close()
-		}
-		
-		let url = Preferences.shared.aria2Servers.serverURL()
-		guard url?.host != nil else { return }
-		
-        socket = SRWebSocket(url: url!)
-        socket.delegate = self
-		socket.open()
-        startTimer()
+        
+        socket?.close()
+        
+        if let url = Preferences.shared.aria2Servers.serverURL() {
+            guard url.host != nil else { return }
+            
+            socket = SRWebSocket(url: url)
+            socket?.delegate = self
+            socket?.open()
+            startTimer()
+        }
+
 	}
-
-
-
 	
 	func showNotification(_ gid: String) {
 		let notification = NSUserNotification()
@@ -102,7 +76,6 @@ class Aria2Websocket: NSObject {
 
 	}
 	
-	
 	var isSuspend = Bool()
 	private var timer: DispatchSourceTimer?
 	
@@ -113,9 +86,13 @@ class Aria2Websocket: NSObject {
 		if let timer = timer {
 			timer.schedule(deadline: .now(), repeating: .seconds(1))
 			timer.setEventHandler {
-				if !self.isConnected {
-					self.socket.open()
-				} else {
+                if !self.isConnected {
+                    self.socket?.close()
+                    let url = self.socket?.url
+                    self.socket = SRWebSocket(url: url!)
+                    self.socket?.delegate = self
+                    self.socket?.open()
+                } else {
                     if DataManager.shared.activeCount() > 0 {
                         Aria2.shared.updateActiveTasks()
                     }
@@ -216,7 +193,7 @@ class Aria2Websocket: NSObject {
             }
         }
         do {
-            try socket.send(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
+            try socket?.send(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
         } catch {
             completion(.somethingError)
             return
@@ -235,26 +212,23 @@ class Aria2Websocket: NSObject {
 
 extension Aria2Websocket: SRWebSocketDelegate {
     func webSocketDidOpen(_ webSocket: SRWebSocket) {
-        
-        isConnected = true
         Aria2.shared.initData()
+        connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         Aria2.shared.getVersion {
             self.connectedServerInfo.version = "Version: \($0)"
             self.connectedServerInfo.enabledFeatures = $1
+            NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
         }
-
-
         Aria2.shared.getGlobalOption()
-        self.connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         ViewControllersManager.shared.showHUD(.connected)
     }
     
     func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
-        isConnected = false
         connectedServerInfo.version = reason ?? ""
         connectedServerInfo.enabledFeatures = ""
         aria2GlobalOption = [:]
         DataManager.shared.deleteAllAria2Objects()
+        NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
     }
     
     func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {
@@ -283,7 +257,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
                 case .onDownloadStop:
                     Aria2.shared.updateStatus(gids)
                 }
-                if Preferences.shared.developerMode ,Preferences.shared.recordWebSocketLog {
+                if Preferences.shared.developerMode, Preferences.shared.recordWebSocketLog {
                     let log = WebSocketLog()
                     log.method = json.method.rawValue
                     log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
