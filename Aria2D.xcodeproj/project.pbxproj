@@ -24,13 +24,10 @@
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; };
 		012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDD1F1461BC009E4110 /* Just.framework */; };
-		012ADEE51F1461BC009E4110 /* Just.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDD1F1461BC009E4110 /* Just.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012ADEE61F1461BC009E4110 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; };
 		012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; };
 		012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEF31F1461CD009E4110 /* Just.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */; };
 		012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */; };
 		012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
@@ -44,6 +41,8 @@
 		012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */; };
 		012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */; };
 		0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130D74D1F13E9F500F11DBC /* JSONModels.swift */; };
+		0133936E20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 0133936D20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM */; };
+		0133937220DFCEDA009FF2D2 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		013817671D238E0100E0F926 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817661D238E0100E0F926 /* MainWindowController.swift */; };
 		013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */; };
 		013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9F1E51B305008D370D /* SetServersViewController.swift */; };
@@ -67,7 +66,6 @@
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
 		017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C20081D979448005F035A /* DownloadsTableRowView.swift */; };
-		017E882F1D82575A000412DA /* LoginButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E882E1D82575A000412DA /* LoginButtonCell.swift */; };
 		017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
@@ -81,18 +79,17 @@
 		018E89711D350075000C71B0 /* Generalview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* Generalview.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
-		01903A3C1D5CB86D008A3E6E /* BaiduLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
 		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
-		01BC4F931E4324D100417221 /* SetPCSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F921E4324D100417221 /* SetPCSViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
+		01DEC4C920C3EFDA007D21F0 /* StepTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */; };
+		01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEC4CA20C3F062007D21F0 /* BaiduViewController.swift */; };
 		01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */; };
 		01EB1CB61D60971600F2925F /* Baidu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB51D60971600F2925F /* Baidu.swift */; };
-		01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB71D60997600F2925F /* LoginButton.swift */; };
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
 		01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
@@ -106,8 +103,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0133937220DFCEDA009FF2D2 /* SwiftHTTP.framework in Embed Frameworks */,
 				012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */,
-				012ADEE51F1461BC009E4110 /* Just.framework in Embed Frameworks */,
 				012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */,
 				012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */,
 				011F830C20ADC22200CA18E5 /* SocketRocket.framework in Embed Frameworks */,
@@ -121,7 +118,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				012ADEF31F1461CD009E4110 /* Just.framework.dSYM in Copy Files */,
 				012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in Copy Files */,
 				012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in Copy Files */,
 				011F830E20ADC23000CA18E5 /* SocketRocket.framework.dSYM in Copy Files */,
@@ -151,10 +147,8 @@
 		012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSwiftKevlar.m; sourceTree = "<group>"; };
 		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		012ADEDC1F1461BC009E4110 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
-		012ADEDD1F1461BC009E4110 /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = Carthage/Build/Mac/Just.framework; sourceTree = "<group>"; };
 		012ADEDE1F1461BC009E4110 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		012ADEDF1F1461BC009E4110 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
-		012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Just.framework.dSYM; path = Carthage/Build/Mac/Just.framework.dSYM; sourceTree = "<group>"; };
 		012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
 		012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -168,6 +162,8 @@
 		012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableViewPopoverSegue.swift; sourceTree = "<group>"; };
 		0130D74D1F13E9F500F11DBC /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
+		0133936D20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/Mac/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
+		0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/Mac/SwiftHTTP.framework; sourceTree = "<group>"; };
 		013817661D238E0100E0F926 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListArrayController.swift; sourceTree = "<group>"; };
 		013ABB9F1E51B305008D370D /* SetServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetServersViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +191,6 @@
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		017C20081D979448005F035A /* DownloadsTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableRowView.swift; sourceTree = "<group>"; };
-		017E882E1D82575A000412DA /* LoginButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButtonCell.swift; sourceTree = "<group>"; };
 		017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewWithBackgroundColor.swift; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -209,18 +204,17 @@
 		018E896D1D350075000C71B0 /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduLoginViewController.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
-		01BC4F921E4324D100417221 /* SetPCSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPCSViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleClickTextField.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
+		01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTableCellView.swift; sourceTree = "<group>"; };
+		01DEC4CA20C3F062007D21F0 /* BaiduViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduViewController.swift; sourceTree = "<group>"; };
 		01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduSettingView.swift; sourceTree = "<group>"; };
 		01EB1CB51D60971600F2925F /* Baidu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baidu.swift; sourceTree = "<group>"; };
-		01EB1CB71D60997600F2925F /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
 		01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCellView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
@@ -233,7 +227,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
-				012ADEE41F1461BC009E4110 /* Just.framework in Frameworks */,
 				012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */,
 				012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */,
 				010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */,
@@ -376,14 +369,6 @@
 			path = Aria2D;
 			sourceTree = "<group>";
 		};
-		016B696D1E482BAA004FEAE1 /* SetPCSView */ = {
-			isa = PBXGroup;
-			children = (
-				01BC4F921E4324D100417221 /* SetPCSViewController.swift */,
-			);
-			path = SetPCSView;
-			sourceTree = "<group>";
-		};
 		016C405A1DA27C6200EB27A2 /* AboutAria2D */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,9 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				017E88301D83A720000412DA /* BaiduLogin */,
-				016B696D1E482BAA004FEAE1 /* SetPCSView */,
 				016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */,
-				01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */,
 				018E896D1D350075000C71B0 /* Generalview.swift */,
 				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
 				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
@@ -435,9 +418,9 @@
 		017E88301D83A720000412DA /* BaiduLogin */ = {
 			isa = PBXGroup;
 			children = (
-				01903A3A1D5CB86D008A3E6E /* BaiduLoginViewController.swift */,
-				01EB1CB71D60997600F2925F /* LoginButton.swift */,
-				017E882E1D82575A000412DA /* LoginButtonCell.swift */,
+				01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */,
+				01DEC4CA20C3F062007D21F0 /* BaiduViewController.swift */,
+				01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */,
 			);
 			path = BaiduLogin;
 			sourceTree = "<group>";
@@ -512,13 +495,13 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				012ADEEE1F1461CD009E4110 /* Just.framework.dSYM */,
+				0133936D20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM */,
 				012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */,
 				012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */,
 				011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */,
+				0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */,
 				011F830B20ADC22100CA18E5 /* SocketRocket.framework */,
 				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
-				012ADEDD1F1461BC009E4110 /* Just.framework */,
 				012ADEDE1F1461BC009E4110 /* Realm.framework */,
 				012ADEDF1F1461BC009E4110 /* RealmSwift.framework */,
 				01610DE41EDFF7B200BAEF02 /* Security.framework */,
@@ -606,6 +589,7 @@
 			files = (
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
+				0133936E20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
 				014D3B501ED5C36F00E3ABC0 /* Aria2D_aria2c in Resources */,
@@ -622,7 +606,6 @@
 				012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */,
 				018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */,
 				0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */,
-				01EB1CB81D60997600F2925F /* LoginButton.swift in Sources */,
 				0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */,
 				013817671D238E0100E0F926 /* MainWindowController.swift in Sources */,
 				012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */,
@@ -652,7 +635,7 @@
 				010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */,
 				0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
-				01BC4F931E4324D100417221 /* SetPCSViewController.swift in Sources */,
+				01DEC4C920C3EFDA007D21F0 /* StepTableCellView.swift in Sources */,
 				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,
 				017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */,
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
@@ -664,7 +647,6 @@
 				010B59181D3CF66600550A43 /* MainMenu.swift in Sources */,
 				01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */,
 				01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */,
-				01903A3C1D5CB86D008A3E6E /* BaiduLoginViewController.swift in Sources */,
 				0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */,
 				016CF8F61ED52E5C001336F1 /* Aria2OptionsViewController.swift in Sources */,
 				012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */,
@@ -674,6 +656,7 @@
 				018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */,
 				013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */,
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
+				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
 				018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */,
 				0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */,
@@ -682,7 +665,6 @@
 				018E89711D350075000C71B0 /* Generalview.swift in Sources */,
 				01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */,
 				01EB1CB61D60971600F2925F /* Baidu.swift in Sources */,
-				017E882F1D82575A000412DA /* LoginButtonCell.swift in Sources */,
 				012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
 				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,

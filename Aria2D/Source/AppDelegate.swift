@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		self.setDevMate()
 		Aria2Websocket.shared.initSocket()
-		Baidu.shared.checkLogin(nil)
+		Baidu.shared.checkTokenEffective()
 		Preferences.shared.checkPlistFile()
 		Aria2.shared.aria2c.autoStart()
 	}

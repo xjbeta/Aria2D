@@ -31,6 +31,11 @@ class PCSError: Decodable {
 	}
 }
 
+struct PCSInfo: Decodable {
+    var quota: Double
+    var used: Double
+}
+
 /*
 struct PCSFile: Codable {
 	let category: Int

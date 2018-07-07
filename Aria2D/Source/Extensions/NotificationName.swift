@@ -21,11 +21,8 @@ extension Notification.Name {
 	
 	static let deleteFile = Notification.Name("com.xjbeta.Aria2D.BaiduFileListMenu.deleteFile")
     static let showInfoWindow = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.showInfoWindow")
-	static let resetLeftOutlineView = Notification.Name("com.xjbeta.Aria2D.LeftSourceListView.resetLeftOutlineView")
+	static let baiduStatusUpdated = Notification.Name("com.xjbeta.Aria2D.Baidu.baiduStatusUpdated")
 	static let developerModeChanged = Notification.Name("com.xjbeta.Aria2D.Preferences.developerModeChanged")
-	
-	static let updateToken = Notification.Name("com.xjbeta.Aria2D.SetPCSViewController.updateToken")
-	static let updateUserInfo = Notification.Name("com.xjbeta.Aria2D.BaiduSettingView.updateUserInfo")
 	
 	static let activateApp = Notification.Name("com.xjbeta.Aria2D.MainMenu.activateApp")
 

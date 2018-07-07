@@ -28,6 +28,7 @@ extension NSUserInterfaceItemIdentifier {
     static let statusSpaceTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusSpaceTableCellView")
     static let statusBitfieldTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusBitfieldTableCellView")
     static let statusCollectionViewItem = NSUserInterfaceItemIdentifier(rawValue: "StatusCollectionViewItem")
+    static let stepTableCellView = NSUserInterfaceItemIdentifier(rawValue: "StepTableCellView")
 }
 
 extension NSStoryboard.SceneIdentifier {
