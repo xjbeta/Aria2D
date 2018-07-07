@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Just
 
 protocol BaiduDlinksDataSource {
 	func selectedObjects() -> [PCSFile]

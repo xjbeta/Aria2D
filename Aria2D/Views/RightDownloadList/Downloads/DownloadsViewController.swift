@@ -53,28 +53,12 @@ class DownloadsViewController: NSViewController {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
 				vc.dataSource = self
 			}
-        } else if segue.identifier == .showOptionsWindow {
+        } else if segue.identifier == .showInfoWindow {
             if let wc = segue.destinationController as? NSWindowController,
-                let vc = wc.contentViewController as? OptionsViewController,
-                let gid = self.selectedObjects(Aria2Object.self).first?.gid {
-                
-                Aria2.shared.getOption(gid) {
-                    vc.options = $0
-                    vc.gid = gid
-                }
+                let vc = wc.contentViewController as? InfoViewController,
+                let obj = self.selectedObjects(Aria2Object.self).first {
+                vc.gid = obj.gid
             }
-        } else if segue.identifier == .showStatusWindow {
-            if let wc = segue.destinationController as? NSWindowController,
-                let vc = wc.contentViewController as? StatusViewController,
-                let gid = self.selectedObjects(Aria2Object.self).first?.gid {
-                Aria2.shared.initData(gid) {
-                    if let json = try? JSONSerialization.jsonObject(with: $0, options: .mutableContainers),
-                        let dic = json as? [String: Any],
-                        let result = dic["result"] as? [String: Any] {
-                        vc.result = result
-                    }
-                }
-			}
 		}
 	}
 	
@@ -158,9 +142,7 @@ extension DownloadsViewController {
 		downloadsTableView.setRealmNotification()
 		NotificationCenter.default.addObserver(self, selector: #selector(getDlinks), name: .getDlinks, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(deleteBaiduFile), name: .deleteFile, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showOptions), name: .showOptionsWindow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showStatus), name: .showStatusWindow, object: nil)
-		
+        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: .showInfoWindow, object: nil)
 	}
 
 	
@@ -200,13 +182,9 @@ extension DownloadsViewController {
 		}
 	}
 	
-    @objc func showOptions(_ notification: Notification) {
-        performSegue(withIdentifier: .showOptionsWindow, sender: self)
+    @objc func showInfo(_ notification: Notification) {
+        performSegue(withIdentifier: .showInfoWindow, sender: self)
     }
-    
-    @objc func showStatus(_ notification: Notification) {
-        performSegue(withIdentifier: .showStatusWindow, sender: self)
-	}
 	
 	@objc func deleteBaiduFile() {
         Baidu.shared.delete(selectedObjects(PCSFile.self).filter({ !$0.isBackButton }).map({ $0.path }))

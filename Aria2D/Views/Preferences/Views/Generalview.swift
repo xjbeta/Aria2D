@@ -82,9 +82,15 @@ class Generalview: NSViewController {
 				return Aria2Websocket.shared.aria2GlobalOption[.optimizeConcurrentDownloads] == "true"
 			}
 		}
-		var dir: String? {
+		var dir: String {
 			get {
-				return Aria2Websocket.shared.aria2GlobalOption[.dir]
+                let customPath = Preferences.shared.aria2Servers.getServer().customPath
+                if customPath == "" || customPath == nil {
+                    return Aria2Websocket.shared.aria2GlobalOption[.dir] ?? ""
+                } else if let customPath = customPath {
+                    return customPath
+                }
+                return ""
 			}
 		}
 		
@@ -142,14 +148,13 @@ class Generalview: NSViewController {
 			setPopbutton()
 		} else {
 			downloadDirTextField.isHidden = false
-			downloadDirTextField.stringValue = Preferences.shared.aria2Servers.getServer().customPath ?? options.dir ?? ""
+			downloadDirTextField.stringValue = options.dir
 		}
 	}
 	
-	func setPopbutton() {
-		let path = Preferences.shared.aria2Servers.getServer().customPath ?? options.dir ?? ""
-		let dirURL = URL(fileURLWithPath: path)
-		if path == "" {
+    func setPopbutton() {
+		let dirURL = URL(fileURLWithPath: options.dir)
+		if options.dir == "" {
 			downloadDir.title = "Select A Folder"
 		} else {
 			downloadDir.title = dirURL.lastPathComponent
@@ -215,7 +220,7 @@ extension Generalview: NSMenuDelegate {
 	
 	func initSocket() {
 		DispatchQueue.main.async {
-			if Aria2Websocket.shared.socket.currentURL != Preferences.shared.aria2Servers.serverURL() {
+            if Aria2Websocket.shared.socket?.url != Preferences.shared.aria2Servers.serverURL() {
 				Aria2Websocket.shared.initSocket()
 			}
 		}

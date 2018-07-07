@@ -8,13 +8,13 @@
 
 import Foundation
 import Cocoa
+import RealmSwift
 
 class ViewControllersManager: NSObject {
 
     static let shared = ViewControllersManager()
     
     private override init() {
-        super.init()
     }
 	
     
@@ -84,23 +84,25 @@ class ViewControllersManager: NSObject {
 	
     // LeftSourceList
     var selectedRowDidSet: (() -> Void)?
-    
+
     var selectedRow: SidebarItem = .none {
-        willSet {
-            if newValue == .baidu {
-                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
-            }
-        }
         didSet {
+            selectedIndexs = IndexSet()
+            switch selectedRow {
+            case .downloading, .removed, .completed:
+                Aria2.shared.initData()
+            case .baidu:
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
+            default:
+                break
+            }
+            
             selectedRowDidSet?()
         }
     }
 
 	// DownloadsTableView selectedIndexs
     var selectedIndexs = IndexSet()
-	func showOptions() {
-		NotificationCenter.default.post(name: .showOptionsWindow, object: nil)
-	}
 	
 	func showSelectedInFinder() {
 		let urls = selectedUrls()
@@ -113,7 +115,7 @@ class ViewControllersManager: NSObject {
 		guard Preferences.shared.aria2Servers.isLocal else { return }
 		DataManager.shared.data(Aria2Object.self).enumerated().filter {
 			selectedIndexs.contains($0.offset)
-			}.flatMap {
+            }.compactMap {
 			$0.element.path()
 			}.filter {
 				FileManager.default.fileExists(atPath: $0.path)
@@ -125,7 +127,7 @@ class ViewControllersManager: NSObject {
 	func selectedUrls() -> [URL] {
 		var urls = DataManager.shared.data(Aria2Object.self).enumerated().filter {
 			selectedIndexs.contains($0.offset)
-			}.flatMap {
+            }.compactMap {
 				$0.element.path()
 		}
 		
@@ -138,12 +140,42 @@ class ViewControllersManager: NSObject {
 	}
 	
 	
-	func showStatus() {
-		NotificationCenter.default.post(name: .showStatusWindow, object: nil)
-	}
+    func showInfo() {
+        NotificationCenter.default.post(name: .showInfoWindow, object: nil)
+    }
 	
 	// LogViewController
-	var webSocketLog: [WebSocketLog] = []
+    
+    func addLog(_ log: WebSocketLog) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(log)
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
+    }
+
+    func deleteAllLog() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(realm.objects(WebSocketLog.self))
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
+    }
+
+    func getLogs() -> Results<WebSocketLog> {
+        do {
+            let realm = try Realm()
+            return realm.objects(WebSocketLog.self).sorted(byKeyPath: "time")
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
+    }
 	
 	// Front Window
 	enum frontWindow {
@@ -227,4 +259,13 @@ class ViewControllersManager: NSObject {
 			break
 		}
 	}
+}
+
+
+class WebSocketLog: Object {
+    @objc dynamic var time: TimeInterval = 0
+    @objc dynamic var method = ""
+    @objc dynamic var success = false
+    @objc dynamic var sendJSON = ""
+    @objc dynamic var receivedJSON = ""
 }

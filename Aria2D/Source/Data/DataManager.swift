@@ -13,14 +13,7 @@ class DataManager: NSObject {
 	static let shared = DataManager()
 	
 	fileprivate override init() {
-
 	}
-	
-	fileprivate var realm: Realm {
-		let realmConfiguration = Realm.Configuration(inMemoryIdentifier: "InMemoryRealm")
-		return try! Realm(configuration: realmConfiguration)
-	}
-	
 	
 	func initAllObjects(_ objs: [Aria2Object]) {
 		writeToRealm { realm in
@@ -98,7 +91,8 @@ class DataManager: NSObject {
 	func updateFiles(_ gid: String, files: [Aria2File]) {
 		writeToRealm { realm in
 			if let obj = realm.object(ofType: Aria2Object.self, forPrimaryKey: gid) {
-				obj.files = files
+				obj.files.removeAll()
+                obj.files.append(objectsIn: files)
 			}
 		}
 	}
@@ -107,7 +101,7 @@ class DataManager: NSObject {
     
     func onDownloadRemove(_ gidList: [String]) {
         writeToRealm { realm in
-			let objs = gidList.flatMap {
+            let objs = gidList.compactMap {
 				realm.object(ofType: Aria2Object.self, forPrimaryKey: $0)
 			}
 			realm.delete(objs)
@@ -163,42 +157,59 @@ class DataManager: NSObject {
  //MARK: - Get Data
 	
 	func aria2Object(gid: String) -> Aria2Object? {
-		return realm.object(ofType: Aria2Object.self, forPrimaryKey: gid)
+        do {
+            let realm = try Realm()
+            return realm.object(ofType: Aria2Object.self, forPrimaryKey: gid)
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
 	}
 	
     func data<T: Object>(_ type: T.Type) -> Results<T> {
-        switch ViewControllersManager.shared.selectedRow {
-        case .downloading:
-            return realm.objects(type)
-				.filter("status != %@", Status.complete.rawValue)
-				.filter("status != %@", Status.removed.rawValue)
-				.sorted(byKeyPath: "date")
-				.sorted(byKeyPath: "status")
-        case .completed:
-            return realm.objects(type)
-				.filter("status == %@", Status.complete.rawValue)
-                .sorted(byKeyPath:"date", ascending: false)
-		case .removed:
-			return realm.objects(type)
-				.filter("status == %@", Status.removed.rawValue)
-				.sorted(byKeyPath: "date")
-        case .baidu:
-			let ascending = Preferences.shared.ascending
-			let sortValue = Preferences.shared.sortValue
-			var re = realm.objects(type)
-			if sortValue != "path" {
-				re = re.sorted(byKeyPath: "path", ascending: true)
-			}
-			return re.sorted(byKeyPath: sortValue, ascending: ascending)
-				.sorted(byKeyPath: "isdir", ascending: false)
-				.sorted(byKeyPath: "isBackButton", ascending: false)
-        default:
-            return realm.objects(type).filter("status == -1")
+        do {
+            let realm = try Realm()
+            switch ViewControllersManager.shared.selectedRow {
+            case .downloading:
+                return realm.objects(type)
+                    .filter("status == %@ OR status == %@ OR status == %@",
+                            Status.active.rawValue, Status.waiting.rawValue, Status.paused.rawValue)
+                    .sorted(byKeyPath: "date")
+                    .sorted(byKeyPath: "status")
+            case .completed:
+                return realm.objects(type)
+                    .filter("status == %@", Status.complete.rawValue)
+                    .sorted(byKeyPath:"date", ascending: false)
+            case .removed:
+                return realm.objects(type)
+                    .filter("status == %@ OR status == %@",
+                            Status.removed.rawValue, Status.error.rawValue)
+                    .sorted(byKeyPath: "date")
+                    .sorted(byKeyPath: "status")
+            case .baidu:
+                let ascending = Preferences.shared.ascending
+                let sortValue = Preferences.shared.sortValue
+                var re = realm.objects(type)
+                if sortValue != "path" {
+                    re = re.sorted(byKeyPath: "path", ascending: true)
+                }
+                return re.sorted(byKeyPath: sortValue, ascending: ascending)
+                    .sorted(byKeyPath: "isdir", ascending: false)
+                    .sorted(byKeyPath: "isBackButton", ascending: false)
+            default:
+                return realm.objects(type).filter("status == -1")
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
         }
     }
 	
 	func activeCount() -> Int {
-		return realm.objects(Aria2Object.self).filter("status == %@", Status.active.rawValue).count
+        do {
+            let realm = try Realm()
+            return realm.objects(Aria2Object.self).filter("status == %@", Status.active.rawValue).count
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
     }
 }
 
@@ -207,12 +218,17 @@ class DataManager: NSObject {
 // MARK: - Private Function For TaskObject
 private extension DataManager {
 	func writeToRealm(block: @escaping (_ realm: Realm) -> Void) {
-		DispatchQueue(label: "io.realm.realm.background").async {
-			autoreleasepool {
-				try? self.realm.write {
-					block(self.realm)
-				}
-			}
-		}
+        DispatchQueue(label: "io.realm.realm.background").async {
+            autoreleasepool {
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        block(realm)
+                    }
+                } catch let error as NSError {
+                    fatalError("Error opening realm: \(error)")
+                }
+            }
+        }
 	}
 }

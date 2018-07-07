@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import JavaScriptCore
 
 // Int <-> NsNumber
 @objc(IntToNumberTransformer)
@@ -37,3 +37,28 @@ class StringToNSStringTransformer: ValueTransformer {
 		return value as? String ?? ""
 	}
 }
+
+@objc(Int64ToByteSpeedTransformer)
+class Int64ToByteSpeedTransformer: ValueTransformer {
+    override func transformedValue(_ value: Any?) -> Any? {
+        if let value = value as? Int64 {
+            return "\(value.ByteFileFormatter())/s"
+        }
+        return ""
+    }
+}
+
+@objc(PeerIDDecode)
+class PeerIDDecode: ValueTransformer {
+    override func transformedValue(_ value: Any?) -> Any? {
+        if let value = value as? String {
+            if let context = JSContext() {
+                context.evaluateScript("var str = unescape('\(value)')")
+                return context.evaluateScript("str").toString()
+            }
+        }
+        return ""
+    }
+}
+
+

@@ -52,14 +52,7 @@ class MainMenu: NSObject {
 				&& (selectedRow == .downloading || selectedRow == .completed || selectedRow == .removed)
 		}
 		
-		if menuItem.action == #selector(showOptions) {
-			return selectedIndexs.count > 0
-				&& mainWindowFront
-				&& selectedRow != .baidu
-				&& selectedRow != .none
-		}
-		
-		if menuItem.action == #selector(showStatus) {
+		if menuItem.action == #selector(showInfo) {
 			return selectedIndexs.count > 0
 				&& mainWindowFront
 				&& selectedRow != .baidu
@@ -116,12 +109,8 @@ class MainMenu: NSObject {
         Aria2.shared.unPauseAll()
     }
 	
-	@IBAction func showOptions(_ sender: Any) {
-		ViewControllersManager.shared.showOptions()
-	}
-	
-	@IBAction func showStatus(_ sender: Any) {
-		ViewControllersManager.shared.showStatus()
+	@IBAction func showInfo(_ sender: Any) {
+		ViewControllersManager.shared.showInfo()
 	}
 
 	@IBAction func feedback(_ sender: Any) {

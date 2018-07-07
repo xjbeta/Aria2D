@@ -19,10 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
-        if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 11, patchVersion: 0)) {
+        if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 12, patchVersion: 0)) {
 			let alert: NSAlert = NSAlert()
 			alert.messageText = "This version of macOS does not support Aria2D"
-			alert.informativeText = "Update your Mac to version 10.11 or higher to use Aria2D."
+			alert.informativeText = "Update your Mac to version 10.12 or higher to use Aria2D."
 			alert.alertStyle = .warning
 			alert.addButton(withTitle: "OK")
 			alert.runModal()
@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		self.setDevMate()
 		Aria2Websocket.shared.initSocket()
-		Baidu.shared.checkLogin(nil)
+		Baidu.shared.checkTokenEffective()
 		Preferences.shared.checkPlistFile()
 		Aria2.shared.aria2c.autoStart()
 	}
@@ -50,15 +50,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 	
-	func applicationWillBecomeActive(_ notification: Notification) {
-		Aria2Websocket.shared.resumeTimer()
-	}
-	
-	func applicationWillResignActive(_ notification: Notification) {
-		Aria2Websocket.shared.suspendTimer()
-	}
 	
 	func applicationWillTerminate(_ notification: Notification) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
 		Aria2.shared.aria2c.autoClose()
 	}
     
@@ -88,8 +89,8 @@ extension AppDelegate: DevMateKitDelegate {
 		
 	}
 	
-	@objc func feedbackController(_ controller: DMFeedbackController!, parentWindowFor mode: DMFeedbackMode) -> NSWindow? {
-		return self.window
+    @objc func feedbackController(_ controller: DMFeedbackController, parentWindowFor mode: DMFeedbackMode) -> NSWindow {
+        return self.window!
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {

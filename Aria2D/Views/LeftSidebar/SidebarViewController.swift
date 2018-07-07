@@ -23,7 +23,7 @@ class SidebarViewController: NSViewController {
 		initIndicator()
 		initNotification()
 //        ViewControllersManager.shared.selectedRow = .downloading
-		
+		resetLeftOutlineView()
 	}
 	
 	
@@ -49,7 +49,8 @@ class SidebarViewController: NSViewController {
         }
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .resetLeftOutlineView, object: nil)
+        
+		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .baiduStatusUpdated, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .developerModeChanged, object: nil)
 	}
 	
@@ -64,26 +65,28 @@ class SidebarViewController: NSViewController {
     }
 	
 	func setDefaultData() {
-		if Baidu.shared.isLogin && Preferences.shared.developerMode {
-			if sidebarItems.count == 3 {
-				sidebarItems.append(.baidu)
-				sidebarTableView.insertRows(at: IndexSet(integer: 3), withAnimation: .effectFade)
-			} else {
-				sidebarItems = [.downloading, .removed, .completed, .baidu]
-				sidebarTableView.reloadData()
-			}
-		} else {
-			if sidebarItems.count == 4 {
-				sidebarItems.remove(at: 3)
-				sidebarTableView.removeRows(at: IndexSet(integer: 3), withAnimation: .effectFade)
-			} else {
-				sidebarItems = [.downloading, .removed, .completed]
-				sidebarTableView.reloadData()
-			}
-		}
-		if sidebarTableView.selectedRow == -1 {
-			sidebarTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
-		}
+        
+        if Preferences.shared.developerMode && Baidu.shared.isTokenEffective {
+            if sidebarItems.count == 3 {
+                sidebarItems.append(.baidu)
+                sidebarTableView.insertRows(at: IndexSet(integer: 3), withAnimation: .effectFade)
+            } else if sidebarItems.count != 4 {
+                sidebarItems = [.downloading, .removed, .completed, .baidu]
+                sidebarTableView.reloadData()
+            }
+        } else {
+            if sidebarItems.count == 4 {
+                sidebarItems.remove(at: 3)
+                sidebarTableView.removeRows(at: IndexSet(integer: 3), withAnimation: .effectFade)
+            } else if sidebarItems.count != 3 {
+                sidebarItems = [.downloading, .removed, .completed]
+                sidebarTableView.reloadData()
+            }
+        }
+        
+        if sidebarTableView.selectedRow == -1 {
+            sidebarTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        }
 	}
 
 	

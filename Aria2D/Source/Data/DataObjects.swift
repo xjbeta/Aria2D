@@ -8,38 +8,28 @@
 
 import Foundation
 import RealmSwift
-import Realm
 
-final class Aria2Object: Object, Decodable {
-	private let _files = List<Aria2File>()
-	var files: [Aria2File] {
-		get {
-			return _files.map { $0 }
-		}
-		set {
-			_files.removeAll()
-			_files.append(objectsIn: newValue.map(Aria2File.init))
-		}
-	}
-	
-	
+class Aria2Object: Object, Decodable {
+    var files = List<Aria2File>()
+
 	@objc dynamic var gid: String = ""
 	@objc dynamic var status: Status = .error
 	@objc dynamic var totalLength: Int64 = 0
 	@objc dynamic var completedLength: Int64 = 0 
 	@objc dynamic var uploadLength: Int64 = 0
 	@objc dynamic var downloadSpeed: Int64 = 0
+    @objc dynamic var uploadSpeed: Int64 = 0
 	@objc dynamic var pieceLength: Int64 = 0
 	@objc dynamic var connections: Int = 0
 	@objc dynamic var dir: String = ""
 	@objc dynamic var date: Double = 0
-
+    @objc dynamic var bitfield: String = ""
 	
-	//	let uploadSpeed: String
+	
 	//	let infoHash: String = ""
 	//	let numSeeders: String
 	//	let seeder: Bool
-	//	let numPieces: String
+	@objc dynamic var numPieces: String = ""
 	//	let errorCode: String
 	//	let errorMessage: String
 	//	let followedBy: String
@@ -51,7 +41,7 @@ final class Aria2Object: Object, Decodable {
 	
 	@objc dynamic var bittorrent: Bittorrent?
 	
-	private enum CodingKeys: String, CodingKey {
+	enum CodingKeys: String, CodingKey {
 		case files,
 		gid,
 		status,
@@ -59,27 +49,36 @@ final class Aria2Object: Object, Decodable {
 		completedLength,
 		uploadLength,
 		downloadSpeed,
+        uploadSpeed,
 		pieceLength,
 		connections,
 		dir,
-		bittorrent
+        bittorrent,
+        bitfield,
+        numPieces
 	}
 	
 	
 	required convenience init(from decoder: Decoder) throws {
 		self.init()
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		files = try values.decode([Aria2File].self, forKey: .files)
+        if let files = try values.decodeIfPresent([Aria2File].self, forKey: .files) {
+            self.files.append(objectsIn: files)
+        }
 		gid = try values.decode(String.self, forKey: .gid)
 		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
 		totalLength = Int64(try values.decode(String.self, forKey: .totalLength)) ?? 0
 		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
 		uploadLength = Int64(try values.decode(String.self, forKey: .uploadLength)) ?? 0
 		downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
+        uploadSpeed = Int64(try values.decode(String.self, forKey: .uploadSpeed)) ?? 0
 		pieceLength = Int64(try values.decode(String.self, forKey: .pieceLength)) ?? 0
 		connections = Int(try values.decode(String.self, forKey: .connections)) ?? 0
-		dir = try values.decode(String.self, forKey: .dir)
+		dir = (try values.decode(String.self, forKey: .dir)).standardizingPath
 		bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
+        bitfield = try values.decodeIfPresent(String.self, forKey: .bitfield) ?? ""
+//        numPieces = try values.decodeIfPresent(String.self, forKey: .numPieces) ?? ""
+        numPieces = try values.decode(String.self, forKey: .numPieces)
 		date = Date().timeIntervalSince1970
 	}
 
@@ -94,8 +93,33 @@ final class Aria2Object: Object, Decodable {
 	override static func indexedProperties() -> [String] {
 		return ["gid"]
 	}
+    
+    func path() -> URL? {
+        if let name = bittorrent?.name, dir != "", name != "" {
+            return URL(fileURLWithPath: dir).appendingPathComponent(name)
+        }
+        if let path = files.first?.path, path != "" {
+            return URL(fileURLWithPath: path)
+        }
+        return nil
+    }
+    
+    func nameString() -> String {
+        
+        return path()?.lastPathComponent ?? "Unknown"
+    }
+    
+    func fileIcon() -> NSImage {
+        var image = NSImage()
+        if files.count > 1 || bittorrent?.mode == .multi {
+            image = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+        } else {
+            image = NSWorkspace.shared.icon(forFileType: URL(fileURLWithPath: nameString()).pathExtension)
+        }
+        return image
+    }
+    
 }
-
 
 class Aria2File: Object, Decodable {
 	@objc dynamic var index: Int = -1
@@ -103,20 +127,7 @@ class Aria2File: Object, Decodable {
 	@objc dynamic var length: Int64 = 0
 	@objc dynamic var completedLength: Int64 = 0
 	@objc dynamic var selected: Bool = false
-	private let _uris = List<Aria2Uri>()
-//	@objc dynamic var uris: [String] = []
-
-	var uris: [Aria2Uri] {
-		get {
-			return _uris.map { $0 }
-		}
-		set {
-			_uris.removeAll()
-			_uris.append(objectsIn: newValue.map(Aria2Uri.init))
-		}
-	}
-
-
+	var uris = List<Aria2Uri>()
 	
 	private enum CodingKeys: String, CodingKey {
 		case index,
@@ -131,12 +142,12 @@ class Aria2File: Object, Decodable {
 		self.init()
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		index = Int(try values.decode(String.self, forKey: .index)) ?? -1
-		path = try values.decode(String.self, forKey: .path)
+		path = try values.decode(String.self, forKey: .path).standardizingPath
 		length = Int64(try values.decode(String.self, forKey: .length)) ?? 0
 		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
 		selected = try values.decode(String.self, forKey: .selected) == "true"
 
-		uris = try values.decode([Aria2Uri].self, forKey: .uris)
+//        uris = try values.decode([Aria2Uri].self, forKey: .uris)
 //			.map { $0.uri }
 	}
 	
@@ -206,10 +217,12 @@ class Bittorrent: Object, Decodable {
 	//	announceList
 	@objc dynamic var name: String? = nil
 	@objc dynamic var mode: FileMode = .error
-
+    var announceList = List<String>()
+    
 	private enum CodingKeys: String, CodingKey {
 		case name = "info",
-		mode
+		mode,
+        announceList
 	}
 
 	required convenience init(from decoder: Decoder) throws {
@@ -221,6 +234,9 @@ class Bittorrent: Object, Decodable {
 		if let str = try values.decodeIfPresent(String.self, forKey: .mode) {
 			mode = FileMode(str) ?? .error
 		}
+        if let str = try values.decodeIfPresent([[String]].self, forKey: .announceList) {
+            announceList.append(objectsIn: str.flatMap {$0})
+        }
 	}
 }
 

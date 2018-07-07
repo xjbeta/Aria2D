@@ -22,23 +22,12 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 			Aria2.shared.changeOption(gid,
 			                          key: option.rawValue,
 			                          value: changeValue) {
-										switch $0 {
-										case .success(let data):
-											struct Result: Codable {
-												let result: String
-											}
-											if let result = try? JSONDecoder().decode(Result.self, from: data).result,
-												result == "OK" {
-												DispatchQueue.main.async {
-													self.changeComplete?()
-													self.dismiss(self)
-												}
-											} else {
-												
-											}
-										default:
-											return
-										}
+                                        if $0 {
+                                            DispatchQueue.main.async {
+                                                self.changeComplete?()
+                                                self.dismiss(self)
+                                            }
+                                        }
 			}
 		}
 	}
@@ -145,8 +134,8 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 					self.textField.stringValue = "Click help for more info."
 				}
 			}
-			if shoudRestartKeys.contains(self.option) {
-				self.textField.stringValue = self.textField.stringValue + "Should restart to enable"
+			if shoudRestartKeys.contains(self.option), let textField = self.textField {
+				textField.stringValue = textField.stringValue + "Should restart to enable"
 			}
 		}
 	}
@@ -155,7 +144,7 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
         super.viewDidLoad()
         visualEffectView.material = .popover
 		changeButton.isEnabled = false
-		show(.string) {}
+        optionKey.stringValue = option.rawValue
     }
 	
 	

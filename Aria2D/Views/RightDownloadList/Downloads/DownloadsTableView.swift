@@ -102,48 +102,52 @@ class DownloadsTableView: NSTableView {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			let data = DataManager.shared.data(Aria2Object.self)
-			notificationToken = data.observe {
-				switch $0 {
-				case .initial:
-					self.reloadData()
-					self.oldKeys = self.newKeys()
-				//			case .update(_, let deletions, let insertions, let modifications):
-				case .update(_, let deletions, let insertions, _):
-					
-					if deletions.count == 0, insertions.count == 0 {
-						return
-					}
-					if self.tableviewUpdating {
-						self.shouldUpdate = true
-					} else {
-						self.updateRows()
-					}
-				case .error:
-					break
-				}
-			}
+            
+            notificationToken = data.bind(to: self, animated: true)
+            
+//            notificationToken = data.observe {
+//                switch $0 {
+//                case .initial:
+//                    self.reloadData()
+//                    self.oldKeys = self.newKeys()
+//                //            case .update(_, let deletions, let insertions, let modifications):
+//                case .update(_, let deletions, let insertions, _):
+//
+//                    if deletions.count == 0, insertions.count == 0 {
+//                        return
+//                    }
+//                    if self.tableviewUpdating {
+//                        self.shouldUpdate = true
+//                    } else {
+//                        self.updateRows()
+//                    }
+//                case .error:
+//                    break
+//                }
+//            }
 		case .baidu:
 			let data = DataManager.shared.data(PCSFile.self)
-			notificationToken = data.observe {
-				switch $0 {
-				case .initial:
-					self.reloadData()
-					self.oldKeys = self.newKeys()
-				//			case .update(_, let deletions, let insertions, let modifications):
-				case .update(_, let deletions, let insertions, _):
-					
-					if deletions.count == 0, insertions.count == 0 {
-						return
-					}
-					if self.tableviewUpdating {
-						self.shouldUpdate = true
-					} else {
-						self.updateRows()
-					}
-				case .error:
-					break
-				}
-			}
+            notificationToken = data.bind(to: self, animated: true)
+//            notificationToken = data.observe {
+//                switch $0 {
+//                case .initial:
+//                    self.reloadData()
+//                    self.oldKeys = self.newKeys()
+//                //            case .update(_, let deletions, let insertions, let modifications):
+//                case .update(_, let deletions, let insertions, _):
+//
+//                    if deletions.count == 0, insertions.count == 0 {
+//                        return
+//                    }
+//                    if self.tableviewUpdating {
+//                        self.shouldUpdate = true
+//                    } else {
+//                        self.updateRows()
+//                    }
+//                case .error:
+//                    break
+//                }
+//            }
 		default:
 			break
 		}
@@ -298,3 +302,64 @@ class DownloadsTableView: NSTableView {
 		NotificationCenter.default.removeObserver(self)
     }
 }
+
+extension Results {
+    func bind(to tableView: NSTableView, animated: Bool) -> NotificationToken {
+        return self.observe {
+            switch $0 {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                guard animated else {
+                    tableView.reloadData()
+                    return
+                }
+
+                let lastItemCount = tableView.numberOfRows
+                guard self.count == lastItemCount + insertions.count - deletions.count else {
+                    tableView.reloadData()
+                    return
+                }
+
+                tableView.beginUpdates()
+                tableView.removeRows(at: IndexSet(deletions), withAnimation: .effectFade)
+                tableView.insertRows(at: IndexSet(insertions), withAnimation: .effectFade)
+                tableView.reloadData(forRowIndexes: IndexSet(modifications), columnIndexes: IndexSet([0]))
+                tableView.endUpdates()
+            case .error:
+                break
+            }
+        }
+    }
+}
+
+extension List {
+    func bind(to tableView: NSTableView, animated: Bool) -> NotificationToken {
+        return self.observe {
+            switch $0 {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                guard animated else {
+                    tableView.reloadData()
+                    return
+                }
+
+                let lastItemCount = tableView.numberOfRows
+                guard self.count == lastItemCount + insertions.count - deletions.count else {
+                    tableView.reloadData()
+                    return
+                }
+
+                tableView.beginUpdates()
+                tableView.removeRows(at: IndexSet(deletions), withAnimation: .effectFade)
+                tableView.insertRows(at: IndexSet(insertions), withAnimation: .effectFade)
+                tableView.reloadData(forRowIndexes: IndexSet(modifications), columnIndexes: IndexSet([0]))
+                tableView.endUpdates()
+            case .error:
+                break
+            }
+        }
+    }
+}
+
