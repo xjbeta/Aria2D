@@ -19,10 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
-        if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 11, patchVersion: 0)) {
+        if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 12, patchVersion: 0)) {
 			let alert: NSAlert = NSAlert()
 			alert.messageText = "This version of macOS does not support Aria2D"
-			alert.informativeText = "Update your Mac to version 10.11 or higher to use Aria2D."
+			alert.informativeText = "Update your Mac to version 10.12 or higher to use Aria2D."
 			alert.alertStyle = .warning
 			alert.addButton(withTitle: "OK")
 			alert.runModal()
