@@ -15,10 +15,12 @@ class Aria2: NSObject {
 	}
 	
 	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
-		Aria2.shared.initData()
+		Aria2.shared.initAllData()
 	}
 	
-    func initData() {
+    let aria2c = Aria2c()
+    
+    func initAllData() {
         let block: ((webSocketResult) -> Void) = {
             switch $0 {
             case .success(let data):
@@ -82,22 +84,25 @@ class Aria2: NSObject {
 	
 	
 	
-	let aria2c = Aria2c()
 
-	func initData(_ gid: String, block: @escaping (_ result: Data) -> Void = { _ in}) {
+
+	func initData(_ gid: String, block: @escaping (_ result: Aria2Object) -> Void = { _ in}) {
 		Aria2WebsocketObject(method: Aria2Method.tellStatus,
 		                     params: [gid])
 			.writeToWebsocket {
 				switch $0 {
 				case .success(let data):
-					block(data)
+                    struct Result: Decodable {
+                        let result: Aria2Object
+                    }
+                    if let re = data.decode(Result.self)?.result {
+                        block(re)
+                    }
 				default:
 					break
 				}
 		}
 	}
-
-
 
 	func updateActiveTasks() {
 		Aria2WebsocketObject(method: Aria2Method.tellActive,
@@ -481,7 +486,7 @@ class Aria2: NSObject {
                              params: [gid])
             .writeToWebsocket {
                 switch $0 {
-                case .success(let data):
+                case .success(let _):
 
                     block()
                     
@@ -496,7 +501,7 @@ class Aria2: NSObject {
                              params: [gid])
             .writeToWebsocket {
                 switch $0 {
-                case .success(let data):
+                case .success(let _):
                     
                     block()
                     

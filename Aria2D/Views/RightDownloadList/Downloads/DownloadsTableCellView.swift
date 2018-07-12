@@ -26,19 +26,6 @@ class DownloadsTableCellView: NSTableCellView {
     func setData(_ obj: Aria2Object) {
 		gid = obj.gid
 		setText(obj)
-//        notificationToken = obj.observe {
-//            switch $0 {
-//            case .change:
-//                if let data = DataManager.shared.aria2Object(gid: obj.gid) {
-//                    self.setText(data)
-//                }
-//            default:
-//                break
-//            }
-//        }
-		if obj.path() == nil {
-			Aria2.shared.getFiles(obj.gid)
-		}
     }
 	
 	func setText(_ obj: Aria2Object) {

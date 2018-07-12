@@ -30,7 +30,7 @@ class Aria2Websocket: NSObject {
     }
 	
 	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
-		Aria2.shared.initData()
+		Aria2.shared.initAllData()
 	}
 
 	var connectedServerInfo = ConnectedServerInfo()
@@ -60,20 +60,13 @@ class Aria2Websocket: NSObject {
 
 	}
 	
-	func showNotification(_ gid: String) {
+	func showNotification(_ obj: Aria2Object) {
 		let notification = NSUserNotification()
 		notification.title = "Completed"
-		let obj = DataManager.shared.aria2Object(gid: gid)
-		notification.subtitle = obj?.path()?.lastPathComponent ?? "Unknown"
-		
-		if let totalLength = obj?.totalLength {
-			let formatter = ByteCountFormatter()
-			notification.informativeText = formatter.string(fromByteCount: totalLength)
-		}
-		
+        notification.subtitle = obj.nameString()
+		notification.informativeText = obj.totalLength.ByteFileFormatter()
 		notification.soundName = NSUserNotificationDefaultSoundName
 		NSUserNotificationCenter.default.deliver(notification)
-
 	}
 	
 	var isSuspend = Bool()
@@ -116,7 +109,7 @@ class Aria2Websocket: NSObject {
 		if isSuspend, timer != nil {
 			timer?.resume()
 			isSuspend = false
-			Aria2.shared.initData()
+			Aria2.shared.initAllData()
 		}
 	}
     
@@ -212,7 +205,7 @@ class Aria2Websocket: NSObject {
 
 extension Aria2Websocket: SRWebSocketDelegate {
     func webSocketDidOpen(_ webSocket: SRWebSocket) {
-        Aria2.shared.initData()
+        Aria2.shared.initAllData()
         connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         Aria2.shared.getVersion {
             self.connectedServerInfo.version = "Version: \($0)"
@@ -248,9 +241,11 @@ extension Aria2Websocket: SRWebSocketDelegate {
                     Aria2.shared.updateStatus(gids)
                 case .onDownloadComplete, .onBtDownloadComplete:
                     Aria2.shared.updateStatus(gids)
-                    if !NSApp.isActive && Preferences.shared.completeNotice {
-                        gids.forEach {
-                            showNotification($0)
+                    if !NSApp.isActive,
+                        Preferences.shared.completeNotice,
+                        let gid = gids.first {
+                        Aria2.shared.initData(gid) {
+                            self.showNotification($0)
                         }
                     }
                     ViewControllersManager.shared.showHUD(.downloadCompleted)

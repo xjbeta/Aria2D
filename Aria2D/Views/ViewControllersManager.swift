@@ -90,7 +90,7 @@ class ViewControllersManager: NSObject {
             selectedIndexs = IndexSet()
             switch selectedRow {
             case .downloading, .removed, .completed:
-                Aria2.shared.initData()
+                Aria2.shared.initAllData()
             case .baidu:
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
             default:
@@ -252,7 +252,7 @@ class ViewControllersManager: NSObject {
 	func refresh() {
 		switch selectedRow {
 		case .downloading, .completed, .removed:
-			Aria2.shared.initData()
+			Aria2.shared.initAllData()
 		case .baidu:
 			Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
 		default:
