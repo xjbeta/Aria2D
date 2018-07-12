@@ -39,24 +39,6 @@ extension String {
 		}
 		return ""
 	}
-	
-	private func cCode(_ b: (SecStaticCode) -> Void) {
-		let bundleURL: CFURL = Bundle.main.bundleURL as CFURL
-		var code: SecStaticCode? = nil
-		SecStaticCodeCreateWithPath(bundleURL, [], &code)
-		b(code!)
-	}
-	
-	func sort() {
-		#if DEBUG
-		#else
-			DispatchQueue.global().async {
-				self.cCode {
-					assert(SecStaticCodeCheckValidityWithErrors($0, SecCSFlags(rawValue: kSecCSBasicValidateOnly), nil, nil) == errSecSuccess)
-				}
-			}
-		#endif
-	}
     
 //MARK: - String Path
     var pathComponents: [String] {

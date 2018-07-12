@@ -42,7 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !flag {
             for window in sender.windows {
 				if window.className == "NSWindow" {
-					window.className.sort()
 					window.makeKeyAndOrderFront(self)
 				}
             }

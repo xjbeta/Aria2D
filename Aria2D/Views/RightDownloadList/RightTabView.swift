@@ -16,7 +16,6 @@ class RightTabView: NSTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		let title = self.title ?? ""
-		title.sort()
         ViewControllersManager.shared.selectedRowDidSet = {
             self.setSelectedTab()
         }
