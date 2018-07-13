@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+import RealmSwift
 
 
 @NSApplicationMain
@@ -18,12 +18,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-		#if DEBUG
-			DMKitDebugAddDevMateMenu()
-		#endif
+		
+        if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 12, patchVersion: 0)) {
+			let alert: NSAlert = NSAlert()
+			alert.messageText = "This version of macOS does not support Aria2D"
+			alert.informativeText = "Update your Mac to version 10.12 or higher to use Aria2D."
+			alert.alertStyle = .warning
+			alert.addButton(withTitle: "OK")
+			alert.runModal()
+			
+			NSApp.terminate(self)
+		}
+        
+		
 		self.setDevMate()
 		Aria2Websocket.shared.initSocket()
-		Baidu.shared.checkLogin(nil)
+		Baidu.shared.checkTokenEffective()
 		Preferences.shared.checkPlistFile()
 		Aria2.shared.aria2c.autoStart()
 	}
@@ -32,7 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !flag {
             for window in sender.windows {
 				if window.className == "NSWindow" {
-					window.className.sort()
 					window.makeKeyAndOrderFront(self)
 				}
             }
@@ -40,26 +49,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 	
-	func applicationWillBecomeActive(_ notification: Notification) {
-		Aria2Websocket.shared.resumeTimer()
-	}
-	
-	func applicationWillResignActive(_ notification: Notification) {
-		Aria2Websocket.shared.suspendTimer()
-	}
 	
 	func applicationWillTerminate(_ notification: Notification) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch let error as NSError {
+            fatalError("Error opening realm: \(error)")
+        }
 		Aria2.shared.aria2c.autoClose()
 	}
+    
+    func application(_ sender: NSApplication, openFiles filenames: [String]) {
+        if let file = filenames.filter({ FileManager.default.fileExists(atPath: $0) }).first {
+            ViewControllersManager.shared.openTorrent(file)
+        }
+    }
+    
 }
 
 extension AppDelegate: DevMateKitDelegate {
 	
 	func setDevMate() {
+		#if DEBUG
+			DMKitDebugAddDevMateMenu()
+		#endif
 		//DevMate
 		DevMateKit.sendTrackingReport(nil, delegate: self)
 		
-		//		DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
+        //        DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
 		
 		if !string_check(nil).boolValue {
 			DevMateKit.setupTimeTrial(self, withTimeInterval: kDMTrialWeek)
@@ -68,8 +88,8 @@ extension AppDelegate: DevMateKitDelegate {
 		
 	}
 	
-	@objc func feedbackController(_ controller: DMFeedbackController!, parentWindowFor mode: DMFeedbackMode) -> NSWindow? {
-		return self.window
+    @objc func feedbackController(_ controller: DMFeedbackController, parentWindowFor mode: DMFeedbackMode) -> NSWindow {
+        return self.window!
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
@@ -107,8 +127,6 @@ extension AppDelegate: DevMateKitDelegate {
 					}
 				}
 			}
-			
-			
 		}
 	}
 }
