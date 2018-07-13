@@ -12,16 +12,20 @@
 		010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */; };
 		010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */; };
 		010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */; };
-		010F0ECF20F83B4100F33553 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECA20F83B4100F33553 /* SocketRocket.framework */; };
-		010F0ED020F83B4100F33553 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECA20F83B4100F33553 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		010F0ED120F83B4100F33553 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */; };
-		010F0ED220F83B4100F33553 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		010F0ED320F83B4100F33553 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECC20F83B4100F33553 /* Realm.framework */; };
-		010F0ED420F83B4100F33553 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECC20F83B4100F33553 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		010F0ED520F83B4100F33553 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECD20F83B4100F33553 /* RealmSwift.framework */; };
-		010F0ED620F83B4100F33553 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECD20F83B4100F33553 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		010F0ED720F83B4100F33553 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECE20F83B4100F33553 /* DevMateKit.framework */; };
-		010F0ED820F83B4100F33553 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECE20F83B4100F33553 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0EDA20F8582C00F33553 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */; };
+		010F0EDB20F8582C00F33553 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0EDC20F8582C00F33553 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011F830B20ADC22100CA18E5 /* SocketRocket.framework */; };
+		010F0EDD20F8582C00F33553 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 011F830B20ADC22100CA18E5 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; };
+		010F0EDF20F8582C00F33553 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0EE020F8582C00F33553 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; };
+		010F0EE120F8582C00F33553 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0EE220F8582C00F33553 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; };
+		010F0EE320F8582C00F33553 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0EEC20F8586C00F33553 /* Realm.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 010F0EE420F8586100F33553 /* Realm.framework.dSYM */; };
+		010F0EED20F8586C00F33553 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 010F0EE720F8586100F33553 /* RealmSwift.framework.dSYM */; };
+		010F0EEE20F8586C00F33553 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 010F0EE520F8586100F33553 /* SocketRocket.framework.dSYM */; };
+		010F0EEF20F8586C00F33553 /* SwiftHTTP.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 010F0EE620F8586100F33553 /* SwiftHTTP.framework.dSYM */; };
 		0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D42E1E04E36E003EBFCD /* NotificationName.swift */; };
 		0115D4311E04E423003EBFCD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4301E04E423003EBFCD /* Color.swift */; };
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
@@ -83,10 +87,6 @@
 		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01CD741020F7B44A002D93BF /* DevMate_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 01CD740F20F7B449002D93BF /* DevMate_pub.pem */; };
-		01D0C11320F838120060F622 /* Realm.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C10F20F838100060F622 /* Realm.framework.dSYM */; };
-		01D0C11420F838120060F622 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C11020F838100060F622 /* SocketRocket.framework.dSYM */; };
-		01D0C11520F838120060F622 /* SwiftHTTP.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C11120F838110060F622 /* SwiftHTTP.framework.dSYM */; };
-		01D0C11620F838120060F622 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C11220F838110060F622 /* RealmSwift.framework.dSYM */; };
 		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
 		01DEC4C920C3EFDA007D21F0 /* StepTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */; };
@@ -106,11 +106,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				010F0ED820F83B4100F33553 /* DevMateKit.framework in Embed Frameworks */,
-				010F0ED420F83B4100F33553 /* Realm.framework in Embed Frameworks */,
-				010F0ED220F83B4100F33553 /* SwiftHTTP.framework in Embed Frameworks */,
-				010F0ED620F83B4100F33553 /* RealmSwift.framework in Embed Frameworks */,
-				010F0ED020F83B4100F33553 /* SocketRocket.framework in Embed Frameworks */,
+				010F0EE120F8582C00F33553 /* Realm.framework in Embed Frameworks */,
+				010F0EE320F8582C00F33553 /* RealmSwift.framework in Embed Frameworks */,
+				010F0EDF20F8582C00F33553 /* DevMateKit.framework in Embed Frameworks */,
+				010F0EDB20F8582C00F33553 /* SwiftHTTP.framework in Embed Frameworks */,
+				010F0EDD20F8582C00F33553 /* SocketRocket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,10 +121,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				01D0C11320F838120060F622 /* Realm.framework.dSYM in Copy Files */,
-				01D0C11420F838120060F622 /* SocketRocket.framework.dSYM in Copy Files */,
-				01D0C11520F838120060F622 /* SwiftHTTP.framework.dSYM in Copy Files */,
-				01D0C11620F838120060F622 /* RealmSwift.framework.dSYM in Copy Files */,
+				010F0EEC20F8586C00F33553 /* Realm.framework.dSYM in Copy Files */,
+				010F0EED20F8586C00F33553 /* RealmSwift.framework.dSYM in Copy Files */,
+				010F0EEE20F8586C00F33553 /* SocketRocket.framework.dSYM in Copy Files */,
+				010F0EEF20F8586C00F33553 /* SwiftHTTP.framework.dSYM in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,11 +138,10 @@
 		010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableView.swift; sourceTree = "<group>"; };
 		010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableCellView.swift; sourceTree = "<group>"; };
-		010F0ECA20F83B4100F33553 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
-		010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/Mac/SwiftHTTP.framework; sourceTree = "<group>"; };
-		010F0ECC20F83B4100F33553 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
-		010F0ECD20F83B4100F33553 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
-		010F0ECE20F83B4100F33553 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
+		010F0EE420F8586100F33553 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
+		010F0EE520F8586100F33553 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
+		010F0EE620F8586100F33553 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/Mac/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
+		010F0EE720F8586100F33553 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		0115D42E1E04E36E003EBFCD /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		0115D4301E04E423003EBFCD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
@@ -215,10 +214,6 @@
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01CD740F20F7B449002D93BF /* DevMate_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DevMate_pub.pem; sourceTree = "<group>"; };
-		01D0C10F20F838100060F622 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
-		01D0C11020F838100060F622 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
-		01D0C11120F838110060F622 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/Mac/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
-		01D0C11220F838110060F622 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleClickTextField.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
 		01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTableCellView.swift; sourceTree = "<group>"; };
@@ -236,13 +231,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010F0EE020F8582C00F33553 /* Realm.framework in Frameworks */,
+				010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */,
+				010F0EE220F8582C00F33553 /* RealmSwift.framework in Frameworks */,
+				010F0EDA20F8582C00F33553 /* SwiftHTTP.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
 				010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */,
-				010F0ED120F83B4100F33553 /* SwiftHTTP.framework in Frameworks */,
-				010F0ED520F83B4100F33553 /* RealmSwift.framework in Frameworks */,
-				010F0ECF20F83B4100F33553 /* SocketRocket.framework in Frameworks */,
-				010F0ED720F83B4100F33553 /* DevMateKit.framework in Frameworks */,
-				010F0ED320F83B4100F33553 /* Realm.framework in Frameworks */,
+				010F0EDC20F8582C00F33553 /* SocketRocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,19 +305,10 @@
 		0147EDB41D21FAD800FB4324 = {
 			isa = PBXGroup;
 			children = (
-				010F0ECE20F83B4100F33553 /* DevMateKit.framework */,
-				010F0ECC20F83B4100F33553 /* Realm.framework */,
-				010F0ECD20F83B4100F33553 /* RealmSwift.framework */,
-				010F0ECA20F83B4100F33553 /* SocketRocket.framework */,
-				010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */,
 				0165AF611D963CDF00469601 /* Aria2D */,
 				6ACACE787527AEFD90491354 /* Frameworks */,
 				012624611ED174AC007FF8AA /* Kevlar */,
 				0147EDBE1D21FAD800FB4324 /* Products */,
-				01D0C10F20F838100060F622 /* Realm.framework.dSYM */,
-				01D0C11220F838110060F622 /* RealmSwift.framework.dSYM */,
-				01D0C11020F838100060F622 /* SocketRocket.framework.dSYM */,
-				01D0C11120F838110060F622 /* SwiftHTTP.framework.dSYM */,
 			);
 			sourceTree = "<group>";
 		};
@@ -517,6 +503,10 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				010F0EE420F8586100F33553 /* Realm.framework.dSYM */,
+				010F0EE720F8586100F33553 /* RealmSwift.framework.dSYM */,
+				010F0EE520F8586100F33553 /* SocketRocket.framework.dSYM */,
+				010F0EE620F8586100F33553 /* SwiftHTTP.framework.dSYM */,
 				0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */,
 				011F830B20ADC22100CA18E5 /* SocketRocket.framework */,
 				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
