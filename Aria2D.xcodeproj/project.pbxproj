@@ -12,24 +12,24 @@
 		010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */; };
 		010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */; };
 		010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */; };
+		010F0ECF20F83B4100F33553 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECA20F83B4100F33553 /* SocketRocket.framework */; };
+		010F0ED020F83B4100F33553 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECA20F83B4100F33553 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0ED120F83B4100F33553 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */; };
+		010F0ED220F83B4100F33553 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0ED320F83B4100F33553 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECC20F83B4100F33553 /* Realm.framework */; };
+		010F0ED420F83B4100F33553 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECC20F83B4100F33553 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0ED520F83B4100F33553 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECD20F83B4100F33553 /* RealmSwift.framework */; };
+		010F0ED620F83B4100F33553 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECD20F83B4100F33553 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		010F0ED720F83B4100F33553 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECE20F83B4100F33553 /* DevMateKit.framework */; };
+		010F0ED820F83B4100F33553 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 010F0ECE20F83B4100F33553 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D42E1E04E36E003EBFCD /* NotificationName.swift */; };
 		0115D4311E04E423003EBFCD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4301E04E423003EBFCD /* Color.swift */; };
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
 		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
 		011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */; };
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
-		011F830C20ADC22200CA18E5 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 011F830B20ADC22100CA18E5 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		011F830E20ADC23000CA18E5 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */; };
 		012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */ = {isa = PBXBuildFile; fileRef = 012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
-		012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; };
-		012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEE61F1461BC009E4110 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; };
-		012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDE1F1461BC009E4110 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; };
-		012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDF1F1461BC009E4110 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */; };
-		012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
@@ -41,8 +41,6 @@
 		012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */; };
 		012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */; };
 		0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130D74D1F13E9F500F11DBC /* JSONModels.swift */; };
-		0133936E20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 0133936D20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM */; };
-		0133937220DFCEDA009FF2D2 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		013817671D238E0100E0F926 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817661D238E0100E0F926 /* MainWindowController.swift */; };
 		013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */; };
 		013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9F1E51B305008D370D /* SetServersViewController.swift */; };
@@ -85,6 +83,10 @@
 		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01CD741020F7B44A002D93BF /* DevMate_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 01CD740F20F7B449002D93BF /* DevMate_pub.pem */; };
+		01D0C11320F838120060F622 /* Realm.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C10F20F838100060F622 /* Realm.framework.dSYM */; };
+		01D0C11420F838120060F622 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C11020F838100060F622 /* SocketRocket.framework.dSYM */; };
+		01D0C11520F838120060F622 /* SwiftHTTP.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C11120F838110060F622 /* SwiftHTTP.framework.dSYM */; };
+		01D0C11620F838120060F622 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01D0C11220F838110060F622 /* RealmSwift.framework.dSYM */; };
 		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
 		01DEC4C920C3EFDA007D21F0 /* StepTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */; };
@@ -98,17 +100,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		012C057B1F13E6D600EA5BD1 /* Embed Frameworks */ = {
+		010F0ED920F83B4100F33553 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0133937220DFCEDA009FF2D2 /* SwiftHTTP.framework in Embed Frameworks */,
-				012ADEE71F1461BC009E4110 /* Realm.framework in Embed Frameworks */,
-				012ADEE91F1461BC009E4110 /* RealmSwift.framework in Embed Frameworks */,
-				012ADEE31F1461BC009E4110 /* DevMateKit.framework in Embed Frameworks */,
-				011F830C20ADC22200CA18E5 /* SocketRocket.framework in Embed Frameworks */,
+				010F0ED820F83B4100F33553 /* DevMateKit.framework in Embed Frameworks */,
+				010F0ED420F83B4100F33553 /* Realm.framework in Embed Frameworks */,
+				010F0ED220F83B4100F33553 /* SwiftHTTP.framework in Embed Frameworks */,
+				010F0ED620F83B4100F33553 /* RealmSwift.framework in Embed Frameworks */,
+				010F0ED020F83B4100F33553 /* SocketRocket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,9 +121,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				012ADEF41F1461CD009E4110 /* Realm.framework.dSYM in Copy Files */,
-				012ADEF51F1461CD009E4110 /* RealmSwift.framework.dSYM in Copy Files */,
-				011F830E20ADC23000CA18E5 /* SocketRocket.framework.dSYM in Copy Files */,
+				01D0C11320F838120060F622 /* Realm.framework.dSYM in Copy Files */,
+				01D0C11420F838120060F622 /* SocketRocket.framework.dSYM in Copy Files */,
+				01D0C11520F838120060F622 /* SwiftHTTP.framework.dSYM in Copy Files */,
+				01D0C11620F838120060F622 /* RealmSwift.framework.dSYM in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +138,11 @@
 		010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableView.swift; sourceTree = "<group>"; };
 		010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableCellView.swift; sourceTree = "<group>"; };
+		010F0ECA20F83B4100F33553 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
+		010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/Mac/SwiftHTTP.framework; sourceTree = "<group>"; };
+		010F0ECC20F83B4100F33553 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
+		010F0ECD20F83B4100F33553 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
+		010F0ECE20F83B4100F33553 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
 		0115D42E1E04E36E003EBFCD /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		0115D4301E04E423003EBFCD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
@@ -142,7 +150,6 @@
 		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011F830B20ADC22100CA18E5 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
-		011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
 		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
 		012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSwiftKevlar.h; sourceTree = "<group>"; };
 		012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSwiftKevlar.m; sourceTree = "<group>"; };
@@ -150,8 +157,6 @@
 		012ADEDC1F1461BC009E4110 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
 		012ADEDE1F1461BC009E4110 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		012ADEDF1F1461BC009E4110 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
-		012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
-		012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -163,7 +168,6 @@
 		012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableViewPopoverSegue.swift; sourceTree = "<group>"; };
 		0130D74D1F13E9F500F11DBC /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
-		0133936D20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/Mac/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
 		0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/Mac/SwiftHTTP.framework; sourceTree = "<group>"; };
 		013817661D238E0100E0F926 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListArrayController.swift; sourceTree = "<group>"; };
@@ -211,6 +215,10 @@
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01CD740F20F7B449002D93BF /* DevMate_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DevMate_pub.pem; sourceTree = "<group>"; };
+		01D0C10F20F838100060F622 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
+		01D0C11020F838100060F622 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
+		01D0C11120F838110060F622 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/Mac/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
+		01D0C11220F838110060F622 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleClickTextField.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
 		01DEC4C820C3EFDA007D21F0 /* StepTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTableCellView.swift; sourceTree = "<group>"; };
@@ -229,10 +237,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
-				012ADEE21F1461BC009E4110 /* DevMateKit.framework in Frameworks */,
-				012ADEE81F1461BC009E4110 /* RealmSwift.framework in Frameworks */,
 				010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */,
-				012ADEE61F1461BC009E4110 /* Realm.framework in Frameworks */,
+				010F0ED120F83B4100F33553 /* SwiftHTTP.framework in Frameworks */,
+				010F0ED520F83B4100F33553 /* RealmSwift.framework in Frameworks */,
+				010F0ECF20F83B4100F33553 /* SocketRocket.framework in Frameworks */,
+				010F0ED720F83B4100F33553 /* DevMateKit.framework in Frameworks */,
+				010F0ED320F83B4100F33553 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,10 +310,19 @@
 		0147EDB41D21FAD800FB4324 = {
 			isa = PBXGroup;
 			children = (
+				010F0ECE20F83B4100F33553 /* DevMateKit.framework */,
+				010F0ECC20F83B4100F33553 /* Realm.framework */,
+				010F0ECD20F83B4100F33553 /* RealmSwift.framework */,
+				010F0ECA20F83B4100F33553 /* SocketRocket.framework */,
+				010F0ECB20F83B4100F33553 /* SwiftHTTP.framework */,
 				0165AF611D963CDF00469601 /* Aria2D */,
 				6ACACE787527AEFD90491354 /* Frameworks */,
 				012624611ED174AC007FF8AA /* Kevlar */,
 				0147EDBE1D21FAD800FB4324 /* Products */,
+				01D0C10F20F838100060F622 /* Realm.framework.dSYM */,
+				01D0C11220F838110060F622 /* RealmSwift.framework.dSYM */,
+				01D0C11020F838100060F622 /* SocketRocket.framework.dSYM */,
+				01D0C11120F838110060F622 /* SwiftHTTP.framework.dSYM */,
 			);
 			sourceTree = "<group>";
 		};
@@ -498,10 +517,6 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0133936D20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM */,
-				012ADEEF1F1461CD009E4110 /* Realm.framework.dSYM */,
-				012ADEF01F1461CD009E4110 /* RealmSwift.framework.dSYM */,
-				011F830D20ADC23000CA18E5 /* SocketRocket.framework.dSYM */,
 				0133936F20DFCCE9009FF2D2 /* SwiftHTTP.framework */,
 				011F830B20ADC22100CA18E5 /* SocketRocket.framework */,
 				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
@@ -523,8 +538,8 @@
 				0147EDB91D21FAD800FB4324 /* Sources */,
 				0147EDBA1D21FAD800FB4324 /* Frameworks */,
 				0147EDBB1D21FAD800FB4324 /* Resources */,
-				012C057B1F13E6D600EA5BD1 /* Embed Frameworks */,
 				01D82A141F145E59003754E4 /* Copy Files */,
+				010F0ED920F83B4100F33553 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -592,7 +607,6 @@
 				01CD741020F7B44A002D93BF /* DevMate_pub.pem in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
-				0133936E20DFCCE0009FF2D2 /* SwiftHTTP.framework.dSYM in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
 				014D3B501ED5C36F00E3ABC0 /* Aria2D_aria2c in Resources */,
