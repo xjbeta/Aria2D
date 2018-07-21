@@ -20,7 +20,7 @@ class SetServersViewController: NSViewController {
 	
 	@IBAction func applyChanges(_ sender: Any) {
 		Preferences.shared.aria2Servers.set(serverListContent)
-		dismissViewController(self)
+		dismiss(self)
 		onViewControllerDismiss?(tableview.selectedRow)
 	}
 	

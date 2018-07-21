@@ -25,7 +25,7 @@ class HUD: NSObject {
 		self.init()
 		self.view = view
 		
-		hud = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: .hudViewController) as? HUDViewController
+		hud = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: .hudViewController) as? HUDViewController
 		if let hud = hud {
 			hud.view.isHidden = true
 			view.addSubview(hud.view)

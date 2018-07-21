@@ -8,13 +8,13 @@
 
 import Foundation
 extension NSStoryboardSegue.Identifier {
-	static let showBaiduDlinksProgress = NSStoryboardSegue.Identifier(rawValue: "showBaiduDlinksProgress")
-    static let showInfoWindow = NSStoryboardSegue.Identifier(rawValue: "showInfoWindow")
-	static let showNewTaskViewController = NSStoryboardSegue.Identifier(rawValue: "showNewTaskViewController")
-	static let showChangeOptionView = NSStoryboardSegue.Identifier(rawValue: "showChangeOptionView")
-	static let showSetServersViewController = NSStoryboardSegue.Identifier(rawValue: "showSetServersViewController")
-	static let showPCSView = NSStoryboardSegue.Identifier(rawValue: "showPCSView")
-	static let showLoginView = NSStoryboardSegue.Identifier(rawValue: "showLoginView")
+	static let showBaiduDlinksProgress = "showBaiduDlinksProgress"
+    static let showInfoWindow = "showInfoWindow"
+	static let showNewTaskViewController = "showNewTaskViewController"
+	static let showChangeOptionView = "showChangeOptionView"
+	static let showSetServersViewController = "showSetServersViewController"
+	static let showPCSView = "showPCSView"
+	static let showLoginView = "showLoginView"
 }
 
 
@@ -32,5 +32,5 @@ extension NSUserInterfaceItemIdentifier {
 }
 
 extension NSStoryboard.SceneIdentifier {
-	static let hudViewController = NSStoryboard.SceneIdentifier(rawValue: "HUDViewController")
+	static let hudViewController = "HUDViewController"
 }

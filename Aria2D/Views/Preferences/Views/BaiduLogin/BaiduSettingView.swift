@@ -40,7 +40,7 @@ class BaiduSettingView: NSViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let vc = segue.destinationController as? BaiduViewController {
             vc.dismiss = {
-                self.dismissViewController(vc)
+                self.dismiss(vc)
                 self.initUserInfo()
             }
         }

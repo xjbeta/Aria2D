@@ -24,10 +24,9 @@ extension URL {
 		if let data = urlData {
 			do {
 				var bool = false
-				if let url = try URL(resolvingBookmarkData: data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &bool) {
-					let _ = url.startAccessingSecurityScopedResource()
-					return url
-				}
+                let url = try URL(resolvingBookmarkData: data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &bool)
+                let _ = url.startAccessingSecurityScopedResource()
+                return url
 			} catch {
 				Log("resolveBookmarkError\(error)")
 			}

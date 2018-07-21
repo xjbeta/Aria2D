@@ -37,7 +37,7 @@ class MainWindowController: NSWindowController, NSDraggingDestination {
 	}
 	
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        if let urls = sender.draggingPasteboard().readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
+        if let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
             return urls.contains {
                 $0.pathExtension == "torrent"
             } ? .copy : []
@@ -46,7 +46,7 @@ class MainWindowController: NSWindowController, NSDraggingDestination {
     }
 
     func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        if let urls = sender.draggingPasteboard().readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
+        if let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
             if let url = urls.filter({ $0.pathExtension == "torrent" }).first {
                 ViewControllersManager.shared.openTorrent(url.path)
                 return true
