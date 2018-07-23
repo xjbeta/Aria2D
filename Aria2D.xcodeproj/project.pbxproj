@@ -53,7 +53,6 @@
 		0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */; };
 		0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */; };
 		0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */; };
-		014D3B501ED5C36F00E3ABC0 /* Aria2D_aria2c in Resources */ = {isa = PBXBuildFile; fileRef = 014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */; };
 		014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */ = {isa = PBXBuildFile; fileRef = 014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */; };
 		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
 		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
@@ -178,7 +177,6 @@
 		0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableCellView.swift; sourceTree = "<group>"; };
 		0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableView.swift; sourceTree = "<group>"; };
-		014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Aria2D_aria2c; sourceTree = "<group>"; };
 		014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aria2D.conf; sourceTree = "<group>"; };
 		0154156A1E371583007ECB29 /* URLSecurityScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
 		01610DE41EDFF7B200BAEF02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -446,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
-				014D3B4F1ED5C36F00E3ABC0 /* Aria2D_aria2c */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
 				01CD740F20F7B449002D93BF /* DevMate_pub.pem */,
 				0147EDC91D21FAD800FB4324 /* Info.plist */,
@@ -599,7 +596,6 @@
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
-				014D3B501ED5C36F00E3ABC0 /* Aria2D_aria2c in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
