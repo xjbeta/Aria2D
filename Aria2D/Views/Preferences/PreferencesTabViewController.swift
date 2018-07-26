@@ -11,10 +11,12 @@ import Cocoa
 class PreferencesTabViewController: NSTabViewController {
 
 	lazy var baiduItem = NSTabViewItem()
-	
+    var originalSizes = [String: CGSize]()
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initItems()
+//        self.tabView.selectTabViewItem(at: 0)
 		NotificationCenter.default.addObserver(self, selector: #selector(initItems), name: .developerModeChanged, object: nil)
 	}
 	
@@ -28,27 +30,23 @@ class PreferencesTabViewController: NSTabViewController {
 			self.removeTabViewItem(item)
 		}
 	}
-	
+    
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, willSelect: tabViewItem)
-        if let item = tabViewItem {
-            if (item.view as? ViewWithBackgroundColor)?.size == nil {
-                (item.view as? ViewWithBackgroundColor)?.size = item.view?.frame.size
+        autoResizeWindow(tabViewItem)
+    }
+    
+    func autoResizeWindow(_ tabViewItem: NSTabViewItem?) {
+        if let title = tabViewItem?.label {
+            if !originalSizes.keys.contains(title) {
+                originalSizes[title] = tabViewItem?.view?.frame.size
             }
-        }
-	}
-	
-    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        super.tabView(tabView, didSelect: tabViewItem)
-        if let size = (tabViewItem?.view as? ViewWithBackgroundColor)?.size {
-            if let window = self.view.window {
+            if let size = originalSizes[title], let window = view.window {
                 window.autoResize(toFill: size)
-            } else {
-                self.view.setFrameSize(size)
             }
         }
     }
-	
+    
 	deinit {
 		NotificationCenter.default.removeObserver(self)
 	}
@@ -56,19 +54,14 @@ class PreferencesTabViewController: NSTabViewController {
 }
 
 extension NSWindow {
-	func autoResize(toFill size: CGSize, runAnimation: Bool = true) {
-		let contentFrame = self.frameRect(forContentRect: NSMakeRect(0.0, 0.0, size.width, size.height))
+	func autoResize(toFill size: CGSize) {
+		let contentFrame = frameRect(forContentRect: CGRect(origin: .zero, size: size))
 		var frame = self.frame
 		frame.origin.y = frame.origin.y + (frame.size.height - contentFrame.size.height)
 		frame.size = contentFrame.size
-		if runAnimation {
-			NSAnimationContext.runAnimationGroup({
-				$0.duration = 0.15
-				self.animator().setFrame(frame, display: true, animate: true)
-			})
-		} else {
-			self.animator().setFrame(frame, display: true, animate: true)
-		}
-
+        NSAnimationContext.runAnimationGroup({
+            $0.duration = 0.15
+            self.animator().setFrame(frame, display: false)
+        })
 	}
 }

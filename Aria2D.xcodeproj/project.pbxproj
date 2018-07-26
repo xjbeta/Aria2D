@@ -412,7 +412,6 @@
 				017E88301D83A720000412DA /* BaiduLogin */,
 				016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */,
 				018E896D1D350075000C71B0 /* Generalview.swift */,
-				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
 				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
 				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
 				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
@@ -483,6 +482,7 @@
 			children = (
 				01789B1C1D9D207E00A5B789 /* Views */,
 				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
+				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
