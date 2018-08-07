@@ -486,7 +486,7 @@ class Aria2: NSObject {
                              params: [gid])
             .writeToWebsocket {
                 switch $0 {
-                case .success(let _):
+                case .success(_):
 
                     block()
                     
@@ -501,7 +501,7 @@ class Aria2: NSObject {
                              params: [gid])
             .writeToWebsocket {
                 switch $0 {
-                case .success(let _):
+                case .success(_):
                     
                     block()
                     
