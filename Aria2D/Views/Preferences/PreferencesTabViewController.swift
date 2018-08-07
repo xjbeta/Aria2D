@@ -16,7 +16,6 @@ class PreferencesTabViewController: NSTabViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initItems()
-//        self.tabView.selectTabViewItem(at: 0)
 		NotificationCenter.default.addObserver(self, selector: #selector(initItems), name: .developerModeChanged, object: nil)
 	}
 	
@@ -33,16 +32,16 @@ class PreferencesTabViewController: NSTabViewController {
     
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, willSelect: tabViewItem)
-        autoResizeWindow(tabViewItem)
+        autoResizeWindow(tabViewItem, animate: true)
     }
     
-    func autoResizeWindow(_ tabViewItem: NSTabViewItem?) {
+    func autoResizeWindow(_ tabViewItem: NSTabViewItem?, animate: Bool) {
         if let title = tabViewItem?.label {
             if !originalSizes.keys.contains(title) {
                 originalSizes[title] = tabViewItem?.view?.frame.size
             }
             if let size = originalSizes[title], let window = view.window {
-                window.autoResize(toFill: size)
+                window.autoResize(toFill: size, animate: animate)
             }
         }
     }
@@ -54,14 +53,18 @@ class PreferencesTabViewController: NSTabViewController {
 }
 
 extension NSWindow {
-	func autoResize(toFill size: CGSize) {
-		let contentFrame = frameRect(forContentRect: CGRect(origin: .zero, size: size))
+    func autoResize(toFill size: CGSize, animate: Bool) {
+        let contentFrame = frameRect(forContentRect: CGRect(origin: .zero, size: size))
 		var frame = self.frame
 		frame.origin.y = frame.origin.y + (frame.size.height - contentFrame.size.height)
 		frame.size = contentFrame.size
-        NSAnimationContext.runAnimationGroup({
-            $0.duration = 0.15
-            self.animator().setFrame(frame, display: false)
-        })
+        if animate {
+            NSAnimationContext.runAnimationGroup({
+                $0.duration = 0.15
+                self.animator().setFrame(frame, display: false)
+            })
+        } else {
+            setFrame(frame, display: false)
+        }
 	}
 }

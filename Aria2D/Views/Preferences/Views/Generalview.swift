@@ -10,7 +10,6 @@ import Cocoa
 
 class Generalview: NSViewController {
     
-	@IBOutlet var controlsView: NSView!
     @IBOutlet var downloadDirPopUpButton: NSPopUpButton!
 
 	@IBOutlet var downloadDirTextField: NSTextField!
@@ -168,11 +167,16 @@ class Generalview: NSViewController {
 	@objc func setControlsStatus() {
 		DispatchQueue.main.async {
 			let enable = Aria2Websocket.shared.isConnected
-			self.controlsView.subviews.forEach {
-				if let control = $0 as? NSControl {
-					control.isEnabled = enable
-				}
-			}
+            self.view.subviews.forEach {
+                if let button = $0 as? NSPopUpButton,
+                    button == self.menuPopupButton {
+                    return
+                }
+                if let control = $0 as? NSControl {
+                    control.isEnabled = enable
+                }
+
+            }
 		}
 	}
 	
