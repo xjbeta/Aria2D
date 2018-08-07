@@ -35,6 +35,7 @@
                         <tabViewItem label="Advanced" image="NSAdvanced" id="aTJ-Ok-0Jj"/>
                         <tabViewItem label="Baidu" image="NSUserAccounts" id="kEe-ts-unb"/>
                     </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions"/>
                     <tabView key="tabView" misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" id="Ga4-rQ-grv">
                         <rect key="frame" x="0.0" y="232" width="217" height="62"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
