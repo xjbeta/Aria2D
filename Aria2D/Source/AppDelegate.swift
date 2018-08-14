@@ -32,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
 		
 		self.setDevMate()
+        DataManager.shared.deleteAll()
 		Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkTokenEffective()
 		Preferences.shared.checkPlistFile()
@@ -49,16 +50,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 	
+    
 	
 	func applicationWillTerminate(_ notification: Notification) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.deleteAll()
-            }
-        } catch let error as NSError {
-            fatalError("Error opening realm: \(error)")
-        }
 		Aria2.shared.aria2c.autoClose()
 	}
     

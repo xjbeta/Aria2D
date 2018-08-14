@@ -15,7 +15,6 @@ class RightTabView: NSTabViewController {
     @IBOutlet var downloadTab: NSTabViewItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-		let title = self.title ?? ""
         ViewControllersManager.shared.selectedRowDidSet = {
             self.setSelectedTab()
         }

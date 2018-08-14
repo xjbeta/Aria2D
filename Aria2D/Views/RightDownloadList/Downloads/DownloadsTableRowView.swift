@@ -32,7 +32,7 @@ class DownloadsTableRowView: NSTableRowView {
 		
 	}
 	
-	let defaultRowColor = NSColor(catalogName: NSColorList.Name(rawValue: "System"), colorName: NSColor.Name(rawValue: "controlAlternatingRowColor"))
+	let defaultRowColor = NSColor(catalogName: "System", colorName: "controlAlternatingRowColor")
 	
 	override var backgroundColor: NSColor {
 		didSet {

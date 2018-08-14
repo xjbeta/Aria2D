@@ -17,7 +17,7 @@ class NSTableViewPopoverSegue: NSStoryboardSegue {
 		let selectedRow = anchorTableView.selectedRow
 		if selectedRow >= 0 {
 			(sourceController as AnyObject)
-				.presentViewController(destinationController as! NSViewController,
+				.present(destinationController as! NSViewController,
 				                       asPopoverRelativeTo: anchorTableView.rect(ofRow: selectedRow),
 				                       of: anchorTableView,
 				                       preferredEdge: preferredEdge,

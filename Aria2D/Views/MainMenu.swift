@@ -8,13 +8,13 @@
 
 import Cocoa
 
-class MainMenu: NSObject {
+class MainMenu: NSObject, NSMenuItemValidation {
 	
 	@objc var enableLogItem: Bool {
 		return Preferences.shared.developerMode
 	}
     
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         let selectedRow = ViewControllersManager.shared.selectedRow
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
 		let mainWindowFront = ViewControllersManager.shared.mainWindowFront
@@ -124,6 +124,30 @@ class MainMenu: NSObject {
 	@IBAction func checkForUpdate(_ sender: Any) {
 		DM_SUUpdater.shared().checkForUpdates(sender)
 	}
-	
+    
+    @IBAction func installWithHomebrew(_ sender: Any) {
+            NSAppleScript(source: """
+tell application "Terminal"
+    do script ""
+    activate
+    tell application "System Events"
+        keystroke "brew install aria2"
+    end tell
+end tell
+""")?.executeAndReturnError(nil)
+    }
+    
+    @IBAction func installWithDMG(_ sender: Any) {
+        if let url = URL(string: "https://dl.devmate.com/com.aria2.aria2c/aria2c.dmg") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
+    @IBAction func help(_ sender: Any) {
+        if let url = URL(string: "https://github.com/xjbeta/Aria2D") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
 }
 

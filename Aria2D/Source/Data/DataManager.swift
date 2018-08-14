@@ -15,12 +15,19 @@ class DataManager: NSObject {
 	fileprivate override init() {
 	}
 	
+    func deleteAll() {
+        writeToRealm { realm in
+            realm.deleteAll()
+        }
+    }
+    
 	func initAllObjects(_ objs: [Aria2Object]) {
 		writeToRealm { realm in
 			let deleteGids = Set(realm.objects(Aria2Object.self).map { $0.gid }).subtracting(Set(objs.map { $0.gid }))
 			let deleteObjs = realm.objects(Aria2Object.self).filter {
 				deleteGids.contains($0.gid)
 			}
+            realm.delete(realm.objects(Aria2File.self))
 			realm.delete(deleteObjs)
 			realm.add(objs, update: true)
 		}
@@ -91,6 +98,11 @@ class DataManager: NSObject {
 	func updateFiles(_ gid: String, files: [Aria2File]) {
 		writeToRealm { realm in
 			if let obj = realm.object(ofType: Aria2Object.self, forPrimaryKey: gid) {
+                var oldFiles: [Aria2File] = []
+                obj.files.forEach {
+                    oldFiles.append($0)
+                }
+                realm.delete(oldFiles)
 				obj.files.removeAll()
                 obj.files.append(objectsIn: files)
 			}

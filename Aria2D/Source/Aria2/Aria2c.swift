@@ -54,6 +54,41 @@ class Aria2c: NSObject {
 		guard !Preferences.shared.autoStartAria2c else { return }
 		self.killLastAria2c { }
 	}
+    
+    func aria2cPaths() -> [String] {
+        let task = Process()
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.launchPath = "/bin/bash"
+        task.arguments  = ["-l", "-c", "which aria2c"]
+        
+        task.launch()
+        task.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        if let output = String(data: data, encoding: .utf8) {
+            return output.components(separatedBy: "\n").filter({ $0 != "" })
+        }
+        return []
+    }
+    
+    func checkCustomPath() -> Bool {
+        
+        let task = Process()
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.launchPath = Preferences.shared.aria2cOptions.customAria2c
+        task.arguments  = ["-v"]
+        
+        task.launch()
+        task.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        if let output = String(data: data, encoding: .utf8) {
+            if let str = output.components(separatedBy: "\n").first {
+                return str.contains("aria2")
+            }
+        }
+        return false
+    }
 	
 }
 
