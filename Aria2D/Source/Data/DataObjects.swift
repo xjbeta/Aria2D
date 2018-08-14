@@ -63,6 +63,7 @@ class Aria2Object: Object, Decodable {
 		self.init()
 		let values = try decoder.container(keyedBy: CodingKeys.self)
         if let files = try values.decodeIfPresent([Aria2File].self, forKey: .files) {
+            self.files.removeAll()
             self.files.append(objectsIn: files)
         }
 		gid = try values.decode(String.self, forKey: .gid)
