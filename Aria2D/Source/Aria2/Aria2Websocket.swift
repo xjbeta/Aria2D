@@ -164,7 +164,8 @@ class Aria2Websocket: NSObject {
     func write(_ dic: [String: Any],
                withID id: String,
                method: String,
-               completion: @escaping (_ result: webSocketResult) -> Void) {
+               completion: @escaping (_ result: Data) -> Void,
+               error: @escaping (_ result: webSocketResult) -> Void) {
         let time = Date().timeIntervalSince1970
         WaitingList.shared.add(id) { (data, timeOut) in
             // Save log
@@ -180,15 +181,15 @@ class Aria2Websocket: NSObject {
             }
             
             if !timeOut {
-                completion(.success(data: data))
+                completion(data)
             } else {
-                completion(.timeOut)
+                error(.timeOut)
             }
         }
         do {
             try socket?.send(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
-        } catch {
-            completion(.somethingError)
+        } catch let er {
+            error(.receiveError(message: "\(er)"))
             return
         }
     }
