@@ -8,9 +8,9 @@
 
 import Cocoa
 
-class DownloadsMenu: NSMenu {
+class DownloadsMenu: NSMenu, NSMenuItemValidation {
 
-	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		let selectedRow = ViewControllersManager.shared.selectedRow
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
 		let mainWindowFront = ViewControllersManager.shared.mainWindowFront

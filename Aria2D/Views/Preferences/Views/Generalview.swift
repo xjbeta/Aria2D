@@ -251,9 +251,9 @@ extension Generalview: NSMenuDelegate {
 }
 
 // controls changed
-extension Generalview: NSComboBoxDelegate {
+extension Generalview: NSComboBoxDelegate, NSControlTextEditingDelegate {
 	
-	override func controlTextDidEndEditing(_ obj: Notification) {
+	func controlTextDidEndEditing(_ obj: Notification) {
 		if let obj = obj.object as? NSObject {
 			switch obj {
 			case maxConcurrentDownloadsComboBox:

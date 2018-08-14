@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
+class ChangeOptionViewController: NSViewController {
 	@IBOutlet var optionKey: NSTextField!
 	@IBOutlet var optionValueTextField: NSTextField!
 	
@@ -148,26 +148,6 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
     }
 	
 	
-	override func controlTextDidChange(_ obj: Notification) {
-		if let obj = obj.object as? NSObject {
-			switch obj {
-			case optionValueComboBox:
-				updateChangeButton(optionValueComboBox.stringValue)
-			case optionValueTextField:
-				updateChangeButton(optionValueTextField.stringValue)
-			case numberValueTextField:
-				updateChangeButton(numberValueTextField.stringValue)
-			default:
-				break
-			}
-		}
-	}
-	
-	func comboBoxSelectionDidChange(_ notification: Notification) {
-		if let value = optionValueComboBox.objectValueOfSelectedItem as? String {
-			updateChangeButton(value)
-		}
-	}
 
 	
 	func updateChangeButton(_ str: String) {
@@ -201,4 +181,29 @@ class ChangeOptionViewController: NSViewController, NSComboBoxDelegate {
 		}
 	}
     
+}
+
+extension ChangeOptionViewController: NSComboBoxDelegate, NSControlTextEditingDelegate {
+    
+    func controlTextDidChange(_ obj: Notification) {
+        if let obj = obj.object as? NSObject {
+            switch obj {
+            case optionValueComboBox:
+                updateChangeButton(optionValueComboBox.stringValue)
+            case optionValueTextField:
+                updateChangeButton(optionValueTextField.stringValue)
+            case numberValueTextField:
+                updateChangeButton(numberValueTextField.stringValue)
+            default:
+                break
+            }
+        }
+    }
+    
+    func comboBoxSelectionDidChange(_ notification: Notification) {
+        if let value = optionValueComboBox.objectValueOfSelectedItem as? String {
+            updateChangeButton(value)
+        }
+    }
+
 }

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BaiduFileListMenu: NSMenu {
+class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 	
 	@IBOutlet var nameItem: NSMenuItem!
 	@IBOutlet var sizeItem: NSMenuItem!
@@ -93,7 +93,7 @@ class BaiduFileListMenu: NSMenu {
 	}
 	
 	
-	 override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	 func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
 		if menuItem.action == #selector(download) {
 			return Aria2Websocket.shared.isConnected

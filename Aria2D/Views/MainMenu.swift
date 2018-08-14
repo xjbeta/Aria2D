@@ -8,13 +8,13 @@
 
 import Cocoa
 
-class MainMenu: NSObject {
+class MainMenu: NSObject, NSMenuItemValidation {
 	
 	@objc var enableLogItem: Bool {
 		return Preferences.shared.developerMode
 	}
     
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         let selectedRow = ViewControllersManager.shared.selectedRow
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
 		let mainWindowFront = ViewControllersManager.shared.mainWindowFront
