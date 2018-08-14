@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment version="101200" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.3.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="1315.5" y="424"/>
         </scene>
-        <!--Aria2 Options View Controller-->
+        <!--Advanced View Controller-->
         <scene sceneID="ee0-Be-tjR">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="gh3-nU-zKU" customClass="Aria2OptionsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="gh3-nU-zKU" customClass="AdvancedViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BfK-ko-f4y" customClass="ViewWithBackgroundColor" customModule="Aria2D" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="330" height="258"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -269,10 +269,10 @@
             </objects>
             <point key="canvasLocation" x="1612" y="779"/>
         </scene>
-        <!--Generalview-->
+        <!--General View Controller-->
         <scene sceneID="sUA-77-rja">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="iGx-Rv-PRS" customClass="Generalview" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="iGx-Rv-PRS" customClass="GeneralViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Rfr-7M-OHh" customClass="ViewWithBackgroundColor" customModule="Aria2D" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="330" height="298"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1824,6 +1824,7 @@ CA
                     </connections>
                 </menu>
                 <dateFormatter formatterBehavior="custom10_4" dateStyle="short" timeStyle="short" dateFormat="yy/MM/dd HH:mm" id="2Cb-eO-VUI"/>
+                <arrayController objectClassName="PCSFile" editable="NO" id="rpM-oJ-cLX"/>
                 <customObject id="0YZ-pn-WTA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController showSeguePresentationStyle="single" id="cjb-Aj-3qj" customClass="DownloadsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5zW-kZ-8rg" customClass="ViewWithBackgroundColor" customModule="Aria2D" customModuleProvider="target">

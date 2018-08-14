@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Generalview: NSViewController {
+class GeneralViewController: NSViewController {
     
     @IBOutlet var downloadDirPopUpButton: NSPopUpButton!
 
@@ -213,7 +213,7 @@ class Generalview: NSViewController {
 	}
 }
 
-extension Generalview: NSMenuDelegate {
+extension GeneralViewController: NSMenuDelegate {
 	func menuNeedsUpdate(_ menu: NSMenu) {
 		initSelectMenu()
 	}
@@ -251,7 +251,7 @@ extension Generalview: NSMenuDelegate {
 }
 
 // controls changed
-extension Generalview: NSComboBoxDelegate, NSControlTextEditingDelegate {
+extension GeneralViewController: NSComboBoxDelegate, NSControlTextEditingDelegate {
 	
 	func controlTextDidEndEditing(_ obj: Notification) {
 		if let obj = obj.object as? NSObject {

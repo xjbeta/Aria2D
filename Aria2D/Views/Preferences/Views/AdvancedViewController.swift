@@ -8,12 +8,13 @@
 
 import Cocoa
 
-class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
+class AdvancedViewController: NSViewController, NSMenuDelegate {
 	
 	@IBOutlet var aria2cPathPopUpButton: NSPopUpButton!
     @IBOutlet weak var aria2cStatusImageView: NSImageView!
     @IBAction func showAria2cInFinder(_ sender: Any) {
 		NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: Preferences.shared.aria2cOptions.path(for: .aria2c))])
+        initPathMenu()
 	}
     @IBOutlet weak var aria2cConfsGridView: NSGridView!
     @IBAction func selectAria2c(_ sender: Any) {
@@ -134,6 +135,9 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
             
             if let index = paths.firstIndex(of: path) {
                 aria2cPathPopUpButton.selectItem(at: index)
+            } else if FileManager.default.isExecutableFile(atPath: path) {
+                menu.insertItem(NSMenuItem(title: path, action: nil, keyEquivalent: ""), at: 0)
+                aria2cPathPopUpButton.selectItem(at: 0)
             } else {
                 menu.insertItem(NSMenuItem(title: "-", action: nil, keyEquivalent: ""), at: 0)
                 aria2cPathPopUpButton.selectItem(at: 0)
@@ -162,7 +166,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     
 }
 
-extension Aria2OptionsViewController: NSOpenSavePanelDelegate {
+extension AdvancedViewController: NSOpenSavePanelDelegate {
 	func panel(_ sender: Any, shouldEnable url: URL) -> Bool {
 		var isDir: ObjCBool = ObjCBool(false)
 		if FileManager.default.isExecutableFile(atPath: url.path), url.lastPathComponent == "aria2c" {

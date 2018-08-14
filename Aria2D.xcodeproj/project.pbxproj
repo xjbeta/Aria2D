@@ -61,7 +61,7 @@
 		016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */; };
 		016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */; };
 		016C98F91DB1C0A000955C09 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C98F81DB1C0A000955C09 /* HUD.swift */; };
-		016CF8F61ED52E5C001336F1 /* Aria2OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */; };
+		016CF8F61ED52E5C001336F1 /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */; };
 		016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */; };
 		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
@@ -77,7 +77,7 @@
 		018E896E1D350075000C71B0 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896A1D350075000C71B0 /* PreferencesWindow.swift */; };
 		018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */; };
 		018E89701D350075000C71B0 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896C1D350075000C71B0 /* Preferences.swift */; };
-		018E89711D350075000C71B0 /* Generalview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* Generalview.swift */; };
+		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
@@ -187,7 +187,7 @@
 		016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2D.swift; sourceTree = "<group>"; };
 		016C98F81DB1C0A000955C09 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		016CF8F41ED41618001336F1 /* Aria2D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Aria2D.entitlements; sourceTree = "<group>"; };
-		016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
+		016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
 		016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteFileFormatter.swift; sourceTree = "<group>"; };
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 		018E896A1D350075000C71B0 /* PreferencesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTabViewController.swift; sourceTree = "<group>"; };
 		018E896C1D350075000C71B0 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		018E896D1D350075000C71B0 /* Generalview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generalview.swift; sourceTree = "<group>"; };
+		018E896D1D350075000C71B0 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
@@ -410,11 +410,11 @@
 			isa = PBXGroup;
 			children = (
 				017E88301D83A720000412DA /* BaiduLogin */,
-				016CF8F51ED52E5C001336F1 /* Aria2OptionsViewController.swift */,
-				018E896D1D350075000C71B0 /* Generalview.swift */,
 				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
-				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
 				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
+				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
+				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
+				018E896D1D350075000C71B0 /* GeneralViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -651,7 +651,7 @@
 				01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */,
 				01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */,
 				0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */,
-				016CF8F61ED52E5C001336F1 /* Aria2OptionsViewController.swift in Sources */,
+				016CF8F61ED52E5C001336F1 /* AdvancedViewController.swift in Sources */,
 				012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */,
 				012A1BB21E174860007C4B46 /* Transformer.swift in Sources */,
 				013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */,
@@ -665,7 +665,7 @@
 				0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */,
 				016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */,
 				018E89701D350075000C71B0 /* Preferences.swift in Sources */,
-				018E89711D350075000C71B0 /* Generalview.swift in Sources */,
+				018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */,
 				01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */,
 				01EB1CB61D60971600F2925F /* Baidu.swift in Sources */,
 				012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */,
