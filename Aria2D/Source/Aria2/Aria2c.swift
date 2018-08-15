@@ -75,16 +75,19 @@ class Aria2c: NSObject {
         
         let task = Process()
         let pipe = Pipe()
-        task.standardOutput = pipe
-        task.launchPath = Preferences.shared.aria2cOptions.customAria2c
-        task.arguments  = ["-v"]
-        
-        task.launch()
-        task.waitUntilExit()
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        if let output = String(data: data, encoding: .utf8) {
-            if let str = output.components(separatedBy: "\n").first {
-                return str.contains("aria2")
+        let customPath = Preferences.shared.aria2cOptions.customAria2c
+        if FileManager.default.isExecutableFile(atPath: customPath) {
+            task.standardOutput = pipe
+            task.launchPath = Preferences.shared.aria2cOptions.customAria2c
+            task.arguments  = ["-v"]
+            
+            task.launch()
+            task.waitUntilExit()
+            let data = pipe.fileHandleForReading.readDataToEndOfFile()
+            if let output = String(data: data, encoding: .utf8) {
+                if let str = output.components(separatedBy: "\n").first {
+                    return str.contains("aria2")
+                }
             }
         }
         return false
