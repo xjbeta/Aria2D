@@ -215,6 +215,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         }
         Aria2.shared.getGlobalOption()
         ViewControllersManager.shared.showHUD(.connected)
+        NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
     }
     
     func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
