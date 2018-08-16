@@ -13,9 +13,7 @@ import RealmSwift
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	var window: NSWindow? {
-		return NSApp.mainWindow
-	}
+    var mainWindowController: MainWindowController!
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
@@ -30,13 +28,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(self)
 		}
         
-		
-		self.setDevMate()
         DataManager.shared.deleteAll()
 		Aria2Websocket.shared.initSocket()
 		Baidu.shared.checkTokenEffective()
 		Preferences.shared.checkPlistFile()
 		Aria2.shared.aria2c.autoStart()
+        
+        let sb = NSStoryboard(name: "Main", bundle: nil)
+        mainWindowController = sb.instantiateController(withIdentifier: "MainWindowController") as? MainWindowController
+        mainWindowController.showWindow(self)
+        self.setDevMate()
+        
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -83,11 +85,11 @@ extension AppDelegate: DevMateKitDelegate {
 	}
 	
     @objc func feedbackController(_ controller: DMFeedbackController, parentWindowFor mode: DMFeedbackMode) -> NSWindow {
-        return self.window!
+        return mainWindowController.window!
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
-		return self.window
+		return mainWindowController.window
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
@@ -103,7 +105,8 @@ extension AppDelegate: DevMateKitDelegate {
 		// to see how to create _my_secret_activation_check variable
 		if !string_check(nil).boolValue {
 			DevMateKit.runActivationDialog(self, in: .sheet)
-		} else if let window = self.window, let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
+		} else if let window = mainWindowController.window,
+            let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
 			
 			let licenseSheet = NSAlert()
 			licenseSheet.messageText = "Your application is already activated."

@@ -11,9 +11,7 @@ import RealmSwift
 
 class DownloadsViewController: NSViewController {
 	@IBOutlet var downloadsTableView: DownloadsTableView!
-	
-	
-	
+    
 	@IBAction func cellDoubleAction(_ sender: Any) {
 		switch ViewControllersManager.shared.selectedRow {
 		case .completed:
@@ -33,22 +31,18 @@ class DownloadsViewController: NSViewController {
 		}
 	}
 	
-
-	
 	@IBOutlet var downloadsTableViewMenu: DownloadsMenu!
 	@IBOutlet var baiduFileListMenu: BaiduFileListMenu!
-	
 
 	var dlinksProgress: BaiduDlinksProgress!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
         ViewControllersManager.shared.selectedRow = .downloading
-		initNotification()
-	}
-
+        initNotification()
+    }
+    
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-
 		if segue.identifier == .showBaiduDlinksProgress {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
 				vc.dataSource = self
