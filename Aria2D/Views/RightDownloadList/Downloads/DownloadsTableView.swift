@@ -102,52 +102,10 @@ class DownloadsTableView: NSTableView {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			let data = DataManager.shared.data(Aria2Object.self)
-            
             notificationToken = data.bind(to: self, animated: true)
-            
-//            notificationToken = data.observe {
-//                switch $0 {
-//                case .initial:
-//                    self.reloadData()
-//                    self.oldKeys = self.newKeys()
-//                //            case .update(_, let deletions, let insertions, let modifications):
-//                case .update(_, let deletions, let insertions, _):
-//
-//                    if deletions.count == 0, insertions.count == 0 {
-//                        return
-//                    }
-//                    if self.tableviewUpdating {
-//                        self.shouldUpdate = true
-//                    } else {
-//                        self.updateRows()
-//                    }
-//                case .error:
-//                    break
-//                }
-//            }
 		case .baidu:
 			let data = DataManager.shared.data(PCSFile.self)
             notificationToken = data.bind(to: self, animated: true)
-//            notificationToken = data.observe {
-//                switch $0 {
-//                case .initial:
-//                    self.reloadData()
-//                    self.oldKeys = self.newKeys()
-//                //            case .update(_, let deletions, let insertions, let modifications):
-//                case .update(_, let deletions, let insertions, _):
-//
-//                    if deletions.count == 0, insertions.count == 0 {
-//                        return
-//                    }
-//                    if self.tableviewUpdating {
-//                        self.shouldUpdate = true
-//                    } else {
-//                        self.updateRows()
-//                    }
-//                case .error:
-//                    break
-//                }
-//            }
 		default:
 			break
 		}
@@ -157,11 +115,11 @@ class DownloadsTableView: NSTableView {
 	}
 	
 	func initNotification() {
-		NotificationCenter.default.addObserver(self, selector: #selector(changeSelectRow), name: .sidebarSelectionChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(sidebarSelectionChanged), name: .sidebarSelectionChanged, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(shouldReloadData), name: .refreshDownloadList, object: nil)
 	}
 	
-	@objc func changeSelectRow() {
+	@objc func sidebarSelectionChanged() {
 		DispatchQueue.main.async {
 			switch ViewControllersManager.shared.selectedRow {
 			case .baidu:
