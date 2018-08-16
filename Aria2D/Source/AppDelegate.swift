@@ -14,6 +14,28 @@ import RealmSwift
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
     var mainWindowController: MainWindowController!
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            
+            schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+                if (oldSchemaVersion < 1) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+        }, deleteRealmIfMigrationNeeded: true)
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+        // Now that we've told Realm how to handle the schema change, opening the file
+        // will automatically perform the migration
+        let _ = try! Realm()
+    }
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
