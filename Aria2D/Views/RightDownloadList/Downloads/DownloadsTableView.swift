@@ -157,7 +157,7 @@ class DownloadsTableView: NSTableView {
 	}
 	
 	func initNotification() {
-		NotificationCenter.default.addObserver(self, selector: #selector(changeSelectRow), name: .leftSourceListSelection, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(changeSelectRow), name: .sidebarSelectionChanged, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(shouldReloadData), name: .refreshDownloadList, object: nil)
 	}
 	

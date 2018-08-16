@@ -15,16 +15,14 @@ class RightTabView: NSTabViewController {
     @IBOutlet var downloadTab: NSTabViewItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        ViewControllersManager.shared.selectedRowDidSet = {
-            self.setSelectedTab()
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(setSelectedTab), name: .sidebarSelectionChanged, object: nil)
 		if let view = loadingTab.view as? LoadingView {
 			view.initVersionInfo()
 		}
     }
     
     
-    func setSelectedTab() {
+    @objc func setSelectedTab() {
         switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
 			updateTab()

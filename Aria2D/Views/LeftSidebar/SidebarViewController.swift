@@ -153,7 +153,7 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 		if let item = sidebarItems[safe: sidebarTableView.selectedRow] {
 			ViewControllersManager.shared.selectedRow = item
 		}
-		NotificationCenter.default.post(name: .leftSourceListSelection, object: nil)
+		NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
 	}
 	
 	

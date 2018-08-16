@@ -83,8 +83,6 @@ class ViewControllersManager: NSObject {
 	
 	
     // LeftSourceList
-    var selectedRowDidSet: (() -> Void)?
-
     var selectedRow: SidebarItem = .none {
         didSet {
             selectedIndexs = IndexSet()
@@ -96,8 +94,6 @@ class ViewControllersManager: NSObject {
             default:
                 break
             }
-            
-            selectedRowDidSet?()
         }
     }
 
