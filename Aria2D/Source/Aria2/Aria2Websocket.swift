@@ -174,7 +174,11 @@ class Aria2Websocket: NSObject {
                 let log = WebSocketLog()
                 log.method = method
                 log.sendJSON = "\(dic)"
-                log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
+                if let str = String(data: data, encoding: .utf8),
+                    let shrotData = Aria2Websocket.shared.clearUrls(str),
+                    let shortStr = String(data: shrotData, encoding: .utf8) {
+                    log.receivedJSON =  shortStr
+                }
                 log.success = !timeOut
                 log.time = time
                 ViewControllersManager.shared.addLog(log)
