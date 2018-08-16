@@ -319,52 +319,36 @@
 		0147EDBF1D21FAD800FB4324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
-				0147EDD51D220BED00FB4324 /* LeftSidebar */,
-				0182E60C1EAEE90000E08454 /* Log */,
-				01713BD71D9BA998000240A2 /* NewTask */,
-				018E89721D350079000C71B0 /* Preferences */,
-				01EB1CBB1D61FC1D00F2925F /* RightDownloadList */,
-				016FDC781E7B9BD600E01B35 /* InfoView */,
-				016C98F81DB1C0A000955C09 /* HUD.swift */,
 				0147EDC61D21FAD800FB4324 /* Main.storyboard */,
-				010B59171D3CF66600550A43 /* MainMenu.swift */,
-				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
-				013817661D238E0100E0F926 /* MainWindowController.swift */,
 				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
+				018E89721D350079000C71B0 /* Preferences */,
+				019BFF5E2125D90A00E715CC /* MainWindow */,
+				0147EDD51D220BED00FB4324 /* Sidebar */,
+				01EB1CBB1D61FC1D00F2925F /* DownloadList */,
+				01713BD71D9BA998000240A2 /* NewTask */,
+				0182E60C1EAEE90000E08454 /* Log */,
+				016FDC781E7B9BD600E01B35 /* InfoView */,
+				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0147EDD51D220BED00FB4324 /* LeftSidebar */ = {
+		0147EDD51D220BED00FB4324 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
 				010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */,
 				010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */,
 				010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */,
 			);
-			path = LeftSidebar;
-			sourceTree = "<group>";
-		};
-		0147EDE01D2381F100FB4324 /* Downloads */ = {
-			isa = PBXGroup;
-			children = (
-				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
-				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
-				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
-				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
-				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
-				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
-				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
-				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
-			);
-			path = Downloads;
+			path = Sidebar;
 			sourceTree = "<group>";
 		};
 		0165AF611D963CDF00469601 /* Aria2D */ = {
 			isa = PBXGroup;
 			children = (
 				018E892A1D34FEB7000C71B0 /* Resources */,
+				018E89541D34FF60000C71B0 /* Data */,
+				012C3AEB1E10102C00ABFE4C /* Aria2 */,
 				018E89471D34FF48000C71B0 /* Source */,
 				0147EDBF1D21FAD800FB4324 /* Views */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
@@ -375,8 +359,8 @@
 		016C405A1DA27C6200EB27A2 /* AboutAria2D */ = {
 			isa = PBXGroup;
 			children = (
-				016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */,
 				016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */,
+				016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */,
 			);
 			path = AboutAria2D;
 			sourceTree = "<group>";
@@ -407,12 +391,11 @@
 		01789B1C1D9D207E00A5B789 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				017E88301D83A720000412DA /* BaiduLogin */,
-				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
-				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
-				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
-				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
 				018E896D1D350075000C71B0 /* GeneralViewController.swift */,
+				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
+				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
+				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
+				017E88301D83A720000412DA /* BaiduLogin */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -430,8 +413,8 @@
 		0182E60C1EAEE90000E08454 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
 				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
+				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
 				016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */,
 			);
 			path = Log;
@@ -450,8 +433,6 @@
 		018E89471D34FF48000C71B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				012C3AEB1E10102C00ABFE4C /* Aria2 */,
-				018E89541D34FF60000C71B0 /* Data */,
 				0115D42D1E04E346003EBFCD /* Extensions */,
 				012C3AEC1E10104600ABFE4C /* Other */,
 				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
@@ -477,21 +458,48 @@
 		018E89721D350079000C71B0 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				01789B1C1D9D207E00A5B789 /* Views */,
-				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
 				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
+				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
+				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
+				01789B1C1D9D207E00A5B789 /* Views */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
 		};
-		01EB1CBB1D61FC1D00F2925F /* RightDownloadList */ = {
+		019BFF5E2125D90A00E715CC /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
-				0147EDE01D2381F100FB4324 /* Downloads */,
-				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
-				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
+				013817661D238E0100E0F926 /* MainWindowController.swift */,
+				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
+				010B59171D3CF66600550A43 /* MainMenu.swift */,
+				016C98F81DB1C0A000955C09 /* HUD.swift */,
 			);
-			path = RightDownloadList;
+			path = MainWindow;
+			sourceTree = "<group>";
+		};
+		019BFF5F2125D95700E715CC /* DownloadsTableView */ = {
+			isa = PBXGroup;
+			children = (
+				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
+				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
+				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
+				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
+			);
+			path = DownloadsTableView;
+			sourceTree = "<group>";
+		};
+		01EB1CBB1D61FC1D00F2925F /* DownloadList */ = {
+			isa = PBXGroup;
+			children = (
+				019BFF5F2125D95700E715CC /* DownloadsTableView */,
+				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
+				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
+				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
+				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
+				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
+				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
+			);
+			path = DownloadList;
 			sourceTree = "<group>";
 		};
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
