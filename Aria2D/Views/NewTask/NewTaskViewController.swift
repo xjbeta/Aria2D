@@ -91,14 +91,15 @@ class NewTaskViewController: NSViewController {
 		
     }
 	
+    lazy var openPanel = NSOpenPanel()
+    
 	func selectTorrentFile() {
-		let openPanel = NSOpenPanel()
 		openPanel.canChooseFiles = true
 		openPanel.allowedFileTypes = ["torrent"]
 		openPanel.allowsMultipleSelection = false
 		if let window = view.window {
 			openPanel.beginSheetModal(for: window) { result in
-				if result == .OK, let path = openPanel.url {
+                if result == .OK, let path = self.openPanel.url {
                     self.fileURL = path
 				}
 			}

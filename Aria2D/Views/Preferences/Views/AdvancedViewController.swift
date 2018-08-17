@@ -17,18 +17,18 @@ class AdvancedViewController: NSViewController, NSMenuDelegate {
         initPathMenu()
 	}
     @IBOutlet weak var aria2cConfsGridView: NSGridView!
+    lazy var selectAria2cPanel = NSOpenPanel()
     @IBAction func selectAria2c(_ sender: Any) {
-		let openPanel = NSOpenPanel()
-		openPanel.prompt = "Select"
-		openPanel.canChooseFiles = true
-		openPanel.canChooseDirectories = false
-		openPanel.allowsMultipleSelection = false
-		openPanel.delegate = self
-		openPanel.hidesOnDeactivate = true
+		selectAria2cPanel.prompt = "Select"
+		selectAria2cPanel.canChooseFiles = true
+		selectAria2cPanel.canChooseDirectories = false
+		selectAria2cPanel.allowsMultipleSelection = false
+		selectAria2cPanel.delegate = self
+		selectAria2cPanel.hidesOnDeactivate = true
 		if let window = view.window {
-			openPanel.beginSheetModal(for: window) { result in
+			selectAria2cPanel.beginSheetModal(for: window) { result in
 				if result == .OK,
-					let url = openPanel.url,
+                    let url = self.selectAria2cPanel.url,
 					FileManager.default.isExecutableFile(atPath: url.path) {
 					Preferences.shared.aria2cOptions.customAria2c = url.path
 				}
@@ -43,17 +43,18 @@ class AdvancedViewController: NSViewController, NSMenuDelegate {
 	@IBAction func showConfInFinder(_ sender: Any) {
 		NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: Preferences.shared.aria2cOptions.path(for: .aria2cConf))])
 	}
+    
+    lazy var selectConfPanel = NSOpenPanel()
 	@IBAction func selectConf(_ sender: Any) {
-		let openPanel = NSOpenPanel()
-		openPanel.prompt = "Select"
-		openPanel.canChooseFiles = true
-		openPanel.canChooseDirectories = false
-		openPanel.allowsMultipleSelection = false
-		openPanel.allowedFileTypes = ["conf"]
+		selectConfPanel.prompt = "Select"
+		selectConfPanel.canChooseFiles = true
+		selectConfPanel.canChooseDirectories = false
+		selectConfPanel.allowsMultipleSelection = false
+		selectConfPanel.allowedFileTypes = ["conf"]
 
 		if let window = view.window {
-			openPanel.beginSheetModal(for: window) { result in
-				if result == .OK, let url = openPanel.url {
+			selectConfPanel.beginSheetModal(for: window) { result in
+                if result == .OK, let url = self.selectConfPanel.url {
 					Preferences.shared.aria2cOptions.customAria2cConf = url.path
 					Preferences.shared.aria2cOptions.selectedAria2cConf = .custom
 				}
