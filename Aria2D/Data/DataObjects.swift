@@ -30,8 +30,8 @@ class Aria2Object: Object, Decodable {
 	//	let numSeeders: String
 	//	let seeder: Bool
 	@objc dynamic var numPieces: String = ""
-	//	let errorCode: String
-	//	let errorMessage: String
+    @objc dynamic var errorCode: Int = 0
+    @objc dynamic var errorMessage: String = ""
 	//	let followedBy: String
 	//	let following: String
 	//	let belongsTo: String
@@ -55,7 +55,9 @@ class Aria2Object: Object, Decodable {
 		dir,
         bittorrent,
         bitfield,
-        numPieces
+        numPieces,
+        errorCode,
+        errorMessage
 	}
 	
 	
@@ -85,6 +87,8 @@ class Aria2Object: Object, Decodable {
         bitfield = try values.decodeIfPresent(String.self, forKey: .bitfield) ?? ""
 //        numPieces = try values.decodeIfPresent(String.self, forKey: .numPieces) ?? ""
         numPieces = try values.decode(String.self, forKey: .numPieces)
+        errorCode = Int(try values.decodeIfPresent(String.self, forKey: .errorCode) ?? "") ?? 0
+        errorMessage = try values.decodeIfPresent(String.self, forKey: .errorMessage) ?? ""
 		date = Date().timeIntervalSince1970
 	}
 
