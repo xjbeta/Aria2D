@@ -101,7 +101,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		
 	}
 	
-	
+	// 40
 	enum constants: String {
 		case true🤣 = "true"
 		case false😂 = "false"
@@ -156,7 +156,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case other
 	}
 	
-	
+	// 213
 	init(rawValue: RawValue) {
 		switch rawValue {
 		case "all-proxy": self = .allProxy
@@ -177,6 +177,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case "bt-force-encryption": self = .btForceEncryption
 		case "bt-hash-check-seed": self = .btHashCheckSeed
 		case "bt-keep-alive-interval": self = .btKeepAliveInterval
+        case "bt-load-saved-metadata": self = .btLoadSavedMetadata
 		case "bt-lpd-interface": self = .btLpdInterface
 		case "bt-max-open-files": self = .btMaxOpenFiles
 		case "bt-max-peers": self = .btMaxPeers
@@ -317,6 +318,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case "parameterized-uri": self = .parameterizedUri
 		case "pause": self = .pause
 		case "pause-metadata": self = .pauseMetadata
+        case "peer-agent": self = .peerAgent
 		case "peer-connection-timeout": self = .peerConnectionTimeout
 		case "peer-id-prefix": self = .peerIdPrefix
 		case "piece-length": self = .pieceLength
@@ -395,6 +397,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	static let btForceEncryption = Aria2Option("bt-force-encryption", valueType: .boolType, type: .bitTorrentRelated)
 	static let btHashCheckSeed = Aria2Option("bt-hash-check-seed", valueType: .boolType, type: .bitTorrentRelated)
 	static let btKeepAliveInterval = Aria2Option("bt-keep-alive-interval", valueType: .number(min: 1, max: 120), type: .bitTorrentRelated)
+    static let btLoadSavedMetadata = Aria2Option("bt-load-saved-metadata", valueType: .boolType, type: .bitTorrentRelated)
 	static let btLpdInterface = Aria2Option("bt-lpd-interface", valueType: .string(str: "Possible Values: interface, IP address"), type: .bitTorrentRelated)
 	static let btMaxOpenFiles = Aria2Option("bt-max-open-files", valueType: .number(min: 1, max: -1), type: .bitTorrentRelated)
 	static let btMaxPeers = Aria2Option("bt-max-peers", valueType: .number(min: 0, max: -1), type: .bitTorrentRelated)
@@ -537,6 +540,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	static let parameterizedUri = Aria2Option("parameterized-uri", valueType: .boolType, type: .general)
 	static let pause = Aria2Option("pause", valueType: .boolType, type: .general)
 	static let pauseMetadata = Aria2Option("pause-metadata", valueType: .boolType, type: .general)
+    static let peerAgent = Aria2Option("peer-agent", valueType: .string(str: "PEER_AGENT"), type: .bitTorrentRelated)
 	static let peerConnectionTimeout = Aria2Option("peer-connection-timeout", valueType: .number(min: 1, max: 600), type: .bitTorrentRelated)
 	static let peerIdPrefix = Aria2Option("peer-id-prefix", valueType: .string(str: "a string, less than or equals to 20 bytes length"), type: .bitTorrentRelated)
 	static let pieceLength = Aria2Option("piece-length", valueType: .unitNumber(min: UnitNumber("1M"), max: UnitNumber("1G")), type: .general)
