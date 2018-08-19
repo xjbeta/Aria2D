@@ -17,7 +17,7 @@ class DownloadsMenu: NSMenu, NSMenuItemValidation {
 		let selectedUrls = ViewControllersManager.shared.selectedUrls().count
 		
 		if menuItem.action == #selector(startOrPause) {
-			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? "pause" : "unpause"
+			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? NSLocalizedString("mainMenu.pauseOrUnpausItem.pause", comment: "") : NSLocalizedString("mainMenu.pauseOrUnpausItem.unpause", comment: "")
 			return selectedRow == .downloading
 				&& selectedIndexs.count > 0
 				&& mainWindowFront

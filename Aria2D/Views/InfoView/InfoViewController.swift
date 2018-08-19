@@ -209,20 +209,24 @@ class InfoViewController: NSViewController {
 	@IBOutlet var downloadSpeedTextField: NSTextField!
 	@IBOutlet var uploadSpeedTextField: NSTextField!
     @IBOutlet weak var segmentedControl: NSSegmentedControl!
-    var segmentedControlLabels = ["Status", "Options", "Files", "Peer", "Announces"]
+    var segmentedControlLabels = [NSLocalizedString("infoViewController.segmentedControl.0", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.1", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.2", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.3", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.4", comment: "")]
     
     
     func updateSegmentedControl(_ isBittorrent: Bool) {
         func initSegmentedControl() {
             self.segmentedControl.segmentCount = 3
-            self.segmentedControl.setLabel("Status", forSegment: 0)
-            self.segmentedControl.setLabel("Options", forSegment: 1)
-            self.segmentedControl.setLabel("Files", forSegment: 2)
+            self.segmentedControl.setLabel(segmentedControlLabels[0], forSegment: 0)
+            self.segmentedControl.setLabel(segmentedControlLabels[1], forSegment: 1)
+            self.segmentedControl.setLabel(segmentedControlLabels[2], forSegment: 2)
             
             if isBittorrent {
                 self.segmentedControl.segmentCount = 5
-                self.segmentedControl.setLabel("Peer", forSegment: 3)
-                self.segmentedControl.setLabel("Announces", forSegment: 4)
+                self.segmentedControl.setLabel(segmentedControlLabels[3], forSegment: 3)
+                self.segmentedControl.setLabel(segmentedControlLabels[4], forSegment: 4)
             }
         }
         
@@ -233,8 +237,8 @@ class InfoViewController: NSViewController {
                     return
                 }
                 self.segmentedControl.segmentCount = 5
-                self.segmentedControl.setLabel("Peer", forSegment: 3)
-                self.segmentedControl.setLabel("Announces", forSegment: 4)
+                self.segmentedControl.setLabel(self.segmentedControlLabels[3], forSegment: 3)
+                self.segmentedControl.setLabel(self.segmentedControlLabels[4], forSegment: 4)
             } else {
                 guard self.segmentedControl.segmentCount == 5 else {
                     initSegmentedControl()
