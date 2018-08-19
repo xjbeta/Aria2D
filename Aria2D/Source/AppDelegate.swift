@@ -130,19 +130,29 @@ extension AppDelegate: DevMateKitDelegate {
 		} else if let window = mainWindowController.window,
             let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
 			
-			let licenseSheet = NSAlert()
-			licenseSheet.messageText = "Your application is already activated."
+			let licenseAlert = NSAlert()
+			licenseAlert.messageText = NSLocalizedString("licenseInfo.messageText", comment: "")
+            
+			licenseAlert.informativeText = "This product is licensed to:\n    email: \(license["email"] as? String ?? "")\n    activation id: \(license["activation_number"] as? String ?? "")"
+            
+			licenseAlert.addButton(withTitle: NSLocalizedString("licenseInfo.okButton", comment: ""))
+			licenseAlert.addButton(withTitle: NSLocalizedString("licenseInfo.invalidateButton", comment: ""))
 			
-//			Log(license)
-			
-			licenseSheet.informativeText = "This product is licensed to:\n    email: \(license["email"] as? String ?? "")\n    activation id: \(license["activation_number"] as? String ?? "")"
-			licenseSheet.addButton(withTitle: "OK")
-			licenseSheet.addButton(withTitle: "Invalidate License")
-			
+            
+            let warningAlert = NSAlert()
+            warningAlert.alertStyle = .critical
+            warningAlert.messageText = NSLocalizedString("licenseInfo.invalidateButton", comment: "")
+            warningAlert.informativeText = NSLocalizedString("licenseInfo.informativeText", comment: "")
+            warningAlert.addButton(withTitle: NSLocalizedString("licenseInfo.okButton", comment: ""))
+            warningAlert.addButton(withTitle: NSLocalizedString("licenseInfo.cancelButton", comment: ""))
+            
 			DispatchQueue.main.async {
-				licenseSheet.beginSheetModal(for: window) {
+				licenseAlert.beginSheetModal(for: window) {
 					if $0 == .alertSecondButtonReturn {
-						InvalidateAppLicense()
+                        let response = warningAlert.runModal()
+                        if response == .alertFirstButtonReturn {
+                            InvalidateAppLicense()
+                        }
 					}
 				}
 			}

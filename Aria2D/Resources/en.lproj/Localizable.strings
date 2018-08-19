@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Aria2D
+
+  Created by xjbeta on 2018/8/19.
+  Copyright © 2018 xjbeta. All rights reserved.
+*/
+
+"infoViewController.segmentedControl.0" = "Status";
+"infoViewController.segmentedControl.1" = "Options";
+"infoViewController.segmentedControl.2" = "Files";
+"infoViewController.segmentedControl.3" = "Peer";
+"infoViewController.segmentedControl.4" = "Announces";
+
+"mainMenu.activateAppItem.activate" = "Activate Aria2D";
+"mainMenu.activateAppItem.activated" = "Activated";
+
+"licenseInfo.messageText" = "Your application is already activated.";
+"licenseInfo.invalidateButton" = "Invalidate License";
+"licenseInfo.okButton" = "OK";
+"licenseInfo.cancelButton" = "Cancel";
+"licenseInfo.informativeText" = "It will deactivates application and invalidates license info.";
+

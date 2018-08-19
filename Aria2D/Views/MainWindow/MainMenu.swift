@@ -65,9 +65,9 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		
 		if menuItem.action == #selector(activateApp) {
 			if !string_check(nil).boolValue {
-				menuItem.title = "Activate Aria2D"
+				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activate", comment: "")
 			} else {
-				menuItem.title = "Activated"
+				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activated", comment: "")
 			}
 			
 //			return !_my_secret_activation_check(nil).boolValue
