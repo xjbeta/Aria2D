@@ -23,3 +23,8 @@
 "licenseInfo.cancelButton" = "取消";
 "licenseInfo.informativeText" = "这将取消激活应用程序, 并使许可证信息无效.";
 
+"baiduStep.baiduAccount" = "Baidu 账号";
+"baiduStep.pcsKey" = "PCS key";
+"baiduStep.accessToken" = "Access Token";
+"baiduStep.pcsFolder" = "PCS 文件夹";
+

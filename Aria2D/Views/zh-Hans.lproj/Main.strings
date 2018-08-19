@@ -297,7 +297,7 @@
 "TNd-re-uzs.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "*Folder:"; ObjectID = "Tme-wl-Tx4"; */
-"Tme-wl-Tx4.title" = "*文件夹:";
+"Tme-wl-Tx4.title" = "*PCS 文件夹:";
 
 /* Class = "NSButtonCell"; title = "Apply"; ObjectID = "TqC-hL-j31"; */
 "TqC-hL-j31.title" = "应用";

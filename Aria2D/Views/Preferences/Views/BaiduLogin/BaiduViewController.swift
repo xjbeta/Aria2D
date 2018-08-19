@@ -86,10 +86,11 @@ class BaiduViewController: NSViewController {
         var checkStatus: NSControl.StateValue
     }
     
-    var baiduSteps = [BaiduStep(name: "Baidu account", checkStatus: .off),
-                      BaiduStep(name: "PCS key", checkStatus: .off),
-                      BaiduStep(name: "Access Token", checkStatus: .off),
-                      BaiduStep(name: "PCS Folder", checkStatus: .off)]
+    var baiduSteps = [BaiduStep(name: NSLocalizedString("baiduStep.baiduAccount", comment: ""), checkStatus: .off),
+                      BaiduStep(name: NSLocalizedString("baiduStep.pcsKey", comment: ""), checkStatus: .off),
+                      BaiduStep(name: NSLocalizedString("baiduStep.accessToken", comment: ""), checkStatus: .off),
+                      BaiduStep(name: NSLocalizedString("baiduStep.pcsFolder", comment: ""), checkStatus: .off)]
+    
     enum Steps: Int {
         case baiduAccount, pcsKey, accessToken, pcsFolder
     }
