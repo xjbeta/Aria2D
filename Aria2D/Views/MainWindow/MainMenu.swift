@@ -32,7 +32,7 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		}
 		
 		if menuItem.action == #selector(startOrPause) {
-			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? "pause" : "unpause"
+			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? NSLocalizedString("mainMenu.pauseOrUnpausItem.pause", comment: "") : NSLocalizedString("mainMenu.pauseOrUnpausItem.unpause", comment: "")
 			return selectedRow == .downloading
 				&& selectedIndexs.count > 0
 				&& mainWindowFront

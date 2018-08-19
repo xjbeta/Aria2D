@@ -14,6 +14,8 @@
 
 "mainMenu.activateAppItem.activate" = "激活 Aria2D";
 "mainMenu.activateAppItem.activated" = "已激活";
+"mainMenu.pauseOrUnpausItem.pause" = "暂停";
+"mainMenu.pauseOrUnpausItem.unpause" = "开始";
 
 "licenseInfo.messageText" = "您的应用程序已激活.";
 "licenseInfo.invalidateButton" = "注销授权";

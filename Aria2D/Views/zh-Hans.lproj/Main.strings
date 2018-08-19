@@ -165,7 +165,7 @@
 "ERl-Ox-10W.title" = "文本单元格";
 
 /* Class = "NSMenuItem"; title = "Pause All"; ObjectID = "Eod-ir-mQe"; */
-"Eod-ir-mQe.title" = "暂停所有任务";
+"Eod-ir-mQe.title" = "全部暂停";
 
 /* Class = "NSMenuItem"; title = "Show In Finder"; ObjectID = "EqX-1a-d71"; */
 "EqX-1a-d71.title" = "在 Finder 中显示";
@@ -426,7 +426,7 @@
 "bib-Uj-vzu.title" = "文件";
 
 /* Class = "NSMenuItem"; title = "Pause All"; ObjectID = "bux-Hj-cuH"; */
-"bux-Hj-cuH.title" = "暂停所有";
+"bux-Hj-cuH.title" = "全部暂停";
 
 /* Class = "NSTextFieldCell"; title = "Copyright"; ObjectID = "d3Y-L4-s5p"; */
 "d3Y-L4-s5p.title" = "Copyright";
@@ -465,7 +465,7 @@
 "gVA-U4-sdL.title" = "粘贴";
 
 /* Class = "NSMenuItem"; title = "Refresh"; ObjectID = "gh5-01-7ha"; */
-"gh5-01-7ha.title" = "刷新下载信息";
+"gh5-01-7ha.title" = "刷新任务信息";
 
 /* Class = "NSButtonCell"; title = "Use forceRemove and forcePause"; ObjectID = "gvt-P2-gWx"; */
 "gvt-P2-gWx.title" = "使用 forceRemove 和 forcePause";
@@ -504,7 +504,7 @@
 "kEe-ts-unb.label" = "Baidu";
 
 /* Class = "NSMenuItem"; title = "Info"; ObjectID = "kSC-ph-VpU"; */
-"kSC-ph-VpU.title" = "下载信息";
+"kSC-ph-VpU.title" = "任务信息";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "l33-ka-dsB"; */
 "l33-ka-dsB.title" = "文本单元格";
@@ -555,7 +555,7 @@
 "pCg-vJ-T6l.title" = "☜";
 
 /* Class = "NSMenuItem"; title = "Unpause All"; ObjectID = "pRn-oF-KWn"; */
-"pRn-oF-KWn.title" = "全部取消暂停";
+"pRn-oF-KWn.title" = "全部开始";
 
 /* Class = "NSButtonCell"; title = "Logout"; ObjectID = "pZK-D6-28R"; */
 "pZK-D6-28R.title" = "注销";
@@ -570,7 +570,7 @@
 "pkc-1U-noL.title" = "文本单元格";
 
 /* Class = "NSMenuItem"; title = "Unpause All"; ObjectID = "puJ-mb-eTT"; */
-"puJ-mb-eTT.title" = "全部取消暂停";
+"puJ-mb-eTT.title" = "全部开始";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qra-wX-At3"; */
 "qra-wX-At3.title" = "取消";
