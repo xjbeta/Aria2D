@@ -86,6 +86,10 @@ class SidebarViewController: NSViewController {
         
         if sidebarTableView.selectedRow == -1 {
             sidebarTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        } else if sidebarTableView.selectedRow < sidebarTableView.numberOfRows {
+            if let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: sidebarTableView.selectedRow, makeIfNecessary: false) as? SidebarTableCellView {
+                view.isSelected = true
+            }
         }
 	}
 
@@ -133,9 +137,6 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 		if let cell = sidebarTableView.makeView(withIdentifier: .sidebarTableCellView, owner: self) as? SidebarTableCellView,
 			let item = sidebarItems[safe: row] {
 			cell.item = item
-			if row == 0 {
-				cell.isSelected = true
-			}
 			return cell
 		}
 		return nil
