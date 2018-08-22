@@ -340,9 +340,9 @@
 		0147EDD51D220BED00FB4324 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
-				010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */,
-				010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */,
 				010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */,
+				010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */,
+				010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */,
 			);
 			path = Sidebar;
 			sourceTree = "<group>";

@@ -1557,7 +1557,7 @@ CA
         <scene sceneID="GH1-20-efG">
             <objects>
                 <viewController showSeguePresentationStyle="single" id="aDS-je-EVP" customClass="SidebarViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
-                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="ultraDark" state="followsWindowActiveState" id="jES-9n-Xr8">
+                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" id="jES-9n-Xr8">
                         <rect key="frame" x="0.0" y="0.0" width="68" height="520"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -1590,6 +1590,21 @@ CA
                                                         <tableCellView identifier="SidebarTableCellView" id="Gmv-Vc-bv0" customClass="SidebarTableCellView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="6" width="36" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XCi-Op-bEi">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="36" height="40"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ChP-TH-Ygp"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="XCi-Op-bEi" secondAttribute="trailing" id="3uD-OI-rN1"/>
+                                                                <constraint firstAttribute="bottom" secondItem="XCi-Op-bEi" secondAttribute="bottom" id="aUa-Gh-MJr"/>
+                                                                <constraint firstItem="XCi-Op-bEi" firstAttribute="leading" secondItem="Gmv-Vc-bv0" secondAttribute="leading" id="ru8-mF-kkd"/>
+                                                                <constraint firstItem="XCi-Op-bEi" firstAttribute="top" secondItem="Gmv-Vc-bv0" secondAttribute="top" id="tBR-Oj-9LW"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="imageView" destination="XCi-Op-bEi" id="WPX-q5-cCf"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -3425,7 +3440,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="Mi8-NA-oMt">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" headerView="c2O-gr-ZQy" id="kR5-pN-Auw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>
@@ -3494,7 +3509,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="y12-II-h7D">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>
