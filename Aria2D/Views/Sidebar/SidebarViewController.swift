@@ -147,7 +147,9 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 			view.isSelected = false
 		}
 		
-		if let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: sidebarTableView.selectedRow, makeIfNecessary: false) as? SidebarTableCellView {
+		if sidebarTableView.selectedRow >= 0,
+            sidebarTableView.selectedRow < sidebarTableView.numberOfRows,
+            let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: sidebarTableView.selectedRow, makeIfNecessary: false) as? SidebarTableCellView {
 			view.isSelected = true
 		}
 		if let item = sidebarItems[safe: sidebarTableView.selectedRow] {
