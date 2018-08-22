@@ -23,7 +23,7 @@ class SidebarViewController: NSViewController {
 		initIndicator()
 		initNotification()
 //        ViewControllersManager.shared.selectedRow = .downloading
-		resetLeftOutlineView()
+		resetSidebarItems()
 	}
 	
 	
@@ -50,8 +50,8 @@ class SidebarViewController: NSViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
         
-		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .baiduStatusUpdated, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .developerModeChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .baiduStatusUpdated, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .developerModeChanged, object: nil)
 	}
 	
     
@@ -90,7 +90,7 @@ class SidebarViewController: NSViewController {
 	}
 
 	
-	@objc func resetLeftOutlineView() {
+	@objc func resetSidebarItems() {
 		DispatchQueue.main.async {
 			self.setDefaultData()
 		}
