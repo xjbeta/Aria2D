@@ -1,5 +1,5 @@
 //
-//  TaskUrl.swift
+//  DownloadUrlTextField.swift
 //  Aria2D
 //
 //  Created by xjbeta on 2016/9/30.
@@ -8,15 +8,13 @@
 
 import Cocoa
 
-class TaskUrl: NSTextField {
+class DownloadUrlTextField: NSTextField {
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
         // Drawing code here.
     }
-	
-	
 	
 	var button: NSButton = {
 		let button = NSButton(frame: NSRect(x: 25, y: 20, width: 132, height: 20))
@@ -26,12 +24,10 @@ class TaskUrl: NSTextField {
 		return button
 	}()
 	
-	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 	}
 
-	
 	override func textDidChange(_ notification: Notification) {
 		if stringValue == "ma" {
 			self.addSubview(button)
@@ -39,8 +35,6 @@ class TaskUrl: NSTextField {
 			hideButton()
 		}
 	}
-	
-	
 	
 	@objc func changeStringValue() {
 		stringValue = "magnet:?xt=urn:btih:"
@@ -50,13 +44,10 @@ class TaskUrl: NSTextField {
 	
 	func hideButton() {
 		subviews.forEach {
-			if let _ = $0 as? NSButton, let i = subviews.index(of: $0) {
+			if $0 is NSButton, let i = subviews.index(of: $0) {
 				subviews.remove(at: i)
 			}
 		}
-
 	}
-	
-	
 
 }

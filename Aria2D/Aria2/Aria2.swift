@@ -347,12 +347,13 @@ class Aria2: NSObject {
                 }
             })
     }
-    func getGlobalOption() {
+    func getGlobalOption(_ block: @escaping () -> Void = {}) {
         Aria2WebsocketObject(method: Aria2Method.getGlobalOption,
                              params: [])
             .writeToWebsocket(block: { data in
                 if let options = data.decode(OptionResult.self)?.result {
                     Aria2Websocket.shared.aria2GlobalOption = options
+                    block()
                 }
             })
     }
