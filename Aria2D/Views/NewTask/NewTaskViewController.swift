@@ -202,6 +202,7 @@ class NewTaskViewController: NSViewController {
         optionsGridRow.isHidden = true
         optionsTypeGridView.isHidden = true
         optionsManagerGridRow.isHidden = true
+        downloadButton.keyEquivalent = "\r"
         
         Aria2.shared.getGlobalOption() {
             let options = Aria2Websocket.shared.aria2GlobalOption
