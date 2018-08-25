@@ -133,12 +133,14 @@ class NewTaskViewController: NSViewController {
             return re
         }
         
-		if !torrentTask, downloadUrlTextField.stringValue != "" {
+        if let _ = fileURL, torrentData != "" {
+            Aria2.shared.addTorrent(torrentData, options: options)
+            dismiss(self)
+        } else if downloadUrlTextField.stringValue != "" {
             Aria2.shared.addUri(downloadUrlTextField.stringValue, options: options)
-		} else if torrentTask, torrentData != "" {
-			Aria2.shared.addTorrent(torrentData, options: options)
-		}
-		dismiss(self)
+            dismiss(self)
+        }
+        
 	}
 	
 	@IBOutlet var showOptionsButton: NSButton!
@@ -179,15 +181,7 @@ class NewTaskViewController: NSViewController {
         }
     }
     
-    var torrentTask = false
-    var fileURL: URL? = nil {
-        didSet {
-            if let url = fileURL {
-                self.setTorrentPath(url)
-                self.urlManager(true)
-            }
-        }
-    }
+    var fileURL: URL?
     var torrentData: String {
         get {
             do {
