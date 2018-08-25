@@ -43,6 +43,8 @@ class Aria2TextOptionCellView: NSTableCellView, NSControlTextEditingDelegate {
                     }
                     unitNumberValue = new
                     valueTextField.stringValue = unitNumberValue.stringValue
+                    delegate?.aria2OptionValueDidChanged(valueTextField.stringValue, for: option)
+                    delegate?.resizeTableView(0, for: option)
                     return true
                 }
             default:
