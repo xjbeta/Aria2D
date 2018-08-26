@@ -57,7 +57,7 @@
 		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
 		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
 		016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */; };
-		016C403C1D9E8D2800EB27A2 /* TaskUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */; };
+		016C403C1D9E8D2800EB27A2 /* DownloadUrlTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */; };
 		016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */; };
 		016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */; };
 		016C98F91DB1C0A000955C09 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C98F81DB1C0A000955C09 /* HUD.swift */; };
@@ -80,9 +80,13 @@
 		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
+		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
+		01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */; };
+		01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350B212871F700E5C88C /* Aria2Methods.swift */; };
+		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
 		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
@@ -182,7 +186,7 @@
 		01610DE41EDFF7B200BAEF02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
 		016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedJSONTableCellView.swift; sourceTree = "<group>"; };
-		016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskUrl.swift; sourceTree = "<group>"; };
+		016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUrlTextField.swift; sourceTree = "<group>"; };
 		016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2DWindow.swift; sourceTree = "<group>"; };
 		016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2D.swift; sourceTree = "<group>"; };
 		016C98F81DB1C0A000955C09 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
@@ -206,9 +210,13 @@
 		018E896D1D350075000C71B0 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ErrorCode.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionCellView.swift; sourceTree = "<group>"; };
+		01A5350B212871F700E5C88C /* Aria2Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2Methods.swift; sourceTree = "<group>"; };
+		01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionTooltip.swift; sourceTree = "<group>"; };
 		01A53518212943F500E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		01A5351C2129512000E5C88C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -275,7 +283,10 @@
 				0115D4341E06AD99003EBFCD /* Aria2.swift */,
 				012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */,
 				016A3E371E8A9FA100CC1999 /* Aria2Option.swift */,
+				01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */,
+				01A5350B212871F700E5C88C /* Aria2Methods.swift */,
 				018E895F1D34FFA8000C71B0 /* Aria2c.swift */,
+				019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */,
 			);
 			path = Aria2;
 			sourceTree = "<group>";
@@ -387,7 +398,8 @@
 			isa = PBXGroup;
 			children = (
 				01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */,
-				016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */,
+				016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */,
+				01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */,
 			);
 			path = NewTask;
 			sourceTree = "<group>";
@@ -653,7 +665,7 @@
 				018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */,
 				0115D4331E04F09F003EBFCD /* SubString.swift in Sources */,
 				01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */,
-				016C403C1D9E8D2800EB27A2 /* TaskUrl.swift in Sources */,
+				016C403C1D9E8D2800EB27A2 /* DownloadUrlTextField.swift in Sources */,
 				01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */,
 				012CBD761F6CC57F00EFD1D4 /* InfoWindowController.swift in Sources */,
 				0115D4311E04E423003EBFCD /* Color.swift in Sources */,
@@ -677,6 +689,7 @@
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
+				019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */,
 				012CBD751F6CC57F00EFD1D4 /* InfoView.swift in Sources */,
 				016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */,
 				010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */,
@@ -693,6 +706,8 @@
 				013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */,
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
 				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
+				01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */,
+				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
 				018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */,
 				0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */,
@@ -703,6 +718,7 @@
 				01EB1CB61D60971600F2925F /* Baidu.swift in Sources */,
 				012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
+				01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */,
 				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,
 				01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */,
 				012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */,

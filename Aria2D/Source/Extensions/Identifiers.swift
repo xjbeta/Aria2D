@@ -19,16 +19,23 @@ extension NSStoryboardSegue.Identifier {
 
 
 extension NSUserInterfaceItemIdentifier {
-	
+	// Sidebar
     static let sidebarTableCellView = NSUserInterfaceItemIdentifier(rawValue: "SidebarTableCellView")
+    //Download List
 	static let downloadsTableCell = NSUserInterfaceItemIdentifier(rawValue: "downloadsTableCell")
 	static let baiduFileListCell = NSUserInterfaceItemIdentifier(rawValue: "baiduFileListCell")
+    //Log
     static let receivedJSONTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "ReceivedJSONTableCellView")
+    //Info View
     static let statusDicTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusDicTableCellView")
     static let statusSpaceTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusSpaceTableCellView")
     static let statusBitfieldTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusBitfieldTableCellView")
     static let statusCollectionViewItem = NSUserInterfaceItemIdentifier(rawValue: "StatusCollectionViewItem")
+    //Baidu Login
     static let stepTableCellView = NSUserInterfaceItemIdentifier(rawValue: "StepTableCellView")
+    //New Task
+    static let aria2OptionCellView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2OptionCellView")
+    
 }
 
 extension NSStoryboard.SceneIdentifier {
