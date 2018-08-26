@@ -68,12 +68,16 @@ class Aria2OptionCellView: NSTableCellView {
         case .number(min: let min, max: let max):
             numberFormatter.maximumFractionDigits = 0
             numberFormatter.minimum = min as NSNumber
-            numberFormatter.maximum = max as NSNumber
+            if max != -1 {
+                numberFormatter.maximum = max as NSNumber
+            }
             numberValueTextField.integerValue = Int(value) ?? min
         case .floatNumber(min: let min, max: let max):
             numberFormatter.maximumFractionDigits = 2
             numberFormatter.minimum = min as NSNumber
-            numberFormatter.maximum = max as NSNumber
+            if max != -1 {
+                numberFormatter.maximum = max as NSNumber
+            }
             numberValueTextField.floatValue = Float(value) ?? min
         case .unitNumber(min: let min, max: let max):
             unitNumberValue = UnitNumber(value)
