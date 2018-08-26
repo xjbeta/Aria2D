@@ -278,7 +278,7 @@ extension NewTaskViewController: NSTableViewDelegate, NSTableViewDataSource {
         default:
             textFiled.stringValue = allowAria2Options[option] ?? ""
             let width = tableView.bounds.size.width - 180 - 24
-            heights.append(textFiled.cellSize(forBounds: NSRect.init(x: 0, y: 0, width: width, height: 400)).height + 10)
+            heights.append(textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: width, height: 400)).height + 10)
         }
         return heights.max() ?? 24
     }
