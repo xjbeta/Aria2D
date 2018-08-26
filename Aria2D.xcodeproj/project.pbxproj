@@ -384,11 +384,11 @@
 			isa = PBXGroup;
 			children = (
 				012CBD701F6CC56700EFD1D4 /* StatusView */,
+				012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */,
+				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
+				012CBD711F6CC57E00EFD1D4 /* InfoView.swift */,
 				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
 				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
-				012CBD711F6CC57E00EFD1D4 /* InfoView.swift */,
-				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
-				012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */,
 				012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */,
 			);
 			path = InfoView;
