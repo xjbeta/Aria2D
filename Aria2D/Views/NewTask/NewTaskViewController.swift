@@ -268,132 +268,46 @@ extension NewTaskViewController: NSTableViewDelegate, NSTableViewDataSource {
         let option = allowOptions.filter({
             $0.preferencesType == optionsType
         })[row]
+        let textFiled = NSTextFieldCell()
+        textFiled.stringValue = option.rawValue
+        var heights: [CGFloat] = [24]
+        heights.append(textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: 180, height: 80)).height + 7)
         switch option.valueType {
-        case .bool:
-            return 21
-        case .parameter:
-            return 22
-        case .number(min: _, max: _), .floatNumber(min: _, max: _):
-            return 28
+        case .bool, .parameter, .number, .floatNumber:
+            break
         default:
-            if let view = tableView.makeView(withIdentifier: .aria2TextOptionCellView, owner: nil) as? Aria2TextOptionCellView {
-                view.bounds.size.width = tableView.bounds.size.width
-                view.valueTextField.stringValue = allowAria2Options[option] ?? ""
-                view.layoutSubtreeIfNeeded()
-                view.autoResize()
-                return view.frame.height
-            } else {
-                return 28
-            }
+            textFiled.stringValue = allowAria2Options[option] ?? ""
+            let width = tableView.bounds.size.width - 180 - 24
+            heights.append(textFiled.cellSize(forBounds: NSRect.init(x: 0, y: 0, width: width, height: 400)).height + 10)
         }
+        return heights.max() ?? 24
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var identifier: NSUserInterfaceItemIdentifier? = nil
-        
         let option = allowOptions.filter({
             $0.preferencesType == optionsType
         })[row]
-        switch option.valueType {
-        case .bool:
-            identifier = .aria2BoolOptionCellView
-        case .parameter:
-            identifier = .aria2ParameterOptionCellView
-        case .number(min: _, max: _), .floatNumber(min: _, max: _):
-            identifier = .aria2NumberOptionTextView
-        default:
-            identifier = .aria2TextOptionCellView
-        }
-        if let identifier = identifier {
-            switch identifier {
-            case .aria2BoolOptionCellView:
-                if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? Aria2BoolOptionCellView {
-                    view.textField?.stringValue = option.rawValue
-                    
-//                    view.textField?.toolTip = "fsadfsdghdfgsdsalbfhkjbadlhf"
-                    view.checkButton.state = allowAria2Options[option] == "true" ? .on : .off
-                    view.option = option
-                    view.delegate = self
-                    return view
-                }
-            case .aria2ParameterOptionCellView:
-                if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? Aria2ParameterOptionCellView {
-                    view.textField?.stringValue = option.rawValue
-//                    view.textField?.toolTip = "fsadfsdghdfgsdsalbfhkjbadlhf"
-                    switch option.valueType {
-                    case .parameter(p: let p):
-                        view.comboBox.removeAllItems()
-                        view.comboBox.addItems(withObjectValues: p.map({ $0.rawValue }))
-                        view.comboBox.selectItem(withObjectValue: allowAria2Options[option])
-                    default:break
-                    }
-                    view.option = option
-                    view.delegate = self
-                    return view
-                }
-            case .aria2TextOptionCellView:
-                if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? Aria2TextOptionCellView {
-                    view.textField?.stringValue = option.rawValue
-                    
-//                    view.textField?.toolTip = "fsadfsdghdfgsdsalbfhkjbadlhf"
-                    view.valueTextField.placeholderString = option.toolTisString()
-                    switch option.valueType {
-                    case .unitNumber(min: _, max: _):
-                        view.unitNumberValue = UnitNumber(allowAria2Options[option] ?? "")
-                        view.valueTextField?.stringValue = view.unitNumberValue.stringValue
-                        
-                    default:
-                        view.valueTextField.stringValue = allowAria2Options[option] ?? ""
-                    }
-                    
-                    view.option = option
-                    view.delegate = self
-                    return view
-                }
-            case .aria2NumberOptionTextView:
-                if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? Aria2NumberOptionTextView {
-                    view.textField?.stringValue = option.rawValue
-//                    view.textField?.toolTip = "fsadfsdghdfgsdsalbfhkjbadlhf"
-                    
-                    view.numberTextField.placeholderString = option.toolTisString()
-                    view.numberTextField.integerValue = Int(allowAria2Options[option] ?? "") ?? 0
-                    switch option.valueType {
-                    case .number(min: let min, max: let max):
-                        view.numberFormatter.maximumFractionDigits = 0
-                        view.numberFormatter.minimum = min as NSNumber
-                        view.numberFormatter.maximum = max as NSNumber
-                    case .floatNumber(min: let min, max: let max):
-                        view.numberFormatter.maximumFractionDigits = 1
-                        view.numberFormatter.minimum = min as NSNumber
-                        view.numberFormatter.maximum = max as NSNumber
-                        break
-                    default:
-                        break
-                    }
-                    view.option = option
-                    view.delegate = self
-                    return view
-                }
-            default:
-                break
-            }
+        if let view = tableView.makeView(withIdentifier: .aria2OptionCellView, owner: nil) as? Aria2OptionCellView {
+            view.initValue(option: option, value: allowAria2Options[option] ?? "")
+            view.delegate = self
+            return view
         }
         return nil
     }
 }
 
 extension NewTaskViewController: Aria2OptionValueDelegate {
-    func resizeTableView(_ height: CGFloat, for option: Aria2Option) {
+    func aria2OptionValueDidChanged(_ value: String, for option: Aria2Option) {
+        allowAria2Options[option] = value
+    }
+    
+    func resizeTableView(for option: Aria2Option) {
         let options = allowOptions.filter({
             $0.preferencesType == optionsType
         })
         if let row = options.firstIndex(of: option) {
             optionsTableView.noteHeightOfRows(withIndexesChanged: IndexSet(integer: row))
         }
-    }
-    
-    func aria2OptionValueDidChanged(_ value: String, for option: Aria2Option) {
-        allowAria2Options[option] = value
     }
     
 }

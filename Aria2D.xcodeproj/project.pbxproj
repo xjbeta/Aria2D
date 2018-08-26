@@ -84,10 +84,7 @@
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
-		01A5350221282C7000E5C88C /* Aria2BoolOptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350121282C7000E5C88C /* Aria2BoolOptionCellView.swift */; };
-		01A5350421282CB900E5C88C /* Aria2ParameterOptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350321282CB900E5C88C /* Aria2ParameterOptionCellView.swift */; };
-		01A5350621282CE900E5C88C /* Aria2TextOptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350521282CE900E5C88C /* Aria2TextOptionCellView.swift */; };
-		01A535082128628600E5C88C /* Aria2NumberOptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A535072128628600E5C88C /* Aria2NumberOptionTextView.swift */; };
+		01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */; };
 		01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350B212871F700E5C88C /* Aria2Methods.swift */; };
 		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
@@ -217,10 +214,7 @@
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		01A5350121282C7000E5C88C /* Aria2BoolOptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2BoolOptionCellView.swift; sourceTree = "<group>"; };
-		01A5350321282CB900E5C88C /* Aria2ParameterOptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ParameterOptionCellView.swift; sourceTree = "<group>"; };
-		01A5350521282CE900E5C88C /* Aria2TextOptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2TextOptionCellView.swift; sourceTree = "<group>"; };
-		01A535072128628600E5C88C /* Aria2NumberOptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2NumberOptionTextView.swift; sourceTree = "<group>"; };
+		01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionCellView.swift; sourceTree = "<group>"; };
 		01A5350B212871F700E5C88C /* Aria2Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2Methods.swift; sourceTree = "<group>"; };
 		01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionTooltip.swift; sourceTree = "<group>"; };
 		01A53518212943F500E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -405,10 +399,7 @@
 			children = (
 				01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */,
 				016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */,
-				01A5350121282C7000E5C88C /* Aria2BoolOptionCellView.swift */,
-				01A5350321282CB900E5C88C /* Aria2ParameterOptionCellView.swift */,
-				01A535072128628600E5C88C /* Aria2NumberOptionTextView.swift */,
-				01A5350521282CE900E5C88C /* Aria2TextOptionCellView.swift */,
+				01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */,
 			);
 			path = NewTask;
 			sourceTree = "<group>";
@@ -695,7 +686,6 @@
 				01DEC4C920C3EFDA007D21F0 /* StepTableCellView.swift in Sources */,
 				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,
 				017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */,
-				01A535082128628600E5C88C /* Aria2NumberOptionTextView.swift in Sources */,
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
@@ -714,10 +704,8 @@
 				019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */,
 				018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */,
 				013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */,
-				01A5350421282CB900E5C88C /* Aria2ParameterOptionCellView.swift in Sources */,
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
 				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
-				01A5350621282CE900E5C88C /* Aria2TextOptionCellView.swift in Sources */,
 				01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */,
 				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
@@ -730,7 +718,7 @@
 				01EB1CB61D60971600F2925F /* Baidu.swift in Sources */,
 				012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
-				01A5350221282C7000E5C88C /* Aria2BoolOptionCellView.swift in Sources */,
+				01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */,
 				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,
 				01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */,
 				012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */,

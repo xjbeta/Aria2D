@@ -34,11 +34,7 @@ extension NSUserInterfaceItemIdentifier {
     //Baidu Login
     static let stepTableCellView = NSUserInterfaceItemIdentifier(rawValue: "StepTableCellView")
     //New Task
-    static let aria2BoolOptionCellView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2BoolOptionCellView")
-    static let aria2ParameterOptionCellView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2ParameterOptionCellView")
-    static let aria2TextOptionCellView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2TextOptionCellView")
-    static let aria2NumberOptionTextView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2NumberOptionTextView")
-    
+    static let aria2OptionCellView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2OptionCellView")
     
 }
 
