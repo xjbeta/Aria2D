@@ -84,6 +84,15 @@ class Aria2OptionCellView: NSTableCellView {
             valueTextField.stringValue = value
         }
         
+        switch option.valueType {
+        case .bool, .parameter:
+            break
+        case .number, .floatNumber:
+            numberValueTextField.placeholderString = option.toolTisString()
+        default:
+            valueTextField.placeholderString = option.toolTisString()
+        }
+        
     }
     
     func setValueType(_ type: Aria2Option.ValueType) {
