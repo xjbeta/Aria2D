@@ -118,7 +118,13 @@ class DataManager: NSObject {
                 }
                 realm.delete(oldFiles)
 				obj.files.removeAll()
-                obj.files.append(objectsIn: files)
+                var newFiles = files
+                    
+                newFiles.enumerated().forEach {
+                    $0.element.id = gid + "-files-\($0.offset)"
+                }
+                
+                obj.files.append(objectsIn: newFiles)
 			}
 		}
 	}
