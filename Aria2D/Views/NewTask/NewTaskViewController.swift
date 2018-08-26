@@ -269,6 +269,8 @@ extension NewTaskViewController: NSTableViewDelegate, NSTableViewDataSource {
             $0.preferencesType == optionsType
         })[row]
         let textFiled = NSTextFieldCell()
+        textFiled.font = NSFont.systemFont(ofSize: 13)
+        
         textFiled.stringValue = option.rawValue
         var heights: [CGFloat] = [24]
         heights.append(textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: 180, height: 80)).height + 7)
@@ -277,7 +279,7 @@ extension NewTaskViewController: NSTableViewDelegate, NSTableViewDataSource {
             break
         default:
             textFiled.stringValue = allowAria2Options[option] ?? ""
-            let width = tableView.bounds.size.width - 180 - 24
+            let width = tableView.bounds.size.width - 180 - 24 - tableView.intercellSpacing.width
             heights.append(textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: width, height: 400)).height + 10)
         }
         return heights.max() ?? 24

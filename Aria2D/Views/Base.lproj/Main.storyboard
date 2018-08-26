@@ -2418,6 +2418,7 @@ CA
                                                                                 </textFieldCell>
                                                                                 <connections>
                                                                                     <action selector="applyChange:" target="Iso-4u-VXT" id="mcW-oq-SJE"/>
+                                                                                    <outlet property="delegate" destination="Iso-4u-VXT" id="eLN-gK-rU6"/>
                                                                                 </connections>
                                                                             </textField>
                                                                         </subviews>

@@ -53,6 +53,7 @@ class Aria2OptionCellView: NSTableCellView {
     }
     
     func initValue(option: Aria2Option, value: String) {
+        self.option = option
         textField?.stringValue = option.rawValue
 //        textField?.toolTip
         
@@ -150,7 +151,11 @@ extension Aria2OptionCellView: NSControlTextEditingDelegate {
             delegate?.aria2OptionValueDidChanged(valueTextField.stringValue, for: option)
         }
         if let option = option {
-            delegate?.resizeTableView(for: option)
+            let height = valueTextField.cell?.cellSize(forBounds: NSRect(x: 0, y: 0, width: valueTextField.bounds.size.width, height: 400)).height
+            
+            if height != valueTextField.frame.height - 2 {
+                delegate?.resizeTableView(for: option)
+            }
         }
     }
     
