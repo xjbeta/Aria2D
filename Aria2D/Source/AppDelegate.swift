@@ -51,16 +51,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
         
         DataManager.shared.deleteAll()
-		Aria2Websocket.shared.initSocket()
-		Baidu.shared.checkTokenEffective()
-		Preferences.shared.checkPlistFile()
-		Aria2.shared.aria2c.autoStart()
         
         let sb = NSStoryboard(name: "Main", bundle: nil)
         mainWindowController = sb.instantiateController(withIdentifier: "MainWindowController") as? MainWindowController
         mainWindowController.showWindow(self)
         self.setDevMate()
-        
+        Aria2Websocket.shared.initSocket()
+        Preferences.shared.checkPlistFile()
+        Aria2.shared.aria2c.autoStart()
+        Baidu.shared.checkTokenEffective()
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
