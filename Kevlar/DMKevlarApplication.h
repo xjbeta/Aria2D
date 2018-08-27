@@ -37,7 +37,7 @@ NS_INLINE void DMKStopDebug(void)
 }
 
 //! CodeSign validation function that will raise an exception in case when signature is wrong
-#define DMKCheckBundleSignatureWithURL TacWAQOGPRqh4gU
+#define DMKCheckBundleSignatureWithURL omJfV3X5jDX5D2F
 FOUNDATION_EXTERN void DMKCheckBundleSignatureWithURL(CFURLRef bundleURL, SecCSFlags validationFlags);
 
 NS_INLINE void DMKCheckMainBundleSignature(void)
@@ -143,30 +143,30 @@ FOUNDATION_EXTERN NSString *const DMKApplicationActivationStatusDidChangeNotific
 
 
 //! Function help with running timer for advanced check
-#define DMKRunNewIntegrityCheckTimer PXwQ7czb2bFmvOgm8
+#define DMKRunNewIntegrityCheckTimer ZUqnshWAkH0Rq4aYo
 FOUNDATION_EXTERN void DMKRunNewIntegrityCheckTimer(NSUInteger num, NSTimeInterval checkFrequency);
 
 //! Checks if application is activated
-#define DMKIsApplicationActivated HBlkNMfSe2OkuVKtuy
+#define DMKIsApplicationActivated b0lmR4JReaTkpMWYgw
 FOUNDATION_EXTERN BOOL DMKIsApplicationActivated(DMKevlarError * _Nullable outKevlarError);
 
 //! Returns user license info
-#define DMKCopyLicenseUserInfo Dg7dpLKm4iQXl3XMcib
+#define DMKCopyLicenseUserInfo kzc4PKMNnfR1Jprn9zn
 FOUNDATION_EXTERN CFDictionaryRef DMKCopyLicenseUserInfo(void) CF_RETURNS_RETAINED;
 
 //! Forces license validation request on DevMate server
-#define DMKValidateLicense xyUBn4bsDdVHBtUh737M
+#define DMKValidateLicense lOsfj0bWfzqNrwi4R3tg
 FOUNDATION_EXTERN void DMKValidateLicense(void (^completionHandler)(NSError * _Nullable error));
 
 //! Deactivates application and invalidates license info
-#define DMKInvalidateLicense Pg0QZVBBKqGlcvSUivjGn
+#define DMKInvalidateLicense b1IgKgVnND1lnn01u6IX8
 FOUNDATION_EXTERN BOOL DMKInvalidateLicense(void);
 
 /**
     This category will extend functionality of NSApplication to be complies with Kevlar concept of protection.
     Right now, some helper interface have been declared there, because it is kind of complicated to load category.
 */
-#define com_devmate_Kevlar c5RKSY7sow
+#define com_devmate_Kevlar hlYzduXExN
 @interface NSApplication (com_devmate_Kevlar)
 
 /**
@@ -174,21 +174,21 @@ FOUNDATION_EXTERN BOOL DMKInvalidateLicense(void);
     where to find and where to store license. Property is bitwise mask.
     Default is DMKLicenseStorageAllMask
 */
-#define licenseStorageLocation EmIiGMsOkTKvdcP3S
+#define licenseStorageLocation YG42cuOBKx9NwOw5A
 @property (nonatomic) DMKLicenseStorageLocation licenseStorageLocation;
 
 /**
     Indicate application activation status. This option is useful for bindings.
     For more security use DMKIsApplicationActivated function.
 */
-#define isActivated A0qdN9ir6xRgIv2
+#define isActivated IIEicTijzYmNSk9
 @property (nonatomic, readonly) BOOL isActivated;
 
 /**
     Return user-friendly information about license, with out any system information.
     For more security use DMKCopyLicenseUserInfo function.
 */
-#define licenseUserInfo OYST7G9Fx12BVk
+#define licenseUserInfo WAaLvjXPL18FI2
 @property (nonatomic, readonly) NSDictionary *licenseUserInfo;
 
 /**
@@ -196,7 +196,7 @@ FOUNDATION_EXTERN BOOL DMKInvalidateLicense(void);
     In case if license is invalidated, it removes all license information.
     For more security use DMKInvalidateLicense function.
 */
-#define invalidateLicense LyfWl8eyIMY6l
+#define invalidateLicense VuOZsAJw8Hutv
 - (BOOL)invalidateLicense;
 
 /**

@@ -1250,7 +1250,7 @@ DQ
                                         <menuItem title="Check For Update" id="A91-B0-y3r">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="checkForUpdate:" target="6ga-g5-iZP" id="Ztl-I7-k0T"/>
+                                                <action selector="checkForUpdates:" target="Q5n-y2-Q28" id="oJX-mf-vYh"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -1474,6 +1474,7 @@ CA
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Aria2D" customModuleProvider="target"/>
+                <customObject id="Q5n-y2-Q28" customClass="SUUpdater"/>
                 <customObject id="6ga-g5-iZP" customClass="MainMenu" customModule="Aria2D" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

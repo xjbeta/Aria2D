@@ -120,10 +120,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 	@IBAction func activateApp(_ sender: Any) {
 		NotificationCenter.default.post(name: .activateApp, object: nil)
 	}
-	
-	@IBAction func checkForUpdate(_ sender: Any) {
-		DM_SUUpdater.shared().checkForUpdates(sender)
-	}
     
     @IBAction func installWithHomebrew(_ sender: Any) {
             NSAppleScript(source: """

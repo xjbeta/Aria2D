@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		010B59181D3CF66600550A43 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B59171D3CF66600550A43 /* MainMenu.swift */; };
-		010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 010CCDCD209EB67600F6B45B /* libkevlar.a */; };
 		010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */; };
 		010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */; };
 		010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */; };
@@ -99,6 +98,7 @@
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
 		01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
+		01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F6C4F921339F830009672A /* libkevlar.a */; };
 		01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */; };
 /* End PBXBuildFile section */
 
@@ -136,8 +136,6 @@
 
 /* Begin PBXFileReference section */
 		010B59171D3CF66600550A43 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		010CCDCC209EB67600F6B45B /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
-		010CCDCD209EB67600F6B45B /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
 		010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableView.swift; sourceTree = "<group>"; };
 		010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableCellView.swift; sourceTree = "<group>"; };
@@ -231,6 +229,8 @@
 		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
 		01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCellView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
+		01F6C4F921339F830009672A /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
+		01F6C4FA21339F840009672A /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
 		01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduDlinksProgress.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,12 +239,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */,
 				010F0EE020F8582C00F33553 /* Realm.framework in Frameworks */,
 				010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */,
 				010F0EE220F8582C00F33553 /* RealmSwift.framework in Frameworks */,
 				010F0EDA20F8582C00F33553 /* SwiftHTTP.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
-				010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */,
 				010F0EDC20F8582C00F33553 /* SocketRocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,8 +271,8 @@
 		012624611ED174AC007FF8AA /* Kevlar */ = {
 			isa = PBXGroup;
 			children = (
-				010CCDCC209EB67600F6B45B /* DMKevlarApplication.h */,
-				010CCDCD209EB67600F6B45B /* libkevlar.a */,
+				01F6C4FA21339F840009672A /* DMKevlarApplication.h */,
+				01F6C4F921339F830009672A /* libkevlar.a */,
 			);
 			path = Kevlar;
 			sourceTree = "<group>";
