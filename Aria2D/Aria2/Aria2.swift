@@ -26,7 +26,7 @@ class Aria2: NSObject {
                 var result: [[[Aria2Object]]]
             }
             if let objs = data.decode(InitDataResult.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
-                DataManager.shared.initAllObjects(objs)
+                DataManager.shared.initObjects(objs, for: ViewControllersManager.shared.selectedRow)
             }
         }
 
@@ -53,21 +53,24 @@ class Aria2: NSObject {
         })
     }
 	
-	func sortData() {
+	func sortData(block: (([[String : String]]) -> Void)? = nil) {
 		Aria2WebsocketObject(method: Aria2Method.multicall,
 		                     params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-		                                                    params: [["gid"]]).object(),
+		                                                    params: [["gid", "status"]]).object(),
 		                               Aria2WebsocketParams(method: Aria2Method.tellWaiting,
-		                                                    params: [0, 1000, ["gid"]]).object(),
+		                                                    params: [0, 1000, ["gid", "status"]]).object(),
 		                               Aria2WebsocketParams(method: Aria2Method.tellStopped,
-		                                                    params: [0, 1000, ["gid"]]).object()]])
+		                                                    params: [0, 1000, ["gid", "status"]]).object()]])
             .writeToWebsocket(block: { data in
                 struct GIDList: Decodable {
                     var result: [[[[String: String]]]]
                 }
-                
-                if let gids = data.decode(GIDList.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }).map ({ $0["gid"] }).compactMap ({ $0 }) {
-                    DataManager.shared.sortAllObjects(gids)
+                if let re = data.decode(GIDList.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
+                    if let _ = block {
+                       block?(re)
+                    } else {
+                        DataManager.shared.sortAllObjects(re)
+                    }
                 }
             })
 	}
@@ -344,12 +347,13 @@ class Aria2: NSObject {
                 }
             })
     }
-    func getGlobalOption() {
+    func getGlobalOption(_ block: @escaping () -> Void = {}) {
         Aria2WebsocketObject(method: Aria2Method.getGlobalOption,
                              params: [])
             .writeToWebsocket(block: { data in
                 if let options = data.decode(OptionResult.self)?.result {
                     Aria2Websocket.shared.aria2GlobalOption = options
+                    block()
                 }
             })
     }

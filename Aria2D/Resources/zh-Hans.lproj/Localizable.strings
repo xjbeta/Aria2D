@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  Aria2D
+
+  Created by xjbeta on 2018/8/19.
+  Copyright © 2018 xjbeta. All rights reserved.
+*/
+
+"infoViewController.segmentedControl.0" = "状态";
+"infoViewController.segmentedControl.1" = "选项";
+"infoViewController.segmentedControl.2" = "文件";
+"infoViewController.segmentedControl.3" = "Peer";
+"infoViewController.segmentedControl.4" = "Announces";
+
+"mainMenu.activateAppItem.activate" = "激活 Aria2D";
+"mainMenu.activateAppItem.activated" = "已激活";
+"mainMenu.pauseOrUnpausItem.pause" = "暂停";
+"mainMenu.pauseOrUnpausItem.unpause" = "开始";
+
+"licenseInfo.messageText" = "您的应用程序已激活.";
+"licenseInfo.invalidateButton" = "注销授权";
+"licenseInfo.okButton" = "好";
+"licenseInfo.cancelButton" = "取消";
+"licenseInfo.informativeText" = "这将取消激活应用程序, 并使许可证信息无效.";
+
+"baiduStep.baiduAccount" = "Baidu 账号";
+"baiduStep.pcsKey" = "PCS key";
+"baiduStep.accessToken" = "Access Token";
+"baiduStep.pcsFolder" = "PCS 文件夹";
+

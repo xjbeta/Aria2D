@@ -23,7 +23,7 @@ class SidebarViewController: NSViewController {
 		initIndicator()
 		initNotification()
 //        ViewControllersManager.shared.selectedRow = .downloading
-		resetLeftOutlineView()
+		resetSidebarItems()
 	}
 	
 	
@@ -50,8 +50,8 @@ class SidebarViewController: NSViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
         
-		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .baiduStatusUpdated, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(resetLeftOutlineView), name: .developerModeChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .baiduStatusUpdated, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .developerModeChanged, object: nil)
 	}
 	
     
@@ -86,11 +86,15 @@ class SidebarViewController: NSViewController {
         
         if sidebarTableView.selectedRow == -1 {
             sidebarTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        } else if sidebarTableView.selectedRow < sidebarTableView.numberOfRows {
+            if let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: sidebarTableView.selectedRow, makeIfNecessary: false) as? SidebarTableCellView {
+                view.isSelected = true
+            }
         }
 	}
 
 	
-	@objc func resetLeftOutlineView() {
+	@objc func resetSidebarItems() {
 		DispatchQueue.main.async {
 			self.setDefaultData()
 		}
@@ -133,9 +137,6 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 		if let cell = sidebarTableView.makeView(withIdentifier: .sidebarTableCellView, owner: self) as? SidebarTableCellView,
 			let item = sidebarItems[safe: row] {
 			cell.item = item
-			if row == 0 {
-				cell.isSelected = true
-			}
 			return cell
 		}
 		return nil
@@ -147,13 +148,15 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 			view.isSelected = false
 		}
 		
-		if let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: sidebarTableView.selectedRow, makeIfNecessary: false) as? SidebarTableCellView {
+		if sidebarTableView.selectedRow >= 0,
+            sidebarTableView.selectedRow < sidebarTableView.numberOfRows,
+            let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: sidebarTableView.selectedRow, makeIfNecessary: false) as? SidebarTableCellView {
 			view.isSelected = true
 		}
 		if let item = sidebarItems[safe: sidebarTableView.selectedRow] {
 			ViewControllersManager.shared.selectedRow = item
 		}
-		NotificationCenter.default.post(name: .leftSourceListSelection, object: nil)
+		NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
 	}
 	
 	

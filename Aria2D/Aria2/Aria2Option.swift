@@ -8,46 +8,6 @@
 
 import Foundation
 
-struct Aria2Method {
-	static let addUri = "aria2.addUri"
-	static let addTorrent = "aria2.addTorrent"
-	static let getPeers = "aria2.getPeers"
-	static let addMetalink = "aria2.addMetalink"
-	static let remove = "aria2.remove"
-	static let pause = "aria2.pause"
-	static let forcePause = "aria2.forcePause"
-	static let pauseAll = "aria2.pauseAll"
-	static let forcePauseAll = "aria2.forcePauseAll"
-	static let unpause = "aria2.unpause"
-	static let unpauseAll = "aria2.unpauseAll"
-	static let forceRemove = "aria2.forceRemove"
-	static let changePosition = "aria2.changePosition"
-	static let tellStatus = "aria2.tellStatus"
-	static let getUris = "aria2.getUris"
-	static let getFiles = "aria2.getFiles"
-	static let getServers = "aria2.getServers"
-	static let tellActive = "aria2.tellActive"
-	static let tellWaiting = "aria2.tellWaiting"
-	static let tellStopped = "aria2.tellStopped"
-	static let getOption = "aria2.getOption"
-	static let changeUri = "aria2.changeUri"
-	static let changeOption = "aria2.changeOption"
-	static let getGlobalOption = "aria2.getGlobalOption"
-	static let changeGlobalOption = "aria2.changeGlobalOption"
-	static let purgeDownloadResult = "aria2.purgeDownloadResult"
-	static let removeDownloadResult = "aria2.removeDownloadResult"
-	static let getVersion = "aria2.getVersion"
-	static let getSessionInfo = "aria2.getSessionInfo"
-	static let shutdown = "aria2.shutdown"
-	static let forceShutdown = "aria2.forceShutdown"
-	static let getGlobalStat = "aria2.getGlobalStat"
-	static let saveSession = "aria2.saveSession"
-	static let multicall = "system.multicall"
-	static let listMethods = "system.listMethods"
-	static let listNotifications = "system.listNotifications"
-}
-
-
 struct Aria2Option: RawRepresentable, Hashable, Codable {
 	typealias RawValue = String
 	
@@ -58,10 +18,10 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		}
 	}
 	
-	var valueType: valueType
-	var preferencesType: preferencesType
+	var valueType: ValueType
+	var preferencesType: PreferencesType
 	
-	init(_ string: String, valueType: valueType, type: preferencesType) {
+	init(_ string: String, valueType: ValueType, type: PreferencesType) {
 		self.rawValue = string
 		switch valueType {
 		case .boolType:
@@ -72,8 +32,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		self.preferencesType = type
 	}
 	
-	
-	enum valueType {
+	enum ValueType {
 		case string(str: String)
 		case bool(bool: [constants])
 		case boolType
@@ -101,7 +60,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		
 	}
 	
-	
+	// 40
 	enum constants: String {
 		case true🤣 = "true"
 		case false😂 = "false"
@@ -146,7 +105,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	}
 	
 	
-	enum preferencesType {
+	enum PreferencesType {
 		case general
 		case ftpRelated
 		case httpRelated
@@ -154,9 +113,10 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case bitTorrentRelated
 		case metalinkRelated
 		case other
+        case none
 	}
 	
-	
+	// 213
 	init(rawValue: RawValue) {
 		switch rawValue {
 		case "all-proxy": self = .allProxy
@@ -177,6 +137,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case "bt-force-encryption": self = .btForceEncryption
 		case "bt-hash-check-seed": self = .btHashCheckSeed
 		case "bt-keep-alive-interval": self = .btKeepAliveInterval
+        case "bt-load-saved-metadata": self = .btLoadSavedMetadata
 		case "bt-lpd-interface": self = .btLpdInterface
 		case "bt-max-open-files": self = .btMaxOpenFiles
 		case "bt-max-peers": self = .btMaxPeers
@@ -317,6 +278,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case "parameterized-uri": self = .parameterizedUri
 		case "pause": self = .pause
 		case "pause-metadata": self = .pauseMetadata
+        case "peer-agent": self = .peerAgent
 		case "peer-connection-timeout": self = .peerConnectionTimeout
 		case "peer-id-prefix": self = .peerIdPrefix
 		case "piece-length": self = .pieceLength
@@ -395,6 +357,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	static let btForceEncryption = Aria2Option("bt-force-encryption", valueType: .boolType, type: .bitTorrentRelated)
 	static let btHashCheckSeed = Aria2Option("bt-hash-check-seed", valueType: .boolType, type: .bitTorrentRelated)
 	static let btKeepAliveInterval = Aria2Option("bt-keep-alive-interval", valueType: .number(min: 1, max: 120), type: .bitTorrentRelated)
+    static let btLoadSavedMetadata = Aria2Option("bt-load-saved-metadata", valueType: .boolType, type: .bitTorrentRelated)
 	static let btLpdInterface = Aria2Option("bt-lpd-interface", valueType: .string(str: "Possible Values: interface, IP address"), type: .bitTorrentRelated)
 	static let btMaxOpenFiles = Aria2Option("bt-max-open-files", valueType: .number(min: 1, max: -1), type: .bitTorrentRelated)
 	static let btMaxPeers = Aria2Option("bt-max-peers", valueType: .number(min: 0, max: -1), type: .bitTorrentRelated)
@@ -537,6 +500,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	static let parameterizedUri = Aria2Option("parameterized-uri", valueType: .boolType, type: .general)
 	static let pause = Aria2Option("pause", valueType: .boolType, type: .general)
 	static let pauseMetadata = Aria2Option("pause-metadata", valueType: .boolType, type: .general)
+    static let peerAgent = Aria2Option("peer-agent", valueType: .string(str: "PEER_AGENT"), type: .bitTorrentRelated)
 	static let peerConnectionTimeout = Aria2Option("peer-connection-timeout", valueType: .number(min: 1, max: 600), type: .bitTorrentRelated)
 	static let peerIdPrefix = Aria2Option("peer-id-prefix", valueType: .string(str: "a string, less than or equals to 20 bytes length"), type: .bitTorrentRelated)
 	static let pieceLength = Aria2Option("piece-length", valueType: .unitNumber(min: UnitNumber("1M"), max: UnitNumber("1G")), type: .general)
@@ -567,7 +531,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	static let saveSession = Aria2Option("save-session", valueType: .localFilePath, type: .general)
 	static let saveSessionInterval = Aria2Option("save-session-interval", valueType: .number(min: 0, max: -1), type: .general)
 	static let seedRatio = Aria2Option("seed-ratio", valueType: .floatNumber(min: 1.0, max: -1), type: .bitTorrentRelated)
-	static let seedTime = Aria2Option("seed-time", valueType: .floatNumber(min: 1, max: 1024), type: .bitTorrentRelated)
+	static let seedTime = Aria2Option("seed-time", valueType: .number(min: 1, max: 1024), type: .bitTorrentRelated)
 	static let selectFile = Aria2Option("select-file", valueType: .integerRange(min: 1, max: 1024), type: .bitTorrentRelated)
 	static let selectLeastUsedHost = Aria2Option("select-least-used-host", valueType: .boolType, type: .general)
 	static let serverStatIf = Aria2Option("server-stat-if", valueType: .localFilePath, type: .general)
@@ -620,11 +584,11 @@ struct UnitNumber {
 			let last = string.last {
 			var value: UInt64 = 0
 			switch last {
-			case "K":
+			case "K", "k":
 				value = unit.K.rawValue
-			case "M":
+			case "M", "m":
 				value = unit.M.rawValue
-			case "G":
+			case "G", "g":
 				value = unit.G.rawValue
 			default:
 				value = 0

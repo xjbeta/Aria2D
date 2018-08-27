@@ -30,8 +30,8 @@ class Aria2Object: Object, Decodable {
 	//	let numSeeders: String
 	//	let seeder: Bool
 	@objc dynamic var numPieces: String = ""
-	//	let errorCode: String
-	//	let errorMessage: String
+    @objc dynamic var errorCode: Int = 0
+    @objc dynamic var errorMessage: String = ""
 	//	let followedBy: String
 	//	let following: String
 	//	let belongsTo: String
@@ -55,18 +55,23 @@ class Aria2Object: Object, Decodable {
 		dir,
         bittorrent,
         bitfield,
-        numPieces
+        numPieces,
+        errorCode,
+        errorMessage
 	}
 	
 	
 	required convenience init(from decoder: Decoder) throws {
 		self.init()
 		let values = try decoder.container(keyedBy: CodingKeys.self)
+        gid = try values.decode(String.self, forKey: .gid)
         if let files = try values.decodeIfPresent([Aria2File].self, forKey: .files) {
             self.files.removeAll()
-            self.files.append(objectsIn: files)
+            files.enumerated().forEach {
+                $0.element.id = gid + "-files-\($0.offset)"
+                self.files.append($0.element)
+            }
         }
-		gid = try values.decode(String.self, forKey: .gid)
 		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
 		totalLength = Int64(try values.decode(String.self, forKey: .totalLength)) ?? 0
 		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
@@ -76,10 +81,14 @@ class Aria2Object: Object, Decodable {
 		pieceLength = Int64(try values.decode(String.self, forKey: .pieceLength)) ?? 0
 		connections = Int(try values.decode(String.self, forKey: .connections)) ?? 0
 		dir = (try values.decode(String.self, forKey: .dir)).standardizingPath
-		bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
+		let bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
+        bittorrent?.id = gid + "-bittorrent"
+        self.bittorrent = bittorrent
         bitfield = try values.decodeIfPresent(String.self, forKey: .bitfield) ?? ""
 //        numPieces = try values.decodeIfPresent(String.self, forKey: .numPieces) ?? ""
         numPieces = try values.decode(String.self, forKey: .numPieces)
+        errorCode = Int(try values.decodeIfPresent(String.self, forKey: .errorCode) ?? "") ?? 0
+        errorMessage = try values.decodeIfPresent(String.self, forKey: .errorMessage) ?? ""
 		date = Date().timeIntervalSince1970
 	}
 
@@ -128,6 +137,7 @@ class Aria2File: Object, Decodable {
 	@objc dynamic var length: Int64 = 0
 	@objc dynamic var completedLength: Int64 = 0
 	@objc dynamic var selected: Bool = false
+    @objc dynamic var id = ""
 	var uris = List<Aria2Uri>()
 	
 	private enum CodingKeys: String, CodingKey {
@@ -151,6 +161,10 @@ class Aria2File: Object, Decodable {
 //        uris = try values.decode([Aria2Uri].self, forKey: .uris)
 //			.map { $0.uri }
 	}
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 	
 	func dic() -> [String: Any] {
 		var dic: [String: Any] = [:]
@@ -219,6 +233,12 @@ class Bittorrent: Object, Decodable {
 	@objc dynamic var name: String? = nil
 	@objc dynamic var mode: FileMode = .error
     var announceList = List<String>()
+    
+    @objc dynamic var id = ""
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
     
 	private enum CodingKeys: String, CodingKey {
 		case name = "info",

@@ -21,35 +21,49 @@ class DataManager: NSObject {
         }
     }
     
-	func initAllObjects(_ objs: [Aria2Object]) {
+    func initObjects(_ objs: [Aria2Object], for list: SidebarItem) {
 		writeToRealm { realm in
-			let deleteGids = Set(realm.objects(Aria2Object.self).map { $0.gid }).subtracting(Set(objs.map { $0.gid }))
-			let deleteObjs = realm.objects(Aria2Object.self).filter {
-				deleteGids.contains($0.gid)
-			}
-            realm.delete(realm.objects(Aria2File.self))
-			realm.delete(deleteObjs)
-			realm.add(objs, update: true)
+            var oldGids: [String] = []
+            switch list {
+            case .downloading:
+                oldGids = realm.objects(Aria2Object.self)
+                    .filter("status == %@ OR status == %@ OR status == %@",
+                            Status.active.rawValue, Status.waiting.rawValue, Status.paused.rawValue)
+                .map({ $0.gid })
+            case .removed, .completed:
+                oldGids = realm.objects(Aria2Object.self)
+                    .filter("status == %@ OR status == %@ OR status == %@",
+                            Status.complete.rawValue, Status.error.rawValue, Status.removed.rawValue)
+                .map({ $0.gid })
+            default:
+                break
+            }
+
+            let deleteList = Set(oldGids).subtracting(Set(objs.map({ $0.gid })))
+            let deleteObjs = realm.objects(Aria2Object.self).filter {
+                deleteList.contains($0.gid)
+            }
+            
+            realm.delete(deleteObjs)
+            realm.add(objs, update: true)
 		}
 	}
 	
-	func sortAllObjects(_ gids: [String]) {
+    func sortAllObjects(_ gidsDic: [[String: String]]) {
 		writeToRealm { realm in
-			let deleteGids = Set(realm.objects(Aria2Object.self).map { $0.gid }).subtracting(Set(gids))
-			let deleteObjs = realm.objects(Aria2Object.self).filter {
-				deleteGids.contains($0.gid)
-			}
-			realm.delete(deleteObjs)
-			gids.forEach {
-				realm.object(ofType: Aria2Object.self, forPrimaryKey: $0)?.updateDate()
-			}
-		}
-	}
-	
-	
-	func initObjects(_ objs: [Aria2Object]) {
-		writeToRealm { realm in
-			realm.add(objs, update: true)
+            let deleteGids = Set(realm.objects(Aria2Object.self).map { $0.gid }).subtracting(Set(gidsDic.map({ $0["gid"] })))
+            let deleteObjs = realm.objects(Aria2Object.self).filter {
+                deleteGids.contains($0.gid)
+            }
+            realm.delete(deleteObjs)
+            
+            gidsDic.forEach {
+                var dic: [String: Any] = [:]
+                dic["gid"] = $0["gid"]
+                dic["status"] = Status($0["status"] ?? "")?.rawValue
+                dic["date"] = Double(Date().timeIntervalSince1970)
+                realm.create(Aria2Object.self, value: dic, update: true)
+            }
 		}
 	}
 	
@@ -104,7 +118,13 @@ class DataManager: NSObject {
                 }
                 realm.delete(oldFiles)
 				obj.files.removeAll()
-                obj.files.append(objectsIn: files)
+                var newFiles = files
+                    
+                newFiles.enumerated().forEach {
+                    $0.element.id = gid + "-files-\($0.offset)"
+                }
+                
+                obj.files.append(objectsIn: newFiles)
 			}
 		}
 	}

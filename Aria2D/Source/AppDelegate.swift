@@ -13,9 +13,29 @@ import RealmSwift
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	var window: NSWindow? {
-		return NSApp.mainWindow
-	}
+    var mainWindowController: MainWindowController!
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            
+            schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+                if (oldSchemaVersion < 1) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+        }, deleteRealmIfMigrationNeeded: true)
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+        // Now that we've told Realm how to handle the schema change, opening the file
+        // will automatically perform the migration
+        let _ = try! Realm()
+    }
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
@@ -30,13 +50,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(self)
 		}
         
-		
-		self.setDevMate()
         DataManager.shared.deleteAll()
-		Aria2Websocket.shared.initSocket()
-		Baidu.shared.checkTokenEffective()
-		Preferences.shared.checkPlistFile()
-		Aria2.shared.aria2c.autoStart()
+        
+        let sb = NSStoryboard(name: "Main", bundle: nil)
+        mainWindowController = sb.instantiateController(withIdentifier: "MainWindowController") as? MainWindowController
+        mainWindowController.showWindow(self)
+        self.setDevMate()
+        Aria2Websocket.shared.initSocket()
+        Preferences.shared.checkPlistFile()
+        Aria2.shared.aria2c.autoStart()
+        Baidu.shared.checkTokenEffective()
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -83,11 +106,11 @@ extension AppDelegate: DevMateKitDelegate {
 	}
 	
     @objc func feedbackController(_ controller: DMFeedbackController, parentWindowFor mode: DMFeedbackMode) -> NSWindow {
-        return self.window!
+        return mainWindowController.window!
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
-		return self.window
+		return mainWindowController.window
 	}
 	
 	@objc func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
@@ -103,21 +126,32 @@ extension AppDelegate: DevMateKitDelegate {
 		// to see how to create _my_secret_activation_check variable
 		if !string_check(nil).boolValue {
 			DevMateKit.runActivationDialog(self, in: .sheet)
-		} else if let window = self.window, let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
+		} else if let window = mainWindowController.window,
+            let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
 			
-			let licenseSheet = NSAlert()
-			licenseSheet.messageText = "Your application is already activated."
+			let licenseAlert = NSAlert()
+			licenseAlert.messageText = NSLocalizedString("licenseInfo.messageText", comment: "")
+            
+			licenseAlert.informativeText = "This product is licensed to:\n    email: \(license["email"] as? String ?? "")\n    activation id: \(license["activation_number"] as? String ?? "")"
+            
+			licenseAlert.addButton(withTitle: NSLocalizedString("licenseInfo.okButton", comment: ""))
+			licenseAlert.addButton(withTitle: NSLocalizedString("licenseInfo.invalidateButton", comment: ""))
 			
-//			Log(license)
-			
-			licenseSheet.informativeText = "This product is licensed to:\n    email: \(license["email"] as? String ?? "")\n    activation id: \(license["activation_number"] as? String ?? "")"
-			licenseSheet.addButton(withTitle: "OK")
-			licenseSheet.addButton(withTitle: "Invalidate License")
-			
+            
+            let warningAlert = NSAlert()
+            warningAlert.alertStyle = .critical
+            warningAlert.messageText = NSLocalizedString("licenseInfo.invalidateButton", comment: "")
+            warningAlert.informativeText = NSLocalizedString("licenseInfo.informativeText", comment: "")
+            warningAlert.addButton(withTitle: NSLocalizedString("licenseInfo.okButton", comment: ""))
+            warningAlert.addButton(withTitle: NSLocalizedString("licenseInfo.cancelButton", comment: ""))
+            
 			DispatchQueue.main.async {
-				licenseSheet.beginSheetModal(for: window) {
+				licenseAlert.beginSheetModal(for: window) {
 					if $0 == .alertSecondButtonReturn {
-						InvalidateAppLicense()
+                        let response = warningAlert.runModal()
+                        if response == .alertFirstButtonReturn {
+                            InvalidateAppLicense()
+                        }
 					}
 				}
 			}

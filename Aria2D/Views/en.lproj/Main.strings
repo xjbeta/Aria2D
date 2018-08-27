@@ -1,0 +1,705 @@
+
+/* Class = "NSMenuItem"; title = "With Homebrew"; ObjectID = "09N-SX-MZA"; */
+"09N-SX-MZA.title" = "With Homebrew";
+
+/* Class = "NSMenuItem"; title = "Start / Pause"; ObjectID = "0Ac-kS-d2i"; */
+"0Ac-kS-d2i.title" = "Start / Pause";
+
+/* Class = "NSTextFieldCell"; title = "enabledFeatures"; ObjectID = "0Ll-Vy-uub"; */
+"0Ll-Vy-uub.title" = "enabledFeatures";
+
+/* Class = "NSTextFieldCell"; title = "Aria2c path"; ObjectID = "0Lz-mN-X7V"; */
+"0Lz-mN-X7V.title" = "Aria2c path";
+
+/* Class = "NSMenuItem"; title = "Aria2D"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "Aria2D";
+
+/* Class = "NSMenuItem"; title = "Download DMG File"; ObjectID = "1cl-5B-BMD"; */
+"1cl-5B-BMD.title" = "Download DMG File";
+
+/* Class = "NSTextFieldCell"; title = "☜"; ObjectID = "2C1-hD-fll"; */
+"2C1-hD-fll.title" = "☜";
+
+/* Class = "NSDateFormatter"; ibShadowedDateFormat = "yy/MM/dd HH:mm"; ObjectID = "2Cb-eO-VUI"; */
+"2Cb-eO-VUI.ibShadowedDateFormat" = "yy/MM/dd HH:mm";
+
+/* Class = "NSTableColumn"; headerCell.title = "time"; ObjectID = "2JT-NA-BM7"; */
+"2JT-NA-BM7.headerCell.title" = "time";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2Nv-Mm-kG9"; */
+"2Nv-Mm-kG9.title" = "Text Cell";
+
+/* Class = "NSButtonCell"; title = "Delete"; ObjectID = "2Wq-ao-IjG"; */
+"2Wq-ao-IjG.title" = "Delete";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "2aE-Wb-5W8"; */
+"2aE-Wb-5W8.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Total Length"; ObjectID = "3N2-HC-YgG"; */
+"3N2-HC-YgG.title" = "Total Length";
+
+/* Class = "NSMenu"; title = "Install Aria2"; ObjectID = "3vy-Zr-6pq"; */
+"3vy-Zr-6pq.title" = "Install Aria2";
+
+/* Class = "NSTextFieldCell"; title = "/jsonrpc"; ObjectID = "4GA-VL-PB8"; */
+"4GA-VL-PB8.title" = "/jsonrpc";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "4mo-8Q-0bN"; */
+"4mo-8Q-0bN.title" = "Text Cell";
+
+/* Class = "NSButtonCell"; title = "Name"; ObjectID = "4r5-B8-oQ1"; */
+"4r5-B8-oQ1.title" = "Name";
+
+/* Class = "NSMenuItem"; title = "Quit Aria2D"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit Aria2D";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "4zq-M1-knn"; */
+"4zq-M1-knn.title" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "5N7-Qz-UeY"; */
+"5N7-Qz-UeY.headerCell.title" = "Name";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
+"5QF-Oa-p0T.title" = "Edit";
+
+/* Class = "NSTextFieldCell"; title = "UserName"; ObjectID = "5Tn-ST-Gtt"; */
+"5Tn-ST-Gtt.title" = "UserName";
+
+/* Class = "NSTabViewItem"; label = "Status"; ObjectID = "5Vy-Q0-dyr"; */
+"5Vy-Q0-dyr.label" = "Status";
+
+/* Class = "NSTabViewItem"; label = "Peer"; ObjectID = "5dw-cu-5Bw"; */
+"5dw-cu-5Bw.label" = "Peer";
+
+/* Class = "NSMenuItem"; title = "About Aria2D"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About Aria2D";
+
+/* Class = "NSTextFieldCell"; title = "Max concurrent downloads:"; ObjectID = "6Ma-HL-eo0"; */
+"6Ma-HL-eo0.title" = "Max concurrent downloads:";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
+"6dh-zS-Vam.title" = "Redo";
+
+/* Class = "NSButtonCell"; title = "Previous"; ObjectID = "6tU-CS-gFr"; */
+"6tU-CS-gFr.title" = "Previous";
+
+/* Class = "NSTextFieldCell"; title = "Can't Connect to Baidu."; ObjectID = "7PH-ii-Qk5"; */
+"7PH-ii-Qk5.title" = "Can't Connect to Baidu.";
+
+/* Class = "NSButtonCell"; title = "Record Log"; ObjectID = "88f-Xz-u9a"; */
+"88f-Xz-u9a.title" = "Record Log";
+
+/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8Fr-vU-CVg"; */
+"8Fr-vU-CVg.title" = "Item 1";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "8dS-q6-d0K"; */
+"8dS-q6-d0K.title" = "OK";
+
+/* Class = "NSMenu"; title = "Download"; ObjectID = "96c-TL-NJg"; */
+"96c-TL-NJg.title" = "Download";
+
+/* Class = "NSTextFieldCell"; title = "Can't Connect to Baidu."; ObjectID = "9et-61-oBc"; */
+"9et-61-oBc.title" = "Can't Connect to Baidu.";
+
+/* Class = "NSMenuItem"; title = "Check For Update"; ObjectID = "A91-B0-y3r"; */
+"A91-B0-y3r.title" = "Check For Update";
+
+/* Class = "NSWindow"; title = "About Aria2D"; ObjectID = "ARZ-Pc-kvy"; */
+"ARZ-Pc-kvy.title" = "About Aria2D";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSTextFieldCell"; title = "bitfield"; ObjectID = "AgN-Fb-Nc2"; */
+"AgN-Fb-Nc2.title" = "bitfield";
+
+/* Class = "NSMenuItem"; title = "Size"; ObjectID = "Akb-5R-tif"; */
+"Akb-5R-tif.title" = "Size";
+
+/* Class = "NSButtonCell"; title = "SSL/TLS encryption"; ObjectID = "BHb-Ah-Dmg"; */
+"BHb-Ah-Dmg.title" = "SSL/TLS encryption";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
+"BOF-NM-1cW.title" = "Preferences…";
+
+/* Class = "NSButtonCell"; title = "Download"; ObjectID = "Bfa-YR-nvz"; */
+"Bfa-YR-nvz.title" = "Download";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "Bgi-kd-Pfp"; */
+"Bgi-kd-Pfp.title" = "Delete";
+
+/* Class = "NSTextFieldCell"; title = "Creat the folder in your Baidu Yun first."; ObjectID = "C6y-Sg-wmE"; */
+"C6y-Sg-wmE.title" = "Creat the folder in your Baidu Yun first.";
+
+/* Class = "NSTextFieldCell"; title = "CapacityInfo"; ObjectID = "CgE-lD-4ij"; */
+"CgE-lD-4ij.title" = "CapacityInfo";
+
+/* Class = "NSTableColumn"; headerCell.title = "downloadSpeed"; ObjectID = "Cxc-ib-w4f"; */
+"Cxc-ib-w4f.headerCell.title" = "downloadSpeed";
+
+/* Class = "NSButtonCell"; title = "Clear"; ObjectID = "DMp-kR-3Eq"; */
+"DMp-kR-3Eq.title" = "Clear";
+
+/* Class = "NSMenuItem"; title = "Other"; ObjectID = "DPc-BY-tMV"; */
+"DPc-BY-tMV.title" = "Other";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
+"DVo-aG-piG.title" = "Close";
+
+/* Class = "NSTextFieldCell"; placeholderString = "/apps/folderName"; ObjectID = "DsK-TW-enL"; */
+"DsK-TW-enL.placeholderString" = "/apps/folderName";
+
+/* Class = "NSTextFieldCell"; title = "Upload:"; ObjectID = "DtO-g4-PZj"; */
+"DtO-g4-PZj.title" = "Upload:";
+
+/* Class = "NSTextFieldCell"; title = "PCS Secret Key:"; ObjectID = "E04-1Q-cD4"; */
+"E04-1Q-cD4.title" = "PCS Secret Key:";
+
+/* Class = "NSMenuItem"; title = "Install Aria2"; ObjectID = "E2u-eK-Feq"; */
+"E2u-eK-Feq.title" = "Install Aria2";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "ERl-Ox-10W"; */
+"ERl-Ox-10W.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Pause All"; ObjectID = "Eod-ir-mQe"; */
+"Eod-ir-mQe.title" = "Pause All";
+
+/* Class = "NSMenuItem"; title = "Show In Finder"; ObjectID = "EqX-1a-d71"; */
+"EqX-1a-d71.title" = "Show In Finder";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "Aria2D Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "Aria2D Help";
+
+/* Class = "NSMenuItem"; title = "Next Tag"; ObjectID = "FWc-QJ-FdT"; */
+"FWc-QJ-FdT.title" = "Next Tag";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "FYd-cH-RWO"; */
+"FYd-cH-RWO.title" = "Table View Cell";
+
+/* Class = "NSButtonCell"; title = "Optimize Concurrent Downloads"; ObjectID = "FkV-vT-eiN"; */
+"FkV-vT-eiN.title" = "Optimize Concurrent Downloads";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "FuL-fw-MjP"; */
+"FuL-fw-MjP.title" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Progress"; ObjectID = "G1s-NO-gCy"; */
+"G1s-NO-gCy.headerCell.title" = "Progress";
+
+/* Class = "NSTableColumn"; headerCell.title = "Size"; ObjectID = "GBz-OQ-J4p"; */
+"GBz-OQ-J4p.headerCell.title" = "Size";
+
+/* Class = "NSTableColumn"; headerCell.title = "method"; ObjectID = "GC6-Rz-OGq"; */
+"GC6-Rz-OGq.headerCell.title" = "method";
+
+/* Class = "NSMenuItem"; title = "Feedback"; ObjectID = "HUB-N9-3pS"; */
+"HUB-N9-3pS.title" = "Feedback";
+
+/* Class = "NSTextFieldCell"; title = "_Text"; ObjectID = "Hht-xb-X32"; */
+"Hht-xb-X32.title" = "_Text";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "IOf-ye-WDU"; */
+"IOf-ye-WDU.title" = "Table View Cell";
+
+/* Class = "NSWindow"; title = "Main"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "Main";
+
+/* Class = "NSTextFieldCell"; title = ":"; ObjectID = "IyT-yZ-Jja"; */
+"IyT-yZ-Jja.title" = ":";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "J3h-OL-3vf"; */
+"J3h-OL-3vf.title" = "Item 3";
+
+/* Class = "NSTabViewItem"; label = "webView"; ObjectID = "J8A-D3-Xgh"; */
+"J8A-D3-Xgh.label" = "webView";
+
+/* Class = "NSTextFieldCell"; title = "Task Name"; ObjectID = "JZB-1X-bKi"; */
+"JZB-1X-bKi.title" = "Task Name";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "KUy-zf-WFO"; */
+"KUy-zf-WFO.title" = "Label";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "Show All";
+
+/* Class = "NSButtonCell"; title = "Copy"; ObjectID = "KjB-3m-tYk"; */
+"KjB-3m-tYk.title" = "Copy";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "LAg-gC-sma"; */
+"LAg-gC-sma.title" = "Table View Cell";
+
+/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "M7D-Xv-aan"; */
+"M7D-Xv-aan.title" = "Item 2";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "MJ7-GS-xFr"; */
+"MJ7-GS-xFr.title" = "Delete";
+
+/* Class = "NSTextFieldCell"; title = "Version"; ObjectID = "MK7-iX-ygC"; */
+"MK7-iX-ygC.title" = "Version";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[0] = "general"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[0]" = "general";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[1] = "ftp"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[1]" = "ftp";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[2] = "http"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[2]" = "http";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[3] = "proxy"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[3]" = "proxy";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[4] = "bitTorrent"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[4]" = "bitTorrent";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[5] = "metalink"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[5]" = "metalink";
+
+/* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[6] = "other"; ObjectID = "MTL-27-lX7"; */
+"MTL-27-lX7.ibShadowedLabels[6]" = "other";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "MbU-yi-ARb"; */
+"MbU-yi-ARb.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "_OptionKey"; ObjectID = "NEI-TT-xxW"; */
+"NEI-TT-xxW.title" = "_OptionKey";
+
+/* Class = "NSTextFieldCell"; title = "Connecting..."; ObjectID = "NIW-72-xNB"; */
+"NIW-72-xNB.title" = "Connecting...";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
+"NMo-om-nkz.title" = "Services";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Np8-3r-7gx"; */
+"Np8-3r-7gx.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "info"; ObjectID = "Npr-Pt-dem"; */
+"Npr-Pt-dem.title" = "info";
+
+/* Class = "NSTextFieldCell"; title = "_key"; ObjectID = "ONF-wF-lNo"; */
+"ONF-wF-lNo.title" = "_key";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OVO-g0-FO9"; */
+"OVO-g0-FO9.title" = "Minimize";
+
+/* Class = "NSTextFieldCell"; title = "Aria2D"; ObjectID = "Od9-hk-5eL"; */
+"Od9-hk-5eL.title" = "Aria2D";
+
+/* Class = "NSMenuItem"; title = "Activate Aria2D"; ObjectID = "Oew-bB-DUy"; */
+"Oew-bB-DUy.title" = "Activate Aria2D";
+
+/* Class = "NSMenuItem"; title = "Hide Aria2D"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Hide Aria2D";
+
+/* Class = "NSMenuItem"; title = "Sort"; ObjectID = "QSY-yp-TEj"; */
+"QSY-yp-TEj.title" = "Sort";
+
+/* Class = "NSButtonCell"; title = "Complete notification"; ObjectID = "Qdl-Au-CjN"; */
+"Qdl-Au-CjN.title" = "Complete notification";
+
+/* Class = "NSButtonCell"; title = "Options"; ObjectID = "Qla-pR-3HO"; */
+"Qla-pR-3HO.title" = "Options";
+
+/* Class = "NSTextFieldCell"; title = "Per"; ObjectID = "Qr8-SK-gik"; */
+"Qr8-SK-gik.title" = "Per";
+
+/* Class = "NSTextFieldCell"; title = "_value"; ObjectID = "QsH-uc-f8e"; */
+"QsH-uc-f8e.title" = "_value";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "R08-P8-IJn"; */
+"R08-P8-IJn.title" = "Table View Cell";
+
+/* Class = "NSMenuItem"; title = "Ascending"; ObjectID = "RpH-Pz-uES"; */
+"RpH-Pz-uES.title" = "Ascending";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m"; */
+"Ruw-6m-B2m.title" = "Select All";
+
+/* Class = "NSButtonCell"; title = "New"; ObjectID = "SEG-B4-94Y"; */
+"SEG-B4-94Y.title" = "New";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "TNd-re-uzs"; */
+"TNd-re-uzs.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "*Folder:"; ObjectID = "Tme-wl-Tx4"; */
+"Tme-wl-Tx4.title" = "*Folder:";
+
+/* Class = "NSButtonCell"; title = "Apply"; ObjectID = "TqC-hL-j31"; */
+"TqC-hL-j31.title" = "Apply";
+
+/* Class = "NSTextFieldCell"; title = "☜"; ObjectID = "UI2-L3-b6l"; */
+"UI2-L3-b6l.title" = "☜";
+
+/* Class = "NSMenuItem"; title = "Info"; ObjectID = "UIc-sO-HD1"; */
+"UIc-sO-HD1.title" = "Info";
+
+/* Class = "NSTextFieldCell"; title = "HUD"; ObjectID = "Ud8-Q1-meG"; */
+"Ud8-Q1-meG.title" = "HUD";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UxZ-mc-bDe"; */
+"UxZ-mc-bDe.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; placeholderString = "0"; ObjectID = "VMm-bw-4U0"; */
+"VMm-bw-4U0.placeholderString" = "0";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "Hide Others";
+
+/* Class = "NSMenuItem"; title = "Date"; ObjectID = "VeW-ju-OYh"; */
+"VeW-ju-OYh.title" = "Date";
+
+/* Class = "NSButtonCell"; title = "Auto start Aria2"; ObjectID = "VxI-Jf-yOc"; */
+"VxI-Jf-yOc.title" = "Auto start Aria2";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl"; */
+"W48-6f-4Dl.title" = "Edit";
+
+/* Class = "NSTabViewItem"; label = "Item 4"; ObjectID = "WC9-tT-oaT"; */
+"WC9-tT-oaT.label" = "Item 4";
+
+/* Class = "NSWindow"; title = "Aria2 WebSocket Log"; ObjectID = "WCd-0s-2hg"; */
+"WCd-0s-2hg.title" = "Aria2 WebSocket Log";
+
+/* Class = "NSMenuItem"; title = "New"; ObjectID = "Was-JA-tGl"; */
+"Was-JA-tGl.title" = "New";
+
+/* Class = "NSTableColumn"; headerCell.title = "send json"; ObjectID = "Win-Z7-wtq"; */
+"Win-Z7-wtq.headerCell.title" = "send json";
+
+/* Class = "NSMenuItem"; title = "Show In Finder"; ObjectID = "X7E-3W-wwe"; */
+"X7E-3W-wwe.title" = "Show In Finder";
+
+/* Class = "NSTabViewItem"; label = "connectError"; ObjectID = "XKU-gy-rQf"; */
+"XKU-gy-rQf.label" = "connectError";
+
+/* Class = "NSTextFieldCell"; title = "_Size"; ObjectID = "XNf-yR-eBx"; */
+"XNf-yR-eBx.title" = "_Size";
+
+/* Class = "NSMenuItem"; title = "Log"; ObjectID = "Xap-qC-UwI"; */
+"Xap-qC-UwI.title" = "Log";
+
+/* Class = "NSButtonCell"; title = "Log in"; ObjectID = "XdM-tO-4qX"; */
+"XdM-tO-4qX.title" = "Log in";
+
+/* Class = "NSMenuItem"; title = "Start / Pause"; ObjectID = "Xxa-1u-Vjj"; */
+"Xxa-1u-Vjj.title" = "Start / Pause";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "Y2D-WL-H1q"; */
+"Y2D-WL-H1q.title" = "Box";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[0] = "1"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[0]" = "1";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[1] = "2"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[1]" = "2";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[2] = "3"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[2]" = "3";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[3] = "4"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[3]" = "4";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[4] = "5"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[4]" = "5";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[5] = "10"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[5]" = "10";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[6] = "15"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[6]" = "15";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[7] = "20"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[7]" = "20";
+
+/* Class = "NSComboBoxCell"; YAK-tL-sAj.ibShadowedObjectValues[8] = "25"; ObjectID = "YAK-tL-sAj"; */
+"YAK-tL-sAj.ibShadowedObjectValues[8]" = "25";
+
+/* Class = "NSButtonCell"; title = "Refresh"; ObjectID = "YKH-av-BE9"; */
+"YKH-av-BE9.title" = "Refresh";
+
+/* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "YX6-aO-eU9"; */
+"YX6-aO-eU9.label" = "Tab";
+
+/* Class = "NSButtonCell"; title = "Hide active"; ObjectID = "a7e-dV-Fbb"; */
+"a7e-dV-Fbb.title" = "Hide active";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "aAb-0U-tbP"; */
+"aAb-0U-tbP.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "aO4-fW-hKZ"; */
+"aO4-fW-hKZ.title" = "Text Cell";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "aTJ-Ok-0Jj"; */
+"aTJ-Ok-0Jj.label" = "Advanced";
+
+/* Class = "NSButtonCell"; title = "Developer mode"; ObjectID = "aUm-g1-dZi"; */
+"aUm-g1-dZi.title" = "Developer mode";
+
+/* Class = "NSButtonCell"; title = "Try again"; ObjectID = "aZ3-I6-q2W"; */
+"aZ3-I6-q2W.title" = "Try again";
+
+/* Class = "NSMenuItem"; title = "Task"; ObjectID = "an9-Qw-nqW"; */
+"an9-Qw-nqW.title" = "Task";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "b9M-Gc-zaK"; */
+"b9M-Gc-zaK.title" = "Text Cell";
+
+/* Class = "NSButtonCell"; title = "Try again"; ObjectID = "bRB-bQ-g5o"; */
+"bRB-bQ-g5o.title" = "Try again";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
+"bib-Uj-vzu.title" = "File";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "bo6-A1-RyS"; */
+"bo6-A1-RyS.title" = "Table View Cell";
+
+/* Class = "NSMenuItem"; title = "Pause All"; ObjectID = "bux-Hj-cuH"; */
+"bux-Hj-cuH.title" = "Pause All";
+
+/* Class = "NSTextFieldCell"; title = "Copyright"; ObjectID = "d3Y-L4-s5p"; */
+"d3Y-L4-s5p.title" = "Copyright";
+
+/* Class = "NSMenuItem"; title = "Download"; ObjectID = "dKF-cw-Xt1"; */
+"dKF-cw-Xt1.title" = "Download";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
+"dMs-cI-mzQ.title" = "File";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
+"dRJ-4n-Yzg.title" = "Undo";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "dXM-aU-nU9"; */
+"dXM-aU-nU9.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Time"; ObjectID = "e0D-8Q-iP8"; */
+"e0D-8Q-iP8.title" = "Time";
+
+/* Class = "NSMenuItem"; title = "Download"; ObjectID = "eCS-rB-qMY"; */
+"eCS-rB-qMY.title" = "Download";
+
+/* Class = "NSMenuItem"; title = "Descending"; ObjectID = "eN7-4v-tZf"; */
+"eN7-4v-tZf.title" = "Descending";
+
+/* Class = "NSButtonCell"; title = "Download"; ObjectID = "ebL-cm-pPO"; */
+"ebL-cm-pPO.title" = "Download";
+
+/* Class = "NSMenuItem"; title = "Name"; ObjectID = "edt-wb-eWB"; */
+"edt-wb-eWB.title" = "Name";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "fd6-QV-zJB"; */
+"fd6-QV-zJB.title" = "Cancel";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
+"gVA-U4-sdL.title" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Refresh"; ObjectID = "gh5-01-7ha"; */
+"gh5-01-7ha.title" = "Refresh";
+
+/* Class = "NSButtonCell"; title = "Use forceRemove and forcePause"; ObjectID = "gvt-P2-gWx"; */
+"gvt-P2-gWx.title" = "Use forceRemove and forcePause";
+
+/* Class = "NSTableColumn"; headerCell.title = "ip"; ObjectID = "hJN-i6-Ese"; */
+"hJN-i6-Ese.headerCell.title" = "ip";
+
+/* Class = "NSTableColumn"; headerCell.title = "uploadSpeed"; ObjectID = "hjh-yN-zdd"; */
+"hjh-yN-zdd.headerCell.title" = "uploadSpeed";
+
+/* Class = "NSTextFieldCell"; placeholderString = "0"; ObjectID = "hvl-YD-f3v"; */
+"hvl-YD-f3v.placeholderString" = "0";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "Services";
+
+/* Class = "NSButtonCell"; title = "Restart aria2c at next boot"; ObjectID = "iBh-7W-lt8"; */
+"iBh-7W-lt8.title" = "Restart aria2c at next boot";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "ir6-03-WQt"; */
+"ir6-03-WQt.title" = "Window";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "jBh-oi-8nW"; */
+"jBh-oi-8nW.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "_Progress"; ObjectID = "jLN-cM-CH5"; */
+"jLN-cM-CH5.title" = "_Progress";
+
+/* Class = "NSTextFieldCell"; title = "KB/s"; ObjectID = "jvC-It-65D"; */
+"jvC-It-65D.title" = "KB/s";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "kAr-PP-IhD"; */
+"kAr-PP-IhD.title" = "Text Cell";
+
+/* Class = "NSTabViewItem"; label = "Baidu"; ObjectID = "kEe-ts-unb"; */
+"kEe-ts-unb.label" = "Baidu";
+
+/* Class = "NSMenuItem"; title = "Info"; ObjectID = "kSC-ph-VpU"; */
+"kSC-ph-VpU.title" = "Info";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "l33-ka-dsB"; */
+"l33-ka-dsB.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Other"; ObjectID = "lPT-Wt-gHe"; */
+"lPT-Wt-gHe.title" = "Other";
+
+/* Class = "NSMenuItem"; title = "Set Servers"; ObjectID = "lU5-c6-Xxy"; */
+"lU5-c6-Xxy.title" = "Set Servers";
+
+/* Class = "NSMenuItem"; title = "Show In Finder"; ObjectID = "leU-hm-MKR"; */
+"leU-hm-MKR.title" = "Show In Finder";
+
+/* Class = "NSTableColumn"; headerCell.title = "option"; ObjectID = "lhe-rI-o1j"; */
+"lhe-rI-o1j.headerCell.title" = "option";
+
+/* Class = "NSTextFieldCell"; title = "Conf File"; ObjectID = "llH-oL-Oqi"; */
+"llH-oL-Oqi.title" = "Conf File";
+
+/* Class = "NSTableColumn"; headerCell.title = "peerid"; ObjectID = "mM0-pJ-5GN"; */
+"mM0-pJ-5GN.headerCell.title" = "peerid";
+
+/* Class = "NSTextFieldCell"; title = "Download files save in:"; ObjectID = "nWZ-De-EOU"; */
+"nWZ-De-EOU.title" = "Download files save in:";
+
+/* Class = "NSTextFieldCell"; title = "Download:"; ObjectID = "nbS-Xb-VYk"; */
+"nbS-Xb-VYk.title" = "Download:";
+
+/* Class = "NSTextFieldCell"; title = "ws://"; ObjectID = "nsv-3l-Piw"; */
+"nsv-3l-Piw.title" = "ws://";
+
+/* Class = "NSTabViewItem"; label = "Item 3"; ObjectID = "o3S-EZ-fM2"; */
+"o3S-EZ-fM2.label" = "Item 3";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "oO8-U9-kKl"; */
+"oO8-U9-kKl.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "oTD-fH-dLn"; */
+"oTD-fH-dLn.title" = "Table View Cell";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "ogH-FW-xkq"; */
+"ogH-FW-xkq.title" = "Text Cell";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "p7g-ye-EvL"; */
+"p7g-ye-EvL.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "☜"; ObjectID = "pCg-vJ-T6l"; */
+"pCg-vJ-T6l.title" = "☜";
+
+/* Class = "NSMenuItem"; title = "Unpause All"; ObjectID = "pRn-oF-KWn"; */
+"pRn-oF-KWn.title" = "Unpause All";
+
+/* Class = "NSButtonCell"; title = "Logout"; ObjectID = "pZK-D6-28R"; */
+"pZK-D6-28R.title" = "Logout";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
+"pa3-QI-u2k.title" = "Delete";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "localhost"; ObjectID = "paS-TA-gcn"; */
+"paS-TA-gcn.ibShadowedIsNilPlaceholder" = "localhost";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "pkc-1U-noL"; */
+"pkc-1U-noL.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Unpause All"; ObjectID = "puJ-mb-eTT"; */
+"puJ-mb-eTT.title" = "Unpause All";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qra-wX-At3"; */
+"qra-wX-At3.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "Secret Token:"; ObjectID = "qy8-qe-lfn"; */
+"qy8-qe-lfn.title" = "Secret Token:";
+
+/* Class = "NSTabViewItem"; label = "Item 2"; ObjectID = "r9c-TP-JYx"; */
+"r9c-TP-JYx.label" = "Item 2";
+
+/* Class = "NSButtonCell"; title = "Continue"; ObjectID = "rAS-Kq-5vx"; */
+"rAS-Kq-5vx.title" = "Continue";
+
+/* Class = "NSTableColumn"; headerCell.title = "received json"; ObjectID = "rUf-kL-h7r"; */
+"rUf-kL-h7r.headerCell.title" = "received json";
+
+/* Class = "NSTextFieldCell"; title = "Overall speed limit:"; ObjectID = "rW6-Fw-h2X"; */
+"rW6-Fw-h2X.title" = "Overall speed limit:";
+
+/* Class = "NSSegmentedCell"; rXF-7U-uIU.ibShadowedLabels[0] = "Status"; ObjectID = "rXF-7U-uIU"; */
+"rXF-7U-uIU.ibShadowedLabels[0]" = "Status";
+
+/* Class = "NSSegmentedCell"; rXF-7U-uIU.ibShadowedLabels[1] = "Options"; ObjectID = "rXF-7U-uIU"; */
+"rXF-7U-uIU.ibShadowedLabels[1]" = "Options";
+
+/* Class = "NSSegmentedCell"; rXF-7U-uIU.ibShadowedLabels[2] = "Files"; ObjectID = "rXF-7U-uIU"; */
+"rXF-7U-uIU.ibShadowedLabels[2]" = "Files";
+
+/* Class = "NSTabViewItem"; label = "Options"; ObjectID = "rmX-FY-cCW"; */
+"rmX-FY-cCW.label" = "Options";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "sJE-A4-L4w"; */
+"sJE-A4-L4w.label" = "General";
+
+/* Class = "NSTextFieldCell"; placeholderString = "localhost"; ObjectID = "sgA-L8-pi4"; */
+"sgA-L8-pi4.placeholderString" = "localhost";
+
+/* Class = "NSTableColumn"; headerCell.title = "value"; ObjectID = "tD4-aB-gLu"; */
+"tD4-aB-gLu.headerCell.title" = "value";
+
+/* Class = "NSTabViewItem"; label = "View"; ObjectID = "tXA-Cx-07b"; */
+"tXA-Cx-07b.label" = "View";
+
+/* Class = "NSMenu"; title = "Sort"; ObjectID = "tpq-NI-Id6"; */
+"tpq-NI-Id6.title" = "Sort";
+
+/* Class = "NSMenu"; title = "Aria2D"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "Aria2D";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
+"uRl-iY-unG.title" = "Cut";
+
+/* Class = "NSTextFieldCell"; placeholderString = "2333"; ObjectID = "w82-NS-t7A"; */
+"w82-NS-t7A.placeholderString" = "2333";
+
+/* Class = "NSTextFieldCell"; title = ":"; ObjectID = "wIF-VN-KC4"; */
+"wIF-VN-KC4.title" = ":";
+
+/* Class = "NSTextFieldCell"; title = "KB/s"; ObjectID = "wIO-Kh-XaN"; */
+"wIO-Kh-XaN.title" = "KB/s";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "wYa-kZ-t1n"; */
+"wYa-kZ-t1n.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Status"; ObjectID = "wgc-as-BQd"; */
+"wgc-as-BQd.title" = "Status";
+
+/* Class = "NSMenuItem"; title = "Previous Tag"; ObjectID = "wj5-Cd-TeC"; */
+"wj5-Cd-TeC.title" = "Previous Tag";
+
+/* Class = "NSTabViewItem"; label = "setPCS"; ObjectID = "wl2-Wt-IfD"; */
+"wl2-Wt-IfD.label" = "setPCS";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "Help";
+
+/* Class = "NSTextFieldCell"; title = "*PCS API Key:"; ObjectID = "x3l-fA-fZt"; */
+"x3l-fA-fZt.title" = "*PCS API Key:";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU"; */
+"x3v-GG-iWU.title" = "Copy";
+
+/* Class = "NSTabViewItem"; label = "Files"; ObjectID = "x6h-xk-9nw"; */
+"x6h-xk-9nw.label" = "Files";
+
+/* Class = "NSMenuItem"; title = "Other"; ObjectID = "xJa-l1-Cls"; */
+"xJa-l1-Cls.title" = "Other";
+
+/* Class = "NSButtonCell"; title = "Torrent"; ObjectID = "xXY-RQ-9jK"; */
+"xXY-RQ-9jK.title" = "Torrent";
+
+/* Class = "NSButtonCell"; title = "Change"; ObjectID = "yPR-pW-dgZ"; */
+"yPR-pW-dgZ.title" = "Change";
+
+/* Class = "NSTableColumn"; headerCell.title = "success"; ObjectID = "ymg-Ci-nhK"; */
+"ymg-Ci-nhK.headerCell.title" = "success";
+
+/* Class = "NSMenuItem"; title = "Default"; ObjectID = "z1W-PU-6xL"; */
+"z1W-PU-6xL.title" = "Default";
+
+/* Class = "NSTextFieldCell"; title = "You selected task > 5, maybe some problems."; ObjectID = "ztr-DH-aOW"; */
+"ztr-DH-aOW.title" = "You selected task > 5, maybe some problems.";

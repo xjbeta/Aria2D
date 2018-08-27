@@ -174,7 +174,11 @@ class Aria2Websocket: NSObject {
                 let log = WebSocketLog()
                 log.method = method
                 log.sendJSON = "\(dic)"
-                log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
+                if let str = String(data: data, encoding: .utf8),
+                    let shrotData = Aria2Websocket.shared.clearUrls(str),
+                    let shortStr = String(data: shrotData, encoding: .utf8) {
+                    log.receivedJSON =  shortStr
+                }
                 log.success = !timeOut
                 log.time = time
                 ViewControllersManager.shared.addLog(log)
@@ -215,6 +219,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         }
         Aria2.shared.getGlobalOption()
         ViewControllersManager.shared.showHUD(.connected)
+        NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
     }
     
     func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
@@ -265,5 +270,82 @@ extension Aria2Websocket: SRWebSocketDelegate {
         }
     }
     
+    
+    func clearUrls(_ json: String) -> Data? {
+        let markStr = "\"uris\":"
+        var json = json
+        
+        if json.contains(markStr) {
+            let sIndex = json.indexes(of: "[")
+            let eIndex = json.indexes(of: "]")
+            let mIndex = json.indexes(of: markStr).map({$0.encodedOffset})
+            
+            var ranges: [Range<String.Index>] = []
+            
+            mIndex.forEach { urlIndex in
+                if let tt = sIndex.filter({ $0.encodedOffset > urlIndex }).min(),
+                    let yy = eIndex.filter({ $0.encodedOffset > tt.encodedOffset }).min() {
+                    ranges.append(json.index(after: tt) ..< yy)
+                }
+            }
+            ranges.reverse()
+            ranges.forEach {
+                json.removeSubrange($0)
+            }
+            return json.data(using: .utf8)
+        }
+        return json.data(using: .utf8)
+    }
+    
+    func clearUrls2(_ json: String) -> Data? {
+        let markStr = "\"uris\":"
+        var json = json
+        
+        if json.contains(markStr) {
+            let sIndex = json.ranges(of: "[").map({$0.upperBound})
+            let eIndex = json.ranges(of: "]").map({$0.upperBound})
+            let mIndex = json.ranges(of: markStr).map({$0.upperBound})
+            
+            var ranges: [Range<String.Index>] = []
+            
+            mIndex.forEach { urlIndex in
+                if let tt = sIndex.filter({ $0.encodedOffset > urlIndex.encodedOffset }).min(),
+                    let yy = eIndex.filter ({ $0.encodedOffset > tt.encodedOffset }).min() {
+                    ranges.append(tt ..< json.index(before: yy))
+                }
+            }
+            ranges.reverse()
+            
+            ranges.forEach {
+                json.removeSubrange($0)
+            }
+            return json.data(using: .utf8)
+        }
+        return json.data(using: .utf8)
+    }
+    
 }
 
+
+extension StringProtocol where Index == String.Index {
+    func indexes<T: StringProtocol>(of string: T, options: String.CompareOptions = []) -> [Index] {
+        var result: [Index] = []
+        var start = startIndex
+        while start < endIndex, let range = range(of: string, options: options, range: start..<endIndex) {
+            result.append(range.lowerBound)
+            start = range.lowerBound < range.upperBound ? range.upperBound : index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return result
+    }
+}
+
+
+extension String {
+    func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [Range<Index>] {
+        var ranges: [Range<Index>] = []
+        while let range = self.range(of: substring, options: options, range: (ranges.last?.upperBound ?? self.startIndex)..<self.endIndex, locale: locale) {
+            ranges.append(range)
+        }
+        return ranges
+    }
+}

@@ -32,7 +32,7 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		}
 		
 		if menuItem.action == #selector(startOrPause) {
-			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? "pause" : "unpause"
+			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? NSLocalizedString("mainMenu.pauseOrUnpausItem.pause", comment: "") : NSLocalizedString("mainMenu.pauseOrUnpausItem.unpause", comment: "")
 			return selectedRow == .downloading
 				&& selectedIndexs.count > 0
 				&& mainWindowFront
@@ -65,9 +65,9 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		
 		if menuItem.action == #selector(activateApp) {
 			if !string_check(nil).boolValue {
-				menuItem.title = "Activate Aria2D"
+				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activate", comment: "")
 			} else {
-				menuItem.title = "Activated"
+				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activated", comment: "")
 			}
 			
 //			return !_my_secret_activation_check(nil).boolValue
@@ -119,10 +119,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 	
 	@IBAction func activateApp(_ sender: Any) {
 		NotificationCenter.default.post(name: .activateApp, object: nil)
-	}
-	
-	@IBAction func checkForUpdate(_ sender: Any) {
-		DM_SUUpdater.shared().checkForUpdates(sender)
 	}
     
     @IBAction func installWithHomebrew(_ sender: Any) {

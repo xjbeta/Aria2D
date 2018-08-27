@@ -122,6 +122,15 @@ class InfoViewController: NSViewController {
                             return false
                         }
                     }
+                    
+                    // Update error in statusList
+                    if let errorCode = statusProperties.filter({
+                        $0.name == StatusObjectKey.errorCode.rawValue
+                    }).first {
+                        self.statusList.initErrorKeys("\(errorCode.newValue as? Int ?? 0)")
+                    }
+                    
+                    // Update objects in statusList
                     statusProperties.forEach {
                         if let key = StatusObjectKey(rawValue: $0.name),
 //                            "\($0.newValue)" != "\($0.oldValue)",
@@ -129,6 +138,7 @@ class InfoViewController: NSViewController {
                             self.statusList.update(key, newValue: value, in: self.statusTableView)
                         }
                     }
+                    
 
                     self.getFilesCounter += 1
                     if self.getFilesCounter == 3 {
@@ -199,20 +209,24 @@ class InfoViewController: NSViewController {
 	@IBOutlet var downloadSpeedTextField: NSTextField!
 	@IBOutlet var uploadSpeedTextField: NSTextField!
     @IBOutlet weak var segmentedControl: NSSegmentedControl!
-    var segmentedControlLabels = ["Status", "Options", "Files", "Peer", "Announces"]
+    var segmentedControlLabels = [NSLocalizedString("infoViewController.segmentedControl.0", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.1", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.2", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.3", comment: ""),
+                                  NSLocalizedString("infoViewController.segmentedControl.4", comment: "")]
     
     
     func updateSegmentedControl(_ isBittorrent: Bool) {
         func initSegmentedControl() {
             self.segmentedControl.segmentCount = 3
-            self.segmentedControl.setLabel("Status", forSegment: 0)
-            self.segmentedControl.setLabel("Options", forSegment: 1)
-            self.segmentedControl.setLabel("Files", forSegment: 2)
+            self.segmentedControl.setLabel(segmentedControlLabels[0], forSegment: 0)
+            self.segmentedControl.setLabel(segmentedControlLabels[1], forSegment: 1)
+            self.segmentedControl.setLabel(segmentedControlLabels[2], forSegment: 2)
             
             if isBittorrent {
                 self.segmentedControl.segmentCount = 5
-                self.segmentedControl.setLabel("Peer", forSegment: 3)
-                self.segmentedControl.setLabel("Announces", forSegment: 4)
+                self.segmentedControl.setLabel(segmentedControlLabels[3], forSegment: 3)
+                self.segmentedControl.setLabel(segmentedControlLabels[4], forSegment: 4)
             }
         }
         
@@ -223,8 +237,8 @@ class InfoViewController: NSViewController {
                     return
                 }
                 self.segmentedControl.segmentCount = 5
-                self.segmentedControl.setLabel("Peer", forSegment: 3)
-                self.segmentedControl.setLabel("Announces", forSegment: 4)
+                self.segmentedControl.setLabel(self.segmentedControlLabels[3], forSegment: 3)
+                self.segmentedControl.setLabel(self.segmentedControlLabels[4], forSegment: 4)
             } else {
                 guard self.segmentedControl.segmentCount == 5 else {
                     initSegmentedControl()
@@ -651,7 +665,9 @@ enum StatusObjectKey: String {
     case uploadLength = "uploadLength"
     case dir = "dir"
     case bitfield = "bitfield"
-    case error = ""
+    case errorCode = "errorCode"
+    case errorMessage = "errorMessage"
+    case none = ""
     //        init?(raw: String) {
     //            self.init(rawValue: raw)
     //        }
@@ -673,7 +689,7 @@ class StatusObject {
             return 42
         case .space:
             return 10
-        case .error:
+        case .none:
             return 0
         default:
             return 21
@@ -690,7 +706,7 @@ class StatusObject {
 extension Array where Element: StatusObject {
     mutating func initial(_ obj: Aria2Object) {
         self.removeAll()
-        if let contents = [StatusObject(.gid, value: obj.gid),
+        if var contents = [StatusObject(.gid, value: obj.gid),
 //                           StatusObject(.bitfield, value: obj.bitfield),
                            StatusObject(.status, value: obj.status.string()),
                            StatusObject(.connections, value: "\(obj.connections)"),
@@ -699,8 +715,13 @@ extension Array where Element: StatusObject {
                            StatusObject(.space, value: ""),
                            StatusObject(.totalLength, value: obj.totalLength.ByteFileFormatter()),
                            StatusObject(.completedLength, value: obj.completedLength.ByteFileFormatter()),
-                           StatusObject(.uploadLength, value: obj.uploadLength.ByteFileFormatter()),
-                           StatusObject(.dir, value: obj.dir)] as? Array<Element> {
+                           StatusObject(.uploadLength, value: obj.uploadLength.ByteFileFormatter())] as? Array<Element> {
+            if obj.errorCode != 0 {
+                contents.append(contentsOf: [
+                    StatusObject(.space, value: ""),
+                    StatusObject(.errorCode, value: "\(obj.errorCode)"),
+                    StatusObject(.errorMessage, value: obj.errorMessage)] as? Array<Element> ?? [])
+            }
             self = contents
         }
     }
@@ -710,9 +731,9 @@ extension Array where Element: StatusObject {
         var value: String?
         
         switch key {
-        case .gid, .dir, .bitfield, .numPieces:
+        case .gid, .dir, .bitfield, .numPieces, .errorMessage:
             value = newValue as? String
-        case .connections:
+        case .connections, .errorCode:
             value = "\(newValue as? Int ?? 0)"
         case .status:
             if let i = newValue as? Int {
@@ -720,8 +741,7 @@ extension Array where Element: StatusObject {
             }
         case .pieceLength, .totalLength, .completedLength, .uploadLength:
             value = (newValue as? Int64)?.ByteFileFormatter()
-            //                case .error:
-        //                    break
+//            case .errorMessage, .errorCode
         default:
             break
         }
@@ -730,6 +750,22 @@ extension Array where Element: StatusObject {
             tableView.beginUpdates()
             tableView.reloadData(forRowIndexes: IndexSet(integer: index), columnIndexes: IndexSet([0]))
             tableView.endUpdates()
+        }
+    }
+    
+    mutating func initErrorKeys(_ errorCode: String) {
+        let errors: [StatusObjectKey] = [.space, .errorCode, .errorMessage]
+        if errorCode == "0" {
+            while errors.contains(self.last?.key ?? .none) {
+                self.removeLast()
+            }
+        } else {
+            if !self.map({ $0.key }).contains(where: errors.contains) {
+                self.append(contentsOf: [
+                    StatusObject(.space, value: ""),
+                    StatusObject(.errorCode, value: ""),
+                    StatusObject(.errorMessage, value: "")] as? Array<Element> ?? [])
+            }
         }
     }
 }

@@ -56,9 +56,7 @@ class GeneralViewController: NSViewController {
 		}
 	}
 	
-	lazy var openPanel: NSOpenPanel = {
-		return NSOpenPanel()
-	}()
+	lazy var openPanel = NSOpenPanel()
 
 	struct Options {
 		var maxConcurrentDownloads: Int {

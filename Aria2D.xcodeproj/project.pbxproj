@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		010B59181D3CF66600550A43 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B59171D3CF66600550A43 /* MainMenu.swift */; };
-		010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 010CCDCD209EB67600F6B45B /* libkevlar.a */; };
 		010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */; };
 		010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */; };
 		010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */; };
@@ -57,7 +56,7 @@
 		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
 		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
 		016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */; };
-		016C403C1D9E8D2800EB27A2 /* TaskUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */; };
+		016C403C1D9E8D2800EB27A2 /* DownloadUrlTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */; };
 		016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */; };
 		016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */; };
 		016C98F91DB1C0A000955C09 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C98F81DB1C0A000955C09 /* HUD.swift */; };
@@ -80,9 +79,14 @@
 		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01903A351D5CB6E0008A3E6E /* WebKit.framework */; };
+		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
+		01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */; };
+		01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350B212871F700E5C88C /* Aria2Methods.swift */; };
+		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
+		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
 		01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
@@ -94,6 +98,7 @@
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
 		01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
+		01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F6C4F921339F830009672A /* libkevlar.a */; };
 		01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,8 +136,6 @@
 
 /* Begin PBXFileReference section */
 		010B59171D3CF66600550A43 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		010CCDCC209EB67600F6B45B /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
-		010CCDCD209EB67600F6B45B /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
 		010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableView.swift; sourceTree = "<group>"; };
 		010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableCellView.swift; sourceTree = "<group>"; };
@@ -181,7 +184,7 @@
 		01610DE41EDFF7B200BAEF02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
 		016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedJSONTableCellView.swift; sourceTree = "<group>"; };
-		016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskUrl.swift; sourceTree = "<group>"; };
+		016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUrlTextField.swift; sourceTree = "<group>"; };
 		016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2DWindow.swift; sourceTree = "<group>"; };
 		016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2D.swift; sourceTree = "<group>"; };
 		016C98F81DB1C0A000955C09 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
@@ -205,9 +208,16 @@
 		018E896D1D350075000C71B0 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		01903A351D5CB6E0008A3E6E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ErrorCode.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionCellView.swift; sourceTree = "<group>"; };
+		01A5350B212871F700E5C88C /* Aria2Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2Methods.swift; sourceTree = "<group>"; };
+		01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionTooltip.swift; sourceTree = "<group>"; };
+		01A53518212943F500E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		01A5351C2129512000E5C88C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListMenu.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleClickTextField.swift; sourceTree = "<group>"; };
@@ -219,6 +229,8 @@
 		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
 		01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCellView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
+		01F6C4F921339F830009672A /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
+		01F6C4FA21339F840009672A /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
 		01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduDlinksProgress.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,12 +239,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */,
 				010F0EE020F8582C00F33553 /* Realm.framework in Frameworks */,
 				010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */,
 				010F0EE220F8582C00F33553 /* RealmSwift.framework in Frameworks */,
 				010F0EDA20F8582C00F33553 /* SwiftHTTP.framework in Frameworks */,
 				01903A361D5CB6E0008A3E6E /* WebKit.framework in Frameworks */,
-				010CCDCE209EB67600F6B45B /* libkevlar.a in Frameworks */,
 				010F0EDC20F8582C00F33553 /* SocketRocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +271,8 @@
 		012624611ED174AC007FF8AA /* Kevlar */ = {
 			isa = PBXGroup;
 			children = (
-				010CCDCC209EB67600F6B45B /* DMKevlarApplication.h */,
-				010CCDCD209EB67600F6B45B /* libkevlar.a */,
+				01F6C4FA21339F840009672A /* DMKevlarApplication.h */,
+				01F6C4F921339F830009672A /* libkevlar.a */,
 			);
 			path = Kevlar;
 			sourceTree = "<group>";
@@ -271,7 +283,10 @@
 				0115D4341E06AD99003EBFCD /* Aria2.swift */,
 				012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */,
 				016A3E371E8A9FA100CC1999 /* Aria2Option.swift */,
+				01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */,
+				01A5350B212871F700E5C88C /* Aria2Methods.swift */,
 				018E895F1D34FFA8000C71B0 /* Aria2c.swift */,
+				019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */,
 			);
 			path = Aria2;
 			sourceTree = "<group>";
@@ -319,52 +334,36 @@
 		0147EDBF1D21FAD800FB4324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
-				0147EDD51D220BED00FB4324 /* LeftSidebar */,
-				0182E60C1EAEE90000E08454 /* Log */,
-				01713BD71D9BA998000240A2 /* NewTask */,
-				018E89721D350079000C71B0 /* Preferences */,
-				01EB1CBB1D61FC1D00F2925F /* RightDownloadList */,
-				016FDC781E7B9BD600E01B35 /* InfoView */,
-				016C98F81DB1C0A000955C09 /* HUD.swift */,
 				0147EDC61D21FAD800FB4324 /* Main.storyboard */,
-				010B59171D3CF66600550A43 /* MainMenu.swift */,
-				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
-				013817661D238E0100E0F926 /* MainWindowController.swift */,
 				018E89611D34FFB1000C71B0 /* ViewControllersManager.swift */,
+				018E89721D350079000C71B0 /* Preferences */,
+				019BFF5E2125D90A00E715CC /* MainWindow */,
+				0147EDD51D220BED00FB4324 /* Sidebar */,
+				01EB1CBB1D61FC1D00F2925F /* DownloadList */,
+				01713BD71D9BA998000240A2 /* NewTask */,
+				0182E60C1EAEE90000E08454 /* Log */,
+				016FDC781E7B9BD600E01B35 /* InfoView */,
+				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0147EDD51D220BED00FB4324 /* LeftSidebar */ = {
+		0147EDD51D220BED00FB4324 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
-				010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */,
-				010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */,
 				010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */,
+				010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */,
+				010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */,
 			);
-			path = LeftSidebar;
-			sourceTree = "<group>";
-		};
-		0147EDE01D2381F100FB4324 /* Downloads */ = {
-			isa = PBXGroup;
-			children = (
-				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
-				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
-				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
-				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
-				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
-				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
-				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
-				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
-			);
-			path = Downloads;
+			path = Sidebar;
 			sourceTree = "<group>";
 		};
 		0165AF611D963CDF00469601 /* Aria2D */ = {
 			isa = PBXGroup;
 			children = (
 				018E892A1D34FEB7000C71B0 /* Resources */,
+				018E89541D34FF60000C71B0 /* Data */,
+				012C3AEB1E10102C00ABFE4C /* Aria2 */,
 				018E89471D34FF48000C71B0 /* Source */,
 				0147EDBF1D21FAD800FB4324 /* Views */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
@@ -375,8 +374,8 @@
 		016C405A1DA27C6200EB27A2 /* AboutAria2D */ = {
 			isa = PBXGroup;
 			children = (
-				016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */,
 				016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */,
+				016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */,
 			);
 			path = AboutAria2D;
 			sourceTree = "<group>";
@@ -385,11 +384,11 @@
 			isa = PBXGroup;
 			children = (
 				012CBD701F6CC56700EFD1D4 /* StatusView */,
+				012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */,
+				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
+				012CBD711F6CC57E00EFD1D4 /* InfoView.swift */,
 				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
 				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
-				012CBD711F6CC57E00EFD1D4 /* InfoView.swift */,
-				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
-				012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */,
 				012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */,
 			);
 			path = InfoView;
@@ -399,7 +398,8 @@
 			isa = PBXGroup;
 			children = (
 				01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */,
-				016C403B1D9E8D2800EB27A2 /* TaskUrl.swift */,
+				016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */,
+				01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */,
 			);
 			path = NewTask;
 			sourceTree = "<group>";
@@ -407,12 +407,11 @@
 		01789B1C1D9D207E00A5B789 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				017E88301D83A720000412DA /* BaiduLogin */,
-				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
-				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
-				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
-				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
 				018E896D1D350075000C71B0 /* GeneralViewController.swift */,
+				013ABB9F1E51B305008D370D /* SetServersViewController.swift */,
+				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
+				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
+				017E88301D83A720000412DA /* BaiduLogin */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -430,8 +429,8 @@
 		0182E60C1EAEE90000E08454 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
 				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
+				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
 				016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */,
 			);
 			path = Log;
@@ -443,6 +442,7 @@
 				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
 				0147EDC91D21FAD800FB4324 /* Info.plist */,
+				01A5351D2129512000E5C88C /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -450,8 +450,6 @@
 		018E89471D34FF48000C71B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				012C3AEB1E10102C00ABFE4C /* Aria2 */,
-				018E89541D34FF60000C71B0 /* Data */,
 				0115D42D1E04E346003EBFCD /* Extensions */,
 				012C3AEC1E10104600ABFE4C /* Other */,
 				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
@@ -477,21 +475,48 @@
 		018E89721D350079000C71B0 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				01789B1C1D9D207E00A5B789 /* Views */,
-				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
 				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
+				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
+				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
+				01789B1C1D9D207E00A5B789 /* Views */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
 		};
-		01EB1CBB1D61FC1D00F2925F /* RightDownloadList */ = {
+		019BFF5E2125D90A00E715CC /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
-				0147EDE01D2381F100FB4324 /* Downloads */,
-				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
-				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
+				013817661D238E0100E0F926 /* MainWindowController.swift */,
+				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
+				010B59171D3CF66600550A43 /* MainMenu.swift */,
+				016C98F81DB1C0A000955C09 /* HUD.swift */,
 			);
-			path = RightDownloadList;
+			path = MainWindow;
+			sourceTree = "<group>";
+		};
+		019BFF5F2125D95700E715CC /* DownloadsTableView */ = {
+			isa = PBXGroup;
+			children = (
+				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
+				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
+				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
+				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
+			);
+			path = DownloadsTableView;
+			sourceTree = "<group>";
+		};
+		01EB1CBB1D61FC1D00F2925F /* DownloadList */ = {
+			isa = PBXGroup;
+			children = (
+				019BFF5F2125D95700E715CC /* DownloadsTableView */,
+				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
+				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
+				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
+				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
+				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
+				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
+			);
+			path = DownloadList;
 			sourceTree = "<group>";
 		};
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
@@ -524,6 +549,7 @@
 				0147EDBB1D21FAD800FB4324 /* Resources */,
 				01D82A141F145E59003754E4 /* Copy Files */,
 				010F0ED920F83B4100F33553 /* Embed Frameworks */,
+				019BFF5C2124838E00E715CC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -573,6 +599,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 0147EDB41D21FAD800FB4324;
 			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
@@ -589,6 +616,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
@@ -597,6 +625,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		019BFF5C2124838E00E715CC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nBUILD_NUMBER=`git rev-parse --short HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NUMBER\" \"${TARGET_BUILD_DIR}\"/\"${INFOPLIST_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0147EDB91D21FAD800FB4324 /* Sources */ = {
@@ -617,7 +665,7 @@
 				018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */,
 				0115D4331E04F09F003EBFCD /* SubString.swift in Sources */,
 				01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */,
-				016C403C1D9E8D2800EB27A2 /* TaskUrl.swift in Sources */,
+				016C403C1D9E8D2800EB27A2 /* DownloadUrlTextField.swift in Sources */,
 				01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */,
 				012CBD761F6CC57F00EFD1D4 /* InfoWindowController.swift in Sources */,
 				0115D4311E04E423003EBFCD /* Color.swift in Sources */,
@@ -641,6 +689,7 @@
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
+				019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */,
 				012CBD751F6CC57F00EFD1D4 /* InfoView.swift in Sources */,
 				016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */,
 				010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */,
@@ -657,6 +706,8 @@
 				013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */,
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
 				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
+				01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */,
+				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
 				018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */,
 				0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */,
@@ -667,6 +718,7 @@
 				01EB1CB61D60971600F2925F /* Baidu.swift in Sources */,
 				012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
+				01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */,
 				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,
 				01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */,
 				012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */,
@@ -681,9 +733,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				0147EDC71D21FAD800FB4324 /* Base */,
+				01A53518212943F500E5C88C /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			path = .;
+			sourceTree = "<group>";
+		};
+		01A5351D2129512000E5C88C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01A5351C2129512000E5C88C /* en */,
+				01A5351E2129512200E5C88C /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -694,6 +756,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -737,7 +800,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -751,6 +814,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -788,7 +852,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
