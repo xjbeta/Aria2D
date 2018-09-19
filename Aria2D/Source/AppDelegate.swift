@@ -109,17 +109,17 @@ extension AppDelegate: DevMateKitDelegate {
         return mainWindowController.window!
 	}
 	
-	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
+    @objc func activationController(_ controller: DMActivationController, parentWindowFor mode: DMActivationMode) -> NSWindow? {
 		return mainWindowController.window
 	}
-	
-	@objc func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
-		ioProposedMode.pointee = .sheet
-		handlerSetter { _ in
-			ViewControllersManager.shared.showAria2cAlert()
-		}
-		return true
-	}
+    
+    @objc private func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
+        ioProposedMode.pointee = .sheet
+        handlerSetter { _ in
+            ViewControllersManager.shared.showAria2cAlert()
+        }
+        return true
+    }
 	
 	@objc func activateApp() {
 		// Swift does't work with macros, so check our Examples project on GitHub (https://github.com/DevMate/DevMateKit)
