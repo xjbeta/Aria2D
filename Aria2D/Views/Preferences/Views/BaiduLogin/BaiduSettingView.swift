@@ -25,10 +25,10 @@ class BaiduSettingView: NSViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        Baidu.shared.logout({
+        Baidu.shared.logout().done {
             self.initUserInfo()
-        }) { _ in
-            self.setTabView(.error)
+            }.catch { _ in
+                self.setTabView(.error)
         }
     }
     
@@ -48,24 +48,20 @@ class BaiduSettingView: NSViewController {
     
 	func initUserInfo() {
         setTabView(.progress)
-        Baidu.shared.checkBaiduState {
-            switch $0 {
-            case .success:
-                Baidu.shared.getUserInfo ({ name, capacity, capacityPer  in
-                    DispatchQueue.main.async {
-                        self.userName.stringValue = name
-                        self.capacityInfo.stringValue = capacity
-                        self.capacityProgressIndicator.doubleValue = capacityPer
-                        self.setTabView(.info)
-                    }
-                }) { _ in
+        Baidu.shared.checkLogin().then { _ in
+            Baidu.shared.getUserInfo()
+            }.done(on: .main) { info in
+                self.userName.stringValue = info.username
+                self.capacityInfo.stringValue = "\(Int64(info.quota.used).ByteFileFormatter())/\(Int64(info.quota.total).ByteFileFormatter())"
+                self.capacityProgressIndicator.doubleValue = info.quota.total == 0 ? 0 : Double(info.quota.used)/Double(info.quota.total)
+                self.setTabView(.info)
+            }.catch { error in
+                switch error {
+                case BaiduHTTPError.shouldLogin:
+                    self.setTabView(.login)
+                default:
                     self.setTabView(.error)
                 }
-            case .error:
-                self.setTabView(.error)
-            default:
-                self.setTabView(.login)
-            }
         }
 	}
 	

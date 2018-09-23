@@ -9,7 +9,6 @@
 import Cocoa
 import RealmSwift
 
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
@@ -59,7 +58,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
         Aria2.shared.aria2c.autoStart()
-        Baidu.shared.checkTokenEffective()
+        Baidu.shared.checkLogin().done { _ in
+            }.catch {
+                print($0)
+        }
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

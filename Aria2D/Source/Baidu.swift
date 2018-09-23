@@ -7,279 +7,334 @@
 //
 
 import Cocoa
-import SwiftHTTP
+import PromiseKit
+import Alamofire
 
 class Baidu: NSObject {
 	
 	static let shared = Baidu()
 	private override init() {
-        HTTP.globalRequest {
-            $0.timeoutInterval = 2
-            $0.addValue("netdisk", forHTTPHeaderField: "User-Agent")
-        }
+        var headers = Alamofire.SessionManager.defaultHTTPHeaders
+        headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:63.0) Gecko/20100101 Firefox/63.0"
+        let baiduConf = URLSessionConfiguration.default
+        baiduConf.httpAdditionalHeaders = headers
+        baiduHTTP = Alamofire.SessionManager(configuration: baiduConf)
+        
+        
+        let privateConf = URLSessionConfiguration.default
+        privateConf.httpAdditionalHeaders = headers
+        privateConf.httpCookieStorage = nil
+        privateHTTP = Alamofire.SessionManager(configuration: privateConf)
 	}
-    
-    //https://pcs.baidu.com/rest/2.0/pcs/manage?method=listhost
-    //https://pcs.baidu.com/rest/2.0/pcs/file?app_id=250528&method=locateupload
-    
-    let cdnList = ["https://pcs.baidu.com",
-                   "https://www.baidupcs.com",
-                   "https://c.pcs.baidu.com",
-                   "https://c3.pcs.baidu.com",
-                   "https://d.pcs.baidu.com",
-                   "https://d3.pcs.baidu.com",
-                   "https://nj.baidupcs.com",
-                   "https://bj.baidupcs.com",
-                   "https://qd.baidupcs.com",
-                   "https://ipv6.baidupcs.com"]
+    let baiduHTTP: SessionManager
+    let privateHTTP: SessionManager
+
+	let mainPath = "/"
 	
-    var isTokenEffective = false {
+    var isLogin = false {
         didSet {
-            if isTokenEffective != oldValue {
+            if isLogin {
+                getBdStoken().done { _ in }.catch { _ in }
+            } else {
+                bdStoken = ""
+            }
+            
+            if isLogin != oldValue {
                 NotificationCenter.default.post(name: .baiduStatusUpdated, object: nil)
             }
         }
     }
-	
-	@objc dynamic var mainPath: String = {
-		return Preferences.shared.baiduFolder == "" ? "/" : Preferences.shared.baiduFolder
-	}()
-	
-	var selectedPath = Preferences.shared.baiduFolder == "" ? "/" : Preferences.shared.baiduFolder {
+    
+	var selectedPath = "/" {
 		didSet {
-			getFileList(forPath: selectedPath)
+			getFileList(forPath: selectedPath).done { _ in }.catch { _ in }
 		}
 	}
 
-	func updateCookie(_ block: @escaping () -> Void) {
-		HTTP.GET("https://pan.baidu.com") { _ in
-			block()
-		}
-	}
-	
-    func getUserInfo(_ block: ((_ userName: String, _ capacityInfo: String, _ capacityPer: Double) -> Void)?,
-                     _ error: ((_ error: Error) -> Void)?) {
-		HTTP.GET("https://pan.baidu.com/wap/home") {
-			let str = $0.text ?? ""
-			let userName = str.subString(from: "<h3 class=\"name\">", to: "</h3>")
-			let capacityInfo = str.subString(from: "<p class=\"capacity\">", to: "</p>").replacingOccurrences(of: "\n", with: "")
-            let params = ["method": "info",
-                          "access_token": Preferences.shared.baiduToken]
-            if $0.error != nil {
-                error?($0.error!)
-            }
-            HTTP.GET("https://pcs.baidu.com/rest/2.0/pcs/quota?", parameters: params) {
-                if $0.error == nil, let info = $0.data.decode(PCSInfo.self) {
-                    block?(userName, capacityInfo, Double(info.used/info.quota))
-                } else {
-                    error?($0.error!)
-                }
-            }
-		}
-	}
+    var bdStoken = ""
     
-    func checkTokenEffective() {
-        isTokenEffective = false
-        checkToken {
-            if $0 {
-                self.checkAppsFolder {
-                    self.isTokenEffective = $0
-                }
+	func updateCookie() -> Promise<Void> {
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/disk/home")
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    resolver.fulfill(())
             }
         }
-    }
-	
-    func logout(_ block: (() -> Void)?,
-                _ error: ((_ error: Error) -> Void)?) {
-		HTTP.GET("https://wappass.baidu.com/passport?logout") {
-            if $0.error != nil {
-                error?($0.error!)
-            }
-            Preferences.shared.baiduToken = ""
-            Preferences.shared.baiduFolder = ""
-			block?()
-		}
 	}
 	
-	//MARK: - GetFileList
-	func getFileList(forPath path: String) {
-		ViewControllersManager.shared.waiting = true
-        HTTP.GET("https://pan.baidu.com/api/list", parameters: ["dir": path]) {
-        
-			if let json = $0.data.decode(PCSFileList.self) {
-				if json.errno == 0 {
-					DataManager.shared.setData(forBaidu: json.list, forPath: path)
-				} else {
-					self.selectedPath = self.mainPath
-				}
-			}
-			ViewControllersManager.shared.waiting = false
-		}
-	}
-	
-    enum baiduState {
-        case shouldLogin, tokenFailure, folderFailure, error, success
+    struct BaiduUserInfo: Decodable {
+        let username: String
+        let quota: Quota
+        struct Quota: Decodable {
+            let total: Int
+            let used: Int
+        }
     }
     
-    func checkBaiduState(_ block: ((_ state: baiduState) -> Void)?) {
-        Baidu.shared.checkLogin({
-            if $0 {
-                Baidu.shared.checkToken {
-                    if $0 {
-                        Baidu.shared.checkAppsFolder {
-                            if $0 {
-                                self.isTokenEffective = true
-                                block?(.success)
-                            } else {
-                                Preferences.shared.baiduFolder = ""
-                                Baidu.shared.getAppsFolderPath {
-                                    if $0 {
-                                        self.isTokenEffective = true
-                                        block?(.success)
-                                    } else {
-                                        self.isTokenEffective = false
-                                        block?(.folderFailure)
-                                    }
-                                }
-                            }
+    func getUserInfo() -> Promise<BaiduUserInfo> {
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/wap/home")
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    let str = $0.text ?? ""
+                    struct Result: Decodable {
+                        let username: String
+                        let quota: Quota
+                        struct Quota: Decodable {
+                            let total: Int
+                            let used: Int
                         }
+                    }
+                    if let re = str.subString(from: "window.yunData = ", to: ";\n").data(using: .utf8)?.decode(BaiduUserInfo.self) {
+                        resolver.fulfill(re)
                     } else {
-                        self.isTokenEffective = false
-                        block?(.tokenFailure)
+                        resolver.fulfill(BaiduUserInfo(username: "", quota: Baidu.BaiduUserInfo.Quota(total: 0, used: 0)))
                     }
-                }
-            } else {
-                self.isTokenEffective = false
-                block?(.shouldLogin)
             }
-        }) { _ in
-            self.isTokenEffective = false
-            block?(.error)
         }
-    }
-}
-//MARK: PCS
-extension Baidu {
-	//MARK: - GetDownloadUrl  PCS
+	}
+    
 	
-    func checkLogin(_ block: ((_ isLogin: Bool) -> Void)?,
-                    _ error: ((_ error: Error) -> Void)?) {
-        HTTP.GET("https://pan.baidu.com/api/quota") {
-            if $0.error != nil {
-                error?($0.error!)
+    func logout() -> Promise<Void> {
+        return Promise { resolver in
+            baiduHTTP.request("https://wappass.baidu.com/passport?logout")
+                .validate()
+                .response { _ in
+                    resolver.fulfill(())
             }
-            if let errno = $0.data.decode(PCSErrno.self)?.errno {
-                block?(errno == 0)
-            } else {
-                block?(false)
+        }
+	}
+    
+    func checkLogin() -> Promise<Bool> {
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/api/quota")
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    
+                    guard let errno = $0.data?.decode(PCSErrno.self)?.errno, errno == 0 else {
+                        self.isLogin = false
+                        resolver.reject(BaiduHTTPError.shouldLogin)
+                        return
+                    }
+                    self.isLogin = true
+                    resolver.fulfill(self.isLogin)
             }
         }
     }
     
-	func checkToken(_ block: ((_ t: Bool) -> Void)?) {
-		let params = ["method": "info",
-		              "access_token": Preferences.shared.baiduToken]
-        HTTP.GET("https://pcs.baidu.com/rest/2.0/pcs/quota?", parameters: params) {
-			if let error = $0.data.decode(PCSError.self) {
-                block?(!error.isError)
-			} else {
-				block?(false)
-			}
-		}
-	}
-	
-    func delete(_ paths: [String]) {
-        struct Path: Encodable {
-            let path: String
-        }
-        
-        struct List: Encodable {
-            let list: [Path]
-        }
-        
-        if let data = try? JSONEncoder().encode(List(list: paths.map({ Path(path: $0) }))),
-            let paramStr = String(data: data, encoding: .utf8) {
-            HTTP.GET("https://pcs.baidu.com/rest/2.0/pcs/file",
-                     parameters: ["method": "delete",
-                               "access_token": "\(Preferences.shared.baiduToken)",
-                        "param": paramStr]) {
-                        if let error = $0.data.decode(PCSError.self),
-                            !error.isError {
-                            DataManager.shared.deletePCSFile(paths)
+	func getFileList(forPath path: String) -> Promise<Void> {
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/api/list", parameters: ["dir": path])
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    if let json = $0.data?.decode(PCSFileList.self) {
+                        if json.errno == 0 {
+                            DataManager.shared.setData(forBaidu: json.list, forPath: path)
+                            resolver.fulfill(())
                         } else {
-                            self.getFileList(forPath: self.selectedPath)
+                            self.selectedPath = self.mainPath
                         }
+                    }
+            }
+        }
+	}
+    
+    struct DeleteResult: Decodable {
+        let errno: Int
+        let path: String
+    }
+	
+    func delete(_ paths: [String]) -> Promise<[DeleteResult]> {
+        let p = ["filelist": "\(paths)"]
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/api/filemanager?opera=delete&web=1&channel=chunlei&web=1&bdstoken=\(bdStoken)&clienttype=0", method: .post, parameters: p)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    struct Result: Decodable {
+                        let errno: Int
+                        let info: [DeleteResult]
+                    }
+                    
+                    guard let re = $0.data?.decode(Result.self), re.errno == 0 else {
+                        resolver.reject(BaiduHTTPError.cantDelete)
+                        return
+                    }
+                    resolver.fulfill(re.info)
             }
         }
     }
     
-	func getDownloadUrls(FromPCS path: String, block: @escaping (_ dlinks: [String]) -> Void) {
-        
-        let URLString = cdnList.map {
-            $0 + "/rest/2.0/pcs/file?"
-            } + cdnList.map {
-                $0 + "/rest/2.0/pcs/stream?"
-        }
-
-        var reserved = CharacterSet.urlQueryAllowed
-        reserved.remove(charactersIn: ": #[]@!$&'()*+, ;=")
-        
-        let encodePath = path.addingPercentEncoding(withAllowedCharacters: reserved) ?? "/"
-        let params = "method=download&access_token=\(Preferences.shared.baiduToken)&path=\(encodePath)"
-		
-		let urls = URLString.map {
-			$0 + params
-		}
-		block(urls)
-	}
-
-	func getAppsFolderPath(_ block: ((_ isFinded: Bool) -> Void)?) {
-		HTTP.GET("https://pan.baidu.com/api/list?dir=/apps") {
-            let group = DispatchGroup()
-			if let json = $0.data.decode(PCSFileList.self),
-				json.errno == 0 {
-				json.list.filter {
-					$0.isdir == true
-					}.map {
-						$0.path
-				}.forEach { path in
-                    group.enter()
-                    HTTP.GET("https://pcs.baidu.com/rest/2.0/pcs/file",
-                             parameters: ["method": "list",
-                                          "access_token": "\(Preferences.shared.baiduToken)",
-                                "path": path]) {
-                                    if let error = $0.data.decode(PCSError.self),
-                                        !error.isError,
-                                        Preferences.shared.baiduFolder != path {
-                                        Preferences.shared.baiduFolder = path
-                                        self.selectedPath = path
-                                        self.mainPath = path
-                                        
-                        }
-                                    group.leave()
-					}
-				}
-                group.notify(queue: .main) {
-                    self.checkAppsFolder {
-                        block?($0)
+    func creatShareLink(_ fsIds: [Int]) -> Promise<String> {
+        let p = [
+            "fid_list": "\(fsIds)",
+            "schannel": "0",
+            "channel_list": "[]",
+            "period": "0"]
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/share/set?web=1&channel=chunlei&web=1&bdstoken=\(bdStoken)&clienttype=0", method: .post, parameters: p)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
                     }
-                }
-            } else {
-                block?(false)
+                    struct ShareResult: Decodable {
+                        let errno: Int
+                        let link: String
+                    }
+                    guard let re = $0.data?.decode(ShareResult.self),
+                        re.errno == 0 else {
+                            resolver.reject(BaiduHTTPError.shareFileError)
+                            return
+                    }
+                    resolver.fulfill(re.link)
             }
-		}
-	}
-	
-	func checkAppsFolder(_ block: @escaping (_ effective: Bool) -> Void) {
-        HTTP.GET("https://pcs.baidu.com/rest/2.0/pcs/file",
-                 parameters: ["method": "list",
-                           "access_token": "\(Preferences.shared.baiduToken)",
-                    "path": Preferences.shared.baiduFolder]) {
-			if let error = $0.data.decode(PCSError.self) {
-				block(!error.isError)
-			} else {
-				block(true)
-			}
-		}
-	}
+        }
+    }
+    
+    struct SharedLinkInfo: Decodable {
+        let uk: Int
+        let timestamp: Int
+        let shareid: Int
+        let sign: String
+    }
+    
+    func getSharedLinkInfo(_ sLink: String) -> Promise<SharedLinkInfo> {
+        return Promise { resolver in
+            privateHTTP.request(sLink)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    guard let infoData = $0.text?.subString(from: "yunData.setData(", to: ");").data(using: .utf8),
+                        let info = infoData.decode(SharedLinkInfo.self) else {
+                            resolver.reject(BaiduHTTPError.cantFindInfoInShareLink)
+                            return
+                    }
+                    resolver.fulfill(info)
+            }
+        }
+    }
+    
+    struct BaiduDlink: Decodable {
+        let fileName: String
+        let md5: String
+        let dlink: String
+        var dlinks: [String] = []
+        let cdnList = ["https://pcs.baidu.com",
+                       "https://www.baidupcs.com",
+                       "https://c.pcs.baidu.com",
+                       "https://c3.pcs.baidu.com",
+                       "https://d.pcs.baidu.com",
+                       "https://d3.pcs.baidu.com",
+                       "https://nj.baidupcs.com",
+                       "https://bj.baidupcs.com",
+                       "https://qd.baidupcs.com",
+                       "https://ipv6.baidupcs.com"]
+        private enum CodingKeys: String, CodingKey {
+            case fileName = "server_filename",
+            md5,
+            dlink
+        }
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            fileName = try values.decode(String.self, forKey: .fileName)
+            md5 = try values.decode(String.self, forKey: .md5)
+            dlink = try values.decode(String.self, forKey: .dlink)
+            dlinks = cdnList.map {
+                $0 + dlink.subString(from: "com")
+            }
+        }
+    }
+    
+
+    
+    func getDlinks(_ info: SharedLinkInfo, fsIds: [Int]) -> Promise<[BaiduDlink]> {
+        let p = ["encrypt": "0",
+                 "product": "share",
+                 "uk": "\(info.uk)",
+            "primaryid": "\(info.shareid)",
+            "fid_list": "\(fsIds)"]
+        return Promise { resolver in
+            privateHTTP.request("https://pan.baidu.com/api/sharedownload?sign=\(info.sign)&timestamp=\(info.timestamp)", method: .post, parameters: p)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    struct Result: Decodable {
+                        let list: [BaiduDlink]
+                        let errno: Int
+                    }
+                    
+                    guard let re = $0.data?.decode(Result.self), re.errno == 0 else {
+                        resolver.reject(BaiduHTTPError.cantGenerateDlinks)
+                        return
+                    }
+                    resolver.fulfill(re.list)
+            }
+        }
+    }
+    
+    func getBdStoken() -> Promise<String> {
+        return Promise { resolver in
+            if bdStoken != "", bdStoken.count == 32 {
+                resolver.fulfill(bdStoken)
+            }
+            baiduHTTP.request("https://pan.baidu.com/disk/home")
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                    }
+                    let str = $0.text?.subString(from: "initPrefetch(\'", to: "\',")
+                    guard let bdStoken = str, bdStoken.count == 32 else {
+                        resolver.fulfill("")
+                        return
+                    }
+                    self.bdStoken = bdStoken
+                    resolver.fulfill(bdStoken)
+            }
+        }
+    }
 }
+
+extension DefaultDataResponse {
+    var text: String? {
+        get {
+            if let data = data, let str = String(data: data, encoding: .utf8) {
+                return str
+            }
+            return nil
+        }
+    }
+}
+
+enum BaiduHTTPError: Error {
+    case shouldLogin
+    
+    // Download links
+    case shareFileError
+    case cantFindInfoInShareLink
+    case cantGenerateDlinks
+    
+    // Delete files
+    case cantDelete
+}
+

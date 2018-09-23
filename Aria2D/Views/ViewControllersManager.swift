@@ -90,7 +90,9 @@ class ViewControllersManager: NSObject {
             case .downloading, .removed, .completed:
                 Aria2.shared.initAllData()
             case .baidu:
-                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                    .catch { error in
+                }
             default:
                 break
             }
@@ -250,7 +252,9 @@ class ViewControllersManager: NSObject {
 		case .downloading, .completed, .removed:
 			Aria2.shared.initAllData()
 		case .baidu:
-			Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath)
+            Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                .catch { error in
+            }
 		default:
 			break
 		}
