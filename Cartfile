@@ -1,4 +1,5 @@
 github "DevMate/DevMateKit"
-github "daltoniam/SwiftHTTP"
 github "realm/realm-cocoa"
 github "facebook/SocketRocket"
+github "Alamofire/Alamofire"
+github "mxcl/PromiseKit"

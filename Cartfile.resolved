@@ -1,4 +1,5 @@
+github "Alamofire/Alamofire" "4.7.3"
 github "DevMate/DevMateKit" "v1.9.1"
-github "daltoniam/SwiftHTTP" "3.0.1"
 github "facebook/SocketRocket" "0.5.1"
-github "realm/realm-cocoa" "v3.9.0"
+github "mxcl/PromiseKit" "6.4.0"
+github "realm/realm-cocoa" "v3.10.0"
