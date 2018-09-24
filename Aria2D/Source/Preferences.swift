@@ -153,50 +153,16 @@ class Preferences: NSObject {
 		}
 	}
 
-
-// MARK: - Baidu
-	var baiduAPIKey: String {
-		get {
-			return defaults(.baiduAPIKey) as? String ?? ""
-		}
-		set {
-			defaultsSet(newValue, forKey: .baiduAPIKey)
-		}
-	}
-	
-	var baiduSecretKey: String {
-		get {
-			return defaults(.baiduSecretKey) as? String ?? ""
-		}
-		set {
-			defaultsSet(newValue, forKey: .baiduSecretKey)
-		}
-	}
-	
-	var baiduFolder: String {
-		get {
-			return defaults(.baiduFolder) as? String ?? ""
-		}
-		set {
-			defaultsSet(newValue, forKey: .baiduFolder)
-		}
-	}
-	
-	var baiduToken: String {
-		get {
-			return defaults(.baiduToken) as? String ?? ""
-		}
-		set {
-			defaultsSet(newValue, forKey: .baiduToken)
-		}
-	}
-	
-
 	func checkPlistFile() {
 		let key = "checkPlistFile"
 		prefs.set(true, forKey: key)
 		assert(prefs.value(forKey: key) != nil, "Can't save value to preference, try to restart your macOS.", file: "124")
 		prefs.removeObject(forKey: key)
+        
+        let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey"]
+        dropedKeys.forEach {
+            prefs.removeObject(forKey: $0)
+        }
 	}
 	
 }

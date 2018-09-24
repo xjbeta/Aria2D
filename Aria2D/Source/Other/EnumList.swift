@@ -38,11 +38,6 @@ enum PreferenceKeys: String {
 	case split = "--split"
 	case optimizeConcurrentDownloads = "--optimize-concurrent-downloads"
 	
-	case baiduToken = "baidu_token"
-	case baiduFolder = "baidu_folder"
-	case baiduAPIKey = "baidu_APIKey"
-	case baiduSecretKey = "baidu_SecretKey"
-	
 	var keyValue: String {
 		return self.rawValue.replacingOccurrences(of: "--", with: "")
 	}
