@@ -1871,6 +1871,7 @@ CA
                                         </tableView>
                                     </subviews>
                                 </clipView>
+                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="5fl-rI-k04">
                                     <rect key="frame" x="-100" y="-100" width="665" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1901,7 +1902,8 @@ CA
                         <outlet property="baiduFileListMenu" destination="H9X-fo-5n4" id="jIr-cN-Cz3"/>
                         <outlet property="baiduPathControl" destination="Rbe-BB-rvd" id="swF-Cz-Fjh"/>
                         <outlet property="downloadsTableViewMenu" destination="fWv-5q-1uS" id="0Xl-qr-tlc"/>
-                        <outlet property="listTableView" destination="2lW-dF-ywg" id="Uih-LZ-wUQ"/>
+                        <outlet property="mainListScrollView" destination="zgn-mS-pSY" id="JLu-Ps-gLy"/>
+                        <outlet property="mainListTableView" destination="2lW-dF-ywg" id="Uih-LZ-wUQ"/>
                         <outlet property="view" destination="5zW-kZ-8rg" id="rgr-hX-lAs"/>
                         <segue destination="a4j-SR-1yJ" kind="sheet" identifier="showBaiduDlinksProgress" id="B5o-Ky-NHD"/>
                         <segue destination="MI1-7F-3gr" kind="show" identifier="showInfoWindow" id="DHM-Yl-UGC"/>

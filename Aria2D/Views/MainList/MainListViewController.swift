@@ -10,15 +10,16 @@ import Cocoa
 import RealmSwift
 
 class MainListViewController: NSViewController {
-	@IBOutlet var listTableView: MainListTableView!
+	@IBOutlet var mainListTableView: MainListTableView!
+    @IBOutlet weak var mainListScrollView: NSScrollView!
     
 	@IBAction func cellDoubleAction(_ sender: Any) {
 		switch ViewControllersManager.shared.selectedRow {
 		case .completed:
 			ViewControllersManager.shared.openSelected()
 		case .baidu:
-			if listTableView.selectedRowIndexes.count == 1,
-                let row = listTableView.selectedRowIndexes.first {
+			if mainListTableView.selectedRowIndexes.count == 1,
+                let row = mainListTableView.selectedRowIndexes.first {
                 let data = DataManager.shared.data(PCSFile.self)[row]
 				if data.isdir {
 					Baidu.shared.selectedPath = data.path
@@ -149,10 +150,10 @@ class MainListViewController: NSViewController {
         switch ViewControllersManager.shared.selectedRow {
         case .downloading, .completed, .removed:
             let data = DataManager.shared.data(Aria2Object.self)
-            notificationToken = data.bind(to: listTableView, animated: true)
+            notificationToken = data.bind(to: mainListTableView, animated: true)
         case .baidu:
             let data = DataManager.shared.data(PCSFile.self)
-            notificationToken = data.bind(to: listTableView, animated: true)
+            notificationToken = data.bind(to: mainListTableView, animated: true)
         default:
             break
         }
@@ -163,9 +164,11 @@ class MainListViewController: NSViewController {
             self.initPathControl()
             switch ViewControllersManager.shared.selectedRow {
             case .baidu:
-                self.listTableView.rowHeight = 40
+                self.mainListScrollView.contentInsets.bottom = 20
+                self.mainListTableView.rowHeight = 40
             default:
-                self.listTableView.rowHeight = 50
+                self.mainListScrollView.contentInsets.bottom = 0
+                self.mainListTableView.rowHeight = 50
             }
             self.setRealmNotification()
         }
@@ -173,7 +176,7 @@ class MainListViewController: NSViewController {
     
     @objc func shouldReloadData() {
         DispatchQueue.main.async {
-            self.listTableView.reloadData()
+            self.mainListTableView.reloadData()
         }
     }
 
@@ -191,10 +194,10 @@ extension MainListViewController: NSTableViewDelegate, NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			listTableView.menu = downloadsTableViewMenu
+			mainListTableView.menu = downloadsTableViewMenu
 			return DataManager.shared.data(Aria2Object.self).count
 		case .baidu:
-			listTableView.menu = baiduFileListMenu
+			mainListTableView.menu = baiduFileListMenu
 			return DataManager.shared.data(PCSFile.self).count
 		default:
 			return 0
@@ -226,11 +229,11 @@ extension MainListViewController: NSTableViewDelegate, NSTableViewDataSource {
 	}
 	
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-		return listTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("MainListTableRowView"), owner: self) as? MainListTableRowView
+		return mainListTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("MainListTableRowView"), owner: self) as? MainListTableRowView
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
-		listTableView.setSelectedIndexs()
+		mainListTableView.setSelectedIndexs()
 	}
 	
 }
@@ -238,7 +241,7 @@ extension MainListViewController: NSTableViewDelegate, NSTableViewDataSource {
 // MARK: - MenuDelegate
 extension MainListViewController: NSMenuDelegate {
 	func menuWillOpen(_ menu: NSMenu) {
-		listTableView.setSelectedIndexs()
+		mainListTableView.setSelectedIndexs()
 		if menu == baiduFileListMenu {
 			baiduFileListMenu.initItemState()
 		}
