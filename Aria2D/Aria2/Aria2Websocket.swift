@@ -8,6 +8,7 @@
 
 import Cocoa
 import SocketRocket
+import PromiseKit
 
 struct ConnectedServerInfo {
 	var version = ""
@@ -163,50 +164,51 @@ class Aria2Websocket: NSObject {
     
     func write(_ dic: [String: Any],
                withID id: String,
-               method: String,
-               completion: @escaping (_ result: Data) -> Void,
-               error: @escaping (_ result: webSocketResult) -> Void) {
-        let time = Date().timeIntervalSince1970
-        WaitingList.shared.add(id) { (data, timeOut) in
-            // Save log
-            if Preferences.shared.developerMode,
-                Preferences.shared.recordWebSocketLog {
-                let log = WebSocketLog()
-                log.method = method
-                log.sendJSON = "\(dic)"
-                if let str = String(data: data, encoding: .utf8),
-                    let shrotData = Aria2Websocket.shared.clearUrls(str),
-                    let shortStr = String(data: shrotData, encoding: .utf8) {
-                    log.receivedJSON =  shortStr
+               method: String) -> Promise<Data> {
+        return Promise { resolver in
+            let time = Date().timeIntervalSince1970
+            WaitingList.shared.add(id) { (data, timeOut) in
+                // Save log
+                if Preferences.shared.developerMode,
+                    Preferences.shared.recordWebSocketLog {
+                    let log = WebSocketLog()
+                    log.method = method
+                    log.sendJSON = "\(dic)"
+                    if let str = String(data: data, encoding: .utf8),
+                        let shrotData = Aria2Websocket.shared.clearUrls(str),
+                        let shortStr = String(data: shrotData, encoding: .utf8) {
+                        log.receivedJSON =  shortStr
+                    }
+                    log.success = !timeOut
+                    log.time = time
+                    ViewControllersManager.shared.addLog(log)
                 }
-                log.success = !timeOut
-                log.time = time
-                ViewControllersManager.shared.addLog(log)
+                
+                if !timeOut {
+                    resolver.fulfill(data)
+                } else {
+                    resolver.reject(webSocketResult.timeOut)
+                }
             }
-            
-            if !timeOut {
-                completion(data)
-            } else {
-                error(.timeOut)
+            do {
+                try socket?.send(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
+            } catch let er {
+                resolver.reject(webSocketResult.receiveError(message: "\(er)"))
+                return
             }
-        }
-        do {
-            try socket?.send(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
-        } catch let er {
-            error(.receiveError(message: "\(er)"))
-            return
         }
     }
     
     func received(_ value: Data, withID id: String) {
         WaitingList.shared.update(id, value: value)
     }
-
-
 }
 
-
-
+enum webSocketResult: Error {
+    case timeOut
+    case receiveError(message: String)
+    case somethingError
+}
 
 extension Aria2Websocket: SRWebSocketDelegate {
     func webSocketDidOpen(_ webSocket: SRWebSocket) {
