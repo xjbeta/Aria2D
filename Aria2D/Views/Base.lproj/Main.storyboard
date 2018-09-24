@@ -604,20 +604,44 @@
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="102"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wyp-C9-geA">
-                                                    <rect key="frame" x="63" y="33" width="115" height="32"/>
-                                                    <buttonCell key="cell" type="push" title="Log in Baidu" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XdM-tO-4qX">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <segue destination="cwS-RB-PA3" kind="sheet" id="Q38-Z0-U4J"/>
-                                                    </connections>
-                                                </button>
+                                                <gridView xPlacement="center" yPlacement="top" rowAlignment="none" rowSpacing="8" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="apf-AJ-Vkt">
+                                                    <rect key="frame" x="38" y="23" width="165" height="57"/>
+                                                    <rows>
+                                                        <gridRow id="0eU-40-EyX"/>
+                                                        <gridRow id="5jd-eR-0DZ"/>
+                                                    </rows>
+                                                    <columns>
+                                                        <gridColumn width="165" id="BbL-nt-72P"/>
+                                                    </columns>
+                                                    <gridCells>
+                                                        <gridCell row="0eU-40-EyX" column="BbL-nt-72P" id="Bw8-fa-2FK">
+                                                            <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wyp-C9-geA">
+                                                                <rect key="frame" x="25" y="29" width="115" height="32"/>
+                                                                <buttonCell key="cell" type="push" title="Log in Baidu" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XdM-tO-4qX">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <segue destination="cwS-RB-PA3" kind="sheet" id="Q38-Z0-U4J"/>
+                                                                </connections>
+                                                            </button>
+                                                        </gridCell>
+                                                        <gridCell row="5jd-eR-0DZ" column="BbL-nt-72P" id="PAw-gq-1hn">
+                                                            <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EtJ-6l-zMZ">
+                                                                <rect key="frame" x="-1" y="0.0" width="168" height="28"/>
+                                                                <textFieldCell key="cell" controlSize="small" selectable="YES" title="This feature is only for testing. Don't pay for this!" id="dvn-oz-rLS">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
+                                                        </gridCell>
+                                                    </gridCells>
+                                                </gridView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wyp-C9-geA" firstAttribute="centerY" secondItem="QGZ-Dz-KDz" secondAttribute="centerY" id="gI5-xQ-h8i"/>
-                                                <constraint firstItem="wyp-C9-geA" firstAttribute="centerX" secondItem="QGZ-Dz-KDz" secondAttribute="centerX" id="l1c-wp-56P"/>
+                                                <constraint firstItem="apf-AJ-Vkt" firstAttribute="centerY" secondItem="QGZ-Dz-KDz" secondAttribute="centerY" id="MEf-Iv-Kdb"/>
+                                                <constraint firstItem="apf-AJ-Vkt" firstAttribute="centerX" secondItem="QGZ-Dz-KDz" secondAttribute="centerX" id="yQy-7Q-5NR"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
