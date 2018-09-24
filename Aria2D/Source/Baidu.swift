@@ -62,6 +62,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     resolver.fulfill(())
             }
@@ -84,6 +85,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     let str = $0.text ?? ""
                     struct Result: Decodable {
@@ -121,6 +123,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     
                     guard let errno = $0.data?.decode(PCSErrno.self)?.errno, errno == 0 else {
@@ -141,6 +144,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     if let json = $0.data?.decode(PCSFileList.self) {
                         if json.errno == 0 {
@@ -167,6 +171,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     struct Result: Decodable {
                         let errno: Int
@@ -194,6 +199,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     struct ShareResult: Decodable {
                         let errno: Int
@@ -223,6 +229,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     guard let infoData = $0.text?.subString(from: "yunData.setData(", to: ");").data(using: .utf8),
                         let info = infoData.decode(SharedLinkInfo.self) else {
@@ -279,6 +286,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     struct Result: Decodable {
                         let list: [BaiduDlink]
@@ -304,6 +312,7 @@ class Baidu: NSObject {
                 .response {
                     if let error = $0.error {
                         resolver.reject(error)
+                        return
                     }
                     let str = $0.text?.subString(from: "initPrefetch(\'", to: "\',")
                     guard let bdStoken = str, bdStoken.count == 32 else {
@@ -339,4 +348,3 @@ enum BaiduHTTPError: Error {
     // Delete files
     case cantDelete
 }
-
