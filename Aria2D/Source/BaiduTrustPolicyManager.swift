@@ -19,6 +19,7 @@ class BaiduTrustPolicyManager: ServerTrustPolicyManager {
             guard let certificateData = Data(base64Encoded: baiducomCertificate) as CFData?,
                 let certificate = SecCertificateCreateWithData(nil, certificateData) else {
                     assert(false, "init certificate false")
+                    return .disableEvaluation
             }
             
             func extractPublicKeysFromCertificates(_ certs: [SecCertificate]) -> [SecKey] {
