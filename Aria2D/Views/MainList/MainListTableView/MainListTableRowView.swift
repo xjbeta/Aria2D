@@ -1,5 +1,5 @@
 //
-//  DownloadsTableRowView.swift
+//  MainListTableRowView.swift
 //  Aria2D
 //
 //  Created by xjbeta on 2016/9/25.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class DownloadsTableRowView: NSTableRowView {
+class MainListTableRowView: NSTableRowView {
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)

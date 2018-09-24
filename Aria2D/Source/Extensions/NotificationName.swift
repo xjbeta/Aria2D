@@ -12,7 +12,7 @@ extension Notification.Name {
 	static let nextTag = Notification.Name("com.xjbeta.Aria2D.NextTag")
 	static let previousTag = Notification.Name("com.xjbeta.Aria2D.PreviousTag")
 	static let sidebarSelectionChanged = Notification.Name("com.xjbeta.Aria2D.SidebarSelectionChanged")
-	static let refreshDownloadList = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.Refresh")
+	static let refreshMainList = Notification.Name("com.xjbeta.Aria2D.MainList.Refresh")
 	static let getDlinks = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.getDlinks")
 	static let newTask = Notification.Name("com.xjbeta.Aria2D.Dwnloadlist.newTask")
 	static let showHUD = Notification.Name("com.xjbeta.Aria2D.MainWindow.showHUD")

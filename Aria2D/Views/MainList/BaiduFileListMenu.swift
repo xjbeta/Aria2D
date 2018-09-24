@@ -33,7 +33,7 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		default:
 			break
 		}
-		refreshDownloadList()
+		refreshMainList()
 	}
 	
 	
@@ -46,7 +46,7 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		default:
 			break
 		}
-		refreshDownloadList()
+		refreshMainList()
 	}
 	
 	
@@ -59,8 +59,8 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		NotificationCenter.default.post(name: .deleteFile, object: nil)
 	}
 	
-	func refreshDownloadList() {
-		NotificationCenter.default.post(name: .refreshDownloadList, object: nil)
+	func refreshMainList() {
+		NotificationCenter.default.post(name: .refreshMainList, object: nil)
 	}
 	
 	func initItemState() {

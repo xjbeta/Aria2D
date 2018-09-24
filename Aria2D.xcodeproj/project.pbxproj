@@ -30,6 +30,7 @@
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012B57282158875000D1AC03 /* BaiduTrustPolicyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B57272158875000D1AC03 /* BaiduTrustPolicyManager.swift */; };
 		012B572C2159146600D1AC03 /* BaiduPathControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572B2159146600D1AC03 /* BaiduPathControl.swift */; };
+		012B572E21591AFD00D1AC03 /* RealmBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572D21591AFD00D1AC03 /* RealmBind.swift */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
@@ -56,8 +57,8 @@
 		0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDC01D21FAD800FB4324 /* AppDelegate.swift */; };
 		0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0147EDC61D21FAD800FB4324 /* Main.storyboard */; };
 		0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */; };
-		0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */; };
-		0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */; };
+		0147EDDE1D2381EA00FB4324 /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDC1D2381EA00FB4324 /* MainListViewController.swift */; };
+		0147EDDF1D2381EA00FB4324 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDD1D2381EA00FB4324 /* MainListTableView.swift */; };
 		014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */ = {isa = PBXBuildFile; fileRef = 014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */; };
 		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
 		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
@@ -71,7 +72,7 @@
 		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
-		017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C20081D979448005F035A /* DownloadsTableRowView.swift */; };
+		017C20091D979448005F035A /* MainListTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C20081D979448005F035A /* MainListTableRowView.swift */; };
 		017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
@@ -100,7 +101,7 @@
 		01EB1CB41D5F4C1500F2925F /* BaiduSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */; };
 		01EB1CB61D60971600F2925F /* Baidu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB51D60971600F2925F /* Baidu.swift */; };
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
-		01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */; };
+		01EB1CC61D634F4A00F2925F /* BaiduFileTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CC51D634F4A00F2925F /* BaiduFileTableCellView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
 		01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F6C4F921339F830009672A /* libkevlar.a */; };
 		01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */; };
@@ -163,6 +164,7 @@
 		012ADEDF1F1461BC009E4110 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
 		012B57272158875000D1AC03 /* BaiduTrustPolicyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduTrustPolicyManager.swift; sourceTree = "<group>"; };
 		012B572B2159146600D1AC03 /* BaiduPathControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduPathControl.swift; sourceTree = "<group>"; };
+		012B572D21591AFD00D1AC03 /* RealmBind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmBind.swift; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -188,8 +190,8 @@
 		0147EDC71D21FAD800FB4324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0147EDC91D21FAD800FB4324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableCellView.swift; sourceTree = "<group>"; };
-		0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
-		0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableView.swift; sourceTree = "<group>"; };
+		0147EDDC1D2381EA00FB4324 /* MainListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
+		0147EDDD1D2381EA00FB4324 /* MainListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListTableView.swift; sourceTree = "<group>"; };
 		014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aria2D.conf; sourceTree = "<group>"; };
 		0154156A1E371583007ECB29 /* URLSecurityScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
 		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
@@ -204,7 +206,7 @@
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
-		017C20081D979448005F035A /* DownloadsTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableRowView.swift; sourceTree = "<group>"; };
+		017C20081D979448005F035A /* MainListTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListTableRowView.swift; sourceTree = "<group>"; };
 		017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewWithBackgroundColor.swift; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -235,7 +237,7 @@
 		01EB1CB31D5F4C1500F2925F /* BaiduSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduSettingView.swift; sourceTree = "<group>"; };
 		01EB1CB51D60971600F2925F /* Baidu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baidu.swift; sourceTree = "<group>"; };
 		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
-		01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileListCellView.swift; sourceTree = "<group>"; };
+		01EB1CC51D634F4A00F2925F /* BaiduFileTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaiduFileTableCellView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
 		01F6C4F921339F830009672A /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
 		01F6C4FA21339F840009672A /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
@@ -347,7 +349,7 @@
 				018E89721D350079000C71B0 /* Preferences */,
 				019BFF5E2125D90A00E715CC /* MainWindow */,
 				0147EDD51D220BED00FB4324 /* Sidebar */,
-				01EB1CBB1D61FC1D00F2925F /* DownloadList */,
+				01EB1CBB1D61FC1D00F2925F /* MainList */,
 				01713BD71D9BA998000240A2 /* NewTask */,
 				0182E60C1EAEE90000E08454 /* Log */,
 				016FDC781E7B9BD600E01B35 /* InfoView */,
@@ -477,6 +479,7 @@
 				018E89491D34FF5B000C71B0 /* DataManager.swift */,
 				018E894A1D34FF5B000C71B0 /* DataObjects.swift */,
 				0130D74D1F13E9F500F11DBC /* JSONModels.swift */,
+				012B572D21591AFD00D1AC03 /* RealmBind.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -503,30 +506,30 @@
 			path = MainWindow;
 			sourceTree = "<group>";
 		};
-		019BFF5F2125D95700E715CC /* DownloadsTableView */ = {
+		019BFF5F2125D95700E715CC /* MainListTableView */ = {
 			isa = PBXGroup;
 			children = (
-				0147EDDD1D2381EA00FB4324 /* DownloadsTableView.swift */,
-				017C20081D979448005F035A /* DownloadsTableRowView.swift */,
+				0147EDDD1D2381EA00FB4324 /* MainListTableView.swift */,
+				017C20081D979448005F035A /* MainListTableRowView.swift */,
 				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
-				01EB1CC51D634F4A00F2925F /* BaiduFileListCellView.swift */,
+				01EB1CC51D634F4A00F2925F /* BaiduFileTableCellView.swift */,
 			);
-			path = DownloadsTableView;
+			path = MainListTableView;
 			sourceTree = "<group>";
 		};
-		01EB1CBB1D61FC1D00F2925F /* DownloadList */ = {
+		01EB1CBB1D61FC1D00F2925F /* MainList */ = {
 			isa = PBXGroup;
 			children = (
-				019BFF5F2125D95700E715CC /* DownloadsTableView */,
+				019BFF5F2125D95700E715CC /* MainListTableView */,
 				01EB1CB91D61FC1400F2925F /* RightTabView.swift */,
 				01A0B4281DCB25FD0053FB9B /* LoadingView.swift */,
-				0147EDDC1D2381EA00FB4324 /* DownloadsViewController.swift */,
+				0147EDDC1D2381EA00FB4324 /* MainListViewController.swift */,
 				01FD5B8D1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift */,
 				012B572B2159146600D1AC03 /* BaiduPathControl.swift */,
 				01BBC9171D6FDE67006B5ED7 /* BaiduFileListMenu.swift */,
 				01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */,
 			);
-			path = DownloadList;
+			path = MainList;
 			sourceTree = "<group>";
 		};
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
@@ -664,7 +667,7 @@
 				012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */,
 				018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */,
 				0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */,
-				0147EDDE1D2381EA00FB4324 /* DownloadsViewController.swift in Sources */,
+				0147EDDE1D2381EA00FB4324 /* MainListViewController.swift in Sources */,
 				013817671D238E0100E0F926 /* MainWindowController.swift in Sources */,
 				012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */,
 				018E89621D34FFB1000C71B0 /* ViewControllersManager.swift in Sources */,
@@ -694,10 +697,10 @@
 				012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */,
 				010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */,
 				012B572C2159146600D1AC03 /* BaiduPathControl.swift in Sources */,
-				0147EDDF1D2381EA00FB4324 /* DownloadsTableView.swift in Sources */,
+				0147EDDF1D2381EA00FB4324 /* MainListTableView.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
 				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,
-				017C20091D979448005F035A /* DownloadsTableRowView.swift in Sources */,
+				017C20091D979448005F035A /* MainListTableRowView.swift in Sources */,
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
@@ -719,6 +722,7 @@
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
 				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
 				01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */,
+				012B572E21591AFD00D1AC03 /* RealmBind.swift in Sources */,
 				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
 				018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */,
@@ -732,7 +736,7 @@
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
 				01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */,
 				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,
-				01EB1CC61D634F4A00F2925F /* BaiduFileListCellView.swift in Sources */,
+				01EB1CC61D634F4A00F2925F /* BaiduFileTableCellView.swift in Sources */,
 				012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */,
 				012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */,
 			);

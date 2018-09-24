@@ -1,5 +1,5 @@
 //
-//  DownloadsViewController.swift
+//  MainListViewController.swift
 //  Aria2D
 //
 //  Created by xjbeta on 16/2/19.
@@ -9,16 +9,16 @@
 import Cocoa
 import RealmSwift
 
-class DownloadsViewController: NSViewController {
-	@IBOutlet var downloadsTableView: DownloadsTableView!
+class MainListViewController: NSViewController {
+	@IBOutlet var listTableView: MainListTableView!
     
 	@IBAction func cellDoubleAction(_ sender: Any) {
 		switch ViewControllersManager.shared.selectedRow {
 		case .completed:
 			ViewControllersManager.shared.openSelected()
 		case .baidu:
-			if downloadsTableView.selectedRowIndexes.count == 1,
-                let row = downloadsTableView.selectedRowIndexes.first {
+			if listTableView.selectedRowIndexes.count == 1,
+                let row = listTableView.selectedRowIndexes.first {
                 let data = DataManager.shared.data(PCSFile.self)[row]
 				if data.isdir {
 					Baidu.shared.selectedPath = data.path
@@ -51,6 +51,7 @@ class DownloadsViewController: NSViewController {
         }
     }
     var dlinksProgress: BaiduDlinksProgress!
+    var notificationToken: NotificationToken? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -74,11 +75,13 @@ class DownloadsViewController: NSViewController {
 	}
 	
     func initNotification() {
-        downloadsTableView.initNotification()
-        downloadsTableView.setRealmNotification()
+        setRealmNotification()
         NotificationCenter.default.addObserver(self, selector: #selector(getDlinks), name: .getDlinks, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteBaiduFile), name: .deleteFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: .showInfoWindow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(sidebarSelectionChanged), name: .sidebarSelectionChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(shouldReloadData), name: .refreshMainList, object: nil)
     }
     
     
@@ -123,6 +126,11 @@ class DownloadsViewController: NSViewController {
     }
     
     func initPathControl() {
+        guard ViewControllersManager.shared.selectedRow == .baidu else {
+            baiduPathControl.isHidden = true
+            return
+        }
+        baiduPathControl.isHidden = false
         let str = "/Baidu" + Baidu.shared.selectedPath
         
         baiduPathControl.url = URL.init(string: str.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!)
@@ -135,24 +143,58 @@ class DownloadsViewController: NSViewController {
             }
         }
     }
+    
+    func setRealmNotification() {
+        notificationToken?.invalidate()
+        switch ViewControllersManager.shared.selectedRow {
+        case .downloading, .completed, .removed:
+            let data = DataManager.shared.data(Aria2Object.self)
+            notificationToken = data.bind(to: listTableView, animated: true)
+        case .baidu:
+            let data = DataManager.shared.data(PCSFile.self)
+            notificationToken = data.bind(to: listTableView, animated: true)
+        default:
+            break
+        }
+    }
+    
+    @objc func sidebarSelectionChanged() {
+        DispatchQueue.main.async {
+            self.initPathControl()
+            switch ViewControllersManager.shared.selectedRow {
+            case .baidu:
+                self.listTableView.rowHeight = 40
+            default:
+                self.listTableView.rowHeight = 50
+            }
+            self.setRealmNotification()
+        }
+    }
+    
+    @objc func shouldReloadData() {
+        DispatchQueue.main.async {
+            self.listTableView.reloadData()
+        }
+    }
 
 	deinit {
 		NotificationCenter.default.removeObserver(self)
+        notificationToken?.invalidate()
 	}
 }
 
 
 
 // MARK: - TableView
-extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
+extension MainListViewController: NSTableViewDelegate, NSTableViewDataSource {
 	
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			downloadsTableView.menu = downloadsTableViewMenu
+			listTableView.menu = downloadsTableViewMenu
 			return DataManager.shared.data(Aria2Object.self).count
 		case .baidu:
-			downloadsTableView.menu = baiduFileListMenu
+			listTableView.menu = baiduFileListMenu
 			return DataManager.shared.data(PCSFile.self).count
 		default:
 			return 0
@@ -164,14 +206,14 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 		
 		switch ViewControllersManager.shared.selectedRow {
 		case .downloading, .completed, .removed:
-			if let cell = tableView.makeView(withIdentifier: .downloadsTableCell, owner: self) as? DownloadsTableCellView {
+			if let cell = tableView.makeView(withIdentifier: .downloadsTableCellView, owner: self) as? DownloadsTableCellView {
 				if let data = DataManager.shared.data(Aria2Object.self)[safe: row] {
 					cell.setData(data)
 				}
 				return cell
 			}
 		case .baidu:
-			if let cell = tableView.makeView(withIdentifier: .baiduFileListCell, owner: self) as? BaiduFileListCellView {
+			if let cell = tableView.makeView(withIdentifier: .baiduFileTableCellView, owner: self) as? BaiduFileTableCellView {
 				if let data = DataManager.shared.data(PCSFile.self)[safe: row] {
 					cell.setData(data)
 				}
@@ -184,27 +226,26 @@ extension DownloadsViewController: NSTableViewDelegate, NSTableViewDataSource {
 	}
 	
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-		return downloadsTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("DownloadsTableRowView"), owner: self) as? DownloadsTableRowView
-		
+		return listTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("MainListTableRowView"), owner: self) as? MainListTableRowView
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
-		downloadsTableView.setSelectedIndexs()
+		listTableView.setSelectedIndexs()
 	}
 	
 }
 
 // MARK: - MenuDelegate
-extension DownloadsViewController: NSMenuDelegate {
+extension MainListViewController: NSMenuDelegate {
 	func menuWillOpen(_ menu: NSMenu) {
-		downloadsTableView.setSelectedIndexs()
+		listTableView.setSelectedIndexs()
 		if menu == baiduFileListMenu {
 			baiduFileListMenu.initItemState()
 		}
 	}
 }
 
-extension DownloadsViewController: BaiduDlinksDataSource {
+extension MainListViewController: BaiduDlinksDataSource {
 	func selectedObjects() -> [Int] {
 		return selectedObjects(PCSFile.self).filter {
 			!$0.isBackButton && !$0.isdir

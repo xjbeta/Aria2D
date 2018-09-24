@@ -1490,7 +1490,7 @@ CA
             </objects>
             <point key="canvasLocation" x="565" y="1346"/>
         </scene>
-        <!--Downloads View Controller-->
+        <!--Main List View Controller-->
         <scene sceneID="oNP-Hh-h8d">
             <objects>
                 <menu id="fWv-5q-1uS" customClass="DownloadsMenu" customModule="Aria2D" customModuleProvider="target">
@@ -1608,7 +1608,7 @@ CA
                 <dateFormatter formatterBehavior="custom10_4" dateStyle="short" timeStyle="short" dateFormat="yy/MM/dd HH:mm" id="2Cb-eO-VUI"/>
                 <arrayController objectClassName="PCSFile" editable="NO" id="rpM-oJ-cLX"/>
                 <customObject id="0YZ-pn-WTA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController showSeguePresentationStyle="single" id="cjb-Aj-3qj" customClass="DownloadsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="cjb-Aj-3qj" customClass="MainListViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5zW-kZ-8rg" customClass="ViewWithBackgroundColor" customModule="Aria2D" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1620,7 +1620,7 @@ CA
                                     <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="2lW-dF-ywg" customClass="DownloadsTableView" customModule="Aria2D" customModuleProvider="target">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="2lW-dF-ywg" customClass="MainListTableView" customModule="Aria2D" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1640,7 +1640,7 @@ CA
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="downloadsTableCell" id="ng5-Ma-jfp" customClass="DownloadsTableCellView" customModule="Aria2D" customModuleProvider="target">
+                                                        <tableCellView identifier="DownloadsTableCellView" id="ng5-Ma-jfp" customClass="DownloadsTableCellView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="662" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                             <subviews>
@@ -1778,7 +1778,7 @@ CA
                                                                 <outlet property="totalLength" destination="Voa-Jr-LBN" id="4mA-Xt-KEh"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="baiduFileListCell" id="QDW-gl-nMG" customClass="BaiduFileListCellView" customModule="Aria2D" customModuleProvider="target">
+                                                        <tableCellView identifier="BaiduFileTableCellView" id="QDW-gl-nMG" customClass="BaiduFileTableCellView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="53" width="662" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                             <subviews>
@@ -1856,7 +1856,7 @@ CA
                                                                 <outlet property="size" destination="zVY-Be-1II" id="sJC-j2-GxM"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <customView identifier="DownloadsTableRowView" id="6wX-02-MEW" userLabel="DownloadsTableRowView" customClass="DownloadsTableRowView" customModule="Aria2D" customModuleProvider="target">
+                                                        <customView identifier="MainListTableRowView" id="6wX-02-MEW" userLabel="MainListTableRowView" customClass="MainListTableRowView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="95" width="662" height="57"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         </customView>
@@ -1900,8 +1900,8 @@ CA
                     <connections>
                         <outlet property="baiduFileListMenu" destination="H9X-fo-5n4" id="jIr-cN-Cz3"/>
                         <outlet property="baiduPathControl" destination="Rbe-BB-rvd" id="swF-Cz-Fjh"/>
-                        <outlet property="downloadsTableView" destination="2lW-dF-ywg" id="Uih-LZ-wUQ"/>
                         <outlet property="downloadsTableViewMenu" destination="fWv-5q-1uS" id="0Xl-qr-tlc"/>
+                        <outlet property="listTableView" destination="2lW-dF-ywg" id="Uih-LZ-wUQ"/>
                         <outlet property="view" destination="5zW-kZ-8rg" id="rgr-hX-lAs"/>
                         <segue destination="a4j-SR-1yJ" kind="sheet" identifier="showBaiduDlinksProgress" id="B5o-Ky-NHD"/>
                         <segue destination="MI1-7F-3gr" kind="show" identifier="showInfoWindow" id="DHM-Yl-UGC"/>
