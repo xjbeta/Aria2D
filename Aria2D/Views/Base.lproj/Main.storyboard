@@ -870,6 +870,7 @@ DQ
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="PTH-8n-vhg" secondAttribute="bottom" constant="20" id="4qk-kW-GDJ"/>
+                            <constraint firstItem="72j-pP-0QQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PTH-8n-vhg" secondAttribute="trailing" id="Ein-PT-DkD"/>
                             <constraint firstAttribute="trailing" secondItem="du2-xr-qIf" secondAttribute="trailing" constant="20" id="Gz0-KP-uNe"/>
                             <constraint firstItem="PTH-8n-vhg" firstAttribute="leading" secondItem="PVM-qM-rbF" secondAttribute="leading" constant="20" id="Ldf-Wc-jJH"/>
                             <constraint firstAttribute="bottom" secondItem="72j-pP-0QQ" secondAttribute="bottom" constant="20" id="OmG-JR-Tmu"/>
