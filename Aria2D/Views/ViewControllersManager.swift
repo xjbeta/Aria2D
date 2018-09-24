@@ -91,7 +91,8 @@ class ViewControllersManager: NSObject {
                 Aria2.shared.initAllData()
             case .baidu:
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
-                    .catch { error in
+                    .catch {
+                        Log("Get baidu file list error when selected baidu item \($0)")
                 }
             default:
                 break
@@ -253,7 +254,8 @@ class ViewControllersManager: NSObject {
 			Aria2.shared.initAllData()
 		case .baidu:
             Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
-                .catch { error in
+                .catch {
+                    Log("Get baidu file list error when refresh \($0)")
             }
 		default:
 			break

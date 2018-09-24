@@ -59,7 +59,7 @@ class BaiduDlinksProgress: NSViewController {
                     self.infoTextField.stringValue = "Failed to generate dlinks."
                 default:
                     self.infoTextField.stringValue = "Unknown error."
-                    Log(error)
+                    Log("Unknown error when generate download lisks \(error)")
                 }
         }
 	}

@@ -27,7 +27,8 @@ class BaiduSettingView: NSViewController {
     @IBAction func logout(_ sender: Any) {
         Baidu.shared.logout().done {
             self.initUserInfo()
-            }.catch { _ in
+            }.catch {
+                Log("Logout baidu error \($0)")
                 self.setTabView(.error)
         }
     }
@@ -55,11 +56,12 @@ class BaiduSettingView: NSViewController {
                 self.capacityInfo.stringValue = "\(Int64(info.quota.used).ByteFileFormatter())/\(Int64(info.quota.total).ByteFileFormatter())"
                 self.capacityProgressIndicator.doubleValue = info.quota.total == 0 ? 0 : Double(info.quota.used)/Double(info.quota.total)
                 self.setTabView(.info)
-            }.catch { error in
-                switch error {
+            }.catch {
+                switch $0 {
                 case BaiduHTTPError.shouldLogin:
                     self.setTabView(.login)
                 default:
+                    Log("Init baidu user info error \($0)")
                     self.setTabView(.error)
                 }
         }

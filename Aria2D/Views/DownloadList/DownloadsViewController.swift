@@ -159,11 +159,16 @@ extension DownloadsViewController {
                 DataManager.shared.deletePCSFile(successPaths.map{ $0.path })
             } else {
                 Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
-                    .catch { error in
+                    .catch {
+                        Log("Get baidu file list error when delete file failed \($0)")
                 }
             }
             }.catch { error in
-                Log("delete files error \(error)")
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                    .catch {
+                        Log("Get baidu file list error when delete file failed \($0)")
+                }
+                Log("Delete files error \(error)")
         }
 	}
 

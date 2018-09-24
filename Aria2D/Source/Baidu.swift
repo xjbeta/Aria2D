@@ -36,7 +36,9 @@ class Baidu: NSObject {
     var isLogin = false {
         didSet {
             if isLogin {
-                getBdStoken().done { _ in }.catch { _ in }
+                getBdStoken().done { _ in }.catch {
+                    Log("Get bdstoken error \($0)")
+                }
             } else {
                 bdStoken = ""
             }
@@ -49,7 +51,9 @@ class Baidu: NSObject {
     
 	var selectedPath = "/" {
 		didSet {
-			getFileList(forPath: selectedPath).done { _ in }.catch { _ in }
+			getFileList(forPath: selectedPath).done { _ in }.catch {
+                Log("Get baidu file list error \($0)")
+            }
 		}
 	}
 

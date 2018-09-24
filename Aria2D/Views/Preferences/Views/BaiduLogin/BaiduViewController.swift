@@ -103,7 +103,8 @@ extension BaiduViewController: WKNavigationDelegate {
                     } else {
                         self.loadWebView()
                     }
-                }.catch(on: .main) { _ in
+                }.catch(on: .main) {
+                    Log("Baidu website login success update infos error \($0)")
                     self.loadWebView()
             }
             decisionHandler(.cancel)

@@ -60,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Aria2.shared.aria2c.autoStart()
         Baidu.shared.checkLogin().done { _ in
             }.catch {
-                print($0)
+                Log("Check baidu login error \($0)")
         }
 	}
 	
