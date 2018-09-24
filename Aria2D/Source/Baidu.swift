@@ -18,13 +18,15 @@ class Baidu: NSObject {
         headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:63.0) Gecko/20100101 Firefox/63.0"
         let baiduConf = URLSessionConfiguration.default
         baiduConf.httpAdditionalHeaders = headers
-        baiduHTTP = Alamofire.SessionManager(configuration: baiduConf)
+        baiduHTTP = SessionManager(configuration: baiduConf,
+                                   serverTrustPolicyManager: BaiduTrustPolicyManager(policies: [:]))
         
         
         let privateConf = URLSessionConfiguration.default
         privateConf.httpAdditionalHeaders = headers
         privateConf.httpCookieStorage = nil
-        privateHTTP = Alamofire.SessionManager(configuration: privateConf)
+        privateHTTP = SessionManager(configuration: privateConf,
+                                     serverTrustPolicyManager: BaiduTrustPolicyManager(policies: [:]))
 	}
     let baiduHTTP: SessionManager
     let privateHTTP: SessionManager
