@@ -9,7 +9,6 @@
 import Cocoa
 import RealmSwift
 
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
@@ -59,7 +58,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
         Aria2.shared.aria2c.autoStart()
-        Baidu.shared.checkTokenEffective()
+        Baidu.shared.checkLogin().done { _ in
+            }.catch {
+                Log("Check baidu login error \($0)")
+        }
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -109,17 +111,17 @@ extension AppDelegate: DevMateKitDelegate {
         return mainWindowController.window!
 	}
 	
-	@objc func activationController(_ controller: DMActivationController!, parentWindowFor mode: DMActivationMode) -> NSWindow? {
+    @objc func activationController(_ controller: DMActivationController, parentWindowFor mode: DMActivationMode) -> NSWindow? {
 		return mainWindowController.window
 	}
-	
-	@objc func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
-		ioProposedMode.pointee = .sheet
-		handlerSetter { _ in
-			ViewControllersManager.shared.showAria2cAlert()
-		}
-		return true
-	}
+    
+    @objc private func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
+        ioProposedMode.pointee = .sheet
+        handlerSetter { _ in
+            ViewControllersManager.shared.showAria2cAlert()
+        }
+        return true
+    }
 	
 	@objc func activateApp() {
 		// Swift does't work with macros, so check our Examples project on GitHub (https://github.com/DevMate/DevMateKit)

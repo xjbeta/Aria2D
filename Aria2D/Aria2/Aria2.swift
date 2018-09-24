@@ -204,7 +204,7 @@ class Aria2: NSObject {
             })
     }
 
-    func addUri(fromBaidu uri: [String], name: String) {
+    func addUri(fromBaidu uri: [String], name: String, md5: String = "") {
         guard uri.count > 0 else { return }
 
         var options: [String: String] = ["out": name,
@@ -213,6 +213,10 @@ class Aria2: NSObject {
             "max-connection-per-server": "16",
             "min-split-size": "1M",
             "user-agent": "netdisk"]
+        if md5 != "" {
+            options["check-integrity"] = "true"
+            options["checksum"] = "md5=\(md5)"
+        }
 
         if let path = Preferences.shared.aria2Servers.getServer().customPath {
             options["dir"] = path

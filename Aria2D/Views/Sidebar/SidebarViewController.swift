@@ -66,7 +66,7 @@ class SidebarViewController: NSViewController {
 	
 	func setDefaultData() {
         
-        if Preferences.shared.developerMode && Baidu.shared.isTokenEffective {
+        if Preferences.shared.developerMode && Baidu.shared.isLogin {
             if sidebarItems.count == 3 {
                 sidebarItems.append(.baidu)
                 sidebarTableView.insertRows(at: IndexSet(integer: 3), withAnimation: .effectFade)

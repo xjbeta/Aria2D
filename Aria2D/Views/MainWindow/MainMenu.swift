@@ -122,15 +122,10 @@ class MainMenu: NSObject, NSMenuItemValidation {
 	}
     
     @IBAction func installWithHomebrew(_ sender: Any) {
-            NSAppleScript(source: """
-tell application "Terminal"
-    do script ""
-    activate
-    tell application "System Events"
-        keystroke "brew install aria2"
-    end tell
-end tell
+        NSAppleScript(source: """
+tell application "Terminal" to do script "brew install aria2"
 """)?.executeAndReturnError(nil)
+        NSWorkspace.shared.launchApplication("Terminal")
     }
     
     @IBAction func installWithDMG(_ sender: Any) {

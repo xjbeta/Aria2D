@@ -141,39 +141,7 @@ extension DownloadsViewController {
 
 	
 	@objc func getDlinks() {
-		let group = DispatchGroup()
-		let data = selectedObjects(PCSFile.self).filter {
-			!$0.isBackButton && !$0.isdir
-		}
-		
-		switch data.count {
-		case 0:
-			return
-		case 1...5:
-			download(data: data, group: group)
-		default:
-			performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
-		}
-		
-	}
-	
-	func download(data: [PCSFile], group: DispatchGroup) {
-		var dlinks = [[Any]](repeating: [], count: data.count)
-		data.map {
-			$0.path
-			}.enumerated().forEach { (arg) in
-				let (i, path) = arg
-				group.enter()
-				Baidu.shared.getDownloadUrls(FromPCS: path) {
-					dlinks[i] = [$0, URL(fileURLWithPath: path).lastPathComponent]
-					group.leave()
-				}
-		}
-		group.notify(queue: .main) {
-			dlinks.forEach {
-				Aria2.shared.addUri(fromBaidu: $0[0] as! [String], name: $0[1] as! String)
-			}
-		}
+        performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
 	}
 	
     @objc func showInfo(_ notification: Notification) {
@@ -181,7 +149,27 @@ extension DownloadsViewController {
     }
 	
 	@objc func deleteBaiduFile() {
-        Baidu.shared.delete(selectedObjects(PCSFile.self).filter({ !$0.isBackButton }).map({ $0.path }))
+        let paths = selectedObjects(PCSFile.self).filter({ !$0.isBackButton }).map({ $0.path })
+
+        Baidu.shared.delete(paths).done {
+            let successPaths = $0.filter {
+                $0.errno == 0
+            }
+            if successPaths.count == paths.count {
+                DataManager.shared.deletePCSFile(successPaths.map{ $0.path })
+            } else {
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                    .catch {
+                        Log("Get baidu file list error when delete file failed \($0)")
+                }
+            }
+            }.catch { error in
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                    .catch {
+                        Log("Get baidu file list error when delete file failed \($0)")
+                }
+                Log("Delete files error \(error)")
+        }
 	}
 
 	func selectedObjects<T: Object>(_ type: T.Type) -> [T] {
@@ -196,9 +184,11 @@ extension DownloadsViewController {
 }
 
 extension DownloadsViewController: BaiduDlinksDataSource {
-	func selectedObjects() -> [PCSFile] {
+	func selectedObjects() -> [Int] {
 		return selectedObjects(PCSFile.self).filter {
 			!$0.isBackButton && !$0.isdir
-		}
+            }.map {
+                $0.fsID
+        }
 	}
 }

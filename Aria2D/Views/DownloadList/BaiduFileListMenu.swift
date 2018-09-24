@@ -97,11 +97,11 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
 		if menuItem.action == #selector(download) {
 			return Aria2Websocket.shared.isConnected
-				&& Baidu.shared.isTokenEffective
+				&& Baidu.shared.isLogin
 				&& selectedIndexs.count > 0
 		}
 		if menuItem.action == #selector(delete) {
-			return Baidu.shared.isTokenEffective
+			return Baidu.shared.isLogin
 				&& selectedIndexs.count > 0
 		}
 		
