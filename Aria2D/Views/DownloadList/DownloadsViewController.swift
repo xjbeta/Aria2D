@@ -25,6 +25,7 @@ class DownloadsViewController: NSViewController {
 				} else if data.isBackButton {
 					Baidu.shared.selectedPath = data.backParentDir
 				}
+                initPathControl()
 			}
 		default:
 			break
@@ -34,10 +35,26 @@ class DownloadsViewController: NSViewController {
 	@IBOutlet var downloadsTableViewMenu: DownloadsMenu!
 	@IBOutlet var baiduFileListMenu: BaiduFileListMenu!
 
-	var dlinksProgress: BaiduDlinksProgress!
+    @IBOutlet weak var baiduPathControl: NSPathControl!
+    @IBAction func baiduPathControl(_ sender: Any) {
+        if let clickedUrl = baiduPathControl.clickedPathItem?.url,
+            var path = clickedUrl.path.removingPercentEncoding {
+            if path.starts(with: "/Baidu") {
+                path = String(clickedUrl.path.dropFirst(6))
+            }
+            
+            if path == "" {
+                path = Baidu.shared.mainPath
+            }
+            Baidu.shared.selectedPath = path
+            initPathControl()
+        }
+    }
+    var dlinksProgress: BaiduDlinksProgress!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        initPathControl()
         ViewControllersManager.shared.selectedRow = .downloading
         initNotification()
     }
@@ -56,6 +73,68 @@ class DownloadsViewController: NSViewController {
 		}
 	}
 	
+    func initNotification() {
+        downloadsTableView.initNotification()
+        downloadsTableView.setRealmNotification()
+        NotificationCenter.default.addObserver(self, selector: #selector(getDlinks), name: .getDlinks, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteBaiduFile), name: .deleteFile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: .showInfoWindow, object: nil)
+    }
+    
+    
+    @objc func getDlinks() {
+        performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
+    }
+    
+    @objc func showInfo(_ notification: Notification) {
+        performSegue(withIdentifier: .showInfoWindow, sender: self)
+    }
+    
+    @objc func deleteBaiduFile() {
+        let paths = selectedObjects(PCSFile.self).filter({ !$0.isBackButton }).map({ $0.path })
+        
+        Baidu.shared.delete(paths).done {
+            let successPaths = $0.filter {
+                $0.errno == 0
+            }
+            if successPaths.count == paths.count {
+                DataManager.shared.deletePCSFile(successPaths.map{ $0.path })
+            } else {
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                    .catch {
+                        Log("Get baidu file list error when delete file failed \($0)")
+                }
+            }
+            }.catch { error in
+                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
+                    .catch {
+                        Log("Get baidu file list error when delete file failed \($0)")
+                }
+                Log("Delete files error \(error)")
+        }
+    }
+    
+    func selectedObjects<T: Object>(_ type: T.Type) -> [T] {
+        return DataManager.shared.data(type).enumerated().filter {
+            ViewControllersManager.shared.selectedIndexs.contains($0.offset)
+            }.map {
+                $0.element
+        }
+    }
+    
+    func initPathControl() {
+        let str = "/Baidu" + Baidu.shared.selectedPath
+        
+        baiduPathControl.url = URL.init(string: str.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!)
+        
+        baiduPathControl.pathItems.enumerated().forEach {
+            if $0.offset == 0, $0.element.title == "Baidu" {
+                $0.element.image = NSImage(named: "baidu")
+            } else {
+                $0.element.image = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+            }
+        }
+    }
 
 	deinit {
 		NotificationCenter.default.removeObserver(self)
@@ -123,64 +202,6 @@ extension DownloadsViewController: NSMenuDelegate {
 			baiduFileListMenu.initItemState()
 		}
 	}
-}
-
-
-
-
-extension DownloadsViewController {
-	
-	
-	func initNotification() {
-		downloadsTableView.initNotification()
-		downloadsTableView.setRealmNotification()
-		NotificationCenter.default.addObserver(self, selector: #selector(getDlinks), name: .getDlinks, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(deleteBaiduFile), name: .deleteFile, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: .showInfoWindow, object: nil)
-	}
-
-	
-	@objc func getDlinks() {
-        performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
-	}
-	
-    @objc func showInfo(_ notification: Notification) {
-        performSegue(withIdentifier: .showInfoWindow, sender: self)
-    }
-	
-	@objc func deleteBaiduFile() {
-        let paths = selectedObjects(PCSFile.self).filter({ !$0.isBackButton }).map({ $0.path })
-
-        Baidu.shared.delete(paths).done {
-            let successPaths = $0.filter {
-                $0.errno == 0
-            }
-            if successPaths.count == paths.count {
-                DataManager.shared.deletePCSFile(successPaths.map{ $0.path })
-            } else {
-                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
-                    .catch {
-                        Log("Get baidu file list error when delete file failed \($0)")
-                }
-            }
-            }.catch { error in
-                Baidu.shared.getFileList(forPath: Baidu.shared.selectedPath).done {}
-                    .catch {
-                        Log("Get baidu file list error when delete file failed \($0)")
-                }
-                Log("Delete files error \(error)")
-        }
-	}
-
-	func selectedObjects<T: Object>(_ type: T.Type) -> [T] {
-		return DataManager.shared.data(type).enumerated().filter {
-			ViewControllersManager.shared.selectedIndexs.contains($0.offset)
-			}.map {
-				$0.element
-		}
-	}
-	
-	
 }
 
 extension DownloadsViewController: BaiduDlinksDataSource {

@@ -1880,10 +1880,26 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <pathControl horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rbe-BB-rvd" customClass="BaiduPathControl" customModule="Aria2D" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="665" height="0.0"/>
+                                <pathCell key="cell" controlSize="small" lineBreakMode="truncatingMiddle" selectable="YES" alignment="left" id="RKF-dt-24b">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="backgroundColor" red="0.89803921568627454" green="0.92549019607843142" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
+                                </pathCell>
+                                <connections>
+                                    <action selector="baiduPathControl:" target="cjb-Aj-3qj" id="gIR-xO-LMB"/>
+                                </connections>
+                            </pathControl>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Rbe-BB-rvd" secondAttribute="bottom" id="PKn-EM-feP"/>
+                            <constraint firstItem="Rbe-BB-rvd" firstAttribute="leading" secondItem="5zW-kZ-8rg" secondAttribute="leading" priority="250" id="ahe-lW-38X"/>
+                            <constraint firstAttribute="trailing" secondItem="Rbe-BB-rvd" secondAttribute="trailing" id="ywV-gX-DhW"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="baiduFileListMenu" destination="H9X-fo-5n4" id="jIr-cN-Cz3"/>
+                        <outlet property="baiduPathControl" destination="Rbe-BB-rvd" id="swF-Cz-Fjh"/>
                         <outlet property="downloadsTableView" destination="2lW-dF-ywg" id="Uih-LZ-wUQ"/>
                         <outlet property="downloadsTableViewMenu" destination="fWv-5q-1uS" id="0Xl-qr-tlc"/>
                         <outlet property="view" destination="5zW-kZ-8rg" id="rgr-hX-lAs"/>
