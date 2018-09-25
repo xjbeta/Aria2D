@@ -67,7 +67,7 @@ class SidebarTableCellView: NSTableCellView {
 	
     var fillColor: NSColor {
         get {
-            return isSelected || isMouseInside ? NSColor.highlightColor : NSColor.lightGray
+            return isSelected || isMouseInside ? NSColor.labelColor : NSColor.secondaryLabelColor
         }
     }
 }

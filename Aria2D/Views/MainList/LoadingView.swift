@@ -17,11 +17,7 @@ class LoadingView: NSView {
 	
 	override func draw(_ dirtyRect: NSRect) {
 		super.draw(dirtyRect)
-		NSColor.customBackgroundColor.setFill()
-		label.textColor = .customHightlightColor
-		versionLabel.textColor = .customHightlightColor
-		featuresLabel.textColor = .customHightlightColor
-		dirtyRect.fill()
+
 	}
 	
 	func initVersionInfo() {

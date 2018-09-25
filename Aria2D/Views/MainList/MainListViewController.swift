@@ -10,7 +10,7 @@ import Cocoa
 import RealmSwift
 
 class MainListViewController: NSViewController {
-	@IBOutlet var mainListTableView: MainListTableView!
+	@IBOutlet var mainListTableView: NSTableView!
     @IBOutlet weak var mainListScrollView: NSScrollView!
     
 	@IBAction func cellDoubleAction(_ sender: Any) {
@@ -228,20 +228,33 @@ extension MainListViewController: NSTableViewDelegate, NSTableViewDataSource {
 		return nil
 	}
 	
-	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-		return mainListTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("MainListTableRowView"), owner: self) as? MainListTableRowView
-	}
-	
 	func tableViewSelectionDidChange(_ notification: Notification) {
-		mainListTableView.setSelectedIndexs()
+		setSelectedIndexsForMainList()
 	}
+    
+    func setSelectedIndexsForMainList() {
+        
+        let selectedIndexs: IndexSet = {
+            if mainListTableView.clickedRow != -1 {
+                if mainListTableView.selectedRowIndexes.contains(mainListTableView.clickedRow) {
+                    return mainListTableView.selectedRowIndexes
+                } else {
+                    return IndexSet(integer: mainListTableView.clickedRow)
+                }
+            } else {
+                return mainListTableView.selectedRowIndexes
+            }
+        }()
+        
+        ViewControllersManager.shared.selectedIndexs = selectedIndexs
+    }
 	
 }
 
 // MARK: - MenuDelegate
 extension MainListViewController: NSMenuDelegate {
 	func menuWillOpen(_ menu: NSMenu) {
-		mainListTableView.setSelectedIndexs()
+		setSelectedIndexsForMainList()
 		if menu == baiduFileListMenu {
 			baiduFileListMenu.initItemState()
 		}

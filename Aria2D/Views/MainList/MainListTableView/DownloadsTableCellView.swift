@@ -91,19 +91,6 @@ class DownloadsTableCellView: NSTableCellView {
 		}
 	}
 	
-	
-
-	
-	
-    override var mouseDownCanMoveWindow: Bool {
-        return true
-    }
-	
-	override var isOpaque: Bool {
-		return true
-	}
-	
-	
 	override func viewDidEndLiveResize() {
 //		progressIndicator.wantsLayer = true
 		progressIndicator.needsDisplay = true

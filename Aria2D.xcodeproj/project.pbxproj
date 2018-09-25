@@ -21,7 +21,6 @@
 		010F0EED20F8586C00F33553 /* RealmSwift.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 010F0EE720F8586100F33553 /* RealmSwift.framework.dSYM */; };
 		010F0EEE20F8586C00F33553 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 010F0EE520F8586100F33553 /* SocketRocket.framework.dSYM */; };
 		0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D42E1E04E36E003EBFCD /* NotificationName.swift */; };
-		0115D4311E04E423003EBFCD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4301E04E423003EBFCD /* Color.swift */; };
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
 		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
 		011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */; };
@@ -58,7 +57,6 @@
 		0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0147EDC61D21FAD800FB4324 /* Main.storyboard */; };
 		0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */; };
 		0147EDDE1D2381EA00FB4324 /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDC1D2381EA00FB4324 /* MainListViewController.swift */; };
-		0147EDDF1D2381EA00FB4324 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDD1D2381EA00FB4324 /* MainListTableView.swift */; };
 		014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */ = {isa = PBXBuildFile; fileRef = 014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */; };
 		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
 		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
@@ -72,8 +70,6 @@
 		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
-		017C20091D979448005F035A /* MainListTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C20081D979448005F035A /* MainListTableRowView.swift */; };
-		017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
 		018E89501D34FF5B000C71B0 /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E894A1D34FF5B000C71B0 /* DataObjects.swift */; };
@@ -150,7 +146,6 @@
 		010F0EE520F8586100F33553 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
 		010F0EE720F8586100F33553 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
 		0115D42E1E04E36E003EBFCD /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
-		0115D4301E04E423003EBFCD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
 		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2.swift; sourceTree = "<group>"; };
 		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
@@ -191,7 +186,6 @@
 		0147EDC91D21FAD800FB4324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableCellView.swift; sourceTree = "<group>"; };
 		0147EDDC1D2381EA00FB4324 /* MainListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
-		0147EDDD1D2381EA00FB4324 /* MainListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListTableView.swift; sourceTree = "<group>"; };
 		014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aria2D.conf; sourceTree = "<group>"; };
 		0154156A1E371583007ECB29 /* URLSecurityScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
 		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
@@ -206,8 +200,6 @@
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
-		017C20081D979448005F035A /* MainListTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListTableRowView.swift; sourceTree = "<group>"; };
-		017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewWithBackgroundColor.swift; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		018E894A1D34FF5B000C71B0 /* DataObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
@@ -266,7 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */,
-				0115D4301E04E423003EBFCD /* Color.swift */,
 				019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */,
 				018F5C3B1F298E1900B2150A /* JSONDecoder.swift */,
 				0115D42E1E04E36E003EBFCD /* NotificationName.swift */,
@@ -489,7 +480,6 @@
 			children = (
 				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
 				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
-				017E88311D83A74C000412DA /* ViewWithBackgroundColor.swift */,
 				01789B1C1D9D207E00A5B789 /* Views */,
 			);
 			path = Preferences;
@@ -509,8 +499,6 @@
 		019BFF5F2125D95700E715CC /* MainListTableView */ = {
 			isa = PBXGroup;
 			children = (
-				0147EDDD1D2381EA00FB4324 /* MainListTableView.swift */,
-				017C20081D979448005F035A /* MainListTableRowView.swift */,
 				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
 				01EB1CC51D634F4A00F2925F /* BaiduFileTableCellView.swift */,
 			);
@@ -682,14 +670,12 @@
 				01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */,
 				012CBD761F6CC57F00EFD1D4 /* InfoWindowController.swift in Sources */,
 				012B57282158875000D1AC03 /* BaiduTrustPolicyManager.swift in Sources */,
-				0115D4311E04E423003EBFCD /* Color.swift in Sources */,
 				018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */,
 				0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */,
 				012CBD6F1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift in Sources */,
 				012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */,
 				016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */,
 				011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */,
-				017E88321D83A74C000412DA /* ViewWithBackgroundColor.swift in Sources */,
 				016C98F91DB1C0A000955C09 /* HUD.swift in Sources */,
 				0147489921572052005014D3 /* BaiduShareError.swift in Sources */,
 				018E89641D34FFCC000C71B0 /* EnumList.swift in Sources */,
@@ -697,10 +683,8 @@
 				012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */,
 				010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */,
 				012B572C2159146600D1AC03 /* BaiduPathControl.swift in Sources */,
-				0147EDDF1D2381EA00FB4324 /* MainListTableView.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
 				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,
-				017C20091D979448005F035A /* MainListTableRowView.swift in Sources */,
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,

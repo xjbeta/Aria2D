@@ -12,7 +12,7 @@ class InfoView: NSView {
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-		NSColor.customBackgroundColor.setFill()
+        NSColor.controlBackgroundColor.setFill()
         dirtyRect.fill()
     }
     
