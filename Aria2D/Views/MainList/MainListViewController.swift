@@ -131,6 +131,7 @@ class MainListViewController: NSViewController {
             baiduPathControl.isHidden = true
             return
         }
+        baiduPathControl.backgroundColor = NSColor.controlBackgroundColor
         baiduPathControl.isHidden = false
         let str = "/Baidu" + Baidu.shared.selectedPath
         

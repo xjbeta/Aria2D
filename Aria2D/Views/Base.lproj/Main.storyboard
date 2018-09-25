@@ -1881,7 +1881,6 @@ CA
                                 <rect key="frame" x="0.0" y="0.0" width="665" height="0.0"/>
                                 <pathCell key="cell" controlSize="small" lineBreakMode="truncatingMiddle" selectable="YES" alignment="left" id="RKF-dt-24b">
                                     <font key="font" metaFont="smallSystem"/>
-                                    <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 </pathCell>
                                 <connections>
                                     <action selector="baiduPathControl:" target="cjb-Aj-3qj" id="gIR-xO-LMB"/>
@@ -2329,7 +2328,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H7D-rd-Xy6">
                                 <rect key="frame" x="14" y="3" width="97" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="HUD" id="Ud8-Q1-meG">
-                                    <font key="font" metaFont="system" size="11"/>
+                                    <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
