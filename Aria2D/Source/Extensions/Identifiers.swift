@@ -21,9 +21,9 @@ extension NSStoryboardSegue.Identifier {
 extension NSUserInterfaceItemIdentifier {
 	// Sidebar
     static let sidebarTableCellView = NSUserInterfaceItemIdentifier(rawValue: "SidebarTableCellView")
-    //Download List
-	static let downloadsTableCell = NSUserInterfaceItemIdentifier(rawValue: "downloadsTableCell")
-	static let baiduFileListCell = NSUserInterfaceItemIdentifier(rawValue: "baiduFileListCell")
+    //Main List
+	static let downloadsTableCellView = NSUserInterfaceItemIdentifier(rawValue: "DownloadsTableCellView")
+	static let baiduFileTableCellView = NSUserInterfaceItemIdentifier(rawValue: "BaiduFileTableCellView")
     //Log
     static let receivedJSONTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "ReceivedJSONTableCellView")
     //Info View

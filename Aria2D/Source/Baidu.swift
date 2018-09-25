@@ -150,14 +150,14 @@ class Baidu: NSObject {
                         resolver.reject(error)
                         return
                     }
-                    if let json = $0.data?.decode(PCSFileList.self) {
-                        if json.errno == 0 {
-                            DataManager.shared.setData(forBaidu: json.list, forPath: path)
-                            resolver.fulfill(())
-                        } else {
-                            self.selectedPath = self.mainPath
-                        }
+                    
+                    guard let json = $0.data?.decode(PCSFileList.self), json.errno == 0 else {
+                        resolver.reject(BaiduHTTPError.cantGetList)
+                        return
                     }
+                    
+                    DataManager.shared.setData(forBaidu: json.list, forPath: path)
+                    resolver.fulfill(())
             }
         }
 	}
@@ -351,4 +351,7 @@ enum BaiduHTTPError: Error {
     
     // Delete files
     case cantDelete
+    
+    // Get file list
+    case cantGetList
 }

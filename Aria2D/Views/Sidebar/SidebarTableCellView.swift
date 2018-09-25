@@ -33,18 +33,11 @@ class SidebarTableCellView: NSTableCellView {
     }
     
     func setImage(_ item: SidebarItem) {
-        imageView?.image = nil
-        guard let image = NSImage(named: item.rawValue)?.copy() as? NSImage else {
-            return
+        if isSelected || isMouseInside {
+            imageView?.image = NSImage(named: item.rawValue + "Selected")
+        } else {
+            imageView?.image = NSImage(named: item.rawValue)
         }
-        image.size = NSSize(width: 36, height: 36)
-        image.isTemplate = false
-        image.lockFocus()
-        let rect = NSRect(origin: .zero, size: image.size)
-        fillColor.set()
-        rect.fill(using: .sourceAtop)
-        image.unlockFocus()
-        imageView?.image = image
     }
 	
 	override func mouseEntered(with event: NSEvent) {
@@ -64,10 +57,4 @@ class SidebarTableCellView: NSTableCellView {
 		                               owner: self,
 		                               userInfo: nil))
 	}
-	
-    var fillColor: NSColor {
-        get {
-            return isSelected || isMouseInside ? NSColor.highlightColor : NSColor.lightGray
-        }
-    }
 }
