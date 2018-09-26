@@ -1620,7 +1620,7 @@ CA
                                     <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="2lW-dF-ywg">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="2lW-dF-ywg" customClass="MainListTableView" customModule="Aria2D" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>

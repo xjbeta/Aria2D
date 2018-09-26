@@ -82,6 +82,7 @@
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
+		019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
 		01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */; };
@@ -211,6 +212,7 @@
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ErrorCode.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
+		019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTableView.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionCellView.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 		019BFF5F2125D95700E715CC /* MainListTableView */ = {
 			isa = PBXGroup;
 			children = (
+				019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */,
 				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
 				01EB1CC51D634F4A00F2925F /* BaiduFileTableCellView.swift */,
 			);
@@ -702,6 +705,7 @@
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
 				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
 				01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */,
+				019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */,
 				012B572E21591AFD00D1AC03 /* RealmBind.swift in Sources */,
 				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,
