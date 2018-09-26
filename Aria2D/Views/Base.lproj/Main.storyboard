@@ -1866,6 +1866,7 @@ CA
                                             </connections>
                                         </tableView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="5fl-rI-k04">
@@ -2973,11 +2974,11 @@ Gw
         <scene sceneID="OH4-b1-YVh">
             <objects>
                 <viewController showSeguePresentationStyle="single" id="987-L3-Tth" customClass="InfoViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="BkN-9J-Kg3" customClass="InfoView" customModule="Aria2D" customModuleProvider="target">
+                    <view key="view" id="BkN-9J-Kg3">
                         <rect key="frame" x="0.0" y="0.0" width="460" height="620"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="ultraDark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="muf-pP-9Nr">
+                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="muf-pP-9Nr">
                                 <rect key="frame" x="0.0" y="520" width="460" height="100"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yq2-gl-qcc">
@@ -3086,7 +3087,7 @@ Gw
                                                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Fem-jB-YYi">
                                                     <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="Maj-8Z-DM4">
+                                                    <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="Maj-8Z-DM4">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
@@ -3118,16 +3119,16 @@ Gw
                                                                                         <rect key="frame" x="-2" y="3" width="166" height="17"/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="_key" id="ONF-wF-lNo">
                                                                                             <font key="font" metaFont="system"/>
-                                                                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gBn-38-fj7">
                                                                                         <rect key="frame" x="168" y="3" width="291" height="18"/>
-                                                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" title="_value" usesSingleLineMode="YES" id="QsH-uc-f8e">
+                                                                                        <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="_value" id="QsH-uc-f8e">
                                                                                             <font key="font" metaFont="system" size="14"/>
                                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                 </subviews>
@@ -3170,7 +3171,6 @@ Gw
                                                                                                     </connections>
                                                                                                 </collectionView>
                                                                                             </subviews>
-                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                         </clipView>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="222" id="4cd-Xc-5ak"/>
@@ -3189,8 +3189,8 @@ Gw
                                                                                         <rect key="frame" x="-2" y="53" width="169" height="17"/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="bitfield" id="AgN-Fb-Nc2">
                                                                                             <font key="font" metaFont="system"/>
-                                                                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                 </subviews>
@@ -3215,6 +3215,7 @@ Gw
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
+                                                        <nil key="backgroundColor"/>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="pEw-ET-lrc">
                                                         <rect key="frame" x="-100" y="-100" width="235" height="16"/>
@@ -3307,7 +3308,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="y12-II-h7D">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>

@@ -18,7 +18,7 @@ class InfoWindowController: NSWindowController, NSWindowDelegate {
 			window.titleVisibility = .hidden
 			window.isMovableByWindowBackground = true
             window.standardWindowButton(.zoomButton)?.superview?.isHidden = true
-            
+            window.backgroundColor = NSColor.controlBackgroundColor
 		}
     }
 	

@@ -36,7 +36,6 @@
 		012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */; };
 		012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */; };
 		012CBD6F1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD6B1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift */; };
-		012CBD751F6CC57F00EFD1D4 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD711F6CC57E00EFD1D4 /* InfoView.swift */; };
 		012CBD761F6CC57F00EFD1D4 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */; };
 		012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */; };
 		012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */; };
@@ -166,7 +165,6 @@
 		012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItemView.swift; sourceTree = "<group>"; };
 		012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDicTableCellView.swift; sourceTree = "<group>"; };
 		012CBD6B1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBitfieldTableCellView.swift; sourceTree = "<group>"; };
-		012CBD711F6CC57E00EFD1D4 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableViewPopoverSegue.swift; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 				012CBD701F6CC56700EFD1D4 /* StatusView */,
 				012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */,
 				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
-				012CBD711F6CC57E00EFD1D4 /* InfoView.swift */,
 				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
 				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
 				012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */,
@@ -689,7 +686,6 @@
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
 				019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */,
-				012CBD751F6CC57F00EFD1D4 /* InfoView.swift in Sources */,
 				016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */,
 				010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */,
 				010B59181D3CF66600550A43 /* MainMenu.swift in Sources */,
