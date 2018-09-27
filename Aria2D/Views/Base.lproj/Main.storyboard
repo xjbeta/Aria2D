@@ -2385,7 +2385,7 @@ Gw
                                 </connections>
                             </button>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b0o-CU-LSe">
-                                <rect key="frame" x="65" y="76" width="149" height="17"/>
+                                <rect key="frame" x="101" y="76" width="149" height="17"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="WLx-7n-9KL">
                                         <rect key="frame" x="0.0" y="1" width="16" height="16"/>
@@ -2413,8 +2413,8 @@ Gw
                             <constraint firstAttribute="bottom" secondItem="u8L-FP-RP5" secondAttribute="bottom" constant="20" id="An2-Yo-OOK"/>
                             <constraint firstAttribute="bottom" secondItem="WjQ-wX-jto" secondAttribute="bottom" constant="20" id="Pw7-Ca-Cfg"/>
                             <constraint firstItem="u8L-FP-RP5" firstAttribute="leading" secondItem="S1r-5w-nhc" secondAttribute="leading" constant="20" id="Rfu-lE-Nup"/>
-                            <constraint firstItem="b0o-CU-LSe" firstAttribute="leading" secondItem="S1r-5w-nhc" secondAttribute="leading" constant="65" id="SwZ-5s-385"/>
                             <constraint firstItem="b0o-CU-LSe" firstAttribute="top" secondItem="S1r-5w-nhc" secondAttribute="top" constant="20" id="cz6-C5-FnU"/>
+                            <constraint firstItem="b0o-CU-LSe" firstAttribute="centerX" secondItem="S1r-5w-nhc" secondAttribute="centerX" id="nJf-7O-ObH"/>
                             <constraint firstItem="WjQ-wX-jto" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="u8L-FP-RP5" secondAttribute="trailing" id="oSq-rh-lEd"/>
                             <constraint firstAttribute="trailing" secondItem="WjQ-wX-jto" secondAttribute="trailing" constant="20" id="z5L-gg-7Gt"/>
                         </constraints>
@@ -3239,7 +3239,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="Mi8-NA-oMt">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="kR5-pN-Auw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
@@ -3345,7 +3345,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="y12-II-h7D">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>

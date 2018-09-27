@@ -322,6 +322,27 @@ class Baidu: NSObject {
         }
     }
     
+    func cancelSharing(_list: [Int]) -> Promise<Void> {
+        let p = ["shareid_list": "\(_list)"]
+        
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/share/cancel?web=1&channel=chunlei&web=1&bdstoken=\(bdStoken)&clienttype=0", method: .post, parameters: p)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                        return
+                    }
+                    
+                    guard let re = $0.data?.decode(PCSErrno.self), re.errno == 0 else {
+                        resolver.reject(BaiduHTTPError.cancelSharingError)
+                        return
+                    }
+                    resolver.fulfill(())
+            }
+        }
+    }
+    
     func getBdStoken() -> Promise<String> {
         return Promise { resolver in
             if bdStoken != "", bdStoken.count == 32 {
@@ -370,4 +391,7 @@ enum BaiduHTTPError: Error {
     
     // Get file list
     case cantGetList
+    
+    // Cancel sharing
+    case cancelSharingError
 }
