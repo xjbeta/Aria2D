@@ -14,6 +14,20 @@ class Baidu: NSObject {
 	
 	static let shared = Baidu()
 	private override init() {
+        
+        networkReachabilityManager = NetworkReachabilityManager(host: "pan.baidu.com")!
+        networkReachabilityManager.listener = { status in
+            switch status {
+            case .notReachable:
+                Log("Network notReachable")
+            case .reachable:
+                Log("Network reachable")
+            case .unknown:
+                Log("Network unknown")
+            }
+        }
+        networkReachabilityManager.startListening()
+        
         var headers = Alamofire.SessionManager.defaultHTTPHeaders
         headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:63.0) Gecko/20100101 Firefox/63.0"
         let baiduConf = URLSessionConfiguration.default
@@ -28,6 +42,8 @@ class Baidu: NSObject {
         privateHTTP = SessionManager(configuration: privateConf,
                                      serverTrustPolicyManager: BaiduTrustPolicyManager(policies: [:]))
 	}
+    
+    let networkReachabilityManager: NetworkReachabilityManager
     let baiduHTTP: SessionManager
     let privateHTTP: SessionManager
 
