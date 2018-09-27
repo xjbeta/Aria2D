@@ -166,6 +166,8 @@ class InfoViewController: NSViewController {
                         }
                         self.getFilesCounter = 0
                     }
+                case .deleted:
+                    self.view.window?.close()
                 default:
                     break
                 }
