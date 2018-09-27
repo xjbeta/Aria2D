@@ -56,7 +56,8 @@ class InfoViewController: NSViewController {
         }
 	}
     
-	var notificationToken: NotificationToken? = nil
+    var objectNotificationToken: NotificationToken? = nil
+    var fileNotificationToken: NotificationToken? = nil
     var getFilesCounter = 0
     
 //    let object = Aria2Object
@@ -71,10 +72,11 @@ class InfoViewController: NSViewController {
         case name, size, status, files, announces
     }
     
-    var notificationTT: NotificationToken? = nil
+   
     
     func initRealmObject() {
-        notificationToken?.invalidate()
+        objectNotificationToken?.invalidate()
+        fileNotificationToken?.invalidate()
         
         Aria2.shared.getServers(gid) {}
         Aria2.shared.getUris(gid) {}
@@ -90,11 +92,27 @@ class InfoViewController: NSViewController {
             update(obj, block: .status)
             update(obj, block: .announces)
             
-            notificationTT = obj.files.observe { _ in
-                self.updateFilesOutlineView(ThreadSafeReference(to: obj))
+            fileNotificationToken = obj.files.observe { objectChange in
+                var reloadFileNodes = true
+                switch objectChange {
+                case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                    Log("deletions\(deletions), insertions\(insertions), modifications\(modifications)")
+                    
+                    if deletions.count == 0, insertions.count == 0 {
+                        reloadFileNodes = false
+                        self.updateFileNodes(modifications, ThreadSafeReference(to: obj))
+                    }
+                default:
+                    break
+                }
+                
+                
+                if reloadFileNodes {
+                    self.initFileNodes(ThreadSafeReference(to: obj))
+                }
             }
             
-            notificationToken = obj.observe { objectChange in
+            objectNotificationToken = obj.observe { objectChange in
                 switch objectChange {
                 case .change(let properties):
                     let propertieKeys = properties.compactMap({ Aria2Object.CodingKeys(rawValue: $0.name) })
@@ -312,7 +330,8 @@ class InfoViewController: NSViewController {
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        notificationToken?.invalidate()
+        fileNotificationToken?.invalidate()
+        objectNotificationToken?.invalidate()
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -339,7 +358,8 @@ class InfoViewController: NSViewController {
     }
     
     deinit {
-        notificationToken?.invalidate()
+        fileNotificationToken?.invalidate()
+        objectNotificationToken?.invalidate()
     }
     
 }
@@ -443,7 +463,7 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
 
 extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
-    func updateFilesOutlineView(_ objRef: ThreadSafeReference<Aria2Object>) {
+    func initFileNodes(_ objRef: ThreadSafeReference<Aria2Object>) {
         
         DispatchQueue.global(qos: .background).async {
 
@@ -521,23 +541,79 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                         }
                     }
                 }
+                self.updateStatus(for: groupChildrens)
+            } catch let error as NSError {
+                fatalError("Error opening realm: \(error)")
+            }
+        }
+    }
+    
+    func updateFileNodes(_ list: [Int], _ objRef: ThreadSafeReference<Aria2Object>) {
+        
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let realm = try Realm()
+                guard let obj = realm.resolve(objRef), self.fileNodes != nil else {
+                    return
+                }
                 
+                let rootPathComponents = self.fileNodes!.path.pathComponents
+                var groupChildrens: [FileNode] = []
+                var shouldUpdateSelected = false
                 
-                // update node state
-                var count = groupChildrens.map({$0.path.pathComponents.count}).max() ?? 0
-                while count > rootPathComponents.count {
-                    groupChildrens.filter {
-                        $0.path.pathComponents.count == count
-                        }.forEach { child in
-                            DispatchQueue.main.async {
-                                child.updateStateWithChildren()
+                obj.files.filter {
+                    list.contains($0.index - 1)
+                    }.map { Aria2File(value: $0) }.forEach { file in
+                        Log(file.path)
+                        var pathComponents = file.path.pathComponents
+                        
+                        guard var currentNode = self.fileNodes else { return }
+                        
+                        if file.path.isChildPath(of: currentNode.path) {
+                            pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+                        }
+                        
+                        while !pathComponents.isEmpty {
+                            guard let title = pathComponents.first, let node = currentNode.getChild(title) else {
+                                pathComponents.removeAll()
+                                return
                             }
-                    }
-                    count -= 1
+                            pathComponents.removeFirst()
+                            currentNode = node
+                            if pathComponents.count != 1 {
+                                groupChildrens.append(node)
+                            }
+                            if currentNode.isLeaf {
+                                let new = FileNode(currentNode.path, file: file, isLeaf: true)
+                                if new.selected != currentNode.selected {
+                                    shouldUpdateSelected = true
+                                }
+                                currentNode = new
+                            }
+                        }
+                }
+                if shouldUpdateSelected {
+                    self.updateStatus(for: groupChildrens)
                 }
             } catch let error as NSError {
                 fatalError("Error opening realm: \(error)")
             }
+        }
+    }
+    
+    func updateStatus(for nodes: [FileNode]) {
+        // update node state
+        guard let rootPathComponents = fileNodes?.path.pathComponents else { return }
+        var count = nodes.map({$0.path.pathComponents.count}).max() ?? 0
+        while count > rootPathComponents.count {
+            nodes.filter {
+                $0.path.pathComponents.count == count
+                }.forEach { child in
+                    DispatchQueue.main.async {
+                        child.updateStateWithChildren()
+                    }
+            }
+            count -= 1
         }
     }
     
@@ -579,79 +655,7 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
 }
 
-@objc(FileNode)
-class FileNode: NSObject {
-    @objc dynamic let path: String
-    let index: Int
-    
-    @objc dynamic let size: String
-    @objc dynamic var progress: String
-    @objc dynamic var selected: Bool
-    
-    @objc dynamic var title: String {
-        get {
-            return path.lastPathComponent
-        }
-    }
-    
-    @objc dynamic var state: NSControl.StateValue {
-        didSet {
-            if isLeaf {
-                selected = state == .on
-            }
-        }
-    }
-    
-    @objc dynamic var children: [FileNode] = []
-    
-    init(_ path: String, file: Aria2File? = nil, isLeaf: Bool) {
-        self.path = path
-        if isLeaf, let file = file {
-            self.size = file.length.ByteFileFormatter()
-            self.progress = file.completedLength == 0 ? "0%" : (Double(file.completedLength) / Double(file.length) * 100).percentageFormat()
-            self.index = file.index
-            self.state = file.selected ? .on : .off
-            self.selected = file.selected
-        } else {
-            self.size = ""
-            self.progress = ""
-            self.index = -1
-            self.state = .off
-            self.selected = false
-        }
-    }
-    
-    func updateData(_ file: Aria2File) {
-        guard file.index == index else { return }
-        self.progress = file.completedLength == 0 ? "0%" : (Double(file.completedLength) / Double(file.length) * 100).percentageFormat()
-    }
-    
-    
-    @objc dynamic var isLeaf: Bool {
-        get {
-            return children.isEmpty
-        }
-    }
-    
-    
-    func getChild(_ title: String) -> FileNode? {
-        return children.filter {
-            $0.title == title
-            }.first
-    }
-    
-    func updateStateWithChildren() {
-        switch (children.filter({ $0.state == .on }).count,
-                children.filter({ $0.state == .off }).count) {
-        case (0, children.count):
-            state = .off
-        case (children.count, 0):
-            state = .on
-        default:
-            state = .mixed
-        }
-    }
-}
+
 
 enum StatusObjectKey: String {
     case gid = "gid"
