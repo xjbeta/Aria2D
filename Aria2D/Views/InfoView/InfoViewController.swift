@@ -289,6 +289,7 @@ class InfoViewController: NSViewController {
     @IBOutlet weak var optionsTableView: NSTableView!
     @IBAction func changeOption(_ sender: Any) {
         if let key = optionKeys[safe: optionsTableView.selectedRow],
+            !key.isGroup,
             !exceptKeys.contains(key.option) {
             performSegue(withIdentifier: .showChangeOptionView, sender: self)
         }
