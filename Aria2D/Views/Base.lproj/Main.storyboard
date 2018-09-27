@@ -3116,9 +3116,9 @@ Gw
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JhX-65-tfs">
-                                                                                        <rect key="frame" x="-2" y="3" width="163" height="17"/>
+                                                                                        <rect key="frame" x="-2" y="3" width="163" height="18"/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="_key" id="ONF-wF-lNo">
-                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <font key="font" metaFont="system" size="14"/>
                                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
@@ -3135,7 +3135,7 @@ Gw
                                                                                 <constraints>
                                                                                     <constraint firstItem="gBn-38-fj7" firstAttribute="top" secondItem="18R-aE-ez3" secondAttribute="top" constant="2" id="6Hj-e8-Xyb"/>
                                                                                     <constraint firstItem="gBn-38-fj7" firstAttribute="leading" secondItem="JhX-65-tfs" secondAttribute="trailing" constant="8" id="6Xa-9N-ujS"/>
-                                                                                    <constraint firstItem="JhX-65-tfs" firstAttribute="top" secondItem="18R-aE-ez3" secondAttribute="top" constant="3" id="JGb-b3-Eom"/>
+                                                                                    <constraint firstItem="JhX-65-tfs" firstAttribute="top" secondItem="18R-aE-ez3" secondAttribute="top" constant="2" id="JGb-b3-Eom"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="gBn-38-fj7" secondAttribute="trailing" constant="8" id="JLK-7c-aQc"/>
                                                                                     <constraint firstItem="JhX-65-tfs" firstAttribute="width" secondItem="gBn-38-fj7" secondAttribute="width" multiplier="9:16" constant="1" id="OPd-BM-8fR"/>
                                                                                     <constraint firstItem="JhX-65-tfs" firstAttribute="leading" secondItem="18R-aE-ez3" secondAttribute="leading" id="iKA-ek-82A"/>
