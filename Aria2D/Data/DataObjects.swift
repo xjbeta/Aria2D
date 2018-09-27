@@ -67,9 +67,9 @@ class Aria2Object: Object, Decodable {
         gid = try values.decode(String.self, forKey: .gid)
         if let files = try values.decodeIfPresent([Aria2File].self, forKey: .files) {
             self.files.removeAll()
-            files.enumerated().forEach {
-                $0.element.id = gid + "-files-\($0.offset)"
-                self.files.append($0.element)
+            files.forEach {
+                $0.id = gid + "-files-\($0.index)"
+                self.files.append($0)
             }
         }
 		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
