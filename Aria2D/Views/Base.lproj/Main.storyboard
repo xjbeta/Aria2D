@@ -3116,7 +3116,7 @@ Gw
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JhX-65-tfs">
-                                                                                        <rect key="frame" x="-2" y="3" width="166" height="17"/>
+                                                                                        <rect key="frame" x="-2" y="3" width="163" height="17"/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="_key" id="ONF-wF-lNo">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3124,7 +3124,7 @@ Gw
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gBn-38-fj7">
-                                                                                        <rect key="frame" x="168" y="3" width="291" height="18"/>
+                                                                                        <rect key="frame" x="165" y="3" width="286" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="_value" id="QsH-uc-f8e">
                                                                                             <font key="font" metaFont="system" size="14"/>
                                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3133,11 +3133,11 @@ Gw
                                                                                     </textField>
                                                                                 </subviews>
                                                                                 <constraints>
+                                                                                    <constraint firstItem="gBn-38-fj7" firstAttribute="top" secondItem="18R-aE-ez3" secondAttribute="top" constant="2" id="6Hj-e8-Xyb"/>
                                                                                     <constraint firstItem="gBn-38-fj7" firstAttribute="leading" secondItem="JhX-65-tfs" secondAttribute="trailing" constant="8" id="6Xa-9N-ujS"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="gBn-38-fj7" secondAttribute="trailing" id="JLK-7c-aQc"/>
-                                                                                    <constraint firstItem="gBn-38-fj7" firstAttribute="centerY" secondItem="18R-aE-ez3" secondAttribute="centerY" id="KU7-xL-WwO"/>
+                                                                                    <constraint firstItem="JhX-65-tfs" firstAttribute="top" secondItem="18R-aE-ez3" secondAttribute="top" constant="3" id="JGb-b3-Eom"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="gBn-38-fj7" secondAttribute="trailing" constant="8" id="JLK-7c-aQc"/>
                                                                                     <constraint firstItem="JhX-65-tfs" firstAttribute="width" secondItem="gBn-38-fj7" secondAttribute="width" multiplier="9:16" constant="1" id="OPd-BM-8fR"/>
-                                                                                    <constraint firstItem="JhX-65-tfs" firstAttribute="centerY" secondItem="18R-aE-ez3" secondAttribute="centerY" id="a4c-7z-hgK"/>
                                                                                     <constraint firstItem="JhX-65-tfs" firstAttribute="leading" secondItem="18R-aE-ez3" secondAttribute="leading" id="iKA-ek-82A"/>
                                                                                 </constraints>
                                                                                 <connections>
@@ -3239,7 +3239,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="Mi8-NA-oMt">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" headerView="c2O-gr-ZQy" id="kR5-pN-Auw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>

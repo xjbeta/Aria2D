@@ -413,6 +413,16 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         if tableView == statusTableView {
+            if statusList[row].key == .errorMessage {
+                let textFiled = NSTextFieldCell()
+                textFiled.font = NSFont.systemFont(ofSize: 14)
+                textFiled.stringValue = statusList[row].value
+                
+                let width = (tableView.bounds.size.width - 16 - tableView.intercellSpacing.width) * 16/25
+                let height = textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: width, height: 400)).height
+                
+                return height < statusList[row].height ? statusList[row].height : height
+            }
             return statusList[row].height
         } else {
             return tableView.rowHeight
