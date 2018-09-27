@@ -289,20 +289,36 @@ class InfoViewController: NSViewController {
     @IBOutlet weak var optionsTableView: NSTableView!
     @IBAction func changeOption(_ sender: Any) {
         if let key = optionKeys[safe: optionsTableView.selectedRow],
-            !exceptKeys.contains(key) {
+            !exceptKeys.contains(key.option) {
             performSegue(withIdentifier: .showChangeOptionView, sender: self)
         }
     }
     var options: [Aria2Option: String] = [:] {
         didSet {
-            optionKeys = options.keys.sorted(by: { $0.rawValue < $1.rawValue })
+            optionKeys = []
+            Array(Set(options.keys.map { $0.preferencesType }))
+                .sorted(by: { $0.rawValue < $1.rawValue })
+                .forEach { type in
+                    // Group Item
+                    optionKeys.append((isGroup: true,
+                                   option: Aria2Option("", valueType: .boolType, type: type)))
+                    // Options for this group
+                    let keys = options.keys.filter {
+                        $0.preferencesType == type
+                    }.sorted(by: { $0.rawValue < $1.rawValue })
+                        .map { option -> (isGroup: Bool, option: Aria2Option) in
+                            return (isGroup: false, option: option)
+                    }
+                    optionKeys.append(contentsOf: keys)
+            }
+            
             DispatchQueue.main.async {
                 self.optionsTableView.reloadData()
             }
         }
     }
     
-    private var optionKeys: [Aria2Option] = []
+    private var optionKeys: [(isGroup: Bool, option: Aria2Option)] = []
     
     let exceptKeys: [Aria2Option] = [.dryRun,
                                      .metalinkBaseUri,
@@ -345,8 +361,8 @@ class InfoViewController: NSViewController {
                 tableviewSegue.popoverBehavior = .transient
                 
                 if let option = optionKeys[safe: optionsTableView.selectedRow] {
-                    vc.optionValue = options[option] ?? ""
-                    vc.option = option
+                    vc.optionValue = options[option.option] ?? ""
+                    vc.option = option.option
                     vc.gid = self.gid
                     vc.changeComplete = {
                         Aria2.shared.getOption(self.gid) {
@@ -401,18 +417,19 @@ extension InfoViewController: NSTabViewDelegate {
 extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if tableView == statusTableView {
+        switch tableView {
+        case statusTableView:
             return statusList.count
-        } else if tableView == optionsTableView {
+        case optionsTableView:
             return optionKeys.count
-        } else {
+        default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if tableView == statusTableView {
+        switch tableView {
+        case statusTableView:
             if statusList[row].key == .errorMessage {
                 let textFiled = NSTextFieldCell()
                 textFiled.font = NSFont.systemFont(ofSize: 14)
@@ -424,31 +441,17 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
                 return height < statusList[row].height ? statusList[row].height : height
             }
             return statusList[row].height
-        } else {
+        case optionsTableView:
             return tableView.rowHeight
+        default:
+            return 0
         }
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        if let title = tableColumn?.title {
-            if tableView == optionsTableView {
-                switch title {
-                case "option":
-                    return optionKeys[safe: row]?.rawValue
-                case "value":
-                    if let key = optionKeys[safe: row] {
-                        return options[key]
-                    }
-                default:
-                    break
-                }
-            }
-        }
-        return nil
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if tableView == statusTableView {
+        
+        switch tableView {
+        case statusTableView:
             switch statusList[row].key {
             case .space:
                 if let view = statusTableView.makeView(withIdentifier: .statusSpaceTableCellView, owner: self) {
@@ -467,8 +470,36 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
                     return view
                 }
             }
+        case optionsTableView:
+            switch tableColumn?.title {
+            case "value":
+                if let view = optionsTableView.makeView(withIdentifier: .optionTableViewValue, owner: nil) as? NSTableCellView, let key = optionKeys[safe: row] {
+                    view.textField?.stringValue = options[key.option] ?? ""
+                    return view
+                }
+            default:
+                if let view = optionsTableView.makeView(withIdentifier: .optionTableViewOption, owner: nil) as? NSTableCellView, let key = optionKeys[safe: row] {
+                    if key.isGroup {
+                        view.textField?.stringValue = key.option.preferencesType.raw()
+                    } else {
+                        view.textField?.stringValue = key.option.rawValue
+                    }
+                    return view
+                }
+            }
+        default:
+            break
         }
         return nil
+    }
+    
+    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
+        switch tableView {
+        case optionsTableView:
+            return optionKeys[row].isGroup
+        default:
+            return false
+        }
     }
     
 }

@@ -31,6 +31,9 @@ extension NSUserInterfaceItemIdentifier {
     static let statusSpaceTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusSpaceTableCellView")
     static let statusBitfieldTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusBitfieldTableCellView")
     static let statusCollectionViewItem = NSUserInterfaceItemIdentifier(rawValue: "StatusCollectionViewItem")
+    static let optionTableViewOption = NSUserInterfaceItemIdentifier(rawValue: "OptionTableViewOption")
+    static let optionTableViewValue = NSUserInterfaceItemIdentifier(rawValue: "OptionTableViewValue")
+    
     //Baidu Login
     static let stepTableCellView = NSUserInterfaceItemIdentifier(rawValue: "StepTableCellView")
     //New Task
