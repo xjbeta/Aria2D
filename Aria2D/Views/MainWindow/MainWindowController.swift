@@ -67,15 +67,4 @@ class MainWindowController: NSWindowController, NSDraggingDestination {
 	}
 }
 
-extension MainWindowController: NSWindowDelegate {
-    func windowDidChangeOcclusionState(_ notification: Notification) {
-        if window?.occlusionState.rawValue == 8194 {
-            //visible
-            Aria2Websocket.shared.resumeTimer()
-        } else {
-            //Occlusion
-            Aria2Websocket.shared.suspendTimer()
-        }
-    }
-}
 

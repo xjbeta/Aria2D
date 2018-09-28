@@ -96,6 +96,10 @@ class DownloadsTableCellView: NSTableCellView {
 		progressIndicator.needsDisplay = true
 	}
 	
+    override var mouseDownCanMoveWindow: Bool {
+        return false
+    }
+    
 	deinit {
 		notificationToken?.invalidate()
 		gid = ""

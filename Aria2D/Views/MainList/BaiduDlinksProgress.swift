@@ -39,8 +39,11 @@ class BaiduDlinksProgress: NSViewController {
         progressIndicator.isHidden = false
         guard let fsIds = dataSource?.selectedObjects() else { return }
         infoTextField.stringValue = "Preparing download links."
+        var shareId: [Int] = []
         Baidu.shared.creatShareLink(fsIds).then {
             Baidu.shared.getSharedLinkInfo($0)
+            }.get {
+                shareId = [$0.shareid]
             }.then {
                 Baidu.shared.getDlinks($0, fsIds: fsIds)
             }.done(on: .main) {
@@ -49,6 +52,8 @@ class BaiduDlinksProgress: NSViewController {
                 self.infoTextField.stringValue = "Enjoy your downloads."
             }.ensure(on: .main) {
                 self.progressIndicator.isHidden = true
+            }.then {
+                Baidu.shared.cancelSharing(_list: shareId)
             }.catch(on: .main) { error in
                 switch error {
                 case BaiduHTTPError.shareFileError:
@@ -57,6 +62,8 @@ class BaiduDlinksProgress: NSViewController {
                     self.infoTextField.stringValue = "Failed to get parameters in share link."
                 case BaiduHTTPError.cantGenerateDlinks:
                     self.infoTextField.stringValue = "Failed to generate dlinks."
+                case BaiduHTTPError.cancelSharingError:
+                    self.infoTextField.stringValue = "Failed to cancel sharing."
                 default:
                     self.infoTextField.stringValue = "Unknown error."
                     Log("Unknown error when generate download lisks \(error)")

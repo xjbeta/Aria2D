@@ -56,10 +56,8 @@ class InfoViewController: NSViewController {
         }
 	}
     
-	var notificationToken: NotificationToken? = nil
-    var getFilesCounter = 0
-    
-//    let object = Aria2Object
+    var objectNotificationToken: NotificationToken? = nil
+    var fileNotificationToken: NotificationToken? = nil
     
 	var gid = "" {
 		didSet {
@@ -71,10 +69,11 @@ class InfoViewController: NSViewController {
         case name, size, status, files, announces
     }
     
-    var notificationTT: NotificationToken? = nil
+   
     
     func initRealmObject() {
-        notificationToken?.invalidate()
+        objectNotificationToken?.invalidate()
+        fileNotificationToken?.invalidate()
         
         Aria2.shared.getServers(gid) {}
         Aria2.shared.getUris(gid) {}
@@ -90,14 +89,32 @@ class InfoViewController: NSViewController {
             update(obj, block: .status)
             update(obj, block: .announces)
             
-            notificationTT = obj.files.observe { _ in
-                self.updateFilesOutlineView(ThreadSafeReference(to: obj))
+            fileNotificationToken = obj.files.observe { objectChange in
+                var reloadFileNodes = true
+                switch objectChange {
+                case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                    if deletions.count == 0, insertions.count == 0 {
+                        reloadFileNodes = false
+                        self.updateFileNodes(modifications, ThreadSafeReference(to: obj))
+                    }
+                default:
+                    break
+                }
+                
+                
+                if reloadFileNodes {
+                    self.initFileNodes(ThreadSafeReference(to: obj))
+                }
             }
             
-            notificationToken = obj.observe { objectChange in
+            objectNotificationToken = obj.observe { objectChange in
                 switch objectChange {
                 case .change(let properties):
-                    let propertieKeys = properties.compactMap({ Aria2Object.CodingKeys(rawValue: $0.name) })
+                    let propertieKeys = properties.filter {
+                        String(describing: $0.newValue) != String(describing: $0.oldValue)
+                        }.compactMap {
+                            Aria2Object.CodingKeys(rawValue: $0.name)
+                    }
                     
                     if propertieKeys.contains(where: [.status, .downloadSpeed, .uploadSpeed, .bittorrent].contains) {
                         switch obj.status {
@@ -139,15 +156,14 @@ class InfoViewController: NSViewController {
                         }
                     }
                     
-
-                    self.getFilesCounter += 1
-                    if self.getFilesCounter == 3 {
+                    if !propertieKeys.contains(.files) {
                         if let str = self.tabView.selectedTabViewItem?.label,
-                            str != "Status" {
-                            self.updateTabView(with: str)
+                            str == "Files" {
+                            Aria2.shared.getFiles(self.gid)
                         }
-                        self.getFilesCounter = 0
                     }
+                case .deleted:
+                    self.view.window?.close()
                 default:
                     break
                 }
@@ -269,20 +285,37 @@ class InfoViewController: NSViewController {
     @IBOutlet weak var optionsTableView: NSTableView!
     @IBAction func changeOption(_ sender: Any) {
         if let key = optionKeys[safe: optionsTableView.selectedRow],
-            !exceptKeys.contains(key) {
+            !key.isGroup,
+            !exceptKeys.contains(key.option) {
             performSegue(withIdentifier: .showChangeOptionView, sender: self)
         }
     }
     var options: [Aria2Option: String] = [:] {
         didSet {
-            optionKeys = options.keys.sorted(by: { $0.rawValue < $1.rawValue })
+            optionKeys = []
+            Array(Set(options.keys.map { $0.preferencesType }))
+                .sorted(by: { $0.rawValue < $1.rawValue })
+                .forEach { type in
+                    // Group Item
+                    optionKeys.append((isGroup: true,
+                                   option: Aria2Option("", valueType: .boolType, type: type)))
+                    // Options for this group
+                    let keys = options.keys.filter {
+                        $0.preferencesType == type
+                    }.sorted(by: { $0.rawValue < $1.rawValue })
+                        .map { option -> (isGroup: Bool, option: Aria2Option) in
+                            return (isGroup: false, option: option)
+                    }
+                    optionKeys.append(contentsOf: keys)
+            }
+            
             DispatchQueue.main.async {
                 self.optionsTableView.reloadData()
             }
         }
     }
     
-    private var optionKeys: [Aria2Option] = []
+    private var optionKeys: [(isGroup: Bool, option: Aria2Option)] = []
     
     let exceptKeys: [Aria2Option] = [.dryRun,
                                      .metalinkBaseUri,
@@ -310,11 +343,6 @@ class InfoViewController: NSViewController {
         statusBitfieldTableCellView = statusTableView.makeView(withIdentifier: .statusBitfieldTableCellView, owner: self) as? StatusBitfieldTableCellView
     }
     
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        notificationToken?.invalidate()
-    }
-    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .showChangeOptionView {
             if let tableviewSegue = segue as? NSTableViewPopoverSegue,
@@ -324,8 +352,8 @@ class InfoViewController: NSViewController {
                 tableviewSegue.popoverBehavior = .transient
                 
                 if let option = optionKeys[safe: optionsTableView.selectedRow] {
-                    vc.optionValue = options[option] ?? ""
-                    vc.option = option
+                    vc.optionValue = options[option.option] ?? ""
+                    vc.option = option.option
                     vc.gid = self.gid
                     vc.changeComplete = {
                         Aria2.shared.getOption(self.gid) {
@@ -339,23 +367,21 @@ class InfoViewController: NSViewController {
     }
     
     deinit {
-        notificationToken?.invalidate()
+        fileNotificationToken?.invalidate()
+        objectNotificationToken?.invalidate()
     }
     
 }
 extension InfoViewController: NSTabViewDelegate {
     
-    func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-        if let str = tabViewItem?.label {
-            updateTabView(with: str)
-        }
+    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        updateTabView()
     }
     
-    func updateTabView(with title: String) {
-        switch title {
+    func updateTabView() {
+        switch tabView.selectedTabViewItem?.label ?? "" {
         case "Status":
             break
-//            update(block: .status)
         case "Options":
             Aria2.shared.getOption(gid) {
                 self.options = $0
@@ -379,44 +405,41 @@ extension InfoViewController: NSTabViewDelegate {
 extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if tableView == statusTableView {
+        switch tableView {
+        case statusTableView:
             return statusList.count
-        } else if tableView == optionsTableView {
+        case optionsTableView:
             return optionKeys.count
-        } else {
+        default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if tableView == statusTableView {
-            return statusList[row].height
-        } else {
-            return tableView.rowHeight
-        }
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        if let title = tableColumn?.title {
-            if tableView == optionsTableView {
-                switch title {
-                case "option":
-                    return optionKeys[safe: row]?.rawValue
-                case "value":
-                    if let key = optionKeys[safe: row] {
-                        return options[key]
-                    }
-                default:
-                    break
-                }
+        switch tableView {
+        case statusTableView:
+            if statusList[row].key == .errorMessage {
+                let textFiled = NSTextFieldCell()
+                textFiled.font = NSFont.systemFont(ofSize: 14)
+                textFiled.stringValue = statusList[row].value
+                
+                let width = (tableView.bounds.size.width - 16 - tableView.intercellSpacing.width) * 16/25
+                let height = textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: width, height: 400)).height
+                
+                return height < statusList[row].height ? statusList[row].height : height
             }
+            return statusList[row].height
+        case optionsTableView:
+            return tableView.rowHeight
+        default:
+            return 0
         }
-        return nil
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if tableView == statusTableView {
+        
+        switch tableView {
+        case statusTableView:
             switch statusList[row].key {
             case .space:
                 if let view = statusTableView.makeView(withIdentifier: .statusSpaceTableCellView, owner: self) {
@@ -435,15 +458,43 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
                     return view
                 }
             }
+        case optionsTableView:
+            switch tableColumn?.title {
+            case "value":
+                if let view = optionsTableView.makeView(withIdentifier: .optionTableViewValue, owner: nil) as? NSTableCellView, let key = optionKeys[safe: row] {
+                    view.textField?.stringValue = options[key.option] ?? ""
+                    return view
+                }
+            default:
+                if let view = optionsTableView.makeView(withIdentifier: .optionTableViewOption, owner: nil) as? NSTableCellView, let key = optionKeys[safe: row] {
+                    if key.isGroup {
+                        view.textField?.stringValue = key.option.preferencesType.raw()
+                    } else {
+                        view.textField?.stringValue = key.option.rawValue
+                    }
+                    return view
+                }
+            }
+        default:
+            break
         }
         return nil
+    }
+    
+    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
+        switch tableView {
+        case optionsTableView:
+            return optionKeys[row].isGroup
+        default:
+            return false
+        }
     }
     
 }
 
 extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
-    func updateFilesOutlineView(_ objRef: ThreadSafeReference<Aria2Object>) {
+    func initFileNodes(_ objRef: ThreadSafeReference<Aria2Object>) {
         
         DispatchQueue.global(qos: .background).async {
 
@@ -521,23 +572,80 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                         }
                     }
                 }
+                self.updateStatus(for: groupChildrens)
+            } catch let error as NSError {
+                fatalError("Error opening realm: \(error)")
+            }
+        }
+    }
+    
+    func updateFileNodes(_ list: [Int], _ objRef: ThreadSafeReference<Aria2Object>) {
+        
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let realm = try Realm()
+                guard let obj = realm.resolve(objRef), self.fileNodes != nil else {
+                    return
+                }
                 
+                let rootPathComponents = self.fileNodes!.path.pathComponents
+                var groupChildrens: [FileNode] = []
+                var shouldUpdateSelected = false
                 
-                // update node state
-                var count = groupChildrens.map({$0.path.pathComponents.count}).max() ?? 0
-                while count > rootPathComponents.count {
-                    groupChildrens.filter {
-                        $0.path.pathComponents.count == count
-                        }.forEach { child in
-                            DispatchQueue.main.async {
-                                child.updateStateWithChildren()
+                obj.files.filter {
+                    list.contains($0.index - 1)
+                    }.map { Aria2File(value: $0) }.forEach { file in
+                        var pathComponents = file.path.pathComponents
+                        
+                        guard var currentNode = self.fileNodes else { return }
+                        
+                        if file.path.isChildPath(of: currentNode.path) {
+                            pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+                        }
+                        
+                        while !pathComponents.isEmpty {
+                            guard let title = pathComponents.first, let node = currentNode.getChild(title) else {
+                                pathComponents.removeAll()
+                                return
                             }
-                    }
-                    count -= 1
+                            pathComponents.removeFirst()
+                            currentNode = node
+                            if pathComponents.count != 1 {
+                                groupChildrens.append(node)
+                            }
+                            if currentNode.isLeaf {
+                                let new = FileNode(currentNode.path, file: file, isLeaf: true)
+                                if new.selected != currentNode.selected {
+                                    shouldUpdateSelected = true
+                                }
+                                DispatchQueue.main.async {
+                                    currentNode.updateData(file)
+                                }
+                            }
+                        }
+                }
+                if shouldUpdateSelected {
+                    self.updateStatus(for: groupChildrens)
                 }
             } catch let error as NSError {
                 fatalError("Error opening realm: \(error)")
             }
+        }
+    }
+    
+    func updateStatus(for nodes: [FileNode]) {
+        // update node state
+        guard let rootPathComponents = fileNodes?.path.pathComponents else { return }
+        var count = nodes.map({$0.path.pathComponents.count}).max() ?? 0
+        while count > rootPathComponents.count {
+            nodes.filter {
+                $0.path.pathComponents.count == count
+                }.forEach { child in
+                    DispatchQueue.main.async {
+                        child.updateStateWithChildren()
+                    }
+            }
+            count -= 1
         }
     }
     
@@ -579,79 +687,7 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
 }
 
-@objc(FileNode)
-class FileNode: NSObject {
-    @objc dynamic let path: String
-    let index: Int
-    
-    @objc dynamic let size: String
-    @objc dynamic var progress: String
-    @objc dynamic var selected: Bool
-    
-    @objc dynamic var title: String {
-        get {
-            return path.lastPathComponent
-        }
-    }
-    
-    @objc dynamic var state: NSControl.StateValue {
-        didSet {
-            if isLeaf {
-                selected = state == .on
-            }
-        }
-    }
-    
-    @objc dynamic var children: [FileNode] = []
-    
-    init(_ path: String, file: Aria2File? = nil, isLeaf: Bool) {
-        self.path = path
-        if isLeaf, let file = file {
-            self.size = file.length.ByteFileFormatter()
-            self.progress = file.completedLength == 0 ? "0%" : (Double(file.completedLength) / Double(file.length) * 100).percentageFormat()
-            self.index = file.index
-            self.state = file.selected ? .on : .off
-            self.selected = file.selected
-        } else {
-            self.size = ""
-            self.progress = ""
-            self.index = -1
-            self.state = .off
-            self.selected = false
-        }
-    }
-    
-    func updateData(_ file: Aria2File) {
-        guard file.index == index else { return }
-        self.progress = file.completedLength == 0 ? "0%" : (Double(file.completedLength) / Double(file.length) * 100).percentageFormat()
-    }
-    
-    
-    @objc dynamic var isLeaf: Bool {
-        get {
-            return children.isEmpty
-        }
-    }
-    
-    
-    func getChild(_ title: String) -> FileNode? {
-        return children.filter {
-            $0.title == title
-            }.first
-    }
-    
-    func updateStateWithChildren() {
-        switch (children.filter({ $0.state == .on }).count,
-                children.filter({ $0.state == .off }).count) {
-        case (0, children.count):
-            state = .off
-        case (children.count, 0):
-            state = .on
-        default:
-            state = .mixed
-        }
-    }
-}
+
 
 enum StatusObjectKey: String {
     case gid = "gid"

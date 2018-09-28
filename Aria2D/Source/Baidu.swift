@@ -14,6 +14,20 @@ class Baidu: NSObject {
 	
 	static let shared = Baidu()
 	private override init() {
+        
+        networkReachabilityManager = NetworkReachabilityManager(host: "pan.baidu.com")!
+        networkReachabilityManager.listener = { status in
+            switch status {
+            case .notReachable:
+                Log("Network notReachable")
+            case .reachable:
+                Log("Network reachable")
+            case .unknown:
+                Log("Network unknown")
+            }
+        }
+        networkReachabilityManager.startListening()
+        
         var headers = Alamofire.SessionManager.defaultHTTPHeaders
         headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:63.0) Gecko/20100101 Firefox/63.0"
         let baiduConf = URLSessionConfiguration.default
@@ -28,6 +42,8 @@ class Baidu: NSObject {
         privateHTTP = SessionManager(configuration: privateConf,
                                      serverTrustPolicyManager: BaiduTrustPolicyManager(policies: [:]))
 	}
+    
+    let networkReachabilityManager: NetworkReachabilityManager
     let baiduHTTP: SessionManager
     let privateHTTP: SessionManager
 
@@ -247,7 +263,7 @@ class Baidu: NSObject {
     
     struct BaiduDlink: Decodable {
         let fileName: String
-        let md5: String
+        let md5: String = ""
         let dlink: String
         var dlinks: [String] = []
         let cdnList = ["https://pcs.baidu.com",
@@ -262,13 +278,11 @@ class Baidu: NSObject {
                        "https://ipv6.baidupcs.com"]
         private enum CodingKeys: String, CodingKey {
             case fileName = "server_filename",
-            md5,
             dlink
         }
         init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             fileName = try values.decode(String.self, forKey: .fileName)
-            md5 = try values.decode(String.self, forKey: .md5)
             dlink = try values.decode(String.self, forKey: .dlink)
             dlinks = cdnList.map {
                 $0 + dlink.subString(from: "com")
@@ -302,6 +316,27 @@ class Baidu: NSObject {
                         return
                     }
                     resolver.fulfill(re.list)
+            }
+        }
+    }
+    
+    func cancelSharing(_list: [Int]) -> Promise<Void> {
+        let p = ["shareid_list": "\(_list)"]
+        
+        return Promise { resolver in
+            baiduHTTP.request("https://pan.baidu.com/share/cancel?web=1&channel=chunlei&web=1&bdstoken=\(bdStoken)&clienttype=0", method: .post, parameters: p)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                        return
+                    }
+                    
+                    guard let re = $0.data?.decode(PCSErrno.self), re.errno == 0 else {
+                        resolver.reject(BaiduHTTPError.cancelSharingError)
+                        return
+                    }
+                    resolver.fulfill(())
             }
         }
     }
@@ -354,4 +389,7 @@ enum BaiduHTTPError: Error {
     
     // Get file list
     case cantGetList
+    
+    // Cancel sharing
+    case cancelSharingError
 }

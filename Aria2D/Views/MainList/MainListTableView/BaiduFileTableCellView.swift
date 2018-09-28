@@ -55,5 +55,9 @@ class BaiduFileTableCellView: NSTableCellView {
         }
 		fsid = "\(data.fsID)"
     }
+    
+    override var mouseDownCanMoveWindow: Bool {
+        return false
+    }
 	
 }

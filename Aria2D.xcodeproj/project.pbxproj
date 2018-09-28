@@ -30,13 +30,13 @@
 		012B57282158875000D1AC03 /* BaiduTrustPolicyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B57272158875000D1AC03 /* BaiduTrustPolicyManager.swift */; };
 		012B572C2159146600D1AC03 /* BaiduPathControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572B2159146600D1AC03 /* BaiduPathControl.swift */; };
 		012B572E21591AFD00D1AC03 /* RealmBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572D21591AFD00D1AC03 /* RealmBind.swift */; };
+		012B57302159267400D1AC03 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572F2159267400D1AC03 /* FileNode.swift */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
 		012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */; };
 		012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */; };
 		012CBD6F1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD6B1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift */; };
-		012CBD751F6CC57F00EFD1D4 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD711F6CC57E00EFD1D4 /* InfoView.swift */; };
 		012CBD761F6CC57F00EFD1D4 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */; };
 		012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */; };
 		012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */; };
@@ -83,6 +83,7 @@
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
+		019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */; };
 		019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019FAD9F1EA65B880032A60B /* LogWindowController.swift */; };
 		01A0B4291DCB25FD0053FB9B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0B4281DCB25FD0053FB9B /* LoadingView.swift */; };
 		01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */; };
@@ -160,13 +161,13 @@
 		012B57272158875000D1AC03 /* BaiduTrustPolicyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduTrustPolicyManager.swift; sourceTree = "<group>"; };
 		012B572B2159146600D1AC03 /* BaiduPathControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduPathControl.swift; sourceTree = "<group>"; };
 		012B572D21591AFD00D1AC03 /* RealmBind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmBind.swift; sourceTree = "<group>"; };
+		012B572F2159267400D1AC03 /* FileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItem.swift; sourceTree = "<group>"; };
 		012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItemView.swift; sourceTree = "<group>"; };
 		012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDicTableCellView.swift; sourceTree = "<group>"; };
 		012CBD6B1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBitfieldTableCellView.swift; sourceTree = "<group>"; };
-		012CBD711F6CC57E00EFD1D4 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableViewPopoverSegue.swift; sourceTree = "<group>"; };
@@ -213,6 +214,7 @@
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ErrorCode.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
+		019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTableView.swift; sourceTree = "<group>"; };
 		019FAD9F1EA65B880032A60B /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		01A0B4281DCB25FD0053FB9B /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		01A5350121282C7000E5C88C /* Aria2OptionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionCellView.swift; sourceTree = "<group>"; };
@@ -387,7 +389,7 @@
 				012CBD701F6CC56700EFD1D4 /* StatusView */,
 				012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */,
 				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
-				012CBD711F6CC57E00EFD1D4 /* InfoView.swift */,
+				012B572F2159267400D1AC03 /* FileNode.swift */,
 				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
 				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
 				012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */,
@@ -499,6 +501,7 @@
 		019BFF5F2125D95700E715CC /* MainListTableView */ = {
 			isa = PBXGroup;
 			children = (
+				019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */,
 				0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */,
 				01EB1CC51D634F4A00F2925F /* BaiduFileTableCellView.swift */,
 			);
@@ -684,12 +687,12 @@
 				010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */,
 				012B572C2159146600D1AC03 /* BaiduPathControl.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
+				012B57302159267400D1AC03 /* FileNode.swift in Sources */,
 				0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */,
 				01BBC9181D6FDE67006B5ED7 /* BaiduFileListMenu.swift in Sources */,
 				010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */,
 				01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */,
 				019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */,
-				012CBD751F6CC57F00EFD1D4 /* InfoView.swift in Sources */,
 				016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */,
 				010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */,
 				010B59181D3CF66600550A43 /* MainMenu.swift in Sources */,
@@ -706,6 +709,7 @@
 				019FADA01EA65B880032A60B /* LogWindowController.swift in Sources */,
 				01DEC4CB20C3F062007D21F0 /* BaiduViewController.swift in Sources */,
 				01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */,
+				019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */,
 				012B572E21591AFD00D1AC03 /* RealmBind.swift in Sources */,
 				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FD5B8E1D8CCDC600FCCB98 /* BaiduDlinksProgress.swift in Sources */,

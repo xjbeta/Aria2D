@@ -111,21 +111,40 @@ class DataManager: NSObject {
     
 	func updateFiles(_ gid: String, files: [Aria2File]) {
 		writeToRealm { realm in
-			if let obj = realm.object(ofType: Aria2Object.self, forPrimaryKey: gid) {
+            if let obj = realm.object(ofType: Aria2Object.self, forPrimaryKey: gid) {
                 var oldFiles: [Aria2File] = []
                 obj.files.forEach {
                     oldFiles.append($0)
                 }
+                
+                guard oldFiles.count != files.count else {
+                    files.forEach {
+                        $0.id = gid + "-files-\($0.index)"
+                    }
+                    files.filter {
+                        guard let old = realm.object(ofType: Aria2File.self, forPrimaryKey: $0.id) else {
+                            return true
+                        }
+                        return $0.completedLength != old.completedLength ||
+                        $0.path != old.path ||
+                        $0.length != old.length ||
+                        $0.selected != old.selected
+                        }.forEach {
+                            realm.add($0, update: true)
+                    }
+                    return
+                }
+                
                 realm.delete(oldFiles)
-				obj.files.removeAll()
+                obj.files.removeAll()
                 let newFiles = files
-                    
+
                 newFiles.enumerated().forEach {
                     $0.element.id = gid + "-files-\($0.offset)"
                 }
-                
+
                 obj.files.append(objectsIn: newFiles)
-			}
+            }
 		}
 	}
 

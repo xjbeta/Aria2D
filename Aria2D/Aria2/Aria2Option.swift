@@ -105,7 +105,7 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 	}
 	
 	
-	enum PreferencesType {
+    enum PreferencesType: Int {
 		case general
 		case ftpRelated
 		case httpRelated
@@ -114,6 +114,19 @@ struct Aria2Option: RawRepresentable, Hashable, Codable {
 		case metalinkRelated
 		case other
         case none
+        
+        func raw() -> String {
+            switch self {
+            case .general: return "general"
+            case .ftpRelated: return "ftpRelated"
+            case .httpRelated: return "httpRelated"
+            case .proxyRelated: return "proxyRelated"
+            case .bitTorrentRelated: return "bitTorrentRelated"
+            case .metalinkRelated: return "metalinkRelated"
+            case .other: return "other"
+            case .none: return "none"
+            }
+        }
 	}
 	
 	// 213

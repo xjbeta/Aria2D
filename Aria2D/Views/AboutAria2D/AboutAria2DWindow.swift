@@ -12,13 +12,9 @@ class AboutAria2DWindow: NSWindowController {
 	
 	override func windowDidLoad() {
 		super.windowDidLoad()
-		
 		window?.titlebarAppearsTransparent = true
 		window?.titleVisibility = .hidden
 		window?.isMovableByWindowBackground = true
-		//Set color
-		window?.backgroundColor = NSColor.white
-		window?.contentView?.wantsLayer = true
 	}
 	
 }
