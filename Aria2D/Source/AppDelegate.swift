@@ -87,6 +87,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func applicationDidChangeOcclusionState(_ notification: Notification) {
+        if NSApp.occlusionState.rawValue == 8194 {
+            //visible
+            Aria2Websocket.shared.resumeTimer()
+        } else {
+            //Occlusion
+            Aria2Websocket.shared.suspendTimer()
+        }
+    }
+    
 }
 
 extension AppDelegate: DevMateKitDelegate {
