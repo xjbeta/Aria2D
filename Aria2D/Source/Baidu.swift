@@ -263,7 +263,7 @@ class Baidu: NSObject {
     
     struct BaiduDlink: Decodable {
         let fileName: String
-        let md5: String
+        let md5: String = ""
         let dlink: String
         var dlinks: [String] = []
         let cdnList = ["https://pcs.baidu.com",
@@ -278,13 +278,11 @@ class Baidu: NSObject {
                        "https://ipv6.baidupcs.com"]
         private enum CodingKeys: String, CodingKey {
             case fileName = "server_filename",
-            md5,
             dlink
         }
         init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             fileName = try values.decode(String.self, forKey: .fileName)
-            md5 = try values.decode(String.self, forKey: .md5)
             dlink = try values.decode(String.self, forKey: .dlink)
             dlinks = cdnList.map {
                 $0 + dlink.subString(from: "com")
