@@ -58,9 +58,6 @@ class InfoViewController: NSViewController {
     
     var objectNotificationToken: NotificationToken? = nil
     var fileNotificationToken: NotificationToken? = nil
-    var getFilesCounter = 0
-    
-//    let object = Aria2Object
     
 	var gid = "" {
 		didSet {
@@ -115,7 +112,11 @@ class InfoViewController: NSViewController {
             objectNotificationToken = obj.observe { objectChange in
                 switch objectChange {
                 case .change(let properties):
-                    let propertieKeys = properties.compactMap({ Aria2Object.CodingKeys(rawValue: $0.name) })
+                    let propertieKeys = properties.filter {
+                        String(describing: $0.newValue) != String(describing: $0.oldValue)
+                        }.compactMap {
+                            Aria2Object.CodingKeys(rawValue: $0.name)
+                    }
                     
                     if propertieKeys.contains(where: [.status, .downloadSpeed, .uploadSpeed, .bittorrent].contains) {
                         switch obj.status {
@@ -157,14 +158,12 @@ class InfoViewController: NSViewController {
                         }
                     }
                     
-
-                    self.getFilesCounter += 1
-                    if self.getFilesCounter == 3 {
+                    if !propertieKeys.contains(.files) {
                         if let str = self.tabView.selectedTabViewItem?.label,
-                            str != "Status" {
-                            self.updateTabView(with: str)
+                            str == "Files" {
+                            Log("getFiles")
+                            Aria2.shared.getFiles(self.gid)
                         }
-                        self.getFilesCounter = 0
                     }
                 case .deleted:
                     self.view.window?.close()
@@ -347,12 +346,6 @@ class InfoViewController: NSViewController {
         statusBitfieldTableCellView = statusTableView.makeView(withIdentifier: .statusBitfieldTableCellView, owner: self) as? StatusBitfieldTableCellView
     }
     
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        fileNotificationToken?.invalidate()
-        objectNotificationToken?.invalidate()
-    }
-    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .showChangeOptionView {
             if let tableviewSegue = segue as? NSTableViewPopoverSegue,
@@ -384,17 +377,14 @@ class InfoViewController: NSViewController {
 }
 extension InfoViewController: NSTabViewDelegate {
     
-    func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-        if let str = tabViewItem?.label {
-            updateTabView(with: str)
-        }
+    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        updateTabView()
     }
     
-    func updateTabView(with title: String) {
-        switch title {
+    func updateTabView() {
+        switch tabView.selectedTabViewItem?.label ?? "" {
         case "Status":
             break
-//            update(block: .status)
         case "Options":
             Aria2.shared.getOption(gid) {
                 self.options = $0
@@ -632,7 +622,9 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                                 if new.selected != currentNode.selected {
                                     shouldUpdateSelected = true
                                 }
-                                currentNode = new
+                                DispatchQueue.main.async {
+                                    currentNode.updateData(file)
+                                }
                             }
                         }
                 }
