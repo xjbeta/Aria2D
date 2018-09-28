@@ -93,8 +93,6 @@ class InfoViewController: NSViewController {
                 var reloadFileNodes = true
                 switch objectChange {
                 case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-                    Log("deletions\(deletions), insertions\(insertions), modifications\(modifications)")
-                    
                     if deletions.count == 0, insertions.count == 0 {
                         reloadFileNodes = false
                         self.updateFileNodes(modifications, ThreadSafeReference(to: obj))
@@ -161,7 +159,6 @@ class InfoViewController: NSViewController {
                     if !propertieKeys.contains(.files) {
                         if let str = self.tabView.selectedTabViewItem?.label,
                             str == "Files" {
-                            Log("getFiles")
                             Aria2.shared.getFiles(self.gid)
                         }
                     }
@@ -598,7 +595,6 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                 obj.files.filter {
                     list.contains($0.index - 1)
                     }.map { Aria2File(value: $0) }.forEach { file in
-                        Log(file.path)
                         var pathComponents = file.path.pathComponents
                         
                         guard var currentNode = self.fileNodes else { return }
