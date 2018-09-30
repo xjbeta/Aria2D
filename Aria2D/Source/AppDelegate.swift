@@ -33,7 +33,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        let _ = try! Realm()
+        do {
+            let _ = try Realm()
+        } catch let error {
+            assert(true, "Can't init Realm database: \(error)")
+        }
+        
     }
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
