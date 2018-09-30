@@ -43,7 +43,12 @@ class DownloadsTableCellView: NSTableCellView {
 		case .downloading:
 			if obj.status == .active {
 				time.stringValue = timeFormat(obj.totalLength - obj.completedLength, speed: obj.downloadSpeed)
-				status.stringValue = "\(obj.downloadSpeed.ByteFileFormatter())/s"
+                
+                if obj.bittorrent != nil, obj.totalLength == obj.completedLength {
+                    status.stringValue = "⬆︎ \(obj.uploadSpeed.ByteFileFormatter())/s"
+                } else {
+                    status.stringValue = "\(obj.downloadSpeed.ByteFileFormatter())/s"
+                }
 			} else {
 				time.stringValue = ""
 				status.stringValue = obj.status.string()
