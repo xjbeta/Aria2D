@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             let _ = try Realm()
         } catch let error {
-            assert(true, "Can't init Realm database: \(error)")
+            assert(false, "Can't init Realm database: \(error)")
         }
         
     }
