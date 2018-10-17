@@ -3239,7 +3239,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="Mi8-NA-oMt">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="kR5-pN-Auw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="461" height="405"/>
@@ -3355,7 +3355,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" id="y12-II-h7D">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>
