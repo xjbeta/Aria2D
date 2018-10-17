@@ -263,11 +263,9 @@ extension MainListViewController: NSMenuDelegate {
 }
 
 extension MainListViewController: BaiduDlinksDataSource {
-	func selectedObjects() -> [Int] {
+	func selectedObjects() -> [PCSFile] {
 		return selectedObjects(PCSFile.self).filter {
 			!$0.isBackButton && !$0.isdir
-            }.map {
-                $0.fsID
         }
 	}
 }

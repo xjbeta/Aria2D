@@ -227,7 +227,7 @@ class Aria2: NSObject {
         }
     }
 
-    func addUri(fromBaidu uri: [String], name: String, md5: String = "") {
+    func addUri(fromBaidu uri: [String], name: String, md5: String = "", isPCS: Bool = false, bduss: String = "") {
         guard uri.count > 0 else { return }
 
         var options: [String: String] = ["out": name,
@@ -236,6 +236,12 @@ class Aria2: NSObject {
             "max-connection-per-server": "16",
             "min-split-size": "1M",
             "user-agent": "netdisk"]
+        
+        if isPCS {
+            options["max-connection-per-server"] = "10"
+            options["header"] = "Cookie: BDUSS=\(bduss)"
+        }
+        
         if md5 != "" {
             options["check-integrity"] = "true"
             options["checksum"] = "md5=\(md5)"

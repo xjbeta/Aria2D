@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol BaiduDlinksDataSource {
-	func selectedObjects() -> [Int]
+	func selectedObjects() -> [PCSFile]
 }
 
 class BaiduDlinksProgress: NSViewController {
@@ -25,19 +25,37 @@ class BaiduDlinksProgress: NSViewController {
 	
 	@IBAction func downloadTasks(_ sender: Any) {
         dlinks.forEach {
-            Aria2.shared.addUri(fromBaidu: $0.dlinks, name: $0.fileName, md5: $0.md5)
+            Aria2.shared.addUri(fromBaidu: $0.dlinks, name: $0.fileName, md5: $0.md5, isPCS: usePcs, bduss: bduss)
         }
 		self.dismiss(self)
 	}
     
 	var dlinks: [Baidu.BaiduDlink] = []
+    
+    var usePcs = true
+    var bduss = ""
 	
 	override func viewDidAppear() {
 		super.viewDidAppear()
+
         downloadButton.isEnabled = false
         progressIndicator.startAnimation(nil)
         progressIndicator.isHidden = false
-        guard let fsIds = dataSource?.selectedObjects() else { return }
+        
+        if usePcs {
+            preparePcsUrls()
+        } else {
+            prepareDlinks()
+        }
+	}
+    
+    func prepareDlinks() {
+
+        
+        guard let objs = dataSource?.selectedObjects() else { return }
+        let fsIds = objs.map {
+            $0.fsID
+        }
         infoTextField.stringValue = "Preparing download links."
         var shareId: [Int] = []
         Baidu.shared.creatShareLink(fsIds).then {
@@ -69,5 +87,27 @@ class BaiduDlinksProgress: NSViewController {
                     Log("Unknown error when generate download lisks \(error)")
                 }
         }
-	}
+    }
+    
+    func preparePcsUrls() {
+
+        guard let objs = dataSource?.selectedObjects() else { return }
+        dlinks = objs.map {
+            $0.path
+            }.map {
+                Baidu.shared.getLinksWithPcs($0)
+        }
+        
+        guard let bduss = HTTPCookieStorage.shared.cookies?.filter({
+            $0.name == "BDUSS"
+        }).first?.value else {
+            infoTextField.stringValue = "Can't find baidu cookies."
+            return
+        }
+        
+        self.bduss = bduss
+        downloadButton.isEnabled = true
+        progressIndicator.isHidden = true
+        infoTextField.stringValue = "Enjoy your downloads."
+    }
 }

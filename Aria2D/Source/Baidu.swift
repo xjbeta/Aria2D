@@ -207,6 +207,9 @@ class Baidu: NSObject {
         }
     }
     
+    
+    // MARK: - Download with share
+    
     func creatShareLink(_ fsIds: [Int]) -> Promise<String> {
         let p = [
             "fid_list": "\(fsIds)",
@@ -288,6 +291,34 @@ class Baidu: NSObject {
                 $0 + dlink.subString(from: "com")
             }
         }
+        init(_ path: String) {
+            dlink = ""
+            
+            fileName = path.lastPathComponent
+            
+            let cdn = ["https://pcs.baidu.com",
+                       "https://c.pcs.baidu.com",
+                       "https://c3.pcs.baidu.com",
+                       "https://d3.pcs.baidu.com"]
+            
+            let URLString =
+//                cdn.map {
+//                $0 + "/rest/2.0/pcs/file?"
+//                } +
+                cdn.map {
+                    $0 + "/rest/2.0/pcs/stream?"
+            }
+            
+            var reserved = CharacterSet.urlQueryAllowed
+            reserved.remove(charactersIn: ": #[]@!$&'()*+, ;=")
+            
+            let encodePath = path.addingPercentEncoding(withAllowedCharacters: reserved) ?? "/"
+            let params = "app_id=266719&method=download&path=\(encodePath)"
+            
+            dlinks = URLString.map {
+                $0 + params
+            }
+        }
     }
     
 
@@ -363,6 +394,19 @@ class Baidu: NSObject {
             }
         }
     }
+    
+    // MARK: - Download with PCS
+    
+    func getLinksWithPcs(_ path: String) -> BaiduDlink {
+        
+//        http://pcs.baidu.com/rest/2.0/pcs/file?app_id=266719&method=download&path=%2Fcn_windows_10_business_editions_version_1803_updated_march_2018_x64_dvd_12063730.iso
+///BDUSS=prUXJHSTRvRUlhTFlTOFBCOEJGQzlPVEtaMFVSMjdUSkRrS0JFa2pEck5FTzViQVFBQUFBJCQAAAAAAAAAAAEAAAC7FFkpdGlueV~Qx7~VAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM2DxlvNg8ZbS1
+
+        return BaiduDlink(path)
+    }
+    
+    
+    
 }
 
 extension DefaultDataResponse {
