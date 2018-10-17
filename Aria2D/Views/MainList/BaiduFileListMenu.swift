@@ -14,13 +14,11 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 	@IBOutlet var sizeItem: NSMenuItem!
 	@IBOutlet var dateItem: NSMenuItem!
 	
-	
 	@IBOutlet var ascendingItem: NSMenuItem!
 	@IBOutlet var descendingItem: NSMenuItem!
 	
 	@IBOutlet var downloadItem: NSMenuItem!
 	@IBOutlet var deleteItem: NSMenuItem!
-	
 	
 	@IBAction func sortItem(_ sender: NSMenuItem) {
 		switch sender {
@@ -36,7 +34,6 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		refreshMainList()
 	}
 	
-	
 	@IBAction func ascendingItem(_ sender: NSMenuItem) {
 		switch sender {
 		case ascendingItem:
@@ -49,12 +46,13 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		refreshMainList()
 	}
 	
-	
-	
 	@IBAction func download(_ sender: Any) {
-		NotificationCenter.default.post(name: .getDlinks, object: nil)
+        NotificationCenter.default.post(name: .getDlinks, object: nil, userInfo: ["unsafely": false])
 	}
-	
+    @IBAction func downloadUnsafely(_ sender: Any) {
+        NotificationCenter.default.post(name: .getDlinks, object: nil, userInfo: ["unsafely": true])
+    }
+    
 	@IBAction func delete(_ sender: Any) {
 		NotificationCenter.default.post(name: .deleteFile, object: nil)
 	}
@@ -92,10 +90,9 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		}
 	}
 	
-	
-	 func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
-		if menuItem.action == #selector(download) {
+		if menuItem.action == #selector(download) || menuItem.action == #selector(downloadUnsafely) {
 			return Aria2Websocket.shared.isConnected
 				&& Baidu.shared.isLogin
 				&& selectedIndexs.count > 0
@@ -107,9 +104,4 @@ class BaiduFileListMenu: NSMenu, NSMenuItemValidation {
 		
 		return true
 	}
-	
-
-
-    
-    
 }

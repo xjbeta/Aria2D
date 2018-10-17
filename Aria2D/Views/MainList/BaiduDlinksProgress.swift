@@ -25,14 +25,14 @@ class BaiduDlinksProgress: NSViewController {
 	
 	@IBAction func downloadTasks(_ sender: Any) {
         dlinks.forEach {
-            Aria2.shared.addUri(fromBaidu: $0.dlinks, name: $0.fileName, md5: $0.md5, isPCS: usePcs, bduss: bduss)
+            Aria2.shared.addUri(fromBaidu: $0.dlinks, name: $0.fileName, md5: $0.md5, isPCS: enablePcsDownload, bduss: bduss)
         }
 		self.dismiss(self)
 	}
     
 	var dlinks: [Baidu.BaiduDlink] = []
     
-    var usePcs = true
+    var enablePcsDownload = false
     var bduss = ""
 	
 	override func viewDidAppear() {
@@ -42,7 +42,7 @@ class BaiduDlinksProgress: NSViewController {
         progressIndicator.startAnimation(nil)
         progressIndicator.isHidden = false
         
-        if usePcs {
+        if enablePcsDownload {
             preparePcsUrls()
         } else {
             prepareDlinks()

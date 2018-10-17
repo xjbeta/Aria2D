@@ -1547,6 +1547,12 @@ CA
                                 <action selector="download:" target="H9X-fo-5n4" id="Eej-dV-Dzi"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Download unsafely" id="dwv-Me-rAS">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="downloadUnsafely:" target="H9X-fo-5n4" id="AgZ-cL-jdJ"/>
+                            </connections>
+                        </menuItem>
                         <menuItem isSeparatorItem="YES" id="jQy-3d-0td"/>
                         <menuItem title="Delete" id="Bgi-kd-Pfp">
                             <modifierMask key="keyEquivalentModifierMask"/>

@@ -53,6 +53,8 @@ class MainListViewController: NSViewController {
     }
     var dlinksProgress: BaiduDlinksProgress!
     var notificationToken: NotificationToken? = nil
+    
+    var enablePcsDownload = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -64,6 +66,7 @@ class MainListViewController: NSViewController {
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		if segue.identifier == .showBaiduDlinksProgress {
 			if let vc = segue.destinationController as? BaiduDlinksProgress {
+                vc.enablePcsDownload = enablePcsDownload
 				vc.dataSource = self
 			}
         } else if segue.identifier == .showInfoWindow {
@@ -77,17 +80,19 @@ class MainListViewController: NSViewController {
 	
     func initNotification() {
         setRealmNotification()
-        NotificationCenter.default.addObserver(self, selector: #selector(getDlinks), name: .getDlinks, object: nil)
+        NotificationCenter.default.addObserver(forName: .getDlinks, object: nil, queue: .main) {
+            if let info = $0.userInfo as? [String: Bool],
+                let unsafely = info["unsafely"] {
+                self.enablePcsDownload = unsafely
+                self.performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
+            }
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(deleteBaiduFile), name: .deleteFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: .showInfoWindow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(sidebarSelectionChanged), name: .sidebarSelectionChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shouldReloadData), name: .refreshMainList, object: nil)
-    }
-    
-    
-    @objc func getDlinks() {
-        performSegue(withIdentifier: .showBaiduDlinksProgress, sender: self)
     }
     
     @objc func showInfo(_ notification: Notification) {
