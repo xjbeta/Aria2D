@@ -110,4 +110,17 @@ class BaiduDlinksProgress: NSViewController {
         progressIndicator.isHidden = true
         infoTextField.stringValue = "Enjoy your downloads."
     }
+    
+    func prepareLocateUrls() {
+        guard let objs = dataSource?.selectedObjects() else { return }
+        let paths = objs.map {
+            $0.path
+        }
+        
+        Baidu.shared.getLinksWithLocate(paths.first!).done {
+            print($0)
+            }.catch { error in
+                print(error)
+        }
+    }
 }

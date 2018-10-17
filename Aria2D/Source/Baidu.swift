@@ -405,6 +405,46 @@ class Baidu: NSObject {
         return BaiduDlink(path)
     }
     
+    // MARK: - Download with Locate
+    
+    func getLinksWithLocate(_ path: String) -> Promise<BaiduDlink> {
+//        http://pcs.baidu.com/rest/2.0/pcs/file?app_id=266719&method=locatedownload&network_type=wifi&path=%2Fcn_windows_10_business_editions_version_1803_updated_march_2018_x64_dvd_12063730.iso&ver=2&vip=1
+        
+        var reserved = CharacterSet.urlQueryAllowed
+        reserved.remove(charactersIn: ": #[]@!$&'()*+, ;=")
+        
+        let encodePath = path.addingPercentEncoding(withAllowedCharacters: reserved) ?? "/"
+        
+        let p = ["app_id": "266719",
+                 "method": "locatedownload",
+                 "network_type": "wifi",
+                 "path": encodePath,
+                 "ver": "2",
+                 "vip": "1",]
+        
+        return Promise { resolver in
+            
+            var headers = Alamofire.SessionManager.defaultHTTPHeaders
+            headers["User-Agent"] = "netdisk;1.0"
+            headers["Cookie"] = "BDUSS=prUXJHSTRvRUlhTFlTOFBCOEJGQzlPVEtaMFVSMjdUSkRrS0JFa2pEck5FTzViQVFBQUFBJCQAAAAAAAAAAAEAAAC7FFkpdGlueV~Qx7~VAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM2DxlvNg8ZbS1"
+            
+            let baiduConf = URLSessionConfiguration.default
+            baiduConf.httpAdditionalHeaders = headers
+            
+            
+            SessionManager(configuration: baiduConf).request("http://pcs.baidu.com/rest/2.0/pcs/file?app_id=266719&method=locatedownload&network_type=wifi&path=\(encodePath)&ver=2&vip=1", method: .post)
+                .validate()
+                .response {
+                    if let error = $0.error {
+                        resolver.reject(error)
+                        return
+                    }
+                    print($0.text)
+                    
+                    
+            }
+        }
+    }
     
     
 }
