@@ -66,6 +66,10 @@ class BaiduDlinksProgress: NSViewController {
                 Baidu.shared.getDlinks($0, fsIds: fsIds)
             }.done(on: .main) {
                 self.dlinks = $0
+                guard self.dlinks.count == fsIds.count else {
+                    self.infoTextField.stringValue = "Can't find effective links."
+                    return
+                }
                 self.downloadButton.isEnabled = true
                 self.infoTextField.stringValue = "Enjoy your downloads."
             }.ensure(on: .main) {
