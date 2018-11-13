@@ -10,25 +10,12 @@ import Cocoa
 
 class PreferencesTabViewController: NSTabViewController {
 
-	lazy var baiduItem = NSTabViewItem()
     var originalSizes = [String: CGSize]()
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		initItems()
-		NotificationCenter.default.addObserver(self, selector: #selector(initItems), name: .developerModeChanged, object: nil)
-	}
-	
-	@objc func initItems() {
-		if Preferences.shared.developerMode {
-			if tabViewItems.count == 2 {
-				self.addTabViewItem(baiduItem)
-			}
-		} else if tabViewItems.count == 3, let item = tabViewItems.last, item.label == "Baidu" {
-			baiduItem = item
-			self.removeTabViewItem(item)
-		}
-	}
+		
+    }
     
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, willSelect: tabViewItem)

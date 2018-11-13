@@ -158,51 +158,6 @@ class DataManager: NSObject {
 			realm.delete(objs)
         }
     }
-
-	
-	func deletePCSFile(_ paths: [String]) {
-		writeToRealm {
-            let objs = $0.objects(PCSFile.self).filter {
-                paths.contains($0.path)
-            }
-            $0.delete(objs)
-		}
-	}
-    
-    
-// MARK: - Set Or Update Data For Baidu Files
-    func setData(forBaidu files: [PCSFile], forPath path: String) {
-		var fileObjects: [PCSFile] = files
-		// set the button back to parent directory
-		if path != Baidu.shared.mainPath {
-			let object = PCSFile()
-			object.isBackButton = true
-			object.displayDir = path
-			object.fsID = -2333
-            object.backParentDir = (path as NSString).deletingLastPathComponent
-			fileObjects.append(object)
-		}
-
-        writeToRealm { realm in
-			realm.delete(realm.objects(PCSFile.self).filter({ $0.isBackButton }))
-			if let oldPath = realm.objects(PCSFile.self).filter({ !$0.isBackButton }).first?.path,
-				let oldParentDir = NSURL(fileURLWithPath: oldPath).deletingLastPathComponent?.path,
-				oldParentDir == path {
-				// path didn't changed
-				let deletePaths = Set(realm.objects(PCSFile.self).map { $0.path }).subtracting(Set(fileObjects.map { $0.path }))
-				let objs = realm.objects(PCSFile.self).filter {
-					deletePaths.contains($0.path)
-				}
-				realm.delete(objs)
-				realm.add(fileObjects, update: true)
-			} else {
-				// path changed
-				realm.delete(realm.objects(PCSFile.self))
-				realm.add(fileObjects, update: true)
-			}
-        }
-    }
-    
     
     
  //MARK: - Get Data
@@ -236,16 +191,6 @@ class DataManager: NSObject {
                             Status.removed.rawValue, Status.error.rawValue)
                     .sorted(byKeyPath: "date")
                     .sorted(byKeyPath: "status")
-            case .baidu:
-                let ascending = Preferences.shared.ascending
-                let sortValue = Preferences.shared.sortValue
-                var re = realm.objects(type)
-                if sortValue != "path" {
-                    re = re.sorted(byKeyPath: "path", ascending: true)
-                }
-                return re.sorted(byKeyPath: sortValue, ascending: ascending)
-                    .sorted(byKeyPath: "isdir", ascending: false)
-                    .sorted(byKeyPath: "isBackButton", ascending: false)
             default:
                 return realm.objects(type).filter("status == -1")
             }

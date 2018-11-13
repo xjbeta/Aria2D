@@ -13,8 +13,6 @@ import Foundation
 enum PreferenceKeys: String {
 	case isFirstLaunch = "app_isFirstLaunch"
 	case downloadDir = "app_downloadDir"
-	case ascending = "app_baidu_ascending"
-	case sortValue = "app_baidu_sortValue"
 	case aria2ServersData = "app_aria2ServersData"
 	case recordWebSocketLog = "app_recordWebSocketLog"
     case hideActiveLog = "app_hideActiveLog"
@@ -72,7 +70,6 @@ enum Aria2Notice: String, Codable {
 enum SidebarItem: String {
     case downloading
     case completed
-    case baidu
 	case removed
     case none
 }

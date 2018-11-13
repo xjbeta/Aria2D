@@ -27,10 +27,6 @@ class RightTabView: NSTabViewController {
 		case .downloading, .completed, .removed:
 			updateTab()
 			setNotificationToken()
-		case .baidu:
-			tabView.selectTabViewItem(downloadTab)
-			notificationToken?.invalidate()
-			notificationToken = nil
         default:
             tabView.selectTabViewItem(loadingTab)
 			notificationToken?.invalidate()

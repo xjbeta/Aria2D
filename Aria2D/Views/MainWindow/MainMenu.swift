@@ -24,7 +24,7 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		}
 		
 		if menuItem.action == #selector(nextTag) {
-			return selectedRow != .baidu && mainWindowFront
+			return mainWindowFront
 		}
 		
 		if menuItem.action == #selector(previousTag) {
@@ -55,7 +55,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		if menuItem.action == #selector(showInfo) {
 			return selectedIndexs.count > 0
 				&& mainWindowFront
-				&& selectedRow != .baidu
 				&& selectedRow != .none
 		}
 		

@@ -227,45 +227,6 @@ class Aria2: NSObject {
         }
     }
 
-    func addUri(fromBaidu uri: [String], name: String, md5: String = "", isPCS: Bool = false, bduss: String = "") {
-        guard uri.count > 0 else { return }
-
-        var options: [String: String] = ["out": name,
-            "continue": "true",
-            "split": "255",
-            "max-connection-per-server": "16",
-            "min-split-size": "1M",
-            "user-agent": "netdisk"]
-        
-        if isPCS {
-            options["max-connection-per-server"] = "10"
-            options["header"] = "Cookie: BDUSS=\(bduss)"
-        }
-        
-        if md5 != "" {
-            options["check-integrity"] = "true"
-            options["checksum"] = "md5=\(md5)"
-        }
-
-        if let path = Preferences.shared.aria2Servers.getServer().customPath {
-            options["dir"] = path
-        }
-
-        send(method: Aria2Method.addUri,
-             params: [uri, options])
-            .done { data in
-                struct Result: Decodable {
-                    let result: String
-                }
-                if let result = data.decode(Result.self)?.result {
-                    self.updateStatus([result])
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
-    }
-
-
     func addTorrent(_ data: String, options: [String: String] = [:]) {
         var opt = options
         if let path = Preferences.shared.aria2Servers.getServer().customPath, opt["dir"] == nil {
