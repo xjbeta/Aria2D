@@ -53,7 +53,6 @@ class DataManager: NSObject {
         let request: NSFetchRequest<Aria2List> = Aria2List.fetchRequest()
         return try context.fetch(request)
     }
-    
 
     func deleteAria2Objects(_ gids: [String]) throws {
         let fetchRequest: NSFetchRequest<Aria2Object> = Aria2Object.fetchRequest()
@@ -86,7 +85,6 @@ class DataManager: NSObject {
         let fetchRequest: NSFetchRequest<Aria2Object> = Aria2Object.fetchRequest()
         return (try? context.fetch(fetchRequest)) ?? []
     }
-    
     
     func initAllObjects(_ objs: [Aria2Object]) throws {
         let gids = objs.compactMap({ $0.gid})
@@ -160,8 +158,8 @@ class DataManager: NSObject {
     }
     
     func saveContext() {
-        context.perform {
-            (NSApp.delegate as! AppDelegate).saveAction(nil)
+        DispatchQueue.main.async {
+            (NSApp.delegate as? AppDelegate)?.saveAction(nil)
         }
     }
 }

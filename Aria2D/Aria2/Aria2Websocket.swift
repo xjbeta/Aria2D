@@ -86,8 +86,12 @@ class Aria2Websocket: NSObject {
                     self.socket = SRWebSocket(url: url!)
                     self.socket?.delegate = self
                     self.socket?.open()
-                } else if let count = try? DataManager.shared.activeCount(), count > 0 {
-                    Aria2.shared.updateActiveTasks()
+                } else {
+                    DispatchQueue.main.async {
+                        guard let count = try? DataManager.shared.activeCount(),
+                            count > 0 else { return }
+                        Aria2.shared.updateActiveTasks()
+                    }
 				}
 			}
 			timer.resume()
@@ -169,17 +173,19 @@ class Aria2Websocket: NSObject {
                 // Save log
                 if Preferences.shared.developerMode,
                     Preferences.shared.recordWebSocketLog {
-                    let log = WebSocketLog(context: DataManager.shared.context)
-                    log.method = method
-                    log.sendJSON = "\(dic)"
-                    if let str = String(data: data, encoding: .utf8),
-                        let shrotData = Aria2Websocket.shared.clearUrls(str),
-                        let shortStr = String(data: shrotData, encoding: .utf8) {
-                        log.receivedJSON =  shortStr
+                    DispatchQueue.main.async {
+                        let log = WebSocketLog(context: DataManager.shared.context)
+                        log.method = method
+                        log.sendJSON = "\(dic)"
+                        if let str = String(data: data, encoding: .utf8),
+                            let shrotData = Aria2Websocket.shared.clearUrls(str),
+                            let shortStr = String(data: shrotData, encoding: .utf8) {
+                            log.receivedJSON =  shortStr
+                        }
+                        log.success = !timeOut
+                        log.date = time
+                        DataManager.shared.saveContext()
                     }
-                    log.success = !timeOut
-                    log.date = time
-                    DataManager.shared.saveContext()
                 }
                 
                 if !timeOut {
