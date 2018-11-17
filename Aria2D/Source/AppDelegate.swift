@@ -7,38 +7,40 @@
 //
 
 import Cocoa
-import RealmSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
     var mainWindowController: MainWindowController!
     
-    func applicationWillFinishLaunching(_ notification: Notification) {
-        let config = Realm.Configuration(
-            // Set the new schema version. This must be greater than the previously used
-            // version (if you've never set a schema version before, the version is 0).
-            
-            schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
-                // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 1) {
-                    // Nothing to do!
-                    // Realm will automatically detect new properties and removed properties
-                    // And will update the schema on disk automatically
-                }
-        }, deleteRealmIfMigrationNeeded: true)
-        
-        // Tell Realm to use this new configuration object for the default Realm
-        Realm.Configuration.defaultConfiguration = config
-        
-        // Now that we've told Realm how to handle the schema change, opening the file
-        // will automatically perform the migration
+    lazy var logUrl: URL? = {
         do {
-            let _ = try Realm()
+            let documentDirectoryPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let log = documentDirectoryPath.appendingPathComponent("Aria2D").appendingPathComponent("Aria2D.log")
+            return log
         } catch let error {
-            assert(false, "Can't init Realm database: \(error)")
+            Log(error)
+            return nil
+        }
+    }()
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        if let url = logUrl {
+            try? FileManager.default.removeItem(at: url)
         }
         
+        Log("App will finish launching")
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+        Log("App Version \(version) (Build \(build))")
+        Log("macOS " + ProcessInfo().operatingSystemVersionString)
+        
+        do {
+            try DataManager.shared.initAria2List()
+            DataManager.shared.deleteAllAria2Objects()
+        } catch let error {
+            assert(false, "Can't init Aria2List in Core Data: \(error)")
+        }
     }
 	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -54,8 +56,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(self)
 		}
         
-        DataManager.shared.deleteAll()
-        
         let sb = NSStoryboard(name: "Main", bundle: nil)
         mainWindowController = sb.instantiateController(withIdentifier: "MainWindowController") as? MainWindowController
         mainWindowController.showWindow(self)
@@ -63,7 +63,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
         Aria2.shared.aria2c.autoStart()
-
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -206,10 +205,15 @@ extension AppDelegate: DevMateKitDelegate {
 			DMKitDebugAddDevMateMenu()
 		#endif
 		//DevMate
+        if let url = logUrl {
+            DevMateKit.setupCustomLogFileURLs([url as NSURL])
+        }
+        
 		DevMateKit.sendTrackingReport(nil, delegate: self)
 		
-        //        DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
-		
+        DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
+        
+        
 		if !string_check(nil).boolValue {
 			DevMateKit.setupTimeTrial(self, withTimeInterval: kDMTrialWeek)
 		}

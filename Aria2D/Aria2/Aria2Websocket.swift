@@ -64,7 +64,7 @@ class Aria2Websocket: NSObject {
 	func showNotification(_ obj: Aria2Object) {
 		let notification = NSUserNotification()
 		notification.title = "Completed"
-        notification.subtitle = obj.nameString()
+        notification.subtitle = obj.name
 		notification.informativeText = obj.totalLength.ByteFileFormatter()
 		notification.soundName = NSUserNotificationDefaultSoundName
 		NSUserNotificationCenter.default.deliver(notification)
@@ -86,10 +86,8 @@ class Aria2Websocket: NSObject {
                     self.socket = SRWebSocket(url: url!)
                     self.socket?.delegate = self
                     self.socket?.open()
-                } else {
-                    if DataManager.shared.activeCount() > 0 {
-                        Aria2.shared.updateActiveTasks()
-                    }
+                } else if let count = try? DataManager.shared.activeCount(), count > 0 {
+                    Aria2.shared.updateActiveTasks()
 				}
 			}
 			timer.resume()
@@ -166,12 +164,12 @@ class Aria2Websocket: NSObject {
                withID id: String,
                method: String) -> Promise<Data> {
         return Promise { resolver in
-            let time = Date().timeIntervalSince1970
+            let time = Double(Date().timeIntervalSince1970)
             WaitingList.shared.add(id) { (data, timeOut) in
                 // Save log
                 if Preferences.shared.developerMode,
                     Preferences.shared.recordWebSocketLog {
-                    let log = WebSocketLog()
+                    let log = WebSocketLog(context: DataManager.shared.context)
                     log.method = method
                     log.sendJSON = "\(dic)"
                     if let str = String(data: data, encoding: .utf8),
@@ -180,8 +178,8 @@ class Aria2Websocket: NSObject {
                         log.receivedJSON =  shortStr
                     }
                     log.success = !timeOut
-                    log.time = time
-                    ViewControllersManager.shared.addLog(log)
+                    log.date = time
+                    DataManager.shared.saveContext()
                 }
                 
                 if !timeOut {
@@ -261,12 +259,12 @@ extension Aria2Websocket: SRWebSocketDelegate {
                     Aria2.shared.updateStatus(gids)
                 }
                 if Preferences.shared.developerMode, Preferences.shared.recordWebSocketLog {
-                    let log = WebSocketLog()
+                    let log = WebSocketLog(context: DataManager.shared.context)
                     log.method = json.method.rawValue
                     log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
                     log.success = true
-                    log.time = Date().timeIntervalSince1970
-                    ViewControllersManager.shared.addLog(log)
+                    log.date = Double(Date().timeIntervalSince1970)
+                    DataManager.shared.saveContext()
                 }
             }
         }

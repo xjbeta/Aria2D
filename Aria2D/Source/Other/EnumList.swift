@@ -75,7 +75,7 @@ enum SidebarItem: String {
 }
 
 
-@objc enum Status: Int, Codable {
+@objc enum Status: Int16, Codable {
 	case active
 	case waiting
 	case paused
@@ -83,6 +83,11 @@ enum SidebarItem: String {
 	case complete
 	case removed
 	
+    init?(raw: Int16) {
+        self.init(rawValue: raw)
+    }
+    
+    
 	init?(_ str: String) {
 		switch str {
 		case "active": self.init(rawValue: 0)

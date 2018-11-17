@@ -15,7 +15,6 @@ struct JSONRPC: Decodable {
 	let id: String
 }
 
-
 struct JSONNotice: Decodable {
 	struct GID: Decodable {
 		let gid: String
@@ -25,52 +24,6 @@ struct JSONNotice: Decodable {
 	let params: [GID]
 }
 
-/*
-struct Aria2Object: Codable {
-	let files: [Aria2File]
-	
-	let gid: String
-	let status: Status
-	let totalLength: Int64
-	let completedLength: Int64
-	let uploadLength: Int64
-	let downloadSpeed: Int64
-	let pieceLength: Int64
-	let connections: Int
-	let dir: String
-	
-//	let bitfield: String
-//	let uploadSpeed: String
-//	let infoHash: String
-//	let numSeeders: String
-//	let seeder: Bool
-//	let numPieces: String
-//	let errorCode: String
-//	let errorMessage: String
-//	let followedBy: String
-//	let following: String
-//	let belongsTo: String
-//	let files: String
-//	let bittorrent: String
-//	let verifiedLength: String
-//	let verifyIntegrityPending: String
-	
-	init(from decoder: Decoder) throws {
-		let values = try decoder.container(keyedBy: CodingKeys.self)
-		files = try values.decode([Aria2File].self, forKey: .files)
-		gid = try values.decode(String.self, forKey: .gid)
-		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
-		totalLength = Int64(try values.decode(String.self, forKey: .totalLength)) ?? 0
-		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
-		uploadLength = Int64(try values.decode(String.self, forKey: .uploadLength)) ?? 0
-		downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
-		pieceLength = Int64(try values.decode(String.self, forKey: .pieceLength)) ?? 0
-		connections = Int(try values.decode(String.self, forKey: .connections)) ?? 0
-		dir = try values.decode(String.self, forKey: .dir)
-	}
-}
-*/
-
 struct Aria2Status: Decodable {
 	let gid: String
 	let status: Status
@@ -79,7 +32,7 @@ struct Aria2Status: Decodable {
 	let uploadLength: Int64
 	let downloadSpeed: Int64
 	let connections: Int
-	let bittorrent: Bittorrent?
+//    let bittorrent: Bittorrent?
 	let dir: String?
 	
 	private enum CodingKeys: String, CodingKey {
@@ -104,26 +57,9 @@ struct Aria2Status: Decodable {
 		uploadLength = Int64(try values.decode(String.self, forKey: .uploadLength)) ?? 0
 		downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
 		connections = Int(try values.decode(String.self, forKey: .connections)) ?? 0
-		bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
+//        bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
 		dir = try values.decodeIfPresent(String.self, forKey: .dir)
 	}
-	
-	func dic() -> [String: Any] {
-		var dic: [String: Any] = [:]
-		dic["gid"] = gid
-		dic["status"] = status.rawValue
-		dic["totalLength"] = totalLength
-		dic["completedLength"] = completedLength
-		dic["uploadLength"] = uploadLength
-		dic["downloadSpeed"] = downloadSpeed
-		dic["connections"] = connections
-		dic["bittorrent"] = bittorrent
-		dic["dir"] = dir
-//		dic["date"] = Date().timeIntervalSince1970
-		return dic
-	}
-	
-	
 }
 
 

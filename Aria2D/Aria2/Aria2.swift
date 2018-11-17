@@ -21,17 +21,13 @@ class Aria2: NSObject {
 	
     let aria2c = Aria2c()
     
+    let context = DataManager.shared.context
+    
     func initAllData() {
-        let block: ((Data) -> Void) = { data in
-            struct InitDataResult: Decodable {
-                var result: [[[Aria2Object]]]
-            }
-            if let objs = data.decode(InitDataResult.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
-                DataManager.shared.initObjects(objs, for: ViewControllersManager.shared.selectedRow)
-            }
+        struct Result: Decodable {
+            var result: [[[Aria2Object]]]
         }
-
-
+        
         var params: [Any]? = []
 
         switch ViewControllersManager.shared.selectedRow {
@@ -49,8 +45,12 @@ class Aria2: NSObject {
 
         send(method: Aria2Method.multicall,
              params: params)
-            .done {
-                block($0)
+            .done { data in
+                let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 }).flatMap({ $0 })
+                
+                try DataManager.shared.initAllObjects(re)
+                
+                DataManager.shared.saveContext()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -68,13 +68,10 @@ class Aria2: NSObject {
                 struct GIDList: Decodable {
                     var result: [[[[String: String]]]]
                 }
-                if let re = data.decode(GIDList.self)?.result.flatMap ({ $0 }).flatMap ({ $0 }) {
-                    if let _ = block {
-                       block?(re)
-                    } else {
-                        DataManager.shared.sortAllObjects(re)
-                    }
-                }
+                
+                let re = try JSONDecoder().decode(GIDList.self, from: data).result.flatMap ({ $0 }).flatMap ({ $0 })
+                try DataManager.shared.sortAllObjects(re)
+                DataManager.shared.saveContext()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -90,6 +87,8 @@ class Aria2: NSObject {
                 if let re = data.decode(Result.self)?.result {
                     block(re)
                 }
+                
+                let t = ""
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -108,9 +107,9 @@ class Aria2: NSObject {
                 struct Result: Decodable {
                     let result: [Aria2Status]
                 }
-                if let result = data.decode(Result.self)?.result {
-                    DataManager.shared.updateStatus(result)
-                }
+                let result = try JSONDecoder().decode(Result.self, from: data).result
+                try DataManager.shared.updateStatus(result)
+                DataManager.shared.saveContext()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -135,33 +134,11 @@ class Aria2: NSObject {
                              params: [params])
             .done { data in
                 struct Result: Decodable {
-                    struct ResultObj: Decodable {
-                        let error: ErrorResult?
-                        let dic: [Aria2Status]?
-                        init(from decoder: Decoder) throws {
-                            let unkeyedContainer = try decoder.singleValueContainer()
-                            error = try? unkeyedContainer.decode(ErrorResult.self)
-                            dic = try? unkeyedContainer.decode([Aria2Status].self)
-                        }
-                    }
-                    var result: [ResultObj]
-
-                    func errorObjs() -> [ErrorResult] {
-                        return result.map {
-                            $0.error
-                            }.compactMap { $0 }
-                    }
-
-                    func initObjs() -> [Aria2Status] {
-                        return result.map {
-                            $0.dic
-                            }.compactMap { $0 }.flatMap { $0 }
-                    }
+                    var result: [[Aria2Status]]
                 }
-                if let result = data.decode(Result.self) {
-                    DataManager.shared.updateStatus(result.initObjs())
-                    DataManager.shared.updateError(result.errorObjs())
-                }
+                let result = try JSONDecoder().decode(Result.self, from: data).result.flatMap({ $0 })
+                try DataManager.shared.updateStatus(result)
+                DataManager.shared.saveContext()
                 self.sortData()
             }.catch {
                 Log("\(#function) error \($0)")
@@ -197,9 +174,9 @@ class Aria2: NSObject {
                 struct Result: Decodable {
                     let result: [Aria2File]
                 }
-                if let re = data.decode(Result.self)?.result {
-                    DataManager.shared.updateFiles(gid, files: re)
-                }
+                let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
+                try DataManager.shared.updateFiles(gid, files: re)
+                DataManager.shared.saveContext()
                 block()
             }.catch {
                 Log("\(#function) error \($0)")
@@ -311,31 +288,21 @@ class Aria2: NSObject {
 
 
     func pauseAll() {
-        let gids = DataManager.shared.data(Aria2Object.self).filter {
-            $0.status == .active && $0.status == .waiting
-            }.map {
-                $0.gid
-        } as [String]
         let method = Preferences.shared.useForce ? Aria2Method.forcePauseAll : Aria2Method.pauseAll
         send(method: method,
              params: [])
             .done { _ in
-                self.updateStatus(gids)
+                self.sortData()
             }.catch {
                 Log("\(#function) error \($0)")
         }
     }
 
     func unPauseAll() {
-        let gids = DataManager.shared.data(Aria2Object.self).filter {
-            $0.status == .paused
-            }.map {
-                $0.gid
-        } as [String]
         send(method: Aria2Method.unpauseAll,
              params: [])
             .done { _ in
-                self.updateStatus(gids)
+                self.sortData()
             }.catch {
                 Log("\(#function) error \($0)")
         }

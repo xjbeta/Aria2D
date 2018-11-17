@@ -1,4 +1,3 @@
 github "DevMate/DevMateKit"
-github "realm/realm-cocoa"
-github "facebook/SocketRocket"
+github "facebook/SocketRocket" "master"
 github "mxcl/PromiseKit"

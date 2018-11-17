@@ -24,3 +24,33 @@ extension Data {
 		}
 	}
 }
+
+
+extension CodingUserInfoKey {
+    /// Required. Must be an NSManagedObjectContext.
+    static let context = CodingUserInfoKey(rawValue: "context")!
+    /// Optional. Boolean. If present and true, newly created objects are not inserted into the context.
+    static let deferInsertion = CodingUserInfoKey(rawValue: "deferInsertion")!
+}
+
+protocol MODecoder: class {
+    var userInfo: [CodingUserInfoKey : Any] { get  set }
+    func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : Decodable
+    func decode<T: Decodable>(_ type: T.Type, data: Data, in context: NSManagedObjectContext, deferInsertion: Bool) throws -> T
+}
+
+extension JSONDecoder: MODecoder { }
+extension PropertyListDecoder: MODecoder {}
+
+extension MODecoder {
+    func decode<T: Decodable>(_ type: T.Type, data: Data, in context: NSManagedObjectContext, deferInsertion: Bool = false) throws -> T {
+        
+        userInfo[.context] = context
+        userInfo[.deferInsertion] = deferInsertion
+        defer {
+            userInfo[.context] = nil
+            userInfo[.deferInsertion] = nil
+        }
+        return try self.decode(type, from: data)
+    }
+}

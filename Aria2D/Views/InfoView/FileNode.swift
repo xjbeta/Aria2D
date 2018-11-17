@@ -38,7 +38,7 @@ class FileNode: NSObject {
         if isLeaf, let file = file {
             self.size = file.length.ByteFileFormatter()
             self.progress = file.completedLength == 0 ? "0%" : (Double(file.completedLength) / Double(file.length) * 100).percentageFormat()
-            self.index = file.index
+            self.index = Int(file.index)
             self.state = file.selected ? .on : .off
             self.selected = file.selected
         } else {

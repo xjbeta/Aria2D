@@ -21,3 +21,17 @@ class MainListTableView: NSTableView {
     }
     
 }
+
+extension NSTableView {
+    func selectedIndexs() -> IndexSet{
+        if clickedRow != -1 {
+            if selectedRowIndexes.contains(clickedRow) {
+                return selectedRowIndexes
+            } else {
+                return IndexSet(integer: clickedRow)
+            }
+        } else {
+            return selectedRowIndexes
+        }
+    }
+}

@@ -8,7 +8,6 @@
 
 import Foundation
 import Cocoa
-import RealmSwift
 
 class ViewControllersManager: NSObject {
 
@@ -23,7 +22,6 @@ class ViewControllersManager: NSObject {
         NotificationCenter.default.post(name: .newTask, object: nil, userInfo: ["file": file])
     }
     
-	
 	// MainWindow HUD
 	func showHUD(_ message: hudMessage) {
 		NotificationCenter.default.post(name: .showHUD, object: nil, userInfo: ["message": message])
@@ -85,7 +83,7 @@ class ViewControllersManager: NSObject {
     // LeftSourceList
     var selectedRow: SidebarItem = .none {
         didSet {
-            selectedIndexs = IndexSet()
+            selectedObjects = [Aria2Object]()
             switch selectedRow {
             case .downloading, .removed, .completed:
                 Aria2.shared.initAllData()
@@ -95,22 +93,20 @@ class ViewControllersManager: NSObject {
         }
     }
 
-	// DownloadsTableView selectedIndexs
-    var selectedIndexs = IndexSet()
+	// DownloadsTableView selectedObjects
+    var selectedObjects = [Aria2Object]()
 	
 	func showSelectedInFinder() {
-		let urls = selectedUrls()
-		if urls.count > 0 {
-			NSWorkspace.shared.activateFileViewerSelecting(urls)
-		}
+        let urls = selectedObjects.compactMap {
+            $0.path()
+        }
+        NSWorkspace.shared.activateFileViewerSelecting(urls)
 	}
 	
 	func openSelected() {
 		guard Preferences.shared.aria2Servers.isLocal else { return }
-		DataManager.shared.data(Aria2Object.self).enumerated().filter {
-			selectedIndexs.contains($0.offset)
-            }.compactMap {
-			$0.element.path()
+        selectedObjects.compactMap {
+			$0.path()
 			}.filter {
 				FileManager.default.fileExists(atPath: $0.path)
 			}.forEach {
@@ -119,10 +115,8 @@ class ViewControllersManager: NSObject {
 	}
 	
 	func selectedUrls() -> [URL] {
-		var urls = DataManager.shared.data(Aria2Object.self).enumerated().filter {
-			selectedIndexs.contains($0.offset)
-            }.compactMap {
-				$0.element.path()
+		var urls = selectedObjects.compactMap {
+				$0.path()
 		}
 		
 		urls = urls.map {
@@ -136,39 +130,6 @@ class ViewControllersManager: NSObject {
 	
     func showInfo() {
         NotificationCenter.default.post(name: .showInfoWindow, object: nil)
-    }
-	
-	// LogViewController
-    
-    func addLog(_ log: WebSocketLog) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(log)
-            }
-        } catch let error as NSError {
-            fatalError("Error opening realm: \(error)")
-        }
-    }
-
-    func deleteAllLog() {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.delete(realm.objects(WebSocketLog.self))
-            }
-        } catch let error as NSError {
-            fatalError("Error opening realm: \(error)")
-        }
-    }
-
-    func getLogs() -> Results<WebSocketLog> {
-        do {
-            let realm = try Realm()
-            return realm.objects(WebSocketLog.self).sorted(byKeyPath: "time")
-        } catch let error as NSError {
-            fatalError("Error opening realm: \(error)")
-        }
     }
 	
 	// Front Window
@@ -187,61 +148,55 @@ class ViewControllersManager: NSObject {
 	
 	var tasksShouldPause: Bool {
 		get {
-			if selectedRow == .downloading {
-				let dataList = selectedIndexs.map {
-					DataManager.shared.data(Aria2Object.self)[$0]
-				}
-				let canPauseList = dataList.filter {
-					$0.status == .active || $0.status == .waiting
-				}
-				let pausedList = dataList.filter {
-					$0.status == .paused
-				}
-				if canPauseList.count >= pausedList.count {
-					return true
-				}
-			}
+            guard selectedRow == .downloading else { return false }
+        
+            let canPauseList = selectedObjects.filter {
+                $0.status == Status.active.rawValue || $0.status == Status.waiting.rawValue
+            }
+            let pausedList = selectedObjects.filter {
+                $0.status == Status.paused.rawValue
+            }
+            if canPauseList.count >= pausedList.count {
+                return true
+            }
 			return false
 		}
 	}
 	
 	func pauseOrUnpause() {
-		if selectedRow == .downloading {
-			let dataList = selectedIndexs.map {
-				DataManager.shared.data(Aria2Object.self)[$0]
-			}
-			let canPauseList = dataList.filter {
-				$0.status == .active || $0.status == .waiting
-			}
-			let pausedList = dataList.filter {
-				$0.status == .paused
-			}
-			if canPauseList.count >= pausedList.count {
-				Aria2.shared.pause(canPauseList.map { $0.gid })
-			} else if canPauseList.count < pausedList.count {
-				Aria2.shared.unpause(pausedList.map { $0.gid })
-			}
-		}
+        guard ViewControllersManager.shared.selectedRow == .downloading else { return }
+        let dataList = selectedObjects
+        
+        let canPauseList = dataList.filter {
+            $0.status == Status.active.rawValue || $0.status == Status.waiting.rawValue
+        }
+        let pausedList = dataList.filter {
+            $0.status == Status.paused.rawValue
+        }
+        if canPauseList.count >= pausedList.count {
+            Aria2.shared.pause(canPauseList.compactMap { $0.gid })
+        } else if canPauseList.count < pausedList.count {
+            Aria2.shared.unpause(pausedList.compactMap { $0.gid })
+        }
 	}
 	
-	func deleteTask() {
-		var gidForRemoveDownloadResult: [String] = []
-		var gidForRemove: [String] = []
-		
-		ViewControllersManager.shared.selectedIndexs.forEach {
-			let data = DataManager.shared.data(Aria2Object.self)[$0]
-			let status = data.status
-			let gid = data.gid
-			if status == .complete || status == .error || status == .removed {
-				gidForRemoveDownloadResult.append(gid)
-			} else {
-				gidForRemove.append(gid)
-			}
-		}
-		
-		Aria2.shared.removeDownloadResult(gidForRemoveDownloadResult)
-		Aria2.shared.remove(gidForRemove)
-	}
+    func deleteTask() {
+        var gidForRemoveDownloadResult: [String] = []
+        var gidForRemove: [String] = []
+        
+        selectedObjects.forEach {
+            let status = $0.status
+            guard let gid = $0.gid else { return }
+            if status == Status.complete.rawValue || status == Status.error.rawValue || status == Status.removed.rawValue {
+                gidForRemoveDownloadResult.append(gid)
+            } else {
+                gidForRemove.append(gid)
+            }
+        }
+        
+        Aria2.shared.removeDownloadResult(gidForRemoveDownloadResult)
+        Aria2.shared.remove(gidForRemove)
+    }
 	
 	func refresh() {
 		switch selectedRow {
@@ -251,13 +206,4 @@ class ViewControllersManager: NSObject {
 			break
 		}
 	}
-}
-
-
-class WebSocketLog: Object {
-    @objc dynamic var time: TimeInterval = 0
-    @objc dynamic var method = ""
-    @objc dynamic var success = false
-    @objc dynamic var sendJSON = ""
-    @objc dynamic var receivedJSON = ""
 }

@@ -1145,40 +1145,40 @@ CA
                         <menuItem title="Start / Pause" id="Xxa-1u-Vjj">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="startOrPause:" target="fWv-5q-1uS" id="P5C-zJ-sNL"/>
+                                <action selector="startOrPause:" target="fWv-5q-1uS" id="8aY-W2-q9T"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Delete" id="MJ7-GS-xFr">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="delete:" target="fWv-5q-1uS" id="WjH-21-0RN"/>
+                                <action selector="delete:" target="fWv-5q-1uS" id="h6c-MK-tXF"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="8KT-4f-Wle"/>
                         <menuItem title="Pause All" id="Eod-ir-mQe">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="pauseAll:" target="fWv-5q-1uS" id="HK0-oe-4wf"/>
+                                <action selector="pauseAll:" target="fWv-5q-1uS" id="cgx-wd-T98"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Unpause All" id="pRn-oF-KWn">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="unpauseAll:" target="fWv-5q-1uS" id="8Xt-dT-jSU"/>
+                                <action selector="unpauseAll:" target="fWv-5q-1uS" id="043-lz-LcF"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="1xp-1f-bX4"/>
                         <menuItem title="Info" id="UIc-sO-HD1">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="showInfo:" target="fWv-5q-1uS" id="s08-hz-6wb"/>
+                                <action selector="showInfo:" target="fWv-5q-1uS" id="9aO-ik-O9Y"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="uQU-dr-7tj"/>
                         <menuItem title="Show In Finder" id="leU-hm-MKR">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="showInFinder:" target="fWv-5q-1uS" id="xg6-Hm-Wet"/>
+                                <action selector="showInFinder:" target="fWv-5q-1uS" id="yvv-0f-DG8"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -1186,8 +1186,12 @@ CA
                         <outlet property="delegate" destination="cjb-Aj-3qj" id="g1v-TJ-MSW"/>
                     </connections>
                 </menu>
-                <dateFormatter formatterBehavior="custom10_4" dateStyle="short" timeStyle="short" dateFormat="yy/MM/dd HH:mm" id="2Cb-eO-VUI"/>
-                <arrayController objectClassName="PCSFile" editable="NO" id="rpM-oJ-cLX"/>
+                <arrayController mode="entity" entityName="Aria2Object" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="rpM-oJ-cLX" userLabel="Main List Array Controller">
+                    <connections>
+                        <binding destination="cjb-Aj-3qj" name="filterPredicate" keyPath="self.predicate" id="uxr-Wo-IqO"/>
+                        <binding destination="cjb-Aj-3qj" name="managedObjectContext" keyPath="self.context" id="els-e9-z3N"/>
+                    </connections>
+                </arrayController>
                 <customObject id="0YZ-pn-WTA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController showSeguePresentationStyle="single" id="cjb-Aj-3qj" customClass="MainListViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5zW-kZ-8rg">
@@ -1221,11 +1225,11 @@ CA
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="DownloadsTableCellView" id="ng5-Ma-jfp" customClass="DownloadsTableCellView" customModule="Aria2D" customModuleProvider="target">
+                                                        <tableCellView id="ng5-Ma-jfp" customClass="DownloadsTableCellView" customModule="Aria2D" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="662" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                             <subviews>
-                                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Bud-Lt-oNl">
+                                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bud-Lt-oNl">
                                                                     <rect key="frame" x="8" y="5" width="642" height="40"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8u-sM-XJ1">
@@ -1235,28 +1239,34 @@ CA
                                                                                 <constraint firstAttribute="width" constant="40" id="D1c-VH-yUt"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="0OK-zU-4mc"/>
+                                                                            <connections>
+                                                                                <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.icon" id="kJL-TN-Wwt"/>
+                                                                            </connections>
                                                                         </imageView>
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Zj-oE4">
-                                                                            <rect key="frame" x="44" y="4" width="420" height="33"/>
+                                                                            <rect key="frame" x="44" y="4" width="400" height="33"/>
                                                                             <subviews>
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BsB-ch-qD8">
-                                                                                    <rect key="frame" x="-2" y="16" width="72" height="17"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="_task name" id="JZB-1X-bKi">
+                                                                                    <rect key="frame" x="-2" y="16" width="43" height="17"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="_name" id="JZB-1X-bKi">
                                                                                         <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                     <connections>
-                                                                                        <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue" id="YwZ-9o-c0h"/>
+                                                                                        <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.name" id="Y6l-RT-bMY"/>
                                                                                     </connections>
                                                                                 </textField>
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Voa-Jr-LBN">
-                                                                                    <rect key="frame" x="-2" y="0.0" width="69" height="14"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="_total length" id="3N2-HC-YgG">
+                                                                                    <rect key="frame" x="-2" y="0.0" width="48" height="14"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="_fileSize" id="3N2-HC-YgG">
                                                                                         <font key="font" metaFont="smallSystem"/>
                                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
+                                                                                    <connections>
+                                                                                        <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.fileSize" id="ceG-fE-dav"/>
+                                                                                    </connections>
                                                                                 </textField>
                                                                             </subviews>
                                                                             <visibilityPriorities>
@@ -1269,10 +1279,13 @@ CA
                                                                             </customSpacing>
                                                                         </stackView>
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="AwJ-gN-o0G">
-                                                                            <rect key="frame" x="468" y="4" width="110" height="32"/>
+                                                                            <rect key="frame" x="448" y="4" width="110" height="32"/>
                                                                             <subviews>
                                                                                 <progressIndicator maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="VM6-LB-Kra">
                                                                                     <rect key="frame" x="0.0" y="13" width="110" height="20"/>
+                                                                                    <connections>
+                                                                                        <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.progressValue" id="lYY-kg-wio"/>
+                                                                                    </connections>
                                                                                 </progressIndicator>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="eHu-ST-xug">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="110" height="14"/>
@@ -1284,6 +1297,9 @@ CA
                                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
+                                                                                            <connections>
+                                                                                                <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.remainingTime" id="Jif-QP-qYn"/>
+                                                                                            </connections>
                                                                                         </textField>
                                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9X7-pX-wwZ">
                                                                                             <rect key="frame" x="85" y="0.0" width="27" height="14"/>
@@ -1292,6 +1308,9 @@ CA
                                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
+                                                                                            <connections>
+                                                                                                <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.percentage" id="z0g-1T-ff2"/>
+                                                                                            </connections>
                                                                                         </textField>
                                                                                     </subviews>
                                                                                     <visibilityPriorities>
@@ -1317,17 +1336,23 @@ CA
                                                                                 <real value="3.4028234663852886e+38"/>
                                                                                 <real value="3.4028234663852886e+38"/>
                                                                             </customSpacing>
+                                                                            <connections>
+                                                                                <binding destination="ng5-Ma-jfp" name="hidden" keyPath="objectValue.shouldHideProgress" id="a91-hg-JcW"/>
+                                                                            </connections>
                                                                         </stackView>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIQ-lh-ckD">
-                                                                            <rect key="frame" x="580" y="12" width="64" height="17"/>
+                                                                            <rect key="frame" x="560" y="12" width="84" height="17"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="CNy-uo-Fzy"/>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="CNy-uo-Fzy"/>
                                                                             </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Status" id="wgc-as-BQd">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="ng5-Ma-jfp" name="value" keyPath="objectValue.statusValue" id="w9H-3t-dhp"/>
+                                                                            </connections>
                                                                         </textField>
                                                                     </subviews>
                                                                     <visibilityPriorities>
@@ -1349,23 +1374,17 @@ CA
                                                                 <constraint firstItem="Bud-Lt-oNl" firstAttribute="centerY" secondItem="ng5-Ma-jfp" secondAttribute="centerY" id="TvY-8j-TeN"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Bud-Lt-oNl" secondAttribute="trailing" constant="12" id="zwY-ek-vge"/>
                                                             </constraints>
-                                                            <connections>
-                                                                <outlet property="downloadTaskName" destination="BsB-ch-qD8" id="ZqU-dJ-5sB"/>
-                                                                <outlet property="fileIcon" destination="i8u-sM-XJ1" id="GUT-rI-9CI"/>
-                                                                <outlet property="percentage" destination="9X7-pX-wwZ" id="CBz-cY-d3O"/>
-                                                                <outlet property="progressIndicator" destination="VM6-LB-Kra" id="Lf4-UX-Wfl"/>
-                                                                <outlet property="status" destination="CIQ-lh-ckD" id="HUu-p9-L7a"/>
-                                                                <outlet property="time" destination="Tl0-Mc-0bg" id="IM5-Uj-CWX"/>
-                                                                <outlet property="totalLength" destination="Voa-Jr-LBN" id="4mA-Xt-KEh"/>
-                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="rpM-oJ-cLX" name="value" keyPath="arrangedObjects" id="3K2-Jt-uiZ"/>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
                                                 <action trigger="doubleAction" selector="cellDoubleAction:" target="cjb-Aj-3qj" id="qgG-nu-GOB"/>
-                                                <outlet property="dataSource" destination="cjb-Aj-3qj" id="j2E-gQ-OTU"/>
-                                                <outlet property="delegate" destination="cjb-Aj-3qj" id="5Dq-rh-YGx"/>
+                                                <outlet property="delegate" destination="cjb-Aj-3qj" id="zmo-Zu-KkK"/>
+                                                <outlet property="menu" destination="fWv-5q-1uS" id="CPm-QU-Ncu"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -1384,8 +1403,8 @@ CA
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="arrayController" destination="rpM-oJ-cLX" id="Slu-0R-v7q"/>
                         <outlet property="downloadsTableViewMenu" destination="fWv-5q-1uS" id="0Xl-qr-tlc"/>
-                        <outlet property="mainListScrollView" destination="zgn-mS-pSY" id="JLu-Ps-gLy"/>
                         <outlet property="mainListTableView" destination="2lW-dF-ywg" id="Uih-LZ-wUQ"/>
                         <outlet property="view" destination="5zW-kZ-8rg" id="rgr-hX-lAs"/>
                         <segue destination="MI1-7F-3gr" kind="show" identifier="showInfoWindow" id="DHM-Yl-UGC"/>
@@ -2217,6 +2236,13 @@ Gw
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="xkd-r1-X83" name="value" keyPath="arrangedObjects.time" id="icX-wv-IA6">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableMethod" editable="NO" width="150" minWidth="150" maxWidth="250" id="GC6-Rz-OGq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="method">
@@ -2230,6 +2256,13 @@ Gw
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="xkd-r1-X83" name="value" keyPath="arrangedObjects.method" id="SIY-uN-qgd">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableSuccess" editable="NO" width="50" minWidth="50" maxWidth="50" id="ymg-Ci-nhK">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="success">
@@ -2242,6 +2275,9 @@ Gw
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="xkd-r1-X83" name="value" keyPath="arrangedObjects.success" id="hw8-Ev-eMd"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableSendJSON" width="441" minWidth="100" maxWidth="3.4028234663852886e+38" id="Win-Z7-wtq">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="send json">
@@ -2255,6 +2291,9 @@ Gw
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="xkd-r1-X83" name="value" keyPath="arrangedObjects.sendJSON" id="Dyl-4N-mQe"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableReceivedJSON" width="80" minWidth="80" maxWidth="80" id="rUf-kL-h7r">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="received json">
@@ -2273,7 +2312,7 @@ Gw
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="XkN-Gp-7e3" id="uyb-5A-giS"/>
+                                                <binding destination="xkd-r1-X83" name="content" keyPath="arrangedObjects" id="Ud7-9d-itO"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -2308,18 +2347,11 @@ Gw
                                             <action selector="recordLog:" target="XkN-Gp-7e3" id="Fpn-Hw-D98"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Zh-hU-iRV">
-                                        <rect key="frame" x="699" y="2" width="87" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YKH-av-BE9">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="refresh:" target="XkN-Gp-7e3" id="7ZO-hV-CMQ"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fqq-hi-f3I">
-                                        <rect key="frame" x="612" y="2" width="87" height="32"/>
+                                        <rect key="frame" x="714" y="2" width="72" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="ZMy-PM-IEC"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DMp-kR-3Eq">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -2341,19 +2373,16 @@ Gw
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Fqq-hi-f3I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="euZ-sg-FOe" secondAttribute="leading" constant="20" symbolic="YES" id="4wF-3C-6JM"/>
-                                    <constraint firstItem="Fqq-hi-f3I" firstAttribute="width" secondItem="4Zh-hU-iRV" secondAttribute="width" id="6cM-vP-41g"/>
                                     <constraint firstItem="1V6-jx-igX" firstAttribute="centerY" secondItem="euZ-sg-FOe" secondAttribute="centerY" id="8N9-MN-251"/>
                                     <constraint firstItem="1V6-jx-igX" firstAttribute="leading" secondItem="euZ-sg-FOe" secondAttribute="leading" constant="100" id="IP9-iU-3yT"/>
-                                    <constraint firstItem="4Zh-hU-iRV" firstAttribute="leading" secondItem="Fqq-hi-f3I" secondAttribute="trailing" constant="12" id="QiE-kW-lj4"/>
+                                    <constraint firstItem="Fqq-hi-f3I" firstAttribute="centerY" secondItem="euZ-sg-FOe" secondAttribute="centerY" id="RIo-k6-nke"/>
                                     <constraint firstItem="OaM-Hf-nOi" firstAttribute="centerY" secondItem="1V6-jx-igX" secondAttribute="centerY" id="XUZ-Gm-aRw"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1V6-jx-igX" secondAttribute="trailing" constant="600" id="b4A-p4-xs1"/>
-                                    <constraint firstItem="4Zh-hU-iRV" firstAttribute="centerY" secondItem="euZ-sg-FOe" secondAttribute="centerY" id="cdZ-fJ-uDN"/>
                                     <constraint firstAttribute="height" constant="38" id="eDa-Wi-2c9"/>
-                                    <constraint firstItem="Fqq-hi-f3I" firstAttribute="centerY" secondItem="4Zh-hU-iRV" secondAttribute="centerY" id="fMq-gq-FPv"/>
-                                    <constraint firstAttribute="trailing" secondItem="4Zh-hU-iRV" secondAttribute="trailing" constant="20" id="fPr-gh-jFF"/>
                                     <constraint firstItem="OaM-Hf-nOi" firstAttribute="leading" secondItem="1V6-jx-igX" secondAttribute="trailing" constant="30" id="j39-bo-rdS"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OaM-Hf-nOi" secondAttribute="trailing" constant="20" symbolic="YES" id="jt5-pq-hvo"/>
                                     <constraint firstItem="OaM-Hf-nOi" firstAttribute="width" secondItem="1V6-jx-igX" secondAttribute="width" id="reI-kF-ceb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fqq-hi-f3I" secondAttribute="trailing" constant="20" id="sVt-Ye-jLM"/>
                                 </constraints>
                             </visualEffectView>
                         </subviews>
@@ -2368,12 +2397,19 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="arrayController" destination="xkd-r1-X83" id="nSQ-8h-jPb"/>
                         <outlet property="hideActive" destination="OaM-Hf-nOi" id="N50-Cx-UUV"/>
                         <outlet property="logTableView" destination="56b-GR-B1R" id="mD9-xU-EGB"/>
                         <outlet property="recordLog" destination="1V6-jx-igX" id="b0x-Tt-fFS"/>
                     </connections>
                 </viewController>
                 <customObject id="75Y-Eo-8a4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="WebSocketLog" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="xkd-r1-X83">
+                    <connections>
+                        <binding destination="XkN-Gp-7e3" name="filterPredicate" keyPath="self.predicate" id="9tn-LO-zEf"/>
+                        <binding destination="XkN-Gp-7e3" name="managedObjectContext" keyPath="self.context" id="2Mp-Jg-i3O"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="2987" y="-575"/>
         </scene>
@@ -2394,7 +2430,10 @@ Gw
                                             <constraint firstAttribute="height" constant="80" id="7iD-eF-deK"/>
                                             <constraint firstAttribute="width" secondItem="yq2-gl-qcc" secondAttribute="height" multiplier="1:1" id="DFc-ko-UCv"/>
                                         </constraints>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Iw2-Gn-DbF"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="Iw2-Gn-DbF"/>
+                                        <connections>
+                                            <binding destination="lL6-rP-yng" name="value" keyPath="selection.icon" id="qyZ-FJ-zZE"/>
+                                        </connections>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jSn-6a-dBz">
                                         <rect key="frame" x="98" y="62" width="336" height="21"/>
@@ -2404,6 +2443,9 @@ Gw
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="lL6-rP-yng" name="value" keyPath="selection.name" id="vuE-Vr-Fu5"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5g-OJ-c38">
                                         <rect key="frame" x="98" y="39" width="336" height="17"/>
@@ -2413,6 +2455,9 @@ Gw
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="lL6-rP-yng" name="value" keyPath="selection.fileSizeForInfo" id="hBm-wU-71Z"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptq-4n-VdL">
                                         <rect key="frame" x="98" y="18" width="83" height="17"/>
@@ -2422,6 +2467,9 @@ Gw
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="lL6-rP-yng" name="value" keyPath="selection.downloadSpeedForInfo" id="4yr-Zz-4mq"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFR-KV-rYV">
                                         <rect key="frame" x="185" y="18" width="83" height="17"/>
@@ -2431,6 +2479,9 @@ Gw
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="lL6-rP-yng" name="value" keyPath="selection.uploadSpeedForInfo" id="gYN-FN-7PI"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -2529,6 +2580,9 @@ Gw
                                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="18R-aE-ez3" name="value" keyPath="objectValue.keyValue" id="1WF-fq-zG2"/>
+                                                                                        </connections>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gBn-38-fj7">
                                                                                         <rect key="frame" x="165" y="3" width="286" height="18"/>
@@ -2537,6 +2591,9 @@ Gw
                                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="18R-aE-ez3" name="value" keyPath="objectValue.value" id="URv-hI-7jV"/>
+                                                                                        </connections>
                                                                                     </textField>
                                                                                 </subviews>
                                                                                 <constraints>
@@ -2547,10 +2604,6 @@ Gw
                                                                                     <constraint firstItem="JhX-65-tfs" firstAttribute="width" secondItem="gBn-38-fj7" secondAttribute="width" multiplier="9:16" constant="1" id="OPd-BM-8fR"/>
                                                                                     <constraint firstItem="JhX-65-tfs" firstAttribute="leading" secondItem="18R-aE-ez3" secondAttribute="leading" id="iKA-ek-82A"/>
                                                                                 </constraints>
-                                                                                <connections>
-                                                                                    <outlet property="keyTextField" destination="JhX-65-tfs" id="PCr-sn-Sfy"/>
-                                                                                    <outlet property="valueTextField" destination="gBn-38-fj7" id="o8f-6F-jOi"/>
-                                                                                </connections>
                                                                             </tableCellView>
                                                                             <tableCellView identifier="StatusSpaceTableCellView" id="d6a-W3-OWV">
                                                                                 <rect key="frame" x="1" y="26" width="457" height="12"/>
@@ -2614,11 +2667,13 @@ Gw
                                                                                 </connections>
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
+                                                                        <connections>
+                                                                            <binding destination="xpO-Sq-lzH" name="value" keyPath="arrangedObjects" id="ZQ1-iE-Ed4"/>
+                                                                        </connections>
                                                                     </tableColumn>
                                                                 </tableColumns>
                                                                 <connections>
-                                                                    <outlet property="dataSource" destination="987-L3-Tth" id="LqA-rB-nMo"/>
-                                                                    <outlet property="delegate" destination="987-L3-Tth" id="VAt-wa-lgV"/>
+                                                                    <outlet property="delegate" destination="987-L3-Tth" id="xQY-lE-595"/>
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
@@ -3065,20 +3120,26 @@ Gw
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="downloadSpeedTextField" destination="ptq-4n-VdL" id="6mI-Fq-pmm"/>
-                        <outlet property="fileSizeTextField" destination="Y5g-OJ-c38" id="j7F-Mc-UBH"/>
                         <outlet property="filesOutlineView" destination="B1M-ua-9CL" id="qS7-db-YpC"/>
-                        <outlet property="iconImageView" destination="yq2-gl-qcc" id="vu2-H1-Vxt"/>
-                        <outlet property="nameTextField" destination="jSn-6a-dBz" id="6Kt-IF-U2X"/>
+                        <outlet property="objectController" destination="lL6-rP-yng" id="F9b-kQ-6ue"/>
                         <outlet property="optionsTableView" destination="kR5-pN-Auw" id="LEp-zW-97H"/>
                         <outlet property="segmentedControl" destination="m7U-XY-Voo" id="nl7-pR-Shc"/>
-                        <outlet property="statusTableView" destination="k8q-F7-r6G" id="Wax-de-PuB"/>
+                        <outlet property="statusTableView" destination="k8q-F7-r6G" id="aQ1-L7-FWA"/>
                         <outlet property="tabView" destination="r5R-m2-8A7" id="0qg-hf-bXa"/>
-                        <outlet property="uploadSpeedTextField" destination="RFR-KV-rYV" id="Dcv-1q-edx"/>
                         <segue destination="hbB-X3-upa" kind="custom" identifier="showChangeOptionView" customClass="NSTableViewPopoverSegue" customModule="Aria2D" customModuleProvider="target" id="iSX-JX-77m"/>
                     </connections>
                 </viewController>
                 <customObject id="7QC-Vt-TOn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <objectController mode="entity" entityName="Aria2Object" editable="NO" automaticallyPreparesContent="YES" id="lL6-rP-yng">
+                    <connections>
+                        <binding destination="987-L3-Tth" name="contentObject" keyPath="self.aria2Object" id="o6b-tf-Poi"/>
+                    </connections>
+                </objectController>
+                <arrayController objectClassName="StatusObject" editable="NO" automaticallyPreparesContent="YES" id="xpO-Sq-lzH" userLabel="StatusList">
+                    <connections>
+                        <binding destination="lL6-rP-yng" name="contentArray" keyPath="selection.statusList" id="uFY-mJ-M0k"/>
+                    </connections>
+                </arrayController>
                 <arrayController objectClassName="Aria2Peer" editable="NO" avoidsEmptySelection="NO" id="oBw-cE-C42" userLabel="PeerList">
                     <connections>
                         <binding destination="987-L3-Tth" name="contentArray" keyPath="self.peerObjects" id="rTD-Xp-1n3"/>
@@ -3091,7 +3152,7 @@ Gw
                 </treeController>
                 <arrayController editable="NO" id="V1O-oO-Rut" userLabel="AnnounceList">
                     <connections>
-                        <binding destination="987-L3-Tth" name="contentArray" keyPath="self.announces" id="G2V-2c-kqP"/>
+                        <binding destination="lL6-rP-yng" name="contentArray" keyPath="selection.bittorrent.announceList" id="jq9-cA-QZl"/>
                     </connections>
                 </arrayController>
             </objects>
