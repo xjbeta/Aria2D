@@ -27,7 +27,7 @@ extension Aria2Object {
     @NSManaged public var errorMessage: String?
     @NSManaged public var followedBy: String?
     @NSManaged public var following: String?
-    @NSManaged public var gid: String?
+    @NSManaged public var gid: String
     @NSManaged public var infoHash: String?
     @NSManaged public var numPieces: String?
     @NSManaged public var numSeeders: String?

@@ -216,19 +216,17 @@ public class Aria2Object: NSManagedObject, Decodable {
         errorMessage = try values.decodeIfPresent(String.self, forKey: .errorMessage) ?? ""
         
         list = DataManager.shared.aria2List
-        if let gid = gid {
-            let b = try values.decodeIfPresent(Aria2Bittorrent.self, forKey: .bittorrent)
-            b?.id = gid + "-bittorrent"
-            b?.object = self
-            bittorrent = b
-            
-            let f = try values.decodeIfPresent([Aria2File].self, forKey: .files) ?? []
-            f.forEach {
-                $0.id = gid + "-files-\($0.index)"
-                $0.object = self
-            }
-            files = NSSet(array: f)
+        let b = try values.decodeIfPresent(Aria2Bittorrent.self, forKey: .bittorrent)
+        b?.id = gid + "-bittorrent"
+        b?.object = self
+        bittorrent = b
+        
+        let f = try values.decodeIfPresent([Aria2File].self, forKey: .files) ?? []
+        f.forEach {
+            $0.id = gid + "-files-\($0.index)"
+            $0.object = self
         }
+        files = NSSet(array: f)
         
         sortValue = Double(Date().timeIntervalSince1970)
     }

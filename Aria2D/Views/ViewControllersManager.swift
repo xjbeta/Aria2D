@@ -186,7 +186,7 @@ class ViewControllersManager: NSObject {
         
         selectedObjects.forEach {
             let status = $0.status
-            guard let gid = $0.gid else { return }
+            let gid = $0.gid
             if status == Status.complete.rawValue || status == Status.error.rawValue || status == Status.removed.rawValue {
                 gidForRemoveDownloadResult.append(gid)
             } else {

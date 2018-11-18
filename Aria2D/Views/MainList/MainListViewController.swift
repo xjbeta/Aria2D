@@ -45,7 +45,7 @@ class MainListViewController: NSViewController {
             if let wc = segue.destinationController as? NSWindowController,
                 let vc = wc.contentViewController as? InfoViewController,
                 let obj = arrayController.selectedObjects.first as? Aria2Object {
-                vc.gid = obj.gid ?? ""
+                vc.gid = obj.gid
             }
 		}
 	}
