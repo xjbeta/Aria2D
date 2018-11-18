@@ -121,9 +121,12 @@ class DataManager: NSObject {
             obj.completedLength = status.completedLength
             obj.uploadLength = status.uploadLength
             obj.downloadSpeed = status.downloadSpeed
+            obj.uploadSpeed = status.uploadSpeed
             obj.connections = Int64(status.connections)
-//            obj.bittorrent = status.bittorrent
             obj.dir = status.dir
+            obj.bittorrent = status.bittorrent
+            obj.bittorrent?.object = obj
+            obj.bittorrent?.id = status.gid + "-bittorrent"
         }
     }
 	

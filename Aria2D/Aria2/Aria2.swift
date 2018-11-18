@@ -96,18 +96,21 @@ class Aria2: NSObject {
 
     func updateActiveTasks() {
         send(method: Aria2Method.tellActive,
-                             params: [["gid",
-                                       "status",
-                                       "completedLength",
-                                       "totalLength",
-                                       "downloadSpeed",
-                                       "uploadLength",
-                                       "connections"]])
+             params: [["gid",
+                       "status",
+                       "completedLength",
+                       "totalLength",
+                       "downloadSpeed",
+                       "uploadLength",
+                       "uploadSpeed",
+                       "connections",
+                       "bittorrent",
+                       "dir"]])
             .done { data in
                 struct Result: Decodable {
                     let result: [Aria2Status]
                 }
-                let result = try JSONDecoder().decode(Result.self, from: data).result
+                let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
                 try DataManager.shared.updateStatus(result)
                 DataManager.shared.saveContext()
             }.catch {
@@ -125,6 +128,7 @@ class Aria2: NSObject {
                                                "totalLength",
                                                "downloadSpeed",
                                                "uploadLength",
+                                               "uploadSpeed",
                                                "connections",
                                                "bittorrent",
                                                "dir"]]).object()
@@ -136,7 +140,7 @@ class Aria2: NSObject {
                 struct Result: Decodable {
                     var result: [[Aria2Status]]
                 }
-                let result = try JSONDecoder().decode(Result.self, from: data).result.flatMap({ $0 })
+                let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
                 try DataManager.shared.updateStatus(result)
                 DataManager.shared.saveContext()
                 self.sortData()

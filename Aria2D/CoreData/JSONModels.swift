@@ -31,8 +31,9 @@ struct Aria2Status: Decodable {
 	let completedLength: Int64
 	let uploadLength: Int64
 	let downloadSpeed: Int64
+    let uploadSpeed: Int64
 	let connections: Int
-//    let bittorrent: Bittorrent?
+    let bittorrent: Aria2Bittorrent?
 	let dir: String?
 	
 	private enum CodingKeys: String, CodingKey {
@@ -42,6 +43,7 @@ struct Aria2Status: Decodable {
 		completedLength,
 		uploadLength,
 		downloadSpeed,
+        uploadSpeed,
 		connections,
 		bittorrent,
 		dir
@@ -56,9 +58,10 @@ struct Aria2Status: Decodable {
 		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
 		uploadLength = Int64(try values.decode(String.self, forKey: .uploadLength)) ?? 0
 		downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
+        uploadSpeed = Int64(try values.decode(String.self, forKey: .uploadSpeed)) ?? 0
 		connections = Int(try values.decode(String.self, forKey: .connections)) ?? 0
-//        bittorrent = try values.decodeIfPresent(Bittorrent.self, forKey: .bittorrent)
 		dir = try values.decodeIfPresent(String.self, forKey: .dir)
+        bittorrent = try values.decodeIfPresent(Aria2Bittorrent.self, forKey: .bittorrent)
 	}
 }
 
