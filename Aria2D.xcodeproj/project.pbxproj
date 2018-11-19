@@ -26,7 +26,6 @@
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
 		012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */; };
-		012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */; };
 		012CBD6F1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD6B1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift */; };
 		012CBD761F6CC57F00EFD1D4 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */; };
 		012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */; };
@@ -77,7 +76,6 @@
 		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
-		01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
 		01E9068B219BF70900928580 /* Aria2D.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E90689219BF70800928580 /* Aria2D.xcdatamodeld */; };
 		01E906AF219C518B00928580 /* Aria2Object+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906A7219C518B00928580 /* Aria2Object+CoreDataClass.swift */; };
@@ -146,7 +144,6 @@
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
 		012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItem.swift; sourceTree = "<group>"; };
 		012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewItemView.swift; sourceTree = "<group>"; };
-		012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDicTableCellView.swift; sourceTree = "<group>"; };
 		012CBD6B1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBitfieldTableCellView.swift; sourceTree = "<group>"; };
 		012CBD721F6CC57F00EFD1D4 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -200,7 +197,6 @@
 		01A5351C2129512000E5C88C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
-		01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleClickTextField.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
 		01E9068A219BF70800928580 /* Aria2D.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aria2D.xcdatamodel; sourceTree = "<group>"; };
 		01E906A7219C518B00928580 /* Aria2Object+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aria2Object+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -291,7 +287,6 @@
 				012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */,
 				017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */,
 				012CBD691F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift */,
-				012CBD6A1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift */,
 			);
 			path = StatusView;
 			sourceTree = "<group>";
@@ -372,7 +367,6 @@
 				012CBD731F6CC57F00EFD1D4 /* InfoViewController.swift */,
 				012B572F2159267400D1AC03 /* FileNode.swift */,
 				011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */,
-				01D2BF3D1E99038000A41969 /* DoubleClickTextField.swift */,
 				012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */,
 			);
 			path = InfoView;
@@ -659,7 +653,6 @@
 				01E906C2219C682700928580 /* Aria2List+CoreDataProperties.swift in Sources */,
 				010B59181D3CF66600550A43 /* MainMenu.swift in Sources */,
 				01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */,
-				01D2BF3E1E99038000A41969 /* DoubleClickTextField.swift in Sources */,
 				0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */,
 				016CF8F61ED52E5C001336F1 /* AdvancedViewController.swift in Sources */,
 				012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */,
@@ -683,7 +676,6 @@
 				01E906B2219C518B00928580 /* Aria2Bittorrent+CoreDataProperties.swift in Sources */,
 				01E906C8219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift in Sources */,
 				018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */,
-				012CBD6E1F6CC55A00EFD1D4 /* StatusDicTableCellView.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
 				01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */,
 				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,
