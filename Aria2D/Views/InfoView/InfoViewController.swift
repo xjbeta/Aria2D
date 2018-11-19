@@ -123,13 +123,6 @@ class InfoViewController: NSViewController {
         }
     }
     
-    
-    
-//MARK: - Status Item
-    
-    @IBOutlet weak var statusTableView: NSTableView!
-    var statusBitfieldTableCellView: StatusBitfieldTableCellView?
-    
 //MARK: - Options Item
     
     @IBOutlet weak var optionsTableView: NSTableView!
@@ -259,20 +252,6 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         switch tableView {
-        case statusTableView:
-            guard let statusList = aria2Object?.statusList else { return 0 }
-            
-            if statusList[row].key == .errorMessage {
-                let textFiled = NSTextFieldCell()
-                textFiled.font = NSFont.systemFont(ofSize: 14)
-                textFiled.stringValue = statusList[row].value
-
-                let width = (tableView.bounds.size.width - 16 - tableView.intercellSpacing.width) * 16/25
-                let height = textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: width, height: 400)).height
-
-                return height < statusList[row].height ? statusList[row].height : height
-            }
-            return statusList[row].height
         case optionsTableView:
             return tableView.rowHeight
         default:
@@ -283,23 +262,6 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         switch tableView {
-        case statusTableView:
-            guard let statusList = aria2Object?.statusList else { return nil }
-            switch statusList[row].key {
-            case .space:
-                if let view = statusTableView.makeView(withIdentifier: .statusSpaceTableCellView, owner: self) {
-                    return view
-                }
-            case .bitfield:
-                if let view = statusBitfieldTableCellView {
-                    view.bitfield = statusList[row].value
-                    return view
-                }
-            default:
-                if let view = statusTableView.makeView(withIdentifier: .statusDicTableCellView, owner: self) as? StatusDicTableCellView {
-                    return view
-                }
-            }
         case optionsTableView:
             switch tableColumn?.title {
             case "value":

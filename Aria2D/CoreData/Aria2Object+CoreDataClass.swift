@@ -114,25 +114,9 @@ public class Aria2Object: NSManagedObject, Decodable {
         }
     }
     
-    @objc dynamic var statusList: [StatusObject] {
-        var list = [StatusObject(.gid, value: gid),
-//                           StatusObject(.bitfield, value: obj.bitfield),
-                    StatusObject(.status, value: Status(raw: status)?.string()),
-                    StatusObject(.connections, value: "\(connections)"),
-                    StatusObject(.numPieces, value: numPieces),
-                    StatusObject(.pieceLength, value: pieceLength.ByteFileFormatter()),
-                    StatusObject(.space, value: ""),
-                    StatusObject(.totalLength, value: totalLength.ByteFileFormatter()),
-                    StatusObject(.completedLength, value: completedLength.ByteFileFormatter()),
-                    StatusObject(.uploadLength, value: uploadLength.ByteFileFormatter())]
-        
-        if errorCode != 0 {
-            list.append(contentsOf: [
-                StatusObject(.space, value: ""),
-                StatusObject(.errorCode, value: "\(errorCode)"),
-                StatusObject(.errorMessage, value: errorMessage)])
-        }
-        return list
+    @objc dynamic var statusStr: String {
+        guard let s = Status(raw: status) else { return "" }
+        return s.string()
     }
     
     func path() -> URL? {
@@ -149,6 +133,8 @@ public class Aria2Object: NSManagedObject, Decodable {
     
     override public class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
         switch key {
+        case "statusStr":
+            return Set(["status"])
         case "name", "icon" :
             return Set(["bittorrent", "files"])
         case "fileSize":
@@ -161,8 +147,6 @@ public class Aria2Object: NSManagedObject, Decodable {
             return Set(["completedLength", "totalLength"])
         case "remainingTime", "percentage", "hidePercentage":
             return Set(["totalLength", "completedLength", "downloadSpeed", "status"])
-        case "statusList":
-            return Set(["gid", "status", "connections", "numPieces", "pieceLength", "totalLength", "completedLength", "uploadLength", "errorCode", "errorMessage"])
         default :
             return super.keyPathsForValuesAffectingValue(forKey: key)
         }
