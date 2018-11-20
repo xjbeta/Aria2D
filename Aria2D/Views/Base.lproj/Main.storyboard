@@ -3250,6 +3250,7 @@ Gw
                     </view>
                     <connections>
                         <outlet property="filesOutlineView" destination="B1M-ua-9CL" id="qS7-db-YpC"/>
+                        <outlet property="filesTreeController" destination="RHy-o4-P1X" id="mO2-pU-bgK"/>
                         <outlet property="objectController" destination="lL6-rP-yng" id="F9b-kQ-6ue"/>
                         <outlet property="optionsTableView" destination="kR5-pN-Auw" id="LEp-zW-97H"/>
                         <outlet property="segmentedControl" destination="m7U-XY-Voo" id="nl7-pR-Shc"/>

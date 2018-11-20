@@ -171,6 +171,8 @@ class InfoViewController: NSViewController {
     
     @IBOutlet weak var filesOutlineView: NSOutlineView!
     
+    @IBOutlet var filesTreeController: NSTreeController!
+    
     @objc dynamic var fileNodes: FileNode?
 
 //MARK: - Peer Item
@@ -180,7 +182,9 @@ class InfoViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        statusBitfieldTableCellView = statusTableView.makeView(withIdentifier: .statusBitfieldTableCellView, owner: self) as? StatusBitfieldTableCellView
+        
+        filesTreeController.sortDescriptors = [NSSortDescriptor(key: "isLeaf", ascending: true),
+                                               NSSortDescriptor(key: "title", ascending: true)]
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
