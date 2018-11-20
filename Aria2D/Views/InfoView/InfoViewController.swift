@@ -205,7 +205,16 @@ class InfoViewController: NSViewController {
             }
         }
     }
+    deinit {
+        aria2Object = nil
+        objectController.content = nil
+        if let o = filesObserver {
+            NotificationCenter.default.removeObserver(o)
+        }
+    }
+    
 }
+
 extension InfoViewController: NSTabViewDelegate {
     
     func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
