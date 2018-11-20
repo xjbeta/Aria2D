@@ -23,12 +23,11 @@ public class Aria2File: NSManagedObject, Decodable {
     }
     
     required convenience public init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext else {
-            fatalError("Failed to decode Core Data object")
+        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Aria2File", in: context)  else {
+                fatalError("Failed to decode Core Data object")
         }
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        self.init(context: context)
-
+        self.init(entity: entity, insertInto: nil)
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         index = Int64(try values.decode(String.self, forKey: .index)) ?? -1
@@ -38,5 +37,13 @@ public class Aria2File: NSManagedObject, Decodable {
         selected = try values.decode(String.self, forKey: .selected) == "true"
 //        uris = try values.decode([Aria2Uri].self, forKey: .uris)
 //            .map { $0.uri }
+    }
+    
+    func update(with file: Aria2File) {
+        index = file.index
+        path = file.path
+        length = file.length
+        completedLength = file.completedLength
+        selected = file.selected
     }
 }

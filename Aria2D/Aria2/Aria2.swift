@@ -49,8 +49,6 @@ class Aria2: NSObject {
                 let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 }).flatMap({ $0 })
                 
                 try DataManager.shared.initAllObjects(re)
-                
-                DataManager.shared.saveContext()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -71,7 +69,6 @@ class Aria2: NSObject {
                 
                 let re = try JSONDecoder().decode(GIDList.self, from: data).result.flatMap ({ $0 }).flatMap ({ $0 })
                 try DataManager.shared.sortAllObjects(re)
-                DataManager.shared.saveContext()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -112,7 +109,6 @@ class Aria2: NSObject {
                 }
                 let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
                 try DataManager.shared.updateStatus(result)
-                DataManager.shared.saveContext()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -142,7 +138,6 @@ class Aria2: NSObject {
                 }
                 let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
                 try DataManager.shared.updateStatus(result)
-                DataManager.shared.saveContext()
                 self.sortData()
             }.catch {
                 Log("\(#function) error \($0)")
@@ -180,7 +175,6 @@ class Aria2: NSObject {
                 }
                 let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
                 try DataManager.shared.updateFiles(gid, files: re)
-                DataManager.shared.saveContext()
                 block()
             }.catch {
                 Log("\(#function) error \($0)")

@@ -22,7 +22,7 @@ extension Aria2Bittorrent {
     @NSManaged public var creationDate: Int64
     @NSManaged public var mode: Int16
     @NSManaged public var name: String?
-    @NSManaged public var id: String?
+    @NSManaged public var id: String
     @NSManaged public var object: Aria2Object?
 
 }

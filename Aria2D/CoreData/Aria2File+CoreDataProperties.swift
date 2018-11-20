@@ -18,7 +18,7 @@ extension Aria2File {
     }
 
     @NSManaged public var completedLength: Int64
-    @NSManaged public var id: String?
+    @NSManaged public var id: String
     @NSManaged public var index: Int64
     @NSManaged public var length: Int64
     @NSManaged public var path: String?

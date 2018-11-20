@@ -32,12 +32,11 @@ public class Aria2Bittorrent: NSManagedObject, Decodable {
     }
     
     required convenience public init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext else {
-            fatalError("Failed to decode Core Data object")
+        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Aria2Bittorrent", in: context)  else {
+                fatalError("Failed to decode Core Data object")
         }
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        self.init(context: context)
-
+        self.init(entity: entity, insertInto: nil)
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         if let dic = try values.decodeIfPresent([String: String].self, forKey: .name) {
@@ -52,5 +51,10 @@ public class Aria2Bittorrent: NSManagedObject, Decodable {
         }
     }
     
-
+    func update(with bittorrent: Aria2Bittorrent?) {
+        guard let bittorrent = bittorrent else { return }
+        announceList = bittorrent.announceList
+        name = bittorrent.name
+        mode = bittorrent.mode
+    }
 }

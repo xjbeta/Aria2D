@@ -89,6 +89,30 @@ class DataManager: NSObject {
     func initAllObjects(_ objs: [Aria2Object]) throws {
         let gids = objs.compactMap({ $0.gid})
         try deleteAria2Objects(gids)
+
+        let fetchRequest: NSFetchRequest<Aria2Object> = Aria2Object.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "gid IN %@", gids)
+        let needUpdateObjs = try context.fetch(fetchRequest)
+        let needUpdateGids = needUpdateObjs.map { $0.gid }
+
+        objs.forEach { obj in
+            guard needUpdateGids.contains(obj.gid), let oldObj = needUpdateObjs.filter({
+                $0.gid == obj.gid
+            }).first else {
+                context.insert(obj)
+                if let b = obj.bittorrent {
+                    context.insert(b)
+                }
+                (obj.files?.allObjects as? [Aria2File])?.forEach {
+                    context.insert($0)
+                }
+                obj.list = aria2List
+                return
+            }
+            oldObj.update(with: obj, context: context)
+        }
+        
+        saveContext()
     }
     
     func sortAllObjects(_ gidsDic: [[String: String]]) throws {
@@ -103,7 +127,7 @@ class DataManager: NSObject {
             obj?.status = Status(dic["status"] ?? "")?.rawValue ?? 3
             obj?.sortValue = Double(Date().timeIntervalSince1970)
         }
-        
+        saveContext()
     }
     
     func updateStatus(_ results: [Aria2Status]) throws {
@@ -115,33 +139,18 @@ class DataManager: NSObject {
             guard let status = results.filter({
                 $0.gid == obj.gid
             }).first else { return }
-            
-            obj.status = status.status.rawValue
-            obj.totalLength = status.totalLength
-            obj.completedLength = status.completedLength
-            obj.uploadLength = status.uploadLength
-            obj.downloadSpeed = status.downloadSpeed
-            obj.uploadSpeed = status.uploadSpeed
-            obj.connections = Int64(status.connections)
-            obj.dir = status.dir
-            obj.bittorrent?.announceList = status.bittorrent?.announceList
-            obj.bittorrent?.name = status.bittorrent?.name
-            obj.bittorrent?.mode = status.bittorrent?.mode ?? 0
+            obj.update(with: status)
         }
+        saveContext()
     }
 	
 	func updateFiles(_ gid: String, files: [Aria2File]) throws {
         guard let obj = try aria2Objects([gid]).first else { return }
         files.forEach {
             $0.id = gid + "-files-\($0.index)"
-            $0.object = obj
         }
-        
-        (obj.files?.allObjects as? [Aria2File])?.filter {
-            !files.map({ $0.id }).contains($0.id)
-        }.forEach {
-            context.delete($0)
-        }
+        obj.updateFiles(with: files, context: context)
+        saveContext()
 	}
     
 	func activeCount() throws -> Int {

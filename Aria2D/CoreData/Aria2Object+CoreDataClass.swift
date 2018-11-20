@@ -173,11 +173,11 @@ public class Aria2Object: NSManagedObject, Decodable {
     }
     
     required convenience public init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext else {
+        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Aria2Object", in: context)  else {
             fatalError("Failed to decode Core Data object")
         }
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        self.init(context: context)
+        self.init(entity: entity, insertInto: nil)
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         gid = try values.decode(String.self, forKey: .gid)
@@ -196,12 +196,12 @@ public class Aria2Object: NSManagedObject, Decodable {
         errorCode = Int16(try values.decodeIfPresent(String.self, forKey: .errorCode) ?? "") ?? 0
         errorMessage = try values.decodeIfPresent(String.self, forKey: .errorMessage) ?? ""
         
-        list = DataManager.shared.aria2List
+//        list = DataManager.shared.aria2List
         let b = try values.decodeIfPresent(Aria2Bittorrent.self, forKey: .bittorrent)
         b?.id = gid + "-bittorrent"
         b?.object = self
         bittorrent = b
-        
+
         let f = try values.decodeIfPresent([Aria2File].self, forKey: .files) ?? []
         f.forEach {
             $0.id = gid + "-files-\($0.index)"
@@ -210,6 +210,75 @@ public class Aria2Object: NSManagedObject, Decodable {
         files = NSSet(array: f)
         
         sortValue = Double(Date().timeIntervalSince1970)
+    }
+    
+    func update(with obj: Aria2Object, context: NSManagedObjectContext) {
+        belongsTo = obj.belongsTo
+        bitfield = obj.bitfield
+        completedLength = obj.completedLength
+        connections = obj.connections
+        dir = obj.dir
+        downloadSpeed = obj.downloadSpeed
+        errorCode = obj.errorCode
+        errorMessage = obj.errorMessage
+        followedBy = obj.followedBy
+        following = obj.following
+        infoHash = obj.infoHash
+        numPieces = obj.numPieces
+        numSeeders = obj.numSeeders
+        pieceLength = obj.pieceLength
+        seeder = obj.seeder
+        status = obj.status
+        totalLength = obj.totalLength
+        uploadLength = obj.uploadLength
+        uploadSpeed = obj.uploadSpeed
+        verifiedLength = obj.verifiedLength
+        verifyIntegrityPending = obj.verifyIntegrityPending
+        
+        sortValue = obj.sortValue
+        
+        bittorrent?.update(with: obj.bittorrent)
+        
+        if let newFiles = obj.files?.allObjects as? [Aria2File] {
+            updateFiles(with: newFiles, context: context)
+        }
+    }
+    
+    func updateFiles(with newFiles: [Aria2File], context: NSManagedObjectContext) {
+        if let files = files?.allObjects as? [Aria2File] {
+            let newIds = newFiles.map({ $0.id })
+            let oldIds = files.map({ $0.id })
+            
+            let deleteFiles = files.filter {
+                !newIds.contains($0.id)
+            }
+            
+            deleteFiles.forEach {
+                context.delete($0)
+            }
+            
+            newFiles.forEach { newFile in
+                guard oldIds.contains(newFile.id),
+                    let file = files.filter({ $0.id == newFile.id }).first else {
+                        context.insert(newFile)
+                        newFile.object = self
+                        return
+                }
+                file.update(with: newFile)
+            }
+        }
+    }
+    
+    func update(with status: Aria2Status) {
+        self.status = status.status.rawValue
+        totalLength = status.totalLength
+        completedLength = status.completedLength
+        uploadLength = status.uploadLength
+        downloadSpeed = status.downloadSpeed
+        uploadSpeed = status.uploadSpeed
+        connections = Int64(status.connections)
+        dir = status.dir
+        bittorrent?.update(with: status.bittorrent)
     }
     
     

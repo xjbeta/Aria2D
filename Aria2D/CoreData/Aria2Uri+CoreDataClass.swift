@@ -18,11 +18,11 @@ public class Aria2Uri: NSManagedObject, Decodable {
     }
     
     required convenience public init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext else {
-            fatalError("Failed to decode Core Data object")
+        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Aria2Uri", in: context)  else {
+                fatalError("Failed to decode Core Data object")
         }
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        self.init(context: context)
+        self.init(entity: entity, insertInto: nil)
 
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
