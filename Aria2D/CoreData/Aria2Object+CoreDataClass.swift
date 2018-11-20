@@ -119,6 +119,10 @@ public class Aria2Object: NSManagedObject, Decodable {
         return s.string()
     }
     
+    @objc dynamic var hideErrorInfo: Bool {
+        return errorCode == 0
+    }
+    
     func path() -> URL? {
         if let name = bittorrent?.name, let dir = dir, dir != "", name != "" {
             return URL(fileURLWithPath: dir).appendingPathComponent(name)
@@ -133,6 +137,8 @@ public class Aria2Object: NSManagedObject, Decodable {
     
     override public class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
         switch key {
+        case "hideErrorInfo":
+            return Set(["errorCode"])
         case "statusStr":
             return Set(["status"])
         case "name", "icon" :

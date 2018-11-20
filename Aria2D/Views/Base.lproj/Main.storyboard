@@ -2555,8 +2555,16 @@ Gw
                                                         <gridRow id="67b-hH-vEL"/>
                                                         <gridRow id="fEo-Sx-xEh"/>
                                                         <gridRow height="8" id="0cW-H7-rfF"/>
-                                                        <gridRow id="GPl-Xn-Ln5"/>
-                                                        <gridRow id="JLF-0i-hZx"/>
+                                                        <gridRow id="GPl-Xn-Ln5">
+                                                            <connections>
+                                                                <binding destination="lL6-rP-yng" name="hidden" keyPath="selection.hideErrorInfo" id="S8X-jG-AJX"/>
+                                                            </connections>
+                                                        </gridRow>
+                                                        <gridRow id="JLF-0i-hZx">
+                                                            <connections>
+                                                                <binding destination="lL6-rP-yng" name="hidden" keyPath="selection.hideErrorInfo" id="TuL-Jg-6kI"/>
+                                                            </connections>
+                                                        </gridRow>
                                                     </rows>
                                                     <columns>
                                                         <gridColumn xPlacement="trailing" width="150" id="7jk-53-1BQ"/>
