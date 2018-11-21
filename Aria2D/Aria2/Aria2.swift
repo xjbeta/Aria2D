@@ -81,11 +81,8 @@ class Aria2: NSObject {
                 struct Result: Decodable {
                     let result: Aria2Object
                 }
-                if let re = data.decode(Result.self)?.result {
-                    block(re)
-                }
-                
-                let t = ""
+                let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
+                block(re)
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -107,7 +104,7 @@ class Aria2: NSObject {
                 struct Result: Decodable {
                     let result: [Aria2Status]
                 }
-                let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
+                let result = try JSONDecoder().decode(Result.self, from: data).result
                 try DataManager.shared.updateStatus(result)
             }.catch {
                 Log("\(#function) error \($0)")
@@ -136,7 +133,7 @@ class Aria2: NSObject {
                 struct Result: Decodable {
                     var result: [[Aria2Status]]
                 }
-                let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
+                let result = try JSONDecoder().decode(Result.self, from: data).result.flatMap({ $0 })
                 try DataManager.shared.updateStatus(result)
                 self.sortData()
             }.catch {
