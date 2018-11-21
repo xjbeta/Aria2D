@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Aria2Bittorrent" representedClassName="Aria2Bittorrent" syncable="YES">
+        <attribute name="announceList" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="object" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Aria2Object" inverseName="bittorrent" inverseEntity="Aria2Object" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Aria2File" representedClassName="Aria2File" syncable="YES">
+        <attribute name="completedLength" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="object" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Aria2Object" inverseName="files" inverseEntity="Aria2Object" syncable="YES"/>
+        <relationship name="uris" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Aria2Uri" inverseName="file" inverseEntity="Aria2Uri" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Aria2List" representedClassName=".Aria2List" syncable="YES">
+        <relationship name="objects" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Aria2Object" inverseName="list" inverseEntity="Aria2Object" syncable="YES"/>
+    </entity>
+    <entity name="Aria2Object" representedClassName="Aria2Object" syncable="YES">
+        <attribute name="belongsTo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bitfield" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="completedLength" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="connections" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dir" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="downloadSpeed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="errorCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="errorMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="followedBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="following" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gid" attributeType="String" syncable="YES"/>
+        <attribute name="infoHash" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numPieces" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numSeeders" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pieceLength" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="seeder" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sortValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalLength" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uploadLength" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uploadSpeed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="verifiedLength" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verifyIntegrityPending" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="bittorrent" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Aria2Bittorrent" inverseName="object" inverseEntity="Aria2Bittorrent" syncable="YES"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Aria2File" inverseName="object" inverseEntity="Aria2File" syncable="YES"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Aria2List" inverseName="objects" inverseEntity="Aria2List" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="gid"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Aria2Uri" representedClassName="Aria2Uri" syncable="YES">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uri" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="file" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Aria2File" inverseName="uris" inverseEntity="Aria2File" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="WebSocketLog" representedClassName="WebSocketLog" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="method" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receivedJSON" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sendJSON" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="success" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Aria2Bittorrent" positionX="-54" positionY="-9" width="128" height="148"/>
+        <element name="Aria2File" positionX="-36" positionY="9" width="128" height="165"/>
+        <element name="Aria2List" positionX="-27" positionY="144" width="128" height="60"/>
+        <element name="Aria2Object" positionX="-18" positionY="27" width="128" height="435"/>
+        <element name="Aria2Uri" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="WebSocketLog" positionX="-18" positionY="153" width="128" height="120"/>
+    </elements>
+</model>

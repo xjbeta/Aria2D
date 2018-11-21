@@ -12,14 +12,14 @@ class DownloadsMenu: NSMenu, NSMenuItemValidation {
 
 	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		let selectedRow = ViewControllersManager.shared.selectedRow
-		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
+		let selectedObjects = ViewControllersManager.shared.selectedObjects
 		let mainWindowFront = ViewControllersManager.shared.mainWindowFront
 		let selectedUrls = ViewControllersManager.shared.selectedUrls().count
 		
 		if menuItem.action == #selector(startOrPause) {
 			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? NSLocalizedString("mainMenu.pauseOrUnpausItem.pause", comment: "") : NSLocalizedString("mainMenu.pauseOrUnpausItem.unpause", comment: "")
 			return selectedRow == .downloading
-				&& selectedIndexs.count > 0
+				&& selectedObjects.count > 0
 				&& mainWindowFront
 		}
 		
@@ -33,12 +33,12 @@ class DownloadsMenu: NSMenu, NSMenuItemValidation {
 		
 		if menuItem.action == #selector(delete) {
 			return mainWindowFront
-				&& selectedIndexs.count > 0
+				&& selectedObjects.count > 0
 				&& (selectedRow == .downloading || selectedRow == .completed || selectedRow == .removed)
 		}
 		
         if menuItem.action == #selector(showInfo) {
-			return selectedIndexs.count > 0 && mainWindowFront
+			return selectedObjects.count > 0 && mainWindowFront
 		}
 		
 		if menuItem.action == #selector(showInFinder) {

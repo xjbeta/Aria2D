@@ -8,7 +8,6 @@
 
 import Foundation
 extension NSStoryboardSegue.Identifier {
-	static let showBaiduDlinksProgress = "showBaiduDlinksProgress"
     static let showInfoWindow = "showInfoWindow"
 	static let showNewTaskViewController = "showNewTaskViewController"
 	static let showChangeOptionView = "showChangeOptionView"
@@ -23,7 +22,6 @@ extension NSUserInterfaceItemIdentifier {
     static let sidebarTableCellView = NSUserInterfaceItemIdentifier(rawValue: "SidebarTableCellView")
     //Main List
 	static let downloadsTableCellView = NSUserInterfaceItemIdentifier(rawValue: "DownloadsTableCellView")
-	static let baiduFileTableCellView = NSUserInterfaceItemIdentifier(rawValue: "BaiduFileTableCellView")
     //Log
     static let receivedJSONTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "ReceivedJSONTableCellView")
     //Info View
@@ -34,8 +32,6 @@ extension NSUserInterfaceItemIdentifier {
     static let optionTableViewOption = NSUserInterfaceItemIdentifier(rawValue: "OptionTableViewOption")
     static let optionTableViewValue = NSUserInterfaceItemIdentifier(rawValue: "OptionTableViewValue")
     
-    //Baidu Login
-    static let stepTableCellView = NSUserInterfaceItemIdentifier(rawValue: "StepTableCellView")
     //New Task
     static let aria2OptionCellView  = NSUserInterfaceItemIdentifier(rawValue: "Aria2OptionCellView")
     

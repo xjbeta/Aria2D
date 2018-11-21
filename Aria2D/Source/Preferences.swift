@@ -88,30 +88,6 @@ class Preferences: NSObject {
 		}
 	}
 	
-	
-	
-//	var bookmarkUrl: URL
-	
-// MARK: - OtherPreferences
-	var sortValue: String {
-		get {
-			return defaults(.sortValue) as? String ?? "path"
-		}
-		set {
-			defaultsSet(newValue, forKey: .sortValue)
-		}
-	}
-	
-	var ascending: Bool {
-		get {
-			return defaults(.ascending) as? Bool ?? true
-		}
-		set {
-			defaultsSet(newValue, forKey: .ascending)
-		}
-	}
-
-	
 // MARK: - Aria2c Options
 	var autoStartAria2c: Bool {
 		get {
@@ -159,7 +135,7 @@ class Preferences: NSObject {
 		assert(prefs.value(forKey: key) != nil, "Can't save value to preference, try to restart your macOS.", file: "124")
 		prefs.removeObject(forKey: key)
         
-        let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey"]
+        let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey", "app_baidu_ascending", "app_baidu_sortValue"]
         dropedKeys.forEach {
             prefs.removeObject(forKey: $0)
         }

@@ -44,8 +44,8 @@ class HUD: NSObject {
 			                                        multiplier: 1,
 			                                        constant: 0)])
 			
-			removeHUD = WaitTimer(timeOut: .milliseconds(1200)) {
-				self.disappearAnimation(hud.view)
+			removeHUD = WaitTimer(timeOut: .milliseconds(1200)) { [weak self] in
+				self?.disappearAnimation(hud.view)
 			}
 		}
 		

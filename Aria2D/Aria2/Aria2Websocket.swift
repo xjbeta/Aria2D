@@ -64,7 +64,7 @@ class Aria2Websocket: NSObject {
 	func showNotification(_ obj: Aria2Object) {
 		let notification = NSUserNotification()
 		notification.title = "Completed"
-        notification.subtitle = obj.nameString()
+        notification.subtitle = obj.name
 		notification.informativeText = obj.totalLength.ByteFileFormatter()
 		notification.soundName = NSUserNotificationDefaultSoundName
 		NSUserNotificationCenter.default.deliver(notification)
@@ -87,8 +87,14 @@ class Aria2Websocket: NSObject {
                     self.socket?.delegate = self
                     self.socket?.open()
                 } else {
-                    if DataManager.shared.activeCount() > 0 {
+                    DispatchQueue.main.async {
+                        guard let count = try? DataManager.shared.activeCount(),
+                            count > 0 else { return }
                         Aria2.shared.updateActiveTasks()
+                    }
+                    
+                    if let infoVC = NSApp.keyWindow?.contentViewController as? InfoViewController {
+                        infoVC.updateStatusInTimer()
                     }
 				}
 			}
@@ -166,22 +172,24 @@ class Aria2Websocket: NSObject {
                withID id: String,
                method: String) -> Promise<Data> {
         return Promise { resolver in
-            let time = Date().timeIntervalSince1970
+            let time = Double(Date().timeIntervalSince1970)
             WaitingList.shared.add(id) { (data, timeOut) in
                 // Save log
                 if Preferences.shared.developerMode,
                     Preferences.shared.recordWebSocketLog {
-                    let log = WebSocketLog()
-                    log.method = method
-                    log.sendJSON = "\(dic)"
-                    if let str = String(data: data, encoding: .utf8),
-                        let shrotData = Aria2Websocket.shared.clearUrls(str),
-                        let shortStr = String(data: shrotData, encoding: .utf8) {
-                        log.receivedJSON =  shortStr
+                    DispatchQueue.main.async {
+                        let log = WebSocketLog(context: DataManager.shared.context)
+                        log.method = method
+                        log.sendJSON = "\(dic)"
+                        if let str = String(data: data, encoding: .utf8),
+                            let shrotData = Aria2Websocket.shared.clearUrls(str),
+                            let shortStr = String(data: shrotData, encoding: .utf8) {
+                            log.receivedJSON =  shortStr
+                        }
+                        log.success = !timeOut
+                        log.date = time
+                        DataManager.shared.saveContext()
                     }
-                    log.success = !timeOut
-                    log.time = time
-                    ViewControllersManager.shared.addLog(log)
                 }
                 
                 if !timeOut {
@@ -261,12 +269,12 @@ extension Aria2Websocket: SRWebSocketDelegate {
                     Aria2.shared.updateStatus(gids)
                 }
                 if Preferences.shared.developerMode, Preferences.shared.recordWebSocketLog {
-                    let log = WebSocketLog()
+                    let log = WebSocketLog(context: DataManager.shared.context)
                     log.method = json.method.rawValue
                     log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
                     log.success = true
-                    log.time = Date().timeIntervalSince1970
-                    ViewControllersManager.shared.addLog(log)
+                    log.date = Double(Date().timeIntervalSince1970)
+                    DataManager.shared.saveContext()
                 }
             }
         }

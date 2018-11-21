@@ -9,14 +9,14 @@
 import Cocoa
 
 class MainMenu: NSObject, NSMenuItemValidation {
-	
+    
 	@objc var enableLogItem: Bool {
 		return Preferences.shared.developerMode
 	}
     
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         let selectedRow = ViewControllersManager.shared.selectedRow
-		let selectedIndexs = ViewControllersManager.shared.selectedIndexs
+		let selectedObjects = ViewControllersManager.shared.selectedObjects
 		let mainWindowFront = ViewControllersManager.shared.mainWindowFront
 
 		if menuItem.action == #selector(addTask) {
@@ -24,7 +24,7 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		}
 		
 		if menuItem.action == #selector(nextTag) {
-			return selectedRow != .baidu && mainWindowFront
+			return mainWindowFront
 		}
 		
 		if menuItem.action == #selector(previousTag) {
@@ -34,7 +34,7 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		if menuItem.action == #selector(startOrPause) {
 			menuItem.title = ViewControllersManager.shared.tasksShouldPause ? NSLocalizedString("mainMenu.pauseOrUnpausItem.pause", comment: "") : NSLocalizedString("mainMenu.pauseOrUnpausItem.unpause", comment: "")
 			return selectedRow == .downloading
-				&& selectedIndexs.count > 0
+				&& selectedObjects.count > 0
 				&& mainWindowFront
 		}
 		
@@ -48,14 +48,13 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		
 		if menuItem.action == #selector(delete) {
 			return mainWindowFront
-				&& selectedIndexs.count > 0
+				&& selectedObjects.count > 0
 				&& (selectedRow == .downloading || selectedRow == .completed || selectedRow == .removed)
 		}
 		
 		if menuItem.action == #selector(showInfo) {
-			return selectedIndexs.count > 0
+			return selectedObjects.count > 0
 				&& mainWindowFront
-				&& selectedRow != .baidu
 				&& selectedRow != .none
 		}
 		
@@ -69,8 +68,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 			} else {
 				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activated", comment: "")
 			}
-			
-//			return !_my_secret_activation_check(nil).boolValue
 		}
 		
 

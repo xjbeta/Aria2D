@@ -23,8 +23,3 @@
 "licenseInfo.okButton" = "OK";
 "licenseInfo.cancelButton" = "Cancel";
 "licenseInfo.informativeText" = "It will deactivates application and invalidates license info.";
-
-"baiduStep.baiduAccount" = "Baidu account";
-"baiduStep.pcsKey" = "PCS key";
-"baiduStep.accessToken" = "Access Token";
-"baiduStep.pcsFolder" = "PCS Folder";
