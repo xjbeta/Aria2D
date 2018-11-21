@@ -72,8 +72,17 @@ class InfoViewController: NSViewController {
             
             Aria2.shared.getServers(gid) {}
             Aria2.shared.getUris(gid) {}
+            
+            aria2Object?.filesObserve = { [weak self] indexs, reload in
+                if reload {
+                    self?.initFileNodes()
+                } else {
+                    self?.updateFileNodes(indexs)
+                }
+            }
 		}
 	}
+    
     
     @objc dynamic var aria2Object: Aria2Object?
     
@@ -209,12 +218,34 @@ class InfoViewController: NSViewController {
             }
         }
     }
+    
+    func updateStatusInTimer() {
+        guard aria2Object?.status == Status.active.rawValue else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let label = self?.tabView.selectedTabViewItem?.label,
+                let gid = self?.gid else {
+                    return
+            }
+            
+            switch label {
+            case "Files":
+                Aria2.shared.getFiles(gid) {}
+            case "Peer":
+                Aria2.shared.getPeer(gid) { objs in
+                    DispatchQueue.main.async {
+                        self?.peerObjects = objs
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
+    
     deinit {
+        aria2Object?.filesObserve = nil
         aria2Object = nil
         objectController.content = nil
-        if let o = filesObserver {
-            NotificationCenter.default.removeObserver(o)
-        }
     }
     
 }
@@ -384,58 +415,55 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                     }
                 }
             }
-            self.updateStatus(for: groupChildrens)
+            DispatchQueue.main.async {
+                self.updateStatus(for: groupChildrens)
+                self.filesTreeController.content = self.fileNodes?.children
+            }
         }
     }
     
     func updateFileNodes(_ list: [Int]) {
+        guard let obj = self.aria2Object, self.fileNodes != nil else {
+            return
+        }
         
-        DispatchQueue.global(qos: .background).async {
-            guard let obj = self.aria2Object, self.fileNodes != nil else {
-                return
-            }
-            
-            
-            let rootPathComponents = self.fileNodes!.path.pathComponents
-            var groupChildrens: [FileNode] = []
-            var shouldUpdateSelected = false
-            
-            (obj.files?.allObjects as? [Aria2File])?.filter {
-                list.contains(Int($0.index) - 1)
-                }.forEach { file in
-                    guard let path = file.path else { return }
-                    var pathComponents = path.pathComponents
-                    
-                    guard var currentNode = self.fileNodes else { return }
-                    
-                    if path.isChildPath(of: currentNode.path) {
-                        pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+        let rootPathComponents = self.fileNodes!.path.pathComponents
+        var groupChildrens: [FileNode] = []
+        var shouldUpdateSelected = false
+        
+        (obj.files?.allObjects as? [Aria2File])?.filter {
+            list.contains(Int($0.index))
+            }.forEach { file in
+                guard let path = file.path else { return }
+                var pathComponents = path.pathComponents
+                
+                guard var currentNode = self.fileNodes else { return }
+                
+                if path.isChildPath(of: currentNode.path) {
+                    pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+                }
+                
+                while !pathComponents.isEmpty {
+                    guard let title = pathComponents.first, let node = currentNode.getChild(title) else {
+                        pathComponents.removeAll()
+                        return
                     }
-                    
-                    while !pathComponents.isEmpty {
-                        guard let title = pathComponents.first, let node = currentNode.getChild(title) else {
-                            pathComponents.removeAll()
-                            return
-                        }
-                        pathComponents.removeFirst()
-                        currentNode = node
-                        if pathComponents.count != 1 {
-                            groupChildrens.append(node)
-                        }
-                        if currentNode.isLeaf {
-                            let new = FileNode(currentNode.path, file: file, isLeaf: true)
-                            if new.selected != currentNode.selected {
-                                shouldUpdateSelected = true
-                            }
-                            DispatchQueue.main.async {
-                                currentNode.updateData(file)
-                            }
-                        }
+                    pathComponents.removeFirst()
+                    currentNode = node
+                    if pathComponents.count != 1 {
+                        groupChildrens.append(node)
                     }
-            }
-            if shouldUpdateSelected {
-                self.updateStatus(for: groupChildrens)
-            }
+                    if currentNode.isLeaf {
+                        let new = FileNode(currentNode.path, file: file, isLeaf: true)
+                        if new.selected != currentNode.selected {
+                            shouldUpdateSelected = true
+                        }
+                        currentNode.updateData(file)
+                    }
+                }
+        }
+        if shouldUpdateSelected {
+            self.updateStatus(for: groupChildrens)
         }
     }
     
@@ -447,9 +475,7 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
             nodes.filter {
                 $0.path.pathComponents.count == count
                 }.forEach { child in
-                    DispatchQueue.main.async {
-                        child.updateStateWithChildren()
-                    }
+                    child.updateStateWithChildren()
             }
             count -= 1
         }
@@ -457,12 +483,11 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, dataCellFor tableColumn: NSTableColumn?, item: Any) -> NSCell? {
         if tableColumn?.title == "Name",
-            let node = (item as? NSTreeNode)?.representedObject as? FileNode {
-            let cell = NSButtonCell()
+            let node = (item as? NSTreeNode)?.representedObject as? FileNode,
+            let cell = tableColumn?.dataCell as? NSButtonCell {
             cell.setButtonType(.switch)
             cell.allowsMixedState = !(node.children.count == 0)
             cell.title = node.title
-            return cell
         }
         return nil
     }

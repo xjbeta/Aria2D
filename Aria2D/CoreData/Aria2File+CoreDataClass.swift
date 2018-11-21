@@ -40,7 +40,6 @@ public class Aria2File: NSManagedObject, Decodable {
     }
     
     func update(with file: Aria2File) {
-        index = file.index
         path = file.path
         length = file.length
         completedLength = file.completedLength

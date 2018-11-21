@@ -92,6 +92,10 @@ class Aria2Websocket: NSObject {
                             count > 0 else { return }
                         Aria2.shared.updateActiveTasks()
                     }
+                    
+                    if let infoVC = NSApp.keyWindow?.contentViewController as? InfoViewController {
+                        infoVC.updateStatusInTimer()
+                    }
 				}
 			}
 			timer.resume()

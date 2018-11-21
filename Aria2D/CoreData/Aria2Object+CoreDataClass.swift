@@ -135,6 +135,8 @@ public class Aria2Object: NSManagedObject, Decodable {
     }
     
     
+    var filesObserve: (([Int], Bool) -> Void)?
+    
     override public class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
         switch key {
         case "hideErrorInfo":
@@ -251,6 +253,9 @@ public class Aria2Object: NSManagedObject, Decodable {
     }
     
     func updateFiles(with newFiles: [Aria2File], context: NSManagedObjectContext) {
+        var updatedIndexs: [Int] = []
+        var shouldReload = false
+        
         if let files = files?.allObjects as? [Aria2File] {
             let newIds = newFiles.map({ $0.id })
             let oldIds = files.map({ $0.id })
@@ -261,6 +266,7 @@ public class Aria2Object: NSManagedObject, Decodable {
             
             deleteFiles.forEach {
                 context.delete($0)
+                shouldReload = true
             }
             
             newFiles.forEach { newFile in
@@ -268,10 +274,22 @@ public class Aria2Object: NSManagedObject, Decodable {
                     let file = files.filter({ $0.id == newFile.id }).first else {
                         context.insert(newFile)
                         newFile.object = self
+                        shouldReload = true
                         return
                 }
-                file.update(with: newFile)
+                
+                
+                if newFile.path != file.path ||
+                    newFile.length != file.length ||
+                    newFile.completedLength != file.completedLength ||
+                    newFile.selected != file.selected {
+                    file.update(with: newFile)
+                    
+                    updatedIndexs.append(Int(file.index))
+                }
             }
+            
+            filesObserve?(updatedIndexs, shouldReload)
         }
     }
     

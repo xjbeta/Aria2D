@@ -1970,6 +1970,7 @@ Gw
                                 </view>
                                 <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                             <box fixedFrame="YES" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="KlL-uD-OFz">
                                 <rect key="frame" x="172" y="50" width="314" height="226"/>
@@ -2147,6 +2148,7 @@ Gw
                                         </stackView>
                                     </subviews>
                                 </view>
+                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaG-L8-21s">
                                 <rect key="frame" x="338" y="20" width="145" height="21"/>
@@ -2940,33 +2942,33 @@ Gw
                                             <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGe-uo-I1K">
+                                                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="sGe-uo-I1K">
                                                     <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <clipView key="contentView" ambiguous="YES" id="y12-II-h7D">
+                                                    <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="y12-II-h7D">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="460" height="382"/>
+                                                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="461" height="382"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
-                                                                <size key="intercellSpacing" width="3" height="2"/>
+                                                                <size key="intercellSpacing" width="2" height="3"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn editable="NO" width="318" minWidth="300" maxWidth="3000" id="5N7-Qz-UeY">
+                                                                    <tableColumn editable="NO" width="322" minWidth="300" maxWidth="3000" id="5N7-Qz-UeY">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                         </tableHeaderCell>
-                                                                        <buttonCell key="dataCell" type="check" title="Name" bezelStyle="regularSquare" imagePosition="left" allowsMixedState="YES" inset="2" id="4r5-B8-oQ1">
+                                                                        <buttonCell key="dataCell" type="check" title="Name" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingMiddle" allowsMixedState="YES" inset="2" id="4r5-B8-oQ1">
                                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <connections>
-                                                                            <binding destination="RHy-o4-P1X" name="value" keyPath="arrangedObjects.state" id="E7x-rd-QCB"/>
+                                                                            <binding destination="RHy-o4-P1X" name="value" keyPath="arrangedObjects.state" id="Sg9-Zo-nie"/>
                                                                         </connections>
                                                                     </tableColumn>
                                                                     <tableColumn editable="NO" width="65" minWidth="65" maxWidth="100" id="GBz-OQ-J4p">
@@ -3017,9 +3019,10 @@ Gw
                                                                 </connections>
                                                             </outlineView>
                                                         </subviews>
+                                                        <nil key="backgroundColor"/>
                                                     </clipView>
-                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="pIO-b9-eki">
-                                                        <rect key="frame" x="0.0" y="7" width="0.0" height="16"/>
+                                                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="pIO-b9-eki">
+                                                        <rect key="frame" x="0.0" y="389" width="460" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="VuS-MG-f0Q">
@@ -3027,7 +3030,7 @@ Gw
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <tableHeaderView key="headerView" id="28Q-1E-IWj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="23"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="461" height="23"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </tableHeaderView>
                                                 </scrollView>
@@ -3043,7 +3046,7 @@ Gw
                                                     <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                     <clipView key="contentView" id="MGc-pu-rHK">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="Hod-dK-d2Q" id="fj2-ke-JF8">
                                                                 <rect key="frame" x="0.0" y="0.0" width="462" height="382"/>
@@ -3173,7 +3176,7 @@ Gw
                                                     <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                     <clipView key="contentView" id="PBq-bS-UCv">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="dPa-J3-BYU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
@@ -3269,11 +3272,7 @@ Gw
                         <binding destination="987-L3-Tth" name="contentArray" keyPath="self.peerObjects" id="rTD-Xp-1n3"/>
                     </connections>
                 </arrayController>
-                <treeController objectClassName="FileNode" editable="NO" childrenKeyPath="children" leafKeyPath="isLeaf" avoidsEmptySelection="NO" id="RHy-o4-P1X" userLabel="FilesList">
-                    <connections>
-                        <binding destination="987-L3-Tth" name="contentArray" keyPath="fileNodes.children" id="D1R-p9-eow"/>
-                    </connections>
-                </treeController>
+                <treeController objectClassName="FileNode" editable="NO" childrenKeyPath="children" leafKeyPath="isLeaf" avoidsEmptySelection="NO" id="RHy-o4-P1X" userLabel="FilesList"/>
                 <arrayController editable="NO" id="V1O-oO-Rut" userLabel="AnnounceList">
                     <connections>
                         <binding destination="lL6-rP-yng" name="contentArray" keyPath="selection.bittorrent.announceList" id="jq9-cA-QZl"/>
