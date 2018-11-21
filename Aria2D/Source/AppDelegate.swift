@@ -28,6 +28,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let url = logUrl {
             try? FileManager.default.removeItem(at: url)
         }
+        do {
+            var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
+            url.appendPathComponent(Bundle.main.bundleIdentifier!)
+            try FileManager.default.removeItem(atPath: url.path + "/default.realm")
+            try FileManager.default.removeItem(atPath: url.path + "/default.realm.lock")
+            try FileManager.default.removeItem(atPath: url.path + "/default.realm.management")
+        } catch let error {
+            Log("Clear realm files error: \(error)")
+        }
+        
         
         Log("App will finish launching")
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
