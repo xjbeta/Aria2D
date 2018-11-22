@@ -2947,7 +2947,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="y12-II-h7D">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="461" height="382"/>
@@ -3046,7 +3046,7 @@ Gw
                                                     <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                     <clipView key="contentView" id="MGc-pu-rHK">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="Hod-dK-d2Q" id="fj2-ke-JF8">
                                                                 <rect key="frame" x="0.0" y="0.0" width="462" height="382"/>
@@ -3176,7 +3176,7 @@ Gw
                                                     <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
                                                     <clipView key="contentView" id="PBq-bS-UCv">
                                                         <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="dPa-J3-BYU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>

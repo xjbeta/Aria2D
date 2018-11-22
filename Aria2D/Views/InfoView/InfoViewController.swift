@@ -307,8 +307,8 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
         
         switch tableView {
         case optionsTableView:
-            switch tableColumn?.title {
-            case "value":
+            switch tableColumn?.identifier.rawValue {
+            case "OptionTableViewValue":
                 if let view = optionsTableView.makeView(withIdentifier: .optionTableViewValue, owner: nil) as? NSTableCellView, let key = optionKeys[safe: row] {
                     view.textField?.stringValue = options[key.option] ?? ""
                     return view
