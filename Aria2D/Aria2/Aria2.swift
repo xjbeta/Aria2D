@@ -274,7 +274,7 @@ class Aria2: NSObject {
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.updateStatus(gids)
+                self.sortData()
             }.catch {
                 Log("\(#function) error \($0)")
         }
