@@ -245,7 +245,7 @@ public class Aria2Object: NSManagedObject, Decodable {
         
         sortValue = obj.sortValue
         
-        bittorrent?.update(with: obj.bittorrent)
+        updateBittorrent(obj.bittorrent, context: context)
         
         if let newFiles = obj.files?.allObjects as? [Aria2File] {
             updateFiles(with: newFiles, context: context)
@@ -290,6 +290,17 @@ public class Aria2Object: NSManagedObject, Decodable {
             }
             
             filesObserve?(updatedIndexs, shouldReload)
+        }
+    }
+    
+    func updateBittorrent(_ new: Aria2Bittorrent?, context: NSManagedObjectContext) {
+        if bittorrent == nil, new != nil {
+            context.insert(new!)
+            new!.object = self
+        } else if bittorrent != nil, new == nil {
+            context.delete(bittorrent!)
+        } else {
+            bittorrent?.update(with: new)
         }
     }
     
