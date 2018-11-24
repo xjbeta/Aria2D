@@ -14,6 +14,9 @@ import CoreData
 @objc(Aria2Object)
 public class Aria2Object: NSManagedObject, Decodable {
 
+    var waitTimer: WaitTimer?
+    var timerLimit = 0
+    
     @objc dynamic var name: String {
         if let name = bittorrent?.name,
             name != "" {
@@ -22,6 +25,24 @@ public class Aria2Object: NSManagedObject, Decodable {
             files.count == 1, let path = files.first?.path, path != "" {
             return URL(fileURLWithPath: path).lastPathComponent
         } else {
+            if waitTimer == nil {
+                Log("Init file name timer for \(gid)")
+                waitTimer = WaitTimer(timeOut: .seconds(1)) { [weak self] in
+                    guard let name = self?.name,
+                        let downloadSpeed = self?.downloadSpeed,
+                        let gid = self?.gid else { return }
+                    Log("Update file name for \(gid)")
+                    if name != "unknown" || self?.timerLimit == 5 {
+                        self?.waitTimer?.stop()
+                        self?.waitTimer = nil
+                    } else if downloadSpeed > 0,
+                        name == "unknown" {
+                        Aria2.shared.getFiles(gid)
+                        self?.timerLimit += 1
+                    }
+                }
+                waitTimer?.run()
+            }
             return "unknown"
         }
     }
@@ -245,7 +266,7 @@ public class Aria2Object: NSManagedObject, Decodable {
         
         sortValue = obj.sortValue
         
-        bittorrent?.update(with: obj.bittorrent)
+        updateBittorrent(obj.bittorrent, context: context)
         
         if let newFiles = obj.files?.allObjects as? [Aria2File] {
             updateFiles(with: newFiles, context: context)
@@ -290,6 +311,17 @@ public class Aria2Object: NSManagedObject, Decodable {
             }
             
             filesObserve?(updatedIndexs, shouldReload)
+        }
+    }
+    
+    func updateBittorrent(_ new: Aria2Bittorrent?, context: NSManagedObjectContext) {
+        if bittorrent == nil, new != nil {
+            context.insert(new!)
+            new!.object = self
+        } else if bittorrent != nil, new == nil {
+            context.delete(bittorrent!)
+        } else {
+            bittorrent?.update(with: new)
         }
     }
     
