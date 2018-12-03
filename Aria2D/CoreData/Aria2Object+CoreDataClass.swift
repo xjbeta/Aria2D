@@ -326,7 +326,9 @@ public class Aria2Object: NSManagedObject, Decodable {
     }
     
     func update(with status: Aria2Status) {
-        self.status = status.status.rawValue
+        if self.status != status.status.rawValue {
+            self.status = status.status.rawValue
+        }
         totalLength = status.totalLength
         completedLength = status.completedLength
         uploadLength = status.uploadLength
