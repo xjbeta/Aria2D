@@ -162,6 +162,8 @@ public class Aria2Object: NSManagedObject, Decodable {
         switch key {
         case "hideErrorInfo":
             return Set(["errorCode"])
+        case "statusValue":
+            return Set(["status", "bittorrent", "completedLength", "totalLength", "downloadSpeed", "uploadSpeed"])
         case "statusStr":
             return Set(["status"])
         case "name", "icon" :
