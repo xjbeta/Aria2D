@@ -115,6 +115,13 @@ class DataManager: NSObject {
         saveContext()
     }
     
+    func initObject(_ obj: Aria2Object) throws {
+        guard let oldObj = try aria2Objects([obj.gid]).first else {
+            return
+        }
+        oldObj.update(with: obj, context: context)
+    }
+    
     func sortAllObjects(_ gidsDic: [[String: String]]) throws {
         let gids = gidsDic.compactMap({ $0["gid"]})
         try deleteAria2Objects(gids)

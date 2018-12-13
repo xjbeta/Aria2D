@@ -33,11 +33,15 @@ public class Aria2Object: NSManagedObject, Decodable {
                         let gid = self?.gid else { return }
                     Log("Update file name for \(gid)")
                     if name != "unknown" || self?.timerLimit == 5 {
+                        Log("Stop file name timer for \(gid)")
                         self?.waitTimer?.stop()
                         self?.waitTimer = nil
                     } else if downloadSpeed > 0,
                         name == "unknown" {
-                        Aria2.shared.getFiles(gid)
+                        Aria2.shared.initData(gid)
+                        self?.timerLimit += 1
+                    } else if self?.timerLimit == 0 {
+                        Aria2.shared.initData(gid)
                         self?.timerLimit += 1
                     }
                 }
