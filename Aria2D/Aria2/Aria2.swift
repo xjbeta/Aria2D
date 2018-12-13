@@ -82,6 +82,7 @@ class Aria2: NSObject {
                     let result: Aria2Object
                 }
                 let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
+                try DataManager.shared.initObject(re)
                 block(re)
             }.catch {
                 Log("\(#function) error \($0)")

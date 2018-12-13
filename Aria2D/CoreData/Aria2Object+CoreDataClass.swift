@@ -33,11 +33,15 @@ public class Aria2Object: NSManagedObject, Decodable {
                         let gid = self?.gid else { return }
                     Log("Update file name for \(gid)")
                     if name != "unknown" || self?.timerLimit == 5 {
+                        Log("Stop file name timer for \(gid)")
                         self?.waitTimer?.stop()
                         self?.waitTimer = nil
                     } else if downloadSpeed > 0,
                         name == "unknown" {
-                        Aria2.shared.getFiles(gid)
+                        Aria2.shared.initData(gid)
+                        self?.timerLimit += 1
+                    } else if self?.timerLimit == 0 {
+                        Aria2.shared.initData(gid)
                         self?.timerLimit += 1
                     }
                 }
@@ -162,6 +166,8 @@ public class Aria2Object: NSManagedObject, Decodable {
         switch key {
         case "hideErrorInfo":
             return Set(["errorCode"])
+        case "statusValue":
+            return Set(["status", "bittorrent", "completedLength", "totalLength", "downloadSpeed", "uploadSpeed"])
         case "statusStr":
             return Set(["status"])
         case "name", "icon" :
@@ -326,7 +332,9 @@ public class Aria2Object: NSManagedObject, Decodable {
     }
     
     func update(with status: Aria2Status) {
-        self.status = status.status.rawValue
+        if self.status != status.status.rawValue {
+            self.status = status.status.rawValue
+        }
         totalLength = status.totalLength
         completedLength = status.completedLength
         uploadLength = status.uploadLength
