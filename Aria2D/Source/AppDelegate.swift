@@ -48,6 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             try DataManager.shared.initAria2List()
             DataManager.shared.deleteAllAria2Objects()
+            DataManager.shared.cleanUpLogs()
         } catch let error {
             assert(false, "Can't init Aria2List in Core Data: \(error)")
         }
