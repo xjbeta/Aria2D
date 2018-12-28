@@ -15,9 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     lazy var logUrl: URL? = {
         do {
-            let documentDirectoryPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let log = documentDirectoryPath.appendingPathComponent("Aria2D").appendingPathComponent("Aria2D.log")
-            return log
+            var logPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            logPath.appendPathComponent(Bundle.main.bundleIdentifier!)
+            logPath.appendPathComponent("Aria2D.log")
+            
+            return logPath
         } catch let error {
             Log(error)
             return nil
@@ -25,19 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        if let url = logUrl {
-            try? FileManager.default.removeItem(at: url)
-        }
-        do {
-            var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
-            url.appendPathComponent(Bundle.main.bundleIdentifier!)
-            try FileManager.default.removeItem(atPath: url.path + "/default.realm")
-            try FileManager.default.removeItem(atPath: url.path + "/default.realm.lock")
-            try FileManager.default.removeItem(atPath: url.path + "/default.realm.management")
-        } catch let error {
-            Log("Clear realm files error: \(error)")
-        }
-        
+        deleteUselessFiles()
         
         Log("App will finish launching")
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -106,6 +96,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             //Occlusion
             Aria2Websocket.shared.suspendTimer()
+        }
+    }
+    
+    func deleteUselessFiles() {
+        if let url = logUrl {
+            try? FileManager.default.removeItem(at: url)
+        }
+        if var url = try? FileManager.default.url(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask,
+                                                 appropriateFor: nil,
+                                                 create: true) {
+            // Remove Old Log
+            var logPath = url
+            logPath.appendPathComponent("Aria2D")
+            logPath.appendPathComponent("Aria2D.log")
+            try? FileManager.default.removeItem(atPath: logPath.path)
+            
+            // Remove Old Realm Files
+            url.appendPathComponent(Bundle.main.bundleIdentifier!)
+            try? FileManager.default.removeItem(atPath: url.path + "/default.realm")
+            try? FileManager.default.removeItem(atPath: url.path + "/default.realm.lock")
+            try? FileManager.default.removeItem(atPath: url.path + "/default.realm.management")
         }
     }
     
