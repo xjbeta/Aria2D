@@ -12,33 +12,16 @@ class SidebarViewController: NSViewController {
 	
     @IBOutlet var sidebarTableView: SidebarTableView!
 	
-	@IBOutlet var progressIndicator: NSProgressIndicator!
-	
 	var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
     var newTaskViewFile = ""
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		initIndicator()
 		initNotification()
 //        ViewControllersManager.shared.selectedRow = .downloading
 		resetSidebarItems()
 	}
-	
-	
-	func initIndicator() {
-		progressIndicator.isHidden = !ViewControllersManager.shared.waiting
-		progressIndicator.startAnimation(self)
-		ViewControllersManager.shared.updateIndicator = {
-			DispatchQueue.main.async {
-				self.progressIndicator.isHidden = !ViewControllersManager.shared.waiting
-			}
-		}
-	}
-	
-	
-
 	
 	func initNotification() {
         NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {

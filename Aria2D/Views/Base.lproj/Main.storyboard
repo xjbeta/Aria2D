@@ -1045,20 +1045,14 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" doubleValue="50" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="XD8-cj-e57">
-                                <rect key="frame" x="26" y="12" width="16" height="16"/>
-                            </progressIndicator>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="XD8-cj-e57" secondAttribute="bottom" constant="12" id="FRe-8r-5oh"/>
-                            <constraint firstItem="XD8-cj-e57" firstAttribute="centerX" secondItem="jES-9n-Xr8" secondAttribute="centerX" id="FxO-XW-BtW"/>
                             <constraint firstItem="Raf-33-zeN" firstAttribute="leading" secondItem="jES-9n-Xr8" secondAttribute="leading" constant="14" id="RXz-nG-OI6"/>
                             <constraint firstAttribute="trailing" secondItem="Raf-33-zeN" secondAttribute="trailing" constant="14" id="egO-44-diU"/>
                             <constraint firstItem="Raf-33-zeN" firstAttribute="top" secondItem="jES-9n-Xr8" secondAttribute="top" constant="50" id="wfD-My-LGt"/>
                         </constraints>
                     </visualEffectView>
                     <connections>
-                        <outlet property="progressIndicator" destination="XD8-cj-e57" id="jc4-e2-Us7"/>
                         <outlet property="sidebarTableView" destination="7rm-7k-k1B" id="10G-yn-mnd"/>
                         <segue destination="EDW-Z4-5fS" kind="sheet" identifier="showNewTaskViewController" id="0em-5n-jhl"/>
                     </connections>
@@ -1970,7 +1964,6 @@ Gw
                                 </view>
                                 <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                             <box fixedFrame="YES" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="KlL-uD-OFz">
                                 <rect key="frame" x="172" y="50" width="314" height="226"/>
@@ -2148,7 +2141,6 @@ Gw
                                         </stackView>
                                     </subviews>
                                 </view>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaG-L8-21s">
                                 <rect key="frame" x="338" y="20" width="145" height="21"/>
@@ -3456,8 +3448,8 @@ DQ
     <resources>
         <image name="AppIcon" width="128" height="128"/>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSAdvanced" width="128" height="128"/>
-        <image name="NSPreferencesGeneral" width="128" height="128"/>
+        <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSStatusAvailable" width="16" height="16"/>
         <image name="buttonCell:Qla-pR-3HO:image" width="1" height="1">

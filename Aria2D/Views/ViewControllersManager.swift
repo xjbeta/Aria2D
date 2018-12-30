@@ -58,28 +58,6 @@ class ViewControllersManager: NSObject {
 		*/
 	}
 	
-	
-	
-	// LeftSourceList Indicator
-	private var waitingCount = 0
-	
-	var updateIndicator: (() -> Void)?
-	
-	var waiting: Bool {
-		get {
-			return waitingCount > 0
-		}
-		set {
-			if newValue {
-				waitingCount += 1
-			} else if waitingCount > 0 {
-				waitingCount -= 1
-			}
-			updateIndicator?()
-		}
-	}
-	
-	
     // LeftSourceList
     var selectedRow: SidebarItem = .none {
         didSet {
