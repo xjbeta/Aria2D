@@ -270,14 +270,15 @@
 			path = Aria2;
 			sourceTree = "<group>";
 		};
-		012C3AEC1E10104600ABFE4C /* Other */ = {
+		012C3AEC1E10104600ABFE4C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				018E896C1D350075000C71B0 /* Preferences.swift */,
 				018E89631D34FFCC000C71B0 /* EnumList.swift */,
 				012C3AE51E1001CA00ABFE4C /* Log.swift */,
 				018B9B571D72B2EA0087B71E /* WaitTimer.swift */,
 			);
-			path = Other;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		012CBD701F6CC56700EFD1D4 /* StatusView */ = {
@@ -340,12 +341,12 @@
 			isa = PBXGroup;
 			children = (
 				01E90689219BF70800928580 /* Aria2D.xcdatamodeld */,
+				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89541D34FF60000C71B0 /* CoreData */,
 				012C3AEB1E10102C00ABFE4C /* Aria2 */,
 				018E89471D34FF48000C71B0 /* Source */,
 				0147EDBF1D21FAD800FB4324 /* Views */,
-				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
 			);
 			path = Aria2D;
 			sourceTree = "<group>";
@@ -418,12 +419,11 @@
 			isa = PBXGroup;
 			children = (
 				0115D42D1E04E346003EBFCD /* Extensions */,
-				012C3AEC1E10104600ABFE4C /* Other */,
+				012C3AEC1E10104600ABFE4C /* Utils */,
 				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
 				0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */,
 				012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */,
 				012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */,
-				018E896C1D350075000C71B0 /* Preferences.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
