@@ -177,18 +177,24 @@ class Aria2Websocket: NSObject {
                 // Save log
                 if Preferences.shared.developerMode,
                     Preferences.shared.recordWebSocketLog {
-                    DispatchQueue.main.async {
-                        let log = WebSocketLog(context: DataManager.shared.context)
-                        log.method = method
-                        log.sendJSON = "\(dic)"
+                    DispatchQueue.global(qos: .background).async {
+                        var receivedJSON = ""
                         if let str = String(data: data, encoding: .utf8),
                             let shrotData = Aria2Websocket.shared.clearUrls(str),
                             let shortStr = String(data: shrotData, encoding: .utf8) {
-                            log.receivedJSON =  shortStr
+                            receivedJSON = shortStr
                         }
-                        log.success = !timeOut
-                        log.date = time
-                        DataManager.shared.saveContext()
+
+                        DispatchQueue.main.async {
+                            let log = WebSocketLog(context: DataManager.shared.context)
+                            log.method = method
+                            log.sendJSON = "\(dic)"
+                            log.receivedJSON = receivedJSON
+                            
+                            log.success = !timeOut
+                            log.date = time
+                            DataManager.shared.saveContext()
+                        }
                     }
                 }
                 
