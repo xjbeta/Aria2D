@@ -29,10 +29,6 @@ class Aria2Websocket: NSObject {
             return socket?.readyState == .OPEN
         }
     }
-	
-	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
-		Aria2.shared.initAllData()
-	}
 
 	var connectedServerInfo = ConnectedServerInfo()
 	
@@ -119,7 +115,7 @@ class Aria2Websocket: NSObject {
 		if isSuspend, timer != nil {
 			timer?.resume()
 			isSuspend = false
-			Aria2.shared.initAllData()
+			Aria2.shared.initData.run()
 		}
 	}
     
@@ -229,7 +225,7 @@ enum webSocketResult: Error {
 
 extension Aria2Websocket: SRWebSocketDelegate {
     func webSocketDidOpen(_ webSocket: SRWebSocket) {
-        Aria2.shared.initAllData()
+        Aria2.shared.initData.run()
         connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         Aria2.shared.getVersion {
             self.connectedServerInfo.version = "Version: \($0)"

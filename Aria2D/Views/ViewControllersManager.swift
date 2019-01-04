@@ -64,7 +64,7 @@ class ViewControllersManager: NSObject {
             selectedObjects = [Aria2Object]()
             switch selectedRow {
             case .downloading, .removed, .completed:
-                Aria2.shared.initAllData()
+                Aria2.shared.initData.run()
             default:
                 break
             }
@@ -179,7 +179,7 @@ class ViewControllersManager: NSObject {
 	func refresh() {
 		switch selectedRow {
 		case .downloading, .completed, .removed:
-			Aria2.shared.initAllData()
+			Aria2.shared.initData.run()
 		default:
 			break
 		}

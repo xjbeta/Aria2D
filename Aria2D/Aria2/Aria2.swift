@@ -15,15 +15,19 @@ class Aria2: NSObject {
 	fileprivate override init() {
 	}
 	
-	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
-		Aria2.shared.initAllData()
-	}
-	
+    let initData = WaitTimer(timeOut: .milliseconds(150)) {
+        Aria2.shared.initAllData()
+    }
+
+    let sortData = WaitTimer(timeOut: .milliseconds(150)) {
+        Aria2.shared.sortAllData()
+    }
+    
     let aria2c = Aria2c()
     
     let context = DataManager.shared.context
     
-    func initAllData() {
+    private func initAllData() {
         struct Result: Decodable {
             var result: [[[Aria2Object]]]
         }
@@ -47,7 +51,7 @@ class Aria2: NSObject {
         }
     }
 	
-	func sortData() {
+	private func sortAllData() {
 		send(method: Aria2Method.multicall,
              params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
                                             params: [["gid", "status"]]).object,
@@ -150,7 +154,7 @@ class Aria2: NSObject {
                 }
                 let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
                 try DataManager.shared.updateStatus(result)
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -273,7 +277,7 @@ class Aria2: NSObject {
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -289,7 +293,7 @@ class Aria2: NSObject {
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -302,7 +306,7 @@ class Aria2: NSObject {
         send(method: method,
              params: [])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -312,7 +316,7 @@ class Aria2: NSObject {
         send(method: Aria2Method.unpauseAll,
              params: [])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
