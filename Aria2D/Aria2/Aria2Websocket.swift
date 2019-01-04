@@ -89,7 +89,10 @@ class Aria2Websocket: NSObject {
                 } else {
                     DispatchQueue.main.async {
                         guard let count = try? DataManager.shared.activeCount(),
-                            count > 0 else { return }
+                            count > 0 else {
+                                NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
+                                return
+                        }
                         Aria2.shared.updateActiveTasks()
                     }
                     
@@ -236,6 +239,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         Aria2.shared.getGlobalOption()
         ViewControllersManager.shared.showHUD(.connected)
         NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
+        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
     func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
@@ -244,6 +248,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         aria2GlobalOption = [:]
         DataManager.shared.deleteAllAria2Objects()
         NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
+        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
     func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {

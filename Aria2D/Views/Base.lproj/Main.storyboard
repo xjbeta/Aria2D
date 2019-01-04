@@ -1045,15 +1045,50 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DXO-B4-tbX">
+                                <rect key="frame" x="4" y="10" width="60" height="26"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eF5-3k-iaN">
+                                        <rect key="frame" x="-2" y="14" width="64" height="12"/>
+                                        <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" id="Y5O-3h-bF2">
+                                            <font key="font" metaFont="miniSystem"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wf8-SQ-FGu">
+                                        <rect key="frame" x="-2" y="0.0" width="64" height="12"/>
+                                        <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" id="Uyt-gT-zO9">
+                                            <font key="font" metaFont="miniSystem"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="DXO-B4-tbX" firstAttribute="leading" secondItem="jES-9n-Xr8" secondAttribute="leading" constant="4" id="4AJ-3V-ZSt"/>
                             <constraint firstItem="Raf-33-zeN" firstAttribute="leading" secondItem="jES-9n-Xr8" secondAttribute="leading" constant="14" id="RXz-nG-OI6"/>
+                            <constraint firstAttribute="trailing" secondItem="DXO-B4-tbX" secondAttribute="trailing" constant="4" id="URA-HF-5kt"/>
                             <constraint firstAttribute="trailing" secondItem="Raf-33-zeN" secondAttribute="trailing" constant="14" id="egO-44-diU"/>
+                            <constraint firstAttribute="bottom" secondItem="DXO-B4-tbX" secondAttribute="bottom" constant="10" id="hXE-Hh-krX"/>
                             <constraint firstItem="Raf-33-zeN" firstAttribute="top" secondItem="jES-9n-Xr8" secondAttribute="top" constant="50" id="wfD-My-LGt"/>
                         </constraints>
                     </visualEffectView>
                     <connections>
+                        <outlet property="downloadSpeed" destination="Wf8-SQ-FGu" id="2Sb-T2-96U"/>
+                        <outlet property="globalSpeedView" destination="DXO-B4-tbX" id="RzF-Rg-PLB"/>
                         <outlet property="sidebarTableView" destination="7rm-7k-k1B" id="10G-yn-mnd"/>
+                        <outlet property="uploadSpeed" destination="eF5-3k-iaN" id="hVh-af-5tl"/>
                         <segue destination="EDW-Z4-5fS" kind="sheet" identifier="showNewTaskViewController" id="0em-5n-jhl"/>
                     </connections>
                 </viewController>

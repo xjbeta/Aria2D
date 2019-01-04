@@ -177,6 +177,12 @@ class DataManager: NSObject {
         return try context.count(for: fetchRequest)
     }
     
+    func activeBittorrentCount() throws -> Int {
+        let fetchRequest: NSFetchRequest<Aria2Object> = Aria2Object.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "status IN %@ AND bittorrent != nil",
+                                             [Status.active.rawValue])
+        return try context.count(for: fetchRequest)
+    }
     
     func deleteLogs() {
         let fetchRequest: NSFetchRequest<WebSocketLog> = WebSocketLog.fetchRequest()
