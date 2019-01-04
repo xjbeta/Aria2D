@@ -46,7 +46,6 @@
 		014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */ = {isa = PBXBuildFile; fileRef = 014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */; };
 		0154156B1E371583007ECB29 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154156A1E371583007ECB29 /* URLSecurityScope.swift */; };
 		016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3E371E8A9FA100CC1999 /* Aria2Option.swift */; };
-		016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */; };
 		016C403C1D9E8D2800EB27A2 /* DownloadUrlTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */; };
 		016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */; };
 		016C405E1DA29A4100EB27A2 /* AboutAria2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */; };
@@ -164,7 +163,6 @@
 		014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aria2D.conf; sourceTree = "<group>"; };
 		0154156A1E371583007ECB29 /* URLSecurityScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
 		016A3E371E8A9FA100CC1999 /* Aria2Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Option.swift; sourceTree = "<group>"; };
-		016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedJSONTableCellView.swift; sourceTree = "<group>"; };
 		016C403B1D9E8D2800EB27A2 /* DownloadUrlTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUrlTextField.swift; sourceTree = "<group>"; };
 		016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2DWindow.swift; sourceTree = "<group>"; };
 		016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAria2D.swift; sourceTree = "<group>"; };
@@ -399,7 +397,6 @@
 			children = (
 				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
 				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
-				016A8F411F6BC407000D995E /* ReceivedJSONTableCellView.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -678,7 +675,6 @@
 				018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
 				01A5350221282C7000E5C88C /* Aria2OptionCellView.swift in Sources */,
-				016A8F421F6BC407000D995E /* ReceivedJSONTableCellView.swift in Sources */,
 				012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */,
 				012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */,
 			);

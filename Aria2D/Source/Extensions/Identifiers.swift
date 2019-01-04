@@ -22,8 +22,6 @@ extension NSUserInterfaceItemIdentifier {
     static let sidebarTableCellView = NSUserInterfaceItemIdentifier(rawValue: "SidebarTableCellView")
     //Main List
 	static let downloadsTableCellView = NSUserInterfaceItemIdentifier(rawValue: "DownloadsTableCellView")
-    //Log
-    static let receivedJSONTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "ReceivedJSONTableCellView")
     //Info View
     static let statusDicTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusDicTableCellView")
     static let statusSpaceTableCellView =  NSUserInterfaceItemIdentifier(rawValue: "StatusSpaceTableCellView")
