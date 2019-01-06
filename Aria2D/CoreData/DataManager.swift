@@ -25,7 +25,7 @@ class DataManager: NSObject {
     
     func cleanUpLogs() {
         let fetchRequest: NSFetchRequest<WebSocketLog> = WebSocketLog.fetchRequest()
-        let oneDayAgo = Int(Date().timeIntervalSince1970) - 60 * 60 * 24
+        let oneDayAgo = Int(Date().timeIntervalSince1970) - 60 * 60 * 8
         fetchRequest.predicate = NSPredicate(format: "date < %i", oneDayAgo)
         let fetch = try? context.fetch(fetchRequest)
         fetch?.forEach {
