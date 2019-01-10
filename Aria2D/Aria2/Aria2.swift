@@ -45,7 +45,6 @@ class Aria2: NSObject {
                 let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 }).flatMap({ $0 })
                 
                 try DataManager.shared.initAllObjects(re)
-                NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -66,7 +65,6 @@ class Aria2: NSObject {
                 
                 let re = try JSONDecoder().decode(GIDList.self, from: data).result.flatMap ({ $0 }).flatMap ({ $0 })
                 try DataManager.shared.sortAllObjects(re)
-                NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
             }.catch {
                 Log("\(#function) error \($0)")
         }

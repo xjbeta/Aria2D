@@ -86,7 +86,6 @@ class Aria2Websocket: NSObject {
                     DispatchQueue.main.async {
                         guard let count = try? DataManager.shared.activeCount(),
                             count > 0 else {
-                                NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
                                 return
                         }
                         Aria2.shared.updateActiveTasks()

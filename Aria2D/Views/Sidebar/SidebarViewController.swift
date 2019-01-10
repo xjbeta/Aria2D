@@ -12,18 +12,36 @@ class SidebarViewController: NSViewController {
 	
     @IBOutlet var sidebarTableView: SidebarTableView!
 	
+    @IBOutlet weak var arrayController: NSArrayController!
     @IBOutlet weak var downloadSpeed: NSTextField!
     @IBOutlet weak var uploadSpeed: NSTextField!
     @IBOutlet weak var globalSpeedView: NSStackView!
+    var observe: NSKeyValueObservation?
+    @objc var context: NSManagedObjectContext
     
     var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
     var newTaskViewFile = ""
     
+    required init?(coder: NSCoder) {
+        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+        super.init(coder: coder)
+    }
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initNotification()
 		resetSidebarItems()
+        arrayController.filterPredicate = NSPredicate(format: "status IN %@ AND bittorrent != nil", [Status.active.rawValue])
+        
+        observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
+            guard let count = (arrayController.arrangedObjects as? [Any])?.count,
+                Aria2Websocket.shared.isConnected else {
+                    self?.globalSpeedView.isHidden = true
+                    return
+            }
+            self?.globalSpeedView.isHidden = count == 0
+        }
 	}
 	
 	func initNotification() {
@@ -113,7 +131,7 @@ class SidebarViewController: NSViewController {
             globalSpeedView.isHidden = true
         }
         
-        if let activeBittorrentCount = try? DataManager.shared.activeBittorrentCount(),
+        if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
             activeBittorrentCount > 0 {
             uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
         } else {
@@ -123,6 +141,7 @@ class SidebarViewController: NSViewController {
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
+        observe?.invalidate()
 	}
 }
 

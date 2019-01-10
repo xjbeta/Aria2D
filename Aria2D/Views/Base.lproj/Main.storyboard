@@ -1085,6 +1085,7 @@ CA
                         </constraints>
                     </visualEffectView>
                     <connections>
+                        <outlet property="arrayController" destination="ycK-Hf-rep" id="i8k-u8-LK5"/>
                         <outlet property="downloadSpeed" destination="Wf8-SQ-FGu" id="2Sb-T2-96U"/>
                         <outlet property="globalSpeedView" destination="DXO-B4-tbX" id="RzF-Rg-PLB"/>
                         <outlet property="sidebarTableView" destination="7rm-7k-k1B" id="10G-yn-mnd"/>
@@ -1093,6 +1094,11 @@ CA
                     </connections>
                 </viewController>
                 <customObject id="lC1-xA-URe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Aria2Object" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="ycK-Hf-rep">
+                    <connections>
+                        <binding destination="aDS-je-EVP" name="managedObjectContext" keyPath="self.context" id="v88-WZ-a6D"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="-373" y="1249"/>
         </scene>
