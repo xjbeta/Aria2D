@@ -22,6 +22,10 @@ class ViewControllersManager: NSObject {
         NotificationCenter.default.post(name: .newTask, object: nil, userInfo: ["file": file])
     }
     
+    func openUrl(_ url: String) {
+        NotificationCenter.default.post(name: .newTask, object: nil, userInfo: ["url": url])
+    }
+    
 	// MainWindow HUD
 	func showHUD(_ message: hudMessage) {
 		NotificationCenter.default.post(name: .showHUD, object: nil, userInfo: ["message": message])

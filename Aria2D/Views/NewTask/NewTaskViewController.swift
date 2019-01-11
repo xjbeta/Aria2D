@@ -181,7 +181,9 @@ class NewTaskViewController: NSViewController {
         }
     }
     
+    var preparedInfo = [String: String]()
     var fileURL: URL?
+    
     var torrentData: String {
         get {
             do {
@@ -216,13 +218,17 @@ class NewTaskViewController: NSViewController {
             }
         }
         
-        if let url = fileURL {
-            setTorrentPath(url)
+        
+        if let file = preparedInfo["file"] {
+            fileURL = URL(fileURLWithPath: file)
+            setTorrentPath(URL(fileURLWithPath: file))
             urlManager(true)
+        } else if let url = preparedInfo["url"] {
+            downloadUrlTextField.stringValue = url
+            urlManager(false)
         } else {
             urlManager(false)
         }
-		
     }
 	
     lazy var openPanel = NSOpenPanel()

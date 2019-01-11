@@ -60,6 +60,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let sb = NSStoryboard(name: "Main", bundle: nil)
         mainWindowController = sb.instantiateController(withIdentifier: "MainWindowController") as? MainWindowController
         mainWindowController.showWindow(self)
+        
+        // register for url event
+        Preferences.shared.setLaunchServer()
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+        
         self.setDevMate()
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
@@ -97,6 +102,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //Occlusion
             Aria2Websocket.shared.suspendTimer()
         }
+    }
+    
+    @objc func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+        guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
+        Log("URL event: \(url)")
+        ViewControllersManager.shared.openUrl(url)
     }
     
     func deleteUselessFiles() {

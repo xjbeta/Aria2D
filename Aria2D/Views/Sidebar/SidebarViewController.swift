@@ -12,24 +12,44 @@ class SidebarViewController: NSViewController {
 	
     @IBOutlet var sidebarTableView: SidebarTableView!
 	
+    @IBOutlet weak var arrayController: NSArrayController!
     @IBOutlet weak var downloadSpeed: NSTextField!
     @IBOutlet weak var uploadSpeed: NSTextField!
     @IBOutlet weak var globalSpeedView: NSStackView!
+    var observe: NSKeyValueObservation?
+    @objc var context: NSManagedObjectContext
     
     var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
-    var newTaskViewFile = ""
+    var newTaskPreparedInfo = [String: String]()
+    
+    required init?(coder: NSCoder) {
+        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+        super.init(coder: coder)
+    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initNotification()
 		resetSidebarItems()
+        
+        if Preferences.shared.showGlobalSpeed {
+            arrayController.filterPredicate = NSPredicate(format: "status IN %@ AND bittorrent != nil", [Status.active.rawValue])
+            observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
+                guard let count = (arrayController.arrangedObjects as? [Any])?.count,
+                    Aria2Websocket.shared.isConnected else {
+                        self?.globalSpeedView.isHidden = true
+                        return
+                }
+                self?.globalSpeedView.isHidden = count == 0
+            }
+        }
 	}
 	
 	func initNotification() {
         NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: String], let file = userInfo["file"] {
-                self.newTaskViewFile = file
+            if let userInfo = $0.userInfo as? [String: String] {
+                self.newTaskPreparedInfo = userInfo
             }
             self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
         }
@@ -41,10 +61,10 @@ class SidebarViewController: NSViewController {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let vc = segue.destinationController as? NewTaskViewController {
-            if newTaskViewFile != "" {
-                vc.fileURL = URL(fileURLWithPath: newTaskViewFile)
+            if newTaskPreparedInfo.count == 1 {
+                vc.preparedInfo = newTaskPreparedInfo
             }
-            newTaskViewFile = ""
+            newTaskPreparedInfo.removeAll()
         }
     }
 	
@@ -92,6 +112,10 @@ class SidebarViewController: NSViewController {
 	}
 	
     @objc func updateGlobalStat(notification: NSNotification) {
+        globalSpeedView.isHidden = !Preferences.shared.showGlobalSpeed
+        guard Preferences.shared.showGlobalSpeed else {
+            return
+        }
         guard let userInfo = notification.userInfo else { return }
         
         if let updateServer = userInfo["updateServer"] as? Bool, updateServer {
@@ -113,7 +137,7 @@ class SidebarViewController: NSViewController {
             globalSpeedView.isHidden = true
         }
         
-        if let activeBittorrentCount = try? DataManager.shared.activeBittorrentCount(),
+        if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
             activeBittorrentCount > 0 {
             uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
         } else {
@@ -123,6 +147,7 @@ class SidebarViewController: NSViewController {
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
+        observe?.invalidate()
 	}
 }
 

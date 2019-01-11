@@ -33,7 +33,7 @@ class ChangeOptionViewController: NSViewController {
 	}
 	@IBOutlet var helpButton: NSButton!
 	@IBAction func help(_ sender: Any) {
-		let baseURL = "https://aria2.github.io/manual/en/html/aria2c.html#cmdoption--"
+		let baseURL = "https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-"
 		if let url = URL(string: baseURL + option.rawValue) {
 			NSWorkspace.shared.open(url)
 		}
