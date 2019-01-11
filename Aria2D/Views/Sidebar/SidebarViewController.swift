@@ -46,8 +46,9 @@ class SidebarViewController: NSViewController {
 	
 	func initNotification() {
         NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
-            guard let userInfo = $0.userInfo as? [String: String] else { return }
-            self.newTaskPreparedInfo = userInfo
+            if let userInfo = $0.userInfo as? [String: String] {
+                self.newTaskPreparedInfo = userInfo
+            }
             self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
         }
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
