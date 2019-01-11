@@ -79,6 +79,7 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .useForce)
 		}
 	}
+    
 	@objc var completeNotice: Bool {
 		get {
 			return defaults(.completeNotice) as? Bool ?? true
@@ -87,6 +88,26 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .completeNotice)
 		}
 	}
+    
+    @objc var showAria2Features: Bool {
+        get {
+            return defaults(.showAria2Features) as? Bool ?? true
+        }
+        set {
+            defaultsSet(newValue, forKey: .showAria2Features)
+            NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
+        }
+    }
+    
+    @objc var showGlobalSpeed: Bool {
+        get {
+            return defaults(.showGlobalSpeed) as? Bool ?? true
+        }
+        set {
+            defaultsSet(newValue, forKey: .showGlobalSpeed)
+            NotificationCenter.default.post(name: .updateGlobalStat, object: nil)
+        }
+    }
 	
 // MARK: - Aria2c Options
 	var autoStartAria2c: Bool {

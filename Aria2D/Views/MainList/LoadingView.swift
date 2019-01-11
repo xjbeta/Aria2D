@@ -22,21 +22,21 @@ class LoadingView: NSView {
 	
 	func initVersionInfo() {
 		updateVersionInfo()
-		NotificationCenter.default.addObserver(self, selector: #selector(updateVersionInfo), name: .updateConnectStatus, object: nil)
+        NotificationCenter.default.addObserver(forName: .updateConnectStatus, object: nil, queue: .main) { _ in
+            self.updateVersionInfo()
+        }
 	}
 	
 
-	@objc func updateVersionInfo() {
-		DispatchQueue.main.async {
-			let info = Aria2Websocket.shared.connectedServerInfo
-			self.versionLabel.stringValue = info.version
-			self.featuresLabel.stringValue = info.enabledFeatures
-			if Aria2Websocket.shared.isConnected {
-				self.label.stringValue = info.name
-			} else {
-				self.label.stringValue = "Connecting..."
-			}
-		}
+	func updateVersionInfo() {
+        let info = Aria2Websocket.shared.connectedServerInfo
+        self.versionLabel.stringValue = info.version
+        self.featuresLabel.stringValue = Preferences.shared.showAria2Features ? info.enabledFeatures : ""
+        if Aria2Websocket.shared.isConnected {
+            self.label.stringValue = info.name
+        } else {
+            self.label.stringValue = "Connecting..."
+        }
 	}
 	
 	

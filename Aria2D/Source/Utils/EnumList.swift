@@ -20,7 +20,8 @@ enum PreferenceKeys: String {
 	case developerMode = "app_developerMode"
 	case useForce = "app_useForce"
 	case completeNotice = "app_completeNotice"
-	
+    case showAria2Features = "app_showAria2Features"
+	case showGlobalSpeed = "app_showGlobalSpeed"
 	
 	case autoStartAria2c = "aria2c_autoStartAria2c"
 	case restartAria2c = "aria2c_restartAria2c"

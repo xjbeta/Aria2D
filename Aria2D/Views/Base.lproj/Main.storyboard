@@ -33,6 +33,7 @@
                     <tabViewItems>
                         <tabViewItem label="General" identifier="" image="NSPreferencesGeneral" id="sJE-A4-L4w"/>
                         <tabViewItem label="Advanced" image="NSAdvanced" id="aTJ-Ok-0Jj"/>
+                        <tabViewItem id="lQD-SY-l3O" userLabel="Aria2Options"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions"/>
                     <tabView key="tabView" misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" id="Ga4-rQ-grv">
@@ -47,6 +48,7 @@
                         <outlet property="tabView" destination="Ga4-rQ-grv" id="e8T-7n-dPm"/>
                         <segue destination="iGx-Rv-PRS" kind="relationship" relationship="tabItems" id="jqA-3R-d41"/>
                         <segue destination="gh3-nU-zKU" kind="relationship" relationship="tabItems" id="aZd-aN-Vtg"/>
+                        <segue destination="sV5-KT-6dJ" kind="relationship" relationship="tabItems" id="LR1-pB-KzO"/>
                     </connections>
                 </tabViewController>
                 <customObject id="Mcr-CY-ZB6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -58,20 +60,21 @@
             <objects>
                 <viewController showSeguePresentationStyle="single" id="gh3-nU-zKU" customClass="AdvancedViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BfK-ko-f4y">
-                        <rect key="frame" x="0.0" y="0.0" width="330" height="258"/>
+                        <rect key="frame" x="0.0" y="0.0" width="287" height="175"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70u-Nq-1w7">
-                                <rect key="frame" x="28" y="20" width="275" height="218"/>
+                                <rect key="frame" x="32" y="28" width="223" height="118"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VNA-pd-pMN">
-                                        <rect key="frame" x="0.0" y="126" width="275" height="92"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="223" height="118"/>
                                         <rows>
                                             <gridRow id="4Xm-3k-P6A"/>
                                             <gridRow id="P3N-bU-bTU"/>
+                                            <gridRow id="EM3-Sb-TJc"/>
+                                            <gridRow id="k1L-NQ-gZL"/>
                                             <gridRow id="Qzw-Ty-9Yo"/>
-                                            <gridRow id="W2Y-Nu-pyL"/>
                                         </rows>
                                         <columns>
                                             <gridColumn id="fkq-YE-xaO"/>
@@ -79,7 +82,7 @@
                                         <gridCells>
                                             <gridCell row="4Xm-3k-P6A" column="fkq-YE-xaO" id="JGh-EZ-IDt">
                                                 <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="snS-xI-w3h">
-                                                    <rect key="frame" x="-2" y="76" width="122" height="18"/>
+                                                    <rect key="frame" x="-2" y="102" width="122" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Developer mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aUm-g1-dZi">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -91,7 +94,7 @@
                                             </gridCell>
                                             <gridCell row="P3N-bU-bTU" column="fkq-YE-xaO" id="5X0-1w-xOU">
                                                 <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="iID-AT-F6K">
-                                                    <rect key="frame" x="-2" y="50" width="227" height="18"/>
+                                                    <rect key="frame" x="-2" y="76" width="227" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Use forceRemove and forcePause" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gvt-P2-gWx">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -101,9 +104,33 @@
                                                     </connections>
                                                 </button>
                                             </gridCell>
+                                            <gridCell row="EM3-Sb-TJc" column="fkq-YE-xaO" id="LPG-Up-pCK">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yzv-OQ-Or4">
+                                                    <rect key="frame" x="-2" y="50" width="137" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Show global speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pSv-Oz-hKK">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.showGlobalSpeed" id="mod-Dv-qPP"/>
+                                                    </connections>
+                                                </button>
+                                            </gridCell>
+                                            <gridCell row="k1L-NQ-gZL" column="fkq-YE-xaO" id="C5w-Fz-Thc">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xAi-Pz-0Vb">
+                                                    <rect key="frame" x="-2" y="24" width="143" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Show aria2 features" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SIX-sr-sam">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.showAria2Features" id="xHX-C7-aTi"/>
+                                                    </connections>
+                                                </button>
+                                            </gridCell>
                                             <gridCell row="Qzw-Ty-9Yo" column="fkq-YE-xaO" id="E2H-6m-tyn">
                                                 <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="fnb-Ji-cX3">
-                                                    <rect key="frame" x="-2" y="24" width="152" height="18"/>
+                                                    <rect key="frame" x="-2" y="-2" width="152" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Complete notification" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Qdl-Au-CjN">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -113,159 +140,172 @@
                                                     </connections>
                                                 </button>
                                             </gridCell>
-                                            <gridCell row="W2Y-Nu-pyL" column="fkq-YE-xaO" id="deU-8E-MPE">
-                                                <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="inL-ef-3yy">
-                                                    <rect key="frame" x="-2" y="-2" width="118" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Auto start Aria2" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VxI-Jf-yOc">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="gh3-nU-zKU" name="value" keyPath="self.autoStartAria2c" id="WdH-HP-SiX"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                        </gridCells>
-                                    </gridView>
-                                    <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="Tcw-px-v75">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="114"/>
-                                        <rows>
-                                            <gridRow id="pLX-Ps-igr"/>
-                                            <gridRow id="p1m-oL-2CM"/>
-                                            <gridRow id="ogZ-5u-GOa"/>
-                                            <gridRow id="Edt-6v-1pn"/>
-                                            <gridRow id="11u-YQ-c9I"/>
-                                        </rows>
-                                        <columns>
-                                            <gridColumn width="235" leadingPadding="18" id="wu6-Lo-PH4"/>
-                                            <gridColumn id="Vgv-qd-Gjc"/>
-                                        </columns>
-                                        <gridCells>
-                                            <gridCell row="pLX-Ps-igr" column="wu6-Lo-PH4" id="qbK-7B-ilj">
-                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PJP-HB-673">
-                                                    <rect key="frame" x="16" y="97" width="74" height="17"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Aria2c path" id="0Lz-mN-X7V">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </gridCell>
-                                            <gridCell row="pLX-Ps-igr" column="Vgv-qd-Gjc" id="TTe-IZ-MDx"/>
-                                            <gridCell row="p1m-oL-2CM" column="wu6-Lo-PH4" xPlacement="fill" id="BLQ-J4-BoK">
-                                                <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J3L-bF-6Hc">
-                                                    <rect key="frame" x="16" y="67" width="240" height="25"/>
-                                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="udW-qG-Rh5" id="fJG-Oo-ayw">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
-                                                        <menu key="menu" id="DnU-W6-7Tr">
-                                                            <items>
-                                                                <menuItem isSeparatorItem="YES" state="on" id="udW-qG-Rh5"/>
-                                                                <menuItem title="Show In Finder" id="X7E-3W-wwe">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    <connections>
-                                                                        <action selector="showAria2cInFinder:" target="gh3-nU-zKU" id="fGR-jp-zUE"/>
-                                                                    </connections>
-                                                                </menuItem>
-                                                                <menuItem title="Other" id="DPc-BY-tMV">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    <connections>
-                                                                        <action selector="selectAria2c:" target="gh3-nU-zKU" id="NqZ-hf-ZfY"/>
-                                                                    </connections>
-                                                                </menuItem>
-                                                            </items>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="gh3-nU-zKU" id="5Q3-et-7ZP"/>
-                                                            </connections>
-                                                        </menu>
-                                                    </popUpButtonCell>
-                                                </popUpButton>
-                                            </gridCell>
-                                            <gridCell row="p1m-oL-2CM" column="Vgv-qd-Gjc" yPlacement="center" id="KeW-np-GtB">
-                                                <imageView key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-Vc-COS">
-                                                    <rect key="frame" x="259" y="73" width="16" height="16"/>
-                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusAvailable" id="qm0-2i-DjY"/>
-                                                </imageView>
-                                            </gridCell>
-                                            <gridCell row="ogZ-5u-GOa" column="wu6-Lo-PH4" id="eSG-dq-zeM">
-                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PVG-Up-re6">
-                                                    <rect key="frame" x="16" y="47" width="58" height="17"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conf File" id="llH-oL-Oqi">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </gridCell>
-                                            <gridCell row="ogZ-5u-GOa" column="Vgv-qd-Gjc" id="MtF-GZ-gPZ"/>
-                                            <gridCell row="Edt-6v-1pn" column="wu6-Lo-PH4" xPlacement="fill" id="GGy-oT-Sxz">
-                                                <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ZF-K1-H4p">
-                                                    <rect key="frame" x="16" y="17" width="240" height="25"/>
-                                                    <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="z1W-PU-6xL" id="4d0-um-OzE">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
-                                                        <menu key="menu" id="z1G-F0-5Ko">
-                                                            <items>
-                                                                <menuItem title="Default" state="on" id="z1W-PU-6xL"/>
-                                                                <menuItem isSeparatorItem="YES" id="9Wk-lm-pQB"/>
-                                                                <menuItem title="Show In Finder" id="EqX-1a-d71">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    <connections>
-                                                                        <action selector="showConfInFinder:" target="gh3-nU-zKU" id="rpw-FN-XDu"/>
-                                                                    </connections>
-                                                                </menuItem>
-                                                                <menuItem title="Other" id="lPT-Wt-gHe">
-                                                                    <connections>
-                                                                        <action selector="selectConf:" target="gh3-nU-zKU" id="esz-Aw-ggh"/>
-                                                                    </connections>
-                                                                </menuItem>
-                                                            </items>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="gh3-nU-zKU" id="bgr-kU-bjU"/>
-                                                            </connections>
-                                                        </menu>
-                                                    </popUpButtonCell>
-                                                </popUpButton>
-                                            </gridCell>
-                                            <gridCell row="Edt-6v-1pn" column="Vgv-qd-Gjc" id="B4n-Rv-hJV"/>
-                                            <gridCell row="11u-YQ-c9I" column="wu6-Lo-PH4" id="yH6-YW-5ji">
-                                                <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="pmF-wE-SdI">
-                                                    <rect key="frame" x="16" y="-2" width="183" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Restart aria2c at next boot" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iBh-7W-lt8">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="gh3-nU-zKU" name="value" keyPath="self.restartAria2c" id="MBV-Oz-nMn"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                            <gridCell row="11u-YQ-c9I" column="Vgv-qd-Gjc" id="3Go-Wb-9UF"/>
                                         </gridCells>
                                     </gridView>
                                 </subviews>
                                 <visibilityPriorities>
                                     <real value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                         </subviews>
                     </view>
-                    <connections>
-                        <outlet property="aria2cConfPathPopUpButton" destination="4ZF-K1-H4p" id="QLB-QG-zT9"/>
-                        <outlet property="aria2cConfsGridView" destination="Tcw-px-v75" id="yy4-hx-qv2"/>
-                        <outlet property="aria2cPathPopUpButton" destination="J3L-bF-6Hc" id="k3S-bb-aUI"/>
-                        <outlet property="aria2cStatusImageView" destination="PF9-Vc-COS" id="PAv-01-A9s"/>
-                    </connections>
                 </viewController>
                 <customObject id="neY-WK-K0Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="BHh-wy-fJc" customClass="Preferences" customModule="Aria2D" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="779"/>
+            <point key="canvasLocation" x="1590.5" y="737.5"/>
+        </scene>
+        <!--Aria2 Options View Controller-->
+        <scene sceneID="CAs-b5-1m8">
+            <objects>
+                <viewController id="sV5-KT-6dJ" customClass="Aria2OptionsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="zbU-S3-ojc">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="199"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <gridView fixedFrame="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="Tcw-px-v75">
+                                <rect key="frame" x="48" y="26" width="257" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rows>
+                                    <gridRow id="pLX-Ps-igr"/>
+                                    <gridRow id="p1m-oL-2CM"/>
+                                    <gridRow id="ogZ-5u-GOa"/>
+                                    <gridRow id="Edt-6v-1pn"/>
+                                    <gridRow id="11u-YQ-c9I"/>
+                                </rows>
+                                <columns>
+                                    <gridColumn width="235" id="wu6-Lo-PH4"/>
+                                    <gridColumn id="Vgv-qd-Gjc"/>
+                                </columns>
+                                <gridCells>
+                                    <gridCell row="pLX-Ps-igr" column="wu6-Lo-PH4" id="qbK-7B-ilj">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PJP-HB-673">
+                                            <rect key="frame" x="-2" y="97" width="74" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Aria2c path" id="0Lz-mN-X7V">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="pLX-Ps-igr" column="Vgv-qd-Gjc" id="TTe-IZ-MDx"/>
+                                    <gridCell row="p1m-oL-2CM" column="wu6-Lo-PH4" xPlacement="fill" id="BLQ-J4-BoK">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J3L-bF-6Hc">
+                                            <rect key="frame" x="-2" y="67" width="240" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="udW-qG-Rh5" id="fJG-Oo-ayw">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="DnU-W6-7Tr">
+                                                    <items>
+                                                        <menuItem isSeparatorItem="YES" state="on" id="udW-qG-Rh5"/>
+                                                        <menuItem title="Show In Finder" id="X7E-3W-wwe">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="showAria2cInFinder:" target="sV5-KT-6dJ" id="03K-lM-LqF"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Other" id="DPc-BY-tMV">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="selectAria2c:" target="sV5-KT-6dJ" id="f1g-pK-3Xe"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                    </items>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="gh3-nU-zKU" id="5Q3-et-7ZP"/>
+                                                    </connections>
+                                                </menu>
+                                            </popUpButtonCell>
+                                        </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="p1m-oL-2CM" column="Vgv-qd-Gjc" yPlacement="center" id="KeW-np-GtB">
+                                        <imageView key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-Vc-COS">
+                                            <rect key="frame" x="241" y="73" width="16" height="16"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusAvailable" id="qm0-2i-DjY"/>
+                                        </imageView>
+                                    </gridCell>
+                                    <gridCell row="ogZ-5u-GOa" column="wu6-Lo-PH4" id="eSG-dq-zeM">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PVG-Up-re6">
+                                            <rect key="frame" x="-2" y="47" width="58" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conf File" id="llH-oL-Oqi">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="ogZ-5u-GOa" column="Vgv-qd-Gjc" id="MtF-GZ-gPZ"/>
+                                    <gridCell row="Edt-6v-1pn" column="wu6-Lo-PH4" xPlacement="fill" id="GGy-oT-Sxz">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ZF-K1-H4p">
+                                            <rect key="frame" x="-2" y="17" width="240" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="z1W-PU-6xL" id="4d0-um-OzE">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="z1G-F0-5Ko">
+                                                    <items>
+                                                        <menuItem title="Default" state="on" id="z1W-PU-6xL"/>
+                                                        <menuItem isSeparatorItem="YES" id="9Wk-lm-pQB"/>
+                                                        <menuItem title="Show In Finder" id="EqX-1a-d71">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="showConfInFinder:" target="sV5-KT-6dJ" id="sJ1-Q6-rUh"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Other" id="lPT-Wt-gHe">
+                                                            <connections>
+                                                                <action selector="selectConf:" target="sV5-KT-6dJ" id="85i-aO-ome"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                    </items>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="gh3-nU-zKU" id="bgr-kU-bjU"/>
+                                                    </connections>
+                                                </menu>
+                                            </popUpButtonCell>
+                                        </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="Edt-6v-1pn" column="Vgv-qd-Gjc" id="B4n-Rv-hJV"/>
+                                    <gridCell row="11u-YQ-c9I" column="wu6-Lo-PH4" id="yH6-YW-5ji">
+                                        <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="pmF-wE-SdI">
+                                            <rect key="frame" x="-2" y="-2" width="183" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Restart aria2c at next boot" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iBh-7W-lt8">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="sV5-KT-6dJ" name="value" keyPath="self.restartAria2c" id="kZd-vc-cxq"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="11u-YQ-c9I" column="Vgv-qd-Gjc" id="3Go-Wb-9UF"/>
+                                </gridCells>
+                            </gridView>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inL-ef-3yy">
+                                <rect key="frame" x="27" y="157" width="118" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Auto start Aria2" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VxI-Jf-yOc">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="sV5-KT-6dJ" name="value" keyPath="self.autoStartAria2c" id="ZTf-pm-OFf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="aria2cConfPathPopUpButton" destination="4ZF-K1-H4p" id="JeV-x8-0cO"/>
+                        <outlet property="aria2cConfsGridView" destination="Tcw-px-v75" id="G0y-Ic-o3S"/>
+                        <outlet property="aria2cPathPopUpButton" destination="J3L-bF-6Hc" id="qqZ-Xy-f5k"/>
+                        <outlet property="aria2cStatusImageView" destination="PF9-Vc-COS" id="HMI-2q-MCj"/>
+                    </connections>
+                </viewController>
+                <customObject id="BGN-mm-D8P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1991.5" y="754.5"/>
         </scene>
         <!--General View Controller-->
         <scene sceneID="sUA-77-rja">

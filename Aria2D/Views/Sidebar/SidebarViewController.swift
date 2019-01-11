@@ -32,15 +32,17 @@ class SidebarViewController: NSViewController {
 		super.viewDidLoad()
 		initNotification()
 		resetSidebarItems()
-        arrayController.filterPredicate = NSPredicate(format: "status IN %@ AND bittorrent != nil", [Status.active.rawValue])
         
-        observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
-            guard let count = (arrayController.arrangedObjects as? [Any])?.count,
-                Aria2Websocket.shared.isConnected else {
-                    self?.globalSpeedView.isHidden = true
-                    return
+        if Preferences.shared.showGlobalSpeed {
+            arrayController.filterPredicate = NSPredicate(format: "status IN %@ AND bittorrent != nil", [Status.active.rawValue])
+            observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
+                guard let count = (arrayController.arrangedObjects as? [Any])?.count,
+                    Aria2Websocket.shared.isConnected else {
+                        self?.globalSpeedView.isHidden = true
+                        return
+                }
+                self?.globalSpeedView.isHidden = count == 0
             }
-            self?.globalSpeedView.isHidden = count == 0
         }
 	}
 	
@@ -110,6 +112,10 @@ class SidebarViewController: NSViewController {
 	}
 	
     @objc func updateGlobalStat(notification: NSNotification) {
+        globalSpeedView.isHidden = !Preferences.shared.showGlobalSpeed
+        guard Preferences.shared.showGlobalSpeed else {
+            return
+        }
         guard let userInfo = notification.userInfo else { return }
         
         if let updateServer = userInfo["updateServer"] as? Bool, updateServer {
