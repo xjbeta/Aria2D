@@ -62,6 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainWindowController.showWindow(self)
         
         // register for url event
+        Preferences.shared.setLaunchServer()
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         
         self.setDevMate()

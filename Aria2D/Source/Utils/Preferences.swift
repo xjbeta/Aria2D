@@ -108,6 +108,22 @@ class Preferences: NSObject {
             NotificationCenter.default.post(name: .updateGlobalStat, object: nil)
         }
     }
+    
+    @objc var openMagnetLink: Bool {
+        get {
+            return defaults(.openMagnetLink) as? Bool ?? true
+        }
+        set {
+            defaultsSet(newValue, forKey: .openMagnetLink)
+            setLaunchServer()
+        }
+    }
+    
+    func setLaunchServer() {
+        guard openMagnetLink,
+            let bundleIdentifier = Bundle.main.bundleIdentifier else { return }
+        LSSetDefaultHandlerForURLScheme("magnet" as CFString, bundleIdentifier as CFString)
+    }
 	
 // MARK: - Aria2c Options
 	var autoStartAria2c: Bool {

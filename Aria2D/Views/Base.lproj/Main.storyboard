@@ -32,8 +32,8 @@
                 <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="0" tabStyle="toolbar" id="PRT-ss-lgd" customClass="PreferencesTabViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="General" identifier="" image="NSPreferencesGeneral" id="sJE-A4-L4w"/>
-                        <tabViewItem label="Advanced" image="NSAdvanced" id="aTJ-Ok-0Jj"/>
-                        <tabViewItem id="lQD-SY-l3O" userLabel="Aria2Options"/>
+                        <tabViewItem label="Advanced" image="NSAdvanced" id="oMX-ou-i4o" userLabel="Advanced"/>
+                        <tabViewItem label="Aria2Options" id="1Wj-d4-CGF" userLabel="Aria2Options"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions"/>
                     <tabView key="tabView" misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" id="Ga4-rQ-grv">
@@ -47,8 +47,8 @@
                     <connections>
                         <outlet property="tabView" destination="Ga4-rQ-grv" id="e8T-7n-dPm"/>
                         <segue destination="iGx-Rv-PRS" kind="relationship" relationship="tabItems" id="jqA-3R-d41"/>
-                        <segue destination="gh3-nU-zKU" kind="relationship" relationship="tabItems" id="aZd-aN-Vtg"/>
-                        <segue destination="sV5-KT-6dJ" kind="relationship" relationship="tabItems" id="LR1-pB-KzO"/>
+                        <segue destination="NDk-3i-u65" kind="relationship" relationship="tabItems" id="UqW-zi-gwm"/>
+                        <segue destination="sV5-KT-6dJ" kind="relationship" relationship="tabItems" id="EES-Bi-Bot"/>
                     </connections>
                 </tabViewController>
                 <customObject id="Mcr-CY-ZB6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -56,107 +56,109 @@
             <point key="canvasLocation" x="1315.5" y="424"/>
         </scene>
         <!--Advanced View Controller-->
-        <scene sceneID="ee0-Be-tjR">
+        <scene sceneID="oOY-yv-dwt">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="gh3-nU-zKU" customClass="AdvancedViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="BfK-ko-f4y">
-                        <rect key="frame" x="0.0" y="0.0" width="287" height="175"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <viewController id="NDk-3i-u65" customClass="AdvancedViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="wFX-nC-8VE">
+                        <rect key="frame" x="0.0" y="0.0" width="287" height="184"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70u-Nq-1w7">
-                                <rect key="frame" x="32" y="28" width="223" height="118"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VNA-pd-pMN">
-                                        <rect key="frame" x="0.0" y="0.0" width="223" height="118"/>
-                                        <rows>
-                                            <gridRow id="4Xm-3k-P6A"/>
-                                            <gridRow id="P3N-bU-bTU"/>
-                                            <gridRow id="EM3-Sb-TJc"/>
-                                            <gridRow id="k1L-NQ-gZL"/>
-                                            <gridRow id="Qzw-Ty-9Yo"/>
-                                        </rows>
-                                        <columns>
-                                            <gridColumn id="fkq-YE-xaO"/>
-                                        </columns>
-                                        <gridCells>
-                                            <gridCell row="4Xm-3k-P6A" column="fkq-YE-xaO" id="JGh-EZ-IDt">
-                                                <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="snS-xI-w3h">
-                                                    <rect key="frame" x="-2" y="102" width="122" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Developer mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aUm-g1-dZi">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.developerMode" id="U1U-PR-jJo"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                            <gridCell row="P3N-bU-bTU" column="fkq-YE-xaO" id="5X0-1w-xOU">
-                                                <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="iID-AT-F6K">
-                                                    <rect key="frame" x="-2" y="76" width="227" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Use forceRemove and forcePause" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gvt-P2-gWx">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.useForce" id="S4M-pI-JOA"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                            <gridCell row="EM3-Sb-TJc" column="fkq-YE-xaO" id="LPG-Up-pCK">
-                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yzv-OQ-Or4">
-                                                    <rect key="frame" x="-2" y="50" width="137" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Show global speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pSv-Oz-hKK">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.showGlobalSpeed" id="mod-Dv-qPP"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                            <gridCell row="k1L-NQ-gZL" column="fkq-YE-xaO" id="C5w-Fz-Thc">
-                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xAi-Pz-0Vb">
-                                                    <rect key="frame" x="-2" y="24" width="143" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Show aria2 features" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SIX-sr-sam">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.showAria2Features" id="xHX-C7-aTi"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                            <gridCell row="Qzw-Ty-9Yo" column="fkq-YE-xaO" id="E2H-6m-tyn">
-                                                <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="fnb-Ji-cX3">
-                                                    <rect key="frame" x="-2" y="-2" width="152" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Complete notification" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Qdl-Au-CjN">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <binding destination="BHh-wy-fJc" name="value" keyPath="self.completeNotice" id="Ihw-56-iVz"/>
-                                                    </connections>
-                                                </button>
-                                            </gridCell>
-                                        </gridCells>
-                                    </gridView>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <real value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
+                            <gridView fixedFrame="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VNA-pd-pMN">
+                                <rect key="frame" x="32" y="20" width="223" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rows>
+                                    <gridRow yPlacement="fill" id="4Xm-3k-P6A"/>
+                                    <gridRow yPlacement="fill" id="P3N-bU-bTU"/>
+                                    <gridRow yPlacement="fill" id="EM3-Sb-TJc"/>
+                                    <gridRow yPlacement="fill" id="k1L-NQ-gZL"/>
+                                    <gridRow yPlacement="fill" id="Qzw-Ty-9Yo"/>
+                                    <gridRow yPlacement="fill" id="UK8-Op-myt"/>
+                                </rows>
+                                <columns>
+                                    <gridColumn id="fkq-YE-xaO"/>
+                                </columns>
+                                <gridCells>
+                                    <gridCell row="4Xm-3k-P6A" column="fkq-YE-xaO" id="JGh-EZ-IDt">
+                                        <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="snS-xI-w3h">
+                                            <rect key="frame" x="-2" y="128" width="122" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Developer mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aUm-g1-dZi">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="lYY-tq-Fi0" name="value" keyPath="self.developerMode" id="M3j-Gx-Bja"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="P3N-bU-bTU" column="fkq-YE-xaO" id="5X0-1w-xOU">
+                                        <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="iID-AT-F6K">
+                                            <rect key="frame" x="-2" y="102" width="227" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Use forceRemove and forcePause" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gvt-P2-gWx">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="lYY-tq-Fi0" name="value" keyPath="self.useForce" id="ees-TA-Bbq"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="EM3-Sb-TJc" column="fkq-YE-xaO" id="LPG-Up-pCK">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yzv-OQ-Or4">
+                                            <rect key="frame" x="-2" y="76" width="137" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Show global speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pSv-Oz-hKK">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="lYY-tq-Fi0" name="value" keyPath="self.showGlobalSpeed" id="vQO-BF-NQg"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="k1L-NQ-gZL" column="fkq-YE-xaO" id="C5w-Fz-Thc">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xAi-Pz-0Vb">
+                                            <rect key="frame" x="-2" y="50" width="143" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Show aria2 features" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SIX-sr-sam">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="lYY-tq-Fi0" name="value" keyPath="self.showAria2Features" id="JKA-VF-XGF"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="Qzw-Ty-9Yo" column="fkq-YE-xaO" id="E2H-6m-tyn">
+                                        <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="fnb-Ji-cX3">
+                                            <rect key="frame" x="-2" y="24" width="152" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Complete notification" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Qdl-Au-CjN">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="lYY-tq-Fi0" name="value" keyPath="self.completeNotice" id="rcE-Q2-wtc"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="UK8-Op-myt" column="fkq-YE-xaO" id="g4Q-Ra-fBM">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="avk-0O-xMe">
+                                            <rect key="frame" x="-2" y="-2" width="129" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Open magnet link" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="a3B-sB-2OT">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="lYY-tq-Fi0" name="value" keyPath="self.openMagnetLink" id="BA6-ho-8eA"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                </gridCells>
+                            </gridView>
                         </subviews>
                     </view>
                 </viewController>
-                <customObject id="neY-WK-K0Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="BHh-wy-fJc" customClass="Preferences" customModule="Aria2D" customModuleProvider="target"/>
+                <customObject id="Q2Q-28-p0a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="lYY-tq-Fi0" customClass="Preferences" customModule="Aria2D" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1590.5" y="737.5"/>
+            <point key="canvasLocation" x="1539" y="742"/>
         </scene>
         <!--Aria2 Options View Controller-->
         <scene sceneID="CAs-b5-1m8">
@@ -215,7 +217,7 @@
                                                         </menuItem>
                                                     </items>
                                                     <connections>
-                                                        <outlet property="delegate" destination="gh3-nU-zKU" id="5Q3-et-7ZP"/>
+                                                        <outlet property="delegate" destination="sV5-KT-6dJ" id="FJV-oX-rsf"/>
                                                     </connections>
                                                 </menu>
                                             </popUpButtonCell>
@@ -261,7 +263,7 @@
                                                         </menuItem>
                                                     </items>
                                                     <connections>
-                                                        <outlet property="delegate" destination="gh3-nU-zKU" id="bgr-kU-bjU"/>
+                                                        <outlet property="delegate" destination="sV5-KT-6dJ" id="kig-Id-hvW"/>
                                                     </connections>
                                                 </menu>
                                             </popUpButtonCell>
@@ -305,7 +307,7 @@
                 </viewController>
                 <customObject id="BGN-mm-D8P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1991.5" y="754.5"/>
+            <point key="canvasLocation" x="1992" y="750"/>
         </scene>
         <!--General View Controller-->
         <scene sceneID="sUA-77-rja">
