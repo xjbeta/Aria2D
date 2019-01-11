@@ -21,7 +21,7 @@ class SidebarViewController: NSViewController {
     
     var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
-    var newTaskViewFile = ""
+    var newTaskPreparedInfo = [String: String]()
     
     required init?(coder: NSCoder) {
         context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
@@ -46,9 +46,8 @@ class SidebarViewController: NSViewController {
 	
 	func initNotification() {
         NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: String], let file = userInfo["file"] {
-                self.newTaskViewFile = file
-            }
+            guard let userInfo = $0.userInfo as? [String: String] else { return }
+            self.newTaskPreparedInfo = userInfo
             self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
         }
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
@@ -59,10 +58,10 @@ class SidebarViewController: NSViewController {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let vc = segue.destinationController as? NewTaskViewController {
-            if newTaskViewFile != "" {
-                vc.fileURL = URL(fileURLWithPath: newTaskViewFile)
+            if newTaskPreparedInfo.count == 1 {
+                vc.preparedInfo = newTaskPreparedInfo
             }
-            newTaskViewFile = ""
+            newTaskPreparedInfo.removeAll()
         }
     }
 	
