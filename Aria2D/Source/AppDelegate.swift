@@ -17,8 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             var logPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             logPath.appendPathComponent(Bundle.main.bundleIdentifier!)
-            logPath.appendPathComponent("Aria2D.log")
-            
+            var isDir = ObjCBool(false)
+            if !FileManager.default.fileExists(atPath: logPath.path, isDirectory: &isDir) {
+                try FileManager.default.createDirectory(at: logPath, withIntermediateDirectories: true, attributes: nil)
+            }
+            guard let appName = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
+                return nil
+            }
+            logPath.appendPathComponent("\(appName).log")
             return logPath
         } catch let error {
             Log(error)
