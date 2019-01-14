@@ -1,3 +1,4 @@
 github "DevMate/DevMateKit"
 github "facebook/SocketRocket" "master"
 github "mxcl/PromiseKit"
+github "PromiseKit/Foundation"
