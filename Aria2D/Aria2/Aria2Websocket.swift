@@ -255,7 +255,9 @@ extension Aria2Websocket: SRWebSocketDelegate {
                 let gids = json.params.map { $0.gid }
                 switch json.method {
                 case .onDownloadStart:
-                    Aria2.shared.updateStatus(gids)
+                    gids.forEach {
+                        Aria2.shared.initData($0)
+                    }
                     ViewControllersManager.shared.showHUD(.downloadStart)
                 case .onDownloadPause:
                     Aria2.shared.updateStatus(gids)
