@@ -17,6 +17,7 @@ class SidebarViewController: NSViewController {
     @IBOutlet weak var uploadSpeed: NSTextField!
     @IBOutlet weak var globalSpeedView: NSStackView!
     var observe: NSKeyValueObservation?
+    @objc var predicate = NSPredicate(format: "status IN %@", [Status.active.rawValue])
     @objc var context: NSManagedObjectContext
     
     var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
@@ -33,16 +34,14 @@ class SidebarViewController: NSViewController {
 		initNotification()
 		resetSidebarItems()
         
-        if Preferences.shared.showGlobalSpeed {
-            arrayController.filterPredicate = NSPredicate(format: "status IN %@ AND bittorrent != nil", [Status.active.rawValue])
-            observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
-                guard let count = (arrayController.arrangedObjects as? [Any])?.count,
-                    Aria2Websocket.shared.isConnected else {
-                        self?.globalSpeedView.isHidden = true
-                        return
-                }
-                self?.globalSpeedView.isHidden = count == 0
+        observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
+            guard let objs = arrayController.arrangedObjects as? [Aria2Object],
+                Aria2Websocket.shared.isConnected else {
+                    self?.globalSpeedView.isHidden = true
+                    return
             }
+            
+            self?.globalSpeedView.isHidden = objs.count == 0
         }
 	}
 	

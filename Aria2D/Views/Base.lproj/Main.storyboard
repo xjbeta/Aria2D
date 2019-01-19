@@ -1138,6 +1138,7 @@ CA
                 <customObject id="lC1-xA-URe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Aria2Object" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="ycK-Hf-rep">
                     <connections>
+                        <binding destination="aDS-je-EVP" name="filterPredicate" keyPath="self.predicate" id="s6p-1H-tux"/>
                         <binding destination="aDS-je-EVP" name="managedObjectContext" keyPath="self.context" id="v88-WZ-a6D"/>
                     </connections>
                 </arrayController>
