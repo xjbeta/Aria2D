@@ -183,6 +183,7 @@ extension Aria2c {
                         } else {
                             ViewControllersManager.shared.showAria2cAlert(err.text())
                         }
+                        resolver.fulfill()
                         }.catch {
                             resolver.reject($0)
                     }
