@@ -165,11 +165,11 @@
             <objects>
                 <viewController id="sV5-KT-6dJ" customClass="Aria2OptionsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zbU-S3-ojc">
-                        <rect key="frame" x="0.0" y="0.0" width="612" height="731"/>
+                        <rect key="frame" x="0.0" y="0.0" width="620" height="686"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="k0f-T9-9LA">
-                                <rect key="frame" x="20" y="697" width="501" height="14"/>
+                                <rect key="frame" x="20" y="652" width="501" height="14"/>
                                 <rows>
                                     <gridRow id="laO-ul-jjk"/>
                                 </rows>
@@ -194,10 +194,10 @@
                                 </gridCells>
                             </gridView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="5AZ-dZ-P1c">
-                                <rect key="frame" x="20" y="674" width="572" height="5"/>
+                                <rect key="frame" x="20" y="634" width="580" height="5"/>
                             </box>
                             <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="Tcw-px-v75">
-                                <rect key="frame" x="20" y="562" width="528" height="94"/>
+                                <rect key="frame" x="20" y="527" width="528" height="94"/>
                                 <rows>
                                     <gridRow id="pLX-Ps-igr"/>
                                     <gridRow id="ogZ-5u-GOa"/>
@@ -257,8 +257,8 @@
                                     </gridCell>
                                     <gridCell row="ogZ-5u-GOa" column="wu6-Lo-PH4" id="eSG-dq-zeM">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PVG-Up-re6">
-                                            <rect key="frame" x="143" y="48" width="59" height="17"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conf file:" id="llH-oL-Oqi">
+                                            <rect key="frame" x="112" y="48" width="90" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conf file path:" id="llH-oL-Oqi">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -332,10 +332,10 @@
                                 </gridCells>
                             </gridView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="gLk-zB-6X5">
-                                <rect key="frame" x="20" y="539" width="572" height="5"/>
+                                <rect key="frame" x="20" y="509" width="580" height="5"/>
                             </box>
                             <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="tRb-XI-9y2">
-                                <rect key="frame" x="20" y="419" width="506" height="102"/>
+                                <rect key="frame" x="20" y="394" width="506" height="102"/>
                                 <rows>
                                     <gridRow id="6UG-Ub-v57"/>
                                     <gridRow id="AoJ-39-YBe"/>
@@ -435,10 +435,10 @@
                                 </gridCells>
                             </gridView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mgg-67-hYc">
-                                <rect key="frame" x="20" y="396" width="572" height="5"/>
+                                <rect key="frame" x="20" y="376" width="580" height="5"/>
                             </box>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="scu-HT-Ne5">
-                                <rect key="frame" x="20" y="250" width="506" height="128"/>
+                                <rect key="frame" x="20" y="235" width="506" height="128"/>
                                 <rows>
                                     <gridRow id="7pJ-pD-PdX"/>
                                     <gridRow id="HJN-bh-etA"/>
@@ -557,10 +557,10 @@
                                 </gridCells>
                             </gridView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="roc-RR-9cd">
-                                <rect key="frame" x="20" y="227" width="572" height="5"/>
+                                <rect key="frame" x="20" y="217" width="580" height="5"/>
                             </box>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="djm-hP-DAP">
-                                <rect key="frame" x="20" y="25" width="506" height="184"/>
+                                <rect key="frame" x="20" y="20" width="506" height="184"/>
                                 <rows>
                                     <gridRow yPlacement="fill" height="100" id="2Nm-cC-ZCu"/>
                                     <gridRow id="6EJ-uv-iC4"/>
@@ -659,27 +659,27 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5AZ-dZ-P1c" secondAttribute="trailing" constant="20" id="1nn-h3-JvR"/>
-                            <constraint firstItem="mgg-67-hYc" firstAttribute="top" secondItem="tRb-XI-9y2" secondAttribute="bottom" constant="20" id="2fy-dk-lTf"/>
+                            <constraint firstItem="mgg-67-hYc" firstAttribute="top" secondItem="tRb-XI-9y2" secondAttribute="bottom" constant="15" id="2fy-dk-lTf"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tcw-px-v75" secondAttribute="trailing" constant="20" id="4jh-AR-iiZ"/>
                             <constraint firstAttribute="trailing" secondItem="gLk-zB-6X5" secondAttribute="trailing" constant="20" id="6LM-pk-xKD"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="djm-hP-DAP" secondAttribute="trailing" constant="20" id="A8A-8Z-Oj8"/>
-                            <constraint firstItem="Tcw-px-v75" firstAttribute="top" secondItem="5AZ-dZ-P1c" secondAttribute="bottom" constant="20" id="DVf-go-s5g"/>
+                            <constraint firstItem="Tcw-px-v75" firstAttribute="top" secondItem="5AZ-dZ-P1c" secondAttribute="bottom" constant="15" id="DVf-go-s5g"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="scu-HT-Ne5" secondAttribute="trailing" constant="20" id="FFV-jw-o58"/>
-                            <constraint firstItem="roc-RR-9cd" firstAttribute="top" secondItem="scu-HT-Ne5" secondAttribute="bottom" constant="20" id="Fw8-f4-8Ko"/>
-                            <constraint firstItem="5AZ-dZ-P1c" firstAttribute="top" secondItem="k0f-T9-9LA" secondAttribute="bottom" constant="20" id="GHS-O3-zw8"/>
+                            <constraint firstItem="roc-RR-9cd" firstAttribute="top" secondItem="scu-HT-Ne5" secondAttribute="bottom" constant="15" id="Fw8-f4-8Ko"/>
+                            <constraint firstItem="5AZ-dZ-P1c" firstAttribute="top" secondItem="k0f-T9-9LA" secondAttribute="bottom" constant="15" id="GHS-O3-zw8"/>
                             <constraint firstItem="gLk-zB-6X5" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="IzN-WP-7Uq"/>
                             <constraint firstItem="scu-HT-Ne5" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="QMW-Qt-UwH"/>
-                            <constraint firstItem="scu-HT-Ne5" firstAttribute="top" secondItem="mgg-67-hYc" secondAttribute="bottom" constant="20" id="TZP-GI-gtO"/>
+                            <constraint firstItem="scu-HT-Ne5" firstAttribute="top" secondItem="mgg-67-hYc" secondAttribute="bottom" constant="15" id="TZP-GI-gtO"/>
                             <constraint firstItem="tRb-XI-9y2" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="WCP-km-Dfm"/>
                             <constraint firstItem="k0f-T9-9LA" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="XvP-db-9hC"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k0f-T9-9LA" secondAttribute="trailing" constant="20" id="YCq-BA-qHn"/>
-                            <constraint firstItem="tRb-XI-9y2" firstAttribute="top" secondItem="gLk-zB-6X5" secondAttribute="bottom" constant="20" id="ZnS-pd-wV9"/>
+                            <constraint firstItem="tRb-XI-9y2" firstAttribute="top" secondItem="gLk-zB-6X5" secondAttribute="bottom" constant="15" id="ZnS-pd-wV9"/>
                             <constraint firstAttribute="trailing" secondItem="mgg-67-hYc" secondAttribute="trailing" constant="20" id="gPz-dO-mEo"/>
-                            <constraint firstItem="gLk-zB-6X5" firstAttribute="top" secondItem="Tcw-px-v75" secondAttribute="bottom" constant="20" id="jab-2r-hUw"/>
+                            <constraint firstItem="gLk-zB-6X5" firstAttribute="top" secondItem="Tcw-px-v75" secondAttribute="bottom" constant="15" id="jab-2r-hUw"/>
                             <constraint firstItem="mgg-67-hYc" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="lZ4-g5-Ns1"/>
                             <constraint firstItem="k0f-T9-9LA" firstAttribute="top" secondItem="zbU-S3-ojc" secondAttribute="top" constant="20" id="ndl-QL-QNF"/>
                             <constraint firstItem="5AZ-dZ-P1c" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="pCe-1d-s1E"/>
-                            <constraint firstItem="djm-hP-DAP" firstAttribute="top" secondItem="roc-RR-9cd" secondAttribute="bottom" constant="20" id="pD6-mY-3hZ"/>
+                            <constraint firstItem="djm-hP-DAP" firstAttribute="top" secondItem="roc-RR-9cd" secondAttribute="bottom" constant="15" id="pD6-mY-3hZ"/>
                             <constraint firstItem="djm-hP-DAP" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="rMW-M1-KW0"/>
                             <constraint firstItem="roc-RR-9cd" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="vaP-Sn-mse"/>
                             <constraint firstItem="Tcw-px-v75" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" constant="20" id="xb4-ZX-Hv7"/>
@@ -696,7 +696,7 @@
                 </viewController>
                 <customObject id="BGN-mm-D8P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2127" y="1015.5"/>
+            <point key="canvasLocation" x="2129" y="993"/>
         </scene>
         <!--General View Controller-->
         <scene sceneID="sUA-77-rja">
