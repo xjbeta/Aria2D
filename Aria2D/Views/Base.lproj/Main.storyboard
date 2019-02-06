@@ -169,14 +169,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <gridView fixedFrame="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="Tcw-px-v75">
-                                <rect key="frame" x="48" y="26" width="257" height="114"/>
+                                <rect key="frame" x="48" y="46" width="257" height="94"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <rows>
                                     <gridRow id="pLX-Ps-igr"/>
                                     <gridRow id="p1m-oL-2CM"/>
                                     <gridRow id="ogZ-5u-GOa"/>
                                     <gridRow id="Edt-6v-1pn"/>
-                                    <gridRow id="11u-YQ-c9I"/>
                                 </rows>
                                 <columns>
                                     <gridColumn width="235" id="wu6-Lo-PH4"/>
@@ -185,7 +184,7 @@
                                 <gridCells>
                                     <gridCell row="pLX-Ps-igr" column="wu6-Lo-PH4" id="qbK-7B-ilj">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PJP-HB-673">
-                                            <rect key="frame" x="-2" y="97" width="74" height="17"/>
+                                            <rect key="frame" x="-2" y="77" width="74" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Aria2c path" id="0Lz-mN-X7V">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -196,7 +195,7 @@
                                     <gridCell row="pLX-Ps-igr" column="Vgv-qd-Gjc" id="TTe-IZ-MDx"/>
                                     <gridCell row="p1m-oL-2CM" column="wu6-Lo-PH4" xPlacement="fill" id="BLQ-J4-BoK">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J3L-bF-6Hc">
-                                            <rect key="frame" x="-2" y="67" width="240" height="25"/>
+                                            <rect key="frame" x="-2" y="47" width="240" height="25"/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="udW-qG-Rh5" id="fJG-Oo-ayw">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -225,13 +224,13 @@
                                     </gridCell>
                                     <gridCell row="p1m-oL-2CM" column="Vgv-qd-Gjc" yPlacement="center" id="KeW-np-GtB">
                                         <imageView key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-Vc-COS">
-                                            <rect key="frame" x="241" y="73" width="16" height="16"/>
+                                            <rect key="frame" x="241" y="53" width="16" height="16"/>
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusAvailable" id="qm0-2i-DjY"/>
                                         </imageView>
                                     </gridCell>
                                     <gridCell row="ogZ-5u-GOa" column="wu6-Lo-PH4" id="eSG-dq-zeM">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PVG-Up-re6">
-                                            <rect key="frame" x="-2" y="47" width="58" height="17"/>
+                                            <rect key="frame" x="-2" y="27" width="58" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conf File" id="llH-oL-Oqi">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -242,7 +241,7 @@
                                     <gridCell row="ogZ-5u-GOa" column="Vgv-qd-Gjc" id="MtF-GZ-gPZ"/>
                                     <gridCell row="Edt-6v-1pn" column="wu6-Lo-PH4" xPlacement="fill" id="GGy-oT-Sxz">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ZF-K1-H4p">
-                                            <rect key="frame" x="-2" y="17" width="240" height="25"/>
+                                            <rect key="frame" x="-2" y="-3" width="240" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="z1W-PU-6xL" id="4d0-um-OzE">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -270,19 +269,6 @@
                                         </popUpButton>
                                     </gridCell>
                                     <gridCell row="Edt-6v-1pn" column="Vgv-qd-Gjc" id="B4n-Rv-hJV"/>
-                                    <gridCell row="11u-YQ-c9I" column="wu6-Lo-PH4" id="yH6-YW-5ji">
-                                        <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="pmF-wE-SdI">
-                                            <rect key="frame" x="-2" y="-2" width="183" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Restart aria2c at next boot" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iBh-7W-lt8">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <binding destination="sV5-KT-6dJ" name="value" keyPath="self.restartAria2c" id="kZd-vc-cxq"/>
-                                            </connections>
-                                        </button>
-                                    </gridCell>
-                                    <gridCell row="11u-YQ-c9I" column="Vgv-qd-Gjc" id="3Go-Wb-9UF"/>
                                 </gridCells>
                             </gridView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inL-ef-3yy">
@@ -1138,8 +1124,8 @@ CA
                 <customObject id="lC1-xA-URe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Aria2Object" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="ycK-Hf-rep">
                     <connections>
-                        <binding destination="aDS-je-EVP" name="filterPredicate" keyPath="self.predicate" id="s6p-1H-tux"/>
                         <binding destination="aDS-je-EVP" name="managedObjectContext" keyPath="self.context" id="v88-WZ-a6D"/>
+                        <binding destination="aDS-je-EVP" name="filterPredicate" keyPath="self.predicate" id="s6p-1H-tux"/>
                     </connections>
                 </arrayController>
             </objects>

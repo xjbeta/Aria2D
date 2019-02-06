@@ -136,6 +136,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try? FileManager.default.removeItem(atPath: url.path + "/default.realm.lock")
             try? FileManager.default.removeItem(atPath: url.path + "/default.realm.management")
         }
+        
+        UserDefaults.standard.removeObject(forKey: PreferenceKeys.restartAria2c.rawValue)
     }
     
     // MARK: - Core Data stack
