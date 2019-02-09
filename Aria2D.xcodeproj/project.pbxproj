@@ -17,6 +17,7 @@
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
 		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
 		011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */; };
+		011D5588220D4FBE00FCE1DE /* FlippedScrollDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */; };
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
 		011E4D2F21E8BE0100997633 /* Aria2OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */; };
 		011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */; };
@@ -138,6 +139,7 @@
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
 		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2.swift; sourceTree = "<group>"; };
 		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
+		011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippedScrollDocView.swift; sourceTree = "<group>"; };
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
 		011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cOptions.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
 				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
 				011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */,
+				011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */,
 				011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */,
 			);
 			path = Views;
@@ -627,6 +630,7 @@
 				01E906B6219C518B00928580 /* Aria2File+CoreDataProperties.swift in Sources */,
 				0147EDDE1D2381EA00FB4324 /* MainListViewController.swift in Sources */,
 				013817671D238E0100E0F926 /* MainWindowController.swift in Sources */,
+				011D5588220D4FBE00FCE1DE /* FlippedScrollDocView.swift in Sources */,
 				012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */,
 				018E89621D34FFB1000C71B0 /* ViewControllersManager.swift in Sources */,
 				01E906C1219C682700928580 /* Aria2List+CoreDataClass.swift in Sources */,
