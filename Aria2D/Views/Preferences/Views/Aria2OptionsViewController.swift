@@ -73,15 +73,6 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         }
     }
     
-    @objc var restartAria2c: Bool {
-        get {
-            return Preferences.shared.restartAria2c
-        }
-        set {
-            Preferences.shared.restartAria2c = newValue
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPathMenu()
