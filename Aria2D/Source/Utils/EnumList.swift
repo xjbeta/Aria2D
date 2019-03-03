@@ -37,6 +37,8 @@ enum PreferenceKeys: String {
 	case split = "--split"
 	case optimizeConcurrentDownloads = "--optimize-concurrent-downloads"
 	
+    case aria2OptionsDic = "aria2cOptionsDictionary"
+    
     // deprecated
     case restartAria2c = "aria2c_restartAria2c"
     

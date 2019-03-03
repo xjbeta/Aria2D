@@ -155,12 +155,54 @@ class Preferences: NSObject {
 			defaultsSet(newValue.encode(), forKey: .aria2cOptions)
 		}
 	}
+    
+    private let defaultAria2cOptionsDic = [
+        Aria2Option.autoSaveInterval: 60,
+        Aria2Option.saveSessionInterval: 60,
+        
+        Aria2Option.rpcListenAll: false,
+        Aria2Option.rpcListenPort: 2333,
+        Aria2Option.rpcSecret: "",
+        
+        Aria2Option.dir: "${HOME}/Downloads/Aria2/",
+        Aria2Option.maxConcurrentDownloads: 3,
+        Aria2Option.minSplitSize: "20M",
+        Aria2Option.split: 16,
+        Aria2Option.userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
+        
+        Aria2Option.btTracker: "",
+        Aria2Option.peerAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
+        Aria2Option.seedRatio: 1.0,
+        Aria2Option.seedTime: 120] as [Aria2Option : Any]
+
 
 	func checkPlistFile() {
 		let key = "checkPlistFile"
 		prefs.set(true, forKey: key)
-		assert(prefs.value(forKey: key) != nil, "Can't save value to preference, try to restart your macOS.", file: "124")
+		assert(prefs.value(forKey: key) != nil, "Unable to read and write plist file, try to restart your macOS.", file: "")
 		prefs.removeObject(forKey: key)
+        
+        if var dic = defaults(.aria2OptionsDic) as? [String: Any] {
+            
+            let keys = dic.keys.map { $0 }
+            let defaultKeys = defaultAria2cOptionsDic.keys.map { $0.rawValue }
+            
+            keys.filter {
+                !defaultKeys.contains($0)
+                }.forEach {
+                  dic.removeValue(forKey: $0)
+            }
+            
+            defaultKeys.filter {
+                !keys.contains($0)
+                }.forEach {
+                   dic[$0] = defaultAria2cOptionsDic[Aria2Option(rawValue: $0)]
+            }
+            defaultsSet(dic, forKey: .aria2OptionsDic)
+        } else {
+            defaultsSet(Dictionary(uniqueKeysWithValues:
+                defaultAria2cOptionsDic.map { key, value in (key.rawValue, value) }), forKey: .aria2OptionsDic)
+        }
         
         let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey", "app_baidu_ascending", "app_baidu_sortValue"]
         dropedKeys.forEach {
