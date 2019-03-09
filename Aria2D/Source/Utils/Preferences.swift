@@ -13,12 +13,40 @@ class Preferences: NSObject {
 	static let shared = Preferences()
 	
 	private override init() {
+        var downloadUrl = try? FileManager.default.url(for: .downloadsDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        downloadUrl?.appendPathComponent("Aria2")
+        
+        guard let downloadPath = downloadUrl?.path else {
+            defaultAria2cOptionsDic = [:]
+            assert(false, "Unable to find download folder.", file: "")
+            return
+        }
+        
+        defaultAria2cOptionsDic = [
+            Aria2Option.autoSaveInterval: 60,
+            Aria2Option.saveSessionInterval: 60,
+            
+            Aria2Option.rpcListenAll: false,
+            Aria2Option.rpcListenPort: 2333,
+            Aria2Option.rpcSecret: "",
+            
+            Aria2Option.dir: downloadPath,
+            Aria2Option.maxConcurrentDownloads: 3,
+            Aria2Option.minSplitSize: "20M",
+            Aria2Option.split: 16,
+            Aria2Option.userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
+            
+            Aria2Option.btTracker: "",
+            Aria2Option.peerAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
+            Aria2Option.seedRatio: 1.0,
+            Aria2Option.seedTime: 120]
 	}
 
     let prefs = UserDefaults.standard
 
-	
 	let keys = PreferenceKeys.self
+    
+    private let defaultAria2cOptionsDic: [Aria2Option : Any]
 	
 	private lazy var defaultAria2Servers: Aria2Servers = {
 		let s = Aria2Servers()
@@ -156,25 +184,15 @@ class Preferences: NSObject {
 		}
 	}
     
-    private let defaultAria2cOptionsDic = [
-        Aria2Option.autoSaveInterval: 60,
-        Aria2Option.saveSessionInterval: 60,
-        
-        Aria2Option.rpcListenAll: false,
-        Aria2Option.rpcListenPort: 2333,
-        Aria2Option.rpcSecret: "",
-        
-        Aria2Option.dir: "${HOME}/Downloads/Aria2/",
-        Aria2Option.maxConcurrentDownloads: 3,
-        Aria2Option.minSplitSize: "20M",
-        Aria2Option.split: 16,
-        Aria2Option.userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
-        
-        Aria2Option.btTracker: "",
-        Aria2Option.peerAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
-        Aria2Option.seedRatio: 1.0,
-        Aria2Option.seedTime: 120] as [Aria2Option : Any]
+    var aria2cOptionsDic: [String: Any] {
+        get {
+            return defaults(.aria2OptionsDic) as? [String: Any] ?? [:]
+        }
+    }
 
+    func updateAria2cOptionsDic(_ dic: [String: Any]) {
+        defaultsSet(dic, forKey: .aria2OptionsDic)
+    }
 
 	func checkPlistFile() {
 		let key = "checkPlistFile"
