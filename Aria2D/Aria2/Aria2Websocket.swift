@@ -296,13 +296,13 @@ extension Aria2Websocket: SRWebSocketDelegate {
         if json.contains(markStr) {
             let sIndex = json.indexes(of: "[")
             let eIndex = json.indexes(of: "]")
-            let mIndex = json.indexes(of: markStr).map({$0.encodedOffset})
+            let mIndex = json.indexes(of: markStr).map({$0.utf16Offset(in: json)})
             
             var ranges: [Range<String.Index>] = []
             
             mIndex.forEach { urlIndex in
-                if let tt = sIndex.filter({ $0.encodedOffset > urlIndex }).min(),
-                    let yy = eIndex.filter({ $0.encodedOffset > tt.encodedOffset }).min() {
+                if let tt = sIndex.filter({ $0.utf16Offset(in: json) > urlIndex }).min(),
+                    let yy = eIndex.filter({ $0.utf16Offset(in: json) > tt.utf16Offset(in: json) }).min() {
                     ranges.append(json.index(after: tt) ..< yy)
                 }
             }
@@ -327,8 +327,8 @@ extension Aria2Websocket: SRWebSocketDelegate {
             var ranges: [Range<String.Index>] = []
             
             mIndex.forEach { urlIndex in
-                if let tt = sIndex.filter({ $0.encodedOffset > urlIndex.encodedOffset }).min(),
-                    let yy = eIndex.filter ({ $0.encodedOffset > tt.encodedOffset }).min() {
+                if let tt = sIndex.filter({ $0.utf16Offset(in: json) > urlIndex.utf16Offset(in: json) }).min(),
+                    let yy = eIndex.filter ({ $0.utf16Offset(in: json) > tt.utf16Offset(in: json) }).min() {
                     ranges.append(tt ..< json.index(before: yy))
                 }
             }
