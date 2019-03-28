@@ -18,7 +18,7 @@ class Preferences: NSObject {
         
         guard let downloadPath = downloadUrl?.path else {
             defaultAria2cOptionsDic = [:]
-            assert(false, "Unable to find download folder.", file: "")
+            assert(false, "Unable to find download folder.")
             return
         }
         
@@ -219,7 +219,7 @@ class Preferences: NSObject {
             defaultsSet(dic, forKey: .aria2OptionsDic)
         } else {
             defaultsSet(Dictionary(uniqueKeysWithValues:
-                defaultAria2cOptionsDic.map { key, value in (key.rawValue, value) }), forKey: .aria2OptionsDic)
+                defaultAria2cOptionsDic.map { key, value in (key.rawValue as String, value) }), forKey: .aria2OptionsDic)
         }
         
         let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey", "app_baidu_ascending", "app_baidu_sortValue"]

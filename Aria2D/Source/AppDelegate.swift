@@ -248,7 +248,8 @@ extension AppDelegate: DevMateKitDelegate {
 		#endif
 		//DevMate
         if let url = logUrl {
-            DevMateKit.setupCustomLogFileURLs([url as NSURL])
+            DevMateKit.setupCustomLogFileURLs([url as NSURL,
+                                               NSURL(fileURLWithPath: Aria2.shared.aria2c.logPath)])
         }
         
 		DevMateKit.sendTrackingReport(nil, delegate: self)

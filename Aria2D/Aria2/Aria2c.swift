@@ -29,39 +29,85 @@ class Aria2c: NSObject {
     }()
     
     lazy var logPath: String = {
-        return supportPath.appendingPathComponent("Aria2D.log").path
+        return supportPath.appendingPathComponent("aria2c.log").path
     }()
+    
+    let aria2cProcessName = "Aria2D_aria2c"
+    
+    var aria2cArgs: [String] {
+        get {
+            let confPath = Preferences.shared.aria2cOptions.path(for: .aria2cConf)
+            let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
+            
+            guard FileManager.default.fileExists(atPath: aria2cPath),
+                FileManager.default.isExecutableFile(atPath: aria2cPath),
+                FileManager.default.fileExists(atPath: confPath) else {
+                    
+                    
+                    let t = ""
+                    
+                    
+                    return []
+            }
+            
+            var args = ["--conf-path=\(confPath)"]
+            
+            // save session
+            args.append("--input-file=\(sessionPath)")
+            args.append("--save-session=\(sessionPath)")
+            
+            // log
+            args.append("--log-level=notice")
+            args.append("--log=\(logPath)")
+            
+            let dic = Preferences.shared.aria2cOptionsDic.compactMap { kv -> String? in
+                if let v = kv.value as? String {
+                    if v != "" {
+                        return "--\(kv.key)=\(v)"
+                    } else {
+                        return nil
+                    }
+                } else if let v = kv.value as? Bool {
+                    return "--\(kv.key)=\(v ? "true" : "false")"
+                } else {
+                    return "--\(kv.key)=\(kv.value)"
+                }
+            }.sorted()
+            args.append(contentsOf: dic)
+            
+            args = args.map { s -> String in
+                var str = s
+                if s.contains(" ") {
+                    let i = str.firstIndex(of: "=")!
+                    str.remove(at: i)
+                    str.insert(contentsOf: "='", at: i)
+                    str += "'"
+                }
+                return str
+            }
+            
+            return args
+        }
+    }
     
     func autoStart() {
         guard Preferences.shared.autoStartAria2c else { return }
         Log("Should autoStartAria2c")
         createFiles()
-        aria2cPid().then { pid -> Promise<()> in
-            let lastPID = Preferences.shared.aria2cOptions.lastPID
-            let lastLaunch = Preferences.shared.aria2cOptions.lastLaunch
-            if lastPID != "", pid == lastPID {
-                Log("Aria2 did started, do nothing.")
+        aria2cPid().then { pids -> Promise<()> in
+            switch pids.count {
+            case 0:
+                Log("Aria2c process not found, start aria2c.")
+                return self.startAria2()
+            case 1:
+                Log("Aria2c did started, do nothing.")
                 return Promise.value(())
-            } else if pid == "", lastLaunch != "" {
-                if lastPID == "" {
-                    Log("Should kill test process.")
-                    return self.aria2cPid(lastLaunch.replacingOccurrences(of: " -D", with: "")).then {
-                        self.killProcess($0)
-                        }.then {
-                            self.startAria2()
-                        }
-                } else {
-                    Log("Start aria2c.")
-                    return self.startAria2()
-                }
-            } else if lastPID != "", pid != lastPID {
-                Log("The wrong pid with lastPID.")
-                return self.killLastAria2c().then {
+            case 1...:
+                Log("More than 1 process, kill all and restart.")
+                return self.killAria2c().then {
                     self.startAria2()
                 }
-            } else if pid == "", lastPID == "", lastLaunch == "" {
-                return self.startAria2()
-            } else {
+            default:
                 Log("Unknown aria2c status, do nothing.")
                 return Promise.value(())
             }
@@ -74,8 +120,8 @@ class Aria2c: NSObject {
     
 	func autoClose() {
 		guard !Preferences.shared.autoStartAria2c else { return }
-        killLastAria2c().done {
-            Log("killed last aria2c.")
+        killAria2c().done {
+            Log("killed aria2c.")
             }.catch {
                 Log($0)
         }
@@ -93,8 +139,9 @@ class Aria2c: NSObject {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         if let output = String(data: data, encoding: .utf8) {
             return output.components(separatedBy: "\n").filter({ $0 != "" })
+        } else {
+            return []
         }
-        return []
     }
     
     func checkCustomPath() -> Bool {
@@ -118,12 +165,6 @@ class Aria2c: NSObject {
         }
         return false
     }
-	
-}
-
-
-
-extension Aria2c {
     
 	func createFiles() {
 		guard Preferences.shared.aria2cOptions.selectedAria2cConf == .default🙂 else { return }
@@ -145,55 +186,25 @@ extension Aria2c {
 	
 	
 	// aria2c ...... -D
+    // bash -c 'exec -a Aria2D_aria2c aria2c ...... -D'
+    
 	func startAria2(_ test: Bool = false) -> Promise<Void> {
         return Promise { resolver in
             Preferences.shared.aria2cOptions.resetLastConf()
+            deleteAria2cLogFile()
+            
             let task = Process()
             task.currentDirectoryPath = supportPath.path
-            
+            task.launchPath = "/bin/bash"
+            var args = aria2cArgs
             let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
-            let confPath = Preferences.shared.aria2cOptions.path(for: .aria2cConf)
-            
-            guard FileManager.default.fileExists(atPath: aria2cPath),
-                FileManager.default.fileExists(atPath: confPath) else {
-                    resolver.reject(Aria2ProcessError.configFileMissed)
-                    return
-            }
-            
-            task.launchPath = aria2cPath
-            //            var args = ["--conf-path=\(confPath)", "--log=\(logPath)"]
-            var args = ["--conf-path=\(confPath)"]
+            args.insert(aria2cPath, at: 0)
             args.append("-D")
             
-            if Preferences.shared.aria2cOptions.selectedAria2cConf == .default🙂 {
-                args.append("--input-file=\(sessionPath)")
-                args.append("--save-session=\(sessionPath)")
-            }
-            task.arguments = args
-            args.insert(task.launchPath ?? "", at: 0)
-            let path = args.joined(separator: " ")
-            
+            task.arguments = ["-c", "exec -a \(aria2cProcessName) \(args.joined(separator: " "))"]
+
             task.launch(.promise).done { out, err in
-                if let output = out.text() {
-                    Log(output)
-                    self.aria2cPid(path).done {
-                        Preferences.shared.aria2cOptions.lastLaunch = path
-                        if $0 == "\(task.processIdentifier + 1)" {
-                            Preferences.shared.aria2cOptions.lastPID = $0
-                        } else {
-                            ViewControllersManager.shared.showAria2cAlert(err.text())
-                        }
-                        resolver.fulfill()
-                        }.catch {
-                            resolver.reject($0)
-                    }
-                } else if let error = err.text() {
-                    Log("Get aria2c pid error: \(error)")
-                    resolver.reject(Aria2ProcessError.getPidError)
-                } else {
-                    Log("Get aria2c pid error, can't get error output.")
-                    resolver.reject(Aria2ProcessError.getPidError)
-                }
+                resolver.fulfill(())
                 }.catch {
                     resolver.reject($0)
             }
@@ -201,42 +212,34 @@ extension Aria2c {
 	}
 	
     // pgrep -f "path"
-    func aria2cPid(_ arg: String = "") -> Promise<(String)> {
-        let lastLaunch = arg == "" ? Preferences.shared.aria2cOptions.lastLaunch : arg
+    func aria2cPid() -> Promise<([String])> {
         let task = Process()
         task.launchPath = "/usr/bin/pgrep"
-        task.arguments  = ["-f", "\(lastLaunch)"]
+        task.arguments  = ["\(aria2cProcessName)"]
         
         return Promise { resolver in
             task.launch(.promise).done { out, err in
                 if let output = out.text() {
-                    resolver.fulfill(output.replacingOccurrences(of: "\n", with: ""))
-                } else if let error = err.text() {
-                    Log("Get aria2c pid error: \(error)")
-                    resolver.reject(Aria2ProcessError.getPidError)
+                    resolver.fulfill(output.split(separator: "\n").map(String.init))
                 } else {
-                    Log("Get aria2c pid error, can't get error output.")
-                    resolver.reject(Aria2ProcessError.getPidError)
+                    resolver.fulfill([])
                 }
                 }.catch {
-                    resolver.reject($0)
+                    let err = self.pMKError($0).1
+                    if err != "" {
+                        Log("Get aria2c pid error: \(err)")
+                    }
+                    resolver.fulfill([])
             }
         }
     }
 	
 	// kill -9 "pid"
-	func killLastAria2c() -> Promise<Void> {
-		if Preferences.shared.aria2cOptions.lastPID != "" {
-            return killProcess(Preferences.shared.aria2cOptions.lastPID)
-		} else if Preferences.shared.aria2cOptions.lastLaunch != "" {
-            return aria2cPid(Preferences.shared.aria2cOptions.lastLaunch).then {
-                self.killProcess($0)
-            }
-		} else {
-			return Promise { resolver in
-                resolver.fulfill()
-            }
-		}
+	func killAria2c() -> Promise<Void> {
+        deleteAria2cLogFile()
+        return aria2cPid().then {
+            when(resolved: $0.map( { self.killProcess($0) } )).done { _ in }
+        }
 	}
 	
 	func killProcess(_ pid: String) -> Promise<Void> {
@@ -249,10 +252,34 @@ extension Aria2c {
                 Log(descriptor)
                 resolver.reject(Aria2ProcessError.killProcessError)
             } else {
-                resolver.fulfill()
+                resolver.fulfill(())
             }
         }
 	}
+    
+    func deleteAria2cLogFile() {
+        if FileManager.default.fileExists(atPath: logPath) {
+            do {
+                try FileManager.default.removeItem(atPath: logPath)
+            } catch let err {
+                Log("Delete aria2c log file error: \(err)")
+            }
+        }
+    }
+    
+    func pMKError(_ err: Error) -> (String, String) {
+        guard let error = err as? Process.PMKError else {
+            assert(false, "The wrong process error type.")
+            return ("", "")
+        }
+        switch error {
+        case .notExecutable:
+            Log("Get process error: notExecutable.")
+        case .execution(process: _, standardOutput: let out, standardError: let err):
+            return (out ?? "", err ?? "")
+        }
+        return ("", "")
+    }
 }
 
 enum Aria2ProcessError: Error {

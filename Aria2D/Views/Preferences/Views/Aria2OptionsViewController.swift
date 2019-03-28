@@ -10,6 +10,8 @@ import Cocoa
 
 class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     
+// MARK: - Aria2 paths And save interval
+
     @IBOutlet var aria2cPathPopUpButton: NSPopUpButton!
     @IBOutlet weak var aria2cStatusImageView: NSImageView!
     @IBAction func showAria2cInFinder(_ sender: Any) {
@@ -62,6 +64,33 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
             }
         }
     }
+    @IBOutlet weak var dirPopUpButton: NSPopUpButton!
+    @IBOutlet weak var dirMenuItem: NSMenuItem!
+    
+    @IBAction func showDirInFinder(_ sender: Any) {
+        if let dir = Preferences.shared.aria2cOptionsDic["dir"] as? String {
+            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: dir)])
+        }
+    }
+    
+    lazy var selectDirPanel = NSOpenPanel()
+    @IBAction func selectDir(_ sender: Any) {
+        selectDirPanel.prompt = "Select"
+        selectDirPanel.canChooseFiles = false
+        selectDirPanel.canChooseDirectories = true
+        selectDirPanel.allowsMultipleSelection = false
+        
+        if let window = view.window {
+            selectConfPanel.beginSheetModal(for: window) { result in
+                if result == .OK, let url = self.selectConfPanel.url {
+                    var dic = Preferences.shared.aria2cOptionsDic
+                    dic["dir"] = url.path
+                    Preferences.shared.updateAria2cOptionsDic(dic)
+                }
+//                self.initConfMenu()
+            }
+        }
+    }
     
     @objc var autoStartAria2c: Bool {
         get {
@@ -100,11 +129,11 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     }
     
     func initConfsView() {
-        aria2cConfsGridView.subviews.forEach {
-            if let control = $0 as? NSControl {
-                control.isEnabled = autoStartAria2c
-            }
-        }
+//        aria2cConfsGridView.subviews.forEach {
+//            if let control = $0 as? NSControl {
+//                control.isEnabled = autoStartAria2c
+//            }
+//        }
     }
     
     
@@ -142,20 +171,33 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         let options = Preferences.shared.aria2cOptions
         let index = options.selectedIndex(.aria2cConf)
         let path = Preferences.shared.aria2cOptions.customAria2cConf
-        if let button = aria2cConfPathPopUpButton {
-            if index == 1 {
-                if button.itemArray.count == 5 {
-                    button.item(at: 1)?.title = path
-                } else if button.itemArray.count == 4 {
-                    button.insertItem(withTitle: path, at: 1)
-                }
+        guard let button = aria2cConfPathPopUpButton else {
+            return
+        }
+        
+        if index == 1 {
+            if button.itemArray.count == 5 {
+                button.item(at: 1)?.title = path
+            } else if button.itemArray.count == 4 {
+                button.insertItem(withTitle: path, at: 1)
             }
-            DispatchQueue.main.async {
-                button.selectItem(at: index)
-            }
+        }
+        DispatchQueue.main.async {
+            button.selectItem(at: index)
         }
     }
     
+    func initDirMenu() {
+        guard let dir = Preferences.shared.aria2cOptionsDic["dir"] as? String else {
+            return
+        }
+        
+        let image = NSWorkspace.shared.icon(forFile: dir)
+        image.size = NSSize(width: 16, height: 16)
+        dirMenuItem.image = image
+        dirMenuItem.title = dir.lastPathComponent
+        dirPopUpButton.selectItem(at: 0)
+    }
 }
 
 extension Aria2OptionsViewController: NSOpenSavePanelDelegate {
