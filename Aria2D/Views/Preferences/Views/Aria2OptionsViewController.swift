@@ -81,13 +81,13 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         selectDirPanel.allowsMultipleSelection = false
         
         if let window = view.window {
-            selectConfPanel.beginSheetModal(for: window) { result in
-                if result == .OK, let url = self.selectConfPanel.url {
+            selectDirPanel.beginSheetModal(for: window) { result in
+                if result == .OK, let url = self.selectDirPanel.url {
                     var dic = Preferences.shared.aria2cOptionsDic
                     dic["dir"] = url.path
                     Preferences.shared.updateAria2cOptionsDic(dic)
                 }
-//                self.initConfMenu()
+                self.initDirMenu()
             }
         }
     }
@@ -106,6 +106,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         super.viewDidLoad()
         initPathMenu()
         initConfMenu()
+        initDirMenu()
         initConfsView()
     }
     
@@ -125,6 +126,8 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
             default:
                 initConfMenu()
             }
+        } else if menu == dirPopUpButton.menu {
+            initDirMenu()
         }
     }
     
@@ -188,7 +191,11 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     }
     
     func initDirMenu() {
+        DispatchQueue.main.async {
+            self.dirPopUpButton.selectItem(at: 0)
+        }
         guard let dir = Preferences.shared.aria2cOptionsDic["dir"] as? String else {
+            dirMenuItem.title = "Unknown"
             return
         }
         
@@ -196,7 +203,6 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         image.size = NSSize(width: 16, height: 16)
         dirMenuItem.image = image
         dirMenuItem.title = dir.lastPathComponent
-        dirPopUpButton.selectItem(at: 0)
     }
 }
 

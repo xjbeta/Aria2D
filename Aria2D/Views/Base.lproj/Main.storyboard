@@ -562,6 +562,9 @@
                                                                                         </connections>
                                                                                     </menuItem>
                                                                                 </items>
+                                                                                <connections>
+                                                                                    <outlet property="delegate" destination="sV5-KT-6dJ" id="RuM-5t-Ohc"/>
+                                                                                </connections>
                                                                             </menu>
                                                                         </popUpButtonCell>
                                                                     </popUpButton>
