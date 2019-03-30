@@ -875,12 +875,12 @@
             </objects>
             <point key="canvasLocation" x="2129" y="846"/>
         </scene>
-        <!--Aria 2c Process Status View Controller-->
+        <!--Aria2c Process Status View Controller-->
         <scene sceneID="aax-ep-Bmh">
             <objects>
-                <viewController id="HzE-bh-PMB" customClass="Aria2cProcessStatusViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HzE-bh-PMB" userLabel="Aria2c Process Status View Controller" customClass="Aria2cProcessStatusViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="emv-yI-YmR">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="460" height="311"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CSk-Cp-haL">
@@ -897,7 +897,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="czz-zd-xHD">
-                                <rect key="frame" x="351" y="13" width="85" height="32"/>
+                                <rect key="frame" x="361" y="13" width="85" height="32"/>
                                 <buttonCell key="cell" type="push" title="Launch" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5WI-hd-wQI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -910,24 +910,27 @@ DQ
                                 </connections>
                             </button>
                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="DdA-pc-Sfl">
-                                <rect key="frame" x="333" y="23" width="16" height="16"/>
+                                <rect key="frame" x="343" y="23" width="16" height="16"/>
                             </progressIndicator>
-                            <gridView fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="5" columnSpacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5Yn-jE-UqT">
-                                <rect key="frame" x="20" y="88" width="402" height="192"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="5" columnSpacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5Yn-jE-UqT">
+                                <rect key="frame" x="20" y="61" width="420" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="420" id="bHK-Fp-tsa"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="230" id="mIK-LQ-HBM"/>
+                                </constraints>
                                 <rows>
-                                    <gridRow yPlacement="fill" id="yIi-ib-rNF"/>
-                                    <gridRow id="BK2-vE-NM5"/>
-                                    <gridRow height="148" id="w2d-eg-PqC"/>
+                                    <gridRow yPlacement="fill" height="17" id="yIi-ib-rNF"/>
+                                    <gridRow height="17" id="BK2-vE-NM5"/>
+                                    <gridRow id="w2d-eg-PqC"/>
                                 </rows>
                                 <columns>
                                     <gridColumn width="120" id="05C-Xl-8nA"/>
-                                    <gridColumn width="267" id="TWi-9Q-jxf"/>
+                                    <gridColumn id="TWi-9Q-jxf"/>
                                 </columns>
                                 <gridCells>
                                     <gridCell row="yIi-ib-rNF" column="05C-Xl-8nA" id="ZmY-VG-CuU">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xWR-Eq-QWV">
-                                            <rect key="frame" x="-2" y="175" width="99" height="17"/>
+                                            <rect key="frame" x="-2" y="213" width="99" height="17"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Process Status:" id="pTC-fN-VBi">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -937,7 +940,7 @@ DQ
                                     </gridCell>
                                     <gridCell row="yIi-ib-rNF" column="TWi-9Q-jxf" id="eyf-6b-sxY">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9uv-2E-PD7">
-                                            <rect key="frame" x="133" y="175" width="48" height="17"/>
+                                            <rect key="frame" x="133" y="213" width="48" height="17"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="started" id="0aQ-DV-8MH">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -947,7 +950,7 @@ DQ
                                     </gridCell>
                                     <gridCell row="BK2-vE-NM5" column="05C-Xl-8nA" id="aBg-gm-B4Q">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eRc-4Q-aZ2">
-                                            <rect key="frame" x="-2" y="153" width="29" height="17"/>
+                                            <rect key="frame" x="-2" y="191" width="29" height="17"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="PID:" id="qE9-ZO-iXd">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -957,7 +960,7 @@ DQ
                                     </gridCell>
                                     <gridCell row="BK2-vE-NM5" column="TWi-9Q-jxf" id="52W-RK-dk4">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tob-gu-SQi">
-                                            <rect key="frame" x="133" y="153" width="43" height="17"/>
+                                            <rect key="frame" x="133" y="191" width="43" height="17"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="10000" id="CdH-Ss-lE5">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -967,7 +970,7 @@ DQ
                                     </gridCell>
                                     <gridCell row="w2d-eg-PqC" column="05C-Xl-8nA" id="w3B-BR-Ca9">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EQn-P6-KBD">
-                                            <rect key="frame" x="-2" y="131" width="118" height="17"/>
+                                            <rect key="frame" x="-2" y="169" width="118" height="17"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Launch Command:" id="Kbk-83-jhl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -977,18 +980,18 @@ DQ
                                     </gridCell>
                                     <gridCell row="w2d-eg-PqC" column="TWi-9Q-jxf" xPlacement="fill" yPlacement="fill" id="zRt-oj-8ee">
                                         <scrollView key="contentView" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scf-Su-sPP">
-                                            <rect key="frame" x="135" y="0.0" width="267" height="148"/>
+                                            <rect key="frame" x="135" y="0.0" width="285" height="186"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="D3M-Ig-qS1">
-                                                <rect key="frame" x="0.0" y="0.0" width="267" height="148"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="285" height="186"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="7I6-fe-kUh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="267" height="148"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="186"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="267" height="148"/>
-                                                        <size key="maxSize" width="267" height="10000000"/>
+                                                        <size key="minSize" width="285" height="186"/>
+                                                        <size key="maxSize" width="319" height="10000000"/>
                                                         <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     </textView>
                                                 </subviews>
@@ -998,7 +1001,7 @@ DQ
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="fIg-07-Cdl">
-                                                <rect key="frame" x="251" y="0.0" width="16" height="148"/>
+                                                <rect key="frame" x="269" y="0.0" width="16" height="186"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
@@ -1008,9 +1011,13 @@ DQ
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="CSk-Cp-haL" secondAttribute="bottom" constant="20" id="I2m-NC-cLG"/>
+                            <constraint firstItem="5Yn-jE-UqT" firstAttribute="top" secondItem="emv-yI-YmR" secondAttribute="top" constant="20" id="Mag-sk-57A"/>
                             <constraint firstItem="CSk-Cp-haL" firstAttribute="leading" secondItem="emv-yI-YmR" secondAttribute="leading" constant="20" id="NLe-7l-rxn"/>
                             <constraint firstAttribute="trailing" secondItem="czz-zd-xHD" secondAttribute="trailing" constant="20" id="PuL-vc-GzZ"/>
+                            <constraint firstAttribute="trailing" secondItem="5Yn-jE-UqT" secondAttribute="trailing" constant="20" id="RMW-F1-ybM"/>
                             <constraint firstItem="DdA-pc-Sfl" firstAttribute="centerY" secondItem="czz-zd-xHD" secondAttribute="centerY" id="Zlv-N1-Ks3"/>
+                            <constraint firstItem="CSk-Cp-haL" firstAttribute="top" secondItem="5Yn-jE-UqT" secondAttribute="bottom" constant="20" id="hcs-Id-Wvh"/>
+                            <constraint firstItem="5Yn-jE-UqT" firstAttribute="leading" secondItem="emv-yI-YmR" secondAttribute="leading" constant="20" id="mhF-OW-qYl"/>
                             <constraint firstItem="czz-zd-xHD" firstAttribute="leading" secondItem="DdA-pc-Sfl" secondAttribute="trailing" constant="8" id="pbr-bG-aFN"/>
                             <constraint firstItem="czz-zd-xHD" firstAttribute="width" secondItem="CSk-Cp-haL" secondAttribute="width" id="qVx-gB-hEe"/>
                             <constraint firstAttribute="bottom" secondItem="czz-zd-xHD" secondAttribute="bottom" constant="20" id="xWU-sX-bPo"/>
@@ -1027,7 +1034,7 @@ DQ
                 </viewController>
                 <customObject id="5Cd-fn-yDu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2880" y="846"/>
+            <point key="canvasLocation" x="2880" y="845.5"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="W7e-3s-i8P">
