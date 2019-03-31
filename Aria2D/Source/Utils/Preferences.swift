@@ -190,6 +190,27 @@ class Preferences: NSObject {
         }
     }
 
+    var trackersUrlTypes: [String] {
+        get {
+            return defaults(.trackersUrlTypes) as? [String] ?? [Aria2cTrackerListViewController.TrackersUrlType.http,
+            Aria2cTrackerListViewController.TrackersUrlType.https,
+            Aria2cTrackerListViewController.TrackersUrlType.udp,
+            Aria2cTrackerListViewController.TrackersUrlType.ws].map { $0.rawValue }
+        }
+        set {
+            defaultsSet(newValue, forKey: .trackersUrlTypes)
+        }
+    }
+    
+    var trackersType: String {
+        get {
+            return defaults(.trackersType) as? String ?? Aria2cTrackerListViewController.TrackersType.domains.rawValue
+        }
+        set {
+            defaultsSet(newValue, forKey: .trackersType)
+        }
+    }
+    
     func updateAria2cOptionsDic(_ dic: [String: Any]) {
         defaultsSet(dic, forKey: .aria2OptionsDic)
     }

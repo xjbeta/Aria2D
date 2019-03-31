@@ -82,6 +82,7 @@
 		01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350B212871F700E5C88C /* Aria2Methods.swift */; };
 		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
+		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
 		01E9068B219BF70900928580 /* Aria2D.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E90689219BF70800928580 /* Aria2D.xcdatamodeld */; };
@@ -211,6 +212,7 @@
 		01A53518212943F500E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		01A5351C2129512000E5C88C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
 		01E9068A219BF70800928580 /* Aria2D.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aria2D.xcdatamodel; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */,
 				01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */,
 				01391640224611C700233836 /* Aria2cLogViewController.swift */,
+				01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */,
 				011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */,
 				011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */,
 			);
@@ -665,6 +668,7 @@
 				018E89641D34FFCC000C71B0 /* EnumList.swift in Sources */,
 				018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */,
 				012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */,
+				01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */,
 				010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
 				012B57302159267400D1AC03 /* FileNode.swift in Sources */,

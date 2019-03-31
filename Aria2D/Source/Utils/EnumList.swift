@@ -38,6 +38,8 @@ enum PreferenceKeys: String {
 	case optimizeConcurrentDownloads = "--optimize-concurrent-downloads"
 	
     case aria2OptionsDic = "aria2cOptionsDictionary"
+    case trackersUrlTypes = "trackersListTypes"
+    case trackersType = "trackersType"
     
     // deprecated
     case restartAria2c = "aria2c_restartAria2c"
