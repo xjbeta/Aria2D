@@ -42,6 +42,8 @@
 		01391641224611C700233836 /* Aria2cLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01391640224611C700233836 /* Aria2cLogViewController.swift */; };
 		013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */; };
 		013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9F1E51B305008D370D /* SetServersViewController.swift */; };
+		013EF1602258557600E4D7D8 /* InstallationMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */; };
+		013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */; };
 		01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; };
 		01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0147489621567406005014D3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0147488921566FBB005014D3 /* PromiseKit.framework */; };
@@ -169,6 +171,8 @@
 		01391640224611C700233836 /* Aria2cLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cLogViewController.swift; sourceTree = "<group>"; };
 		013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListArrayController.swift; sourceTree = "<group>"; };
 		013ABB9F1E51B305008D370D /* SetServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetServersViewController.swift; sourceTree = "<group>"; };
+		013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationMethodViewController.swift; sourceTree = "<group>"; };
+		013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "DMG File Installation Guide.pdf"; sourceTree = "<group>"; };
 		0147488921566FBB005014D3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		01474892215673C6005014D3 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
 		0147EDBD1D21FAD800FB4324 /* Aria2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -310,6 +314,14 @@
 			path = StatusView;
 			sourceTree = "<group>";
 		};
+		013EF15E2258551C00E4D7D8 /* InstallAria2cGuide */ = {
+			isa = PBXGroup;
+			children = (
+				013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */,
+			);
+			path = InstallAria2cGuide;
+			sourceTree = "<group>";
+		};
 		0147EDB41D21FAD800FB4324 = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +353,7 @@
 				0182E60C1EAEE90000E08454 /* Log */,
 				016FDC781E7B9BD600E01B35 /* InfoView */,
 				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
+				013EF15E2258551C00E4D7D8 /* InstallAria2cGuide */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -432,6 +445,7 @@
 			children = (
 				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
+				013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */,
 				0147EDC91D21FAD800FB4324 /* Info.plist */,
 				01A5351D2129512000E5C88C /* Localizable.strings */,
 			);
@@ -604,6 +618,7 @@
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
+				013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +720,7 @@
 				018E89701D350075000C71B0 /* Preferences.swift in Sources */,
 				01E906B2219C518B00928580 /* Aria2Bittorrent+CoreDataProperties.swift in Sources */,
 				01E906C8219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift in Sources */,
+				013EF1602258557600E4D7D8 /* InstallationMethodViewController.swift in Sources */,
 				011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */,
 				018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
