@@ -37,7 +37,6 @@ class Aria2cProcessStatusViewController: NSViewController {
             }.done {
                 if action == "Start" {
                     Aria2.shared.aria2c.aria2cPid().done(on: .main) {
-                        print($0.count)
                         if $0.count != 1 {
                             self.performSegue(withIdentifier: .showAria2cLog, sender: self)
                         }
