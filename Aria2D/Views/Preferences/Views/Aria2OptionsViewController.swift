@@ -147,7 +147,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         aria2cStatusImageView.image = Aria2.shared.aria2c.checkCustomPath() ? NSImage(named: "NSStatusAvailable") : NSImage(named: "NSStatusUnavailable")
         
         if let menu = aria2cPathPopUpButton.menu {
-            while menu.items.count > 3 {
+            while menu.items.count > 5 {
                 aria2cPathPopUpButton.menu?.removeItem(at: 0)
             }
             
