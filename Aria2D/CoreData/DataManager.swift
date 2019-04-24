@@ -23,6 +23,17 @@ class DataManager: NSObject {
         saveContext()
     }
     
+    func cleanUpLogs() {
+        let fetchRequest: NSFetchRequest<WebSocketLog> = WebSocketLog.fetchRequest()
+        let oneDayAgo = Int(Date().timeIntervalSince1970) - 60 * 60 * 8
+        fetchRequest.predicate = NSPredicate(format: "date < %i", oneDayAgo)
+        let fetch = try? context.fetch(fetchRequest)
+        fetch?.forEach {
+            context.delete($0)
+        }
+        saveContext()
+    }
+    
     let appDelegate = (NSApp.delegate as! AppDelegate)
     let context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -165,7 +176,6 @@ class DataManager: NSObject {
         fetchRequest.predicate = NSPredicate(format: "status IN %@", [Status.active.rawValue])
         return try context.count(for: fetchRequest)
     }
-    
     
     func deleteLogs() {
         let fetchRequest: NSFetchRequest<WebSocketLog> = WebSocketLog.fetchRequest()

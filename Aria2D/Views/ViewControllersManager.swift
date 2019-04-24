@@ -22,6 +22,10 @@ class ViewControllersManager: NSObject {
         NotificationCenter.default.post(name: .newTask, object: nil, userInfo: ["file": file])
     }
     
+    func openUrl(_ url: String) {
+        NotificationCenter.default.post(name: .newTask, object: nil, userInfo: ["url": url])
+    }
+    
 	// MainWindow HUD
 	func showHUD(_ message: hudMessage) {
 		NotificationCenter.default.post(name: .showHUD, object: nil, userInfo: ["message": message])
@@ -58,35 +62,13 @@ class ViewControllersManager: NSObject {
 		*/
 	}
 	
-	
-	
-	// LeftSourceList Indicator
-	private var waitingCount = 0
-	
-	var updateIndicator: (() -> Void)?
-	
-	var waiting: Bool {
-		get {
-			return waitingCount > 0
-		}
-		set {
-			if newValue {
-				waitingCount += 1
-			} else if waitingCount > 0 {
-				waitingCount -= 1
-			}
-			updateIndicator?()
-		}
-	}
-	
-	
     // LeftSourceList
     var selectedRow: SidebarItem = .none {
         didSet {
             selectedObjects = [Aria2Object]()
             switch selectedRow {
             case .downloading, .removed, .completed:
-                Aria2.shared.initAllData()
+                Aria2.shared.initData.run()
             default:
                 break
             }
@@ -201,7 +183,7 @@ class ViewControllersManager: NSObject {
 	func refresh() {
 		switch selectedRow {
 		case .downloading, .completed, .removed:
-			Aria2.shared.initAllData()
+			Aria2.shared.initData.run()
 		default:
 			break
 		}

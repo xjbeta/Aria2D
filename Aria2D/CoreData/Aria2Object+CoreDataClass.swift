@@ -17,13 +17,19 @@ public class Aria2Object: NSManagedObject, Decodable {
     var waitTimer: WaitTimer?
     var timerLimit = 0
     
+    var nameSaved: String?
     @objc dynamic var name: String {
-        if let name = bittorrent?.name,
+        if let name = nameSaved {
+            return name
+        } else if let name = bittorrent?.name,
             name != "" {
+            nameSaved = name
             return name
         } else if let files = files?.allObjects as? [Aria2File],
             files.count == 1, let path = files.first?.path, path != "" {
-            return URL(fileURLWithPath: path).lastPathComponent
+            let name = URL(fileURLWithPath: path).lastPathComponent
+            nameSaved = name
+            return name
         } else {
             if waitTimer == nil {
                 Log("Init file name timer for \(gid)")

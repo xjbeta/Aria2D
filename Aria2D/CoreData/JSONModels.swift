@@ -65,6 +65,33 @@ struct Aria2Status: Decodable {
 	}
 }
 
+struct Aria2GlobalStat: Decodable {
+    let downloadSpeed: Int64
+    let uploadSpeed: Int64
+    let numActive: Int
+    let numStopped: Int
+    let numWaiting: Int
+    let numStoppedTotal: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case downloadSpeed,
+        uploadSpeed,
+        numActive,
+        numStopped,
+        numWaiting,
+        numStoppedTotal
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        downloadSpeed = Int64(try values.decode(String.self, forKey: .downloadSpeed)) ?? 0
+        uploadSpeed = Int64(try values.decode(String.self, forKey: .uploadSpeed)) ?? 0
+        numActive = Int(try values.decode(String.self, forKey: .numActive)) ?? 0
+        numStopped = Int(try values.decode(String.self, forKey: .numStopped)) ?? 0
+        numWaiting = Int(try values.decode(String.self, forKey: .numWaiting)) ?? 0
+        numStoppedTotal = Int(try values.decode(String.self, forKey: .numStoppedTotal)) ?? 0
+    }
+}
 
 struct ErrorResult: Decodable {
 	let code: Int

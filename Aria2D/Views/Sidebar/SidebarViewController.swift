@@ -12,54 +12,58 @@ class SidebarViewController: NSViewController {
 	
     @IBOutlet var sidebarTableView: SidebarTableView!
 	
-	@IBOutlet var progressIndicator: NSProgressIndicator!
+    @IBOutlet weak var arrayController: NSArrayController!
+    @IBOutlet weak var downloadSpeed: NSTextField!
+    @IBOutlet weak var uploadSpeed: NSTextField!
+    @IBOutlet weak var globalSpeedView: NSStackView!
+    var observe: NSKeyValueObservation?
+    @objc var predicate = NSPredicate(format: "status IN %@", [Status.active.rawValue])
+    @objc var context: NSManagedObjectContext
+    
+    var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
-	var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
-	
-    var newTaskViewFile = ""
+    var newTaskPreparedInfo = [String: String]()
+    
+    required init?(coder: NSCoder) {
+        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+        super.init(coder: coder)
+    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		initIndicator()
 		initNotification()
-//        ViewControllersManager.shared.selectedRow = .downloading
 		resetSidebarItems()
+        
+        observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
+            guard let objs = arrayController.arrangedObjects as? [Aria2Object],
+                Aria2Websocket.shared.isConnected else {
+                    self?.globalSpeedView.isHidden = true
+                    return
+            }
+            
+            self?.globalSpeedView.isHidden = objs.count == 0
+        }
 	}
-	
-	
-	func initIndicator() {
-		progressIndicator.isHidden = !ViewControllersManager.shared.waiting
-		progressIndicator.startAnimation(self)
-		ViewControllersManager.shared.updateIndicator = {
-			DispatchQueue.main.async {
-				self.progressIndicator.isHidden = !ViewControllersManager.shared.waiting
-			}
-		}
-	}
-	
-	
-
 	
 	func initNotification() {
         NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: String], let file = userInfo["file"] {
-                self.newTaskViewFile = file
+            if let userInfo = $0.userInfo as? [String: String] {
+                self.newTaskPreparedInfo = userInfo
             }
             self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
         }
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
-        
 		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .developerModeChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGlobalStat), name: .updateGlobalStat, object: nil)
 	}
-	
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let vc = segue.destinationController as? NewTaskViewController {
-            if newTaskViewFile != "" {
-                vc.fileURL = URL(fileURLWithPath: newTaskViewFile)
+            if newTaskPreparedInfo.count == 1 {
+                vc.preparedInfo = newTaskPreparedInfo
             }
-            newTaskViewFile = ""
+            newTaskPreparedInfo.removeAll()
         }
     }
 	
@@ -106,15 +110,44 @@ class SidebarViewController: NSViewController {
         performSegue(withIdentifier: .showNewTaskViewController, sender: self)
 	}
 	
-
+    @objc func updateGlobalStat(notification: NSNotification) {
+        globalSpeedView.isHidden = !Preferences.shared.showGlobalSpeed
+        guard Preferences.shared.showGlobalSpeed else {
+            return
+        }
+        guard let userInfo = notification.userInfo else { return }
+        
+        if let updateServer = userInfo["updateServer"] as? Bool, updateServer {
+            let isConnected = Aria2Websocket.shared.isConnected
+            globalSpeedView.isHidden = !isConnected
+            
+            if isConnected,
+                let activeCount = try? DataManager.shared.activeCount(),
+                activeCount == 0 {
+                globalSpeedView.isHidden = true
+            }
+        }
+        
+        guard let globalStat = userInfo["globalStat"] as? Aria2GlobalStat else { return }
+        
+        if globalStat.numActive > 0 {
+            downloadSpeed.stringValue = "⬇︎ \(globalStat.downloadSpeed.ByteFileFormatter())/s"
+        } else {
+            globalSpeedView.isHidden = true
+        }
+        
+        if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
+            activeBittorrentCount > 0 {
+            uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
+        } else {
+            uploadSpeed.stringValue = ""
+        }
+    }
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
+        observe?.invalidate()
 	}
-	
-
-	
-	
 }
 
 extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
@@ -148,7 +181,5 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 		NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
 	}
 	
-	
-
 }
 

@@ -15,9 +15,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     lazy var logUrl: URL? = {
         do {
-            let documentDirectoryPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let log = documentDirectoryPath.appendingPathComponent("Aria2D").appendingPathComponent("Aria2D.log")
-            return log
+            var logPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            logPath.appendPathComponent(Bundle.main.bundleIdentifier!)
+            var isDir = ObjCBool(false)
+            if !FileManager.default.fileExists(atPath: logPath.path, isDirectory: &isDir) {
+                try FileManager.default.createDirectory(at: logPath, withIntermediateDirectories: true, attributes: nil)
+            }
+            guard let appName = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
+                return nil
+            }
+            logPath.appendPathComponent("\(appName).log")
+            return logPath
         } catch let error {
             Log(error)
             return nil
@@ -25,19 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        if let url = logUrl {
-            try? FileManager.default.removeItem(at: url)
-        }
-        do {
-            var url = try FileManager.default.url(for: .applicationSupportDirectory , in: .userDomainMask, appropriateFor: nil, create: true)
-            url.appendPathComponent(Bundle.main.bundleIdentifier!)
-            try FileManager.default.removeItem(atPath: url.path + "/default.realm")
-            try FileManager.default.removeItem(atPath: url.path + "/default.realm.lock")
-            try FileManager.default.removeItem(atPath: url.path + "/default.realm.management")
-        } catch let error {
-            Log("Clear realm files error: \(error)")
-        }
-        
+        deleteUselessFiles()
         
         Log("App will finish launching")
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -48,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             try DataManager.shared.initAria2List()
             DataManager.shared.deleteAllAria2Objects()
+            DataManager.shared.cleanUpLogs()
         } catch let error {
             assert(false, "Can't init Aria2List in Core Data: \(error)")
         }
@@ -69,6 +66,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let sb = NSStoryboard(name: "Main", bundle: nil)
         mainWindowController = sb.instantiateController(withIdentifier: "MainWindowController") as? MainWindowController
         mainWindowController.showWindow(self)
+        
+        // register for url event
+        Preferences.shared.setLaunchServer()
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+        
         self.setDevMate()
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
@@ -106,6 +108,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //Occlusion
             Aria2Websocket.shared.suspendTimer()
         }
+    }
+    
+    @objc func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+        guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
+        Log("URL event: \(url)")
+        ViewControllersManager.shared.openUrl(url)
+    }
+    
+    func deleteUselessFiles() {
+        if let url = logUrl {
+            try? FileManager.default.removeItem(at: url)
+        }
+        if var url = try? FileManager.default.url(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask,
+                                                 appropriateFor: nil,
+                                                 create: true) {
+            // Remove Old Log
+            var logPath = url
+            logPath.appendPathComponent("Aria2D")
+            logPath.appendPathComponent("Aria2D.log")
+            try? FileManager.default.removeItem(atPath: logPath.path)
+            
+            // Remove Old Realm Files
+            url.appendPathComponent(Bundle.main.bundleIdentifier!)
+            try? FileManager.default.removeItem(atPath: url.path + "/default.realm")
+            try? FileManager.default.removeItem(atPath: url.path + "/default.realm.lock")
+            try? FileManager.default.removeItem(atPath: url.path + "/default.realm.management")
+        }
+        
+        UserDefaults.standard.removeObject(forKey: PreferenceKeys.restartAria2c.rawValue)
     }
     
     // MARK: - Core Data stack
@@ -222,12 +254,6 @@ extension AppDelegate: DevMateKitDelegate {
 		DevMateKit.sendTrackingReport(nil, delegate: self)
 		
         DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
-        
-        
-		if !string_check(nil).boolValue {
-			DevMateKit.setupTimeTrial(self, withTimeInterval: kDMTrialWeek)
-		}
-		NotificationCenter.default.addObserver(self, selector: #selector(activateApp), name: .activateApp, object: nil)
 		
 	}
 	
@@ -235,52 +261,4 @@ extension AppDelegate: DevMateKitDelegate {
         return mainWindowController.window!
 	}
 	
-    @objc func activationController(_ controller: DMActivationController, parentWindowFor mode: DMActivationMode) -> NSWindow? {
-		return mainWindowController.window
-	}
-    
-    @objc private func activationController(_ controller: DMActivationController!, shouldShowDialogFor reason: DMShowDialogReason, withAdditionalInfo additionalInfo: [AnyHashable : Any]!, proposedActivationMode ioProposedMode: UnsafeMutablePointer<DMActivationMode>!, completionHandlerSetter handlerSetter: ((DMCompletionHandler?) -> Void)!) -> Bool {
-        ioProposedMode.pointee = .sheet
-        handlerSetter { _ in
-            ViewControllersManager.shared.showAria2cAlert()
-        }
-        return true
-    }
-	
-	@objc func activateApp() {
-		// Swift does't work with macros, so check our Examples project on GitHub (https://github.com/DevMate/DevMateKit)
-		// to see how to create _my_secret_activation_check variable
-		if !string_check(nil).boolValue {
-			DevMateKit.runActivationDialog(self, in: .sheet)
-		} else if let window = mainWindowController.window,
-            let license = string_info()?.takeUnretainedValue() as? [String: AnyObject] {
-			
-			let licenseAlert = NSAlert()
-			licenseAlert.messageText = NSLocalizedString("licenseInfo.messageText", comment: "")
-            
-			licenseAlert.informativeText = "This product is licensed to:\n    email: \(license["email"] as? String ?? "")\n    activation id: \(license["activation_number"] as? String ?? "")"
-            
-			licenseAlert.addButton(withTitle: NSLocalizedString("licenseInfo.okButton", comment: ""))
-			licenseAlert.addButton(withTitle: NSLocalizedString("licenseInfo.invalidateButton", comment: ""))
-			
-            
-            let warningAlert = NSAlert()
-            warningAlert.alertStyle = .critical
-            warningAlert.messageText = NSLocalizedString("licenseInfo.invalidateButton", comment: "")
-            warningAlert.informativeText = NSLocalizedString("licenseInfo.informativeText", comment: "")
-            warningAlert.addButton(withTitle: NSLocalizedString("licenseInfo.okButton", comment: ""))
-            warningAlert.addButton(withTitle: NSLocalizedString("licenseInfo.cancelButton", comment: ""))
-            
-			DispatchQueue.main.async {
-				licenseAlert.beginSheetModal(for: window) {
-					if $0 == .alertSecondButtonReturn {
-                        let response = warningAlert.runModal()
-                        if response == .alertFirstButtonReturn {
-                            InvalidateAppLicense()
-                        }
-					}
-				}
-			}
-		}
-	}
 }

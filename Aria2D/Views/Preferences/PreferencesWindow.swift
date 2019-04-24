@@ -15,8 +15,11 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
         window?.titlebarAppearsTransparent = true
         window?.isMovableByWindowBackground = true
         window?.titleVisibility = .hidden
-        if let preferencesTabViewController = contentViewController as? PreferencesTabViewController {
-            preferencesTabViewController.autoResizeWindow(preferencesTabViewController.tabView.selectedTabViewItem, animate: false)
+        if let preferencesTabVC = contentViewController as? PreferencesTabViewController {
+            preferencesTabVC.autoResizeWindow(preferencesTabVC.tabView.selectedTabViewItem, animate: false)
+            preferencesTabVC.tabViewItems.filter {
+                $0.label == "Aria2Options"
+            }.first?.image = NSWorkspace.shared.icon(forFile: "/usr/bin/cd")
         }
     }
 }

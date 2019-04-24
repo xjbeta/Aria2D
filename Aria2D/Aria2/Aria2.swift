@@ -15,33 +15,29 @@ class Aria2: NSObject {
 	fileprivate override init() {
 	}
 	
-	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
-		Aria2.shared.initAllData()
-	}
-	
+    let initData = WaitTimer(timeOut: .milliseconds(150)) {
+        Aria2.shared.initAllData()
+    }
+
+    let sortData = WaitTimer(timeOut: .milliseconds(150)) {
+        Aria2.shared.sortAllData()
+    }
+    
     let aria2c = Aria2c()
     
     let context = DataManager.shared.context
     
-    func initAllData() {
+    private func initAllData() {
         struct Result: Decodable {
             var result: [[[Aria2Object]]]
         }
         
-        var params: [Any]? = []
-
-        switch ViewControllersManager.shared.selectedRow {
-        case .downloading:
-            params = [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-                                            params: nil ).object(),
+        let params = [[Aria2WebsocketParams(method: Aria2Method.tellActive,
+                                            params: nil ).object,
                        Aria2WebsocketParams(method: Aria2Method.tellWaiting,
-                                            params: [0, 1000]).object()]]
-        case .removed, .completed:
-            params = [[Aria2WebsocketParams(method: Aria2Method.tellStopped,
-                                 params: [0, 1000]).object()]]
-        default:
-            return
-        }
+                                            params: [0, 1000]).object,
+                       Aria2WebsocketParams(method: Aria2Method.tellStopped,
+                                            params: [0, 1000]).object]]
 
         send(method: Aria2Method.multicall,
              params: params)
@@ -54,14 +50,14 @@ class Aria2: NSObject {
         }
     }
 	
-	func sortData(block: (([[String : String]]) -> Void)? = nil) {
+	private func sortAllData() {
 		send(method: Aria2Method.multicall,
              params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-                                            params: [["gid", "status"]]).object(),
+                                            params: [["gid", "status"]]).object,
                        Aria2WebsocketParams(method: Aria2Method.tellWaiting,
-                                            params: [0, 1000, ["gid", "status"]]).object(),
+                                            params: [0, 1000, ["gid", "status"]]).object,
                        Aria2WebsocketParams(method: Aria2Method.tellStopped,
-                                            params: [0, 1000, ["gid", "status"]]).object()]])
+                                            params: [0, 1000, ["gid", "status"]]).object]])
             .done { data in
                 struct GIDList: Decodable {
                     var result: [[[[String: String]]]]
@@ -90,23 +86,43 @@ class Aria2: NSObject {
     }
 
     func updateActiveTasks() {
-        send(method: Aria2Method.tellActive,
-             params: [["gid",
-                       "status",
-                       "completedLength",
-                       "totalLength",
-                       "downloadSpeed",
-                       "uploadLength",
-                       "uploadSpeed",
-                       "connections",
-                       "bittorrent",
-                       "dir"]])
+        send(method: Aria2Method.multicall,
+             params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
+                                            params: [["gid",
+                                                      "status",
+                                                      "completedLength",
+                                                      "totalLength",
+                                                      "downloadSpeed",
+                                                      "uploadLength",
+                                                      "uploadSpeed",
+                                                      "connections",
+                                                      "bittorrent",
+                                                      "dir"]]).object,
+                       Aria2WebsocketParams(method: Aria2Method.getGlobalStat,
+                                            params: []).object]])
             .done { data in
                 struct Result: Decodable {
-                    let result: [Aria2Status]
+                    let result: [ResultObj]
+                    struct ResultObj: Decodable {
+                        var status: [Aria2Status] = []
+                        var globalStat: Aria2GlobalStat?
+                        init(from decoder: Decoder) throws {
+                            let unkeyedContainer = try decoder.singleValueContainer()
+                            if let stats = try? unkeyedContainer.decode([[Aria2Status]].self) {
+                                status = stats.flatMap({ $0 })
+                            } else if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
+                                self.globalStat = globalStat
+                            }
+                        }
+                    }
                 }
-                let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
-                try DataManager.shared.updateStatus(result)
+                try JSONDecoder().decode(Result.self, data: data, in: self.context).result.forEach {
+                    if let stat = $0.globalStat {
+                        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["globalStat": stat, "updateServer": false])
+                    } else if $0.status.count > 0 {
+                        try DataManager.shared.updateStatus($0.status)
+                    }
+                }
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -125,7 +141,7 @@ class Aria2: NSObject {
                                                "uploadSpeed",
                                                "connections",
                                                "bittorrent",
-                                               "dir"]]).object()
+                                               "dir"]]).object
         }
 
         send(method: Aria2Method.multicall,
@@ -136,7 +152,7 @@ class Aria2: NSObject {
                 }
                 let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
                 try DataManager.shared.updateStatus(result)
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -224,7 +240,7 @@ class Aria2: NSObject {
     func pause(_ gids: [String]) {
         let method = Preferences.shared.useForce ? Aria2Method.forcePause : Aria2Method.pause
         let params = gids.map {
-            Aria2WebsocketParams(method: method, params: [$0]).object()
+            Aria2WebsocketParams(method: method, params: [$0]).object
         }
         send(method: Aria2Method.multicall,
              params: [params])
@@ -238,7 +254,7 @@ class Aria2: NSObject {
 
     func unpause(_ gids: [String]) {
         let params = gids.map {
-            Aria2WebsocketParams(method: Aria2Method.unpause, params: [$0]).object()
+            Aria2WebsocketParams(method: Aria2Method.unpause, params: [$0]).object
         }
         send(method: Aria2Method.multicall,
              params: [params])
@@ -254,12 +270,12 @@ class Aria2: NSObject {
     func removeDownloadResult(_ gids: [String]) {
         guard gids.count > 0 else { return }
         let params = gids.map {
-            Aria2WebsocketParams(method: Aria2Method.removeDownloadResult, params: [$0]).object()
+            Aria2WebsocketParams(method: Aria2Method.removeDownloadResult, params: [$0]).object
         }
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -270,12 +286,12 @@ class Aria2: NSObject {
         guard gids.count > 0 else { return }
         let method = Preferences.shared.useForce ? Aria2Method.forceRemove : Aria2Method.remove
         let params = gids.map {
-            Aria2WebsocketParams(method: method, params: [$0]).object()
+            Aria2WebsocketParams(method: method, params: [$0]).object
         }
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -288,7 +304,7 @@ class Aria2: NSObject {
         send(method: method,
              params: [])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -298,7 +314,7 @@ class Aria2: NSObject {
         send(method: Aria2Method.unpauseAll,
              params: [])
             .done { _ in
-                self.sortData()
+                self.sortData.run()
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -467,23 +483,26 @@ fileprivate extension Aria2 {
 			self.method = method
 			self.params = params
 		}
-		func object() -> [String: Any] {
-			if Preferences.shared.aria2Servers.getSelectedToken().count > 0 {
-				let token = "token:\(Preferences.shared.aria2Servers.getSelectedToken())"
-				if var p = params {
-					p.insert(token, at: 0)
-					return ["methodName": method, "params": p]
-				} else {
-					return ["methodName": method, "params": [token]]
-				}
-			} else {
-				if let p = params {
-					return ["methodName": method, "params": p]
-				} else {
-					return ["methodName": method]
-				}
-			}
-		}
+        
+        var object: [String: Any] {
+            get {
+                if Preferences.shared.aria2Servers.getSelectedToken().count > 0 {
+                    let token = "token:\(Preferences.shared.aria2Servers.getSelectedToken())"
+                    if var p = params {
+                        p.insert(token, at: 0)
+                        return ["methodName": method, "params": p]
+                    } else {
+                        return ["methodName": method, "params": [token]]
+                    }
+                } else {
+                    if let p = params {
+                        return ["methodName": method, "params": p]
+                    } else {
+                        return ["methodName": method]
+                    }
+                }
+            }
+        }
 	}
 
 	

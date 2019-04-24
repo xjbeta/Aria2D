@@ -29,10 +29,6 @@ class Aria2Websocket: NSObject {
             return socket?.readyState == .OPEN
         }
     }
-	
-	let refresh = WaitTimer(timeOut: .milliseconds(50)) {
-		Aria2.shared.initAllData()
-	}
 
 	var connectedServerInfo = ConnectedServerInfo()
 	
@@ -89,7 +85,9 @@ class Aria2Websocket: NSObject {
                 } else {
                     DispatchQueue.main.async {
                         guard let count = try? DataManager.shared.activeCount(),
-                            count > 0 else { return }
+                            count > 0 else {
+                                return
+                        }
                         Aria2.shared.updateActiveTasks()
                     }
                     
@@ -116,7 +114,7 @@ class Aria2Websocket: NSObject {
 		if isSuspend, timer != nil {
 			timer?.resume()
 			isSuspend = false
-			Aria2.shared.initAllData()
+			Aria2.shared.initData.run()
 		}
 	}
     
@@ -177,18 +175,24 @@ class Aria2Websocket: NSObject {
                 // Save log
                 if Preferences.shared.developerMode,
                     Preferences.shared.recordWebSocketLog {
-                    DispatchQueue.main.async {
-                        let log = WebSocketLog(context: DataManager.shared.context)
-                        log.method = method
-                        log.sendJSON = "\(dic)"
+                    DispatchQueue.global(qos: .background).async {
+                        var receivedJSON = ""
                         if let str = String(data: data, encoding: .utf8),
                             let shrotData = Aria2Websocket.shared.clearUrls(str),
                             let shortStr = String(data: shrotData, encoding: .utf8) {
-                            log.receivedJSON =  shortStr
+                            receivedJSON = shortStr
                         }
-                        log.success = !timeOut
-                        log.date = time
-                        DataManager.shared.saveContext()
+
+                        DispatchQueue.main.async {
+                            let log = WebSocketLog(context: DataManager.shared.context)
+                            log.method = method
+                            log.sendJSON = "\(dic)"
+                            log.receivedJSON = receivedJSON
+                            
+                            log.success = !timeOut
+                            log.date = time
+                            DataManager.shared.saveContext()
+                        }
                     }
                 }
                 
@@ -220,7 +224,7 @@ enum webSocketResult: Error {
 
 extension Aria2Websocket: SRWebSocketDelegate {
     func webSocketDidOpen(_ webSocket: SRWebSocket) {
-        Aria2.shared.initAllData()
+        Aria2.shared.initData.run()
         connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         Aria2.shared.getVersion {
             self.connectedServerInfo.version = "Version: \($0)"
@@ -230,6 +234,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         Aria2.shared.getGlobalOption()
         ViewControllersManager.shared.showHUD(.connected)
         NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
+        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
     func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
@@ -238,6 +243,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         aria2GlobalOption = [:]
         DataManager.shared.deleteAllAria2Objects()
         NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
+        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
     func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {
@@ -249,7 +255,9 @@ extension Aria2Websocket: SRWebSocketDelegate {
                 let gids = json.params.map { $0.gid }
                 switch json.method {
                 case .onDownloadStart:
-                    Aria2.shared.updateStatus(gids)
+                    gids.forEach {
+                        Aria2.shared.initData($0)
+                    }
                     ViewControllersManager.shared.showHUD(.downloadStart)
                 case .onDownloadPause:
                     Aria2.shared.updateStatus(gids)

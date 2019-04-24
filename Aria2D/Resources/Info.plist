@@ -12,19 +12,21 @@
 				<string>torrent</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<string>TorrentIcon.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>Torrent file</string>
+			<string>Torrent File</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
-			<string>Owner</string>
+			<string>Default</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>AppIcon.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -37,6 +39,19 @@
 	<string>1.2.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>Magnet Link</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>magnet</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>0</string>
 	<key>LSApplicationCategoryType</key>
