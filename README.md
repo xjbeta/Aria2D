@@ -7,14 +7,6 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 
 ## Last Version
     1.2.5 (358)
-    
-> Old license is no longer valid.
-> 
-> Check your mail for new Lincese.
-> 
-> If you didn't receive a new Lincese, you can contact me.
-> <xjbeta.tiny@outlook.com>
-
 
 ## Downloads
 ### Aria2D
@@ -34,7 +26,7 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 - Dark Mode support
 
 ## Donation List
-> Anyone who has purchased a license can contact me to add your information to the donation list.
+> Anyone who has purchased a license can contact me to add your information to the donation list. <xjbeta.tiny@outlook.com>
 
 ## Acknowledgements
 - [PromiseKit](https://github.com/mxcl/PromiseKit)
