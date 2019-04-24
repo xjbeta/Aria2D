@@ -61,15 +61,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		if menuItem.action == #selector(refresh) {
 			return mainWindowFront
 		}
-		
-		if menuItem.action == #selector(activateApp) {
-			if !string_check(nil).boolValue {
-				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activate", comment: "")
-			} else {
-				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activated", comment: "")
-			}
-		}
-		
 
         return true
     }
@@ -114,10 +105,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		DevMateKit.showFeedbackDialog(nil, in: .sheetMode)
 	}
 	
-	@IBAction func activateApp(_ sender: Any) {
-		NotificationCenter.default.post(name: .activateApp, object: nil)
-	}
-    
     @IBAction func installWithHomebrew(_ sender: Any) {
         NSAppleScript(source: """
 tell application "Terminal" to do script "brew install aria2"

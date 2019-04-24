@@ -183,7 +183,7 @@ extension Aria2c {
                         } else {
                             ViewControllersManager.shared.showAria2cAlert(err.text())
                         }
-                        resolver.fulfill()
+                        resolver.fulfill(())
                         }.catch {
                             resolver.reject($0)
                     }
@@ -233,8 +233,8 @@ extension Aria2c {
                 self.killProcess($0)
             }
 		} else {
-			return Promise { resolver in
-                resolver.fulfill()
+            return Promise { resolver in
+                resolver.fulfill(())
             }
 		}
 	}
@@ -249,7 +249,7 @@ extension Aria2c {
                 Log(descriptor)
                 resolver.reject(Aria2ProcessError.killProcessError)
             } else {
-                resolver.fulfill()
+                resolver.fulfill(())
             }
         }
 	}

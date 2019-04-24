@@ -25,7 +25,6 @@
 		011E4D4221EC36AB00997633 /* PMKFoundation.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3A21EC367200997633 /* PMKFoundation.framework.dSYM */; };
 		011E4D4321EC36AB00997633 /* PromiseKit.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3B21EC367200997633 /* PromiseKit.framework.dSYM */; };
 		011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */; };
-		012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */ = {isa = PBXBuildFile; fileRef = 012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012B57302159267400D1AC03 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572F2159267400D1AC03 /* FileNode.swift */; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
@@ -96,7 +95,6 @@
 		01E906C8219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906C6219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift */; };
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
-		01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F6C4F921339F830009672A /* libkevlar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,8 +144,6 @@
 		011E4D3B21EC367200997633 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
 		011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
 		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
-		012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSwiftKevlar.h; sourceTree = "<group>"; };
-		012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSwiftKevlar.m; sourceTree = "<group>"; };
 		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		012ADEDC1F1461BC009E4110 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
 		012B572F2159267400D1AC03 /* FileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
@@ -222,8 +218,6 @@
 		01E906C6219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebSocketLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		01EB1CB91D61FC1400F2925F /* RightTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTabView.swift; sourceTree = "<group>"; };
 		01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsMenu.swift; sourceTree = "<group>"; };
-		01F6C4F921339F830009672A /* libkevlar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkevlar.a; sourceTree = "<group>"; };
-		01F6C4FA21339F840009672A /* DMKevlarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMKevlarApplication.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +226,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0147489621567406005014D3 /* PromiseKit.framework in Frameworks */,
-				01F6C4FB21339F840009672A /* libkevlar.a in Frameworks */,
 				01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */,
 				011E4D4021EC367D00997633 /* PMKFoundation.framework in Frameworks */,
 				010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */,
@@ -255,15 +248,6 @@
 				0154156A1E371583007ECB29 /* URLSecurityScope.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		012624611ED174AC007FF8AA /* Kevlar */ = {
-			isa = PBXGroup;
-			children = (
-				01F6C4FA21339F840009672A /* DMKevlarApplication.h */,
-				01F6C4F921339F830009672A /* libkevlar.a */,
-			);
-			path = Kevlar;
 			sourceTree = "<group>";
 		};
 		012C3AEB1E10102C00ABFE4C /* Aria2 */ = {
@@ -307,7 +291,6 @@
 			children = (
 				0165AF611D963CDF00469601 /* Aria2D */,
 				6ACACE787527AEFD90491354 /* Frameworks */,
-				012624611ED174AC007FF8AA /* Kevlar */,
 				0147EDBE1D21FAD800FB4324 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -433,8 +416,6 @@
 				012C3AEC1E10104600ABFE4C /* Utils */,
 				0147EDC01D21FAD800FB4324 /* AppDelegate.swift */,
 				0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */,
-				012624641ED17AD9007FF8AA /* DMSwiftKevlar.h */,
-				012624651ED17AD9007FF8AA /* DMSwiftKevlar.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -568,6 +549,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -668,7 +650,6 @@
 				01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */,
 				0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */,
 				016CF8F61ED52E5C001336F1 /* AdvancedViewController.swift in Sources */,
-				012624661ED17AD9007FF8AA /* DMSwiftKevlar.m in Sources */,
 				012A1BB21E174860007C4B46 /* Transformer.swift in Sources */,
 				013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */,
 				019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */,
@@ -860,23 +841,11 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(PROJECT_DIR)/Kevlar\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"\"$(PROJECT_DIR)/Kevlar/libkevlar.a\"",
-					"-lc++",
-					"-framework",
-					Security,
-					"-framework",
-					IOKit,
-				);
+				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xjbeta.Aria2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -911,22 +880,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(PROJECT_DIR)/Kevlar\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"\"$(PROJECT_DIR)/Kevlar/libkevlar.a\"",
-					"-lc++",
-					"-framework",
-					Security,
-					"-framework",
-					IOKit,
-				);
+				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xjbeta.Aria2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
