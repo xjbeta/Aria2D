@@ -27,6 +27,7 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 
 ## Donation List
 > Anyone who has purchased a license can contact me to add your information to the donation list. <xjbeta.tiny@outlook.com>
+- Josh Keer
 
 ## Acknowledgements
 - [PromiseKit](https://github.com/mxcl/PromiseKit)
