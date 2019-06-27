@@ -28,7 +28,7 @@ class Preferences: NSObject {
             
             Aria2Option.rpcListenAll: false,
             Aria2Option.rpcListenPort: 2333,
-            Aria2Option.rpcSecret: "",
+//            Aria2Option.rpcSecret: "",
             
             Aria2Option.dir: downloadPath,
             Aria2Option.maxConcurrentDownloads: 3,
@@ -36,7 +36,7 @@ class Preferences: NSObject {
             Aria2Option.split: 16,
             Aria2Option.userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
             
-            Aria2Option.btTracker: "",
+//            Aria2Option.btTracker: "",
             Aria2Option.peerAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
             Aria2Option.seedRatio: 1.0,
             Aria2Option.seedTime: 120]
@@ -290,12 +290,20 @@ class Preferences: NSObject {
     }
 
 	func checkPlistFile() {
+        // check userdefault plist r/w
 		let key = "checkPlistFile"
 		prefs.set(true, forKey: key)
 		assert(prefs.value(forKey: key) != nil, "Unable to read and write plist file, try to restart your macOS.", file: "")
 		prefs.removeObject(forKey: key)
         
+        // check conf file and add missed options.
+        defaultAria2cOptionsDic.forEach { kv in
+            if !aria2Conf.contains(where: { $0.key == kv.key }) {
+                updateConf(key: kv.key, with: "\(kv.value)")
+            }
+        }
         
+        // remove droped keys
         let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey", "app_baidu_ascending", "app_baidu_sortValue"]
         dropedKeys.forEach {
             prefs.removeObject(forKey: $0)
