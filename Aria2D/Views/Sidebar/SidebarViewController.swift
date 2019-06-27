@@ -165,7 +165,7 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
-		if let row = sidebarItems.index(of: ViewControllersManager.shared.selectedRow),
+		if let row = sidebarItems.firstIndex(of: ViewControllersManager.shared.selectedRow),
 			let view = sidebarTableView.view(atColumn: sidebarTableView.selectedColumn, row: row, makeIfNecessary: false) as? SidebarTableCellView {
 			view.isSelected = false
 		}

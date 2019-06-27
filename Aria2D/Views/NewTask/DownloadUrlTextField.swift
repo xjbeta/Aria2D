@@ -44,7 +44,7 @@ class DownloadUrlTextField: NSTextField {
 	
 	func hideButton() {
 		subviews.forEach {
-			if $0 is NSButton, let i = subviews.index(of: $0) {
+			if $0 is NSButton, let i = subviews.firstIndex(of: $0) {
 				subviews.remove(at: i)
 			}
 		}

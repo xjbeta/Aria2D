@@ -138,7 +138,7 @@ struct Aria2Servers {
 	}
 
 	func getSelectedIndex() -> Int {
-		return contents.map { $0.id }.index(of: selectedID) ?? 0
+		return contents.map { $0.id }.firstIndex(of: selectedID) ?? 0
 	}
 	
 	func getSelectedName() -> String {
