@@ -68,7 +68,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     @IBOutlet weak var dirMenuItem: NSMenuItem!
     
     @IBAction func showDirInFinder(_ sender: Any) {
-        if let dir = Preferences.shared.aria2cOptionsDic["dir"] as? String {
+        if let dir = Preferences.shared.aria2Conf[.dir] {
             NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: dir)])
         }
     }
@@ -83,9 +83,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         if let window = view.window {
             selectDirPanel.beginSheetModal(for: window) { result in
                 if result == .OK, let url = self.selectDirPanel.url {
-                    var dic = Preferences.shared.aria2cOptionsDic
-                    dic["dir"] = url.path
-                    Preferences.shared.updateAria2cOptionsDic(dic)
+                    Preferences.shared.updateConf(key: .dir, with: url.path)
                 }
                 self.initDirMenu()
             }
@@ -194,11 +192,12 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         DispatchQueue.main.async {
             self.dirPopUpButton.selectItem(at: 0)
         }
-        guard let dir = Preferences.shared.aria2cOptionsDic["dir"] as? String else {
+        
+        guard let dir = Preferences.shared.aria2Conf[.dir] else {
             dirMenuItem.title = "Unknown"
             return
         }
-        
+
         let image = NSWorkspace.shared.icon(forFile: dir)
         image.size = NSSize(width: 16, height: 16)
         dirMenuItem.image = image

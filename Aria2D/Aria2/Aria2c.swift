@@ -60,21 +60,6 @@ class Aria2c: NSObject {
             args.append("--log-level=notice")
             args.append("--log=\(logPath)")
             
-            let dic = Preferences.shared.aria2cOptionsDic.compactMap { kv -> String? in
-                if let v = kv.value as? String {
-                    if v != "" {
-                        return "--\(kv.key)=\(v)"
-                    } else {
-                        return nil
-                    }
-                } else if let v = kv.value as? Bool {
-                    return "--\(kv.key)=\(v ? "true" : "false")"
-                } else {
-                    return "--\(kv.key)=\(kv.value)"
-                }
-            }.sorted()
-            args.append(contentsOf: dic)
-            
             args = args.map { s -> String in
                 var str = s
                 if s.contains(" ") {

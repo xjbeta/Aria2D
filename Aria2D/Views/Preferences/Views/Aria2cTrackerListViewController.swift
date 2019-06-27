@@ -55,9 +55,7 @@ class Aria2cTrackerListViewController: NSViewController {
     
     
     @IBAction func done(_ sender: NSButton) {
-        var dic = Preferences.shared.aria2cOptionsDic
-        dic["bt-tracker"] = textView.string
-        Preferences.shared.updateAria2cOptionsDic(dic)
+        Preferences.shared.updateConf(key: .btTracker, with: textView.string)
         self.dismiss(nil)
     }
     

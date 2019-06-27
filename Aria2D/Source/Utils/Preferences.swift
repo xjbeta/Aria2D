@@ -184,12 +184,6 @@ class Preferences: NSObject {
 		}
 	}
     
-    var aria2cOptionsDic: [String: Any] {
-        get {
-            return defaults(.aria2OptionsDic) as? [String: Any] ?? [:]
-        }
-    }
-
     var trackersUrlTypes: [String] {
         get {
             return defaults(.trackersUrlTypes) as? [String] ?? [Aria2cTrackerListViewController.TrackersUrlType.http,
@@ -211,8 +205,88 @@ class Preferences: NSObject {
         }
     }
     
-    func updateAria2cOptionsDic(_ dic: [String: Any]) {
-        defaultsSet(dic, forKey: .aria2OptionsDic)
+    private let confLock = NSLock()
+    
+    var aria2Conf: [Aria2Option: String] {
+        get {
+            confLock.lock()
+            let u = URL(fileURLWithPath: aria2cOptions.path(for: .aria2cConf))
+            guard FileManager.default.fileExists(atPath: u.path),
+                let confData = try? Data(contentsOf: u),
+                let confStr = String(data: confData, encoding: .utf8) else {
+                    print("Load Conf file from \(u) Error.")
+                    confLock.unlock()
+                    return [:]
+            }
+            
+            let confs = confStr.split(separator: "\n").map(String.init).filter {
+                !$0.starts(with: "#") && $0 != ""
+            }
+            
+            var confsDic = [Aria2Option: String]()
+            confs.forEach {
+                let kv = $0.split(separator: "=", maxSplits: 1).map(String.init)
+                guard kv.count == 2 else {
+                    print("Unkown Key-value pair \(kv)")
+                    return
+                }
+                confsDic[Aria2Option(rawValue: kv[0])] = kv[1]
+            }
+            confLock.unlock()
+            return confsDic
+        }
+    }
+    
+    func updateConf(key: Aria2Option, with value: String) {
+        confLock.lock()
+        let u = URL(fileURLWithPath: aria2cOptions.path(for: .aria2cConf))
+        guard FileManager.default.fileExists(atPath: u.path),
+            let confData = try? Data(contentsOf: u),
+            let confStr = String(data: confData, encoding: .utf8) else {
+                print("Load Conf file from \(u) Error.")
+                confLock.unlock()
+                return
+        }
+        
+        let keyStr = key.rawValue as String
+        
+        do {
+            if confStr.contains(keyStr) {
+                // edit value
+                var updated = false
+                var lines = confStr.split(separator: "\n", omittingEmptySubsequences: false)
+                lines.enumerated().filter {
+                    $0.element.contains(keyStr)
+                    }.forEach {
+                        guard $0.offset >= 0, $0.offset < lines.count else { return }
+                        
+                        if !updated {
+                            lines[$0.offset] = "\(keyStr)=\(value)"
+                            updated = true
+                        } else if !lines[$0.offset].starts(with: "#") {
+                            lines[$0.offset] = "# " + lines[$0.offset]
+                        }
+                }
+                
+                try lines.joined(separator: "\n").write(to: u, atomically: true, encoding: .utf8)
+            } else {
+                // add key and value
+                let handle = try FileHandle(forWritingTo: u)
+                handle.seekToEndOfFile()
+                let kvStr = "\n\(keyStr)=\(value)"
+                guard let d = kvStr.data(using: .utf8) else {
+                    print("Init kv data error.")
+                    handle.closeFile()
+                    confLock.unlock()
+                    return
+                }
+                handle.write(d)
+                handle.closeFile()
+            }
+        } catch let error {
+            print(error)
+        }
+        confLock.unlock()
     }
 
 	func checkPlistFile() {
@@ -221,27 +295,6 @@ class Preferences: NSObject {
 		assert(prefs.value(forKey: key) != nil, "Unable to read and write plist file, try to restart your macOS.", file: "")
 		prefs.removeObject(forKey: key)
         
-        if var dic = defaults(.aria2OptionsDic) as? [String: Any] {
-            
-            let keys = dic.keys.map { $0 }
-            let defaultKeys = defaultAria2cOptionsDic.keys.map { $0.rawValue }
-            
-            keys.filter {
-                !defaultKeys.contains($0)
-                }.forEach {
-                  dic.removeValue(forKey: $0)
-            }
-            
-            defaultKeys.filter {
-                !keys.contains($0)
-                }.forEach {
-                   dic[$0] = defaultAria2cOptionsDic[Aria2Option(rawValue: $0)]
-            }
-            defaultsSet(dic, forKey: .aria2OptionsDic)
-        } else {
-            defaultsSet(Dictionary(uniqueKeysWithValues:
-                defaultAria2cOptionsDic.map { key, value in (key.rawValue as String, value) }), forKey: .aria2OptionsDic)
-        }
         
         let dropedKeys = ["baidu_token", "baidu_folder", "baidu_APIKey", "baidu_SecretKey", "app_baidu_ascending", "app_baidu_sortValue"]
         dropedKeys.forEach {
