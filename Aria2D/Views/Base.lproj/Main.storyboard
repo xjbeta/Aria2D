@@ -165,17 +165,17 @@
             <objects>
                 <viewController id="sV5-KT-6dJ" customClass="Aria2OptionsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zbU-S3-ojc">
-                        <rect key="frame" x="0.0" y="0.0" width="620" height="573"/>
+                        <rect key="frame" x="0.0" y="0.0" width="620" height="949"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7Z-TV-BcT">
-                                <rect key="frame" x="0.0" y="0.0" width="620" height="573"/>
+                                <rect key="frame" x="0.0" y="0.0" width="620" height="949"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Rjt-EX-FWu">
-                                    <rect key="frame" x="0.0" y="0.0" width="620" height="573"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="620" height="949"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDU-MA-CTq" userLabel="View" customClass="FlippedScrollDocView" customModule="Aria2D" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="620" height="925"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="620" height="1301"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-Zz-oSB">
@@ -347,7 +347,7 @@
                                                                         <rect key="frame" x="204" y="26" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="600" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="S4g-Rd-79V"/>
                                                                         <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.auto-save-interval" id="YKL-X9-As3"/>
+                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="6od-hL-gDw"/>
                                                                         </connections>
                                                                     </slider>
                                                                 </gridCell>
@@ -359,13 +359,6 @@
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.auto-save-interval" id="xmo-dO-oWb">
-                                                                                <dictionary key="options">
-                                                                                    <string key="NSValueTransformerName">SaveIntervalTransformer</string>
-                                                                                </dictionary>
-                                                                            </binding>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="420-hn-N4T" column="wu6-Lo-PH4" id="0Lr-uP-RTW">
@@ -382,9 +375,6 @@
                                                                     <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-cy-ji9">
                                                                         <rect key="frame" x="204" y="-2" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="600" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="kNC-2x-Ey8"/>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.save-session-interval" id="hDf-fP-X2T"/>
-                                                                        </connections>
                                                                     </slider>
                                                                 </gridCell>
                                                                 <gridCell row="420-hn-N4T" column="0rf-n1-le4" id="x8H-Pq-0aQ">
@@ -395,13 +385,6 @@
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.save-session-interval" id="A4I-bD-HRY">
-                                                                                <dictionary key="options">
-                                                                                    <string key="NSValueTransformerName">SaveIntervalTransformer</string>
-                                                                                </dictionary>
-                                                                            </binding>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                             </gridCells>
@@ -458,9 +441,6 @@
                                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.rpc-listen-all" id="az8-PJ-HXF"/>
-                                                                        </connections>
                                                                     </button>
                                                                 </gridCell>
                                                                 <gridCell row="GfU-xE-spe" column="vZF-2p-i9Y" id="PDg-Mo-qnm">
@@ -482,9 +462,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.rpc-listen-port" id="6or-Kw-O7e"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="JXW-kN-HYI" column="vZF-2p-i9Y" id="uk2-fY-80J">
@@ -508,9 +485,6 @@
                                                                                 <string>NSAllRomanInputSourcesLocaleIdentifier</string>
                                                                             </allowedInputSourceLocales>
                                                                         </secureTextFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.rpc-secret" id="Uir-86-C5h"/>
-                                                                        </connections>
                                                                     </secureTextField>
                                                                 </gridCell>
                                                             </gridCells>
@@ -593,9 +567,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.max-concurrent-downloads" id="Rlt-DL-aVg"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="HJN-bh-etA" column="KWS-W4-LE4" id="lbH-ML-ZHH">
@@ -626,9 +597,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.min-split-size" id="Bpv-3u-ii0"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="2Jw-ex-npG" column="KWS-W4-LE4" id="B6v-ne-SLh">
@@ -656,7 +624,7 @@
                                                                         <rect key="frame" x="204" y="64" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="16" doubleValue="16" tickMarkPosition="above" numberOfTickMarks="16" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ufe-Na-gh6"/>
                                                                         <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.split" id="QXP-Vm-PT7"/>
+                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="OoV-8z-bfK"/>
                                                                         </connections>
                                                                     </slider>
                                                                 </gridCell>
@@ -668,9 +636,6 @@
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.split" id="slC-FR-T3h"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="EbE-iy-cTe" column="o1b-QH-tnf" yPlacement="top" id="pZd-Ti-MH0">
@@ -691,9 +656,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.user-agent" id="i0K-yy-bOV"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="EbE-iy-cTe" column="KWS-W4-LE4" id="QK1-c5-UKG"/>
@@ -734,9 +696,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.bt-tracker" id="KfJ-FI-dPX"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="2QJ-3j-7z4" column="yZH-Hn-1Wz" id="5Q7-vZ-Zyu"/>
@@ -770,9 +729,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.peer-agent" id="77p-IR-gtq"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="2xr-7k-vTa" column="yZH-Hn-1Wz" id="3bx-zC-HBG">
@@ -793,9 +749,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.seed-ratio" id="Q4x-v7-uaI"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="xVy-T7-UEr" column="yZH-Hn-1Wz" id="y2t-Lv-YHZ">
@@ -817,9 +770,6 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
-                                                                        <connections>
-                                                                            <binding destination="V9I-Zy-dHL" name="value" keyPath="selection.seed-time" id="0Bu-NF-seP"/>
-                                                                        </connections>
                                                                     </textField>
                                                                 </gridCell>
                                                             </gridCells>
@@ -853,11 +803,11 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="s3i-Zd-oWh">
-                                    <rect key="frame" x="0.0" y="557" width="620" height="16"/>
+                                    <rect key="frame" x="0.0" y="933" width="620" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Q2N-0i-VSB">
-                                    <rect key="frame" x="604" y="0.0" width="16" height="573"/>
+                                    <rect key="frame" x="604" y="0.0" width="16" height="949"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -874,24 +824,28 @@
                         <outlet property="aria2cConfsGridView" destination="Tcw-px-v75" id="G0y-Ic-o3S"/>
                         <outlet property="aria2cPathPopUpButton" destination="J3L-bF-6Hc" id="qqZ-Xy-f5k"/>
                         <outlet property="aria2cStatusImageView" destination="PF9-Vc-COS" id="HMI-2q-MCj"/>
+                        <outlet property="autoSaveIntervalSlider" destination="yJd-YD-UdN" id="2a5-EV-kfE"/>
+                        <outlet property="bitTorrentTrackerTextField" destination="KSP-LO-aJw" id="3EX-fA-Bw9"/>
                         <outlet property="dirMenuItem" destination="vC0-is-FL0" id="YRC-E6-mXg"/>
                         <outlet property="dirPopUpButton" destination="gp6-PC-rpG" id="Zr1-UK-75S"/>
+                        <outlet property="enableRpcButton" destination="XhA-M6-DUQ" id="FZg-v8-UvV"/>
+                        <outlet property="maxConcurrentDownloadsTextField" destination="pDz-tU-L9T" id="8FS-q6-kMb"/>
+                        <outlet property="minSplitSize" destination="JzJ-zG-jCo" id="fNH-gu-YiN"/>
+                        <outlet property="peerAgentTextField" destination="Wnt-9S-mYo" id="QbL-H4-X4b"/>
+                        <outlet property="rpcListenAllButton" destination="O9M-ZH-GCf" id="4Qi-l2-lbC"/>
+                        <outlet property="rpcListenPortTextField" destination="Brs-hT-k2s" id="sHD-xq-IEY"/>
+                        <outlet property="rpcSecret" destination="ohy-98-vwi" id="gvF-Ly-f5Q"/>
+                        <outlet property="saveSessionInterval" destination="UeQ-cy-ji9" id="fcX-p4-d9c"/>
+                        <outlet property="seedRatioTextField" destination="weK-Ma-oNe" id="uW4-6T-J09"/>
+                        <outlet property="seedTimeTextField" destination="tRY-hs-ZQr" id="d2G-tN-qyp"/>
+                        <outlet property="splitSlider" destination="rFK-7q-QiV" id="Lqi-nu-L0z"/>
+                        <outlet property="userAgentTextField" destination="nN5-p7-SE1" id="wJc-VX-XsX"/>
                     </connections>
                 </viewController>
                 <customObject id="BGN-mm-D8P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="YYM-4K-QuP" customClass="Preferences" customModule="Aria2D" customModuleProvider="target"/>
-                <userDefaultsController representsSharedInstance="YES" id="95y-oJ-2Bh"/>
-                <objectController automaticallyPreparesContent="YES" id="V9I-Zy-dHL">
-                    <connections>
-                        <binding destination="95y-oJ-2Bh" name="contentObject" keyPath="values.aria2cOptionsDictionary" id="28B-vf-VyD">
-                            <dictionary key="options">
-                                <bool key="NSHandlesContentAsCompoundValue" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </objectController>
             </objects>
-            <point key="canvasLocation" x="2129" y="682.5"/>
+            <point key="canvasLocation" x="2129" y="870.5"/>
         </scene>
         <!--Installation Method View Controller-->
         <scene sceneID="ftA-Ix-Stf">

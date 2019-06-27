@@ -10,6 +10,18 @@ import Cocoa
 
 class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     
+// MARK: - Aria2c Process Status
+    @objc var autoStartAria2c: Bool {
+        get {
+            return Preferences.shared.autoStartAria2c
+        }
+        set {
+            Preferences.shared.autoStartAria2c = newValue
+            initConfsView()
+        }
+    }
+    
+    
 // MARK: - Aria2 paths And save interval
 
     @IBOutlet var aria2cPathPopUpButton: NSPopUpButton!
@@ -64,6 +76,19 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
             }
         }
     }
+    
+    @IBOutlet weak var autoSaveIntervalSlider: NSSlider!
+    @IBOutlet weak var saveSessionInterval: NSSlider!
+    
+    // MARK: - Aria2 RPC
+
+    @IBOutlet weak var enableRpcButton: NSButton!
+    @IBOutlet weak var rpcListenAllButton: NSButton!
+    @IBOutlet weak var rpcListenPortTextField: NSTextField!
+    @IBOutlet weak var rpcSecret: NSSecureTextField!
+    
+    // MARK: - Normal Download Options
+    
     @IBOutlet weak var dirPopUpButton: NSPopUpButton!
     @IBOutlet weak var dirMenuItem: NSMenuItem!
     
@@ -90,13 +115,29 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         }
     }
     
-    @objc var autoStartAria2c: Bool {
-        get {
-            return Preferences.shared.autoStartAria2c
-        }
-        set {
-            Preferences.shared.autoStartAria2c = newValue
-            initConfsView()
+    @IBOutlet weak var maxConcurrentDownloadsTextField: NSTextField!
+    @IBOutlet weak var minSplitSize: NSTextField!
+    @IBOutlet weak var splitSlider: NSSlider!
+    @IBOutlet weak var userAgentTextField: NSTextField!
+    
+    // MARK: - BitTorrent Options
+    
+    @IBOutlet weak var bitTorrentTrackerTextField: NSTextField!
+    @IBOutlet weak var peerAgentTextField: NSTextField!
+    @IBOutlet weak var seedRatioTextField: NSTextField!
+    @IBOutlet weak var seedTimeTextField: NSTextField!
+    
+    @IBAction func sliderAction(_ sender: NSSlider) {
+        let v = "\(sender.integerValue)"
+        switch sender {
+        case autoSaveIntervalSlider:
+            Preferences.shared.updateConf(key: .autoSaveInterval, with: v)
+        case saveSessionInterval:
+            Preferences.shared.updateConf(key: .saveSessionInterval, with: v)
+        case splitSlider:
+            Preferences.shared.updateConf(key: .split, with: v)
+        default:
+            break
         }
     }
     
@@ -106,6 +147,20 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         initConfMenu()
         initDirMenu()
         initConfsView()
+        
+        let confs = Preferences.shared.aria2Conf
+        
+        autoSaveIntervalSlider.integerValue = Int(confs[.autoSaveInterval] ?? "60") ?? 60
+        saveSessionInterval.integerValue = Int(confs[.saveSession] ?? "60") ?? 60
+        
+        rpcListenAllButton.state = confs[.rpcListenAll] == "true" ? .on : .off
+        rpcListenPortTextField.stringValue = confs[.rpcListenAll] ?? "2333"
+        rpcSecret.stringValue = confs[.rpcSecret] ?? ""
+        
+        maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3
+        
+        
+        
     }
     
     func menuDidClose(_ menu: NSMenu) {
