@@ -1,4 +1,4 @@
 github "DevMate/DevMateKit"
 github "facebook/SocketRocket" "master"
 github "mxcl/PromiseKit"
-github "PromiseKit/Foundation" "swift-5"
+github "PromiseKit/Foundation"
