@@ -78,7 +78,9 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     }
     
     @IBOutlet weak var autoSaveIntervalSlider: NSSlider!
-    @IBOutlet weak var saveSessionInterval: NSSlider!
+    @IBOutlet weak var saveSessionIntervalSlider: NSSlider!
+    @IBOutlet weak var autoSaveIntervalTextField: NSTextField!
+    @IBOutlet weak var saveSessionIntervalTextField: NSTextField!
     
     // MARK: - Aria2 RPC
 
@@ -132,7 +134,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         switch sender {
         case autoSaveIntervalSlider:
             Preferences.shared.updateConf(key: .autoSaveInterval, with: v)
-        case saveSessionInterval:
+        case saveSessionIntervalSlider:
             Preferences.shared.updateConf(key: .saveSessionInterval, with: v)
         case splitSlider:
             Preferences.shared.updateConf(key: .split, with: v)
@@ -151,16 +153,15 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         let confs = Preferences.shared.aria2Conf
         
         autoSaveIntervalSlider.integerValue = Int(confs[.autoSaveInterval] ?? "60") ?? 60
-        saveSessionInterval.integerValue = Int(confs[.saveSession] ?? "60") ?? 60
+        saveSessionIntervalSlider.integerValue = Int(confs[.saveSession] ?? "60") ?? 60
+        autoSaveIntervalTextField.integerValue = autoSaveIntervalSlider.integerValue
+        saveSessionIntervalTextField.integerValue = saveSessionIntervalSlider.integerValue
         
         rpcListenAllButton.state = confs[.rpcListenAll] == "true" ? .on : .off
         rpcListenPortTextField.stringValue = confs[.rpcListenAll] ?? "2333"
         rpcSecret.stringValue = confs[.rpcSecret] ?? ""
         
         maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3
-        
-        
-        
     }
     
     func menuDidClose(_ menu: NSMenu) {

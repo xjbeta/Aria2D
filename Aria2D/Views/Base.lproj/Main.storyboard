@@ -347,7 +347,7 @@
                                                                         <rect key="frame" x="204" y="26" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="600" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="S4g-Rd-79V"/>
                                                                         <connections>
-                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="6od-hL-gDw"/>
+                                                                            <action selector="takeIntegerValueFrom:" target="JeP-3v-ClY" id="TvP-A9-MnS"/>
                                                                         </connections>
                                                                     </slider>
                                                                 </gridCell>
@@ -375,6 +375,9 @@
                                                                     <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-cy-ji9">
                                                                         <rect key="frame" x="204" y="-2" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="600" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="kNC-2x-Ey8"/>
+                                                                        <connections>
+                                                                            <action selector="takeIntegerValueFrom:" target="Wlq-Vh-Nzd" id="z6R-Ft-WEI"/>
+                                                                        </connections>
                                                                     </slider>
                                                                 </gridCell>
                                                                 <gridCell row="420-hn-N4T" column="0rf-n1-le4" id="x8H-Pq-0aQ">
@@ -825,6 +828,7 @@
                         <outlet property="aria2cPathPopUpButton" destination="J3L-bF-6Hc" id="qqZ-Xy-f5k"/>
                         <outlet property="aria2cStatusImageView" destination="PF9-Vc-COS" id="HMI-2q-MCj"/>
                         <outlet property="autoSaveIntervalSlider" destination="yJd-YD-UdN" id="2a5-EV-kfE"/>
+                        <outlet property="autoSaveIntervalTextField" destination="JeP-3v-ClY" id="ULr-1V-cHp"/>
                         <outlet property="bitTorrentTrackerTextField" destination="KSP-LO-aJw" id="3EX-fA-Bw9"/>
                         <outlet property="dirMenuItem" destination="vC0-is-FL0" id="YRC-E6-mXg"/>
                         <outlet property="dirPopUpButton" destination="gp6-PC-rpG" id="Zr1-UK-75S"/>
@@ -835,7 +839,8 @@
                         <outlet property="rpcListenAllButton" destination="O9M-ZH-GCf" id="4Qi-l2-lbC"/>
                         <outlet property="rpcListenPortTextField" destination="Brs-hT-k2s" id="sHD-xq-IEY"/>
                         <outlet property="rpcSecret" destination="ohy-98-vwi" id="gvF-Ly-f5Q"/>
-                        <outlet property="saveSessionInterval" destination="UeQ-cy-ji9" id="fcX-p4-d9c"/>
+                        <outlet property="saveSessionIntervalSlider" destination="UeQ-cy-ji9" id="fcX-p4-d9c"/>
+                        <outlet property="saveSessionIntervalTextField" destination="Wlq-Vh-Nzd" id="g75-pV-0SP"/>
                         <outlet property="seedRatioTextField" destination="weK-Ma-oNe" id="uW4-6T-J09"/>
                         <outlet property="seedTimeTextField" destination="tRY-hs-ZQr" id="d2G-tN-qyp"/>
                         <outlet property="splitSlider" destination="rFK-7q-QiV" id="Lqi-nu-L0z"/>
