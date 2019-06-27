@@ -702,7 +702,7 @@
                                                                 <gridCell row="2QJ-3j-7z4" column="elH-JE-B09" id="5sr-Pz-csW">
                                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rou-uW-v7i">
                                                                         <rect key="frame" x="200" y="115" width="312" height="32"/>
-                                                                        <buttonCell key="cell" type="push" title="Download trackers from Github" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aJd-IF-ICM">
+                                                                        <buttonCell key="cell" type="push" title="Download trackers from Github" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aJd-IF-ICM">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
