@@ -294,46 +294,20 @@ extension Aria2Websocket: SRWebSocketDelegate {
         var json = json
         
         if json.contains(markStr) {
-            let sIndex = json.indexes(of: "[")
-            let eIndex = json.indexes(of: "]")
+            
+            let sIndex = json.indexes(of: "[").map({$0.utf16Offset(in: json)})
+            let eIndex = json.indexes(of: "]").map({$0.utf16Offset(in: json)})
             let mIndex = json.indexes(of: markStr).map({$0.utf16Offset(in: json)})
             
             var ranges: [Range<String.Index>] = []
             
             mIndex.forEach { urlIndex in
-                if let tt = sIndex.filter({ $0.utf16Offset(in: json) > urlIndex }).min(),
-                    let yy = eIndex.filter({ $0.utf16Offset(in: json) > tt.utf16Offset(in: json) }).min() {
-                    ranges.append(json.index(after: tt) ..< yy)
+                if let tt = sIndex.filter({ $0 > urlIndex }).min(),
+                    let yy = eIndex.filter({ $0 > urlIndex }).min() {
+                    ranges.append(json.index(after: .init(utf16Offset: tt, in: json)) ..< .init(utf16Offset: yy, in: json))
                 }
             }
             ranges.reverse()
-            ranges.forEach {
-                json.removeSubrange($0)
-            }
-            return json.data(using: .utf8)
-        }
-        return json.data(using: .utf8)
-    }
-    
-    func clearUrls2(_ json: String) -> Data? {
-        let markStr = "\"uris\":"
-        var json = json
-        
-        if json.contains(markStr) {
-            let sIndex = json.ranges(of: "[").map({$0.upperBound})
-            let eIndex = json.ranges(of: "]").map({$0.upperBound})
-            let mIndex = json.ranges(of: markStr).map({$0.upperBound})
-            
-            var ranges: [Range<String.Index>] = []
-            
-            mIndex.forEach { urlIndex in
-                if let tt = sIndex.filter({ $0.utf16Offset(in: json) > urlIndex.utf16Offset(in: json) }).min(),
-                    let yy = eIndex.filter ({ $0.utf16Offset(in: json) > tt.utf16Offset(in: json) }).min() {
-                    ranges.append(tt ..< json.index(before: yy))
-                }
-            }
-            ranges.reverse()
-            
             ranges.forEach {
                 json.removeSubrange($0)
             }
@@ -345,25 +319,25 @@ extension Aria2Websocket: SRWebSocketDelegate {
 }
 
 
-extension StringProtocol where Index == String.Index {
-    func indexes<T: StringProtocol>(of string: T, options: String.CompareOptions = []) -> [Index] {
+// https://stackoverflow.com/a/32306142
+extension StringProtocol {
+    func index(of string: Self, options: String.CompareOptions = []) -> Index? {
+        return range(of: string, options: options)?.lowerBound
+    }
+    
+    func endIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
+        return range(of: string, options: options)?.upperBound
+    }
+    
+    func indexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
-        var start = startIndex
-        while start < endIndex, let range = range(of: string, options: options, range: start..<endIndex) {
-            result.append(range.lowerBound)
-            start = range.lowerBound < range.upperBound ? range.upperBound : index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        var startIndex = self.startIndex
+        while startIndex < endIndex,
+            let range = self[startIndex...].range(of: string, options: options) {
+                result.append(range.lowerBound)
+                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
         }
         return result
-    }
-}
-
-
-extension String {
-    func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [Range<Index>] {
-        var ranges: [Range<Index>] = []
-        while let range = self.range(of: substring, options: options, range: (ranges.last?.upperBound ?? self.startIndex)..<self.endIndex, locale: locale) {
-            ranges.append(range)
-        }
-        return ranges
     }
 }

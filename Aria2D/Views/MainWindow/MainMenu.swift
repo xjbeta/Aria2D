@@ -61,15 +61,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		if menuItem.action == #selector(refresh) {
 			return mainWindowFront
 		}
-		
-		if menuItem.action == #selector(activateApp) {
-			if !string_check(nil).boolValue {
-				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activate", comment: "")
-			} else {
-				menuItem.title = NSLocalizedString("mainMenu.activateAppItem.activated", comment: "")
-			}
-		}
-		
 
         return true
     }

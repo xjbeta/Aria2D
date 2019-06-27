@@ -1,4 +1,4 @@
 github "DevMate/DevMateKit" "v1.9.3"
-github "PromiseKit/Foundation" "70b03e14fa94f2447c600bd2abf2dbb52e3233f3"
+github "PromiseKit/Foundation" "3.3.2"
 github "facebook/SocketRocket" "0a023409b138039d1ab5ac5431fe61c5f334e86b"
 github "mxcl/PromiseKit" "6.8.4"
