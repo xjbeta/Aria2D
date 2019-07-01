@@ -86,6 +86,8 @@
 		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
+		01E410B222CA3CED00864118 /* InstallAria2GuideWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E410B122CA3CED00864118 /* InstallAria2GuideWindow.storyboard */; };
+		01E410B422CA427500864118 /* InstallAria2GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */; };
 		01E9068B219BF70900928580 /* Aria2D.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E90689219BF70800928580 /* Aria2D.xcdatamodeld */; };
 		01E906AF219C518B00928580 /* Aria2Object+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906A7219C518B00928580 /* Aria2Object+CoreDataClass.swift */; };
 		01E906B0219C518B00928580 /* Aria2Object+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906A8219C518B00928580 /* Aria2Object+CoreDataProperties.swift */; };
@@ -215,6 +217,8 @@
 		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
+		01E410B122CA3CED00864118 /* InstallAria2GuideWindow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InstallAria2GuideWindow.storyboard; sourceTree = "<group>"; };
+		01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallAria2GuideWindowController.swift; sourceTree = "<group>"; };
 		01E9068A219BF70800928580 /* Aria2D.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aria2D.xcdatamodel; sourceTree = "<group>"; };
 		01E906A7219C518B00928580 /* Aria2Object+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aria2Object+CoreDataClass.swift"; sourceTree = "<group>"; };
 		01E906A8219C518B00928580 /* Aria2Object+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aria2Object+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -302,6 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */,
+				01E410B122CA3CED00864118 /* InstallAria2GuideWindow.storyboard */,
+				01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */,
 			);
 			path = InstallAria2cGuide;
 			sourceTree = "<group>";
@@ -593,6 +599,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E410B222CA3CED00864118 /* InstallAria2GuideWindow.storyboard in Resources */,
 				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
@@ -655,6 +662,7 @@
 				018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */,
 				0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */,
 				01E906B3219C518B00928580 /* Aria2Uri+CoreDataClass.swift in Sources */,
+				01E410B422CA427500864118 /* InstallAria2GuideWindowController.swift in Sources */,
 				012CBD6F1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift in Sources */,
 				012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */,
 				016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */,

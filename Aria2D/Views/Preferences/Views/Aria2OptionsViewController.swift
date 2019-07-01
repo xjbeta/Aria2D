@@ -30,6 +30,12 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: Preferences.shared.aria2cOptions.path(for: .aria2c))])
         initPathMenu()
     }
+    
+    @IBAction func installAria2Guide(_ sender: NSMenuItem) {
+        performSegue(withIdentifier: .init("ShowInstallAria2GuideSegue"), sender: sender)
+        initPathMenu()
+    }
+    
     @IBOutlet weak var aria2cConfsGridView: NSGridView!
     lazy var selectAria2cPanel = NSOpenPanel()
     @IBAction func selectAria2c(_ sender: Any) {
