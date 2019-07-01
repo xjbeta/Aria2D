@@ -187,6 +187,10 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         peerAgentTextField.stringValue = confValue(for: .peerAgent)
         seedRatioTextField.stringValue = confValue(for: .seedRatio)
         seedTimeTextField.stringValue = confValue(for: .seedTime)
+        
+        NotificationCenter.default.addObserver(forName: .updateBtTracker, object: nil, queue: .main) { [weak self] _ in
+            self?.btTrackerTextField.stringValue = self?.confValue(for: .btTracker) ?? ""
+        }
     }
     
     func confValue(for key: Aria2Option) -> String {

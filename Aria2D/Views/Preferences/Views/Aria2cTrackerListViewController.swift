@@ -56,6 +56,7 @@ class Aria2cTrackerListViewController: NSViewController {
     
     @IBAction func done(_ sender: NSButton) {
         Preferences.shared.updateConf(key: .btTracker, with: textView.string)
+        NotificationCenter.default.post(name: .updateBtTracker, object: nil)
         self.dismiss(nil)
     }
     
