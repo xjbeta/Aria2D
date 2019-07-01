@@ -142,6 +142,17 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
             break
         }
     }
+    @IBAction func checkButtonAction(_ sender: NSButton) {
+        let v = "\(sender.state == .on)"
+        switch sender {
+        case enableRpcButton:
+            Preferences.shared.updateConf(key: .enableRpc, with: v)
+        case rpcListenAllButton:
+            Preferences.shared.updateConf(key: .rpcListenAll, with: v)
+        default:
+            break
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,8 +168,9 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         autoSaveIntervalTextField.integerValue = autoSaveIntervalSlider.integerValue
         saveSessionIntervalTextField.integerValue = saveSessionIntervalSlider.integerValue
         
+        enableRpcButton.state = confs[.enableRpc] == "true" ? .on : .off
         rpcListenAllButton.state = confs[.rpcListenAll] == "true" ? .on : .off
-        rpcListenPortTextField.stringValue = confs[.rpcListenAll] ?? "2333"
+        rpcListenPortTextField.stringValue = confs[.rpcListenPort] ?? "2333"
         rpcSecret.stringValue = confs[.rpcSecret] ?? ""
         
         maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3

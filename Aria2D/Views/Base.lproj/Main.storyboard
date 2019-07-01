@@ -425,6 +425,9 @@
                                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
+                                                                        <connections>
+                                                                            <action selector="checkButtonAction:" target="sV5-KT-6dJ" id="paI-nQ-832"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </gridCell>
                                                                 <gridCell row="AoJ-39-YBe" column="vZF-2p-i9Y" id="7CY-Dn-Yd8">
@@ -444,6 +447,9 @@
                                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
+                                                                        <connections>
+                                                                            <action selector="checkButtonAction:" target="sV5-KT-6dJ" id="wOF-fr-MGJ"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </gridCell>
                                                                 <gridCell row="GfU-xE-spe" column="vZF-2p-i9Y" id="PDg-Mo-qnm">
