@@ -87,7 +87,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     @IBOutlet weak var enableRpcButton: NSButton!
     @IBOutlet weak var rpcListenAllButton: NSButton!
     @IBOutlet weak var rpcListenPortTextField: NSTextField!
-    @IBOutlet weak var rpcSecret: NSSecureTextField!
+    @IBOutlet weak var rpcSecretTextField: NSSecureTextField!
     
     // MARK: - Normal Download Options
     
@@ -118,14 +118,14 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     }
     
     @IBOutlet weak var maxConcurrentDownloadsTextField: NSTextField!
-    @IBOutlet weak var minSplitSize: NSTextField!
+    @IBOutlet weak var minSplitSizeTextField: NSTextField!
     @IBOutlet weak var splitSlider: NSSlider!
     @IBOutlet weak var splitValueTextField: NSTextField!
     @IBOutlet weak var userAgentTextField: NSTextField!
     
     // MARK: - BitTorrent Options
     
-    @IBOutlet weak var bitTorrentTrackerTextField: NSTextField!
+    @IBOutlet weak var btTrackerTextField: NSTextField!
     @IBOutlet weak var peerAgentTextField: NSTextField!
     @IBOutlet weak var seedRatioTextField: NSTextField!
     @IBOutlet weak var seedTimeTextField: NSTextField!
@@ -175,11 +175,24 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         enableRpcButton.state = confs[.enableRpc] == "true" ? .on : .off
         rpcListenAllButton.state = confs[.rpcListenAll] == "true" ? .on : .off
         rpcListenPortTextField.stringValue = confs[.rpcListenPort] ?? "2333"
-        rpcSecret.stringValue = confs[.rpcSecret] ?? ""
+        rpcSecretTextField.stringValue = confs[.rpcSecret] ?? ""
         
         maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3
         splitSlider.integerValue = Int(confs[.split] ?? "16") ?? 16
         splitValueTextField.integerValue = splitSlider.integerValue
+        minSplitSizeTextField.stringValue = confValue(for: .minSplitSize)
+        userAgentTextField.stringValue = confValue(for: .userAgent)
+        
+        btTrackerTextField.stringValue = confValue(for: .btTracker)
+        peerAgentTextField.stringValue = confValue(for: .peerAgent)
+        seedRatioTextField.stringValue = confValue(for: .seedRatio)
+        seedTimeTextField.stringValue = confValue(for: .seedTime)
+    }
+    
+    func confValue(for key: Aria2Option) -> String {
+        let confs = Preferences.shared.aria2Conf
+        let defaultConfs = Preferences.shared.defaultAria2cOptionsDic
+        return confs[key] ?? defaultConfs[key] ?? ""
     }
     
     func menuDidClose(_ menu: NSMenu) {
@@ -290,4 +303,37 @@ extension Aria2OptionsViewController: NSOpenSavePanelDelegate {
         return false
     }
     
+}
+
+extension Aria2OptionsViewController: NSControlTextEditingDelegate {
+    func controlTextDidEndEditing(_ obj: Notification) {
+        guard let obj = obj.object as? NSObject,
+            let v = (obj as? NSTextField)?.stringValue else { return }
+        
+        // ignore empty value
+        guard v != "" else { return }
+        
+        switch obj {
+        case rpcListenPortTextField:
+            Preferences.shared.updateConf(key: .rpcListenPort, with: v)
+        case rpcSecretTextField:
+            Preferences.shared.updateConf(key: .rpcSecret, with: v)
+        case maxConcurrentDownloadsTextField:
+            Preferences.shared.updateConf(key: .maxConcurrentDownloads, with: v)
+        case minSplitSizeTextField:
+            Preferences.shared.updateConf(key: .minSplitSize, with: v)
+        case userAgentTextField:
+            Preferences.shared.updateConf(key: .userAgent, with: v)
+        case btTrackerTextField:
+            Preferences.shared.updateConf(key: .btTracker, with: v)
+        case peerAgentTextField:
+            Preferences.shared.updateConf(key: .peerAgent, with: v)
+        case seedRatioTextField:
+            Preferences.shared.updateConf(key: .seedRatio, with: v)
+        case seedTimeTextField:
+            Preferences.shared.updateConf(key: .seedTime, with: v)
+        default:
+            break
+        }
+    }
 }

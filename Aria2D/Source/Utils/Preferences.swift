@@ -23,30 +23,30 @@ class Preferences: NSObject {
         }
         
         defaultAria2cOptionsDic = [
-            Aria2Option.autoSaveInterval: 60,
-            Aria2Option.saveSessionInterval: 60,
+            Aria2Option.autoSaveInterval: "60",
+            Aria2Option.saveSessionInterval: "60",
             
-            Aria2Option.rpcListenAll: false,
-            Aria2Option.rpcListenPort: 2333,
+            Aria2Option.rpcListenAll: "false",
+            Aria2Option.rpcListenPort: "2333",
 //            Aria2Option.rpcSecret: "",
             
             Aria2Option.dir: downloadPath,
-            Aria2Option.maxConcurrentDownloads: 3,
+            Aria2Option.maxConcurrentDownloads: "3",
             Aria2Option.minSplitSize: "20M",
-            Aria2Option.split: 16,
+            Aria2Option.split: "16",
             Aria2Option.userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
             
 //            Aria2Option.btTracker: "",
             Aria2Option.peerAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",
-            Aria2Option.seedRatio: 1.0,
-            Aria2Option.seedTime: 120]
+            Aria2Option.seedRatio: "1.0",
+            Aria2Option.seedTime: "120"]
 	}
 
     let prefs = UserDefaults.standard
 
 	let keys = PreferenceKeys.self
     
-    private let defaultAria2cOptionsDic: [Aria2Option : Any]
+    let defaultAria2cOptionsDic: [Aria2Option: String]
 	
 	private lazy var defaultAria2Servers: Aria2Servers = {
 		let s = Aria2Servers()
