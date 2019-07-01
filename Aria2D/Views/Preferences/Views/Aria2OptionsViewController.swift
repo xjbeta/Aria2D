@@ -320,30 +320,37 @@ extension Aria2OptionsViewController: NSControlTextEditingDelegate {
         guard let obj = obj.object as? NSObject,
             let v = (obj as? NSTextField)?.stringValue else { return }
         
-        // ignore empty value
-        guard v != "" else { return }
-        
+        var key: Aria2Option?
         switch obj {
         case rpcListenPortTextField:
-            Preferences.shared.updateConf(key: .rpcListenPort, with: v)
+            key = .rpcListenPort
         case rpcSecretTextField:
-            Preferences.shared.updateConf(key: .rpcSecret, with: v)
+            key = .rpcSecret
         case maxConcurrentDownloadsTextField:
-            Preferences.shared.updateConf(key: .maxConcurrentDownloads, with: v)
+            key = .maxConcurrentDownloads
         case minSplitSizeTextField:
-            Preferences.shared.updateConf(key: .minSplitSize, with: v)
+            key = .minSplitSize
         case userAgentTextField:
-            Preferences.shared.updateConf(key: .userAgent, with: v)
+            key = .userAgent
         case btTrackerTextField:
-            Preferences.shared.updateConf(key: .btTracker, with: v)
+            key = .btTracker
         case peerAgentTextField:
-            Preferences.shared.updateConf(key: .peerAgent, with: v)
+            key = .peerAgent
         case seedRatioTextField:
-            Preferences.shared.updateConf(key: .seedRatio, with: v)
+            key = .seedRatio
         case seedTimeTextField:
-            Preferences.shared.updateConf(key: .seedTime, with: v)
+            key = .seedTime
         default:
             break
+        }
+        
+        guard let k = key else { return }
+        
+        // ignore empty value
+        if v == "" {
+            Preferences.shared.deleteConfObject(k)
+        } else {
+            Preferences.shared.updateConf(key: k, with: v)
         }
     }
 }

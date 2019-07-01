@@ -237,6 +237,36 @@ class Preferences: NSObject {
         }
     }
     
+    func deleteConfObject(_ key: Aria2Option) {
+        confLock.lock()
+        let u = URL(fileURLWithPath: aria2cOptions.path(for: .aria2cConf))
+        guard FileManager.default.fileExists(atPath: u.path),
+            let confData = try? Data(contentsOf: u),
+            let confStr = String(data: confData, encoding: .utf8) else {
+                print("Load Conf file from \(u) Error.")
+                confLock.unlock()
+                return
+        }
+        let keyStr = key.rawValue as String
+        if confStr.contains(keyStr) {
+            var lines = confStr.split(separator: "\n", omittingEmptySubsequences: false)
+            lines.enumerated().filter {
+                $0.element.contains(keyStr)
+                }.forEach {
+                    guard $0.offset >= 0, $0.offset < lines.count else { return }
+                    if !lines[$0.offset].starts(with: "#") {
+                        lines[$0.offset] = "# " + lines[$0.offset]
+                    }
+            }
+            do {
+                try lines.joined(separator: "\n").write(to: u, atomically: true, encoding: .utf8)
+            } catch let error {
+                print(error)
+            }
+        }
+        confLock.unlock()
+    }
+    
     func updateConf(key: Aria2Option, with value: String) {
         confLock.lock()
         let u = URL(fileURLWithPath: aria2cOptions.path(for: .aria2cConf))
