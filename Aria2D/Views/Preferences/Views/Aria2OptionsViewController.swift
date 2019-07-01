@@ -120,6 +120,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     @IBOutlet weak var maxConcurrentDownloadsTextField: NSTextField!
     @IBOutlet weak var minSplitSize: NSTextField!
     @IBOutlet weak var splitSlider: NSSlider!
+    @IBOutlet weak var splitValueTextField: NSTextField!
     @IBOutlet weak var userAgentTextField: NSTextField!
     
     // MARK: - BitTorrent Options
@@ -134,10 +135,13 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         switch sender {
         case autoSaveIntervalSlider:
             Preferences.shared.updateConf(key: .autoSaveInterval, with: v)
+            autoSaveIntervalTextField.integerValue = sender.integerValue
         case saveSessionIntervalSlider:
             Preferences.shared.updateConf(key: .saveSessionInterval, with: v)
+            saveSessionIntervalTextField.integerValue = sender.integerValue
         case splitSlider:
             Preferences.shared.updateConf(key: .split, with: v)
+            splitValueTextField.integerValue = sender.integerValue
         default:
             break
         }
@@ -174,6 +178,8 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         rpcSecret.stringValue = confs[.rpcSecret] ?? ""
         
         maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3
+        splitSlider.integerValue = Int(confs[.split] ?? "16") ?? 16
+        splitValueTextField.integerValue = splitSlider.integerValue
     }
     
     func menuDidClose(_ menu: NSMenu) {

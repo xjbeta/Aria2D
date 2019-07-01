@@ -347,7 +347,7 @@
                                                                         <rect key="frame" x="204" y="26" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="600" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="S4g-Rd-79V"/>
                                                                         <connections>
-                                                                            <action selector="takeIntegerValueFrom:" target="JeP-3v-ClY" id="TvP-A9-MnS"/>
+                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="6z9-2i-l2Z"/>
                                                                         </connections>
                                                                     </slider>
                                                                 </gridCell>
@@ -376,7 +376,7 @@
                                                                         <rect key="frame" x="204" y="-2" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="600" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="kNC-2x-Ey8"/>
                                                                         <connections>
-                                                                            <action selector="takeIntegerValueFrom:" target="Wlq-Vh-Nzd" id="z6R-Ft-WEI"/>
+                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="lOD-9R-OlO"/>
                                                                         </connections>
                                                                     </slider>
                                                                 </gridCell>
@@ -633,14 +633,14 @@
                                                                         <rect key="frame" x="204" y="64" width="304" height="24"/>
                                                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="16" doubleValue="16" tickMarkPosition="above" numberOfTickMarks="16" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ufe-Na-gh6"/>
                                                                         <connections>
-                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="OoV-8z-bfK"/>
+                                                                            <action selector="sliderAction:" target="sV5-KT-6dJ" id="fqJ-y8-jUK"/>
                                                                         </connections>
                                                                     </slider>
                                                                 </gridCell>
                                                                 <gridCell row="vvY-d1-e1z" column="KWS-W4-LE4" id="h9k-mM-Rfd">
-                                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ogz-Y4-ckn">
-                                                                        <rect key="frame" x="510" y="66" width="44" height="17"/>
-                                                                        <textFieldCell key="cell" lineBreakMode="clipping" id="ohp-VU-Xb3">
+                                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rPp-yX-V7s">
+                                                                        <rect key="frame" x="510" y="66" width="37" height="17"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="lfB-S5-tct">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -850,6 +850,7 @@
                         <outlet property="seedRatioTextField" destination="weK-Ma-oNe" id="uW4-6T-J09"/>
                         <outlet property="seedTimeTextField" destination="tRY-hs-ZQr" id="d2G-tN-qyp"/>
                         <outlet property="splitSlider" destination="rFK-7q-QiV" id="Lqi-nu-L0z"/>
+                        <outlet property="splitValueTextField" destination="rPp-yX-V7s" id="ltU-pg-0LU"/>
                         <outlet property="userAgentTextField" destination="nN5-p7-SE1" id="wJc-VX-XsX"/>
                     </connections>
                 </viewController>
