@@ -173,18 +173,18 @@
             <objects>
                 <viewController id="sV5-KT-6dJ" customClass="Aria2OptionsViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zbU-S3-ojc">
-                        <rect key="frame" x="0.0" y="0.0" width="620" height="949"/>
+                        <rect key="frame" x="0.0" y="0.0" width="620" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7Z-TV-BcT">
-                                <rect key="frame" x="0.0" y="0.0" width="620" height="949"/>
+                                <rect key="frame" x="0.0" y="0.0" width="620" height="600"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Rjt-EX-FWu">
-                                    <rect key="frame" x="0.0" y="0.0" width="620" height="949"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="620" height="600"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDU-MA-CTq" userLabel="View" customClass="FlippedScrollDocView" customModule="Aria2D" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="620" height="1301"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="0.0" y="-88107" width="620" height="925"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-Zz-oSB">
                                                     <rect key="frame" x="20" y="20" width="580" height="885"/>
@@ -850,20 +850,20 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="s3i-Zd-oWh">
-                                    <rect key="frame" x="0.0" y="933" width="620" height="16"/>
+                                    <rect key="frame" x="0.0" y="584" width="620" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Q2N-0i-VSB">
-                                    <rect key="frame" x="604" y="0.0" width="16" height="949"/>
+                                    <rect key="frame" x="604" y="0.0" width="16" height="600"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="q7Z-TV-BcT" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" id="IVs-P0-4go"/>
-                            <constraint firstAttribute="trailing" secondItem="q7Z-TV-BcT" secondAttribute="trailing" id="Iqm-EZ-A7p"/>
-                            <constraint firstItem="q7Z-TV-BcT" firstAttribute="top" secondItem="zbU-S3-ojc" secondAttribute="top" id="ger-Sx-7bl"/>
-                            <constraint firstAttribute="bottom" secondItem="q7Z-TV-BcT" secondAttribute="bottom" id="ngm-9C-ELu"/>
+                            <constraint firstItem="q7Z-TV-BcT" firstAttribute="leading" secondItem="zbU-S3-ojc" secondAttribute="leading" id="Auc-D9-k2N"/>
+                            <constraint firstAttribute="bottom" secondItem="q7Z-TV-BcT" secondAttribute="bottom" id="OWA-so-8om"/>
+                            <constraint firstAttribute="trailing" secondItem="q7Z-TV-BcT" secondAttribute="trailing" id="b9U-zA-BqJ"/>
+                            <constraint firstItem="q7Z-TV-BcT" firstAttribute="top" secondItem="zbU-S3-ojc" secondAttribute="top" id="eas-XW-HbE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -896,7 +896,7 @@
                 <customObject id="BGN-mm-D8P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="YYM-4K-QuP" customClass="Preferences" customModule="Aria2D" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="2129" y="870.5"/>
+            <point key="canvasLocation" x="2129" y="696"/>
         </scene>
         <!--Aria2c Process Status View Controller-->
         <scene sceneID="aax-ep-Bmh">
