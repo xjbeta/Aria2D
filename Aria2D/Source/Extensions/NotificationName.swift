@@ -24,4 +24,6 @@ extension Notification.Name {
 	static let activateApp = Notification.Name("com.xjbeta.Aria2D.MainMenu.activateApp")
 
     static let updateGlobalStat = Notification.Name("com.xjbeta.Aria2D.Aria2.updateGlobalStat")
+    
+    static let updateBtTracker = Notification.Name("com.xjbeta.Aria2D.Aria2Options.updateBtTracker")
 }

@@ -105,18 +105,9 @@ class MainMenu: NSObject, NSMenuItemValidation {
 		DevMateKit.showFeedbackDialog(nil, in: .sheetMode)
 	}
 	
-    @IBAction func installWithHomebrew(_ sender: Any) {
-        NSAppleScript(source: """
-tell application "Terminal" to do script "brew install aria2"
-""")?.executeAndReturnError(nil)
-        NSWorkspace.shared.launchApplication("Terminal")
-    }
-    
-    @IBAction func installWithDMG(_ sender: Any) {
-        if let url = URL(string: "https://dl.devmate.com/com.aria2.aria2c/aria2c.dmg") {
-            NSWorkspace.shared.open(url)
-        }
-    }
+	@IBAction func activateApp(_ sender: Any) {
+		NotificationCenter.default.post(name: .activateApp, object: nil)
+	}
     
     @IBAction func help(_ sender: Any) {
         if let url = URL(string: "https://github.com/xjbeta/Aria2D") {

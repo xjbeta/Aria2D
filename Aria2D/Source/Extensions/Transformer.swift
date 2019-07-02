@@ -61,4 +61,27 @@ class PeerIDDecode: ValueTransformer {
     }
 }
 
-
+@objc(SaveIntervalTransformer)
+class SaveIntervalTransformer: ValueTransformer {
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let value = value as? Int else {
+            return ""
+        }
+        
+        if value == 0 {
+            return "0"
+        } else {
+            let formatter = DateComponentsFormatter()
+            formatter.zeroFormattingBehavior = .default
+            formatter.allowedUnits = [.minute, .second]
+            formatter.maximumUnitCount = 2
+            formatter.unitsStyle = .abbreviated
+            formatter.calendar?.locale = Locale(identifier: "en_US")
+            
+            var component = DateComponents()
+            component.second = value
+            
+            return formatter.string(for: component)
+        }
+    }
+}

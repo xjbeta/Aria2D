@@ -14,6 +14,7 @@ extension NSStoryboardSegue.Identifier {
 	static let showSetServersViewController = "showSetServersViewController"
 	static let showPCSView = "showPCSView"
 	static let showLoginView = "showLoginView"
+    static let showAria2cLog = "showAria2cLog"
 }
 
 
