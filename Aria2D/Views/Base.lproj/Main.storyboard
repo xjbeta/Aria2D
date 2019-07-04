@@ -2200,6 +2200,14 @@ CA
                         <rect key="frame" x="0.0" y="0.0" width="299" height="281"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <box boxType="custom" borderType="none" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="6bA-El-T5Z">
+                                <rect key="frame" x="0.0" y="0.0" width="299" height="281"/>
+                                <view key="contentView" id="NT3-wd-vhC">
+                                    <rect key="frame" x="0.0" y="0.0" width="299" height="281"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </box>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RVJ-FA-rsL">
                                 <rect key="frame" x="11" y="162" width="142" height="28"/>
                                 <subviews>
@@ -2243,12 +2251,16 @@ CA
                         </subviews>
                         <constraints>
                             <constraint firstItem="RVJ-FA-rsL" firstAttribute="centerY" secondItem="ba0-a3-J04" secondAttribute="centerY" multiplier="3:4" id="3Bd-Ca-tCo"/>
+                            <constraint firstAttribute="bottom" secondItem="6bA-El-T5Z" secondAttribute="bottom" id="98K-5J-JT4"/>
+                            <constraint firstAttribute="trailing" secondItem="6bA-El-T5Z" secondAttribute="trailing" id="9Mh-NX-BRK"/>
                             <constraint firstItem="RVJ-FA-rsL" firstAttribute="centerX" secondItem="ba0-a3-J04" secondAttribute="centerX" constant="-67.5" id="ABT-5k-TsW"/>
                             <constraint firstItem="glM-lB-En1" firstAttribute="leading" secondItem="RpO-iu-Eoq" secondAttribute="leading" constant="120" id="EqB-UU-I1Z"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="glM-lB-En1" secondAttribute="trailing" constant="20" symbolic="YES" id="Iy0-UM-pZ4"/>
+                            <constraint firstItem="6bA-El-T5Z" firstAttribute="top" secondItem="ba0-a3-J04" secondAttribute="top" id="Kce-WA-P40"/>
                             <constraint firstAttribute="trailing" secondItem="Ces-KS-MPm" secondAttribute="trailing" constant="8" id="Lhj-qe-9Tg"/>
                             <constraint firstAttribute="bottom" secondItem="Ces-KS-MPm" secondAttribute="bottom" constant="8" id="Lin-Md-uAk"/>
                             <constraint firstItem="Ces-KS-MPm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ba0-a3-J04" secondAttribute="leading" constant="20" symbolic="YES" id="N6A-Jh-HG8"/>
+                            <constraint firstItem="6bA-El-T5Z" firstAttribute="leading" secondItem="ba0-a3-J04" secondAttribute="leading" id="V7n-oJ-Nuc"/>
                             <constraint firstItem="glM-lB-En1" firstAttribute="top" secondItem="RpO-iu-Eoq" secondAttribute="bottom" id="bx2-rr-diH"/>
                         </constraints>
                         <connections>
