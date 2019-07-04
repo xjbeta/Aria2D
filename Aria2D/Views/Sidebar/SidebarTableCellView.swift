@@ -33,10 +33,14 @@ class SidebarTableCellView: NSTableCellView {
     }
     
     func setImage(_ item: SidebarItem) {
-        if isSelected || isMouseInside {
-            imageView?.image = NSImage(named: item.rawValue + "Selected")
+        imageView?.image = nil
+        var image = NSImage(named: item.rawValue)
+        if #available(OSX 10.14, *) {
+            imageView?.image = image
+            imageView?.contentTintColor = isSelected || isMouseInside ? .systemBlue : .tertiaryLabelColor
         } else {
-            imageView?.image = NSImage(named: item.rawValue)
+            image = image?.tint(color: isSelected || isMouseInside ? .systemBlue : .tertiaryLabelColor)
+            imageView?.image = image
         }
     }
 	
@@ -57,4 +61,21 @@ class SidebarTableCellView: NSTableCellView {
 		                               owner: self,
 		                               userInfo: nil))
 	}
+}
+
+
+extension NSImage {
+    func tint(color: NSColor) -> NSImage {
+        let image = self.copy() as! NSImage
+        image.lockFocus()
+
+        color.set()
+
+        let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
+        imageRect.fill(using: .sourceAtop)
+
+        image.unlockFocus()
+
+        return image
+    }
 }
