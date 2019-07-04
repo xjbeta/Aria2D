@@ -2060,7 +2060,7 @@ CA
         <scene sceneID="GH1-20-efG">
             <objects>
                 <viewController showSeguePresentationStyle="single" id="aDS-je-EVP" customClass="SidebarViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
-                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" id="jES-9n-Xr8">
+                    <visualEffectView key="view" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" id="jES-9n-Xr8">
                         <rect key="frame" x="0.0" y="0.0" width="68" height="520"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -2326,7 +2326,7 @@ CA
                             <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zgn-mS-pSY">
                                 <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="8Y5-lV-8An">
+                                <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="8Y5-lV-8An">
                                     <rect key="frame" x="0.0" y="0.0" width="665" height="520"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
