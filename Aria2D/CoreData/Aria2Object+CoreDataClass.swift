@@ -14,10 +14,7 @@ import CoreData
 @objc(Aria2Object)
 public class Aria2Object: NSManagedObject, Decodable {
 
-    var waitTimer: WaitTimer?
-    var timerLimit = 0
-    
-    var nameSaved: String?
+    private var nameSaved: String?
     @objc dynamic var name: String {
         if let name = nameSaved {
             return name
@@ -31,27 +28,6 @@ public class Aria2Object: NSManagedObject, Decodable {
             nameSaved = name
             return name
         } else {
-            if waitTimer == nil {
-                Log("Init file name timer for \(gid)")
-                waitTimer = WaitTimer(timeOut: .milliseconds(500), queue: .global()) { [weak self] in
-                    guard let downloadSpeed = self?.downloadSpeed,
-                        let gid = self?.gid,
-                        self?.nameSaved == nil else { return }
-                    Log("Update file name for \(gid)")
-                    if let timerLimit = self?.timerLimit, timerLimit >= 10 {
-                        Log("Stop file name timer for \(gid)")
-                        self?.waitTimer?.stop()
-                        self?.waitTimer = nil
-                    } else if downloadSpeed > 0 {
-                        Aria2.shared.initData(gid)
-                        self?.timerLimit += 1
-                    } else if self?.timerLimit == 0 {
-                        Aria2.shared.initData(gid)
-                        self?.timerLimit += 1
-                    }
-                }
-                waitTimer?.run()
-            }
             return "unknown"
         }
     }
@@ -348,6 +324,14 @@ public class Aria2Object: NSManagedObject, Decodable {
         connections = Int64(status.connections)
         dir = status.dir
         bittorrent?.update(with: status.bittorrent)
+        updateUnknownTaskName()
+    }
+    
+    func updateUnknownTaskName() {
+        if name == "unknown", nameSaved == nil, status == Status.active.rawValue {
+            Log("InitData for \(gid)")
+            Aria2.shared.initData(gid)
+        }
     }
     
     
