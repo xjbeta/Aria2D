@@ -33,17 +33,16 @@ public class Aria2Object: NSManagedObject, Decodable {
         } else {
             if waitTimer == nil {
                 Log("Init file name timer for \(gid)")
-                waitTimer = WaitTimer(timeOut: .seconds(1)) { [weak self] in
-                    guard let name = self?.name,
-                        let downloadSpeed = self?.downloadSpeed,
-                        let gid = self?.gid else { return }
+                waitTimer = WaitTimer(timeOut: .milliseconds(500), queue: .global()) { [weak self] in
+                    guard let downloadSpeed = self?.downloadSpeed,
+                        let gid = self?.gid,
+                        self?.nameSaved == nil else { return }
                     Log("Update file name for \(gid)")
-                    if name != "unknown" || self?.timerLimit == 5 {
+                    if let timerLimit = self?.timerLimit, timerLimit >= 10 {
                         Log("Stop file name timer for \(gid)")
                         self?.waitTimer?.stop()
                         self?.waitTimer = nil
-                    } else if downloadSpeed > 0,
-                        name == "unknown" {
+                    } else if downloadSpeed > 0 {
                         Aria2.shared.initData(gid)
                         self?.timerLimit += 1
                     } else if self?.timerLimit == 0 {
