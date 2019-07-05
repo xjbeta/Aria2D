@@ -14,12 +14,6 @@ class MainSplitView: NSSplitView {
         super.draw(dirtyRect)
     }
     
-    
-    override var dividerThickness: CGFloat {
-        return 0
-    }
-    
-    
     override var mouseDownCanMoveWindow: Bool {
         return true
     }

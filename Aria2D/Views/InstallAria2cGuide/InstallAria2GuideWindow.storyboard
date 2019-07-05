@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Icc-JI-qsf">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="Yd8-Zb-eiZ">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="Icc-JI-qsf" customClass="InstallAria2GuideWindowController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="61x-hZ-wWs">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="450" height="180"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <value key="minSize" type="size" width="450" height="180"/>
+                        <connections>
+                            <outlet property="delegate" destination="Icc-JI-qsf" id="DUC-hD-uA8"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="JYm-rm-Nbn" kind="relationship" relationship="window.shadowedContentViewController" id="cPn-sa-fEx"/>
+                    </connections>
+                </windowController>
+                <customObject id="hW1-ZK-E6D" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1901" y="-1074"/>
+        </scene>
+        <!--Installation Method View Controller-->
+        <scene sceneID="W10-yz-Lm2">
+            <objects>
+                <viewController id="JYm-rm-Nbn" customClass="InstallationMethodViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="xZJ-bb-VZh">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="D1D-nb-J3V">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Tab" identifier="1" id="My8-Fh-PJ0" userLabel="method">
+                                        <view key="view" id="Ban-T8-bey">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="25" columnSpacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="9k3-bO-VT3">
+                                                    <rect key="frame" x="87" y="40" width="277" height="99"/>
+                                                    <rows>
+                                                        <gridRow yPlacement="fill" id="9aZ-kZ-9bM"/>
+                                                        <gridRow yPlacement="fill" id="FBB-uJ-S1e"/>
+                                                        <gridRow yPlacement="fill" id="tl7-Xx-S0f"/>
+                                                    </rows>
+                                                    <columns>
+                                                        <gridColumn id="uhi-Zl-5Z9"/>
+                                                        <gridColumn xPlacement="fill" id="cEK-41-B19"/>
+                                                    </columns>
+                                                    <gridCells>
+                                                        <gridCell row="9aZ-kZ-9bM" column="uhi-Zl-5Z9" id="zpj-8x-fMu">
+                                                            <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k9v-dB-VaZ">
+                                                                <rect key="frame" x="-2" y="82" width="107" height="17"/>
+                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Install aria2 with:" id="r1O-by-SIF">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
+                                                        </gridCell>
+                                                        <gridCell row="9aZ-kZ-9bM" column="cEK-41-B19" id="iN1-YM-Cem">
+                                                            <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I5D-ut-RfP">
+                                                                <rect key="frame" x="148" y="81" width="129" height="18"/>
+                                                                <buttonCell key="cell" type="inline" title="aria2 official website" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wpc-gB-m6Y">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="officeSite:" target="JYm-rm-Nbn" id="8ia-5Y-XWh"/>
+                                                                </connections>
+                                                            </button>
+                                                        </gridCell>
+                                                        <gridCell row="FBB-uJ-S1e" column="uhi-Zl-5Z9" id="dj4-8J-T2m"/>
+                                                        <gridCell row="FBB-uJ-S1e" column="cEK-41-B19" id="DFg-ib-THO">
+                                                            <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z9P-FT-2fF">
+                                                                <rect key="frame" x="148" y="40" width="129" height="17"/>
+                                                                <buttonCell key="cell" type="inline" title="HomeBrew" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zhv-JJ-JgU">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="homeBrew:" target="JYm-rm-Nbn" id="Amw-83-g2P"/>
+                                                                </connections>
+                                                            </button>
+                                                        </gridCell>
+                                                        <gridCell row="tl7-Xx-S0f" column="uhi-Zl-5Z9" id="Z94-Bw-GZ6"/>
+                                                        <gridCell row="tl7-Xx-S0f" column="cEK-41-B19" id="7lQ-Lh-iJj">
+                                                            <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="plT-pE-syj">
+                                                                <rect key="frame" x="148" y="-1" width="129" height="17"/>
+                                                                <buttonCell key="cell" type="inline" title="A dmg file" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RBx-6B-pqi">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="dmgFile:" target="JYm-rm-Nbn" id="xue-zF-gaq"/>
+                                                                </connections>
+                                                            </button>
+                                                        </gridCell>
+                                                    </gridCells>
+                                                </gridView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9k3-bO-VT3" firstAttribute="centerX" secondItem="Ban-T8-bey" secondAttribute="centerX" id="glV-OC-h09"/>
+                                                <constraint firstItem="9k3-bO-VT3" firstAttribute="centerY" secondItem="Ban-T8-bey" secondAttribute="centerY" id="mUH-5C-er6"/>
+                                                <constraint firstItem="9k3-bO-VT3" firstAttribute="top" secondItem="Ban-T8-bey" secondAttribute="top" constant="40" id="t53-jn-UE7"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="View" identifier="2" id="bcM-dR-6Di" userLabel="homebrew">
+                                        <view key="view" id="SlS-Ng-KEl">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="181"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erK-Nh-iLc">
+                                                    <rect key="frame" x="110" y="102" width="230" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="2xi-PQ-kTv"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="brew install aria2" drawsBackground="YES" id="OfZ-E7-XNv">
+                                                        <font key="font" metaFont="system" size="27"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fct-yX-I76">
+                                                    <rect key="frame" x="161" y="49" width="128" height="32"/>
+                                                    <buttonCell key="cell" type="push" title="Open Terminal" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q35-57-5lN">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="openTerminal:" target="JYm-rm-Nbn" id="XdL-Na-I21"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fct-yX-I76" firstAttribute="centerX" secondItem="SlS-Ng-KEl" secondAttribute="centerX" id="H1D-aP-YCV"/>
+                                                <constraint firstItem="fct-yX-I76" firstAttribute="top" secondItem="erK-Nh-iLc" secondAttribute="bottom" constant="25" id="b5p-yr-YWo"/>
+                                                <constraint firstItem="erK-Nh-iLc" firstAttribute="centerY" secondItem="SlS-Ng-KEl" secondAttribute="centerY" constant="-30" id="eOA-tO-siJ"/>
+                                                <constraint firstItem="erK-Nh-iLc" firstAttribute="centerX" secondItem="SlS-Ng-KEl" secondAttribute="centerX" id="eoy-Jh-EsF"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Item 2" identifier="" id="ABW-71-gau" userLabel="dmgfile">
+                                        <view key="view" id="PPm-RR-hHh">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kkX-Zw-hd0">
+                                                    <rect key="frame" x="98" y="87" width="255" height="32"/>
+                                                    <buttonCell key="cell" type="push" title="How to install aria2 with a dmg file?" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wY2-Sq-2uz">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="dmgHelp:" target="JYm-rm-Nbn" id="g1T-oy-OUs"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kkX-Zw-hd0" firstAttribute="centerY" secondItem="PPm-RR-hHh" secondAttribute="centerY" constant="-15" id="COs-1E-Ad9"/>
+                                                <constraint firstItem="kkX-Zw-hd0" firstAttribute="centerX" secondItem="PPm-RR-hHh" secondAttribute="centerX" id="Vkt-xF-z9e"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="D1D-nb-J3V" firstAttribute="top" secondItem="xZJ-bb-VZh" secondAttribute="top" id="1G5-qw-fuc"/>
+                            <constraint firstAttribute="bottom" secondItem="D1D-nb-J3V" secondAttribute="bottom" id="ABv-CJ-kMg"/>
+                            <constraint firstItem="D1D-nb-J3V" firstAttribute="leading" secondItem="xZJ-bb-VZh" secondAttribute="leading" id="aTr-FR-XsO"/>
+                            <constraint firstAttribute="trailing" secondItem="D1D-nb-J3V" secondAttribute="trailing" id="uJH-sA-0eR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tabView" destination="D1D-nb-J3V" id="WKJ-OQ-TrA"/>
+                    </connections>
+                </viewController>
+                <customObject id="S7J-R9-4gZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2480" y="-1087"/>
+        </scene>
+    </scenes>
+</document>

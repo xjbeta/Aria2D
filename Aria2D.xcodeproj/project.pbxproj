@@ -17,6 +17,7 @@
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
 		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
 		011BEFC31E83D95000DCE205 /* ChangeOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */; };
+		011D5588220D4FBE00FCE1DE /* FlippedScrollDocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */; };
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
 		011E4D2F21E8BE0100997633 /* Aria2OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */; };
 		011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */; };
@@ -37,8 +38,11 @@
 		012CBD781F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */; };
 		0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130D74D1F13E9F500F11DBC /* JSONModels.swift */; };
 		013817671D238E0100E0F926 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013817661D238E0100E0F926 /* MainWindowController.swift */; };
+		01391641224611C700233836 /* Aria2cLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01391640224611C700233836 /* Aria2cLogViewController.swift */; };
 		013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */; };
 		013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9F1E51B305008D370D /* SetServersViewController.swift */; };
+		013EF1602258557600E4D7D8 /* InstallationMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */; };
+		013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */; };
 		01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; };
 		01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0147489621567406005014D3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0147488921566FBB005014D3 /* PromiseKit.framework */; };
@@ -59,6 +63,7 @@
 		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
+		01842A4F2233672700BA77CB /* Aria2cProcessStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
 		018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E895F1D34FFA8000C71B0 /* Aria2c.swift */; };
@@ -78,8 +83,11 @@
 		01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350B212871F700E5C88C /* Aria2Methods.swift */; };
 		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
+		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
+		01E410B222CA3CED00864118 /* InstallAria2GuideWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E410B122CA3CED00864118 /* InstallAria2GuideWindow.storyboard */; };
+		01E410B422CA427500864118 /* InstallAria2GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */; };
 		01E9068B219BF70900928580 /* Aria2D.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E90689219BF70800928580 /* Aria2D.xcdatamodeld */; };
 		01E906AF219C518B00928580 /* Aria2Object+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906A7219C518B00928580 /* Aria2Object+CoreDataClass.swift */; };
 		01E906B0219C518B00928580 /* Aria2Object+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906A8219C518B00928580 /* Aria2Object+CoreDataProperties.swift */; };
@@ -136,6 +144,7 @@
 		0115D4321E04F09F003EBFCD /* SubString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubString.swift; sourceTree = "<group>"; };
 		0115D4341E06AD99003EBFCD /* Aria2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2.swift; sourceTree = "<group>"; };
 		011BEFC21E83D95000DCE205 /* ChangeOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionViewController.swift; sourceTree = "<group>"; };
+		011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippedScrollDocView.swift; sourceTree = "<group>"; };
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
 		011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cOptions.swift; sourceTree = "<group>"; };
@@ -157,8 +166,11 @@
 		012CBD741F6CC57F00EFD1D4 /* NSTableViewPopoverSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableViewPopoverSegue.swift; sourceTree = "<group>"; };
 		0130D74D1F13E9F500F11DBC /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
 		013817661D238E0100E0F926 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		01391640224611C700233836 /* Aria2cLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cLogViewController.swift; sourceTree = "<group>"; };
 		013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListArrayController.swift; sourceTree = "<group>"; };
 		013ABB9F1E51B305008D370D /* SetServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetServersViewController.swift; sourceTree = "<group>"; };
+		013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationMethodViewController.swift; sourceTree = "<group>"; };
+		013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "DMG File Installation Guide.pdf"; sourceTree = "<group>"; };
 		0147488921566FBB005014D3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		01474892215673C6005014D3 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
 		0147EDBD1D21FAD800FB4324 /* Aria2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +192,7 @@
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cProcessStatusViewController.swift; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		018E895F1D34FFA8000C71B0 /* Aria2c.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2c.swift; sourceTree = "<group>"; };
@@ -201,8 +214,11 @@
 		01A53518212943F500E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		01A5351C2129512000E5C88C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
+		01E410B122CA3CED00864118 /* InstallAria2GuideWindow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InstallAria2GuideWindow.storyboard; sourceTree = "<group>"; };
+		01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallAria2GuideWindowController.swift; sourceTree = "<group>"; };
 		01E9068A219BF70800928580 /* Aria2D.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aria2D.xcdatamodel; sourceTree = "<group>"; };
 		01E906A7219C518B00928580 /* Aria2Object+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aria2Object+CoreDataClass.swift"; sourceTree = "<group>"; };
 		01E906A8219C518B00928580 /* Aria2Object+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aria2Object+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -286,6 +302,16 @@
 			path = StatusView;
 			sourceTree = "<group>";
 		};
+		013EF15E2258551C00E4D7D8 /* InstallAria2cGuide */ = {
+			isa = PBXGroup;
+			children = (
+				013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */,
+				01E410B122CA3CED00864118 /* InstallAria2GuideWindow.storyboard */,
+				01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */,
+			);
+			path = InstallAria2cGuide;
+			sourceTree = "<group>";
+		};
 		0147EDB41D21FAD800FB4324 = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +342,7 @@
 				0182E60C1EAEE90000E08454 /* Log */,
 				016FDC781E7B9BD600E01B35 /* InfoView */,
 				016C405A1DA27C6200EB27A2 /* AboutAria2D */,
+				013EF15E2258551C00E4D7D8 /* InstallAria2cGuide */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -384,6 +411,10 @@
 				013ABB9D1E4C588E008D370D /* ServerListArrayController.swift */,
 				016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */,
 				011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */,
+				01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */,
+				01391640224611C700233836 /* Aria2cLogViewController.swift */,
+				01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */,
+				011D5587220D4FBE00FCE1DE /* FlippedScrollDocView.swift */,
 				011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */,
 			);
 			path = Views;
@@ -403,6 +434,7 @@
 			children = (
 				014D3B551EDBF2D000E3ABC0 /* Aria2D.conf */,
 				011E102B1D478EB300BD2E71 /* Assets.xcassets */,
+				013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */,
 				0147EDC91D21FAD800FB4324 /* Info.plist */,
 				01A5351D2129512000E5C88C /* Localizable.strings */,
 			);
@@ -524,7 +556,7 @@
 				TargetAttributes = {
 					0147EDBC1D21FAD800FB4324 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -545,10 +577,9 @@
 			};
 			buildConfigurationList = 0147EDB81D21FAD800FB4324 /* Build configuration list for PBXProject "Aria2D" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -568,11 +599,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E410B222CA3CED00864118 /* InstallAria2GuideWindow.storyboard in Resources */,
 				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
+				013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,8 +639,10 @@
 				012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */,
 				0130D74E1F13E9F500F11DBC /* JSONModels.swift in Sources */,
 				01E906B6219C518B00928580 /* Aria2File+CoreDataProperties.swift in Sources */,
+				01391641224611C700233836 /* Aria2cLogViewController.swift in Sources */,
 				0147EDDE1D2381EA00FB4324 /* MainListViewController.swift in Sources */,
 				013817671D238E0100E0F926 /* MainWindowController.swift in Sources */,
+				011D5588220D4FBE00FCE1DE /* FlippedScrollDocView.swift in Sources */,
 				012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */,
 				018E89621D34FFB1000C71B0 /* ViewControllersManager.swift in Sources */,
 				01E906C1219C682700928580 /* Aria2List+CoreDataClass.swift in Sources */,
@@ -627,6 +662,7 @@
 				018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */,
 				0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */,
 				01E906B3219C518B00928580 /* Aria2Uri+CoreDataClass.swift in Sources */,
+				01E410B422CA427500864118 /* InstallAria2GuideWindowController.swift in Sources */,
 				012CBD6F1F6CC55A00EFD1D4 /* StatusBitfieldTableCellView.swift in Sources */,
 				012CBD771F6CC57F00EFD1D4 /* InfoViewController.swift in Sources */,
 				016C40591DA27C5B00EB27A2 /* AboutAria2DWindow.swift in Sources */,
@@ -635,6 +671,7 @@
 				018E89641D34FFCC000C71B0 /* EnumList.swift in Sources */,
 				018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */,
 				012CBD6D1F6CC55A00EFD1D4 /* StatusCollectionViewItemView.swift in Sources */,
+				01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */,
 				010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */,
 				016A3E381E8A9FA100CC1999 /* Aria2Option.swift in Sources */,
 				012B57302159267400D1AC03 /* FileNode.swift in Sources */,
@@ -652,6 +689,7 @@
 				012A1BB21E174860007C4B46 /* Transformer.swift in Sources */,
 				013ABB9E1E4C588E008D370D /* ServerListArrayController.swift in Sources */,
 				019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */,
+				01842A4F2233672700BA77CB /* Aria2cProcessStatusViewController.swift in Sources */,
 				01E906AF219C518B00928580 /* Aria2Object+CoreDataClass.swift in Sources */,
 				018E896F1D350075000C71B0 /* PreferencesTabViewController.swift in Sources */,
 				01E906B5219C518B00928580 /* Aria2File+CoreDataClass.swift in Sources */,
@@ -669,6 +707,7 @@
 				018E89701D350075000C71B0 /* Preferences.swift in Sources */,
 				01E906B2219C518B00928580 /* Aria2Bittorrent+CoreDataProperties.swift in Sources */,
 				01E906C8219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift in Sources */,
+				013EF1602258557600E4D7D8 /* InstallationMethodViewController.swift in Sources */,
 				011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */,
 				018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */,
 				01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */,
@@ -851,7 +890,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aria2D/Source/Aria2D-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -886,7 +925,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Aria2D/Source/Aria2D-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

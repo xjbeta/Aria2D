@@ -10,12 +10,32 @@ import Cocoa
 
 class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     
+// MARK: - Aria2c Process Status
+    @objc var autoStartAria2c: Bool {
+        get {
+            return Preferences.shared.autoStartAria2c
+        }
+        set {
+            Preferences.shared.autoStartAria2c = newValue
+            initConfsView()
+        }
+    }
+    
+    
+// MARK: - Aria2 paths And save interval
+
     @IBOutlet var aria2cPathPopUpButton: NSPopUpButton!
     @IBOutlet weak var aria2cStatusImageView: NSImageView!
     @IBAction func showAria2cInFinder(_ sender: Any) {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: Preferences.shared.aria2cOptions.path(for: .aria2c))])
         initPathMenu()
     }
+    
+    @IBAction func installAria2Guide(_ sender: NSMenuItem) {
+        performSegue(withIdentifier: .init("ShowInstallAria2GuideSegue"), sender: sender)
+        initPathMenu()
+    }
+    
     @IBOutlet weak var aria2cConfsGridView: NSGridView!
     lazy var selectAria2cPanel = NSOpenPanel()
     @IBAction func selectAria2c(_ sender: Any) {
@@ -63,22 +83,84 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         }
     }
     
-    @objc var autoStartAria2c: Bool {
-        get {
-            return Preferences.shared.autoStartAria2c
-        }
-        set {
-            Preferences.shared.autoStartAria2c = newValue
-            initConfsView()
+    @IBOutlet weak var autoSaveIntervalSlider: NSSlider!
+    @IBOutlet weak var saveSessionIntervalSlider: NSSlider!
+    @IBOutlet weak var autoSaveIntervalTextField: NSTextField!
+    @IBOutlet weak var saveSessionIntervalTextField: NSTextField!
+    
+    // MARK: - Aria2 RPC
+
+    @IBOutlet weak var enableRpcButton: NSButton!
+    @IBOutlet weak var rpcListenAllButton: NSButton!
+    @IBOutlet weak var rpcListenPortTextField: NSTextField!
+    @IBOutlet weak var rpcSecretTextField: NSSecureTextField!
+    
+    // MARK: - Normal Download Options
+    
+    @IBOutlet weak var dirPopUpButton: NSPopUpButton!
+    @IBOutlet weak var dirMenuItem: NSMenuItem!
+    
+    @IBAction func showDirInFinder(_ sender: Any) {
+        if let dir = Preferences.shared.aria2Conf[.dir] {
+            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: dir)])
         }
     }
     
-    @objc var restartAria2c: Bool {
-        get {
-            return Preferences.shared.restartAria2c
+    lazy var selectDirPanel = NSOpenPanel()
+    @IBAction func selectDir(_ sender: Any) {
+        selectDirPanel.prompt = "Select"
+        selectDirPanel.canChooseFiles = false
+        selectDirPanel.canChooseDirectories = true
+        selectDirPanel.allowsMultipleSelection = false
+        
+        if let window = view.window {
+            selectDirPanel.beginSheetModal(for: window) { result in
+                if result == .OK, let url = self.selectDirPanel.url {
+                    Preferences.shared.updateConf(key: .dir, with: url.path)
+                }
+                self.initDirMenu()
+            }
         }
-        set {
-            Preferences.shared.restartAria2c = newValue
+    }
+    
+    @IBOutlet weak var maxConcurrentDownloadsTextField: NSTextField!
+    @IBOutlet weak var minSplitSizeTextField: NSTextField!
+    @IBOutlet weak var splitSlider: NSSlider!
+    @IBOutlet weak var splitValueTextField: NSTextField!
+    @IBOutlet weak var userAgentTextField: NSTextField!
+    
+    // MARK: - BitTorrent Options
+    
+    @IBOutlet weak var btTrackerTextField: NSTextField!
+    @IBOutlet weak var peerAgentTextField: NSTextField!
+    @IBOutlet weak var seedRatioTextField: NSTextField!
+    @IBOutlet weak var seedTimeTextField: NSTextField!
+    
+    @IBAction func sliderAction(_ sender: NSSlider) {
+        let v = "\(sender.integerValue)"
+        switch sender {
+        case autoSaveIntervalSlider:
+            Preferences.shared.updateConf(key: .autoSaveInterval, with: v)
+            autoSaveIntervalTextField.integerValue = sender.integerValue
+        case saveSessionIntervalSlider:
+            Preferences.shared.updateConf(key: .saveSessionInterval, with: v)
+            saveSessionIntervalTextField.integerValue = sender.integerValue
+        case splitSlider:
+            Preferences.shared.updateConf(key: .split, with: v)
+            splitValueTextField.integerValue = sender.integerValue
+        default:
+            break
+        }
+    }
+    @IBAction func checkButtonAction(_ sender: NSButton) {
+        let v = "\(sender.state == .on)"
+        switch sender {
+        case enableRpcButton:
+            Preferences.shared.updateConf(key: .enableRpc, with: v)
+        case rpcListenAllButton:
+            Preferences.shared.updateConf(key: .rpcListenAll, with: v)
+        default:
+            break
         }
     }
     
@@ -86,7 +168,41 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         super.viewDidLoad()
         initPathMenu()
         initConfMenu()
+        initDirMenu()
         initConfsView()
+        
+        let confs = Preferences.shared.aria2Conf
+        
+        autoSaveIntervalSlider.integerValue = Int(confs[.autoSaveInterval] ?? "60") ?? 60
+        saveSessionIntervalSlider.integerValue = Int(confs[.saveSession] ?? "60") ?? 60
+        autoSaveIntervalTextField.integerValue = autoSaveIntervalSlider.integerValue
+        saveSessionIntervalTextField.integerValue = saveSessionIntervalSlider.integerValue
+        
+        enableRpcButton.state = confs[.enableRpc] == "true" ? .on : .off
+        rpcListenAllButton.state = confs[.rpcListenAll] == "true" ? .on : .off
+        rpcListenPortTextField.stringValue = confs[.rpcListenPort] ?? "2333"
+        rpcSecretTextField.stringValue = confs[.rpcSecret] ?? ""
+        
+        maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3
+        splitSlider.integerValue = Int(confs[.split] ?? "16") ?? 16
+        splitValueTextField.integerValue = splitSlider.integerValue
+        minSplitSizeTextField.stringValue = confValue(for: .minSplitSize)
+        userAgentTextField.stringValue = confValue(for: .userAgent)
+        
+        btTrackerTextField.stringValue = confValue(for: .btTracker)
+        peerAgentTextField.stringValue = confValue(for: .peerAgent)
+        seedRatioTextField.stringValue = confValue(for: .seedRatio)
+        seedTimeTextField.stringValue = confValue(for: .seedTime)
+        
+        NotificationCenter.default.addObserver(forName: .updateBtTracker, object: nil, queue: .main) { [weak self] _ in
+            self?.btTrackerTextField.stringValue = self?.confValue(for: .btTracker) ?? ""
+        }
+    }
+    
+    func confValue(for key: Aria2Option) -> String {
+        let confs = Preferences.shared.aria2Conf
+        let defaultConfs = Preferences.shared.defaultAria2cOptionsDic
+        return confs[key] ?? defaultConfs[key] ?? ""
     }
     
     func menuDidClose(_ menu: NSMenu) {
@@ -105,15 +221,17 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
             default:
                 initConfMenu()
             }
+        } else if menu == dirPopUpButton.menu {
+            initDirMenu()
         }
     }
     
     func initConfsView() {
-        aria2cConfsGridView.subviews.forEach {
-            if let control = $0 as? NSControl {
-                control.isEnabled = autoStartAria2c
-            }
-        }
+//        aria2cConfsGridView.subviews.forEach {
+//            if let control = $0 as? NSControl {
+//                control.isEnabled = autoStartAria2c
+//            }
+//        }
     }
     
     
@@ -124,7 +242,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         aria2cStatusImageView.image = Aria2.shared.aria2c.checkCustomPath() ? NSImage(named: "NSStatusAvailable") : NSImage(named: "NSStatusUnavailable")
         
         if let menu = aria2cPathPopUpButton.menu {
-            while menu.items.count > 3 {
+            while menu.items.count > 5 {
                 aria2cPathPopUpButton.menu?.removeItem(at: 0)
             }
             
@@ -151,20 +269,37 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         let options = Preferences.shared.aria2cOptions
         let index = options.selectedIndex(.aria2cConf)
         let path = Preferences.shared.aria2cOptions.customAria2cConf
-        if let button = aria2cConfPathPopUpButton {
-            if index == 1 {
-                if button.itemArray.count == 5 {
-                    button.item(at: 1)?.title = path
-                } else if button.itemArray.count == 4 {
-                    button.insertItem(withTitle: path, at: 1)
-                }
+        guard let button = aria2cConfPathPopUpButton else {
+            return
+        }
+        
+        if index == 1 {
+            if button.itemArray.count == 5 {
+                button.item(at: 1)?.title = path
+            } else if button.itemArray.count == 4 {
+                button.insertItem(withTitle: path, at: 1)
             }
-            DispatchQueue.main.async {
-                button.selectItem(at: index)
-            }
+        }
+        DispatchQueue.main.async {
+            button.selectItem(at: index)
         }
     }
     
+    func initDirMenu() {
+        DispatchQueue.main.async {
+            self.dirPopUpButton.selectItem(at: 0)
+        }
+        
+        guard let dir = Preferences.shared.aria2Conf[.dir] else {
+            dirMenuItem.title = "Unknown"
+            return
+        }
+
+        let image = NSWorkspace.shared.icon(forFile: dir)
+        image.size = NSSize(width: 16, height: 16)
+        dirMenuItem.image = image
+        dirMenuItem.title = dir.lastPathComponent
+    }
 }
 
 extension Aria2OptionsViewController: NSOpenSavePanelDelegate {
@@ -178,4 +313,44 @@ extension Aria2OptionsViewController: NSOpenSavePanelDelegate {
         return false
     }
     
+}
+
+extension Aria2OptionsViewController: NSControlTextEditingDelegate {
+    func controlTextDidEndEditing(_ obj: Notification) {
+        guard let obj = obj.object as? NSObject,
+            let v = (obj as? NSTextField)?.stringValue else { return }
+        
+        var key: Aria2Option?
+        switch obj {
+        case rpcListenPortTextField:
+            key = .rpcListenPort
+        case rpcSecretTextField:
+            key = .rpcSecret
+        case maxConcurrentDownloadsTextField:
+            key = .maxConcurrentDownloads
+        case minSplitSizeTextField:
+            key = .minSplitSize
+        case userAgentTextField:
+            key = .userAgent
+        case btTrackerTextField:
+            key = .btTracker
+        case peerAgentTextField:
+            key = .peerAgent
+        case seedRatioTextField:
+            key = .seedRatio
+        case seedTimeTextField:
+            key = .seedTime
+        default:
+            break
+        }
+        
+        guard let k = key else { return }
+        
+        // ignore empty value
+        if v == "" {
+            Preferences.shared.deleteConfObject(k)
+        } else {
+            Preferences.shared.updateConf(key: k, with: v)
+        }
+    }
 }
