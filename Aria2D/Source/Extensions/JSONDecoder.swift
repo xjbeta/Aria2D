@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension Data {
 	func decode<T>(_ type: T.Type,

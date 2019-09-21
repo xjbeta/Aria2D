@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Cocoa
+
 extension NSStoryboardSegue.Identifier {
     static let showInfoWindow = "showInfoWindow"
 	static let showNewTaskViewController = "showNewTaskViewController"
