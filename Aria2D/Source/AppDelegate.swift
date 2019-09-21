@@ -71,7 +71,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Preferences.shared.setLaunchServer()
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         
-        self.setDevMate()
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
         Aria2.shared.aria2c.autoStart()
@@ -236,30 +235,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // If we got here, it is time to quit.
         return .terminateNow
     }
-
-    
-}
-
-extension AppDelegate: DevMateKitDelegate {
-	
-	func setDevMate() {
-		#if DEBUG
-			DMKitDebugAddDevMateMenu()
-		#endif
-		//DevMate
-        if let url = logUrl {
-            DevMateKit.setupCustomLogFileURLs([url as NSURL,
-                                               NSURL(fileURLWithPath: Aria2.shared.aria2c.logPath)])
-        }
-        
-		DevMateKit.sendTrackingReport(nil, delegate: self)
-		
-        DevMateKit.setupIssuesController(self, reportingUnhandledIssues: true)
-		
-	}
-	
-    @objc func feedbackController(_ controller: DMFeedbackController, parentWindowFor mode: DMFeedbackMode) -> NSWindow {
-        return mainWindowController.window!
-	}
-	
 }
