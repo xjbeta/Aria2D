@@ -22,6 +22,8 @@
 		011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012B57302159267400D1AC03 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572F2159267400D1AC03 /* FileNode.swift */; };
+		012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; };
+		012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
@@ -66,9 +68,9 @@
 		018E89701D350075000C71B0 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896C1D350075000C71B0 /* Preferences.swift */; };
 		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
+		0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */; };
 		019941B02335FA940045FDE9 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 019941AF2335FA940045FDE9 /* PromiseKit */; };
 		019941B32335FAB70045FDE9 /* PMKFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 019941B22335FAB70045FDE9 /* PMKFoundation */; };
-		019941B62335FB220045FDE9 /* AppUpdater in Frameworks */ = {isa = PBXBuildFile; productRef = 019941B52335FB220045FDE9 /* AppUpdater */; };
 		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */; };
@@ -108,6 +110,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */,
+				012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +121,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */,
 				011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */,
 			);
 			name = "Copy Files";
@@ -188,6 +192,8 @@
 		018E896C1D350075000C71B0 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		018E896D1D350075000C71B0 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
+		0199420723378BB30045FDE9 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ErrorCode.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTableView.swift; sourceTree = "<group>"; };
@@ -229,7 +235,7 @@
 				019941B02335FA940045FDE9 /* PromiseKit in Frameworks */,
 				019941B32335FAB70045FDE9 /* PMKFoundation in Frameworks */,
 				01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */,
-				019941B62335FB220045FDE9 /* AppUpdater in Frameworks */,
+				012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +503,8 @@
 			children = (
 				01474892215673C6005014D3 /* SocketRocket.framework */,
 				011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */,
+				0199420723378BB30045FDE9 /* Sparkle.framework */,
+				0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -523,7 +531,6 @@
 			packageProductDependencies = (
 				019941AF2335FA940045FDE9 /* PromiseKit */,
 				019941B22335FAB70045FDE9 /* PMKFoundation */,
-				019941B52335FB220045FDE9 /* AppUpdater */,
 			);
 			productName = Aria2D;
 			productReference = 0147EDBD1D21FAD800FB4324 /* Aria2D.app */;
@@ -573,7 +580,6 @@
 			packageReferences = (
 				019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */,
 				019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */,
-				019941B42335FB220045FDE9 /* XCRemoteSwiftPackageReference "AppUpdater" */,
 			);
 			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
 			projectDirPath = "";
@@ -851,7 +857,6 @@
 		0147EDCD1D21FAD800FB4324 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -875,6 +880,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 1.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -892,7 +898,6 @@
 		0147EDCE1D21FAD800FB4324 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -917,6 +922,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 1.3.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
@@ -968,14 +974,6 @@
 				minimumVersion = 3.3.3;
 			};
 		};
-		019941B42335FB220045FDE9 /* XCRemoteSwiftPackageReference "AppUpdater" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mxcl/AppUpdater";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -988,11 +986,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */;
 			productName = PMKFoundation;
-		};
-		019941B52335FB220045FDE9 /* AppUpdater */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 019941B42335FB220045FDE9 /* XCRemoteSwiftPackageReference "AppUpdater" */;
-			productName = AppUpdater;
 		};
 /* End XCSwiftPackageProductDependency section */
 

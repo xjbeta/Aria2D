@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "AppUpdater",
-        "repositoryURL": "https://github.com/mxcl/AppUpdater",
-        "state": {
-          "branch": null,
-          "revision": "8064fd1ad8bac5bb61f13c077e6897a770c69ddf",
-          "version": "1.1.0"
-        }
-      },
-      {
         "package": "PMKFoundation",
         "repositoryURL": "https://github.com/PromiseKit/Foundation",
         "state": {
@@ -20,30 +11,12 @@
         }
       },
       {
-        "package": "Path.swift",
-        "repositoryURL": "https://github.com/mxcl/Path.swift",
-        "state": {
-          "branch": null,
-          "revision": "dac007e907a4f4c565cfdc55a9ce148a761a11d5",
-          "version": "0.16.3"
-        }
-      },
-      {
         "package": "PromiseKit",
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
           "branch": null,
           "revision": "4d8d1287d2e50c53a9f8430ffe88925292838c57",
           "version": "6.11.0"
-        }
-      },
-      {
-        "package": "Version",
-        "repositoryURL": "https://github.com/mxcl/Version",
-        "state": {
-          "branch": null,
-          "revision": "799aea2cf7669b6b923c32e6adc77cdb3fa4412b",
-          "version": "1.1.2"
         }
       }
     ]

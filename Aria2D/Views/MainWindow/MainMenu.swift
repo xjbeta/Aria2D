@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Sparkle
 
 class MainMenu: NSObject, NSMenuItemValidation {
     
@@ -106,6 +107,10 @@ class MainMenu: NSObject, NSMenuItemValidation {
             NSWorkspace.shared.open(url)
         }
 	}
+    
+    @IBAction func checkForUpdate(_ sender: NSMenuItem) {
+        SUUpdater().checkForUpdates(sender)
+    }
     
     @IBAction func help(_ sender: Any) {
         if let url = URL(string: "https://github.com/xjbeta/Aria2D") {
