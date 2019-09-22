@@ -66,5 +66,7 @@
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/xjbeta/AppUpdaterAppcasts/master/Aria2D/Appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>1u1lOVNGnwTyXSIVYlfz+in5LmD7F2MPDCYWEYnwlJQ=</string>
 </dict>
 </plist>
