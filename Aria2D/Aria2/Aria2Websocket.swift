@@ -89,10 +89,10 @@ class Aria2Websocket: NSObject {
                                 return
                         }
                         Aria2.shared.updateActiveTasks()
-                    }
-                    
-                    if let infoVC = NSApp.keyWindow?.contentViewController as? InfoViewController {
-                        infoVC.updateStatusInTimer()
+                        
+                        if let infoVC = NSApp.keyWindow?.contentViewController as? InfoViewController {
+                            infoVC.updateStatusInTimer()
+                        }
                     }
 				}
 			}

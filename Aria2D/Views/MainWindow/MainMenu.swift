@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Sparkle
 
 class MainMenu: NSObject, NSMenuItemValidation {
     
@@ -102,12 +103,14 @@ class MainMenu: NSObject, NSMenuItemValidation {
 	}
 
 	@IBAction func feedback(_ sender: Any) {
-		DevMateKit.showFeedbackDialog(nil, in: .sheetMode)
+        if let url = URL(string: "https://github.com/xjbeta/Aria2D/issues") {
+            NSWorkspace.shared.open(url)
+        }
 	}
-	
-	@IBAction func activateApp(_ sender: Any) {
-		NotificationCenter.default.post(name: .activateApp, object: nil)
-	}
+    
+    @IBAction func checkForUpdate(_ sender: NSMenuItem) {
+        SUUpdater().checkForUpdates(sender)
+    }
     
     @IBAction func help(_ sender: Any) {
         if let url = URL(string: "https://github.com/xjbeta/Aria2D") {

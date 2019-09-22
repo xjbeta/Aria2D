@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 @objc(FileNode)
 class FileNode: NSObject {

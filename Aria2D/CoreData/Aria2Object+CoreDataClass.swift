@@ -9,7 +9,7 @@
 
 import Foundation
 import CoreData
-
+import Cocoa
 
 @objc(Aria2Object)
 public class Aria2Object: NSManagedObject, Decodable {

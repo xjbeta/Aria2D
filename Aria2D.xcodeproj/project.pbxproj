@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,8 +11,6 @@
 		010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */; };
 		010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */; };
 		010D7C721F6BE54A005356D0 /* SidebarTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6F1F6BE54A005356D0 /* SidebarTableCellView.swift */; };
-		010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; };
-		010F0EDF20F8582C00F33553 /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012ADEDC1F1461BC009E4110 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0115D42F1E04E36E003EBFCD /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D42E1E04E36E003EBFCD /* NotificationName.swift */; };
 		0115D4331E04F09F003EBFCD /* SubString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4321E04F09F003EBFCD /* SubString.swift */; };
 		0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115D4341E06AD99003EBFCD /* Aria2.swift */; };
@@ -21,13 +19,11 @@
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
 		011E4D2F21E8BE0100997633 /* Aria2OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */; };
 		011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */; };
-		011E4D4021EC367D00997633 /* PMKFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011E4D3821EC363F00997633 /* PMKFoundation.framework */; };
-		011E4D4121EC367D00997633 /* PMKFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 011E4D3821EC363F00997633 /* PMKFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		011E4D4221EC36AB00997633 /* PMKFoundation.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3A21EC367200997633 /* PMKFoundation.framework.dSYM */; };
-		011E4D4321EC36AB00997633 /* PromiseKit.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3B21EC367200997633 /* PromiseKit.framework.dSYM */; };
 		011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012B57302159267400D1AC03 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572F2159267400D1AC03 /* FileNode.swift */; };
+		012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; };
+		012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
@@ -45,8 +41,6 @@
 		013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */; };
 		01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; };
 		01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0147489621567406005014D3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0147488921566FBB005014D3 /* PromiseKit.framework */; };
-		0147489721567406005014D3 /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0147488921566FBB005014D3 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDC01D21FAD800FB4324 /* AppDelegate.swift */; };
 		0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0147EDC61D21FAD800FB4324 /* Main.storyboard */; };
 		0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */; };
@@ -74,6 +68,9 @@
 		018E89701D350075000C71B0 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896C1D350075000C71B0 /* Preferences.swift */; };
 		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
+		0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */; };
+		019941B02335FA940045FDE9 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 019941AF2335FA940045FDE9 /* PromiseKit */; };
+		019941B32335FAB70045FDE9 /* PMKFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 019941B22335FAB70045FDE9 /* PMKFoundation */; };
 		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */; };
@@ -113,9 +110,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */,
-				0147489721567406005014D3 /* PromiseKit.framework in Embed Frameworks */,
-				011E4D4121EC367D00997633 /* PMKFoundation.framework in Embed Frameworks */,
-				010F0EDF20F8582C00F33553 /* DevMateKit.framework in Embed Frameworks */,
+				012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,8 +121,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				011E4D4221EC36AB00997633 /* PMKFoundation.framework.dSYM in Copy Files */,
-				011E4D4321EC36AB00997633 /* PromiseKit.framework.dSYM in Copy Files */,
+				0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */,
 				011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */,
 			);
 			name = "Copy Files";
@@ -148,13 +142,9 @@
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
 		011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cOptions.swift; sourceTree = "<group>"; };
-		011E4D3821EC363F00997633 /* PMKFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PMKFoundation.framework; path = Carthage/Build/Mac/PMKFoundation.framework; sourceTree = "<group>"; };
-		011E4D3A21EC367200997633 /* PMKFoundation.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PMKFoundation.framework.dSYM; path = Carthage/Build/Mac/PMKFoundation.framework.dSYM; sourceTree = "<group>"; };
-		011E4D3B21EC367200997633 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
 		011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
 		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
 		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
-		012ADEDC1F1461BC009E4110 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = "<group>"; };
 		012B572F2159267400D1AC03 /* FileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
 		012C3AE51E1001CA00ABFE4C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2Websocket.swift; sourceTree = "<group>"; };
@@ -171,7 +161,6 @@
 		013ABB9F1E51B305008D370D /* SetServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetServersViewController.swift; sourceTree = "<group>"; };
 		013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationMethodViewController.swift; sourceTree = "<group>"; };
 		013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "DMG File Installation Guide.pdf"; sourceTree = "<group>"; };
-		0147488921566FBB005014D3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		01474892215673C6005014D3 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
 		0147EDBD1D21FAD800FB4324 /* Aria2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0147EDC01D21FAD800FB4324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +192,8 @@
 		018E896C1D350075000C71B0 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		018E896D1D350075000C71B0 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		018F5C3B1F298E1900B2150A /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
+		0199420723378BB30045FDE9 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2ErrorCode.swift; sourceTree = "<group>"; };
 		019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTableView.swift; sourceTree = "<group>"; };
@@ -241,10 +232,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0147489621567406005014D3 /* PromiseKit.framework in Frameworks */,
+				019941B02335FA940045FDE9 /* PromiseKit in Frameworks */,
+				019941B32335FAB70045FDE9 /* PMKFoundation in Frameworks */,
 				01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */,
-				011E4D4021EC367D00997633 /* PMKFoundation.framework in Frameworks */,
-				010F0EDE20F8582C00F33553 /* DevMateKit.framework in Frameworks */,
+				012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,13 +501,10 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				012ADEDC1F1461BC009E4110 /* DevMateKit.framework */,
-				011E4D3821EC363F00997633 /* PMKFoundation.framework */,
-				0147488921566FBB005014D3 /* PromiseKit.framework */,
 				01474892215673C6005014D3 /* SocketRocket.framework */,
-				011E4D3A21EC367200997633 /* PMKFoundation.framework.dSYM */,
-				011E4D3B21EC367200997633 /* PromiseKit.framework.dSYM */,
 				011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */,
+				0199420723378BB30045FDE9 /* Sparkle.framework */,
+				0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -540,6 +528,10 @@
 			dependencies = (
 			);
 			name = Aria2D;
+			packageProductDependencies = (
+				019941AF2335FA940045FDE9 /* PromiseKit */,
+				019941B22335FAB70045FDE9 /* PMKFoundation */,
+			);
 			productName = Aria2D;
 			productReference = 0147EDBD1D21FAD800FB4324 /* Aria2D.app */;
 			productType = "com.apple.product-type.application";
@@ -551,7 +543,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = xjbeta;
 				TargetAttributes = {
 					0147EDBC1D21FAD800FB4324 = {
@@ -585,6 +577,10 @@
 				"zh-Hans",
 			);
 			mainGroup = 0147EDB41D21FAD800FB4324;
+			packageReferences = (
+				019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */,
+			);
 			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -852,7 +848,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -860,12 +857,12 @@
 		0147EDCD1D21FAD800FB4324 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
@@ -877,9 +874,13 @@
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 1.3.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -897,12 +898,12 @@
 		0147EDCE1D21FAD800FB4324 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
@@ -915,9 +916,13 @@
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 1.3.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
@@ -951,6 +956,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.11.0;
+			};
+		};
+		019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PromiseKit/Foundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		019941AF2335FA940045FDE9 /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+		019941B22335FAB70045FDE9 /* PMKFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */;
+			productName = PMKFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		01E90689219BF70800928580 /* Aria2D.xcdatamodeld */ = {
