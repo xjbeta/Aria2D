@@ -71,7 +71,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="287" height="184"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <gridView fixedFrame="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VNA-pd-pMN">
+                            <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VNA-pd-pMN">
                                 <rect key="frame" x="32" y="20" width="223" height="144"/>
                                 <rows>
                                     <gridRow yPlacement="fill" id="4Xm-3k-P6A"/>
@@ -160,6 +160,10 @@
                                 </gridCells>
                             </gridView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="VNA-pd-pMN" firstAttribute="centerX" secondItem="wFX-nC-8VE" secondAttribute="centerX" id="Jal-w3-Ibg"/>
+                            <constraint firstItem="VNA-pd-pMN" firstAttribute="centerY" secondItem="wFX-nC-8VE" secondAttribute="centerY" id="oNC-kf-seZ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="Q2Q-28-p0a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
