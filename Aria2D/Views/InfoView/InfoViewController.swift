@@ -514,6 +514,9 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                 parentNode = parentNode?.parent
             }
         }
+        
+        // Unloaded rows will not be updated
+//        outlineView.reloadItem(item, reloadChildren: true)
+        outlineView.reloadData()
     }
-    
 }
