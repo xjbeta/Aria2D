@@ -173,36 +173,43 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         
         let confs = Preferences.shared.aria2Conf
         
-        autoSaveIntervalSlider.integerValue = Int(confs[.autoSaveInterval] ?? "60") ?? 60
-        saveSessionIntervalSlider.integerValue = Int(confs[.saveSession] ?? "60") ?? 60
+        autoSaveIntervalSlider.integerValue = confIntValue(.autoSaveInterval)
+        saveSessionIntervalSlider.integerValue = confIntValue(.saveSession)
         autoSaveIntervalTextField.integerValue = autoSaveIntervalSlider.integerValue
         saveSessionIntervalTextField.integerValue = saveSessionIntervalSlider.integerValue
         
         enableRpcButton.state = confs[.enableRpc] == "true" ? .on : .off
         rpcListenAllButton.state = confs[.rpcListenAll] == "true" ? .on : .off
-        rpcListenPortTextField.stringValue = confs[.rpcListenPort] ?? "2333"
-        rpcSecretTextField.stringValue = confs[.rpcSecret] ?? ""
+        rpcListenPortTextField.integerValue = confIntValue(.rpcListenPort)
         
-        maxConcurrentDownloadsTextField.integerValue = Int(confs[.maxConcurrentDownloads] ?? "3") ?? 3
-        splitSlider.integerValue = Int(confs[.split] ?? "16") ?? 16
+        rpcSecretTextField.stringValue = confStringValue(.rpcSecret)
+        
+        maxConcurrentDownloadsTextField.integerValue = confIntValue(.maxConcurrentDownloads)
+        splitSlider.integerValue = confIntValue(.split)
         splitValueTextField.integerValue = splitSlider.integerValue
-        minSplitSizeTextField.stringValue = confValue(for: .minSplitSize)
-        userAgentTextField.stringValue = confValue(for: .userAgent)
+        minSplitSizeTextField.stringValue = confStringValue(.minSplitSize)
+        userAgentTextField.stringValue = confStringValue(.userAgent)
         
-        btTrackerTextField.stringValue = confValue(for: .btTracker)
-        peerAgentTextField.stringValue = confValue(for: .peerAgent)
-        seedRatioTextField.stringValue = confValue(for: .seedRatio)
-        seedTimeTextField.stringValue = confValue(for: .seedTime)
+        btTrackerTextField.stringValue = confStringValue(.btTracker)
+        peerAgentTextField.stringValue = confStringValue(.peerAgent)
+        seedRatioTextField.stringValue = confStringValue(.seedRatio)
+        seedTimeTextField.integerValue = confIntValue(.seedTime)
         
         NotificationCenter.default.addObserver(forName: .updateBtTracker, object: nil, queue: .main) { [weak self] _ in
-            self?.btTrackerTextField.stringValue = self?.confValue(for: .btTracker) ?? ""
+            self?.btTrackerTextField.stringValue = self?.confStringValue(.btTracker) ?? ""
         }
     }
     
-    func confValue(for key: Aria2Option) -> String {
+    func confStringValue(_ key: Aria2Option) -> String {
         let confs = Preferences.shared.aria2Conf
         let defaultConfs = Preferences.shared.defaultAria2cOptionsDic
         return confs[key] ?? defaultConfs[key] ?? ""
+    }
+    
+    func confIntValue(_ key: Aria2Option) -> Int {
+        let confs = Preferences.shared.aria2Conf
+        let defaultConfs = Preferences.shared.defaultAria2cOptionsDic
+        return Int(confs[key] ?? "") ?? Int(defaultConfs[key] ?? "") ?? 0
     }
     
     func menuDidClose(_ menu: NSMenu) {
@@ -318,8 +325,8 @@ extension Aria2OptionsViewController: NSOpenSavePanelDelegate {
 extension Aria2OptionsViewController: NSControlTextEditingDelegate {
     func controlTextDidEndEditing(_ obj: Notification) {
         guard let obj = obj.object as? NSObject,
-            let v = (obj as? NSTextField)?.stringValue else { return }
-        
+            let textField = obj as? NSTextField else { return }
+
         var key: Aria2Option?
         switch obj {
         case rpcListenPortTextField:
@@ -345,6 +352,13 @@ extension Aria2OptionsViewController: NSControlTextEditingDelegate {
         }
         
         guard let k = key else { return }
+        var v = ""
+        switch k {
+        case .rpcListenPort, .maxConcurrentDownloads, .seedTime:
+            v = "\(textField.integerValue)"
+        default:
+            v = textField.stringValue
+        }
         
         // ignore empty value
         if v == "" {

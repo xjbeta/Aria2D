@@ -9,15 +9,6 @@
           "revision": "ee06d95342a5007de2fffd898f4f35de026842ac",
           "version": "3.3.3"
         }
-      },
-      {
-        "package": "PromiseKit",
-        "repositoryURL": "https://github.com/mxcl/PromiseKit",
-        "state": {
-          "branch": null,
-          "revision": "4d8d1287d2e50c53a9f8430ffe88925292838c57",
-          "version": "6.11.0"
-        }
       }
     ]
   },

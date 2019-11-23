@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,6 +58,12 @@
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
 		01842A4F2233672700BA77CB /* Aria2cProcessStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */; };
+		018B8B58236277B800276985 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B50236277AF00276985 /* PromiseKit.framework */; };
+		018B8B59236277B800276985 /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B50236277AF00276985 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		018B8B5A236277B900276985 /* PMKFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B51236277AF00276985 /* PMKFoundation.framework */; };
+		018B8B5B236277B900276985 /* PMKFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B51236277AF00276985 /* PMKFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		018B8B5C236277C500276985 /* PMKFoundation.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 018B8B52236277AF00276985 /* PMKFoundation.framework.dSYM */; };
+		018B8B5D236277C500276985 /* PromiseKit.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 018B8B53236277AF00276985 /* PromiseKit.framework.dSYM */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
 		018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E895F1D34FFA8000C71B0 /* Aria2c.swift */; };
@@ -69,8 +75,6 @@
 		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
 		0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */; };
-		019941B02335FA940045FDE9 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 019941AF2335FA940045FDE9 /* PromiseKit */; };
-		019941B32335FAB70045FDE9 /* PMKFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 019941B22335FAB70045FDE9 /* PMKFoundation */; };
 		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */; };
@@ -109,7 +113,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				018B8B59236277B800276985 /* PromiseKit.framework in Embed Frameworks */,
 				01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */,
+				018B8B5B236277B900276985 /* PMKFoundation.framework in Embed Frameworks */,
 				012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -121,6 +127,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				018B8B5C236277C500276985 /* PMKFoundation.framework.dSYM in Copy Files */,
+				018B8B5D236277C500276985 /* PromiseKit.framework.dSYM in Copy Files */,
 				0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */,
 				011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */,
 			);
@@ -182,6 +190,10 @@
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cProcessStatusViewController.swift; sourceTree = "<group>"; };
+		018B8B50236277AF00276985 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
+		018B8B51236277AF00276985 /* PMKFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PMKFoundation.framework; path = Carthage/Build/Mac/PMKFoundation.framework; sourceTree = "<group>"; };
+		018B8B52236277AF00276985 /* PMKFoundation.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PMKFoundation.framework.dSYM; path = Carthage/Build/Mac/PMKFoundation.framework.dSYM; sourceTree = "<group>"; };
+		018B8B53236277AF00276985 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
 		018B9B571D72B2EA0087B71E /* WaitTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitTimer.swift; sourceTree = "<group>"; };
 		018E89491D34FF5B000C71B0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		018E895F1D34FFA8000C71B0 /* Aria2c.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aria2c.swift; sourceTree = "<group>"; };
@@ -232,10 +244,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				019941B02335FA940045FDE9 /* PromiseKit in Frameworks */,
-				019941B32335FAB70045FDE9 /* PMKFoundation in Frameworks */,
 				01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */,
 				012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */,
+				018B8B5A236277B900276985 /* PMKFoundation.framework in Frameworks */,
+				018B8B58236277B800276985 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +513,10 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				018B8B51236277AF00276985 /* PMKFoundation.framework */,
+				018B8B52236277AF00276985 /* PMKFoundation.framework.dSYM */,
+				018B8B50236277AF00276985 /* PromiseKit.framework */,
+				018B8B53236277AF00276985 /* PromiseKit.framework.dSYM */,
 				01474892215673C6005014D3 /* SocketRocket.framework */,
 				011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */,
 				0199420723378BB30045FDE9 /* Sparkle.framework */,
@@ -529,8 +545,6 @@
 			);
 			name = Aria2D;
 			packageProductDependencies = (
-				019941AF2335FA940045FDE9 /* PromiseKit */,
-				019941B22335FAB70045FDE9 /* PMKFoundation */,
 			);
 			productName = Aria2D;
 			productReference = 0147EDBD1D21FAD800FB4324 /* Aria2D.app */;
@@ -578,8 +592,6 @@
 			);
 			mainGroup = 0147EDB41D21FAD800FB4324;
 			packageReferences = (
-				019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */,
-				019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */,
 			);
 			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
 			projectDirPath = "";
@@ -848,8 +860,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -874,13 +885,10 @@
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -916,13 +924,10 @@
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
@@ -956,38 +961,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mxcl/PromiseKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.11.0;
-			};
-		};
-		019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PromiseKit/Foundation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.3.3;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		019941AF2335FA940045FDE9 /* PromiseKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 019941AE2335FA940045FDE9 /* XCRemoteSwiftPackageReference "PromiseKit" */;
-			productName = PromiseKit;
-		};
-		019941B22335FAB70045FDE9 /* PMKFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 019941B12335FAB70045FDE9 /* XCRemoteSwiftPackageReference "Foundation" */;
-			productName = PMKFoundation;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		01E90689219BF70800928580 /* Aria2D.xcdatamodeld */ = {
