@@ -19,6 +19,7 @@ class InfoViewController: NSViewController {
     }
     
 	@IBAction func cancelButton(_ sender: Any) {
+        fileEditingMode = false
 		view.window?.close()
 	}
     
@@ -57,6 +58,7 @@ class InfoViewController: NSViewController {
             }
             DispatchQueue.main.async {
                 self.fileNodes = nil
+                self.fileEditingMode = false
                 self.view.window?.close()
             }
         }
@@ -184,6 +186,8 @@ class InfoViewController: NSViewController {
     
     @objc dynamic var fileNodes: FileNode?
 
+    var fileEditingMode = false
+    
 //MARK: - Peer Item
     
     @objc dynamic var peerObjects: [Aria2Peer]?
@@ -229,6 +233,7 @@ class InfoViewController: NSViewController {
             
             switch label {
             case "Files":
+                guard let mode = self?.fileEditingMode, !mode else { return }
                 Aria2.shared.getFiles(gid) {}
             case "Peer":
                 Aria2.shared.getPeer(gid) { objs in
@@ -257,7 +262,9 @@ extension InfoViewController: NSTabViewDelegate {
     }
     
     func updateTabView() {
-        switch tabView.selectedTabViewItem?.label ?? "" {
+        guard let str = tabView.selectedTabViewItem?.label else { return }
+        fileEditingMode = false
+        switch str {
         case "Status":
             break
         case "Options":
@@ -493,6 +500,7 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     }
     
     func outlineView(_ outlineView: NSOutlineView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, byItem item: Any?) {
+        fileEditingMode = true
         func updateState(_ tnode: NSTreeNode, state: NSControl.StateValue) {
             let fileNode = tnode.representedObject as? FileNode
             fileNode?.state = state
