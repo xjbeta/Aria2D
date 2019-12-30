@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b6F-ig-Pz2">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Log View Controller-->
+        <scene sceneID="v1C-cQ-GYf">
+            <objects>
+                <viewController id="eFw-SL-mKF" customClass="LogViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Lzs-dd-4Hf">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="500"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bex-2R-Jfj">
+                                <rect key="frame" x="0.0" y="0.0" width="800" height="464"/>
+                                <clipView key="contentView" drawsBackground="NO" id="LRd-bD-Kzf">
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="464"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="22" rowSizeStyle="small" headerView="xBD-uH-1No" id="QOk-cI-6Rt">
+                                            <rect key="frame" x="0.0" y="0.0" width="801" height="439"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn identifier="LogTableTime" editable="NO" width="65" minWidth="65" maxWidth="65" id="4Eu-Hr-T9s">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="time">
+                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="BIf-yE-eIS">
+                                                        <font key="font" size="13" name="Times-Roman"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="kFf-1X-E2u" name="value" keyPath="arrangedObjects.time" id="ZeJ-Ae-mjq">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="LogTableMethod" editable="NO" width="150" minWidth="150" maxWidth="250" id="fcg-7o-2qj">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="method">
+                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="CVY-4c-V9N">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="kFf-1X-E2u" name="value" keyPath="arrangedObjects.method" id="km5-fk-bEh">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="LogTableSuccess" editable="NO" width="50" minWidth="50" maxWidth="50" id="Kdt-kB-7g2">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="success">
+                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <buttonCell key="dataCell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="center" inset="2" id="ONi-tK-Xef">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="kFf-1X-E2u" name="value" keyPath="arrangedObjects.success" id="FjS-M5-ekq"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="LogTableSendJSON" width="441" minWidth="100" maxWidth="3.4028234663852886e+38" id="fmc-Cw-LZt">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="send json">
+                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="kDM-XS-EFq">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="kFf-1X-E2u" name="value" keyPath="arrangedObjects.sendJSON" id="zuQ-rP-NwL"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="LogTableReceivedJSON" width="80" minWidth="80" maxWidth="80" id="NBA-e0-CUU">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="received json">
+                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <buttonCell key="dataCell" type="push" title="Copy" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="h6m-Ij-drT">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <connections>
+                                                            <action selector="copyJSON:" target="eFw-SL-mKF" id="3zi-zG-R3d"/>
+                                                        </connections>
+                                                    </buttonCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <binding destination="kFf-1X-E2u" name="content" keyPath="arrangedObjects" id="49R-kr-cA5"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                    <nil key="backgroundColor"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="OSC-dn-dTg">
+                                    <rect key="frame" x="-100" y="-100" width="798" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="BrB-DK-yI1">
+                                    <rect key="frame" x="-100" y="-100" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <tableHeaderView key="headerView" id="xBD-uH-1No">
+                                    <rect key="frame" x="0.0" y="0.0" width="801" height="25"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableHeaderView>
+                            </scrollView>
+                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="ultraDark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-CX-sDp">
+                                <rect key="frame" x="0.0" y="462" width="800" height="38"/>
+                                <subviews>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="R5R-7C-rE6">
+                                        <rect key="frame" x="98" y="10" width="104" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="S6T-eY-pbD"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="check" title="Record Log" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="z3d-6i-26M">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="recordLog:" target="eFw-SL-mKF" id="nJj-PU-vwl"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-bV-enq">
+                                        <rect key="frame" x="714" y="2" width="72" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="il4-YG-sCU"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pOT-md-Jn8">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="clear:" target="eFw-SL-mKF" id="DoE-bG-9pf"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="qY7-Zp-lNh">
+                                        <rect key="frame" x="228" y="10" width="104" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Hide active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="j1S-9i-gHP">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <connections>
+                                                <action selector="hideActive:" target="eFw-SL-mKF" id="KTE-VW-7z1"/>
+                                            </connections>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ldI-bV-enq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C1Q-CX-sDp" secondAttribute="leading" constant="20" symbolic="YES" id="1fY-2L-ig2"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R5R-7C-rE6" secondAttribute="trailing" constant="600" id="5Do-HK-Noo"/>
+                                    <constraint firstItem="ldI-bV-enq" firstAttribute="centerY" secondItem="C1Q-CX-sDp" secondAttribute="centerY" id="7v5-9E-LxL"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qY7-Zp-lNh" secondAttribute="trailing" constant="20" symbolic="YES" id="BVg-97-Jo0"/>
+                                    <constraint firstItem="qY7-Zp-lNh" firstAttribute="centerY" secondItem="R5R-7C-rE6" secondAttribute="centerY" id="Igm-p8-jCs"/>
+                                    <constraint firstAttribute="trailing" secondItem="ldI-bV-enq" secondAttribute="trailing" constant="20" id="KZj-im-OPp"/>
+                                    <constraint firstItem="qY7-Zp-lNh" firstAttribute="leading" secondItem="R5R-7C-rE6" secondAttribute="trailing" constant="30" id="OoX-nR-4mq"/>
+                                    <constraint firstItem="R5R-7C-rE6" firstAttribute="leading" secondItem="C1Q-CX-sDp" secondAttribute="leading" constant="100" id="aLk-dA-qFr"/>
+                                    <constraint firstItem="qY7-Zp-lNh" firstAttribute="width" secondItem="R5R-7C-rE6" secondAttribute="width" id="kKJ-Ps-M6t"/>
+                                    <constraint firstItem="R5R-7C-rE6" firstAttribute="centerY" secondItem="C1Q-CX-sDp" secondAttribute="centerY" id="pMv-ZC-B4W"/>
+                                    <constraint firstAttribute="height" constant="38" id="wdw-xi-1F0"/>
+                                </constraints>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="C1Q-CX-sDp" firstAttribute="top" secondItem="Lzs-dd-4Hf" secondAttribute="top" id="0Zd-OM-gBz"/>
+                            <constraint firstAttribute="trailing" secondItem="Bex-2R-Jfj" secondAttribute="trailing" id="629-Yp-D2v"/>
+                            <constraint firstItem="Bex-2R-Jfj" firstAttribute="top" secondItem="C1Q-CX-sDp" secondAttribute="bottom" constant="-2" id="9Eo-Xj-fTw"/>
+                            <constraint firstItem="Bex-2R-Jfj" firstAttribute="leading" secondItem="Lzs-dd-4Hf" secondAttribute="leading" id="Kac-91-u8O"/>
+                            <constraint firstAttribute="trailing" secondItem="C1Q-CX-sDp" secondAttribute="trailing" id="S7J-4p-4ct"/>
+                            <constraint firstItem="C1Q-CX-sDp" firstAttribute="leading" secondItem="Lzs-dd-4Hf" secondAttribute="leading" id="o8q-8C-Ou3"/>
+                            <constraint firstAttribute="bottom" secondItem="Bex-2R-Jfj" secondAttribute="bottom" id="x80-Y2-nov"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="arrayController" destination="kFf-1X-E2u" id="3PY-Y5-Tac"/>
+                        <outlet property="hideActive" destination="qY7-Zp-lNh" id="DNw-E0-XZt"/>
+                        <outlet property="logTableView" destination="QOk-cI-6Rt" id="doA-Ug-zQi"/>
+                        <outlet property="recordLog" destination="R5R-7C-rE6" id="5F0-0t-ziy"/>
+                    </connections>
+                </viewController>
+                <customObject id="ktc-GC-1Pl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="WebSocketLog" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="kFf-1X-E2u">
+                    <connections>
+                        <binding destination="eFw-SL-mKF" name="managedObjectContext" keyPath="self.context" id="Fdf-0H-Eha"/>
+                        <binding destination="eFw-SL-mKF" name="filterPredicate" keyPath="self.predicate" id="a4r-rX-XRj"/>
+                    </connections>
+                </arrayController>
+            </objects>
+            <point key="canvasLocation" x="2987" y="-575"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="tAl-yf-feK">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="b6F-ig-Pz2" customClass="LogWindowController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Aria2 WebSocket Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="" animationBehavior="default" id="YEO-Sb-YsS">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="800" height="500"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <value key="minSize" type="size" width="800" height="500"/>
+                        <toolbar key="toolbar" implicitIdentifier="8F7A5B63-9A6E-4A33-A9E4-3D67B0475646" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="H7f-Cx-90m">
+                            <allowedToolbarItems/>
+                            <defaultToolbarItems/>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="b6F-ig-Pz2" id="vpT-0z-m3J"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="eFw-SL-mKF" kind="relationship" relationship="window.shadowedContentViewController" id="7HC-85-R86"/>
+                    </connections>
+                </windowController>
+                <customObject id="VWR-LO-VZh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2076" y="-575"/>
+        </scene>
+    </scenes>
+</document>
