@@ -850,7 +850,7 @@
                                     <rect key="frame" x="0.0" y="584" width="620" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="UbQ-ai-QWx">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.086153846153846136" horizontal="NO" id="UbQ-ai-QWx">
                                     <rect key="frame" x="604" y="0.0" width="16" height="600"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1908,9 +1908,6 @@ Gw
                                             <size key="minSize" width="632" height="297"/>
                                             <size key="maxSize" width="632" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <binding destination="BOD-yD-Q1N" name="valuePath" keyPath="self.logPath" id="kaP-47-Ofi"/>
-                                            </connections>
                                         </textView>
                                     </subviews>
                                 </clipView>
@@ -1961,6 +1958,10 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="KHz-0j-bdR" secondAttribute="trailing" constant="20" id="nUK-Ie-Udm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="showButton" destination="fkC-Sv-EUK" id="W7D-Y1-rg9"/>
+                        <outlet property="textView" destination="4oJ-UV-RjV" id="vkw-wp-utV"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="3766" y="960"/>

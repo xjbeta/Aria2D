@@ -19,7 +19,7 @@ class Aria2cProcessStatusViewController: NSViewController {
     @IBAction func launchAria2c(_ sender: NSButton) {
         progressIndicator.isHidden = false
         launchButton.isEnabled = false
-        
+        startAria2cError = ""
         var action = ""
         
         Aria2.shared.aria2c.aria2cPid().then { pids -> Promise<()> in
@@ -46,10 +46,20 @@ class Aria2cProcessStatusViewController: NSViewController {
                 }
             }.catch {
                 Log("Launch aria2c process error: \($0)")
+                guard let e = $0 as? Process.PMKError else { return }
+                switch e {
+                case .execution(_,_,let str):
+                    self.startAria2cError = str ?? ""
+                    self.performSegue(withIdentifier: .showAria2cLog, sender: self)
+                case .notExecutable(_):
+                    break
+                }
         }
     }
     
     @IBOutlet var argsTextView: NSTextView!
+    var startAria2cError = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +67,22 @@ class Aria2cProcessStatusViewController: NSViewController {
         updateLaunchButton()
         
         initArgsTextView()
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == .showAria2cLog,
+            let vc = (segue.destinationController as? NSWindowController)?.contentViewController as? Aria2cLogViewController {
+            vc.showButton.isEnabled = false
+            if startAria2cError != "" {
+                vc.textView.string = startAria2cError
+            } else if let d = FileManager.default.contents(atPath: vc.logPath),
+                let s = String(data: d, encoding: .utf8) {
+                vc.textView.string = s
+                vc.showButton.isEnabled = true
+            } else {
+                vc.textView.string = "oops, something went wrong."
+            }
+        }
     }
     
     func initArgsTextView() {
