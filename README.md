@@ -6,24 +6,23 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 ![EFB0CEC1-86E8-44AE-BFEF-F87678EAE6E4.jpeg](https://i.loli.net/2018/11/21/5bf4f8c48657c.jpeg)
 
 ## Last Version
-    1.2.5 (358)
+    1.3.3 (469)
 
 ## Downloads
 ### Aria2D
-- [DMG](https://dl.devmate.com/com.xjbeta.Aria2D/Aria2D.dmg)
-- [ZIP](https://dl.devmate.com/com.xjbeta.Aria2D/Aria2D.zip)
+- [latest releases](https://github.com/xjbeta/Aria2D/releases/latest)
 
 ### aria2 dmg
-- [aria2 DMG](https://dl.devmate.com/com.aria2.aria2c/aria2c.dmg)
+- [aria2 DMG](https://github.com/xjbeta/AppUpdaterAppcasts/raw/master/aria2/aria2-Latest.dmg)
 
 ## Features
-- Native macOS client (swift4.2)
+- Native macOS client (swift5)
 - Shortcuts
-- Full aria2 download options support
+- Full aria2 download options
 - Auto start aria2c
 - Multi-server support
 - Complete notification
-- Dark Mode support
+- Dark Mode
 
 ## Donation List
 > Anyone who has purchased a license can contact me to add your information to the donation list. <xjbeta.tiny@outlook.com>
@@ -31,13 +30,14 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 
 ## Acknowledgements
 - [PromiseKit](https://github.com/mxcl/PromiseKit)
-- [DevMate](https://devmate.com/)
+- [Sparkle](https://github.com/sparkle-project/Sparkle)
+- [Foundation](https://github.com/PromiseKit/Foundation)
 - [SocketRocket](https://github.com/facebook/SocketRocket)
 
 ## LICENSE
 > GPLV3
 
-> Version before adding a LICENSE file, GPLV3 or Copyright © 2016年 xjbeta. All rights reserved.
+> Version before adding a LICENSE file, GPLV3 or Copyright © 2016 - 2019 xjbeta. All rights reserved.
 
 
 ## Screen Shots
