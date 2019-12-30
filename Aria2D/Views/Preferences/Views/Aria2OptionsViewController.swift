@@ -181,7 +181,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         let confs = Preferences.shared.aria2Conf
         
         autoSaveIntervalSlider.integerValue = confIntValue(.autoSaveInterval)
-        saveSessionIntervalSlider.integerValue = confIntValue(.saveSession)
+        saveSessionIntervalSlider.integerValue = confIntValue(.saveSessionInterval)
         autoSaveIntervalTextField.integerValue = autoSaveIntervalSlider.integerValue
         saveSessionIntervalTextField.integerValue = saveSessionIntervalSlider.integerValue
         
