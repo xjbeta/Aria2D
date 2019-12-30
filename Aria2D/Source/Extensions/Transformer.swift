@@ -16,14 +16,14 @@ class IntToNumberTransformer: ValueTransformer {
 		if let i = value as? Int {
 			return NSNumber(value: i)
 		} else {
-			return nil
+			return 0
 		}
 	}
 	override func reverseTransformedValue(_ value: Any?) -> Any? {
 		if let i = value as? NSNumber {
 			return Int(exactly: i)
 		} else {
-			return nil
+			return 0
 		}
 	}
 }
