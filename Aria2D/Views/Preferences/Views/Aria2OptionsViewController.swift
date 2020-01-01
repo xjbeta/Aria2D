@@ -93,7 +93,14 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     @IBOutlet weak var enableRpcButton: NSButton!
     @IBOutlet weak var rpcListenAllButton: NSButton!
     @IBOutlet weak var rpcListenPortTextField: NSTextField!
-    @IBOutlet weak var rpcSecretTextField: NSSecureTextField!
+    @IBOutlet weak var rpcSecretTextField: NSTextField!
+    @IBOutlet weak var randomSecretButton: NSButton!
+    @IBAction func randomSecret(_ sender: Any) {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let key = String((0..<16).map{ _ in letters.randomElement()! })
+        rpcSecretTextField.stringValue = key
+        updateOption(for: rpcSecretTextField)
+    }
     
     // MARK: - Normal Download Options
     
@@ -174,7 +181,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         let confs = Preferences.shared.aria2Conf
         
         autoSaveIntervalSlider.integerValue = confIntValue(.autoSaveInterval)
-        saveSessionIntervalSlider.integerValue = confIntValue(.saveSession)
+        saveSessionIntervalSlider.integerValue = confIntValue(.saveSessionInterval)
         autoSaveIntervalTextField.integerValue = autoSaveIntervalSlider.integerValue
         saveSessionIntervalTextField.integerValue = saveSessionIntervalSlider.integerValue
         
@@ -326,7 +333,10 @@ extension Aria2OptionsViewController: NSControlTextEditingDelegate {
     func controlTextDidEndEditing(_ obj: Notification) {
         guard let obj = obj.object as? NSObject,
             let textField = obj as? NSTextField else { return }
-
+        updateOption(for: textField)
+    }
+    
+    func updateOption(for obj: NSTextField) {
         var key: Aria2Option?
         switch obj {
         case rpcListenPortTextField:
@@ -355,9 +365,9 @@ extension Aria2OptionsViewController: NSControlTextEditingDelegate {
         var v = ""
         switch k {
         case .rpcListenPort, .maxConcurrentDownloads, .seedTime:
-            v = "\(textField.integerValue)"
+            v = "\(obj.integerValue)"
         default:
-            v = textField.stringValue
+            v = obj.stringValue
         }
         
         // ignore empty value

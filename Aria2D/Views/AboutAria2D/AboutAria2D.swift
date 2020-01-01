@@ -23,6 +23,14 @@ class AboutAria2D: NSViewController {
 	@objc var appCopyright: String {
 		return Bundle.main.infoDictionary?["NSHumanReadableCopyright"] as? String ?? ""
 	}
+    @IBOutlet weak var acknowledgementsButton: NSButton!
+    
+    @IBAction func actions(_ sender: NSButton) {
+        guard let u = URL(string: "https://github.com/xjbeta/Aria2D#acknowledgements") else {
+            return
+        }
+        NSWorkspace.shared.open(u)
+    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()

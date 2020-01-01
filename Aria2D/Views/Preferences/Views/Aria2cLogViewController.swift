@@ -12,6 +12,7 @@ class Aria2cLogViewController: NSViewController {
 
     @objc let logPath = Aria2.shared.aria2c.logPath
     
+    @IBOutlet weak var showButton: NSButton!
     @IBAction func showLogFile(_ sender: Any) {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: logPath)])
     }
@@ -19,6 +20,7 @@ class Aria2cLogViewController: NSViewController {
     @IBAction func closeWindow(_ sender: Any) {
         self.view.window?.close()
     }
+    @IBOutlet var textView: NSTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

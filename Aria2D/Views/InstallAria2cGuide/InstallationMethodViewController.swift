@@ -25,7 +25,7 @@ class InstallationMethodViewController: NSViewController {
     }
     
     @IBAction func dmgFile(_ sender: NSButton) {
-        if let u = URL(string: "https://dl.devmate.com/com.aria2.aria2c/aria2c.dmg") {
+        if let u = URL(string: "https://github.com/xjbeta/AppUpdaterAppcasts/raw/master/aria2/aria2-Latest.dmg") {
             NSWorkspace.shared.open(u)
         }
         tabView.selectTabViewItem(at: 2)

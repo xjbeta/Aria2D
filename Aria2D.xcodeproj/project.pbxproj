@@ -55,6 +55,9 @@
 		016CF8F61ED52E5C001336F1 /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */; };
 		016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */; };
 		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
+		0171426F23B9DA850051ADDF /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0171426E23B9DA850051ADDF /* Preferences.storyboard */; };
+		0171427123B9FB710051ADDF /* Log.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0171427023B9FB710051ADDF /* Log.storyboard */; };
+		0171427323B9FC370051ADDF /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0171427223B9FC370051ADDF /* About.storyboard */; };
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
 		01842A4F2233672700BA77CB /* Aria2cProcessStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */; };
@@ -187,6 +190,9 @@
 		016CF8F51ED52E5C001336F1 /* AdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
 		016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteFileFormatter.swift; sourceTree = "<group>"; };
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		0171426E23B9DA850051ADDF /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		0171427023B9FB710051ADDF /* Log.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Log.storyboard; sourceTree = "<group>"; };
+		0171427223B9FC370051ADDF /* About.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cProcessStatusViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +383,7 @@
 		016C405A1DA27C6200EB27A2 /* AboutAria2D */ = {
 			isa = PBXGroup;
 			children = (
+				0171427223B9FC370051ADDF /* About.storyboard */,
 				016C40581DA27C5B00EB27A2 /* AboutAria2DWindow.swift */,
 				016C405D1DA29A4100EB27A2 /* AboutAria2D.swift */,
 			);
@@ -426,6 +433,7 @@
 		0182E60C1EAEE90000E08454 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				0171427023B9FB710051ADDF /* Log.storyboard */,
 				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
 				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
 			);
@@ -481,6 +489,7 @@
 			children = (
 				018E896B1D350075000C71B0 /* PreferencesTabViewController.swift */,
 				018E896A1D350075000C71B0 /* PreferencesWindow.swift */,
+				0171426E23B9DA850051ADDF /* Preferences.storyboard */,
 				01789B1C1D9D207E00A5B789 /* Views */,
 			);
 			path = Preferences;
@@ -609,11 +618,14 @@
 			files = (
 				01E410B222CA3CED00864118 /* InstallAria2GuideWindow.storyboard in Resources */,
 				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
+				0171427123B9FB710051ADDF /* Log.storyboard in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
+				0171427323B9FC370051ADDF /* About.storyboard in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
 				013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */,
+				0171426F23B9DA850051ADDF /* Preferences.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
