@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		010AF01923C4BAB600FC2320 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010AF01B23C4BAB600FC2320 /* About.storyboard */; };
 		010AF02223C4BBFD00FC2320 /* InstallAria2GuideWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010AF02423C4BBFD00FC2320 /* InstallAria2GuideWindow.storyboard */; };
+		010AF02723C4BC4100FC2320 /* Log.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010AF02923C4BC4100FC2320 /* Log.storyboard */; };
 		010B59181D3CF66600550A43 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B59171D3CF66600550A43 /* MainMenu.swift */; };
 		010D7C701F6BE54A005356D0 /* SidebarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */; };
 		010D7C711F6BE54A005356D0 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */; };
@@ -58,7 +59,6 @@
 		016FDC6F1E73F10E00E01B35 /* ByteFileFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */; };
 		016FDC7B1E7D674200E01B35 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FDC7A1E7D674200E01B35 /* LogViewController.swift */; };
 		0171426F23B9DA850051ADDF /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0171426E23B9DA850051ADDF /* Preferences.storyboard */; };
-		0171427123B9FB710051ADDF /* Log.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0171427023B9FB710051ADDF /* Log.storyboard */; };
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
 		01842A4F2233672700BA77CB /* Aria2cProcessStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */; };
@@ -144,6 +144,8 @@
 		010AF01C23C4BAC400FC2320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		010AF02323C4BBFD00FC2320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/InstallAria2GuideWindow.storyboard; sourceTree = "<group>"; };
 		010AF02623C4BC0B00FC2320 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InstallAria2GuideWindow.strings"; sourceTree = "<group>"; };
+		010AF02823C4BC4100FC2320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Log.storyboard; sourceTree = "<group>"; };
+		010AF02B23C4BC4500FC2320 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Log.strings"; sourceTree = "<group>"; };
 		010B59171D3CF66600550A43 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		010D7C6D1F6BE54A005356D0 /* SidebarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTableView.swift; sourceTree = "<group>"; };
 		010D7C6E1F6BE54A005356D0 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +196,6 @@
 		016FDC6E1E73F10E00E01B35 /* ByteFileFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteFileFormatter.swift; sourceTree = "<group>"; };
 		016FDC7A1E7D674200E01B35 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		0171426E23B9DA850051ADDF /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
-		0171427023B9FB710051ADDF /* Log.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Log.storyboard; sourceTree = "<group>"; };
 		017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCollectionViewItem.xib; sourceTree = "<group>"; };
 		01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cProcessStatusViewController.swift; sourceTree = "<group>"; };
@@ -434,11 +435,11 @@
 		0182E60C1EAEE90000E08454 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				0171427023B9FB710051ADDF /* Log.storyboard */,
+				010AF02923C4BC4100FC2320 /* Log.storyboard */,
 				019FAD9F1EA65B880032A60B /* LogWindowController.swift */,
 				016FDC7A1E7D674200E01B35 /* LogViewController.swift */,
 			);
-			path = Log;
+			name = Log;
 			sourceTree = "<group>";
 		};
 		018E892A1D34FEB7000C71B0 /* Resources */ = {
@@ -619,7 +620,7 @@
 			files = (
 				010AF02223C4BBFD00FC2320 /* InstallAria2GuideWindow.storyboard in Resources */,
 				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
-				0171427123B9FB710051ADDF /* Log.storyboard in Resources */,
+				010AF02723C4BC4100FC2320 /* Log.storyboard in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
@@ -757,6 +758,15 @@
 				010AF02623C4BC0B00FC2320 /* zh-Hans */,
 			);
 			name = InstallAria2GuideWindow.storyboard;
+			sourceTree = "<group>";
+		};
+		010AF02923C4BC4100FC2320 /* Log.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				010AF02823C4BC4100FC2320 /* Base */,
+				010AF02B23C4BC4500FC2320 /* zh-Hans */,
+			);
+			name = Log.storyboard;
 			sourceTree = "<group>";
 		};
 		0147EDC61D21FAD800FB4324 /* Main.storyboard */ = {
