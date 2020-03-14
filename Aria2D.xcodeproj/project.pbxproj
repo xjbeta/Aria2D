@@ -23,7 +23,6 @@
 		011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011E102B1D478EB300BD2E71 /* Assets.xcassets */; };
 		011E4D2F21E8BE0100997633 /* Aria2OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */; };
 		011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */; };
-		011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012B57302159267400D1AC03 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572F2159267400D1AC03 /* FileNode.swift */; };
 		012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; };
@@ -43,8 +42,6 @@
 		013ABBA01E51B305008D370D /* SetServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013ABB9F1E51B305008D370D /* SetServersViewController.swift */; };
 		013EF1602258557600E4D7D8 /* InstallationMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */; };
 		013EF1622258605100E4D7D8 /* DMG File Installation Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */; };
-		01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; };
-		01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01474892215673C6005014D3 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0147EDC11D21FAD800FB4324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDC01D21FAD800FB4324 /* AppDelegate.swift */; };
 		0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0147EDC61D21FAD800FB4324 /* Main.storyboard */; };
 		0147EDDB1D221A2800FB4324 /* DownloadsTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147EDDA1D221A2800FB4324 /* DownloadsTableCellView.swift */; };
@@ -90,6 +87,10 @@
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
 		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
+		01C85324241CA605006581F9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01C85323241CA604006581F9 /* Cartfile */; };
+		01C8532B241CA7DB006581F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C85329241CA7D4006581F9 /* Starscream.framework */; };
+		01C8532C241CA7DB006581F9 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01C85329241CA7D4006581F9 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01C8532D241CA7E7006581F9 /* Starscream.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01C8532A241CA7D4006581F9 /* Starscream.framework.dSYM */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
 		01E410B422CA427500864118 /* InstallAria2GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */; };
 		01E9068B219BF70900928580 /* Aria2D.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E90689219BF70800928580 /* Aria2D.xcdatamodeld */; };
@@ -117,7 +118,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				018B8B59236277B800276985 /* PromiseKit.framework in Embed Frameworks */,
-				01474895215673CC005014D3 /* SocketRocket.framework in Embed Frameworks */,
+				01C8532C241CA7DB006581F9 /* Starscream.framework in Embed Frameworks */,
 				018B8B5B236277B900276985 /* PMKFoundation.framework in Embed Frameworks */,
 				012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */,
 			);
@@ -130,10 +131,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				01C8532D241CA7E7006581F9 /* Starscream.framework.dSYM in Copy Files */,
 				018B8B5C236277C500276985 /* PMKFoundation.framework.dSYM in Copy Files */,
 				018B8B5D236277C500276985 /* PromiseKit.framework.dSYM in Copy Files */,
 				0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */,
-				011E4D4421EC36AB00997633 /* SocketRocket.framework.dSYM in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +167,6 @@
 		011E102B1D478EB300BD2E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011E4D2E21E8BE0100997633 /* Aria2OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2OptionsViewController.swift; sourceTree = "<group>"; };
 		011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cOptions.swift; sourceTree = "<group>"; };
-		011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SocketRocket.framework.dSYM; path = Carthage/Build/Mac/SocketRocket.framework.dSYM; sourceTree = "<group>"; };
 		0126245D1ED16178007FF8AA /* Aria2D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria2D-Bridging-Header.h"; sourceTree = "<group>"; };
 		012A1BB11E174860007C4B46 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		012B572F2159267400D1AC03 /* FileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
@@ -185,7 +185,6 @@
 		013ABB9F1E51B305008D370D /* SetServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetServersViewController.swift; sourceTree = "<group>"; };
 		013EF15F2258557600E4D7D8 /* InstallationMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationMethodViewController.swift; sourceTree = "<group>"; };
 		013EF1612258605100E4D7D8 /* DMG File Installation Guide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "DMG File Installation Guide.pdf"; sourceTree = "<group>"; };
-		01474892215673C6005014D3 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/Mac/SocketRocket.framework; sourceTree = "<group>"; };
 		0147EDBD1D21FAD800FB4324 /* Aria2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0147EDC01D21FAD800FB4324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0147EDC71D21FAD800FB4324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -235,6 +234,9 @@
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
+		01C85323241CA604006581F9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		01C85329241CA7D4006581F9 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
+		01C8532A241CA7D4006581F9 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
 		01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallAria2GuideWindowController.swift; sourceTree = "<group>"; };
 		01E9068A219BF70800928580 /* Aria2D.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aria2D.xcdatamodel; sourceTree = "<group>"; };
@@ -259,8 +261,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01474894215673CC005014D3 /* SocketRocket.framework in Frameworks */,
 				012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */,
+				01C8532B241CA7DB006581F9 /* Starscream.framework in Frameworks */,
 				018B8B5A236277B900276985 /* PMKFoundation.framework in Frameworks */,
 				018B8B58236277B800276985 /* PromiseKit.framework in Frameworks */,
 			);
@@ -380,6 +382,7 @@
 			children = (
 				01E90689219BF70800928580 /* Aria2D.xcdatamodeld */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
+				01C85323241CA604006581F9 /* Cartfile */,
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89541D34FF60000C71B0 /* CoreData */,
 				012C3AEB1E10102C00ABFE4C /* Aria2 */,
@@ -531,12 +534,12 @@
 		6ACACE787527AEFD90491354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01C85329241CA7D4006581F9 /* Starscream.framework */,
+				01C8532A241CA7D4006581F9 /* Starscream.framework.dSYM */,
 				018B8B51236277AF00276985 /* PMKFoundation.framework */,
 				018B8B52236277AF00276985 /* PMKFoundation.framework.dSYM */,
 				018B8B50236277AF00276985 /* PromiseKit.framework */,
 				018B8B53236277AF00276985 /* PromiseKit.framework.dSYM */,
-				01474892215673C6005014D3 /* SocketRocket.framework */,
-				011E4D3C21EC367200997633 /* SocketRocket.framework.dSYM */,
 				0199420723378BB30045FDE9 /* Sparkle.framework */,
 				0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */,
 			);
@@ -629,6 +632,7 @@
 				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
 				010AF02723C4BC4100FC2320 /* Log.storyboard in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
+				01C85324241CA605006581F9 /* Cartfile in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				010AF01923C4BAB600FC2320 /* About.storyboard in Resources */,
