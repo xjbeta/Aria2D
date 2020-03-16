@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gny-Ry-EkF">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gny-Ry-EkF">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -50,15 +50,16 @@
                 <customObject id="1XU-kY-fc1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="fCE-dQ-3Ne" customClass="AdvancedViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="beT-ZO-qg8">
-                        <rect key="frame" x="0.0" y="0.0" width="287" height="184"/>
+                        <rect key="frame" x="0.0" y="0.0" width="287" height="210"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eyO-IW-Kth">
-                                <rect key="frame" x="32" y="20" width="223" height="144"/>
+                                <rect key="frame" x="32" y="20" width="223" height="170"/>
                                 <rows>
                                     <gridRow yPlacement="fill" id="aPW-re-udN"/>
                                     <gridRow yPlacement="fill" id="80L-1t-9wT"/>
                                     <gridRow yPlacement="fill" id="LSf-rR-0JT"/>
+                                    <gridRow id="wuj-1G-fjU"/>
                                     <gridRow yPlacement="fill" id="oSA-ji-FvD"/>
                                     <gridRow yPlacement="fill" id="zgv-we-OdX"/>
                                     <gridRow yPlacement="fill" id="Es4-FL-Cko"/>
@@ -69,7 +70,7 @@
                                 <gridCells>
                                     <gridCell row="aPW-re-udN" column="RPk-Lm-qn5" id="thS-bU-wuQ">
                                         <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="osV-ek-K8m">
-                                            <rect key="frame" x="-2" y="128" width="122" height="18"/>
+                                            <rect key="frame" x="-2" y="154" width="122" height="18"/>
                                             <buttonCell key="cell" type="check" title="Developer mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mfl-2k-3U8">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -81,7 +82,7 @@
                                     </gridCell>
                                     <gridCell row="80L-1t-9wT" column="RPk-Lm-qn5" id="ciE-HI-tPs">
                                         <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="XrL-EG-BsT">
-                                            <rect key="frame" x="-2" y="102" width="227" height="18"/>
+                                            <rect key="frame" x="-2" y="128" width="227" height="18"/>
                                             <buttonCell key="cell" type="check" title="Use forceRemove and forcePause" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qWH-YQ-Zof">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -93,13 +94,25 @@
                                     </gridCell>
                                     <gridCell row="LSf-rR-0JT" column="RPk-Lm-qn5" id="KoU-om-X33">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lUL-3f-WPz">
-                                            <rect key="frame" x="-2" y="76" width="137" height="18"/>
+                                            <rect key="frame" x="-2" y="102" width="137" height="18"/>
                                             <buttonCell key="cell" type="check" title="Show global speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pYX-pH-BdP">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
                                                 <binding destination="k4N-aV-ArN" name="value" keyPath="self.showGlobalSpeed" id="WdR-DX-KPv"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="wuj-1G-fjU" column="RPk-Lm-qn5" id="4yB-Ik-7rq">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wyf-Le-FHe">
+                                            <rect key="frame" x="-2" y="76" width="160" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Show Dock icon speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lBc-Zd-Blc">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="k4N-aV-ArN" name="value" keyPath="self.showDockIconSpeed" id="QnG-Q4-eDC"/>
                                             </connections>
                                         </button>
                                     </gridCell>
@@ -149,7 +162,7 @@
                     </view>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1822" y="794"/>
+            <point key="canvasLocation" x="1822" y="807"/>
         </scene>
         <!--Aria2 Options View Controller-->
         <scene sceneID="jaK-l5-GdI">

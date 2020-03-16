@@ -230,7 +230,6 @@ extension Aria2Websocket: WebSocketDelegate {
             Log("websocket is disconnected: \(reason) with code: \(code)")
             webSocket(didCloseWithCode: Int(code), reason: reason)
         case .text(let string):
-            Log("Received text: \(string.count)")
             webSocket(didReceiveMessageWith: string)
         case .binary(let data):
             Log("Received data: \(data.count)")

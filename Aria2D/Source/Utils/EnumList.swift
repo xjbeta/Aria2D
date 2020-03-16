@@ -22,6 +22,7 @@ enum PreferenceKeys: String {
 	case completeNotice = "app_completeNotice"
     case showAria2Features = "app_showAria2Features"
 	case showGlobalSpeed = "app_showGlobalSpeed"
+    case showDockIconSpeed = "app_showDockIconSpeed"
     case openMagnetLink = "app_openMagnetLink"
 	
 	case autoStartAria2c = "aria2c_autoStartAria2c"

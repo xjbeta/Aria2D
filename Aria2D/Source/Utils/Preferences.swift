@@ -137,6 +137,16 @@ class Preferences: NSObject {
         }
     }
     
+    @objc var showDockIconSpeed: Bool {
+        get {
+            return defaults(.showDockIconSpeed) as? Bool ?? true
+        }
+        set {
+            defaultsSet(newValue, forKey: .showDockIconSpeed)
+            NotificationCenter.default.post(name: .updateGlobalStat, object: nil)
+        }
+    }
+    
     @objc var openMagnetLink: Bool {
         get {
             return defaults(.openMagnetLink) as? Bool ?? true
