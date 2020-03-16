@@ -206,6 +206,9 @@
 /* Class = "NSMenuItem"; title = "Show In Finder"; ObjectID = "kdl-fz-wKq"; */
 "kdl-fz-wKq.title" = "Show In Finder";
 
+/* Class = "NSButtonCell"; title = "Show Dock icon speed"; ObjectID = "lBc-Zd-Blc"; */
+"lBc-Zd-Blc.title" = "Show Dock icon speed";
+
 /* Class = "NSTextFieldCell"; title = "Download files save in:"; ObjectID = "lLB-1B-HAZ"; */
 "lLB-1B-HAZ.title" = "Download files save in:";
 
