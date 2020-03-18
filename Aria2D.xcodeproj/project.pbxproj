@@ -87,6 +87,7 @@
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
 		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
+		01C373572422630B006778D1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01C373562422630B006778D1 /* README.md */; };
 		01C85324241CA605006581F9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01C85323241CA604006581F9 /* Cartfile */; };
 		01C8532B241CA7DB006581F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C85329241CA7D4006581F9 /* Starscream.framework */; };
 		01C8532C241CA7DB006581F9 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01C85329241CA7D4006581F9 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -234,6 +235,7 @@
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
+		01C373562422630B006778D1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		01C85323241CA604006581F9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		01C85329241CA7D4006581F9 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		01C8532A241CA7D4006581F9 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				01E90689219BF70800928580 /* Aria2D.xcdatamodeld */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
 				01C85323241CA604006581F9 /* Cartfile */,
+				01C373562422630B006778D1 /* README.md */,
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89541D34FF60000C71B0 /* CoreData */,
 				012C3AEB1E10102C00ABFE4C /* Aria2 */,
@@ -634,6 +637,7 @@
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
 				01C85324241CA605006581F9 /* Cartfile in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
+				01C373572422630B006778D1 /* README.md in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
 				010AF01923C4BAB600FC2320 /* About.storyboard in Resources */,
 				014D3B561EDBF2D000E3ABC0 /* Aria2D.conf in Resources */,
