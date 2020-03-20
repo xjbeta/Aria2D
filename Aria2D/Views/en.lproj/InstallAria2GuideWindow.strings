@@ -1,0 +1,33 @@
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "61x-hZ-wWs"; */
+"61x-hZ-wWs.title" = "Window";
+
+/* Class = "NSTabViewItem"; label = "Item 2"; ObjectID = "ABW-71-gau"; */
+"ABW-71-gau.label" = "Item 2";
+
+/* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "My8-Fh-PJ0"; */
+"My8-Fh-PJ0.label" = "Tab";
+
+/* Class = "NSTextFieldCell"; title = "brew install aria2"; ObjectID = "OfZ-E7-XNv"; */
+"OfZ-E7-XNv.title" = "brew install aria2";
+
+/* Class = "NSButtonCell"; title = "Open Terminal"; ObjectID = "Q35-57-5lN"; */
+"Q35-57-5lN.title" = "Open Terminal";
+
+/* Class = "NSButtonCell"; title = "A dmg file"; ObjectID = "RBx-6B-pqi"; */
+"RBx-6B-pqi.title" = "A dmg file";
+
+/* Class = "NSButtonCell"; title = "HomeBrew"; ObjectID = "Zhv-JJ-JgU"; */
+"Zhv-JJ-JgU.title" = "HomeBrew";
+
+/* Class = "NSTabViewItem"; label = "View"; ObjectID = "bcM-dR-6Di"; */
+"bcM-dR-6Di.label" = "View";
+
+/* Class = "NSTextFieldCell"; title = "Install aria2 with:"; ObjectID = "r1O-by-SIF"; */
+"r1O-by-SIF.title" = "Install aria2 with:";
+
+/* Class = "NSButtonCell"; title = "How to install aria2 with a dmg file?"; ObjectID = "wY2-Sq-2uz"; */
+"wY2-Sq-2uz.title" = "How to install aria2 with a dmg file?";
+
+/* Class = "NSButtonCell"; title = "aria2 official website"; ObjectID = "wpc-gB-m6Y"; */
+"wpc-gB-m6Y.title" = "aria2 official website";

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import SocketRocket
+import Starscream
 import PromiseKit
 
 struct ConnectedServerInfo {
@@ -22,14 +22,9 @@ class Aria2Websocket: NSObject {
 	private override init() {
 	}
 	
-    var socket: SRWebSocket? = nil
+    var socket: WebSocket? = nil
     
-    var isConnected: Bool {
-        get {
-            return socket?.readyState == .OPEN
-        }
-    }
-
+    var isConnected = false
 	var connectedServerInfo = ConnectedServerInfo()
 	
 	var aria2GlobalOption = [Aria2Option: String]() {
@@ -44,14 +39,14 @@ class Aria2Websocket: NSObject {
 			self.timer = nil
 		}
         
-        socket?.close()
+        socket?.disconnect()
         
         if let url = Preferences.shared.aria2Servers.serverURL() {
             guard url.host != nil else { return }
             
-            socket = SRWebSocket(url: url)
+            socket = WebSocket(request: .init(url: url))
             socket?.delegate = self
-            socket?.open()
+            socket?.connect()
             startTimer()
         }
 
@@ -77,11 +72,11 @@ class Aria2Websocket: NSObject {
 			timer.schedule(deadline: .now(), repeating: .seconds(1))
 			timer.setEventHandler {
                 if !self.isConnected {
-                    self.socket?.close()
-                    let url = self.socket?.url
-                    self.socket = SRWebSocket(url: url!)
+                    self.socket?.disconnect()
+                    guard let url = self.socket?.request.url else { return }
+                    self.socket = WebSocket.init(request: .init(url: url))
                     self.socket?.delegate = self
-                    self.socket?.open()
+                    self.socket?.connect()
                 } else {
                     DispatchQueue.main.async {
                         guard let count = try? DataManager.shared.activeCount(),
@@ -203,7 +198,7 @@ class Aria2Websocket: NSObject {
                 }
             }
             do {
-                try socket?.send(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted))
+                socket?.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted), completion: nil)
             } catch let er {
                 resolver.reject(webSocketResult.receiveError(message: "\(er)"))
                 return
@@ -222,8 +217,42 @@ enum webSocketResult: Error {
     case somethingError
 }
 
-extension Aria2Websocket: SRWebSocketDelegate {
-    func webSocketDidOpen(_ webSocket: SRWebSocket) {
+extension Aria2Websocket: WebSocketDelegate {
+    
+    func didReceive(event: WebSocketEvent, client: WebSocket) {
+        switch event {
+        case .connected(let headers):
+            isConnected = true
+            Log("websocket is connected: \(headers)")
+            webSocketDidOpen()
+        case .disconnected(let reason, let code):
+            isConnected = false
+            Log("websocket is disconnected: \(reason) with code: \(code)")
+            webSocket(didCloseWithCode: Int(code), reason: reason)
+        case .text(let string):
+            webSocket(didReceiveMessageWith: string)
+        case .binary(let data):
+            Log("Received data: \(data.count)")
+        case .ping(_):
+            Log("websocket ping")
+        case .pong(_):
+            Log("websocket pong")
+        case .viablityChanged(_):
+            Log("websocket viablityChanged")
+        case .reconnectSuggested(_):
+            Log("websocket reconnectSuggested")
+        case .cancelled:
+            isConnected = false
+            Log("websocket cancelled")
+        case .error(let error):
+            isConnected = false
+            Log("websocket error \(String(describing: error))")
+        }
+    }
+    
+    
+    
+    func webSocketDidOpen() {
         Aria2.shared.initData.run()
         connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         Aria2.shared.getVersion {
@@ -237,8 +266,8 @@ extension Aria2Websocket: SRWebSocketDelegate {
         NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
-    func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
-        connectedServerInfo.version = reason ?? ""
+    func webSocket(didCloseWithCode code: Int, reason: String) {
+        connectedServerInfo.version = reason
         connectedServerInfo.enabledFeatures = ""
         aria2GlobalOption = [:]
         DataManager.shared.deleteAllAria2Objects()
@@ -246,7 +275,7 @@ extension Aria2Websocket: SRWebSocketDelegate {
         NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
-    func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {
+    func webSocket(didReceiveMessageWith string: String) {
         if let data = string.data(using: .utf8) {
             if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
                 json.id.count == 36 {

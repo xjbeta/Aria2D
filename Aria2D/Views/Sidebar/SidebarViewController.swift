@@ -111,8 +111,15 @@ class SidebarViewController: NSViewController {
 	}
 	
     @objc func updateGlobalStat(notification: NSNotification) {
-        globalSpeedView.isHidden = !Preferences.shared.showGlobalSpeed
-        guard Preferences.shared.showGlobalSpeed else {
+        let dockTile = NSDockTile()
+        let preferences = Preferences.shared
+        globalSpeedView.isHidden = !preferences.showGlobalSpeed
+        if !preferences.showDockIconSpeed {
+            dockTile.badgeLabel = ""
+            dockTile.badgeLabel = nil
+        }
+        
+        guard preferences.showGlobalSpeed || preferences.showDockIconSpeed else {
             return
         }
         guard let userInfo = notification.userInfo else { return }
@@ -120,7 +127,7 @@ class SidebarViewController: NSViewController {
         if let updateServer = userInfo["updateServer"] as? Bool, updateServer {
             let isConnected = Aria2Websocket.shared.isConnected
             globalSpeedView.isHidden = !isConnected
-            
+            dockTile.badgeLabel = nil
             if isConnected,
                 let activeCount = try? DataManager.shared.activeCount(),
                 activeCount == 0 {
@@ -130,17 +137,27 @@ class SidebarViewController: NSViewController {
         
         guard let globalStat = userInfo["globalStat"] as? Aria2GlobalStat else { return }
         
-        if globalStat.numActive > 0 {
-            downloadSpeed.stringValue = "⬇︎ \(globalStat.downloadSpeed.ByteFileFormatter())/s"
-        } else {
-            globalSpeedView.isHidden = true
+        if preferences.showGlobalSpeed {
+            if globalStat.numActive > 0 {
+                downloadSpeed.stringValue = "⬇︎ \(globalStat.downloadSpeed.ByteFileFormatter())/s"
+            } else {
+                globalSpeedView.isHidden = true
+            }
+            
+            if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
+                activeBittorrentCount > 0 {
+                uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
+            } else {
+                uploadSpeed.stringValue = ""
+            }
         }
         
-        if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
-            activeBittorrentCount > 0 {
-            uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
-        } else {
-            uploadSpeed.stringValue = ""
+        if preferences.showDockIconSpeed {
+            if globalStat.numActive > 0 {
+                dockTile.badgeLabel = "\(globalStat.downloadSpeed.ByteFileFormatter())/s"
+            } else {
+                dockTile.badgeLabel = nil
+            }
         }
     }
 	

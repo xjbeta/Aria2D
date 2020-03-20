@@ -32,12 +32,16 @@ class Aria2: NSObject {
             var result: [[[Aria2Object]]]
         }
         
-        let params = [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-                                            params: nil ).object,
-                       Aria2WebsocketParams(method: Aria2Method.tellWaiting,
-                                            params: [0, 1000]).object,
-                       Aria2WebsocketParams(method: Aria2Method.tellStopped,
-                                            params: [0, 1000]).object]]
+        let params = [[
+            Aria2WebsocketParams(
+                method: Aria2Method.tellActive,
+                params: nil ).object,
+            Aria2WebsocketParams(
+                method: Aria2Method.tellWaiting,
+                params: [0, 1000]).object,
+            Aria2WebsocketParams(
+                method: Aria2Method.tellStopped,
+                params: [0, 1000]).object]]
 
         send(method: Aria2Method.multicall,
              params: params)
@@ -51,13 +55,17 @@ class Aria2: NSObject {
     }
 	
 	private func sortAllData() {
-		send(method: Aria2Method.multicall,
-             params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-                                            params: [["gid", "status"]]).object,
-                       Aria2WebsocketParams(method: Aria2Method.tellWaiting,
-                                            params: [0, 1000, ["gid", "status"]]).object,
-                       Aria2WebsocketParams(method: Aria2Method.tellStopped,
-                                            params: [0, 1000, ["gid", "status"]]).object]])
+        send(method: Aria2Method.multicall,
+             params: [[
+                Aria2WebsocketParams(
+                    method: Aria2Method.tellActive,
+                    params: [["gid", "status"]]).object,
+                Aria2WebsocketParams(
+                    method: Aria2Method.tellWaiting,
+                    params: [0, 1000, ["gid", "status"]]).object,
+                Aria2WebsocketParams(
+                    method: Aria2Method.tellStopped,
+                    params: [0, 1000, ["gid", "status"]]).object]])
             .done { data in
                 struct GIDList: Decodable {
                     var result: [[[[String: String]]]]
@@ -87,19 +95,22 @@ class Aria2: NSObject {
 
     func updateActiveTasks() {
         send(method: Aria2Method.multicall,
-             params: [[Aria2WebsocketParams(method: Aria2Method.tellActive,
-                                            params: [["gid",
-                                                      "status",
-                                                      "completedLength",
-                                                      "totalLength",
-                                                      "downloadSpeed",
-                                                      "uploadLength",
-                                                      "uploadSpeed",
-                                                      "connections",
-                                                      "bittorrent",
-                                                      "dir"]]).object,
-                       Aria2WebsocketParams(method: Aria2Method.getGlobalStat,
-                                            params: []).object]])
+             params: [[
+                Aria2WebsocketParams(
+                    method: Aria2Method.tellActive,
+                    params: [["gid",
+                              "status",
+                              "completedLength",
+                              "totalLength",
+                              "downloadSpeed",
+                              "uploadLength",
+                              "uploadSpeed",
+                              "connections",
+                              "bittorrent",
+                              "dir"]]).object,
+                Aria2WebsocketParams(
+                    method: Aria2Method.getGlobalStat,
+                    params: []).object]])
             .done { data in
                 struct Result: Decodable {
                     let result: [ResultObj]
@@ -123,25 +134,26 @@ class Aria2: NSObject {
                         try DataManager.shared.updateStatus($0.status)
                     }
                 }
-            }.catch {
-                Log("\(#function) error \($0)")
+        }.catch {
+            Log("\(#function) error \($0)")
         }
     }
 
     func updateStatus(_ gids: [String], block: (([Aria2Status]) -> Void)? = nil) {
         guard effectiveGIDs(gids).count > 0 else { return }
         let params = gids.map {
-            Aria2WebsocketParams(method: Aria2Method.tellStatus,
-                                 params: [$0, ["gid",
-                                               "status",
-                                               "completedLength",
-                                               "totalLength",
-                                               "downloadSpeed",
-                                               "uploadLength",
-                                               "uploadSpeed",
-                                               "connections",
-                                               "bittorrent",
-                                               "dir"]]).object
+            Aria2WebsocketParams(
+                method: Aria2Method.tellStatus,
+                params: [$0, ["gid",
+                              "status",
+                              "completedLength",
+                              "totalLength",
+                              "downloadSpeed",
+                              "uploadLength",
+                              "uploadSpeed",
+                              "connections",
+                              "bittorrent",
+                              "dir"]]).object
         }
 
         send(method: Aria2Method.multicall,

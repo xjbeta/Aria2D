@@ -183,7 +183,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             } catch {
                 // Customize this code block to include application-specific recovery steps.
                 let nserror = error as NSError
-                NSApplication.shared.presentError(nserror)
+                let re = NSApp.presentError(nserror)
+                // click ok button
+                if !re {
+                    NSApp.terminate(self)
+                }
             }
         }
     }

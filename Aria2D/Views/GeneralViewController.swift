@@ -222,9 +222,9 @@ extension GeneralViewController: NSMenuDelegate {
 	
 	func initSocket() {
 		DispatchQueue.main.async {
-            if Aria2Websocket.shared.socket?.url != Preferences.shared.aria2Servers.serverURL() {
-				Aria2Websocket.shared.initSocket()
-			}
+            guard Aria2Websocket.shared.socket?.request.url != Preferences.shared.aria2Servers.serverURL() else { return }
+            
+            Aria2Websocket.shared.initSocket()
 		}
 	}
 	

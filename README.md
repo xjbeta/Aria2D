@@ -32,12 +32,12 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 - [PromiseKit](https://github.com/mxcl/PromiseKit)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)
 - [Foundation](https://github.com/PromiseKit/Foundation)
-- [SocketRocket](https://github.com/facebook/SocketRocket)
+- [Starscream](https://github.com/daltoniam/Starscream)
 
 ## LICENSE
 > GPLV3
 
-> Version before adding a LICENSE file, GPLV3 or Copyright © 2016 - 2019 xjbeta. All rights reserved.
+> Version before adding a LICENSE file, GPLV3 or Copyright © 2016 - 2020 xjbeta. All rights reserved.
 
 
 ## Screen Shots
