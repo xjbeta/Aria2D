@@ -31,6 +31,9 @@ class SidebarViewController: NSViewController {
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        if #available(OSX 11.0, *) {
+            sidebarTableView.style = .fullWidth
+        }
 		initNotification()
 		resetSidebarItems()
         
