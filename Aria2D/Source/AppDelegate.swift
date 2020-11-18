@@ -105,7 +105,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             Aria2Websocket.shared.resumeTimer()
         } else {
             //Occlusion
-            Aria2Websocket.shared.suspendTimer()
+            if !Preferences.shared.showDockIconSpeed {
+                Aria2Websocket.shared.suspendTimer()
+            }
         }
     }
     
