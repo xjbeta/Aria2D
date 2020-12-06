@@ -3,61 +3,61 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "Round Icon 16.png",
+      "filename" : "Aria2D Icon 11MacMicro_16pt.png",
       "scale" : "1x"
     },
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "Round Icon 32.png",
+      "filename" : "Aria2D Icon 11MacMicro_16pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "Round Icon 32-1.png",
+      "filename" : "Aria2D Icon 11MacSmall_32pt.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "Round Icon 64.png",
+      "filename" : "Aria2D Icon 11MacSmall_32pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "Round Icon 128.png",
+      "filename" : "Aria2D Icon 11MacMedium_128pt.png",
       "scale" : "1x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "Round Icon 256.png",
+      "filename" : "Aria2D Icon 11MacMedium_128pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "Round Icon 256-1.png",
+      "filename" : "Aria2D Icon 11MacLarge_256pt.png",
       "scale" : "1x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "Round Icon 512-1.png",
+      "filename" : "Aria2D Icon 11MacLarge_256pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Round Icon 512.png",
+      "filename" : "Aria2D Icon 11MacHuge_512pt.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Round Icon.png",
+      "filename" : "Aria2D Icon 11MacHuge_512pt@2x.png",
       "scale" : "2x"
     }
   ],

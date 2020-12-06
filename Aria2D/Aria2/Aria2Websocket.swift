@@ -237,7 +237,7 @@ extension Aria2Websocket: WebSocketDelegate {
             Log("websocket ping")
         case .pong(_):
             Log("websocket pong")
-        case .viablityChanged(_):
+        case .viabilityChanged(_):
             Log("websocket viablityChanged")
         case .reconnectSuggested(_):
             Log("websocket reconnectSuggested")
