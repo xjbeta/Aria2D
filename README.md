@@ -24,6 +24,17 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 - Complete notification
 - Dark Mode
 
+## Getting Started
+
+1. Install Aria2D and aria2(Both available [above](#Downloads))
+2. Launch Aria2D
+3. Open the Preferences
+4. Navigate to the third tab
+5. Confirm that there is a path present for 'Aria2c path'. If not, select one from the dropdown.
+6. Click the 'Aria2c process status' button to verify if Aria2c is running. If not, click start.
+7. Exit the Preferences
+8. To start a new download press Cmd + N or File -> New and paste the URL of your download and click Download
+
 ## Donation List
 > Anyone who has purchased a license can contact me to add your information to the donation list. <xjbeta.tiny@outlook.com>
 - Josh Keer
