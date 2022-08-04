@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,8 +25,6 @@
 		011E4D3121E8C3AF00997633 /* Aria2cOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E4D3021E8C3AF00997633 /* Aria2cOptions.swift */; };
 		012A1BB21E174860007C4B46 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A1BB11E174860007C4B46 /* Transformer.swift */; };
 		012B57302159267400D1AC03 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012B572F2159267400D1AC03 /* FileNode.swift */; };
-		012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; };
-		012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0199420723378BB30045FDE9 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012C3AE61E1001CA00ABFE4C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AE51E1001CA00ABFE4C /* Log.swift */; };
 		012C3AEE1E1010AD00ABFE4C /* Aria2Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C3AED1E1010AD00ABFE4C /* Aria2Websocket.swift */; };
 		012CBD6C1F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012CBD681F6CC55A00EFD1D4 /* StatusCollectionViewItem.swift */; };
@@ -59,12 +57,6 @@
 		017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017557BC1F6CD18D004C02F3 /* StatusCollectionViewItem.xib */; };
 		01789B1B1D9C995300A5B789 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789B1A1D9C995300A5B789 /* NewTaskViewController.swift */; };
 		01842A4F2233672700BA77CB /* Aria2cProcessStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01842A4E2233672700BA77CB /* Aria2cProcessStatusViewController.swift */; };
-		018B8B58236277B800276985 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B50236277AF00276985 /* PromiseKit.framework */; };
-		018B8B59236277B800276985 /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B50236277AF00276985 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		018B8B5A236277B900276985 /* PMKFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B51236277AF00276985 /* PMKFoundation.framework */; };
-		018B8B5B236277B900276985 /* PMKFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 018B8B51236277AF00276985 /* PMKFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		018B8B5C236277C500276985 /* PMKFoundation.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 018B8B52236277AF00276985 /* PMKFoundation.framework.dSYM */; };
-		018B8B5D236277C500276985 /* PromiseKit.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 018B8B53236277AF00276985 /* PromiseKit.framework.dSYM */; };
 		018B9B581D72B2EA0087B71E /* WaitTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9B571D72B2EA0087B71E /* WaitTimer.swift */; };
 		018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E89491D34FF5B000C71B0 /* DataManager.swift */; };
 		018E89601D34FFA8000C71B0 /* Aria2c.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E895F1D34FFA8000C71B0 /* Aria2c.swift */; };
@@ -75,7 +67,6 @@
 		018E89701D350075000C71B0 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896C1D350075000C71B0 /* Preferences.swift */; };
 		018E89711D350075000C71B0 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E896D1D350075000C71B0 /* GeneralViewController.swift */; };
 		018F5C3C1F298E1900B2150A /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5C3B1F298E1900B2150A /* JSONDecoder.swift */; };
-		0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 0199420823378BB30045FDE9 /* Sparkle.framework.dSYM */; };
 		019BFF6321267A6400E715CC /* Aria2ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BFF6221267A6400E715CC /* Aria2ErrorCode.swift */; };
 		019C5CAD1EEA2E4D00B89B95 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C5CAC1EEA2E4D00B89B95 /* Identifiers.swift */; };
 		019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E3DB9215BBDEE00FDD1F8 /* MainListTableView.swift */; };
@@ -88,10 +79,6 @@
 		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
 		01C373572422630B006778D1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01C373562422630B006778D1 /* README.md */; };
-		01C85324241CA605006581F9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01C85323241CA604006581F9 /* Cartfile */; };
-		01C8532B241CA7DB006581F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C85329241CA7D4006581F9 /* Starscream.framework */; };
-		01C8532C241CA7DB006581F9 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01C85329241CA7D4006581F9 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		01C8532D241CA7E7006581F9 /* Starscream.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 01C8532A241CA7D4006581F9 /* Starscream.framework.dSYM */; };
 		01DD0D0B1D25012F0042ECEB /* MainSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */; };
 		01E410B422CA427500864118 /* InstallAria2GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E410B322CA427500864118 /* InstallAria2GuideWindowController.swift */; };
 		01E9068B219BF70900928580 /* Aria2D.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E90689219BF70800928580 /* Aria2D.xcdatamodeld */; };
@@ -109,38 +96,11 @@
 		01E906C8219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E906C6219FCAB000928580 /* WebSocketLog+CoreDataProperties.swift */; };
 		01EB1CBA1D61FC1400F2925F /* RightTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB1CB91D61FC1400F2925F /* RightTabView.swift */; };
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
+		01F87CB6289B64B500B0ED8F /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CB5289B64B500B0ED8F /* Starscream */; };
+		01F87CB9289B650600B0ED8F /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CB8289B650600B0ED8F /* Sparkle */; };
+		01F87CBC289B656300B0ED8F /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CBB289B656300B0ED8F /* PromiseKit */; };
+		01F87CBF289B670200B0ED8F /* PMKFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CBE289B670200B0ED8F /* PMKFoundation */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		010F0ED920F83B4100F33553 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				018B8B59236277B800276985 /* PromiseKit.framework in Embed Frameworks */,
-				01C8532C241CA7DB006581F9 /* Starscream.framework in Embed Frameworks */,
-				018B8B5B236277B900276985 /* PMKFoundation.framework in Embed Frameworks */,
-				012BB31B23378E2100ACA3DE /* Sparkle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01D82A141F145E59003754E4 /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				01C8532D241CA7E7006581F9 /* Starscream.framework.dSYM in Copy Files */,
-				018B8B5C236277C500276985 /* PMKFoundation.framework.dSYM in Copy Files */,
-				018B8B5D236277C500276985 /* PromiseKit.framework.dSYM in Copy Files */,
-				0195A97823378C530058CBE4 /* Sparkle.framework.dSYM in Copy Files */,
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		010AF01C23C4BAC400FC2320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
@@ -236,7 +196,6 @@
 		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		01C373562422630B006778D1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		01C85323241CA604006581F9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		01C85329241CA7D4006581F9 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		01C8532A241CA7D4006581F9 /* Starscream.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Starscream.framework.dSYM; path = Carthage/Build/Mac/Starscream.framework.dSYM; sourceTree = "<group>"; };
 		01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitView.swift; sourceTree = "<group>"; };
@@ -263,10 +222,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				012BB31A23378E2100ACA3DE /* Sparkle.framework in Frameworks */,
-				01C8532B241CA7DB006581F9 /* Starscream.framework in Frameworks */,
-				018B8B5A236277B900276985 /* PMKFoundation.framework in Frameworks */,
-				018B8B58236277B800276985 /* PromiseKit.framework in Frameworks */,
+				01F87CB9289B650600B0ED8F /* Sparkle in Frameworks */,
+				01F87CBF289B670200B0ED8F /* PMKFoundation in Frameworks */,
+				01F87CB6289B64B500B0ED8F /* Starscream in Frameworks */,
+				01F87CBC289B656300B0ED8F /* PromiseKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +343,6 @@
 			children = (
 				01E90689219BF70800928580 /* Aria2D.xcdatamodeld */,
 				016CF8F41ED41618001336F1 /* Aria2D.entitlements */,
-				01C85323241CA604006581F9 /* Cartfile */,
 				01C373562422630B006778D1 /* README.md */,
 				018E892A1D34FEB7000C71B0 /* Resources */,
 				018E89541D34FF60000C71B0 /* CoreData */,
@@ -559,8 +517,6 @@
 				0147EDB91D21FAD800FB4324 /* Sources */,
 				0147EDBA1D21FAD800FB4324 /* Frameworks */,
 				0147EDBB1D21FAD800FB4324 /* Resources */,
-				01D82A141F145E59003754E4 /* Copy Files */,
-				010F0ED920F83B4100F33553 /* Embed Frameworks */,
 				019BFF5C2124838E00E715CC /* ShellScript */,
 			);
 			buildRules = (
@@ -569,6 +525,10 @@
 			);
 			name = Aria2D;
 			packageProductDependencies = (
+				01F87CB5289B64B500B0ED8F /* Starscream */,
+				01F87CB8289B650600B0ED8F /* Sparkle */,
+				01F87CBB289B656300B0ED8F /* PromiseKit */,
+				01F87CBE289B670200B0ED8F /* PMKFoundation */,
 			);
 			productName = Aria2D;
 			productReference = 0147EDBD1D21FAD800FB4324 /* Aria2D.app */;
@@ -616,6 +576,10 @@
 			);
 			mainGroup = 0147EDB41D21FAD800FB4324;
 			packageReferences = (
+				01F87CB4289B64B500B0ED8F /* XCRemoteSwiftPackageReference "Starscream" */,
+				01F87CB7289B650600B0ED8F /* XCRemoteSwiftPackageReference "Sparkle" */,
+				01F87CBA289B656300B0ED8F /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				01F87CBD289B670200B0ED8F /* XCRemoteSwiftPackageReference "Foundation" */,
 			);
 			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
 			projectDirPath = "";
@@ -635,7 +599,6 @@
 				01A5351B2129512000E5C88C /* Localizable.strings in Resources */,
 				010AF02723C4BC4100FC2320 /* Log.storyboard in Resources */,
 				0147EDC81D21FAD800FB4324 /* Main.storyboard in Resources */,
-				01C85324241CA605006581F9 /* Cartfile in Resources */,
 				011E102C1D478EB300BD2E71 /* Assets.xcassets in Resources */,
 				01C373572422630B006778D1 /* README.md in Resources */,
 				017557BD1F6CD18D004C02F3 /* StatusCollectionViewItem.xib in Resources */,
@@ -932,7 +895,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -949,15 +913,15 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 1.3.6;
@@ -988,15 +952,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Aria2D/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 1.3.6;
@@ -1033,6 +997,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		01F87CB4289B64B500B0ED8F /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		01F87CB7289B650600B0ED8F /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		01F87CBA289B656300B0ED8F /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		01F87CBD289B670200B0ED8F /* XCRemoteSwiftPackageReference "Foundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PromiseKit/Foundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		01F87CB5289B64B500B0ED8F /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01F87CB4289B64B500B0ED8F /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+		01F87CB8289B650600B0ED8F /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01F87CB7289B650600B0ED8F /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+		01F87CBB289B656300B0ED8F /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01F87CBA289B656300B0ED8F /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+		01F87CBE289B670200B0ED8F /* PMKFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01F87CBD289B670200B0ED8F /* XCRemoteSwiftPackageReference "Foundation" */;
+			productName = PMKFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		01E90689219BF70800928580 /* Aria2D.xcdatamodeld */ = {
