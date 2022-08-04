@@ -108,10 +108,6 @@ class MainMenu: NSObject, NSMenuItemValidation {
         }
 	}
     
-    @IBAction func checkForUpdate(_ sender: NSMenuItem) {
-        SUUpdater().checkForUpdates(sender)
-    }
-    
     @IBAction func help(_ sender: Any) {
         if let url = URL(string: "https://github.com/xjbeta/Aria2D") {
             NSWorkspace.shared.open(url)
