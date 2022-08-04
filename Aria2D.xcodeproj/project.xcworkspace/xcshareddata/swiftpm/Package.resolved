@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "foundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PromiseKit/Foundation",
+      "state" : {
+        "revision" : "985f17fa69ee0e5b7eb3ff9be87ffc4e05fc0927",
+        "version" : "3.4.0"
+      }
+    },
+    {
+      "identity" : "promisekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mxcl/PromiseKit",
+      "state" : {
+        "revision" : "ed3192004c0b00b4b3d7baa9578ee655c66faae3",
+        "version" : "6.18.0"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "059ce9128775d5a636c7f4716f71a58919d3111e",
+        "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream",
+      "state" : {
+        "revision" : "df8d82047f6654d8e4b655d1b1525c64e1059d21",
+        "version" : "4.0.4"
+      }
+    }
+  ],
+  "version" : 2
+}
