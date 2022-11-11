@@ -50,13 +50,13 @@
 "Lom-OR-ACd.title" = "Table View Cell";
 "M7D-Xv-aan.title" = "Item 2";
 "MJ7-GS-xFr.title" = "删除";
-"MTL-27-lX7.ibShadowedLabels[0]" = "general";
-"MTL-27-lX7.ibShadowedLabels[1]" = "ftp";
-"MTL-27-lX7.ibShadowedLabels[2]" = "http";
-"MTL-27-lX7.ibShadowedLabels[3]" = "proxy";
-"MTL-27-lX7.ibShadowedLabels[4]" = "bitTorrent";
-"MTL-27-lX7.ibShadowedLabels[5]" = "metalink";
-"MTL-27-lX7.ibShadowedLabels[6]" = "other";
+"MTL-27-lX7.ibShadowedLabels[0]" = "通用";
+"MTL-27-lX7.ibShadowedLabels[1]" = "FTP";
+"MTL-27-lX7.ibShadowedLabels[2]" = "HTTP";
+"MTL-27-lX7.ibShadowedLabels[3]" = "代理";
+"MTL-27-lX7.ibShadowedLabels[4]" = "BitTorrent";
+"MTL-27-lX7.ibShadowedLabels[5]" = "Metalink";
+"MTL-27-lX7.ibShadowedLabels[6]" = "其他";
 "N5E-mk-EFk.title" = "Label";
 "NEI-TT-xxW.title" = "_OptionKey";
 "NIW-72-xNB.title" = "连接中...";
@@ -132,5 +132,5 @@
 "x3v-GG-iWU.title" = "复制";
 "x6h-xk-9nw.label" = "文件";
 "xLH-yg-9h1.title" = "Label";
-"xXY-RQ-9jK.title" = "Torrent";
+"xXY-RQ-9jK.title" = "选择种子文件";
 "yPR-pW-dgZ.title" = "修改";
