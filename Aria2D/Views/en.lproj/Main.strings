@@ -150,25 +150,25 @@
 "MJ7-GS-xFr.title" = "Delete";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[0] = "general"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[0]" = "general";
+"MTL-27-lX7.ibShadowedLabels[0]" = "General";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[1] = "ftp"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[1]" = "ftp";
+"MTL-27-lX7.ibShadowedLabels[1]" = "FTP";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[2] = "http"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[2]" = "http";
+"MTL-27-lX7.ibShadowedLabels[2]" = "HTTP";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[3] = "proxy"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[3]" = "proxy";
+"MTL-27-lX7.ibShadowedLabels[3]" = "Proxy";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[4] = "bitTorrent"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[4]" = "bitTorrent";
+"MTL-27-lX7.ibShadowedLabels[4]" = "BitTorrent";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[5] = "metalink"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[5]" = "metalink";
+"MTL-27-lX7.ibShadowedLabels[5]" = "Metalink";
 
 /* Class = "NSSegmentedCell"; MTL-27-lX7.ibShadowedLabels[6] = "other"; ObjectID = "MTL-27-lX7"; */
-"MTL-27-lX7.ibShadowedLabels[6]" = "other";
+"MTL-27-lX7.ibShadowedLabels[6]" = "Other";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "N5E-mk-EFk"; */
 "N5E-mk-EFk.title" = "Label";
@@ -231,7 +231,7 @@
 "WC9-tT-oaT.label" = "Item 4";
 
 /* Class = "NSMenuItem"; title = "New"; ObjectID = "Was-JA-tGl"; */
-"Was-JA-tGl.title" = "New";
+"Was-JA-tGl.title" = "New Download Task";
 
 /* Class = "NSTextFieldCell"; title = "connections"; ObjectID = "WjS-KT-SMu"; */
 "WjS-KT-SMu.title" = "connections";
@@ -332,8 +332,8 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "oO8-U9-kKl"; */
 "oO8-U9-kKl.title" = "Text Cell";
 
-/* Class = "NSMenuItem"; title = "Unpause All"; ObjectID = "pRn-oF-KWn"; */
-"pRn-oF-KWn.title" = "Unpause All";
+/* Class = "NSMenuItem"; title = "Resume All"; ObjectID = "pRn-oF-KWn"; */
+"pRn-oF-KWn.title" = "Resume All";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
 "pa3-QI-u2k.title" = "Delete";
@@ -341,8 +341,8 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "pkc-1U-noL"; */
 "pkc-1U-noL.title" = "Text Cell";
 
-/* Class = "NSMenuItem"; title = "Unpause All"; ObjectID = "puJ-mb-eTT"; */
-"puJ-mb-eTT.title" = "Unpause All";
+/* Class = "NSMenuItem"; title = "Resume All"; ObjectID = "puJ-mb-eTT"; */
+"puJ-mb-eTT.title" = "Resume All";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qra-wX-At3"; */
 "qra-wX-At3.title" = "Cancel";
@@ -396,7 +396,7 @@
 "xLH-yg-9h1.title" = "Label";
 
 /* Class = "NSButtonCell"; title = "Torrent"; ObjectID = "xXY-RQ-9jK"; */
-"xXY-RQ-9jK.title" = "Torrent";
+"xXY-RQ-9jK.title" = "Open Torrent File";
 
 /* Class = "NSButtonCell"; title = "Change"; ObjectID = "yPR-pW-dgZ"; */
-"yPR-pW-dgZ.title" = "Change";
+"yPR-pW-dgZ.title" = "Update";

@@ -146,29 +146,6 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Task" id="an9-Qw-nqW">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Window" systemMenu="window" id="2aE-Wb-5W8">
-                                    <items>
-                                        <menuItem title="Previous Tag" enabled="NO" keyEquivalent="" id="wj5-Cd-TeC">
-                                            <connections>
-                                                <action selector="previousTag:" target="6ga-g5-iZP" id="Ad4-o9-QbC"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Next Tag" enabled="NO" keyEquivalent="" id="FWc-QJ-FdT">
-                                            <connections>
-                                                <action selector="nextTag:" target="6ga-g5-iZP" id="cW0-cY-LJc"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="4OJ-mE-IBU"/>
-                                        <menuItem title="Minimize" keyEquivalent="m" id="OVO-g0-FO9">
-                                            <connections>
-                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="Orh-qL-Own"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                             <menuItem title="Download" id="dKF-cw-Xt1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Download" id="96c-TL-NJg">
@@ -207,6 +184,29 @@ CA
                                         <menuItem title="Info" keyEquivalent="i" id="kSC-ph-VpU">
                                             <connections>
                                                 <action selector="showInfo:" target="6ga-g5-iZP" id="ZSP-m4-a5N"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Task" id="an9-Qw-nqW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="2aE-Wb-5W8">
+                                    <items>
+                                        <menuItem title="Previous Tag" enabled="NO" keyEquivalent="" id="wj5-Cd-TeC">
+                                            <connections>
+                                                <action selector="previousTag:" target="6ga-g5-iZP" id="Ad4-o9-QbC"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Next Tag" enabled="NO" keyEquivalent="" id="FWc-QJ-FdT">
+                                            <connections>
+                                                <action selector="nextTag:" target="6ga-g5-iZP" id="cW0-cY-LJc"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="4OJ-mE-IBU"/>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="OVO-g0-FO9">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="Orh-qL-Own"/>
                                             </connections>
                                         </menuItem>
                                     </items>

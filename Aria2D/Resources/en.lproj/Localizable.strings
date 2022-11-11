@@ -14,8 +14,8 @@
 
 "mainMenu.activateAppItem.activate" = "Activate Aria2D";
 "mainMenu.activateAppItem.activated" = "Activated";
-"mainMenu.pauseOrUnpausItem.pause" = "pause";
-"mainMenu.pauseOrUnpausItem.unpause" = "unpause";
+"mainMenu.pauseOrUnpausItem.pause" = "Pause";
+"mainMenu.pauseOrUnpausItem.unpause" = "Resume";
 
 
 "licenseInfo.messageText" = "Your application is already activated.";
