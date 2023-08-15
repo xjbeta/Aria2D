@@ -284,9 +284,7 @@ extension Aria2Websocket: WebSocketDelegate {
                 let gids = json.params.map { $0.gid }
                 switch json.method {
                 case .onDownloadStart:
-                    gids.forEach {
-                        Aria2.shared.initData($0)
-                    }
+					Aria2.shared.updateStatus(gids)
                     ViewControllersManager.shared.showHUD(.downloadStart)
                 case .onDownloadPause:
                     Aria2.shared.updateStatus(gids)
