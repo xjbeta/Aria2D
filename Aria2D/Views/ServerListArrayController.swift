@@ -198,7 +198,7 @@ struct Aria2Servers {
 		required init?(coder aDecoder: NSCoder) {
 			self.contents = aDecoder.decodeObject(forKey: "contents") as? [Aria2ConnectionSettings] ?? []
 			self.selectedID = aDecoder.decodeObject(forKey: "selectedID") as? String ?? ""
-			self.selectedIndex = aDecoder.decodeObject(forKey: "selectedIndex") as? Int ?? 0
+			self.selectedIndex = aDecoder.decodeInteger(forKey: "selectedIndex")
 		}
 		
 		func encode(with aCoder: NSCoder) {
