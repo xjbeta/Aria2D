@@ -134,6 +134,9 @@ class SidebarViewController: NSViewController {
             if isConnected,
                 let activeCount = try? DataManager.shared.activeCount(),
                 activeCount == 0 {
+				
+				dockTile.badgeLabel = ""
+				dockTile.badgeLabel = nil
                 globalSpeedView.isHidden = true
             }
         }
