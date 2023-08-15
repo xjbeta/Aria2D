@@ -72,6 +72,17 @@ class Aria2: NSObject {
                 }
                 
                 let re = try JSONDecoder().decode(GIDList.self, from: data).result.flatMap ({ $0 }).flatMap ({ $0 })
+				
+				let actives = re.filter {
+					$0.contains(where: {
+						$0.value == Status.active.string()
+					})
+				}
+				
+				if actives.count == 0 {
+					NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
+				}
+				
                 try DataManager.shared.sortAllObjects(re)
             }.catch {
                 Log("\(#function) error \($0)")
