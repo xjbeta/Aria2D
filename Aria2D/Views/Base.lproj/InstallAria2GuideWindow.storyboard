@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Icc-JI-qsf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Icc-JI-qsf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,20 +32,20 @@
             <objects>
                 <viewController id="JYm-rm-Nbn" customClass="InstallationMethodViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="xZJ-bb-VZh">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="184"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="D1D-nb-J3V">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="184"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Tab" identifier="1" id="My8-Fh-PJ0" userLabel="method">
                                         <view key="view" id="Ban-T8-bey">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="179"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="184"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="25" columnSpacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="9k3-bO-VT3">
-                                                    <rect key="frame" x="87" y="40" width="277" height="99"/>
+                                                    <rect key="frame" x="89" y="40" width="272" height="104"/>
                                                     <rows>
                                                         <gridRow yPlacement="fill" id="9aZ-kZ-9bM"/>
                                                         <gridRow yPlacement="fill" id="FBB-uJ-S1e"/>
@@ -57,8 +57,8 @@
                                                     </columns>
                                                     <gridCells>
                                                         <gridCell row="9aZ-kZ-9bM" column="uhi-Zl-5Z9" id="zpj-8x-fMu">
-                                                            <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k9v-dB-VaZ">
-                                                                <rect key="frame" x="-2" y="82" width="107" height="17"/>
+                                                            <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k9v-dB-VaZ">
+                                                                <rect key="frame" x="-2" y="86" width="107" height="18"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Install aria2 with:" id="r1O-by-SIF">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -68,7 +68,7 @@
                                                         </gridCell>
                                                         <gridCell row="9aZ-kZ-9bM" column="cEK-41-B19" id="iN1-YM-Cem">
                                                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I5D-ut-RfP">
-                                                                <rect key="frame" x="148" y="81" width="129" height="18"/>
+                                                                <rect key="frame" x="148" y="86" width="124" height="18"/>
                                                                 <buttonCell key="cell" type="inline" title="aria2 official website" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wpc-gB-m6Y">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -81,7 +81,7 @@
                                                         <gridCell row="FBB-uJ-S1e" column="uhi-Zl-5Z9" id="dj4-8J-T2m"/>
                                                         <gridCell row="FBB-uJ-S1e" column="cEK-41-B19" id="DFg-ib-THO">
                                                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z9P-FT-2fF">
-                                                                <rect key="frame" x="148" y="40" width="129" height="17"/>
+                                                                <rect key="frame" x="148" y="43" width="124" height="18"/>
                                                                 <buttonCell key="cell" type="inline" title="HomeBrew" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zhv-JJ-JgU">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -94,7 +94,7 @@
                                                         <gridCell row="tl7-Xx-S0f" column="uhi-Zl-5Z9" id="Z94-Bw-GZ6"/>
                                                         <gridCell row="tl7-Xx-S0f" column="cEK-41-B19" id="7lQ-Lh-iJj">
                                                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="plT-pE-syj">
-                                                                <rect key="frame" x="148" y="-1" width="129" height="17"/>
+                                                                <rect key="frame" x="148" y="0.0" width="124" height="18"/>
                                                                 <buttonCell key="cell" type="inline" title="A dmg file" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RBx-6B-pqi">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -119,7 +119,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="450" height="181"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erK-Nh-iLc">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erK-Nh-iLc">
                                                     <rect key="frame" x="110" y="102" width="230" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="2xi-PQ-kTv"/>

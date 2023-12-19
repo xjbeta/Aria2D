@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b6F-ig-Pz2">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b6F-ig-Pz2">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,14 +14,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="800" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bex-2R-Jfj">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bex-2R-Jfj">
                                 <rect key="frame" x="0.0" y="0.0" width="800" height="464"/>
                                 <clipView key="contentView" drawsBackground="NO" id="LRd-bD-Kzf">
                                     <rect key="frame" x="0.0" y="0.0" width="800" height="464"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="22" rowSizeStyle="small" headerView="xBD-uH-1No" id="QOk-cI-6Rt">
-                                            <rect key="frame" x="0.0" y="0.0" width="801" height="439"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="small" headerView="xBD-uH-1No" id="QOk-cI-6Rt">
+                                            <rect key="frame" x="0.0" y="0.0" width="830" height="439"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -29,7 +29,6 @@
                                             <tableColumns>
                                                 <tableColumn identifier="LogTableTime" editable="NO" width="65" minWidth="65" maxWidth="65" id="4Eu-Hr-T9s">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="time">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -49,7 +48,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableMethod" editable="NO" width="150" minWidth="150" maxWidth="250" id="fcg-7o-2qj">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="method">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -69,7 +67,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableSuccess" editable="NO" width="50" minWidth="50" maxWidth="50" id="Kdt-kB-7g2">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="success">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -84,7 +81,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableSendJSON" width="441" minWidth="100" maxWidth="3.4028234663852886e+38" id="fmc-Cw-LZt">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="send json">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -100,7 +96,6 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="LogTableReceivedJSON" width="80" minWidth="80" maxWidth="80" id="NBA-e0-CUU">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="received json">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -129,8 +124,8 @@
                                     <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="xBD-uH-1No">
-                                    <rect key="frame" x="0.0" y="0.0" width="801" height="25"/>
+                                <tableHeaderView key="headerView" wantsLayer="YES" id="xBD-uH-1No">
+                                    <rect key="frame" x="0.0" y="0.0" width="830" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -138,33 +133,33 @@
                                 <rect key="frame" x="0.0" y="462" width="800" height="38"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="R5R-7C-rE6">
-                                        <rect key="frame" x="98" y="10" width="104" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="S6T-eY-pbD"/>
-                                        </constraints>
+                                        <rect key="frame" x="98" y="10" width="102" height="18"/>
                                         <buttonCell key="cell" type="check" title="Record Log" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="z3d-6i-26M">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="S6T-eY-pbD"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="recordLog:" target="eFw-SL-mKF" id="nJj-PU-vwl"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-bV-enq">
-                                        <rect key="frame" x="714" y="2" width="72" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="il4-YG-sCU"/>
-                                        </constraints>
+                                        <rect key="frame" x="713" y="2" width="74" height="32"/>
                                         <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pOT-md-Jn8">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="il4-YG-sCU"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="clear:" target="eFw-SL-mKF" id="DoE-bG-9pf"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="qY7-Zp-lNh">
-                                        <rect key="frame" x="228" y="10" width="104" height="18"/>
+                                        <rect key="frame" x="228" y="10" width="102" height="18"/>
                                         <buttonCell key="cell" type="check" title="Hide active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="j1S-9i-gHP">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
