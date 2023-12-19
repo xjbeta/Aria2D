@@ -116,8 +116,8 @@ class Aria2c: NSObject {
         let task = Process()
         let pipe = Pipe()
         task.standardOutput = pipe
-        task.launchPath = "/bin/bash"
-        task.arguments  = ["-l", "-c", "which aria2c"]
+        task.launchPath = "/usr/bin/which"
+        task.arguments  = ["aria2c"]
         
         task.launch()
         task.waitUntilExit()
