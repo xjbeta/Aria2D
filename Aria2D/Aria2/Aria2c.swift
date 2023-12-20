@@ -116,8 +116,8 @@ class Aria2c: NSObject {
         let task = Process()
         let pipe = Pipe()
         task.standardOutput = pipe
-        task.launchPath = "/bin/bash"
-        task.arguments  = ["-l", "-c", "which aria2c"]
+        task.launchPath = "/usr/bin/which"
+        task.arguments  = ["aria2c"]
         
         task.launch()
         task.waitUntilExit()
@@ -184,15 +184,21 @@ class Aria2c: NSObject {
             var args = aria2cArgs
             let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
             args.insert(aria2cPath, at: 0)
-            args.append("-D")
-            
-            task.arguments = ["-c", "exec -a \(aria2cProcessName) \(args.joined(separator: " "))"]
-
-            task.launch(.promise).done { out, err in
-                resolver.fulfill(())
-                }.catch {
-                    resolver.reject($0)
-            }
+//            args.append("-D")
+			task.arguments = ["-c", "exec -a \(aria2cProcessName) \(args.joined(separator: " "))"]
+			
+			/*
+			task.launch(.promise).done { out, err in
+				resolver.fulfill(())
+				}.catch {
+					resolver.reject($0)
+			}
+			 */
+			
+			var outPipe = Pipe()
+			task.standardOutput = outPipe
+			try? task.run()
+			resolver.fulfill(())
         }
 	}
 	

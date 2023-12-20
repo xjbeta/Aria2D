@@ -8,10 +8,8 @@
 
 import Cocoa
 
-
-
 @objc(Aria2ConnectionSettings)
-class Aria2ConnectionSettings: NSObject, NSCoding {
+class Aria2ConnectionSettings: NSObject, NSCoding, Codable {
 
 	@objc dynamic var wsLabel: String {
 		get {
@@ -115,7 +113,7 @@ class Aria2ConnectionSettings: NSObject, NSCoding {
 }
 
 
-struct Aria2Servers {
+struct Aria2Servers: Codable {
 	private var contents: [Aria2ConnectionSettings] = [Aria2ConnectionSettings()]
 	private var selectedID = ""
 	private var selectedIndex = 0
@@ -167,7 +165,13 @@ struct Aria2Servers {
 	}
 	
 	init?(data: Data) {
-		if let coding = NSKeyedUnarchiver.unarchiveObject(with: data) as? Encoding {
+		NSKeyedUnarchiver.setClass(Aria2ServersEncoding.self, forClassName: "_TtCV6Aria2D12Aria2ServersP33_171DF4024EB981219431F6BE240222578Encoding")
+		
+		if let coding = try? JSONDecoder().decode(Aria2Servers.self, from: data) {
+			contents = coding.contents
+			selectedID = coding.selectedID
+			selectedIndex = coding.selectedIndex
+		} else if let coding = NSKeyedUnarchiver.unarchiveObject(with: data) as? Aria2ServersEncoding {
 			contents = coding.contents
 			selectedID = coding.selectedID
 			selectedIndex = coding.selectedIndex
@@ -180,12 +184,16 @@ struct Aria2Servers {
 	}
 	
 	func encode() -> Data {
-		return NSKeyedArchiver.archivedData(withRootObject: Encoding(self))
+		do {
+			return try JSONEncoder().encode(self)
+		} catch let error {
+			Log(error)
+			return NSKeyedArchiver.archivedData(withRootObject: Aria2ServersEncoding(self))
+		}
 	}
 	
-//	@objc(Encoding)
-	@objc(_TtCV6Aria2D12Aria2ServersP33_171DF4024EB981219431F6BE240222578Encoding)
-	private class Encoding: NSObject, NSCoding {
+	@objc(Aria2ServersEncoding)
+	private class Aria2ServersEncoding: NSObject, NSCoding {
 		var contents: [Aria2ConnectionSettings] = []
 		var selectedID = ""
 		var selectedIndex = -1

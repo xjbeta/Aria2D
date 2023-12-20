@@ -218,38 +218,39 @@ enum webSocketResult: Error {
 }
 
 extension Aria2Websocket: WebSocketDelegate {
-    
-    func didReceive(event: WebSocketEvent, client: WebSocket) {
-        switch event {
-        case .connected(let headers):
-            isConnected = true
-            Log("websocket is connected: \(headers)")
-            webSocketDidOpen()
-        case .disconnected(let reason, let code):
-            isConnected = false
-            Log("websocket is disconnected: \(reason) with code: \(code)")
-            webSocket(didCloseWithCode: Int(code), reason: reason)
-        case .text(let string):
-            webSocket(didReceiveMessageWith: string)
-        case .binary(let data):
-            Log("Received data: \(data.count)")
-        case .ping(_):
-            Log("websocket ping")
-        case .pong(_):
-            Log("websocket pong")
-        case .viabilityChanged(_):
-            Log("websocket viablityChanged")
-        case .reconnectSuggested(_):
-            Log("websocket reconnectSuggested")
-        case .cancelled:
-            isConnected = false
-            Log("websocket cancelled")
-        case .error(let error):
-            isConnected = false
-            Log("websocket error \(String(describing: error))")
-        }
-    }
-    
+	func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
+		switch event {
+		case .connected(let headers):
+			isConnected = true
+			Log("websocket is connected: \(headers)")
+			webSocketDidOpen()
+		case .disconnected(let reason, let code):
+			isConnected = false
+			Log("websocket is disconnected: \(reason) with code: \(code)")
+			webSocket(didCloseWithCode: Int(code), reason: reason)
+		case .text(let string):
+			webSocket(didReceiveMessageWith: string)
+		case .binary(let data):
+			Log("Received data: \(data.count)")
+		case .ping(_):
+			Log("websocket ping")
+		case .pong(_):
+			Log("websocket pong")
+		case .viabilityChanged(_):
+			Log("websocket viablityChanged")
+		case .reconnectSuggested(_):
+			Log("websocket reconnectSuggested")
+		case .cancelled:
+			isConnected = false
+			Log("websocket cancelled")
+		case .error(let error):
+			isConnected = false
+			Log("websocket error \(String(describing: error))")
+		case .peerClosed:
+			isConnected = false
+			Log("websocket peerClosed")
+		}
+	}
     
     
     func webSocketDidOpen() {

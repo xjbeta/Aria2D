@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Upm-iJ-kZp">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Upm-iJ-kZp">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,28 +11,28 @@
             <objects>
                 <viewController showSeguePresentationStyle="single" id="2MO-T1-TY9" customClass="AboutAria2D" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Naw-GD-rDn">
-                        <rect key="frame" x="0.0" y="0.0" width="376" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="261"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <box boxType="custom" borderWidth="0.0" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="VqN-Te-2Nk">
-                                <rect key="frame" x="0.0" y="0.0" width="376" height="260"/>
+                                <rect key="frame" x="0.0" y="0.0" width="376" height="261"/>
                                 <view key="contentView" id="dpP-FD-dzI">
-                                    <rect key="frame" x="0.0" y="0.0" width="376" height="260"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="261"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5gR-93-jtR">
-                                            <rect key="frame" x="127" y="35" width="123" height="175"/>
+                                            <rect key="frame" x="127" y="35" width="123" height="176"/>
                                             <subviews>
                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wC5-VR-Gy7">
-                                                    <rect key="frame" x="19" y="90" width="85" height="85"/>
+                                                    <rect key="frame" x="19" y="91" width="85" height="85"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="85" id="3UR-Qm-Lzk"/>
                                                         <constraint firstAttribute="width" secondItem="wC5-VR-Gy7" secondAttribute="height" multiplier="1:1" id="hk4-j3-3ES"/>
                                                     </constraints>
                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AppIcon" id="Gir-Dj-yfR"/>
                                                 </imageView>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tv6-Li-3Jr">
-                                                    <rect key="frame" x="26" y="61" width="71" height="24"/>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tv6-Li-3Jr">
+                                                    <rect key="frame" x="26" y="61" width="71" height="25"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Aria2D" usesSingleLineMode="YES" id="XX3-0Z-XT8">
                                                         <font key="font" metaFont="system" size="21"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -42,7 +42,7 @@
                                                         <binding destination="2MO-T1-TY9" name="value" keyPath="self.appName" id="XvE-Xh-ljU"/>
                                                     </connections>
                                                 </textField>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veI-KD-rvt">
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veI-KD-rvt">
                                                     <rect key="frame" x="34" y="40" width="54" height="16"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version" usesSingleLineMode="YES" id="H8M-jL-hXN">
                                                         <font key="font" size="14" name="HelveticaNeue"/>
@@ -64,7 +64,7 @@
                                                         <action selector="actions:" target="2MO-T1-TY9" id="8jk-de-mPe"/>
                                                     </connections>
                                                 </button>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NT6-LG-82P">
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NT6-LG-82P">
                                                     <rect key="frame" x="19" y="0.0" width="84" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Xcm-Ug-O2c"/>
