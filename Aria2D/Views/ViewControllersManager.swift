@@ -9,6 +9,7 @@
 import Foundation
 import Cocoa
 
+@MainActor
 final class ViewControllersManager: NSObject, Sendable {
 
     static let shared = ViewControllersManager()
@@ -32,6 +33,7 @@ final class ViewControllersManager: NSObject, Sendable {
 	}
 	
 	private var aria2cAlertStr: String? = nil
+    
 	func showAria2cAlert(_ str: String? = nil) {
 		let info = str ?? aria2cAlertStr ?? ""
 		guard info != "" else { return }

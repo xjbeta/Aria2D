@@ -16,12 +16,16 @@ final class Aria2: NSObject, Sendable {
 	fileprivate override init() {
 	}
 	
-    let initData = Debouncer(duration: 0.15) {
-        Aria2.shared.initAllData()
+    let initData = Debouncer(duration: 0.2) {
+        await MainActor.run {
+            Aria2.shared.initAllData()
+        }
     }
     
-    let sortData = Debouncer(duration: 0.15) {
-        Aria2.shared.sortAllData()
+    let sortData = Debouncer(duration: 0.2) {
+        await MainActor.run {
+            Aria2.shared.sortAllData()
+        }
     }
     
     let aria2c = Aria2c()

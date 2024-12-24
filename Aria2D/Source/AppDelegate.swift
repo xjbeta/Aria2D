@@ -8,7 +8,7 @@
 
 import Cocoa
 
-@NSApplicationMain
+@main
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
     var mainWindowController: MainWindowController!
@@ -102,11 +102,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidChangeOcclusionState(_ notification: Notification) {
         if NSApp.occlusionState.rawValue == 8194 {
             //visible
-            Aria2Websocket.shared.resumeTimer()
+            Aria2Websocket.shared.startTimer()
         } else {
             //Occlusion
             if !Preferences.shared.showDockIconSpeed {
-                Aria2Websocket.shared.suspendTimer()
+                Aria2Websocket.shared.stopTimer()
             }
         }
     }
@@ -114,7 +114,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
         guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
         Log("URL event: \(url)")
-        ViewControllersManager.shared.openUrl(url)
+        Task {
+            await ViewControllersManager.shared.openUrl(url)
+        }
     }
     
     func deleteUselessFiles() {

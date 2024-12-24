@@ -33,12 +33,14 @@ final class Aria2Websocket: NSObject, Sendable {
 			NotificationCenter.default.post(name: .updateGlobalOption, object: nil)
 		}
 	}
+    
+    let waitingList = WaitingList()
+    
+    private var timerTask: Task<Void, Never>?
+    private var isTimerRunning = false
 	
 	func initSocket() {
-		if let timer = timer {
-			timer.cancel()
-			self.timer = nil
-		}
+        stopTimer()
         
         socket?.disconnect()
         
@@ -62,18 +64,11 @@ final class Aria2Websocket: NSObject, Sendable {
 		NSUserNotificationCenter.default.deliver(notification)
 	}
 	
-    let waitingList = WaitingList()
-    
-	var isSuspend = Bool()
-	private var timer: DispatchSourceTimer?
-	
-	private var timerQueue = DispatchQueue(label: "com.xjbeta.Aria2D.connectWebSocketQueue")
-	
-	private func startTimer() {
-		timer = DispatchSource.makeTimerSource(flags: [], queue: timerQueue)
-		if let timer = timer {
-			timer.schedule(deadline: .now(), repeating: .seconds(1))
-			timer.setEventHandler {
+	func startTimer() {
+        guard !isTimerRunning else { return }
+        isTimerRunning = true
+        timerTask = Task {
+            while isTimerRunning {
                 if !self.isConnected {
                     self.socket?.disconnect()
                     guard let url = self.socket?.request.url else { return }
@@ -92,33 +87,22 @@ final class Aria2Websocket: NSObject, Sendable {
                             infoVC.updateStatusInTimer()
                         }
                     }
-				}
-			}
-			timer.resume()
-		}
-	}
-	
-
-	
-	
-	func suspendTimer() {
-		if !isSuspend, timer != nil {
-			timer?.suspend()
-			isSuspend = true
-		}
-	}
-	
-	func resumeTimer() {
-		if isSuspend, timer != nil {
-			timer?.resume()
-			isSuspend = false
-            Task {
-                await Aria2.shared.initData.debounce()
+                }
+                
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
             }
-		}
+        }
+        
+        Task {
+            await Aria2.shared.initData.debounce()
+        }
 	}
-    
-    
+	
+    func stopTimer() {
+        isTimerRunning = false
+        timerTask?.cancel()
+        timerTask = nil
+    }
 
     func write(_ dic: [String: Any],
                withID id: String,
