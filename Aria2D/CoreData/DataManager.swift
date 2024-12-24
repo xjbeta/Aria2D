@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class DataManager: NSObject {
+@MainActor
+final class DataManager: NSObject, Sendable {
 	static let shared = DataManager()
 	
 	fileprivate override init() {
@@ -148,6 +149,7 @@ class DataManager: NSObject {
         saveContext()
     }
     
+    @MainActor
     func updateStatus(_ results: [Aria2Status]) throws {
         let gids = results.map({ $0.gid })
         

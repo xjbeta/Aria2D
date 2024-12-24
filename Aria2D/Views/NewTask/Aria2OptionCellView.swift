@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@MainActor
 protocol Aria2OptionValueDelegate {
     func aria2OptionValueDidChanged(_ value: String, for option: Aria2Option)
     func resizeTableView(for option: Aria2Option)

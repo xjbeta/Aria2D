@@ -73,16 +73,12 @@ class MainListViewController: NSViewController {
     }
     
     @objc func showInfo() {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: .showInfoWindow, sender: self)
-        }
+        performSegue(withIdentifier: .showInfoWindow, sender: self)
     }
     
     
     @objc func shouldReloadData() {
-        DispatchQueue.main.async {
-            self.mainListTableView.reloadData()
-        }
+        mainListTableView.reloadData()
     }
     
 	deinit {

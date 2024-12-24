@@ -37,24 +37,26 @@ class SidebarViewController: NSViewController {
 		initNotification()
 		resetSidebarItems()
         
-        observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
-            guard let objs = arrayController.arrangedObjects as? [Aria2Object],
-                Aria2Websocket.shared.isConnected else {
-                    self?.globalSpeedView.isHidden = true
-                    return
+        observe = arrayController.observe(\.arrangedObjects) {  (arrayController, _) in
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadSpeedView()
             }
-            
-            self?.globalSpeedView.isHidden = objs.count == 0
         }
 	}
+    
+    
+    func reloadSpeedView() {
+        guard let objs = arrayController.arrangedObjects as? [Aria2Object],
+            Aria2Websocket.shared.isConnected else {
+                globalSpeedView.isHidden = true
+                return
+        }
+        
+        globalSpeedView.isHidden = objs.count == 0
+    }
 	
 	func initNotification() {
-        NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: String] {
-                self.newTaskPreparedInfo = userInfo
-            }
-            self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(newTask(_:)), name: .newTask, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .developerModeChanged, object: nil)
@@ -89,6 +91,12 @@ class SidebarViewController: NSViewController {
         }
 	}
 
+    @objc func newTask(_ notification: Notification) {
+        if let userInfo = notification.userInfo as? [String: String] {
+            self.newTaskPreparedInfo = userInfo
+        }
+        self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
+    }
 	
 	@objc func resetSidebarItems() {
 		DispatchQueue.main.async {

@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class ViewControllersManager: NSObject {
+final class ViewControllersManager: NSObject, Sendable {
 
     static let shared = ViewControllersManager()
     
@@ -68,7 +68,9 @@ class ViewControllersManager: NSObject {
             selectedObjects = [Aria2Object]()
             switch selectedRow {
             case .downloading, .removed, .completed:
-                Aria2.shared.initData.run()
+                Task {
+                    await Aria2.shared.initData.debounce()
+                }
             default:
                 break
             }
@@ -118,6 +120,8 @@ class ViewControllersManager: NSObject {
 	enum frontWindow {
 		case main, preference, changeOption, about, other
 	}
+    
+    @MainActor
 	var mainWindowFront: Bool {
 		get {
 			return NSApp.keyWindow?.windowController is MainWindowController
@@ -145,6 +149,7 @@ class ViewControllersManager: NSObject {
 		}
 	}
 	
+    @MainActor
 	func pauseOrUnpause() {
         guard ViewControllersManager.shared.selectedRow == .downloading else { return }
         let dataList = selectedObjects
@@ -162,6 +167,7 @@ class ViewControllersManager: NSObject {
         }
 	}
 	
+    @MainActor
     func deleteTask() {
         var gidForRemoveDownloadResult: [String] = []
         var gidForRemove: [String] = []
@@ -183,7 +189,9 @@ class ViewControllersManager: NSObject {
 	func refresh() {
 		switch selectedRow {
 		case .downloading, .completed, .removed:
-			Aria2.shared.initData.run()
+            Task {
+                await Aria2.shared.initData.debounce()
+            }
 		default:
 			break
 		}

@@ -312,6 +312,7 @@ public class Aria2Object: NSManagedObject, Decodable {
         }
     }
     
+    @MainActor
     func update(with status: Aria2Status) {
         if self.status != status.status.rawValue {
             self.status = status.status.rawValue
@@ -327,6 +328,7 @@ public class Aria2Object: NSManagedObject, Decodable {
         updateUnknownTaskName()
     }
     
+    @MainActor
     func updateUnknownTaskName() {
         if name == "unknown", nameSaved == nil, status == Status.active.rawValue {
             Log("InitData for \(gid)")

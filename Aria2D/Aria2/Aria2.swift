@@ -9,17 +9,18 @@
 import Cocoa
 import PromiseKit
 
-class Aria2: NSObject {
+@MainActor
+final class Aria2: NSObject, Sendable {
 	static let shared = Aria2()
 
 	fileprivate override init() {
 	}
 	
-    let initData = WaitTimer(timeOut: .milliseconds(150)) {
+    let initData = Debouncer(duration: 0.15) {
         Aria2.shared.initAllData()
     }
-
-    let sortData = WaitTimer(timeOut: .milliseconds(150)) {
+    
+    let sortData = Debouncer(duration: 0.15) {
         Aria2.shared.sortAllData()
     }
     
@@ -146,6 +147,8 @@ class Aria2: NSObject {
                     }
                 }
         }.catch {
+            
+            
             Log("\(#function) error \($0)")
         }
     }
@@ -175,7 +178,9 @@ class Aria2: NSObject {
                 }
                 let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
                 try DataManager.shared.updateStatus(result)
-                self.sortData.run()
+                Task {
+                    await self.sortData.debounce()
+                }
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -298,7 +303,9 @@ class Aria2: NSObject {
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.sortData.run()
+                Task {
+                    await self.sortData.debounce()
+                }
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -314,7 +321,9 @@ class Aria2: NSObject {
         send(method: Aria2Method.multicall,
              params: [params])
             .done { _ in
-                self.sortData.run()
+                Task {
+                    await self.sortData.debounce()
+                }
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -327,7 +336,9 @@ class Aria2: NSObject {
         send(method: method,
              params: [])
             .done { _ in
-                self.sortData.run()
+                Task {
+                    await self.sortData.debounce()
+                }
             }.catch {
                 Log("\(#function) error \($0)")
         }
@@ -337,7 +348,9 @@ class Aria2: NSObject {
         send(method: Aria2Method.unpauseAll,
              params: [])
             .done { _ in
-                self.sortData.run()
+                Task {
+                    await self.sortData.debounce()
+                }
             }.catch {
                 Log("\(#function) error \($0)")
         }

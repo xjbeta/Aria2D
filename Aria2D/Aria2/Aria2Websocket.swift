@@ -16,7 +16,8 @@ struct ConnectedServerInfo {
 	var enabledFeatures = ""
 }
 
-class Aria2Websocket: NSObject {
+@MainActor
+final class Aria2Websocket: NSObject, Sendable {
 	
     static let shared = Aria2Websocket()
 	private override init() {
@@ -61,6 +62,8 @@ class Aria2Websocket: NSObject {
 		NSUserNotificationCenter.default.deliver(notification)
 	}
 	
+    let waitingList = WaitingList()
+    
 	var isSuspend = Bool()
 	private var timer: DispatchSourceTimer?
 	
@@ -109,76 +112,35 @@ class Aria2Websocket: NSObject {
 		if isSuspend, timer != nil {
 			timer?.resume()
 			isSuspend = false
-			Aria2.shared.initData.run()
+            Task {
+                await Aria2.shared.initData.debounce()
+            }
 		}
 	}
     
     
-    private class WaitingList: NSObject {
-        static let shared = WaitingList()
-        
-        fileprivate override init() {
-        }
-        
-        private var contents: [String: Data] = [:]
-        private var semaphores: [String: DispatchSemaphore] = [:]
-        private var lock = NSLock()
-        
-        func add(_ key: String, block: @escaping (_ value: Data, _ timeOut: Bool) -> Void) {
-            let semaphore = DispatchSemaphore(value: 0)
-            lock.lock()
-            semaphores[key] = semaphore
-            lock.unlock()
-            DispatchQueue.global().async {
-                switch semaphore.wait(timeout: .now() + .seconds(60)) {
-                case .success:
-                    block(self.contents[key] ?? Data(), false)
-                case .timedOut:
-                    block(Data(), true)
-                }
-                WaitingList.shared.remove(key)
-            }
-        }
-        
-        func update(_ key: String, value: Data) {
-            lock.lock()
-            contents[key] = value
-            semaphores[key]?.signal()
-            lock.unlock()
-        }
-        
-        private func remove(_ key: String) {
-            lock.lock()
-            defer {
-                lock.unlock()
-            }
-            if !contents.isEmpty {
-                contents.removeValue(forKey: key)
-            }
-            if !semaphores.isEmpty {
-                semaphores.removeValue(forKey: key)
-            }
-        }
-    }
-    
+
     func write(_ dic: [String: Any],
                withID id: String,
                method: String) -> Promise<Data> {
         return Promise { resolver in
             let time = Double(Date().timeIntervalSince1970)
-            WaitingList.shared.add(id) { (data, timeOut) in
+            
+            Task {
+                let (data, timeOut) = await waitingList.wait(id)
                 // Save log
                 if Preferences.shared.developerMode,
                     Preferences.shared.recordWebSocketLog {
-                    DispatchQueue.global(qos: .background).async {
+                    
+                    Task {
                         var receivedJSON = ""
                         if let str = String(data: data, encoding: .utf8),
                             let shrotData = Aria2Websocket.shared.clearUrls(str),
                             let shortStr = String(data: shrotData, encoding: .utf8) {
                             receivedJSON = shortStr
                         }
-
-                        DispatchQueue.main.async {
+                        
+                        await MainActor.run {
                             let log = WebSocketLog(context: DataManager.shared.context)
                             log.method = method
                             log.sendJSON = "\(dic)"
@@ -207,7 +169,9 @@ class Aria2Websocket: NSObject {
     }
     
     func received(_ value: Data, withID id: String) {
-        WaitingList.shared.update(id, value: value)
+        Task {
+            await waitingList.update(id, value: value)
+        }
     }
 }
 
@@ -217,7 +181,7 @@ enum webSocketResult: Error {
     case somethingError
 }
 
-extension Aria2Websocket: WebSocketDelegate {
+extension Aria2Websocket: @preconcurrency WebSocketDelegate {
 	func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
 		switch event {
 		case .connected(let headers):
@@ -254,7 +218,10 @@ extension Aria2Websocket: WebSocketDelegate {
     
     
     func webSocketDidOpen() {
-        Aria2.shared.initData.run()
+        Task {
+            await Aria2.shared.initData.debounce()
+        }
+        
         connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
         Aria2.shared.getVersion {
             self.connectedServerInfo.version = "Version: \($0)"
@@ -280,6 +247,8 @@ extension Aria2Websocket: WebSocketDelegate {
         if let data = string.data(using: .utf8) {
             if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
                 json.id.count == 36 {
+                print("received, id: \(json.id)")
+                
                 received(data, withID: json.id)
             } else if let json = try? JSONDecoder().decode(JSONNotice.self, from: data) {
                 let gids = json.params.map { $0.gid }
@@ -367,5 +336,45 @@ extension StringProtocol {
                     index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
         }
         return result
+    }
+}
+
+
+actor WaitingList {
+    private var contents: [String: Data] = [:]
+    private var semaphores: [String: DispatchSemaphore] = [:]
+    
+    func wait(_ key: String) async -> (value: Data, timeOut: Bool) {
+        if let existingData = contents[key] {
+            remove(key)
+            return (existingData, false)
+        }
+        
+        let success: Bool = await withCheckedContinuation { continuation in
+            let semaphore = DispatchSemaphore(value: 0)
+            semaphores[key] = semaphore
+            
+            DispatchQueue.global().async {
+                let success = semaphore.wait(timeout: .now() + .seconds(30)) == .success
+                continuation.resume(returning: success)
+            }
+        }
+        
+        let data = contents[key] ?? Data()
+        remove(key)
+        return (data, !success)
+    }
+    
+    func update(_ key: String, value: Data) {
+        guard semaphores[key] != nil else {
+            return
+        }
+        contents[key] = value
+        semaphores[key]?.signal()
+    }
+    
+    private func remove(_ key: String) {
+        contents[key] = nil
+        semaphores[key] = nil
     }
 }

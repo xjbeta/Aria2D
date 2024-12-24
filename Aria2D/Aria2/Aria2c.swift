@@ -11,6 +11,7 @@ import Cocoa
 import PromiseKit
 import PMKFoundation
 
+@MainActor
 class Aria2c: NSObject {
 	
     lazy var supportPath: URL = {
@@ -40,14 +41,11 @@ class Aria2c: NSObject {
             let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
             
             guard FileManager.default.fileExists(atPath: aria2cPath),
-                FileManager.default.isExecutableFile(atPath: aria2cPath),
-                FileManager.default.fileExists(atPath: confPath) else {
-                    
-                    
-                    let t = ""
-                    
-                    
-                    return []
+                  FileManager.default.isExecutableFile(atPath: aria2cPath),
+                  FileManager.default.fileExists(atPath: confPath) else {
+                
+//                let t = ""
+                return []
             }
             
             var args = ["--conf-path=\(confPath)"]
@@ -195,8 +193,7 @@ class Aria2c: NSObject {
 			}
 			 */
 			
-			var outPipe = Pipe()
-			task.standardOutput = outPipe
+			task.standardOutput = Pipe()
 			try? task.run()
 			resolver.fulfill(())
         }

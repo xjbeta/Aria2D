@@ -350,11 +350,11 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
 extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
     func initFileNodes() {
-        DispatchQueue.global(qos: .background).async {
+        Task {
             guard let obj = self.aria2Object, let dir = obj.dir else {
                 return
             }
-
+            
             if self.fileNodes == nil {
                 self.fileNodes = FileNode(dir, isLeaf: false)
             }
@@ -422,7 +422,7 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                     }
                 }
             }
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.updateStatus(for: groupChildrens)
                 self.filesTreeController.content = self.fileNodes?.children
             }

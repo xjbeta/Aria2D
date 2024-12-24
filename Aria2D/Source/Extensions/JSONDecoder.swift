@@ -20,7 +20,7 @@ extension Data {
 			Log(methodName)
 			Log(error)
             
-            Log(String(data: Aria2Websocket.shared.clearUrls(String(data: self, encoding: .utf8) ?? "") ?? Data() , encoding: .utf8))
+//            Log(String(data: Aria2Websocket.shared.clearUrls(String(data: self, encoding: .utf8) ?? "") ?? Data() , encoding: .utf8))
 			return nil
 		}
 	}

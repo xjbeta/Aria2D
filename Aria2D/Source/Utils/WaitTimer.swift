@@ -8,58 +8,22 @@
 
 import Cocoa
 
-class WaitTimer: NSObject {
+actor Debouncer {
+    private var task: Task<Void, Never>?
+    private let duration: TimeInterval
+    private let operation: () async -> Void
     
-	required init(timeOut: DispatchTimeInterval,
-	              queue: DispatchQueue = DispatchQueue(label: "com.xjbeta.Aria2D.notificationWatchDogQueue"),
-	              action: @escaping (() -> Void)) {
-		self.timeOut = timeOut
-		self.action = action
-		self.queue = queue
-    }
-	
-    private var timeOut: DispatchTimeInterval = .milliseconds(50)
-	private var commitTimer: DispatchSourceTimer?
-	private var queue: DispatchQueue
-	private var action: (() -> Void)?
-	
-    func run() {
-        setTimer()
-    }
-	
-	private func commit() {
-		action?()
+    init(duration: TimeInterval, _ operation: @escaping () async -> Void) {
+        self.duration = duration
+        self.operation = operation
     }
     
-	private func setTimer() {
-        if commitTimer != nil {
-            resetTimer()
-        } else {
-            startTimer()
-        }
-    }
-    
-    private func startTimer() {
-		commitTimer = DispatchSource.makeTimerSource(flags: [], queue: queue)
-		commitTimer?.schedule(deadline: .now() + timeOut, repeating: 0)
-        commitTimer?.setEventHandler {
-            self.commit()
-            self.stop()
-        }
-        commitTimer?.resume()
-    }
-    
-    
-    
-    
-    private func resetTimer() {
-		commitTimer?.schedule(deadline: .now() + timeOut, repeating: 0)
-    }
-    
-	func stop() {
-        if commitTimer != nil {
-            commitTimer?.cancel()
-            commitTimer = nil
+    func debounce() {
+        task?.cancel()
+        task = Task {
+            try? await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+            guard !Task.isCancelled else { return }
+            await operation()
         }
     }
 }

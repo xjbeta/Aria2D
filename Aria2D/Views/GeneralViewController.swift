@@ -58,6 +58,7 @@ class GeneralViewController: NSViewController {
 	
 	lazy var openPanel = NSOpenPanel()
 
+    @MainActor
 	struct Options {
 		var maxConcurrentDownloads: Int {
 			get {
@@ -163,35 +164,25 @@ class GeneralViewController: NSViewController {
 	}
 
 	@objc func setControlsStatus() {
-		DispatchQueue.main.async {
-			let enable = Aria2Websocket.shared.isConnected
-            self.view.subviews.forEach {
-                if let button = $0 as? NSPopUpButton,
-                    button == self.menuPopupButton {
-                    return
-                }
-                if let control = $0 as? NSControl {
-                    control.isEnabled = enable
-                }
-
+        let enable = Aria2Websocket.shared.isConnected
+        view.subviews.forEach {
+            if let button = $0 as? NSPopUpButton,
+                button == menuPopupButton {
+                return
             }
-		}
+            if let control = $0 as? NSControl {
+                control.isEnabled = enable
+            }
+        }
 	}
 	
 	@objc func updateOption() {
-		DispatchQueue.main.async {
-			self.initDir()
-			let options = self.options
-			self.maxConcurrentDownloadsComboBox.integerValue = options.maxConcurrentDownloads
-			self.optimizeConcurrentDownloadsButton.state = options.optimizeConcurrentDownloads ? .on : .off
-			self.maxOverallDownloadLimitTextField.integerValue = options.maxOverallDownloadLimit
-			self.maxOverallUploadLimitTextField.integerValue = options.maxOverallUploadLimit
-		}
+        initDir()
+        maxConcurrentDownloadsComboBox.integerValue = options.maxConcurrentDownloads
+        optimizeConcurrentDownloadsButton.state = options.optimizeConcurrentDownloads ? .on : .off
+        maxOverallDownloadLimitTextField.integerValue = options.maxOverallDownloadLimit
+        maxOverallUploadLimitTextField.integerValue = options.maxOverallUploadLimit
 	}
-	
-	
-
-	
 	
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		if segue.identifier == .showSetServersViewController {

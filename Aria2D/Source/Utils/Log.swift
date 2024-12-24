@@ -15,22 +15,24 @@ public func Log<T>(_ message: T, file: String = #file, method: String = #functio
 	#endif
     
     logStr += "\n"
-    guard let log = (NSApp.delegate as? AppDelegate)?.logUrl else { return }
-    do {
-        if !FileManager.default.fileExists(atPath: log.path) {
-            FileManager.default.createFile(atPath: log.path, contents: nil, attributes: nil)
-        }
-        
-        let handle = try FileHandle(forWritingTo: log)
-        handle.seekToEndOfFile()
-        handle.write(logStr.data(using: .utf8)!)
-        handle.closeFile()
-    } catch {
-        print(error.localizedDescription)
+    Task { @MainActor in
+        guard let log = (NSApp.delegate as? AppDelegate)?.logUrl else { return }
         do {
-            try logStr.data(using: .utf8)?.write(to: log)
+            if !FileManager.default.fileExists(atPath: log.path) {
+                FileManager.default.createFile(atPath: log.path, contents: nil, attributes: nil)
+            }
+            
+            let handle = try FileHandle(forWritingTo: log)
+            handle.seekToEndOfFile()
+            handle.write(logStr.data(using: .utf8)!)
+            handle.closeFile()
         } catch {
             print(error.localizedDescription)
+            do {
+                try logStr.data(using: .utf8)?.write(to: log)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

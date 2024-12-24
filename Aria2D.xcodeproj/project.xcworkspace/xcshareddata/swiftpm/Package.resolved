@@ -1,4 +1,5 @@
 {
+  "originHash" : "ddb0958708cc4892d9520bed0992533ec141aa6d2a81720078c9bc5747cdfdba",
   "pins" : [
     {
       "identity" : "foundation",
@@ -37,5 +38,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
