@@ -73,7 +73,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         Aria2Websocket.shared.initSocket()
         Preferences.shared.checkPlistFile()
-        Aria2.shared.aria2c.autoStart()
+        Task {
+            await Aria2.shared.aria2c.autoStart()
+        }
 	}
 	
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -87,11 +89,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 	
-    
-	
-	func applicationWillTerminate(_ notification: Notification) {
-		Aria2.shared.aria2c.autoClose()
-	}
     
     func application(_ sender: NSApplication, openFiles filenames: [String]) {
         if let file = filenames.filter({ FileManager.default.fileExists(atPath: $0) }).first {
@@ -202,6 +199,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        Task {
+            await Aria2.shared.aria2c.autoClose()
+            semaphore.signal()
+        }
+        
+        let _ = semaphore.wait(timeout: .now() + 5.0)
+        
+        
         // Save changes in the application's managed object context before the application terminates.
         let context = persistentContainer.viewContext
         
