@@ -38,8 +38,8 @@ class SidebarViewController: NSViewController {
 		resetSidebarItems()
         
         observe = arrayController.observe(\.arrangedObjects) {  (arrayController, _) in
-            DispatchQueue.main.async { [weak self] in
-                self?.reloadSpeedView()
+            Task {
+                await self.reloadSpeedView()
             }
         }
 	}
@@ -177,7 +177,7 @@ class SidebarViewController: NSViewController {
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
-        observe?.invalidate()
+//        observe?.invalidate()
 	}
 }
 
