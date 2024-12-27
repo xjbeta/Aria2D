@@ -106,9 +106,13 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     @IBOutlet weak var dirMenuItem: NSMenuItem!
     
     @IBAction func showDirInFinder(_ sender: Any) {
-        if let dir = Preferences.shared.aria2Conf[.dir] {
-            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: dir)])
+        guard var dir = Preferences.shared.aria2Conf[.dir] else { return }
+        let homeStr = "${HOME}"
+        if dir.contains(homeStr) {
+            let path = FileManager.default.homeDirectoryForCurrentUser.path
+            dir = dir.replacingOccurrences(of: homeStr, with: path)
         }
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: dir)])
     }
     
     lazy var selectDirPanel = NSOpenPanel()
