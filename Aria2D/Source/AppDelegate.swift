@@ -199,16 +199,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        Task {
-            await Aria2.shared.aria2c.autoClose()
-            semaphore.signal()
-        }
-        
-        let _ = semaphore.wait(timeout: .now() + 5.0)
-        
-        
         // Save changes in the application's managed object context before the application terminates.
         let context = persistentContainer.viewContext
         
@@ -217,37 +207,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return .terminateCancel
         }
         
-        if !context.hasChanges {
-            return .terminateNow
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                
+                // Customize this code block to include application-specific recovery steps.
+                let result = sender.presentError(nserror)
+                if (result) {
+                    return .terminateCancel
+                }
+                
+                let question = NSLocalizedString("Could not save changes while quitting. Quit anyway?", comment: "Quit without saves error question message")
+                let info = NSLocalizedString("Quitting now will lose any changes you have made since the last successful save", comment: "Quit without saves error question info");
+                let quitButton = NSLocalizedString("Quit anyway", comment: "Quit anyway button title")
+                let cancelButton = NSLocalizedString("Cancel", comment: "Cancel button title")
+                let alert = NSAlert()
+                alert.messageText = question
+                alert.informativeText = info
+                alert.addButton(withTitle: quitButton)
+                alert.addButton(withTitle: cancelButton)
+                
+                let answer = alert.runModal()
+                if answer == .alertSecondButtonReturn {
+                    return .terminateCancel
+                }
+            }
+        }
+
+        // https://github.com/frankhu1089/Planet/blob/097a91949038536ae3218c9945f5240851191192/Planet/PlanetApp.swift#L159
+        Task.detached(priority: .utility) {
+            await Aria2c().autoClose()
+            await NSApplication.shared.reply(toApplicationShouldTerminate: true)
         }
         
-        do {
-            try context.save()
-        } catch {
-            let nserror = error as NSError
-            
-            // Customize this code block to include application-specific recovery steps.
-            let result = sender.presentError(nserror)
-            if (result) {
-                return .terminateCancel
-            }
-            
-            let question = NSLocalizedString("Could not save changes while quitting. Quit anyway?", comment: "Quit without saves error question message")
-            let info = NSLocalizedString("Quitting now will lose any changes you have made since the last successful save", comment: "Quit without saves error question info");
-            let quitButton = NSLocalizedString("Quit anyway", comment: "Quit anyway button title")
-            let cancelButton = NSLocalizedString("Cancel", comment: "Cancel button title")
-            let alert = NSAlert()
-            alert.messageText = question
-            alert.informativeText = info
-            alert.addButton(withTitle: quitButton)
-            alert.addButton(withTitle: cancelButton)
-            
-            let answer = alert.runModal()
-            if answer == .alertSecondButtonReturn {
-                return .terminateCancel
-            }
-        }
-        // If we got here, it is time to quit.
-        return .terminateNow
+        return .terminateLater
     }
 }
