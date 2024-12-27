@@ -133,14 +133,19 @@ class NewTaskViewController: NSViewController {
             return re
         }
         
-        if let _ = fileURL, torrentData != "" {
-            Aria2.shared.addTorrent(torrentData, options: options)
-            dismiss(self)
-        } else if downloadUrlTextField.stringValue != "" {
-            Aria2.shared.addUri(downloadUrlTextField.stringValue, options: options)
+        Task {
+            do {
+                if let _ = fileURL, torrentData != "" {
+                    try await Aria2.shared.addTorrent(torrentData, options: options)
+                } else if downloadUrlTextField.stringValue != "" {
+                    try await Aria2.shared.addUri(downloadUrlTextField.stringValue, options: options)
+                }
+            } catch {
+                Log("Download failed, \(error)")
+            }
+            
             dismiss(self)
         }
-        
 	}
 	
 	@IBOutlet var showOptionsButton: NSButton!
@@ -206,18 +211,16 @@ class NewTaskViewController: NSViewController {
         optionsManagerGridRow.isHidden = true
         downloadButton.keyEquivalent = "\r"
         
-        Aria2.shared.getGlobalOption() {
-            let options = Aria2Websocket.shared.aria2GlobalOption
+        Task {
+            let options = (try? await Aria2.shared.getGlobalOption()) ?? [:]
             options.forEach {
-                if self.allowOptions.contains($0.key) {
-                    self.allowAria2Options[$0.key] = $0.value
-                    DispatchQueue.main.async {
-                        self.optionsTableView.reloadData()
-                    }
+                if allowOptions.contains($0.key) {
+                    allowAria2Options[$0.key] = $0.value
                 }
             }
+            
+            optionsTableView.reloadData()
         }
-        
         
         if let file = preparedInfo["file"] {
             fileURL = URL(fileURLWithPath: file)

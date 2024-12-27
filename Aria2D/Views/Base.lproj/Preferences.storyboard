@@ -926,7 +926,7 @@ Gw
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="dismissController:" target="g0A-d6-g4h" id="5Qs-zK-Do8"/>
+                                    <action selector="dismissController:" target="g0A-d6-g4h" id="6UD-8d-Afa"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="seS-vR-gQp">
@@ -1058,6 +1058,7 @@ DQ
                     </view>
                     <connections>
                         <outlet property="argsTextView" destination="S7M-mh-sbT" id="jF6-su-T8z"/>
+                        <outlet property="cancelButton" destination="PCa-eJ-JKf" id="Xk0-pI-dsH"/>
                         <outlet property="launchButton" destination="seS-vR-gQp" id="tym-2U-KUB"/>
                         <outlet property="pidString" destination="iXR-nX-vSd" id="OSZ-oZ-XK4"/>
                         <outlet property="processStatus" destination="b8I-aa-uHe" id="mAU-m5-uRP"/>

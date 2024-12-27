@@ -18,18 +18,17 @@ class ChangeOptionViewController: NSViewController {
 	@IBOutlet var changeButton: NSButton!
 	@IBOutlet var textField: NSTextField!
 	@IBAction func change(_ sender: Any) {
-		if gid != "", changeValue != "" {
-			Aria2.shared.changeOption(gid,
-			                          key: option.rawValue,
-			                          value: changeValue) {
-                                        if $0 {
-                                            DispatchQueue.main.async {
-                                                self.changeComplete?()
-                                                self.dismiss(self)
-                                            }
-                                        }
-			}
-		}
+		guard gid != "", changeValue != "" else { return }
+        Task {
+            let success = try await Aria2.shared.changeOption(gid,
+                                      key: option.rawValue,
+                                      value: changeValue)
+            if success {
+                changeComplete?()
+                dismiss(self)
+            }
+        }
+        
 	}
 	@IBOutlet var helpButton: NSButton!
 	@IBAction func help(_ sender: Any) {
@@ -38,117 +37,39 @@ class ChangeOptionViewController: NSViewController {
 			NSWorkspace.shared.open(url)
 		}
 	}
+    
+    private var changeValue = ""
+    let shoudRestartKeys: [Aria2Option] = [.btMaxPeers,
+                                           .btRequestPeerSpeedLimit,
+                                           .btRemoveUnselectedFile,
+                                           .forceSave,
+                                           .maxDownloadLimit,
+                                           .maxUploadLimit]
+    
+    
 	
 	var gid = ""
 	var optionValue = ""
 	var changeComplete: (() -> Void)?
-	
-	private var changeValue = ""
-	let shoudRestartKeys: [Aria2Option] = [.btMaxPeers,
-	                                       .btRequestPeerSpeedLimit,
-	                                       .btRemoveUnselectedFile,
-	                                       .forceSave,
-	                                       .maxDownloadLimit,
-	                                       .maxUploadLimit]
-	
-	
-	var option = Aria2Option(rawValue: "") {
-		didSet {
-			switch option.valueType {
-			case .bool(let bool):
-				show(.p) {
-					let objs = bool.map { $0.rawValue }
-					self.optionValueComboBox.addItems(withObjectValues: objs)
-					self.optionValueComboBox.selectItem(withObjectValue: self.optionValue)
-					self.textField.stringValue = objs.joined(separator: "| ")
-				}
-			case .parameter(let p):
-				show(.p) {
-					let objs = p.map { $0.rawValue }
-					self.optionValueComboBox.addItems(withObjectValues: objs)
-					self.optionValueComboBox.selectItem(withObjectValue: self.optionValue)
-					self.textField.stringValue = objs.joined(separator: "| ")
-				}
-			case .number(let min, let max):
-				show(.number) {
-					if let i = Int(self.optionValue) {
-						self.numberValueTextField.integerValue =  i
-					}
-					if max != -1 {
-						self.textField.stringValue = "\(min) - \(max)"
-						self.numberValueFormatter.minimum = min as NSNumber
-						self.numberValueFormatter.maximum = max as NSNumber
-					} else {
-						self.textField.stringValue = "min: \(min)"
-						self.numberValueFormatter.minimum = min as NSNumber
-						self.numberValueFormatter.maximum = INT_MAX as NSNumber
-					}
-				}
-			case .unitNumber(let min, let max):
-				let str = "      1| 1K| 1M"
-				show(.string) {
-					self.optionValueTextField.stringValue = UnitNumber(self.optionValue).stringValue
-					if max.rawValue != 0 {
-						self.textField.stringValue = "\(min.stringValue) - \(max.stringValue)\(str)"
-					} else {
-						self.textField.stringValue = "min: \(min.stringValue)\(str)"
-					}
-				}
-			case .localFilePath:
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = "Local file path"
-				}
-			case .hostPort:
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = "Host port"
-				}
-			case .httpProxy:
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = "Proxy"
-				}
-			case .optimizeConcurrentDownloads:
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = "true| false| A:B"
-				}
-			case .integerRange(let min, let max):
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = "6881-6999, min: \(min), max: \(max)"
-					if self.option == .selectFile {
-						self.textField.stringValue = "1-5,8,9, min: \(min), max: \(max)"
-					}
-				}
-			case .string(let str):
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = str
-				}
-				
-			default:
-				show(.string) {
-					self.optionValueTextField.stringValue = self.optionValue
-					self.textField.stringValue = "Click help for more info."
-				}
-			}
-			if shoudRestartKeys.contains(self.option), let textField = self.textField {
-				textField.stringValue = textField.stringValue + "Should restart to enable"
-			}
-		}
-	}
+    var option = Aria2Option(rawValue: "") {
+        didSet {
+            guard viewDidLoaded else { return }
+            showOption()
+        }
+    }
+    
+    private var viewDidLoaded = false
+    
 	@IBOutlet var visualEffectView: NSVisualEffectView!
     override func viewDidLoad() {
         super.viewDidLoad()
         visualEffectView.material = .popover
 		changeButton.isEnabled = false
+        
+        viewDidLoaded = true
+        showOption()
         optionKey.stringValue = option.rawValue
     }
-	
-	
-
 	
 	func updateChangeButton(_ str: String) {
 		let bool = (str != optionValue && str != "")
@@ -161,26 +82,97 @@ class ChangeOptionViewController: NSViewController {
 	enum showType {
 		case string, number, p
 	}
-	
-	func show(_ type: showType, then: @escaping (() -> Void)) {
-		DispatchQueue.main.async {
-			self.textField.stringValue = ""
-			self.optionValueTextField.isHidden = true
-			self.numberValueTextField.isHidden = true
-			self.optionValueComboBox.isHidden = true
-			self.optionValueComboBox.removeAllItems()
-			switch type {
-			case .string:
-				self.optionValueTextField.isHidden = false
-			case .number:
-				self.numberValueTextField.isHidden = false
-			case .p:
-				self.optionValueComboBox.isHidden = false
-			}
-			then()
-		}
-	}
+	    
+    func showOption() {
+        switch option.valueType {
+        case .bool(let bool):
+            show(.p)
+            let objs = bool.map { $0.rawValue }
+            optionValueComboBox.addItems(withObjectValues: objs)
+            optionValueComboBox.selectItem(withObjectValue: optionValue)
+            textField.stringValue = objs.joined(separator: "| ")
+        case .parameter(let p):
+            show(.p)
+            let objs = p.map { $0.rawValue }
+            optionValueComboBox.addItems(withObjectValues: objs)
+            optionValueComboBox.selectItem(withObjectValue: optionValue)
+            textField.stringValue = objs.joined(separator: "| ")
+        case .number(let min, let max):
+            show(.number)
+            if let i = Int(optionValue) {
+                numberValueTextField.integerValue =  i
+            }
+            if max != -1 {
+                textField.stringValue = "\(min) - \(max)"
+                numberValueFormatter.minimum = min as NSNumber
+                numberValueFormatter.maximum = max as NSNumber
+            } else {
+                textField.stringValue = "min: \(min)"
+                numberValueFormatter.minimum = min as NSNumber
+                numberValueFormatter.maximum = INT_MAX as NSNumber
+            }
+        case .unitNumber(let min, let max):
+            let str = "      1| 1K| 1M"
+            show(.string)
+            optionValueTextField.stringValue = UnitNumber(optionValue).stringValue
+            if max.rawValue != 0 {
+                textField.stringValue = "\(min.stringValue) - \(max.stringValue)\(str)"
+            } else {
+                textField.stringValue = "min: \(min.stringValue)\(str)"
+            }
+        case .localFilePath:
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = "Local file path"
+        case .hostPort:
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = "Host port"
+        case .httpProxy:
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = "Proxy"
+        case .optimizeConcurrentDownloads:
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = "true| false| A:B"
+        case .integerRange(let min, let max):
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = "6881-6999, min: \(min), max: \(max)"
+            if option == .selectFile {
+                textField.stringValue = "1-5,8,9, min: \(min), max: \(max)"
+            }
+        case .string(let str):
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = str
+            
+        default:
+            show(.string)
+            optionValueTextField.stringValue = optionValue
+            textField.stringValue = "Click help for more info."
+        }
+        if shoudRestartKeys.contains(option), let textField = textField {
+            textField.stringValue = textField.stringValue + "Should restart to enable"
+        }
+    }
     
+    func show(_ type: showType) {
+        textField.stringValue = ""
+        optionValueTextField.isHidden = true
+        numberValueTextField.isHidden = true
+        optionValueComboBox.isHidden = true
+        optionValueComboBox.removeAllItems()
+        switch type {
+        case .string:
+            optionValueTextField.isHidden = false
+        case .number:
+            numberValueTextField.isHidden = false
+        case .p:
+            optionValueComboBox.isHidden = false
+        }
+    }
 }
 
 extension ChangeOptionViewController: NSComboBoxDelegate, NSControlTextEditingDelegate {

@@ -92,10 +92,9 @@ class GeneralViewController: NSViewController {
 			}
 		}
 		
-		func update(_ key: Aria2Option, value: Any, completion: @escaping (_ success: Bool) -> Void) {
-			Aria2.shared.changeGlobalOption(key, value: "\(value)") {
-				completion($0)
-			}	
+        func update(_ key: Aria2Option, value: Any) async -> Bool {
+            let re = try? await Aria2.shared.changeGlobalOption(key, value: "\(value)")
+            return re ?? false
 		}
 
 	}
@@ -104,15 +103,14 @@ class GeneralViewController: NSViewController {
 	@IBOutlet var optimizeConcurrentDownloadsButton: NSButton!
 	@IBAction func optimizeConcurrentDownloads(_ sender: NSButton) {
 		let oldState = options.optimizeConcurrentDownloads
-		options.update(.optimizeConcurrentDownloads, value: !oldState) { success in
-			DispatchQueue.main.async {
-				if !success {
-					self.optimizeConcurrentDownloadsButton.state = oldState ? .on : .off
-				} else {
-					self.optimizeConcurrentDownloadsButton.state = self.options.optimizeConcurrentDownloads ? .on : .off
-				}
-			}
-		}
+        Task {
+            let success = await options.update(.optimizeConcurrentDownloads, value: !oldState)
+            if !success {
+                optimizeConcurrentDownloadsButton.state = oldState ? .on : .off
+            } else {
+                optimizeConcurrentDownloadsButton.state = options.optimizeConcurrentDownloads ? .on : .off
+            }
+        }
 	}
 	@IBOutlet var maxOverallDownloadLimitTextField: NSTextField!
 	@IBOutlet var maxOverallUploadLimitTextField: NSTextField!
@@ -243,63 +241,60 @@ extension GeneralViewController: NSMenuDelegate {
 extension GeneralViewController: NSComboBoxDelegate, NSControlTextEditingDelegate {
 	
 	func controlTextDidEndEditing(_ obj: Notification) {
-		if let obj = obj.object as? NSObject {
-			switch obj {
-			case maxConcurrentDownloadsComboBox:
-				guard maxConcurrentDownloadsComboBox.integerValue != options.maxConcurrentDownloads else {
-					return
-				}
-				options.update(.maxConcurrentDownloads,
-				               value: maxConcurrentDownloadsComboBox.stringValue) {
-								if $0 { return }
-								DispatchQueue.main.async {
-									self.maxConcurrentDownloadsComboBox.integerValue = self.options.maxConcurrentDownloads
-								}
-				}
-			case maxOverallDownloadLimitTextField:
-				guard maxOverallDownloadLimitTextField.integerValue != options.maxOverallDownloadLimit else {
-					return
-				}
-				options.update(.maxOverallDownloadLimit,
-				               value: "\(maxOverallDownloadLimitTextField.integerValue * 1000)") {
-								if $0 { return }
-								DispatchQueue.main.async {
-									self.maxOverallDownloadLimitTextField.integerValue = self.options.maxOverallDownloadLimit
-								}
-				}
-			case maxOverallUploadLimitTextField:
-				guard maxOverallUploadLimitTextField.integerValue != options.maxOverallUploadLimit else {
-					return
-				}
-				options.update(.maxOverallUploadLimit,
-				               value: "\(maxOverallUploadLimitTextField.integerValue * 1000)") {
-								if $0 { return }
-								DispatchQueue.main.async {
-									self.maxOverallUploadLimitTextField.integerValue = self.options.maxOverallUploadLimit
-								}
-				}
-				
-			case downloadDirTextField:
-				if !Preferences.shared.aria2Servers.isLocal {
-					Preferences.shared.aria2Servers.set(downloadDirTextField.stringValue)
-				}
-			default:
-				break
-			}
+		guard let obj = obj.object as? NSObject else {
+            return
 		}
+        
+        Task {
+            switch obj {
+            case maxConcurrentDownloadsComboBox:
+                guard maxConcurrentDownloadsComboBox.integerValue != options.maxConcurrentDownloads else {
+                    return
+                }
+                let success = await options.update(.maxConcurrentDownloads,
+                                                   value: maxConcurrentDownloadsComboBox.stringValue)
+                if success {
+                    maxConcurrentDownloadsComboBox.integerValue = options.maxConcurrentDownloads
+                }
+            case maxOverallDownloadLimitTextField:
+                guard maxOverallDownloadLimitTextField.integerValue != options.maxOverallDownloadLimit else {
+                    return
+                }
+                let success = await options.update(.maxOverallDownloadLimit,
+                                                   value: "\(maxOverallDownloadLimitTextField.integerValue * 1000)")
+                if success {
+                    maxOverallDownloadLimitTextField.integerValue = options.maxOverallDownloadLimit
+                }
+            case maxOverallUploadLimitTextField:
+                guard maxOverallUploadLimitTextField.integerValue != options.maxOverallUploadLimit else {
+                    return
+                }
+                let success = await options.update(.maxOverallUploadLimit,
+                                                   value: "\(maxOverallUploadLimitTextField.integerValue * 1000)")
+                if success {
+                    maxOverallUploadLimitTextField.integerValue = options.maxOverallUploadLimit
+                }
+            case downloadDirTextField:
+                if !Preferences.shared.aria2Servers.isLocal {
+                    Preferences.shared.aria2Servers.set(downloadDirTextField.stringValue)
+                }
+            default:
+                break
+            }
+        }
 	}
 	
 	
 	func comboBoxSelectionDidChange(_ notification: Notification) {
-		if let value = maxConcurrentDownloadsComboBox.objectValueOfSelectedItem as? String, Int(value) != options.maxConcurrentDownloads {
-			options.update(.maxConcurrentDownloads,
-			               value: value) {
-							if $0 { return }
-							DispatchQueue.main.async {
-								self.maxConcurrentDownloadsComboBox.integerValue = self.options.maxConcurrentDownloads
-							}
-			}
-		}
+        if let value = maxConcurrentDownloadsComboBox.objectValueOfSelectedItem as? String, Int(value) != options.maxConcurrentDownloads {
+            Task {
+                let success = await options.update(.maxConcurrentDownloads,
+                                                   value: value)
+                if !success {
+                    maxConcurrentDownloadsComboBox.integerValue = options.maxConcurrentDownloads
+                }
+            }
+        }
 	}
 	
 	

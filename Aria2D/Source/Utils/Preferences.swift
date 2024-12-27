@@ -167,13 +167,6 @@ final class Preferences: NSObject, Sendable {
 			defaultsSet(newValue, forKey: .autoStartAria2c)
 		}
 	}
-
-	private lazy var defaultAria2cOptions: Aria2cOptions = {
-		let s = Aria2cOptions()
-		Preferences.shared.aria2cOptions = s
-		return s
-	}()
-	
 	
 	var aria2cOptions: Aria2cOptions {
 		get {

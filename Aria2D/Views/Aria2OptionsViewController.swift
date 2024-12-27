@@ -52,9 +52,7 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
                     FileManager.default.isExecutableFile(atPath: url.path) {
                     Preferences.shared.aria2cOptions.customAria2c = url.path
                 }
-                DispatchQueue.main.async {
-                    self.initPathMenu()
-                }
+                self.initPathMenu()
             }
         }
     }
@@ -252,10 +250,16 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
     
     
     func initPathMenu() {
+        Task {
+            await asyncInitPathMenu()
+        }
+    }
+    
+    func asyncInitPathMenu() async {
         let options = Preferences.shared.aria2cOptions
         let path = options.customAria2c
-        let paths = Aria2.shared.aria2c.aria2cPaths()
-        aria2cStatusImageView.image = Aria2.shared.aria2c.checkCustomPath() ? NSImage(named: "NSStatusAvailable") : NSImage(named: "NSStatusUnavailable")
+        let paths = await Aria2.shared.aria2c.aria2cPaths()
+        aria2cStatusImageView.image = await Aria2.shared.aria2c.checkCustomPath() ? NSImage(named: "NSStatusAvailable") : NSImage(named: "NSStatusUnavailable")
         
         if let menu = aria2cPathPopUpButton.menu {
             while menu.items.count > 5 {

@@ -7,53 +7,46 @@
 //
 
 import Cocoa
-import PromiseKit
 
 class Aria2cProcessStatusViewController: NSViewController {
 
     @IBOutlet weak var processStatus: NSTextField!
     @IBOutlet weak var pidString: NSTextField!
+    @IBOutlet weak var cancelButton: NSButton!
     @IBOutlet weak var launchButton: NSButton!
     
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     @IBAction func launchAria2c(_ sender: NSButton) {
         progressIndicator.isHidden = false
         launchButton.isEnabled = false
+        cancelButton.isEnabled = false
         startAria2cError = ""
         var action = ""
         
-        Aria2.shared.aria2c.aria2cPid().then { pids -> Promise<()> in
+        Task {
+            let pids = await Aria2.shared.aria2c.aria2cPid()
             if pids.count > 0 {
                 action = "Stop"
-                return when(fulfilled: pids.map({ Aria2.shared.aria2c.killProcess($0) }))
+                for pid in pids {
+                    try? await Aria2.shared.aria2c.killProcess(pid)
+                }
             } else {
                 action = "Start"
-                return Aria2.shared.aria2c.startAria2()
+                await Aria2.shared.aria2c.startAria2()
             }
-            }.ensure(on: .main) {
-                self.progressIndicator.isHidden = true
-                self.launchButton.isEnabled = true
-                self.updateLaunchButton()
-            }.done {
-                if action == "Start" {
-                    Aria2.shared.aria2c.aria2cPid().done(on: .main) {
-                        if $0.count != 1 {
-                            self.performSegue(withIdentifier: .showAria2cLog, sender: self)
-                        }
-                        }.catch {
-                          Log("Check aria2c pid for Aria2c log view error: \($0)")
-                    }
+            
+            updateLaunchButton()
+            
+            progressIndicator.isHidden = true
+            launchButton.isEnabled = true
+            cancelButton.isEnabled = true
+            
+            if action == "Start" {
+                let pids = await Aria2.shared.aria2c.aria2cPid()
+                if pids.count != 1 {
+                    performSegue(withIdentifier: .showAria2cLog, sender: self)
                 }
-            }.catch {
-                Log("Launch aria2c process error: \($0)")
-                guard let e = $0 as? Process.PMKError else { return }
-                switch e {
-                case .execution(_,_,let str):
-                    self.startAria2cError = str ?? ""
-                    self.performSegue(withIdentifier: .showAria2cLog, sender: self)
-                case .notExecutable(_):
-                    break
-                }
+            }
         }
     }
     
@@ -93,24 +86,23 @@ class Aria2cProcessStatusViewController: NSViewController {
     }
     
     func updateLaunchButton() {
-        self.processStatus.stringValue = ""
-        self.pidString.stringValue = ""
-        self.launchButton.title = ""
+        processStatus.stringValue = ""
+        pidString.stringValue = ""
+        launchButton.title = ""
         progressIndicator.isHidden = false
-        Aria2.shared.aria2c.aria2cPid().ensure(on: .main) {
-            self.progressIndicator.isHidden = true
-            }.done(on: .main) {
-                if $0.count >= 1 {
-                    self.processStatus.stringValue = "Running"
-                    self.launchButton.title = "Stop"
-                    self.pidString.stringValue = $0.joined(separator: ", ")
-                } else {
-                    self.processStatus.stringValue = "Stopped"
-                    self.launchButton.title = "Start"
-                    self.pidString.stringValue = $0.first ?? ""
-                }
-            }.catch {
-                Log("Unknown error: \($0)")
+        
+        Task { @MainActor in
+            let pids = await Aria2.shared.aria2c.aria2cPid()
+            progressIndicator.isHidden = true
+            if pids.count >= 1 {
+                processStatus.stringValue = "Running"
+                launchButton.title = "Stop"
+                pidString.stringValue = pids.joined(separator: ", ")
+            } else {
+                processStatus.stringValue = "Stopped"
+                launchButton.title = "Start"
+                pidString.stringValue = pids.first ?? ""
+            }
         }
     }
 }

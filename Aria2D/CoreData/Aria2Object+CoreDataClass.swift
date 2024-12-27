@@ -258,6 +258,8 @@ public class Aria2Object: NSManagedObject, Decodable {
         if let newFiles = obj.files?.allObjects as? [Aria2File] {
             updateFiles(with: newFiles, context: context)
         }
+        
+        try? context.save()
     }
     
     func updateFiles(with newFiles: [Aria2File], context: NSManagedObjectContext) {
@@ -296,7 +298,6 @@ public class Aria2Object: NSManagedObject, Decodable {
                     updatedIndexs.append(Int(file.index))
                 }
             }
-            
             filesObserve?(updatedIndexs, shouldReload)
         }
     }
@@ -330,9 +331,9 @@ public class Aria2Object: NSManagedObject, Decodable {
     
     @MainActor
     func updateUnknownTaskName() {
-        if name == "unknown", nameSaved == nil, status == Status.active.rawValue {
-            Log("InitData for \(gid)")
-            Aria2.shared.initData(gid)
+        guard name == "unknown", nameSaved == nil, status == Status.active.rawValue else { return }
+        Task {
+            let _ = try await Aria2.shared.initData(gid)
         }
     }
     

@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import PromiseKit
 
 @MainActor
 final class Aria2: NSObject, Sendable {
@@ -17,22 +16,18 @@ final class Aria2: NSObject, Sendable {
 	}
 	
     let initData = Debouncer(duration: 0.2) {
-        await MainActor.run {
-            Aria2.shared.initAllData()
-        }
+        try? await Aria2.shared.initAllData()
     }
     
     let sortData = Debouncer(duration: 0.2) {
-        await MainActor.run {
-            Aria2.shared.sortAllData()
-        }
+        try? await Aria2.shared.sortAllData()
     }
     
     let aria2c = Aria2c()
     
     let context = DataManager.shared.context
     
-    private func initAllData() {
+    private func initAllData() async throws {
         struct Result: Decodable {
             var result: [[[Aria2Object]]]
         }
@@ -48,20 +43,15 @@ final class Aria2: NSObject, Sendable {
                 method: Aria2Method.tellStopped,
                 params: [0, 1000]).object]]
 
-        send(method: Aria2Method.multicall,
-             params: params)
-            .done { data in
-                let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 }).flatMap({ $0 })
-                
-                try DataManager.shared.initAllObjects(re)
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+        let data = try await send(method: Aria2Method.multicall, params: params)
+        let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 }).flatMap({ $0 })
+        try DataManager.shared.initAllObjects(re)
     }
 	
-	private func sortAllData() {
-        send(method: Aria2Method.multicall,
-             params: [[
+    private func sortAllData() async throws {
+        let data = try await send(
+            method: Aria2Method.multicall,
+            params: [[
                 Aria2WebsocketParams(
                     method: Aria2Method.tellActive,
                     params: [["gid", "status"]]).object,
@@ -71,47 +61,41 @@ final class Aria2: NSObject, Sendable {
                 Aria2WebsocketParams(
                     method: Aria2Method.tellStopped,
                     params: [0, 1000, ["gid", "status"]]).object]])
-            .done { data in
-                struct GIDList: Decodable {
-                    var result: [[[[String: String]]]]
-                }
-                
-                let re = try JSONDecoder().decode(GIDList.self, from: data).result.flatMap ({ $0 }).flatMap ({ $0 })
-				
-				let actives = re.filter {
-					$0.contains(where: {
-						$0.value == Status.active.string()
-					})
-				}
-				
-				if actives.count == 0 {
-					NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
-				}
-				
-                try DataManager.shared.sortAllObjects(re)
-            }.catch {
-                Log("\(#function) error \($0)")
+        
+        struct GIDList: Decodable {
+            var result: [[[[String: String]]]]
         }
-	}
+        
+        let re = try JSONDecoder().decode(GIDList.self, from: data).result.flatMap ({ $0 }).flatMap ({ $0 })
+        
+        let actives = re.filter {
+            $0.contains(where: {
+                $0.value == Status.active.string()
+            })
+        }
+        
+        if actives.count == 0 {
+            NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
+        }
+        
+        try DataManager.shared.sortAllObjects(re)
+    }
 	
-    func initData(_ gid: String, block: @escaping (_ result: Aria2Object) -> Void = { _ in}) {
-        send(method: Aria2Method.tellStatus,
-             params: [gid])
-            .done { data in
-                struct Result: Decodable {
-                    let result: Aria2Object
-                }
-                let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
-                try DataManager.shared.initObject(re)
-                block(re)
-            }.catch {
-                Log("\(#function) error \($0)")
+    @discardableResult
+    func initData(_ gid: String) async throws -> Aria2Object {
+        let data = try await send(method: Aria2Method.tellStatus, params: [gid])
+        struct Result: Decodable {
+            let result: Aria2Object
         }
+        let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
+        try DataManager.shared.initObject(re)
+        return re
     }
 
-    func updateActiveTasks() {
-        send(method: Aria2Method.multicall,
-             params: [[
+    func updateActiveTasks() async throws {
+        let data = try await send(
+            method: Aria2Method.multicall,
+            params: [[
                 Aria2WebsocketParams(
                     method: Aria2Method.tellActive,
                     params: [["gid",
@@ -127,38 +111,34 @@ final class Aria2: NSObject, Sendable {
                 Aria2WebsocketParams(
                     method: Aria2Method.getGlobalStat,
                     params: []).object]])
-            .done { data in
-                struct Result: Decodable {
-                    let result: [ResultObj]
-                    struct ResultObj: Decodable {
-                        var status: [Aria2Status] = []
-                        var globalStat: Aria2GlobalStat?
-                        init(from decoder: Decoder) throws {
-                            let unkeyedContainer = try decoder.singleValueContainer()
-                            if let stats = try? unkeyedContainer.decode([[Aria2Status]].self) {
-                                status = stats.flatMap({ $0 })
-                            } else if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
-                                self.globalStat = globalStat
-                            }
-                        }
+        
+        struct Result: Decodable {
+            let result: [ResultObj]
+            struct ResultObj: Decodable {
+                var status: [Aria2Status] = []
+                var globalStat: Aria2GlobalStat?
+                init(from decoder: Decoder) throws {
+                    let unkeyedContainer = try decoder.singleValueContainer()
+                    if let stats = try? unkeyedContainer.decode([[Aria2Status]].self) {
+                        status = stats.flatMap({ $0 })
+                    } else if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
+                        self.globalStat = globalStat
                     }
                 }
-                try JSONDecoder().decode(Result.self, data: data, in: self.context).result.forEach {
-                    if let stat = $0.globalStat {
-                        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["globalStat": stat, "updateServer": false])
-                    } else if $0.status.count > 0 {
-                        try DataManager.shared.updateStatus($0.status)
-                    }
-                }
-        }.catch {
-            
-            
-            Log("\(#function) error \($0)")
+            }
+        }
+        try JSONDecoder().decode(Result.self, data: data, in: self.context).result.forEach {
+            if let stat = $0.globalStat {
+                NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["globalStat": stat, "updateServer": false])
+            } else if $0.status.count > 0 {
+                try DataManager.shared.updateStatus($0.status)
+            }
         }
     }
 
-    func updateStatus(_ gids: [String], block: (([Aria2Status]) -> Void)? = nil) {
-        guard effectiveGIDs(gids).count > 0 else { return }
+    @discardableResult
+    func updateStatus(_ gids: [String]) async throws -> [Aria2Status] {
+        guard effectiveGIDs(gids).count > 0 else { return [] }
         let params = gids.map {
             Aria2WebsocketParams(
                 method: Aria2Method.tellStatus,
@@ -174,300 +154,190 @@ final class Aria2: NSObject, Sendable {
                               "dir"]]).object
         }
 
-        send(method: Aria2Method.multicall,
-                             params: [params])
-            .done { data in
-                struct Result: Decodable {
-                    var result: [[Aria2Status]]
-                }
-                let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
-                try DataManager.shared.updateStatus(result)
-                Task {
-                    await self.sortData.debounce()
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+        let data = try await send(method: Aria2Method.multicall, params: [params])
+        struct Result: Decodable {
+            var result: [[Aria2Status]]
         }
+        let result = try JSONDecoder().decode(Result.self, data: data, in: self.context).result.flatMap({ $0 })
+        try DataManager.shared.updateStatus(result)
+        await self.sortData.debounce()
+        return result
     }
 
-    func shutdown(_ block: @escaping () -> Void) {
-        saveSession {
-            self.send(method: Aria2Method.shutdown,
-                                 params: [])
-                .done { _ in
-                    block()
-                }.catch {
-                    Log("\(#function) error \($0)")
-            }
-        }
+    func shutdown() async throws {
+        try await saveSession()
+        try await send(method: Aria2Method.shutdown, params: [])
     }
 
-    func saveSession(_ block: @escaping () -> Void) {
-        send(method: Aria2Method.saveSession,
-                             params: [])
-            .done { _ in
-                block()
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+    func saveSession() async throws {
+        try await send(method: Aria2Method.saveSession, params: [])
     }
 
-    func getFiles(_ gid: String, block: @escaping () -> Void = {}) {
-        send(method: Aria2Method.getFiles,
-             params: [gid])
-            .done { data in
-                struct Result: Decodable {
-                    let result: [Aria2File]
-                }
-                let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
-                try DataManager.shared.updateFiles(gid, files: re)
-                block()
-            }.catch {
-                Log("\(#function) error \($0)")
+    func getFiles(_ gid: String) async throws {
+        let data = try await send(method: Aria2Method.getFiles, params: [gid])
+        struct Result: Decodable {
+            let result: [Aria2File]
         }
+        let re = try JSONDecoder().decode(Result.self, data: data, in: self.context).result
+        try DataManager.shared.updateFiles(gid, files: re)
     }
 
 
-    func addUri(_ uri: String, options: [String: String] = [:]) {
+    func addUri(_ uri: String, options: [String: String] = [:]) async throws {
         var opt = options
         if let path = Preferences.shared.aria2Servers.getServer().customPath,
             opt["dir"] == nil {
             opt["dir"] = path
         }
-        send(method: Aria2Method.addUri,
-             params: [[uri], opt])
-            .done { data in
-                struct Result: Decodable {
-                    let result: String
-                }
-                if let gid = data.decode(Result.self)?.result {
-                    self.updateStatus([gid])
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+        let data = try await send(method: Aria2Method.addUri, params: [[uri], opt])
+        struct Result: Decodable {
+            let result: String
+        }
+        if let gid = data.decode(Result.self)?.result {
+            try await updateStatus([gid])
         }
     }
 
-    func addTorrent(_ data: String, options: [String: String] = [:]) {
+    func addTorrent(_ data: String, options: [String: String] = [:]) async throws {
         var opt = options
         if let path = Preferences.shared.aria2Servers.getServer().customPath, opt["dir"] == nil {
             opt["dir"] = path
         }
-        send(method: Aria2Method.addTorrent,
-             params: [data, [], opt])
-            .done { data in
-                struct Result: Decodable {
-                    let result: String
-                }
-                if let result = data.decode(Result.self)?.result {
-                    self.updateStatus([result])
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+        let data = try await send(method: Aria2Method.addTorrent, params: [data, [], opt])
+        struct Result: Decodable {
+            let result: String
+        }
+        if let result = data.decode(Result.self)?.result {
+            try await updateStatus([result])
         }
     }
 
 
 
-    func pause(_ gids: [String]) {
+    func pause(_ gids: [String]) async throws {
         let method = Preferences.shared.useForce ? Aria2Method.forcePause : Aria2Method.pause
         let params = gids.map {
             Aria2WebsocketParams(method: method, params: [$0]).object
         }
-        send(method: Aria2Method.multicall,
-             params: [params])
-            .done { _ in
-                self.updateStatus(gids)
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+        try await send(method: Aria2Method.multicall, params: [params])
+        try await updateStatus(gids)
     }
 
 
-    func unpause(_ gids: [String]) {
+    func unpause(_ gids: [String]) async throws {
         let params = gids.map {
             Aria2WebsocketParams(method: Aria2Method.unpause, params: [$0]).object
         }
-        send(method: Aria2Method.multicall,
-             params: [params])
-            .done { _ in
-                self.updateStatus(gids)
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+        try await send(method: Aria2Method.multicall, params: [params])
+        try await updateStatus(gids)
     }
 
 
 
-    func removeDownloadResult(_ gids: [String]) {
+    func removeDownloadResult(_ gids: [String]) async throws {
         guard gids.count > 0 else { return }
         let params = gids.map {
             Aria2WebsocketParams(method: Aria2Method.removeDownloadResult, params: [$0]).object
         }
-        send(method: Aria2Method.multicall,
-             params: [params])
-            .done { _ in
-                Task {
-                    await self.sortData.debounce()
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+        try await send(method: Aria2Method.multicall, params: [params])
+        await sortData.debounce()
     }
 
 
-    func remove(_ gids: [String]) {
+    func remove(_ gids: [String]) async throws {
         guard gids.count > 0 else { return }
         let method = Preferences.shared.useForce ? Aria2Method.forceRemove : Aria2Method.remove
         let params = gids.map {
             Aria2WebsocketParams(method: method, params: [$0]).object
         }
-        send(method: Aria2Method.multicall,
-             params: [params])
-            .done { _ in
-                Task {
-                    await self.sortData.debounce()
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+        try await send(method: Aria2Method.multicall, params: [params])
+        await sortData.debounce()
     }
 
 
 
-    func pauseAll() {
+    func pauseAll() async throws {
         let method = Preferences.shared.useForce ? Aria2Method.forcePauseAll : Aria2Method.pauseAll
-        send(method: method,
-             params: [])
-            .done { _ in
-                Task {
-                    await self.sortData.debounce()
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+        try await send(method: method, params: [])
+        await sortData.debounce()
     }
 
-    func unPauseAll() {
-        send(method: Aria2Method.unpauseAll,
-             params: [])
-            .done { _ in
-                Task {
-                    await self.sortData.debounce()
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+    func unPauseAll() async throws {
+        try await send(method: Aria2Method.unpauseAll, params: [])
+        await sortData.debounce()
     }
 
-    func changeGlobalOption(_ key: Aria2Option, value: String, completion: @escaping (_ success: Bool) -> Void) {
-        send(method: Aria2Method.changeGlobalOption,
-             params: [[key.rawValue: value]])
-            .done { data in
-                struct Result: Codable {
-                    let result: String
-                }
-                if let result = data.decode(Result.self)?.result,
-                    result == "OK" {
-                    Aria2Websocket.shared.aria2GlobalOption[key] = value
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+    func changeGlobalOption(_ key: Aria2Option, value: String) async throws -> Bool {
+        let data = try await send(method: Aria2Method.changeGlobalOption, params: [[key.rawValue: value]])
+        struct Result: Codable {
+            let result: String
+        }
+        if let result = data.decode(Result.self)?.result,
+            result == "OK" {
+            Aria2Websocket.shared.aria2GlobalOption[key] = value
+            return true
+        } else {
+            return false
         }
     }
-    func getGlobalOption(_ block: @escaping () -> Void = {}) {
-        send(method: Aria2Method.getGlobalOption,
-             params: [])
-            .done { data in
-                if let options = data.decode(OptionResult.self)?.result {
-                    Aria2Websocket.shared.aria2GlobalOption = options
-                    block()
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+    
+    @discardableResult
+    func getGlobalOption() async throws -> [Aria2Option : String]? {
+        let data = try await send(method: Aria2Method.getGlobalOption, params: [])
+        let options = data.decode(OptionResult.self)?.result
+        if let options {
+            Aria2Websocket.shared.aria2GlobalOption = options
         }
+        return options
     }
 
 
-    func getVersion(_ block: @escaping (_ version: String, _ features: String) -> Void) {
-        send(method: Aria2Method.getVersion,
-             params: [])
-            .done { data in
-                struct Result: Decodable {
-                    var result: Aria2Version
-                }
-                if let result = data.decode(Result.self)?.result {
-                    block(result.version, result.enabledFeatures.map({ "✓ " + $0 }).joined(separator: "\n"))
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+    func getVersion() async throws -> (version: String, features: String)? {
+        let data = try await send(method: Aria2Method.getVersion, params: [])
+        struct Result: Decodable {
+            var result: Aria2Version
+        }
+        if let result = data.decode(Result.self)?.result {
+            let features = result.enabledFeatures.map({ "✓ " + $0 }).joined(separator: "\n")
+            return (result.version, features)
+        } else {
+            return nil
         }
     }
 
-    func getOption(_ gid: String, block: @escaping (_ options: [Aria2Option: String]) -> Void) {
-        send(method: Aria2Method.getOption,
-             params: [gid])
-            .done { data in
-                if let options = data.decode(OptionResult.self)?.result {
-                    block(options)
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+    func getOption(_ gid: String) async throws -> [Aria2Option: String]? {
+        let data = try await send(method: Aria2Method.getOption, params: [gid])
+        return data.decode(OptionResult.self)?.result
     }
 
-    func getPeer(_ gid: String, block: @escaping (_ peer: [Aria2Peer]) -> Void) {
-        send(method: Aria2Method.getPeers,
-             params: [gid])
-            .done { data in
-                struct Result: Decodable {
-                    let result: [Aria2Peer]
-                }
-                if let result = data.decode(Result.self)?.result {
-                    block(result)
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+    @discardableResult
+    func getPeer(_ gid: String) async throws -> [Aria2Peer]? {
+        let data = try await send(method: Aria2Method.getPeers, params: [gid])
+        struct Result: Decodable {
+            let result: [Aria2Peer]
         }
+        return data.decode(Result.self)?.result
     }
 
-    func getServers(_ gid: String, block: @escaping () -> Void) {
-        send(method: Aria2Method.getServers,
-             params: [gid])
-            .done { _ in
-                block()
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+    func getServers(_ gid: String) async throws {
+        try await send(method: Aria2Method.getServers, params: [gid])
     }
 
-    func getUris(_ gid: String, block: @escaping () -> Void) {
-        send(method: Aria2Method.getUris,
-             params: [gid])
-            .done { _ in
-                block()
-            }.catch {
-                Log("\(#function) error \($0)")
-        }
+    func getUris(_ gid: String) async throws {
+        try await send(method: Aria2Method.getUris, params: [gid])
     }
 
-
-    func changeOption(_ gid: String, key: String, value: String , block: @escaping (_ success: Bool) -> Void) {
-        send(method: Aria2Method.changeOption,
-             params: [gid, [key: value]])
-            .done { data in
-                struct Result: Decodable {
-                    let result: String
-                }
-                if let result = data.decode(Result.self)?.result,
-                    result == "OK" {
-                    block(true)
-                }
-            }.catch {
-                Log("\(#function) error \($0)")
+    @discardableResult
+    func changeOption(_ gid: String, key: String, value: String) async throws -> Bool {
+        let data = try await send(method: Aria2Method.changeOption, params: [gid, [key: value]])
+        struct Result: Decodable {
+            let result: String
+        }
+        if let result = data.decode(Result.self)?.result,
+            result == "OK" {
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -476,43 +346,34 @@ final class Aria2: NSObject, Sendable {
 
 fileprivate extension Aria2 {
     
-    func send<T>(method: String, params: T, jsonrpc: Double? = 2.0, _ methodName: String = #function) -> Promise<Data> {
+    @discardableResult
+    func send<T>(method: String, params: T, jsonrpc: Double? = 2.0, _ methodName: String = #function) async throws -> Data {
         let id = UUID().uuidString
-        return Promise { resolver in
-            let str: [String: Any] = {
-                var str: [String: Any] = ["jsonrpc": 2.0,
-                                          "id": id,
-                                          "method": method]
-                if let jsonrpc = jsonrpc {
-                    str["jsonrpc"] = jsonrpc
+        var str: [String: Any] = ["jsonrpc": 2.0,
+                                  "id": id,
+                                  "method": method]
+        if let jsonrpc = jsonrpc {
+            str["jsonrpc"] = jsonrpc
+        }
+        
+        if Preferences.shared.aria2Servers.getSelectedToken().count > 0 {
+            let token = "token:\(Preferences.shared.aria2Servers.getSelectedToken())"
+            if var params = params as? [Any] {
+                if method != Aria2Method.multicall {
+                    params.insert(token, at: 0)
+                    str["params"] = params
                 }
-                
-                if Preferences.shared.aria2Servers.getSelectedToken().count > 0 {
-                    let token = "token:\(Preferences.shared.aria2Servers.getSelectedToken())"
-                    if var params = params as? [Any] {
-                        if method != Aria2Method.multicall {
-                            params.insert(token, at: 0)
-                            str["params"] = params
-                        }
-                        if params.count > 0 {
-                            str["params"] = params
-                        }
-                    }
-                } else {
-                    if let params = params as? [Any], params.count != 0 {
-                        str["params"] = params
-                    }
+                if params.count > 0 {
+                    str["params"] = params
                 }
-                return str
-            }()
-            
-            Aria2Websocket.shared.write(str, withID: id, method: methodName)
-                .done {
-                    resolver.fulfill($0)
-                }.catch {
-                    resolver.reject($0)
+            }
+        } else {
+            if let params = params as? [Any], params.count != 0 {
+                str["params"] = params
             }
         }
+        
+        return try await Aria2Websocket.shared.write(str, withID: id, method: methodName)
     }
 
 	

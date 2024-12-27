@@ -152,7 +152,7 @@ final class ViewControllersManager: NSObject, Sendable {
 	}
 	
     @MainActor
-	func pauseOrUnpause() {
+	func pauseOrUnpause() async {
         guard ViewControllersManager.shared.selectedRow == .downloading else { return }
         let dataList = selectedObjects
         
@@ -162,15 +162,16 @@ final class ViewControllersManager: NSObject, Sendable {
         let pausedList = dataList.filter {
             $0.status == Status.paused.rawValue
         }
+        
         if canPauseList.count >= pausedList.count {
-            Aria2.shared.pause(canPauseList.compactMap { $0.gid })
+            try? await Aria2.shared.pause(canPauseList.compactMap { $0.gid })
         } else if canPauseList.count < pausedList.count {
-            Aria2.shared.unpause(pausedList.compactMap { $0.gid })
+            try? await Aria2.shared.unpause(pausedList.compactMap { $0.gid })
         }
 	}
 	
     @MainActor
-    func deleteTask() {
+    func deleteTask() async {
         var gidForRemoveDownloadResult: [String] = []
         var gidForRemove: [String] = []
         
@@ -184,8 +185,8 @@ final class ViewControllersManager: NSObject, Sendable {
             }
         }
         
-        Aria2.shared.removeDownloadResult(gidForRemoveDownloadResult)
-        Aria2.shared.remove(gidForRemove)
+        try? await Aria2.shared.removeDownloadResult(gidForRemoveDownloadResult)
+        try? await Aria2.shared.remove(gidForRemove)
     }
 	
 	func refresh() {

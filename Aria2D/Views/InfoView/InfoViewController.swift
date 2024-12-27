@@ -23,13 +23,21 @@ class InfoViewController: NSViewController {
 		view.window?.close()
 	}
     
-	@IBAction func okButton(_ sender: Any) {
-        Aria2.shared.getFiles(gid) {
-            if let files = self.aria2Object?.files?.allObjects as? [Aria2File] {
+    @IBAction func okButton(_ sender: Any) {
+        Task {
+            defer {
+                fileNodes = nil
+                fileEditingMode = false
+                view.window?.close()
+            }
+            
+            do {
+                try await Aria2.shared.getFiles(gid)
+                guard let files = aria2Object?.files?.allObjects as? [Aria2File] else { return }
                 let oldValue = files.filter {
                     $0.selected
-                    }.map {
-                        Int($0.index)
+                }.map {
+                    Int($0.index)
                 }.sorted()
                 var newValue: [Int] = []
                 func addSelectedIndex(_ nodes: [FileNode]) {
@@ -43,26 +51,23 @@ class InfoViewController: NSViewController {
                         }
                     }
                 }
-                addSelectedIndex(self.fileNodes?.children ?? [])
+                addSelectedIndex(fileNodes?.children ?? [])
                 newValue = newValue.sorted()
                 
                 if newValue != oldValue, newValue.count > 0 {
                     let value = newValue.map {
                         "\($0)"
-                        }.joined(separator: ",")
-
-                    Aria2.shared.changeOption(self.gid,
-                                              key: Aria2Option.selectFile.rawValue,
-                                              value: value) { _ in }
+                    }.joined(separator: ",")
+                    
+                    try await Aria2.shared.changeOption(gid,
+                                                        key: Aria2Option.selectFile.rawValue,
+                                                        value: value)
                 }
-            }
-            DispatchQueue.main.async {
-                self.fileNodes = nil
-                self.fileEditingMode = false
-                self.view.window?.close()
+            } catch {
+                Log("Info ok action, failed")
             }
         }
-	}
+    }
     
 	var gid = "" {
 		didSet {
@@ -72,8 +77,10 @@ class InfoViewController: NSViewController {
             
             updateSegmentedControl(aria2Object?.bittorrent != nil)
             
-            Aria2.shared.getServers(gid) {}
-            Aria2.shared.getUris(gid) {}
+            Task {
+                try? await Aria2.shared.getServers(gid)
+                try? await Aria2.shared.getUris(gid)
+            }
             
             aria2Object?.filesObserve = { [weak self] indexs, reload in
                 if reload {
@@ -202,22 +209,23 @@ class InfoViewController: NSViewController {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .showChangeOptionView {
-            if let tableviewSegue = segue as? NSTableViewPopoverSegue,
-                let vc = segue.destinationController as? ChangeOptionViewController {
-                tableviewSegue.anchorTableView = optionsTableView
-                tableviewSegue.preferredEdge = .minX
-                tableviewSegue.popoverBehavior = .transient
-                
-                if let option = optionKeys[safe: optionsTableView.selectedRow] {
-                    vc.optionValue = options[option.option] ?? ""
-                    vc.option = option.option
-                    vc.gid = self.gid
-                    vc.changeComplete = {
-                        Aria2.shared.getOption(self.gid) {
-                            self.options = $0
-                        }
-                        Aria2.shared.updateStatus([self.gid])
-                    }
+            guard let tableviewSegue = segue as? NSTableViewPopoverSegue,
+                  let vc = segue.destinationController as? ChangeOptionViewController else {
+                return
+            }
+            
+            tableviewSegue.anchorTableView = optionsTableView
+            tableviewSegue.preferredEdge = .minX
+            tableviewSegue.popoverBehavior = .transient
+            
+            guard let option = optionKeys[safe: optionsTableView.selectedRow] else { return }
+            vc.gid = gid
+            vc.optionValue = options[option.option] ?? ""
+            vc.option = option.option
+            vc.changeComplete = {
+                Task {
+                    self.options = (try? await Aria2.shared.getOption(self.gid)) ?? [:]
+                    try await Aria2.shared.updateStatus([self.gid])
                 }
             }
         }
@@ -225,22 +233,17 @@ class InfoViewController: NSViewController {
     
     func updateStatusInTimer() {
         guard aria2Object?.status == Status.active.rawValue else { return }
-        DispatchQueue.main.async { [weak self] in
-            guard let label = self?.tabView.selectedTabViewItem?.label,
-                let gid = self?.gid else {
-                    return
+        Task {
+            guard let label = tabView.selectedTabViewItem?.label else {
+                return
             }
             
             switch label {
             case "Files":
-                guard let mode = self?.fileEditingMode, !mode else { return }
-                Aria2.shared.getFiles(gid) {}
+                guard !fileEditingMode else { return }
+                try await Aria2.shared.getFiles(gid)
             case "Peer":
-                Aria2.shared.getPeer(gid) { objs in
-                    DispatchQueue.main.async {
-                        self?.peerObjects = objs
-                    }
-                }
+                self.peerObjects = try await Aria2.shared.getPeer(gid)
             default:
                 break
             }
@@ -248,9 +251,9 @@ class InfoViewController: NSViewController {
     }
     
     deinit {
-        aria2Object?.filesObserve = nil
-        aria2Object = nil
-        objectController.content = nil
+//        aria2Object?.filesObserve = nil
+//        aria2Object = nil
+//        objectController.content = nil
     }
     
 }
@@ -258,31 +261,25 @@ class InfoViewController: NSViewController {
 extension InfoViewController: NSTabViewDelegate {
     
     func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        updateTabView()
+        Task {
+            try? await updateTabView()
+        }
     }
     
-    func updateTabView() {
+    func updateTabView() async throws {
         guard let str = tabView.selectedTabViewItem?.label else { return }
         fileEditingMode = false
         switch str {
         case "Status":
             break
         case "Options":
-            Aria2.shared.getOption(gid) {
-                self.options = $0
-            }
+            self.options = try await Aria2.shared.getOption(gid) ?? [:]
         case "Files":
-            Aria2.shared.getFiles(gid) {
-                self.initFileNodes()
-            }
+            try await Aria2.shared.getFiles(gid)
+            initFileNodes()
         case "Peer":
             guard aria2Object?.status == Status.active.rawValue else { return }
-            Aria2.shared.getPeer(gid) { objs in
-                DispatchQueue.main.async {
-                    self.peerObjects = objs
-                }
-            }
-            break
+            self.peerObjects = try await Aria2.shared.getPeer(gid)
         default:
             break
         }

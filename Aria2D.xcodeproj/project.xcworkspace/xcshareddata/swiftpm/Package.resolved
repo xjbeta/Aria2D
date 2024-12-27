@@ -1,24 +1,6 @@
 {
-  "originHash" : "ddb0958708cc4892d9520bed0992533ec141aa6d2a81720078c9bc5747cdfdba",
+  "originHash" : "bda6cc5aec7dd9792364776aff972e128ca68940480079c7405a967814e8269a",
   "pins" : [
-    {
-      "identity" : "foundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/PromiseKit/Foundation",
-      "state" : {
-        "revision" : "d967438f58183e02f091f4c17ac7f04f70947e0a",
-        "version" : "4.0.0"
-      }
-    },
-    {
-      "identity" : "promisekit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mxcl/PromiseKit",
-      "state" : {
-        "revision" : "cb70b070cde06837cd10a1febdf6105c1a3bb348",
-        "version" : "8.1.1"
-      }
-    },
     {
       "identity" : "sparkle",
       "kind" : "remoteSourceControl",

@@ -98,8 +98,6 @@
 		01F20B301D367ADB009AB30D /* DownloadsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F20B2F1D367ADB009AB30D /* DownloadsMenu.swift */; };
 		01F87CB6289B64B500B0ED8F /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CB5289B64B500B0ED8F /* Starscream */; };
 		01F87CB9289B650600B0ED8F /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CB8289B650600B0ED8F /* Sparkle */; };
-		01F87CBC289B656300B0ED8F /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CBB289B656300B0ED8F /* PromiseKit */; };
-		01F87CBF289B670200B0ED8F /* PMKFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 01F87CBE289B670200B0ED8F /* PMKFoundation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -223,9 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01F87CB9289B650600B0ED8F /* Sparkle in Frameworks */,
-				01F87CBF289B670200B0ED8F /* PMKFoundation in Frameworks */,
 				01F87CB6289B64B500B0ED8F /* Starscream in Frameworks */,
-				01F87CBC289B656300B0ED8F /* PromiseKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,8 +523,6 @@
 			packageProductDependencies = (
 				01F87CB5289B64B500B0ED8F /* Starscream */,
 				01F87CB8289B650600B0ED8F /* Sparkle */,
-				01F87CBB289B656300B0ED8F /* PromiseKit */,
-				01F87CBE289B670200B0ED8F /* PMKFoundation */,
 			);
 			productName = Aria2D;
 			productReference = 0147EDBD1D21FAD800FB4324 /* Aria2D.app */;
@@ -579,8 +573,6 @@
 			packageReferences = (
 				01F87CB4289B64B500B0ED8F /* XCRemoteSwiftPackageReference "Starscream" */,
 				01F87CB7289B650600B0ED8F /* XCRemoteSwiftPackageReference "Sparkle" */,
-				01F87CBA289B656300B0ED8F /* XCRemoteSwiftPackageReference "PromiseKit" */,
-				01F87CBD289B670200B0ED8F /* XCRemoteSwiftPackageReference "Foundation" */,
 			);
 			productRefGroup = 0147EDBE1D21FAD800FB4324 /* Products */;
 			projectDirPath = "";
@@ -1026,22 +1018,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		01F87CBA289B656300B0ED8F /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mxcl/PromiseKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		01F87CBD289B670200B0ED8F /* XCRemoteSwiftPackageReference "Foundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PromiseKit/Foundation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1054,16 +1030,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01F87CB7289B650600B0ED8F /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
-		};
-		01F87CBB289B656300B0ED8F /* PromiseKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01F87CBA289B656300B0ED8F /* XCRemoteSwiftPackageReference "PromiseKit" */;
-			productName = PromiseKit;
-		};
-		01F87CBE289B670200B0ED8F /* PMKFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01F87CBD289B670200B0ED8F /* XCRemoteSwiftPackageReference "Foundation" */;
-			productName = PMKFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 

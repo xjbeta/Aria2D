@@ -71,27 +71,32 @@ class Aria2cTrackerListViewController: NSViewController {
         done.isEnabled = false
         download.isEnabled = false
         textView.string = "Downloading..."
-        URLSession.shared.dataTask(.promise, with: rq).compactMap(String.init).done(on: .main) {
-            let list = $0.components(separatedBy: "\n\n").filter {
-                $0 != ""
-                }.filter { url -> Bool in
-                    var isSelectedType = false
-                    self.trackersUrlTypes.forEach {
-                        if url.starts(with: $0.rawValue) {
-                            isSelectedType = true
+        
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(for: rq)
+                
+                let list = String(data: data, encoding: .utf8)?.components(separatedBy: "\n\n").filter {
+                    $0 != ""
+                    }.filter { url -> Bool in
+                        var isSelectedType = false
+                        self.trackersUrlTypes.forEach {
+                            if url.starts(with: $0.rawValue) {
+                                isSelectedType = true
+                            }
                         }
-                    }
-                    return isSelectedType
+                        return isSelectedType
+                }
+                textView.string = list?.joined(separator: ",") ?? ""
+                
+                progressIndicator.isHidden = true
+                progressIndicator.stopAnimation(nil)
+                done.isEnabled = true
+                download.isEnabled = true
+            } catch {
+                Log("Download trackers list failed, error: \(error)")
+                textView.string = "Download trackers list failed."
             }
-            self.textView.string = list.joined(separator: ",")
-            }.ensure(on: .main) {
-                self.progressIndicator.isHidden = true
-                self.progressIndicator.stopAnimation(nil)
-                self.done.isEnabled = true
-                self.download.isEnabled = true
-            }.catch(on: .main) {
-                Log("Download trackers list failed, error: \($0)")
-                self.textView.string = "Download trackers list failed."
         }
     }
     
