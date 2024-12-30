@@ -84,7 +84,9 @@ class InfoViewController: NSViewController {
             
             aria2Object?.filesObserve = { [weak self] indexs, reload in
                 if reload {
-                    self?.initFileNodes()
+                    Task {
+                        await self?.initFileNodes()
+                    }
                 } else {
                     self?.updateFileNodes(indexs)
                 }
@@ -101,43 +103,20 @@ class InfoViewController: NSViewController {
     
     @IBOutlet weak var tabView: NSTabView!
     @IBOutlet weak var segmentedControl: NSSegmentedControl!
-    var segmentedControlLabels = [NSLocalizedString("infoViewController.segmentedControl.0", comment: ""),
-                                  NSLocalizedString("infoViewController.segmentedControl.1", comment: ""),
-                                  NSLocalizedString("infoViewController.segmentedControl.2", comment: ""),
-                                  NSLocalizedString("infoViewController.segmentedControl.3", comment: ""),
-                                  NSLocalizedString("infoViewController.segmentedControl.4", comment: "")]
     
+    
+    enum SegmentedControls: Int {
+        case status, options, files, peer, announces
+    }
     
     func updateSegmentedControl(_ isBittorrent: Bool) {
-        func initSegmentedControl() {
-            self.segmentedControl.segmentCount = 3
-            self.segmentedControl.setLabel(segmentedControlLabels[0], forSegment: 0)
-            self.segmentedControl.setLabel(segmentedControlLabels[1], forSegment: 1)
-            self.segmentedControl.setLabel(segmentedControlLabels[2], forSegment: 2)
-            
-            if isBittorrent {
-                self.segmentedControl.segmentCount = 5
-                self.segmentedControl.setLabel(segmentedControlLabels[3], forSegment: 3)
-                self.segmentedControl.setLabel(segmentedControlLabels[4], forSegment: 4)
-            }
-        }
+        let c = isBittorrent ? 5 : 3
+        segmentedControl.segmentCount = c
         
-        DispatchQueue.main.async {
-            if isBittorrent {
-                guard self.segmentedControl.segmentCount == 3 else {
-                    initSegmentedControl()
-                    return
-                }
-                self.segmentedControl.segmentCount = 5
-                self.segmentedControl.setLabel(self.segmentedControlLabels[3], forSegment: 3)
-                self.segmentedControl.setLabel(self.segmentedControlLabels[4], forSegment: 4)
-            } else {
-                guard self.segmentedControl.segmentCount == 5 else {
-                    initSegmentedControl()
-                    return
-                }
-                self.segmentedControl.segmentCount = 3
-            }
+        (0..<c).forEach {
+            guard let sc = SegmentedControls(rawValue: $0) else { return }
+            segmentedControl.setTag($0, forSegment: $0)
+            segmentedControl.setLabel(NSLocalizedString("infoViewController.segmentedControl.\($0)", comment: ""), forSegment: $0)
         }
     }
     
@@ -170,9 +149,7 @@ class InfoViewController: NSViewController {
                     optionKeys.append(contentsOf: keys)
             }
             
-            DispatchQueue.main.async {
-                self.optionsTableView.reloadData()
-            }
+            optionsTableView.reloadData()
         }
     }
     
@@ -205,6 +182,11 @@ class InfoViewController: NSViewController {
         
         filesTreeController.sortDescriptors = [NSSortDescriptor(key: "isLeaf", ascending: true),
                                                NSSortDescriptor(key: "title", ascending: true)]
+        
+        tabView.tabViewItems.enumerated().forEach {
+            guard let sc = SegmentedControls(rawValue: $0.offset) else { return }
+            $0.element.identifier = sc
+        }
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -234,15 +216,14 @@ class InfoViewController: NSViewController {
     func updateStatusInTimer() {
         guard aria2Object?.status == Status.active.rawValue else { return }
         Task {
-            guard let label = tabView.selectedTabViewItem?.label else {
-                return
-            }
+            guard let identifier = tabView.selectedTabViewItem?.identifier,
+                  let sc = identifier as? SegmentedControls else { return }
             
-            switch label {
-            case "Files":
+            switch sc {
+            case .files:
                 guard !fileEditingMode else { return }
                 try await Aria2.shared.getFiles(gid)
-            case "Peer":
+            case .peer:
                 self.peerObjects = try await Aria2.shared.getPeer(gid)
             default:
                 break
@@ -267,17 +248,18 @@ extension InfoViewController: NSTabViewDelegate {
     }
     
     func updateTabView() async throws {
-        guard let str = tabView.selectedTabViewItem?.label else { return }
+        guard let identifier = tabView.selectedTabViewItem?.identifier,
+              let sc = identifier as? SegmentedControls else { return }
         fileEditingMode = false
-        switch str {
-        case "Status":
+        switch sc {
+        case .status:
             break
-        case "Options":
+        case .options:
             self.options = try await Aria2.shared.getOption(gid) ?? [:]
-        case "Files":
+        case .files:
             try await Aria2.shared.getFiles(gid)
-            initFileNodes()
-        case "Peer":
+            await initFileNodes()
+        case .peer:
             guard aria2Object?.status == Status.active.rawValue else { return }
             self.peerObjects = try await Aria2.shared.getPeer(gid)
         default:
@@ -346,84 +328,62 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
 
 extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
-    func initFileNodes() {
-        Task {
-            guard let obj = self.aria2Object, let dir = obj.dir else {
+    func initFileNodes() async {
+        guard let obj = aria2Object, let dir = obj.dir else {
+            return
+        }
+        
+        if fileNodes == nil {
+            fileNodes = FileNode(dir, isLeaf: false)
+        }
+        var fileNodes = fileNodes!
+        
+        let rootPathComponents = fileNodes.path.pathComponents
+        var groupChildrens: [FileNode] = []
+        
+        (obj.files?.allObjects as? [Aria2File])?.forEach { file in
+            guard let path = file.path, path != "" else {
                 return
             }
             
-            if self.fileNodes == nil {
-                self.fileNodes = FileNode(dir, isLeaf: false)
+            Log(path)
+            
+            var pathComponents = path.pathComponents
+            if path.isChildPath(of: fileNodes.path) {
+                pathComponents.removeSubrange(0 ..< rootPathComponents.count)
             }
             
-            let rootPathComponents = self.fileNodes!.path.pathComponents
-            var groupChildrens: [FileNode] = []
+            var currentNode = fileNodes
             
-            let filesSemaphore = DispatchSemaphore(value: 1)
-            
-            (obj.files?.allObjects as? [Aria2File])?.forEach { file in
-                filesSemaphore.wait()
-                guard let path = file.path, path != "" else {
-                    filesSemaphore.signal()
-                    return
-                }
+            pathComponents.forEach { nodeName in
+                Log(nodeName)
                 
-                var pathComponents = path.pathComponents
-                
-                guard var currentNode = self.fileNodes else { return }
-                
-                if path.isChildPath(of: currentNode.path) {
-                    pathComponents.removeSubrange(0 ..< rootPathComponents.count)
-                }
-                
-                let semaphore = DispatchSemaphore(value: 1)
-                
-                pathComponents.forEach { _ in
-                    semaphore.wait()
-                    let str = pathComponents.first!
-                    let group = DispatchGroup()
-                    var child = currentNode.getChild(str)
-                    group.enter()
-                    if child == nil {
-                        var path = currentNode.path
-                        path.appendingPathComponent(str)
-                        
-                        let node = pathComponents.count != 1 ? FileNode(path, isLeaf: false) : FileNode(path, file: file, isLeaf: true)
-                        
-                        DispatchQueue.main.async {
-                            currentNode.children.append(node)
-                            if pathComponents.count != 1 {
-                                groupChildrens.append(node)
-                            }
-                            child = currentNode.getChild(str)
-                            group.leave()
-                        }
-                    } else if let child = child, child.isLeaf {
-                        DispatchQueue.main.async {
-                            child.updateData(file)
-                            group.leave()
-                        }
-                    } else {
-                        group.leave()
-                    }
+                var child = currentNode.getChild(nodeName)
+                if child == nil {
+                    var path = currentNode.path
+                    path.appendingPathComponent(nodeName)
                     
-                    group.notify(queue: .global(qos: .background)) {
-                        if let child = child {
-                            currentNode = child
-                        }
-                        pathComponents.removeFirst()
-                        semaphore.signal()
-                        if pathComponents.count == 0 {
-                            filesSemaphore.signal()
-                        }
+                    let node = pathComponents.count != 1 ? FileNode(path, isLeaf: false) : FileNode(path, file: file, isLeaf: true)
+                    
+                    currentNode.children.append(node)
+                    if pathComponents.count != 1 {
+                        groupChildrens.append(node)
                     }
+                    child = currentNode.getChild(nodeName)
+                } else if let child = child, child.isLeaf {
+                    child.updateData(file)
+                } else {
+                    Log("Ignore")
                 }
-            }
-            await MainActor.run {
-                self.updateStatus(for: groupChildrens)
-                self.filesTreeController.content = self.fileNodes?.children
+                
+                if let child = child {
+                    currentNode = child
+                }
+                pathComponents.removeFirst()
             }
         }
+        updateStatus(for: groupChildrens)
+        filesTreeController.content = fileNodes.children
     }
     
     func updateFileNodes(_ list: [Int]) {
@@ -486,9 +446,11 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     }
     
     func outlineView(_ outlineView: NSOutlineView, dataCellFor tableColumn: NSTableColumn?, item: Any) -> NSCell? {
-        if tableColumn?.title == "Name",
-            let node = (item as? NSTreeNode)?.representedObject as? FileNode,
-            let cell = tableColumn?.dataCell as? NSButtonCell {
+        if let last = tableColumn?.identifier.rawValue.last,
+           let i = Int(String(last)),
+           i == 0,
+           let node = (item as? NSTreeNode)?.representedObject as? FileNode,
+           let cell = tableColumn?.dataCell as? NSButtonCell {
             cell.setButtonType(.switch)
             cell.allowsMixedState = !(node.children.count == 0)
             cell.title = node.title

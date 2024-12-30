@@ -1272,11 +1272,11 @@ Gw
             <objects>
                 <viewController showSeguePresentationStyle="single" id="987-L3-Tth" customClass="InfoViewController" customModule="Aria2D" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BkN-9J-Kg3">
-                        <rect key="frame" x="0.0" y="0.0" width="460" height="620"/>
+                        <rect key="frame" x="0.0" y="0.0" width="460" height="619"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="muf-pP-9Nr">
-                                <rect key="frame" x="0.0" y="520" width="460" height="100"/>
+                                <rect key="frame" x="0.0" y="519" width="460" height="100"/>
                                 <subviews>
                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yq2-gl-qcc">
                                         <rect key="frame" x="12" y="10" width="80" height="80"/>
@@ -1345,7 +1345,7 @@ Gw
                                 </constraints>
                             </visualEffectView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m7U-XY-Voo">
-                                <rect key="frame" x="152" y="483" width="157" height="24"/>
+                                <rect key="frame" x="152" y="482" width="157" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="rXF-7U-uIU">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -1388,16 +1388,16 @@ Gw
                                 </connections>
                             </button>
                             <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="r5R-m2-8A7">
-                                <rect key="frame" x="0.0" y="59" width="460" height="405"/>
+                                <rect key="frame" x="0.0" y="59" width="460" height="404"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Status" identifier="" id="5Vy-Q0-dyr">
                                         <view key="view" id="tdA-0C-cG2">
-                                            <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="bNL-gZ-vh6">
-                                                    <rect key="frame" x="20" y="163" width="420" height="242"/>
+                                                    <rect key="frame" x="20" y="162" width="420" height="242"/>
                                                     <rows>
                                                         <gridRow id="e72-sg-ekq"/>
                                                         <gridRow id="QTA-Z5-d2R"/>
@@ -1675,18 +1675,18 @@ Gw
                                     </tabViewItem>
                                     <tabViewItem label="Options" identifier="" id="rmX-FY-cCW">
                                         <view key="view" id="7fV-jP-dOi">
-                                            <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="qY1-mx-xXb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" id="Mi8-NA-oMt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="kR5-pN-Auw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="485" height="405"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="485" height="404"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="8" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1789,18 +1789,18 @@ Gw
                                     </tabViewItem>
                                     <tabViewItem label="Files" identifier="" id="x6h-xk-9nw">
                                         <view key="view" id="LgK-dd-htO">
-                                            <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="sGe-uo-I1K">
-                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="y12-II-h7D">
-                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="390"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    <clipView key="contentView" drawsBackground="NO" id="y12-II-h7D">
+                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="389"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <outlineView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="491" height="367"/>
+                                                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="28Q-1E-IWj" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="5N7-Qz-UeY" id="B1M-ua-9CL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="491" height="366"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="2" height="3"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1869,14 +1869,14 @@ Gw
                                                         <nil key="backgroundColor"/>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="pIO-b9-eki">
-                                                        <rect key="frame" x="0.0" y="390" width="460" height="15"/>
+                                                        <rect key="frame" x="0.0" y="389" width="460" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="VuS-MG-f0Q">
                                                         <rect key="frame" x="-16" y="23" width="16" height="0.0"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
-                                                    <tableHeaderView key="headerView" id="28Q-1E-IWj">
+                                                    <tableHeaderView key="headerView" wantsLayer="YES" id="28Q-1E-IWj">
                                                         <rect key="frame" x="0.0" y="0.0" width="491" height="23"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </tableHeaderView>
@@ -1886,17 +1886,17 @@ Gw
                                     </tabViewItem>
                                     <tabViewItem label="Peer" identifier="" id="5dw-cu-5Bw">
                                         <view key="view" id="Yj4-9N-sTq">
-                                            <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7LN-4f-JZv">
-                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                                     <clipView key="contentView" id="MGc-pu-rHK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="390"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="389"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="Hod-dK-d2Q" id="fj2-ke-JF8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="491" height="367"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="491" height="366"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1989,14 +1989,14 @@ Gw
                                                         </subviews>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Wpc-wR-WSr">
-                                                        <rect key="frame" x="0.0" y="390" width="460" height="15"/>
+                                                        <rect key="frame" x="0.0" y="389" width="460" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="TLd-Qk-1vj">
                                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
-                                                    <tableHeaderView key="headerView" id="Hod-dK-d2Q">
+                                                    <tableHeaderView key="headerView" wantsLayer="YES" id="Hod-dK-d2Q">
                                                         <rect key="frame" x="0.0" y="0.0" width="491" height="23"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </tableHeaderView>
@@ -2012,17 +2012,17 @@ Gw
                                     </tabViewItem>
                                     <tabViewItem label="Item 4" identifier="" id="WC9-tT-oaT" userLabel="Announces">
                                         <view key="view" id="tkG-7o-EPz">
-                                            <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qya-Ra-1ld">
-                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                                     <clipView key="contentView" id="PBq-bS-UCv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="dPa-J3-BYU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="460" height="405"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="460" height="404"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
