@@ -42,11 +42,14 @@ class MainListViewController: NSViewController {
     
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .showInfoWindow {
-            if let wc = segue.destinationController as? NSWindowController,
-                let vc = wc.contentViewController as? InfoViewController,
-                let obj = arrayController.selectedObjects.first as? Aria2Object {
-                vc.gid = obj.gid
+            guard let wc = segue.destinationController as? NSWindowController,
+                  let vc = wc.contentViewController as? InfoViewController,
+                  let index = mainListTableView.selectedIndexs().first,
+                  let objs = arrayController.arrangedObjects as? [Aria2Object],
+                  let obj = objs[safe: index] else {
+                return
             }
+            vc.gid = obj.gid
 		}
 	}
 	
