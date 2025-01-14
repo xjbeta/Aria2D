@@ -37,25 +37,30 @@ final class ViewControllersManager: NSObject, Sendable {
 	func showAria2cAlert(_ str: String? = nil) {
 		let info = str ?? aria2cAlertStr ?? ""
 		guard info != "" else { return }
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-			if let mainWindow = NSApp.mainWindow, mainWindow.sheets.count == 0 {
-					let alert = NSAlert()
-					alert.messageText = "Aria2c didn't started."
-					alert.informativeText = info
-					alert.addButton(withTitle: "OK")
-					alert.addButton(withTitle: "Cancel")
-					alert.alertStyle = .warning
-					alert.beginSheetModal(for: mainWindow) {
-						if $0 == .alertFirstButtonReturn {
-							
-						}
-					}
-				
-				self.aria2cAlertStr = nil
-			} else {
-				self.aria2cAlertStr = info
-			}
-		}
+        Task {
+            try await Task.sleep(nanoseconds: 300_000_000) // 0.3s
+            
+            guard let mainWindow = NSApp.mainWindow,
+                  mainWindow.sheets.count == 0 else {
+                self.aria2cAlertStr = info
+                return
+            }
+            
+            
+            let alert = NSAlert()
+            alert.messageText = "Aria2c didn't started."
+            alert.informativeText = info
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            alert.alertStyle = .warning
+            alert.beginSheetModal(for: mainWindow) {
+                if $0 == .alertFirstButtonReturn {
+                    
+                }
+            }
+            
+            self.aria2cAlertStr = nil
+        }
 		
 		/*
 		func runScript() {

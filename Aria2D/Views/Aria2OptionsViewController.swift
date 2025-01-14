@@ -304,15 +304,11 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
                 button.insertItem(withTitle: path, at: 1)
             }
         }
-        DispatchQueue.main.async {
-            button.selectItem(at: index)
-        }
+        button.selectItem(at: index)
     }
     
     func initDirMenu() {
-        DispatchQueue.main.async {
-            self.dirPopUpButton.selectItem(at: 0)
-        }
+        dirPopUpButton.selectItem(at: 0)
         
         guard let dir = Preferences.shared.aria2Conf[.dir] else {
             dirMenuItem.title = "Unknown"

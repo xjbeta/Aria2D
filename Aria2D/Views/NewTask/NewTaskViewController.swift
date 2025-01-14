@@ -255,13 +255,12 @@ class NewTaskViewController: NSViewController {
         downloadInfoGridRow.height = isTorrent ? 17 : 70
 	}
 	
+    @MainActor
 	func setTorrentPath(_ url: URL) {
-		DispatchQueue.main.async {
-			let image = NSWorkspace.shared.icon(forFileType: url.pathExtension)
-			image.size = NSSize(width: 17, height: 17)
-			self.torrentFileInfoButton.image = image
-			self.torrentFileInfoButton.title = url.lastPathComponent
-		}
+        let image = NSWorkspace.shared.icon(forFileType: url.pathExtension)
+        image.size = NSSize(width: 17, height: 17)
+        torrentFileInfoButton.image = image
+        torrentFileInfoButton.title = url.lastPathComponent
 	}
     
 }

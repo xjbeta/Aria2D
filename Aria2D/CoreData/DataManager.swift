@@ -189,8 +189,6 @@ final class DataManager: NSObject, Sendable {
     }
     
     func saveContext() {
-        DispatchQueue.main.async {
-            (NSApp.delegate as? AppDelegate)?.saveAction(nil)
-        }
+        (NSApp.delegate as? AppDelegate)?.saveAction(nil)
     }
 }

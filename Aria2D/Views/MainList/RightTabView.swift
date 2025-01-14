@@ -21,10 +21,10 @@ class RightTabView: NSTabViewController {
 			view.initVersionInfo()
 		}
         if let vc = downloadTab.viewController as? MainListViewController {
-            observe = vc.arrayController.observe((\.arrangedObjects)) { (arrayController, _) in
+            observe = vc.arrayController.observe(\.arrangedObjects) { arrayController, _ in
                 let count = (arrayController.arrangedObjects as? [Any] ?? []).count
-                DispatchQueue.main.async { [weak self] in
-                    self?.updateContentView(count)
+                Task {
+                    await self.updateContentView(count)
                 }
             }
         }

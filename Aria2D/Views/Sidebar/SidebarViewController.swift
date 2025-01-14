@@ -98,10 +98,9 @@ class SidebarViewController: NSViewController {
         self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
     }
 	
+    @MainActor
 	@objc func resetSidebarItems() {
-		DispatchQueue.main.async {
-			self.setDefaultData()
-		}
+        setDefaultData()
 	}
 	
 	@objc func nextTag() {
