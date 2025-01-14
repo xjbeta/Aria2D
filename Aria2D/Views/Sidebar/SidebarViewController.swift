@@ -25,7 +25,7 @@ class SidebarViewController: NSViewController {
     var newTaskPreparedInfo = [String: String]()
     
     required init?(coder: NSCoder) {
-        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+        context = NSApp.default.persistentContainer.viewContext
         super.init(coder: coder)
     }
     

@@ -27,7 +27,7 @@ class MainListViewController: NSViewController {
 	@IBOutlet var downloadsTableViewMenu: DownloadsMenu!
     
     required init?(coder: NSCoder) {
-        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+        context = NSApp.default.persistentContainer.viewContext
         super.init(coder: coder)
     }
     

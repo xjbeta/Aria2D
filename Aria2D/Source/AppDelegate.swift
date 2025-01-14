@@ -245,3 +245,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateLater
     }
 }
+
+extension NSApplication {
+    var `default`: AppDelegate {
+        delegate as! AppDelegate
+    }
+}

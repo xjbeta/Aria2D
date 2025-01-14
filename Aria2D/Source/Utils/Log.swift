@@ -16,7 +16,7 @@ public func Log<T>(_ message: T, file: String = #file, method: String = #functio
     
     logStr += "\n"
     Task { @MainActor in
-        guard let log = (NSApp.delegate as? AppDelegate)?.logUrl else { return }
+        guard let log = NSApp.default.logUrl else { return }
         do {
             if !FileManager.default.fileExists(atPath: log.path) {
                 FileManager.default.createFile(atPath: log.path, contents: nil, attributes: nil)

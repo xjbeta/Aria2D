@@ -35,8 +35,7 @@ final class DataManager: NSObject, Sendable {
         saveContext()
     }
     
-    let appDelegate = (NSApp.delegate as! AppDelegate)
-    let context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = NSApp.default.persistentContainer.viewContext
     
     lazy var aria2List: Aria2List? = {
         do {
@@ -189,6 +188,6 @@ final class DataManager: NSObject, Sendable {
     }
     
     func saveContext() {
-        (NSApp.delegate as? AppDelegate)?.saveAction(nil)
+        NSApp.default.saveAction(nil)
     }
 }

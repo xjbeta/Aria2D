@@ -14,7 +14,7 @@ class InfoViewController: NSViewController {
     @objc var context: NSManagedObjectContext
     
     required init?(coder: NSCoder) {
-        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
+        context = NSApp.default.persistentContainer.viewContext
         super.init(coder: coder)
     }
     
