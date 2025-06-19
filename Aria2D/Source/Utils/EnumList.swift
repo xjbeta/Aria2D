@@ -83,41 +83,12 @@ enum SidebarItem: String {
 }
 
 
-@objc enum Status: Int16, Codable {
+enum Status: String {
 	case active
 	case waiting
 	case paused
 	case error
 	case complete
 	case removed
-	
-    init?(raw: Int16) {
-        self.init(rawValue: raw)
-    }
-    
-    
-	init?(_ str: String) {
-		switch str {
-		case "active": self.init(rawValue: 0)
-		case "waiting": self.init(rawValue: 1)
-		case "paused": self.init(rawValue: 2)
-		case "error": self.init(rawValue: 3)
-		case "complete": self.init(rawValue: 4)
-		case "removed": self.init(rawValue: 5)
-		default:
-			self.init(rawValue: -1)
-		}
-	}
-	
-	func string() -> String {
-		switch self {
-		case .active: return "active"
-		case .waiting: return "waiting"
-		case .paused: return "paused"
-		case .error: return "error"
-		case .complete: return "complete"
-		case .removed: return "removed"
-		}
-	}
 }
 

@@ -1,5 +1,5 @@
 {
-  "originHash" : "bda6cc5aec7dd9792364776aff972e128ca68940480079c7405a967814e8269a",
+  "originHash" : "e9fcf4e7b038bb9d540893a34457b5d7c01d3492be424e274ea8b7ba6593ef17",
   "pins" : [
     {
       "identity" : "sparkle",
@@ -11,12 +11,30 @@
       }
     },
     {
+      "identity" : "sqlcipher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tencent/sqlcipher",
+      "state" : {
+        "revision" : "5d8825c22feedb421ad6f9ecfc1399460e10d299",
+        "version" : "1.4.7"
+      }
+    },
+    {
       "identity" : "starscream",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/daltoniam/Starscream",
       "state" : {
         "revision" : "c6bfd1af48efcc9a9ad203665db12375ba6b145a",
         "version" : "4.0.8"
+      }
+    },
+    {
+      "identity" : "wcdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tencent/wcdb",
+      "state" : {
+        "revision" : "db68d174876d4c50c9843d0e6e22c58adebf2431",
+        "version" : "2.1.11"
       }
     }
   ],

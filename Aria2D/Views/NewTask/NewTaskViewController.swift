@@ -187,7 +187,14 @@ class NewTaskViewController: NSViewController {
     }
     
     var preparedInfo = [String: String]()
-    var fileURL: URL?
+    var fileURL: URL? = nil {
+        didSet {
+            if let url = fileURL {
+                self.setTorrentPath(url)
+                self.urlManager(true)
+            }
+        }
+    }
     
     var torrentData: String {
         get {

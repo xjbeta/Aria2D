@@ -11,49 +11,27 @@ import Cocoa
 class SidebarViewController: NSViewController {
 	
     @IBOutlet var sidebarTableView: SidebarTableView!
-	
-    @IBOutlet weak var arrayController: NSArrayController!
+    
     @IBOutlet weak var downloadSpeed: NSTextField!
     @IBOutlet weak var uploadSpeed: NSTextField!
     @IBOutlet weak var globalSpeedView: NSStackView!
-    var observe: NSKeyValueObservation?
-    @objc var predicate = NSPredicate(format: "status IN %@", [Status.active.rawValue])
-    @objc var context: NSManagedObjectContext
     
     var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
     var newTaskPreparedInfo = [String: String]()
-    
-    required init?(coder: NSCoder) {
-        context = NSApp.default.persistentContainer.viewContext
-        super.init(coder: coder)
-    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
         if #available(OSX 11.0, *) {
             sidebarTableView.style = .fullWidth
         }
+        Task {
+            await DataManager.shared.addObserver(self, forTable: .aria2Object)
+        }
+        
 		initNotification()
 		resetSidebarItems()
-        
-        observe = arrayController.observe(\.arrangedObjects) {  (arrayController, _) in
-            Task {
-                await self.reloadSpeedView()
-            }
-        }
 	}
-    
-    
-    func reloadSpeedView() {
-        guard let objs = arrayController.arrangedObjects as? [Aria2Object],
-            Aria2Websocket.shared.isConnected else {
-                globalSpeedView.isHidden = true
-                return
-        }
-        
-        globalSpeedView.isHidden = objs.count == 0
-    }
 	
 	func initNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(newTask(_:)), name: .newTask, object: nil)
@@ -157,7 +135,7 @@ class SidebarViewController: NSViewController {
                 globalSpeedView.isHidden = true
             }
             
-            if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
+            if let activeBittorrentCount = try? DataManager.shared.activeBittorrentCount(),
                 activeBittorrentCount > 0 {
                 uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
             } else {
@@ -213,3 +191,9 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 	
 }
 
+extension SidebarViewController: DatabaseChangeObserver {
+    @MainActor
+    func databaseDidChange(notification: DatabaseChangeNotification) async {
+        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
+    }
+}

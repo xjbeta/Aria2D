@@ -76,7 +76,7 @@ final class ViewControllersManager: NSObject, Sendable {
             switch selectedRow {
             case .downloading, .removed, .completed:
                 Task {
-                    await Aria2.shared.initData.debounce()
+                    await Aria2.shared.reloadAll.debounce()
                 }
             default:
                 break
@@ -198,7 +198,7 @@ final class ViewControllersManager: NSObject, Sendable {
 		switch selectedRow {
 		case .downloading, .completed, .removed:
             Task {
-                await Aria2.shared.initData.debounce()
+                await Aria2.shared.reloadAll.debounce()
             }
 		default:
 			break

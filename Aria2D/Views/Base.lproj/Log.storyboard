@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b6F-ig-Pz2">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b6F-ig-Pz2">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,6 +111,7 @@
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="kFf-1X-E2u" name="content" keyPath="arrangedObjects" id="49R-kr-cA5"/>
+                                                <binding destination="kFf-1X-E2u" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="49R-kr-cA5" id="ku9-N9-4gn"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -129,7 +130,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="ultraDark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-CX-sDp">
+                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-CX-sDp">
                                 <rect key="frame" x="0.0" y="462" width="800" height="38"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="R5R-7C-rE6">
@@ -145,7 +146,7 @@
                                             <action selector="recordLog:" target="eFw-SL-mKF" id="nJj-PU-vwl"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-bV-enq">
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-bV-enq">
                                         <rect key="frame" x="713" y="2" width="74" height="32"/>
                                         <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pOT-md-Jn8">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -202,9 +203,10 @@
                     </connections>
                 </viewController>
                 <customObject id="ktc-GC-1Pl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="WebSocketLog" editable="NO" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="kFf-1X-E2u">
+                <arrayController objectClassName="Aria2Log" editable="NO" selectsInsertedObjects="NO" avoidsEmptySelection="NO" clearsFilterPredicateOnInsertion="NO" automaticallyRearrangesObjects="YES" id="kFf-1X-E2u">
+                    <classReference key="objectClass" className="Aria2Log"/>
                     <connections>
-                        <binding destination="eFw-SL-mKF" name="managedObjectContext" keyPath="self.context" id="Fdf-0H-Eha"/>
+                        <binding destination="eFw-SL-mKF" name="contentArray" keyPath="self.logs" id="OVM-Fw-yrw"/>
                         <binding destination="eFw-SL-mKF" name="filterPredicate" keyPath="self.predicate" id="a4r-rX-XRj"/>
                     </connections>
                 </arrayController>
@@ -220,7 +222,7 @@
                         <rect key="contentRect" x="196" y="240" width="800" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <value key="minSize" type="size" width="800" height="500"/>
-                        <toolbar key="toolbar" implicitIdentifier="8F7A5B63-9A6E-4A33-A9E4-3D67B0475646" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="H7f-Cx-90m">
+                        <toolbar key="toolbar" implicitIdentifier="8F7A5B63-9A6E-4A33-A9E4-3D67B0475646" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="H7f-Cx-90m">
                             <allowedToolbarItems/>
                             <defaultToolbarItems/>
                         </toolbar>

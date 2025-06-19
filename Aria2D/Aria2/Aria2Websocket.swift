@@ -74,7 +74,7 @@ final class Aria2Websocket: NSObject, Sendable {
         }
         
         Task {
-            await Aria2.shared.initData.debounce()
+            await Aria2.shared.reloadAll.debounce()
         }
 	}
     
@@ -126,16 +126,8 @@ final class Aria2Websocket: NSObject, Sendable {
                 receivedJSON = shortStr
             }
             
-            await MainActor.run {
-                let log = WebSocketLog(context: DataManager.shared.context)
-                log.method = method
-                log.sendJSON = "\(dic)"
-                log.receivedJSON = receivedJSON
-                
-                log.success = !timeOut
-                log.date = time
-                DataManager.shared.saveContext()
-            }
+            let log = Aria2Log(date: time, method: method, success: !timeOut, sendJSON: "\(dic)", receivedJSON: receivedJSON)
+            try DataManager.shared.insertLog(log)
         }
         
         if !timeOut {
@@ -197,7 +189,7 @@ extension Aria2Websocket: @preconcurrency WebSocketDelegate {
     
     func webSocketDidOpen() {
         Task {
-            await Aria2.shared.initData.debounce()
+            await Aria2.shared.reloadAll.debounce()
             connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
             if let versions = try? await Aria2.shared.getVersion() {
                 connectedServerInfo.version = "Version: \(versions.version)"
@@ -220,7 +212,7 @@ extension Aria2Websocket: @preconcurrency WebSocketDelegate {
         connectedServerInfo.version = reason
         connectedServerInfo.enabledFeatures = ""
         aria2GlobalOption = [:]
-        DataManager.shared.deleteAllAria2Objects()
+        try? DataManager.shared.deleteAllAria2Objects()
         NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
         NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
@@ -236,31 +228,29 @@ extension Aria2Websocket: @preconcurrency WebSocketDelegate {
                     let gids = json.params.map { $0.gid }
                     switch json.method {
                     case .onDownloadStart:
-                        try await Aria2.shared.updateStatus(gids)
+                        try await Aria2.shared.reloadData(gids)
                         ViewControllersManager.shared.showHUD(.downloadStart)
                     case .onDownloadPause:
-                        try await Aria2.shared.updateStatus(gids)
+                        try await Aria2.shared.reloadData(gids)
                     case .onDownloadError:
-                        try await Aria2.shared.updateStatus(gids)
+                        try await Aria2.shared.reloadData(gids)
                     case .onDownloadComplete, .onBtDownloadComplete:
-                        try await Aria2.shared.updateStatus(gids)
+                        try await Aria2.shared.reloadData(gids)
                         if !NSApp.isActive,
                            Preferences.shared.completeNotice,
                            let gid = gids.first {
-                            let obj = try await Aria2.shared.initData(gid)
-                            showNotification(obj)
+                            try await Aria2.shared.reloadData([gid])
+                            if let obj = try DataManager.shared.aria2Object(gid) {
+                                showNotification(obj)
+                            }
                         }
                         ViewControllersManager.shared.showHUD(.downloadCompleted)
                     case .onDownloadStop:
-                        try await Aria2.shared.updateStatus(gids)
+                        try await Aria2.shared.reloadData(gids)
                     }
                     if Preferences.shared.developerMode, Preferences.shared.recordWebSocketLog {
-                        let log = WebSocketLog(context: DataManager.shared.context)
-                        log.method = json.method.rawValue
-                        log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
-                        log.success = true
-                        log.date = Double(Date().timeIntervalSince1970)
-                        DataManager.shared.saveContext()
+                        let log = Aria2Log(date: Double(Date().timeIntervalSince1970), method: json.method.rawValue, success: true, sendJSON: "", receivedJSON: String(data: data, encoding: .utf8) ?? "")
+                        try DataManager.shared.insertLog(log)
                     }
                 }
             } catch {

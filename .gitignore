@@ -73,3 +73,8 @@ Carthage/Build
 
 # FileMerge backup
 *.orig
+
+
+# VSCode
+.vscode/
+buildServer.json

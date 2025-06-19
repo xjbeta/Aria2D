@@ -26,7 +26,7 @@ struct JSONNotice: Decodable {
 
 struct Aria2Status: Decodable {
 	let gid: String
-	let status: Status
+	let status: String
 	let totalLength: Int64
 	let completedLength: Int64
 	let uploadLength: Int64
@@ -53,7 +53,7 @@ struct Aria2Status: Decodable {
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		gid = try values.decode(String.self, forKey: .gid)
-		status = Status(try values.decode(String.self, forKey: .status)) ?? .error
+		status = try values.decode(String.self, forKey: .status)
 		totalLength = Int64(try values.decode(String.self, forKey: .totalLength)) ?? 0
 		completedLength = Int64(try values.decode(String.self, forKey: .completedLength)) ?? 0
 		uploadLength = Int64(try values.decode(String.self, forKey: .uploadLength)) ?? 0

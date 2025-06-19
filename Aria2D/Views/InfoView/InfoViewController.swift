@@ -11,12 +11,6 @@ import Cocoa
 class InfoViewController: NSViewController {
 
     @IBOutlet var objectController: NSObjectController!
-    @objc var context: NSManagedObjectContext
-    
-    required init?(coder: NSCoder) {
-        context = NSApp.default.persistentContainer.viewContext
-        super.init(coder: coder)
-    }
     
 	@IBAction func cancelButton(_ sender: Any) {
         fileEditingMode = false
@@ -33,7 +27,7 @@ class InfoViewController: NSViewController {
             
             do {
                 try await Aria2.shared.getFiles(gid)
-                guard let files = aria2Object?.files?.allObjects as? [Aria2File] else { return }
+                guard let files = aria2Object?.files as? [Aria2File] else { return }
                 let oldValue = files.filter {
                     $0.selected
                 }.map {
@@ -71,25 +65,19 @@ class InfoViewController: NSViewController {
     
 	var gid = "" {
 		didSet {
-            let fetchRequest: NSFetchRequest<Aria2Object> = Aria2Object.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "gid == %@", gid)
-            aria2Object = (try? context.fetch(fetchRequest))?.first
-            
-            updateSegmentedControl(aria2Object?.bittorrent != nil)
-            
-            Task {
-                try? await Aria2.shared.getServers(gid)
-                try? await Aria2.shared.getUris(gid)
-            }
-            
-            aria2Object?.filesObserve = { [weak self] indexs, reload in
-                if reload {
-                    Task {
-                        await self?.initFileNodes()
-                    }
-                } else {
-                    self?.updateFileNodes(indexs)
+            do {
+                aria2Object = try DataManager.shared.aria2Object(gid, deep: true)
+                
+                updateSegmentedControl(aria2Object?.bittorrent != nil)
+                
+                Task {
+                    try? await Aria2.shared.getServers(gid)
+                    try? await Aria2.shared.getUris(gid)
+                    
+                    await DataManager.shared.addObserver(self, forTable: .aria2File)
                 }
+            } catch {
+                Log(error)
             }
 		}
 	}
@@ -207,7 +195,9 @@ class InfoViewController: NSViewController {
             vc.changeComplete = {
                 Task {
                     self.options = (try? await Aria2.shared.getOption(self.gid)) ?? [:]
-                    try await Aria2.shared.updateStatus([self.gid])
+                    
+                    #warning("")
+//                    try await Aria2.shared.updateStatus([self.gid])
                 }
             }
         }
@@ -329,9 +319,11 @@ extension InfoViewController: NSTableViewDelegate, NSTableViewDataSource {
 extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
     func initFileNodes() async {
-        guard let obj = aria2Object, let dir = obj.dir else {
+        guard let obj = aria2Object else {
             return
         }
+        
+        let dir = obj.dir
         
         if fileNodes == nil {
             fileNodes = FileNode(dir, isLeaf: false)
@@ -341,12 +333,11 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
         let rootPathComponents = fileNodes.path.pathComponents
         var groupChildrens: [FileNode] = []
         
-        (obj.files?.allObjects as? [Aria2File])?.forEach { file in
-            guard let path = file.path, path != "" else {
+        obj.files.forEach { file in
+            let path = file.path
+            guard path != "" else {
                 return
             }
-            
-            Log(path)
             
             var pathComponents = path.pathComponents
             if path.isChildPath(of: fileNodes.path) {
@@ -356,8 +347,6 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
             var currentNode = fileNodes
             
             pathComponents.forEach { nodeName in
-                Log(nodeName)
-                
                 var child = currentNode.getChild(nodeName)
                 if child == nil {
                     var path = currentNode.path
@@ -372,8 +361,6 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                     child = currentNode.getChild(nodeName)
                 } else if let child = child, child.isLeaf {
                     child.updateData(file)
-                } else {
-                    Log("Ignore")
                 }
                 
                 if let child = child {
@@ -386,46 +373,54 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
         filesTreeController.content = fileNodes.children
     }
     
-    func updateFileNodes(_ list: [Int]) {
-        guard let obj = self.aria2Object, self.fileNodes != nil else {
+    func updateFileNodes() {
+        guard let obj = self.aria2Object,
+              self.fileNodes != nil,
+              let newFiles = try? DataManager.shared.aria2Files(obj.gid) else {
             return
+        }
+        
+        let filesDic = newFiles.reduce(into: [String: Aria2File]()) { result, file in
+            result[file.id] = file
         }
         
         let rootPathComponents = self.fileNodes!.path.pathComponents
         var groupChildrens: [FileNode] = []
         var shouldUpdateSelected = false
         
-        (obj.files?.allObjects as? [Aria2File])?.filter {
-            list.contains(Int($0.index))
-            }.forEach { file in
-                guard let path = file.path else { return }
-                var pathComponents = path.pathComponents
-                
-                guard var currentNode = self.fileNodes else { return }
-                
-                if path.isChildPath(of: currentNode.path) {
-                    pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+        obj.files.forEach { file in
+            guard let newFile = filesDic[file.id], file != newFile else { return }
+            file.update(newFile)
+            
+            let path = file.path
+            var pathComponents = path.pathComponents
+            
+            guard var currentNode = self.fileNodes else { return }
+            
+            if path.isChildPath(of: currentNode.path) {
+                pathComponents.removeSubrange(0 ..< rootPathComponents.count)
+            }
+            
+            while !pathComponents.isEmpty {
+                guard let title = pathComponents.first, let node = currentNode.getChild(title) else {
+                    pathComponents.removeAll()
+                    return
                 }
-                
-                while !pathComponents.isEmpty {
-                    guard let title = pathComponents.first, let node = currentNode.getChild(title) else {
-                        pathComponents.removeAll()
-                        return
-                    }
-                    pathComponents.removeFirst()
-                    currentNode = node
-                    if pathComponents.count != 1 {
-                        groupChildrens.append(node)
-                    }
-                    if currentNode.isLeaf {
-                        let new = FileNode(currentNode.path, file: file, isLeaf: true)
-                        if new.selected != currentNode.selected {
-                            shouldUpdateSelected = true
-                        }
-                        currentNode.updateData(file)
-                    }
+                pathComponents.removeFirst()
+                currentNode = node
+                if pathComponents.count != 1 {
+                    groupChildrens.append(node)
                 }
+                if currentNode.isLeaf {
+                    let new = FileNode(currentNode.path, file: file, isLeaf: true)
+                    if new.selected != currentNode.selected {
+                        shouldUpdateSelected = true
+                    }
+                    currentNode.updateData(file)
+                }
+            }
         }
+        
         if shouldUpdateSelected {
             self.updateStatus(for: groupChildrens)
         }
@@ -438,8 +433,8 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
         while count > rootPathComponents.count {
             nodes.filter {
                 $0.path.pathComponents.count == count
-                }.forEach { child in
-                    child.updateStateWithChildren()
+            }.forEach { child in
+                child.updateStateWithChildren()
             }
             count -= 1
         }
@@ -485,5 +480,21 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
         // Unloaded rows will not be updated
 //        outlineView.reloadItem(item, reloadChildren: true)
         outlineView.reloadData()
+    }
+}
+
+extension InfoViewController: DatabaseChangeObserver {
+    @MainActor
+    func databaseDidChange(notification: DatabaseChangeNotification) async {
+        switch notification.changeType {
+        case .insert(let fids), .delete(let fids):
+            guard fids.contains(where: { $0.starts(with: gid) }) else { return }
+            await initFileNodes()
+        case .update(let fids):
+            guard fids.contains(where: { $0.starts(with: gid) }) else { return }
+            updateFileNodes()
+        case .reload:
+            await initFileNodes()
+        }
     }
 }
