@@ -43,7 +43,9 @@ final class Aria2Bittorrent: NSObject, TableCodable, ColumnJSONCodable {
              creationDate,
              id
         
-        nonisolated(unsafe) static let objectRelationalMapping = TableBinding(CodingKeys.self)
+        nonisolated(unsafe) static let objectRelationalMapping = TableBinding(CodingKeys.self) {
+            BindColumnConstraint(id, isPrimary: true, onConflict: .Replace)
+        }
     }
     
     // Decodable initializer

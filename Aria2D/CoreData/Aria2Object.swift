@@ -173,11 +173,18 @@ final class Aria2Object: NSObject, TableCodable {
         return errorCode == 0
     }
     
+    @MainActor
     func path() -> URL? {
-        if let name = bittorrent?.name, dir != "", name != "" {
-            return URL(fileURLWithPath: dir).appendingPathComponent(name)
+        if let bittorrent = try? DataManager.shared.aria2Bittorrent(gid),
+           dir != "",
+           bittorrent.name != "" {
+            return URL(fileURLWithPath: dir).appendingPathComponent(bittorrent.name)
         }
-        if files.count == 1, let path = files.first?.path, path != "" {
+        
+        if let files = try? DataManager.shared.aria2Files(gid),
+           files.count == 1,
+           let path = files.first?.path,
+           path != "" {
             return URL(fileURLWithPath: path)
         }
         return nil

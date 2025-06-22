@@ -30,7 +30,9 @@ final class Aria2File: NSObject, TableCodable {
              selected,
              id
         
-        nonisolated(unsafe) static let objectRelationalMapping = TableBinding(CodingKeys.self)
+        nonisolated(unsafe) static let objectRelationalMapping = TableBinding(CodingKeys.self) {
+            BindColumnConstraint(id, isPrimary: true, onConflict: .Replace)
+        }
     }
    
     enum SubCodingKeys: String, CodingKey {
