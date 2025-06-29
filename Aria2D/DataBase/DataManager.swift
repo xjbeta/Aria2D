@@ -32,7 +32,7 @@ final class DataManager: NSObject, Sendable {
     private let observerManager = ObserverManager()
     
     fileprivate override init() {
-        let dbName = "/Aria2D-WCDB.db"
+        let dbName = "/DataBase/Aria2D-WCDB.db"
         if let path = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.path,
            let identifier = Bundle.main.bundleIdentifier {
             database = Database(at: path + "/\(identifier)" + dbName)
