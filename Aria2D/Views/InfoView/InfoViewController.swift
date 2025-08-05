@@ -75,6 +75,7 @@ class InfoViewController: NSViewController {
                     try? await Aria2.shared.getUris(gid)
                     
                     await DataManager.shared.addObserver(self, forTable: .aria2File)
+                    await DataManager.shared.addObserver(self, forTable: .aria2Object)
                 }
             } catch {
                 Log(error)
@@ -486,15 +487,25 @@ extension InfoViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
 extension InfoViewController: DatabaseChangeObserver {
     @MainActor
     func databaseDidChange(notification: DatabaseChangeNotification) async {
-        switch notification.changeType {
-        case .insert(let fids), .delete(let fids):
-            guard fids.contains(where: { $0.starts(with: gid) }) else { return }
-            await initFileNodes()
-        case .update(let fids):
-            guard fids.contains(where: { $0.starts(with: gid) }) else { return }
-            updateFileNodes()
-        case .reload:
-            await initFileNodes()
+        if notification.tableName == .aria2File {
+            switch notification.changeType {
+            case .insert(let fids), .delete(let fids):
+                guard fids.contains(where: { $0.starts(with: gid) }) else { return }
+                await initFileNodes()
+            case .update(let fids):
+                guard fids.contains(where: { $0.starts(with: gid) }) else { return }
+                updateFileNodes()
+            case .reload:
+                await initFileNodes()
+            }
+        } else if notification.tableName == .aria2Object {
+            switch notification.changeType {
+            case .insert(let gids), .delete(let gids), .update(let gids):
+                guard gids.contains(gid) else { return }
+                aria2Object = try? DataManager.shared.aria2Object(gid, deep: true)
+            case .reload:
+                aria2Object = try? DataManager.shared.aria2Object(gid, deep: true)
+            }
         }
     }
 }
