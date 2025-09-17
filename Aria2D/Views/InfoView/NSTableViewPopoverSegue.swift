@@ -9,22 +9,9 @@
 import Cocoa
 
 @MainActor
-class NSTableViewPopoverSegue: NSStoryboardSegue, Sendable {
-	@IBOutlet weak var anchorTableView: NSTableView!
-	var preferredEdge: NSRectEdge!
-	var popoverBehavior: NSPopover.Behavior!
-    
+class NSTableViewPopoverSegue: NSStoryboardSegue {
     override func perform() {
-        Task {
-            let selectedRow = await anchorTableView.selectedRow
-            guard selectedRow >= 0 else { return }
-            await (sourceController as AnyObject)
-                .present(destinationController as! NSViewController,
-                         asPopoverRelativeTo: anchorTableView.rect(ofRow: selectedRow),
-                         of: anchorTableView,
-                         preferredEdge: preferredEdge,
-                         behavior: popoverBehavior)
-        }
+
     }
 	
 }
