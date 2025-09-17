@@ -12,7 +12,6 @@ class MainListViewController: NSViewController {
 	@IBOutlet var mainListTableView: NSTableView!
     @IBOutlet var arrayController: NSArrayController!
     @objc dynamic var predicate: NSPredicate? = nil
-    @objc var context: NSManagedObjectContext
     
     
 	@IBAction func cellDoubleAction(_ sender: Any) {
@@ -26,10 +25,7 @@ class MainListViewController: NSViewController {
 	
 	@IBOutlet var downloadsTableViewMenu: DownloadsMenu!
     
-    required init?(coder: NSCoder) {
-        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
-        super.init(coder: coder)
-    }
+    @objc dynamic var objects = [Aria2Object]()
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -37,16 +33,24 @@ class MainListViewController: NSViewController {
         initNotification()
         
         arrayController.sortDescriptors = [NSSortDescriptor(key: "status", ascending: true),
-                                           NSSortDescriptor(key: "sortValue", ascending: false)]
+                                           NSSortDescriptor(key: "sortDate", ascending: false)]
+        
+        reloadData()
+        Task {
+            await DataManager.shared.addObserver(self, forTable: .aria2Object)
+        }
     }
     
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == .showInfoWindow {
-            if let wc = segue.destinationController as? NSWindowController,
-                let vc = wc.contentViewController as? InfoViewController,
-                let obj = arrayController.selectedObjects.first as? Aria2Object {
-                vc.gid = obj.gid
+            guard let wc = segue.destinationController as? NSWindowController,
+                  let vc = wc.contentViewController as? InfoViewController,
+                  let index = mainListTableView.selectedIndexs().first,
+                  let objs = arrayController.arrangedObjects as? [Aria2Object],
+                  let obj = objs[safe: index] else {
+                return
             }
+            vc.gid = obj.gid
 		}
 	}
 	
@@ -73,16 +77,16 @@ class MainListViewController: NSViewController {
     }
     
     @objc func showInfo() {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: .showInfoWindow, sender: self)
-        }
+        performSegue(withIdentifier: .showInfoWindow, sender: self)
     }
     
     
     @objc func shouldReloadData() {
-        DispatchQueue.main.async {
-            self.mainListTableView.reloadData()
-        }
+        mainListTableView.reloadData()
+    }
+    
+    func reloadData() {
+        objects = (try? DataManager.shared.getAria2Objects()) ?? []
     }
     
 	deinit {
@@ -117,5 +121,30 @@ extension MainListViewController: NSTableViewDelegate {
 extension MainListViewController: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         setSelectedIndexsForMainList()
+    }
+}
+
+extension MainListViewController: DatabaseChangeObserver {
+    @MainActor
+    func databaseDidChange(notification: DatabaseChangeNotification) async {
+        switch notification.changeType {
+        case .insert(let ids):
+            guard let objs = try? DataManager.shared.getAria2Objects(ids) else {
+                return
+            }
+            objects.append(contentsOf: objs)
+        case .delete(let ids):
+            objects.removeAll {
+                ids.contains($0.gid)
+            }
+        case .reload:
+            reloadData()
+        case .update(let ids):
+            guard let objs = try? DataManager.shared.getAria2Objects(ids) else { return }
+            objs.forEach { obj in
+                guard let index = objects.firstIndex(where: { $0.gid == obj.gid }) else { return }
+                objects[safe: index]?.update(obj)   
+            }
+        }
     }
 }

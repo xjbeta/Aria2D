@@ -29,11 +29,7 @@ class MainWindowController: NSWindowController, NSDraggingDestination {
 
 	
 	func initNotification() {
-		NotificationCenter.default.addObserver(forName: .showHUD, object: nil, queue: .main) {
-			if let userInfo = $0.userInfo as? [String: Any] {
-				self.showHUD(message: userInfo["message"] as? hudMessage ?? .error)
-			}
-		}
+        NotificationCenter.default.addObserver(self, selector: #selector(showHUD(_:)), name: .showHUD, object: nil)
 	}
 	
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
@@ -55,12 +51,11 @@ class MainWindowController: NSWindowController, NSDraggingDestination {
         return false
     }
     
-	
-	func showHUD(message: hudMessage) {
-		hud?.showHUD(message)
-	}
-	
-	
+    @objc
+    func showHUD(_ notification: Notification) {
+        guard let message = notification.userInfo?["message"] as? hudMessage else { return }
+        hud?.showHUD(message)
+    }
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)

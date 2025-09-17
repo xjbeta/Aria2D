@@ -6,17 +6,19 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 ![EFB0CEC1-86E8-44AE-BFEF-F87678EAE6E4.jpeg](https://i.loli.net/2018/11/21/5bf4f8c48657c.jpeg)
 
 ## Last Version
-    1.3.3 (469)
+    1.4.0
 
 ## Downloads
 ### Aria2D
 - [latest releases](https://github.com/xjbeta/Aria2D/releases/latest)
 
-### aria2 dmg
-- [aria2 DMG](https://github.com/xjbeta/AppUpdaterAppcasts/raw/master/aria2/aria2-Latest.dmg)
+### Install aria2 with homebrew
+- [formula aria2](https://formulae.brew.sh/formula/aria2)
+
+- `brew install aria2`
 
 ## Features
-- Native macOS client (swift5)
+- Native macOS client (swift6)
 - Shortcuts
 - Full aria2 download options
 - Auto start aria2c
@@ -30,7 +32,7 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 - Jax0rz
 
 ## Acknowledgements
-- [PromiseKit](https://github.com/mxcl/PromiseKit)
+- [WCDB](https://github.com/Tencent/wcdb)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)
 - [Foundation](https://github.com/PromiseKit/Foundation)
 - [Starscream](https://github.com/daltoniam/Starscream)
@@ -38,7 +40,7 @@ Aria2D is a **Simple** Aria2 GUI for macOS.
 ## LICENSE
 > GPLV3
 
-> Version before adding a LICENSE file, GPLV3 or Copyright © 2016 - 2020 xjbeta. All rights reserved.
+> Version before adding a LICENSE file, GPLV3 or Copyright © 2016 - 2025 xjbeta. All rights reserved.
 
 
 ## Screen Shots

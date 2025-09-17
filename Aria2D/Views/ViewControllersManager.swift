@@ -9,7 +9,8 @@
 import Foundation
 import Cocoa
 
-class ViewControllersManager: NSObject {
+@MainActor
+final class ViewControllersManager: NSObject, Sendable {
 
     static let shared = ViewControllersManager()
     
@@ -32,28 +33,34 @@ class ViewControllersManager: NSObject {
 	}
 	
 	private var aria2cAlertStr: String? = nil
+    
 	func showAria2cAlert(_ str: String? = nil) {
 		let info = str ?? aria2cAlertStr ?? ""
 		guard info != "" else { return }
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-			if let mainWindow = NSApp.mainWindow, mainWindow.sheets.count == 0 {
-					let alert = NSAlert()
-					alert.messageText = "Aria2c didn't started."
-					alert.informativeText = info
-					alert.addButton(withTitle: "OK")
-					alert.addButton(withTitle: "Cancel")
-					alert.alertStyle = .warning
-					alert.beginSheetModal(for: mainWindow) {
-						if $0 == .alertFirstButtonReturn {
-							
-						}
-					}
-				
-				self.aria2cAlertStr = nil
-			} else {
-				self.aria2cAlertStr = info
-			}
-		}
+        Task {
+            try await Task.sleep(nanoseconds: 300_000_000) // 0.3s
+            
+            guard let mainWindow = NSApp.mainWindow,
+                  mainWindow.sheets.count == 0 else {
+                self.aria2cAlertStr = info
+                return
+            }
+            
+            
+            let alert = NSAlert()
+            alert.messageText = "Aria2c didn't started."
+            alert.informativeText = info
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            alert.alertStyle = .warning
+            alert.beginSheetModal(for: mainWindow) {
+                if $0 == .alertFirstButtonReturn {
+                    
+                }
+            }
+            
+            self.aria2cAlertStr = nil
+        }
 		
 		/*
 		func runScript() {
@@ -68,7 +75,9 @@ class ViewControllersManager: NSObject {
             selectedObjects = [Aria2Object]()
             switch selectedRow {
             case .downloading, .removed, .completed:
-                Aria2.shared.initData.run()
+                Task {
+                    await Aria2.shared.reloadAll.debounce()
+                }
             default:
                 break
             }
@@ -118,6 +127,8 @@ class ViewControllersManager: NSObject {
 	enum frontWindow {
 		case main, preference, changeOption, about, other
 	}
+    
+    @MainActor
 	var mainWindowFront: Bool {
 		get {
 			return NSApp.keyWindow?.windowController is MainWindowController
@@ -145,7 +156,8 @@ class ViewControllersManager: NSObject {
 		}
 	}
 	
-	func pauseOrUnpause() {
+    @MainActor
+	func pauseOrUnpause() async {
         guard ViewControllersManager.shared.selectedRow == .downloading else { return }
         let dataList = selectedObjects
         
@@ -155,14 +167,16 @@ class ViewControllersManager: NSObject {
         let pausedList = dataList.filter {
             $0.status == Status.paused.rawValue
         }
+        
         if canPauseList.count >= pausedList.count {
-            Aria2.shared.pause(canPauseList.compactMap { $0.gid })
+            try? await Aria2.shared.pause(canPauseList.compactMap { $0.gid })
         } else if canPauseList.count < pausedList.count {
-            Aria2.shared.unpause(pausedList.compactMap { $0.gid })
+            try? await Aria2.shared.unpause(pausedList.compactMap { $0.gid })
         }
 	}
 	
-    func deleteTask() {
+    @MainActor
+    func deleteTask() async {
         var gidForRemoveDownloadResult: [String] = []
         var gidForRemove: [String] = []
         
@@ -176,14 +190,16 @@ class ViewControllersManager: NSObject {
             }
         }
         
-        Aria2.shared.removeDownloadResult(gidForRemoveDownloadResult)
-        Aria2.shared.remove(gidForRemove)
+        try? await Aria2.shared.removeDownloadResult(gidForRemoveDownloadResult)
+        try? await Aria2.shared.remove(gidForRemove)
     }
 	
 	func refresh() {
 		switch selectedRow {
 		case .downloading, .completed, .removed:
-			Aria2.shared.initData.run()
+            Task {
+                await Aria2.shared.reloadAll.debounce()
+            }
 		default:
 			break
 		}

@@ -8,15 +8,24 @@
 
 import Cocoa
 
-class LogWindowController: NSWindowController {
+class LogWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-		if let window = window {
-			window.titlebarAppearsTransparent = true
-			window.titleVisibility = .hidden
-			window.isMovableByWindowBackground = true
-		}
+        
+        guard let window = window else { return }
+        window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
+        window.isMovableByWindowBackground = true
+        window.delegate = self
     }
-
+    
+    func windowWillClose(_ notification: Notification) {
+        guard let vc = contentViewController as? LogViewController else {
+            return
+        }
+        Task {
+            await DataManager.shared.removeObserver(vc)
+        }
+    }
 }

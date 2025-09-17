@@ -83,19 +83,27 @@ class MainMenu: NSObject, NSMenuItemValidation {
     }
 	
 	@IBAction func startOrPause(_ sender: Any) {
-		ViewControllersManager.shared.pauseOrUnpause()
+        Task {
+            await ViewControllersManager.shared.pauseOrUnpause()
+        }
 	}
 	
     @IBAction func delete(_ sender: Any) {
-		ViewControllersManager.shared.deleteTask()
+        Task {
+            await ViewControllersManager.shared.deleteTask()
+        }
     }
 	
     @IBAction func pauseAll(_ sender: Any) {
-        Aria2.shared.pauseAll()
+        Task {
+            try? await Aria2.shared.pauseAll()
+        }
     }
 	
     @IBAction func unPauseAll(_ sender: Any) {
-        Aria2.shared.unPauseAll()
+        Task {
+            try? await Aria2.shared.unPauseAll()
+        }
     }
 	
 	@IBAction func showInfo(_ sender: Any) {

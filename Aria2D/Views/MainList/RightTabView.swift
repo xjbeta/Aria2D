@@ -21,13 +21,18 @@ class RightTabView: NSTabViewController {
 			view.initVersionInfo()
 		}
         if let vc = downloadTab.viewController as? MainListViewController {
-
-            observe = vc.arrayController.observe((\.arrangedObjects)) { [weak self] (arrayController, _) in
-                let count = (arrayController.arrangedObjects as! [Any]).count
-                if let item = count == 0 ? self?.loadingTab : self?.downloadTab {
-                    self?.tabView.selectTabViewItem(item)
+            observe = vc.arrayController.observe(\.arrangedObjects) { arrayController, _ in
+                let count = (arrayController.arrangedObjects as? [Any] ?? []).count
+                Task {
+                    await self.updateContentView(count)
                 }
             }
+        }
+    }
+    
+    func updateContentView(_ count: Int) {
+        if let item = count == 0 ? loadingTab : downloadTab {
+            tabView.selectTabViewItem(item)
         }
     }
 	

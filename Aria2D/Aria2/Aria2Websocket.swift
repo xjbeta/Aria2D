@@ -8,7 +8,6 @@
 
 import Cocoa
 import Starscream
-import PromiseKit
 
 struct ConnectedServerInfo {
 	var version = ""
@@ -16,7 +15,8 @@ struct ConnectedServerInfo {
 	var enabledFeatures = ""
 }
 
-class Aria2Websocket: NSObject {
+@MainActor
+final class Aria2Websocket: NSObject, Sendable {
 	
     static let shared = Aria2Websocket()
 	private override init() {
@@ -32,12 +32,14 @@ class Aria2Websocket: NSObject {
 			NotificationCenter.default.post(name: .updateGlobalOption, object: nil)
 		}
 	}
+    
+    let waitingList = WaitingList()
+    
+    private var timerTask: Task<Void, Never>?
+    private var isTimerRunning = false
 	
 	func initSocket() {
-		if let timer = timer {
-			timer.cancel()
-			self.timer = nil
-		}
+        stopTimer()
         
         socket?.disconnect()
         
@@ -61,153 +63,85 @@ class Aria2Websocket: NSObject {
 		NSUserNotificationCenter.default.deliver(notification)
 	}
 	
-	var isSuspend = Bool()
-	private var timer: DispatchSourceTimer?
-	
-	private var timerQueue = DispatchQueue(label: "com.xjbeta.Aria2D.connectWebSocketQueue")
-	
-	private func startTimer() {
-		timer = DispatchSource.makeTimerSource(flags: [], queue: timerQueue)
-		if let timer = timer {
-			timer.schedule(deadline: .now(), repeating: .seconds(1))
-			timer.setEventHandler {
-                if !self.isConnected {
-                    self.socket?.disconnect()
-                    guard let url = self.socket?.request.url else { return }
-                    self.socket = WebSocket.init(request: .init(url: url))
-                    self.socket?.delegate = self
-                    self.socket?.connect()
-                } else {
-                    DispatchQueue.main.async {
-                        guard let count = try? DataManager.shared.activeCount(),
-                            count > 0 else {
-                                return
-                        }
-                        Aria2.shared.updateActiveTasks()
-                        
-                        if let infoVC = NSApp.keyWindow?.contentViewController as? InfoViewController {
-                            infoVC.updateStatusInTimer()
-                        }
-                    }
-				}
-			}
-			timer.resume()
-		}
-	}
-	
-
-	
-	
-	func suspendTimer() {
-		if !isSuspend, timer != nil {
-			timer?.suspend()
-			isSuspend = true
-		}
-	}
-	
-	func resumeTimer() {
-		if isSuspend, timer != nil {
-			timer?.resume()
-			isSuspend = false
-			Aria2.shared.initData.run()
-		}
-	}
-    
-    
-    private class WaitingList: NSObject {
-        static let shared = WaitingList()
-        
-        fileprivate override init() {
+	func startTimer() {
+        guard !isTimerRunning else { return }
+        isTimerRunning = true
+        timerTask = Task(priority: .background) {
+            while isTimerRunning {
+                runTimerTask()
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+            }
         }
         
-        private var contents: [String: Data] = [:]
-        private var semaphores: [String: DispatchSemaphore] = [:]
-        private var lock = NSLock()
-        
-        func add(_ key: String, block: @escaping (_ value: Data, _ timeOut: Bool) -> Void) {
-            let semaphore = DispatchSemaphore(value: 0)
-            lock.lock()
-            semaphores[key] = semaphore
-            lock.unlock()
-            DispatchQueue.global().async {
-                switch semaphore.wait(timeout: .now() + .seconds(60)) {
-                case .success:
-                    block(self.contents[key] ?? Data(), false)
-                case .timedOut:
-                    block(Data(), true)
+        Task {
+            await Aria2.shared.reloadAll.debounce()
+        }
+	}
+    
+    func runTimerTask() {
+        Task {
+            if !isConnected {
+                socket?.disconnect()
+                if let url = socket?.request.url {
+                    socket = WebSocket(request: .init(url: url))
+                    socket?.delegate = self
+                    socket?.connect()
                 }
-                WaitingList.shared.remove(key)
-            }
-        }
-        
-        func update(_ key: String, value: Data) {
-            lock.lock()
-            contents[key] = value
-            semaphores[key]?.signal()
-            lock.unlock()
-        }
-        
-        private func remove(_ key: String) {
-            lock.lock()
-            defer {
-                lock.unlock()
-            }
-            if !contents.isEmpty {
-                contents.removeValue(forKey: key)
-            }
-            if !semaphores.isEmpty {
-                semaphores.removeValue(forKey: key)
+            } else if let count = try? DataManager.shared.activeCount(),
+                      count > 0 {
+                try? await Aria2.shared.updateActiveTasks()
+                
+                if let infoVC = NSApp.keyWindow?.contentViewController as? InfoViewController {
+                    infoVC.updateStatusInTimer()
+                }
             }
         }
     }
-    
+	
+    func stopTimer() {
+        isTimerRunning = false
+        timerTask?.cancel()
+        timerTask = nil
+    }
+
     func write(_ dic: [String: Any],
                withID id: String,
-               method: String) -> Promise<Data> {
-        return Promise { resolver in
-            let time = Double(Date().timeIntervalSince1970)
-            WaitingList.shared.add(id) { (data, timeOut) in
-                // Save log
-                if Preferences.shared.developerMode,
-                    Preferences.shared.recordWebSocketLog {
-                    DispatchQueue.global(qos: .background).async {
-                        var receivedJSON = ""
-                        if let str = String(data: data, encoding: .utf8),
-                            let shrotData = Aria2Websocket.shared.clearUrls(str),
-                            let shortStr = String(data: shrotData, encoding: .utf8) {
-                            receivedJSON = shortStr
-                        }
-
-                        DispatchQueue.main.async {
-                            let log = WebSocketLog(context: DataManager.shared.context)
-                            log.method = method
-                            log.sendJSON = "\(dic)"
-                            log.receivedJSON = receivedJSON
-                            
-                            log.success = !timeOut
-                            log.date = time
-                            DataManager.shared.saveContext()
-                        }
-                    }
-                }
-                
-                if !timeOut {
-                    resolver.fulfill(data)
-                } else {
-                    resolver.reject(webSocketResult.timeOut)
-                }
+               method: String) async throws -> Data {
+        let time = Double(Date().timeIntervalSince1970)
+        
+        async let waiting = waitingList.wait(id)
+        
+        socket?.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted), completion: nil)
+        
+        let (data, timeOut) = await waiting
+        
+        // Save log
+        if Preferences.shared.developerMode,
+            Preferences.shared.recordWebSocketLog {
+            
+            var receivedJSON = ""
+            if let str = String(data: data, encoding: .utf8),
+                let shrotData = Aria2Websocket.shared.clearUrls(str),
+                let shortStr = String(data: shrotData, encoding: .utf8) {
+                receivedJSON = shortStr
             }
-            do {
-                socket?.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted), completion: nil)
-            } catch let er {
-                resolver.reject(webSocketResult.receiveError(message: "\(er)"))
-                return
-            }
+            
+            let log = Aria2Log(date: time, method: method, success: !timeOut, sendJSON: "\(dic)", receivedJSON: receivedJSON)
+            try DataManager.shared.insertLog(log)
+        }
+        
+        if !timeOut {
+            return data
+        } else {
+            throw webSocketResult.timeOut
         }
     }
     
+    
     func received(_ value: Data, withID id: String) {
-        WaitingList.shared.update(id, value: value)
+        Task {
+            await waitingList.update(id, value: value)
+        }
     }
 }
 
@@ -217,7 +151,7 @@ enum webSocketResult: Error {
     case somethingError
 }
 
-extension Aria2Websocket: WebSocketDelegate {
+extension Aria2Websocket: @preconcurrency WebSocketDelegate {
 	func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
 		switch event {
 		case .connected(let headers):
@@ -254,64 +188,73 @@ extension Aria2Websocket: WebSocketDelegate {
     
     
     func webSocketDidOpen() {
-        Aria2.shared.initData.run()
-        connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
-        Aria2.shared.getVersion {
-            self.connectedServerInfo.version = "Version: \($0)"
-            self.connectedServerInfo.enabledFeatures = $1
+        Task {
+            await Aria2.shared.reloadAll.debounce()
+            connectedServerInfo.name = Preferences.shared.aria2Servers.getSelectedName()
+            if let versions = try? await Aria2.shared.getVersion() {
+                connectedServerInfo.version = "Version: \(versions.version)"
+                connectedServerInfo.enabledFeatures = versions.features
+            } else {
+                connectedServerInfo.version = "Version: none"
+                connectedServerInfo.enabledFeatures = ""
+            }
+            
+            try await Aria2.shared.getGlobalOption()
+            ViewControllersManager.shared.showHUD(.connected)
+            
             NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
+            NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
+            NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
         }
-        Aria2.shared.getGlobalOption()
-        ViewControllersManager.shared.showHUD(.connected)
-        NotificationCenter.default.post(name: .sidebarSelectionChanged, object: nil)
-        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
     func webSocket(didCloseWithCode code: Int, reason: String) {
         connectedServerInfo.version = reason
         connectedServerInfo.enabledFeatures = ""
         aria2GlobalOption = [:]
-        DataManager.shared.deleteAllAria2Objects()
+        try? DataManager.shared.deleteAllAria2Objects()
         NotificationCenter.default.post(name: .updateConnectStatus, object: nil)
         NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
     }
     
     func webSocket(didReceiveMessageWith string: String) {
-        if let data = string.data(using: .utf8) {
-            if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
-                json.id.count == 36 {
-                received(data, withID: json.id)
-            } else if let json = try? JSONDecoder().decode(JSONNotice.self, from: data) {
-                let gids = json.params.map { $0.gid }
-                switch json.method {
-                case .onDownloadStart:
-					Aria2.shared.updateStatus(gids)
-                    ViewControllersManager.shared.showHUD(.downloadStart)
-                case .onDownloadPause:
-                    Aria2.shared.updateStatus(gids)
-                case .onDownloadError:
-                    Aria2.shared.updateStatus(gids)
-                case .onDownloadComplete, .onBtDownloadComplete:
-                    Aria2.shared.updateStatus(gids)
-                    if !NSApp.isActive,
-                        Preferences.shared.completeNotice,
-                        let gid = gids.first {
-                        Aria2.shared.initData(gid) {
-                            self.showNotification($0)
+        guard let data = string.data(using: .utf8) else { return }
+        Task {
+            do {
+                if let json = try? JSONDecoder().decode(JSONRPC.self, from: data),
+                   json.id.count == 36 {
+                    received(data, withID: json.id)
+                } else if let json = try? JSONDecoder().decode(JSONNotice.self, from: data) {
+                    let gids = json.params.map { $0.gid }
+                    switch json.method {
+                    case .onDownloadStart:
+                        try await Aria2.shared.reloadData(gids)
+                        ViewControllersManager.shared.showHUD(.downloadStart)
+                    case .onDownloadPause:
+                        try await Aria2.shared.reloadData(gids)
+                    case .onDownloadError:
+                        try await Aria2.shared.reloadData(gids)
+                    case .onDownloadComplete, .onBtDownloadComplete:
+                        try await Aria2.shared.reloadData(gids)
+                        if !NSApp.isActive,
+                           Preferences.shared.completeNotice,
+                           let gid = gids.first {
+                            try await Aria2.shared.reloadData([gid])
+                            if let obj = try DataManager.shared.aria2Object(gid) {
+                                showNotification(obj)
+                            }
                         }
+                        ViewControllersManager.shared.showHUD(.downloadCompleted)
+                    case .onDownloadStop:
+                        try await Aria2.shared.reloadData(gids)
                     }
-                    ViewControllersManager.shared.showHUD(.downloadCompleted)
-                case .onDownloadStop:
-                    Aria2.shared.updateStatus(gids)
+                    if Preferences.shared.developerMode, Preferences.shared.recordWebSocketLog {
+                        let log = Aria2Log(date: Double(Date().timeIntervalSince1970), method: json.method.rawValue, success: true, sendJSON: "", receivedJSON: String(data: data, encoding: .utf8) ?? "")
+                        try DataManager.shared.insertLog(log)
+                    }
                 }
-                if Preferences.shared.developerMode, Preferences.shared.recordWebSocketLog {
-                    let log = WebSocketLog(context: DataManager.shared.context)
-                    log.method = json.method.rawValue
-                    log.receivedJSON = String(data: data, encoding: .utf8) ?? ""
-                    log.success = true
-                    log.date = Double(Date().timeIntervalSince1970)
-                    DataManager.shared.saveContext()
-                }
+            } catch {
+                Log(error)
             }
         }
     }
@@ -367,5 +310,45 @@ extension StringProtocol {
                     index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
         }
         return result
+    }
+}
+
+
+actor WaitingList {
+    private var contents: [String: Data] = [:]
+    private var semaphores: [String: DispatchSemaphore] = [:]
+    
+    func wait(_ key: String) async -> (value: Data, timeOut: Bool) {
+        if let existingData = contents[key] {
+            remove(key)
+            return (existingData, false)
+        }
+        
+        let success: Bool = await withCheckedContinuation { continuation in
+            let semaphore = DispatchSemaphore(value: 0)
+            semaphores[key] = semaphore
+            
+            DispatchQueue.global().async {
+                let success = semaphore.wait(timeout: .now() + .seconds(30)) == .success
+                continuation.resume(returning: success)
+            }
+        }
+        
+        let data = contents[key] ?? Data()
+        remove(key)
+        return (data, !success)
+    }
+    
+    func update(_ key: String, value: Data) {
+        guard semaphores[key] != nil else {
+            return
+        }
+        contents[key] = value
+        semaphores[key]?.signal()
+    }
+    
+    private func remove(_ key: String) {
+        contents[key] = nil
+        semaphores[key] = nil
     }
 }

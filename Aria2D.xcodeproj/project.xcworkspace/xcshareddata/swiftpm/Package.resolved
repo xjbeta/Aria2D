@@ -1,23 +1,6 @@
 {
+  "originHash" : "e9fcf4e7b038bb9d540893a34457b5d7c01d3492be424e274ea8b7ba6593ef17",
   "pins" : [
-    {
-      "identity" : "foundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/PromiseKit/Foundation",
-      "state" : {
-        "revision" : "d967438f58183e02f091f4c17ac7f04f70947e0a",
-        "version" : "4.0.0"
-      }
-    },
-    {
-      "identity" : "promisekit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mxcl/PromiseKit",
-      "state" : {
-        "revision" : "cb70b070cde06837cd10a1febdf6105c1a3bb348",
-        "version" : "8.1.1"
-      }
-    },
     {
       "identity" : "sparkle",
       "kind" : "remoteSourceControl",
@@ -28,6 +11,15 @@
       }
     },
     {
+      "identity" : "sqlcipher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tencent/sqlcipher",
+      "state" : {
+        "revision" : "5d8825c22feedb421ad6f9ecfc1399460e10d299",
+        "version" : "1.4.7"
+      }
+    },
+    {
       "identity" : "starscream",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/daltoniam/Starscream",
@@ -35,7 +27,16 @@
         "revision" : "ac6c0fc9da221873e01bd1a0d4818498a71eef33",
         "version" : "4.0.6"
       }
+    },
+    {
+      "identity" : "wcdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tencent/wcdb",
+      "state" : {
+        "revision" : "db68d174876d4c50c9843d0e6e22c58adebf2431",
+        "version" : "2.1.11"
+      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

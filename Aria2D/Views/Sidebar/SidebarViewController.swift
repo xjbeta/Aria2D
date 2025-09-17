@@ -11,50 +11,30 @@ import Cocoa
 class SidebarViewController: NSViewController {
 	
     @IBOutlet var sidebarTableView: SidebarTableView!
-	
-    @IBOutlet weak var arrayController: NSArrayController!
+    
     @IBOutlet weak var downloadSpeed: NSTextField!
     @IBOutlet weak var uploadSpeed: NSTextField!
     @IBOutlet weak var globalSpeedView: NSStackView!
-    var observe: NSKeyValueObservation?
-    @objc var predicate = NSPredicate(format: "status IN %@", [Status.active.rawValue])
-    @objc var context: NSManagedObjectContext
     
     var sidebarItems: [SidebarItem] = [.downloading, .removed, .completed]
 	
     var newTaskPreparedInfo = [String: String]()
-    
-    required init?(coder: NSCoder) {
-        context = (NSApp.delegate as! AppDelegate).persistentContainer.viewContext
-        super.init(coder: coder)
-    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
         if #available(OSX 11.0, *) {
             sidebarTableView.style = .fullWidth
         }
+        Task {
+            await DataManager.shared.addObserver(self, forTable: .aria2Object)
+        }
+        
 		initNotification()
 		resetSidebarItems()
-        
-        observe = arrayController.observe(\.arrangedObjects) { [weak self] (arrayController, _) in
-            guard let objs = arrayController.arrangedObjects as? [Aria2Object],
-                Aria2Websocket.shared.isConnected else {
-                    self?.globalSpeedView.isHidden = true
-                    return
-            }
-            
-            self?.globalSpeedView.isHidden = objs.count == 0
-        }
 	}
 	
 	func initNotification() {
-        NotificationCenter.default.addObserver(forName: .newTask, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: String] {
-                self.newTaskPreparedInfo = userInfo
-            }
-            self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(newTask(_:)), name: .newTask, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(nextTag), name: .nextTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(previousTag), name: .previousTag, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(resetSidebarItems), name: .developerModeChanged, object: nil)
@@ -89,11 +69,16 @@ class SidebarViewController: NSViewController {
         }
 	}
 
+    @objc func newTask(_ notification: Notification) {
+        if let userInfo = notification.userInfo as? [String: String] {
+            self.newTaskPreparedInfo = userInfo
+        }
+        self.performSegue(withIdentifier: .showNewTaskViewController, sender: nil)
+    }
 	
+    @MainActor
 	@objc func resetSidebarItems() {
-		DispatchQueue.main.async {
-			self.setDefaultData()
-		}
+        setDefaultData()
 	}
 	
 	@objc func nextTag() {
@@ -150,7 +135,7 @@ class SidebarViewController: NSViewController {
                 globalSpeedView.isHidden = true
             }
             
-            if let activeBittorrentCount = (arrayController.arrangedObjects as? [Any])?.count,
+            if let activeBittorrentCount = try? DataManager.shared.activeBittorrentCount(),
                 activeBittorrentCount > 0 {
                 uploadSpeed.stringValue = "⬆︎ \(globalStat.uploadSpeed.ByteFileFormatter())/s"
             } else {
@@ -169,7 +154,7 @@ class SidebarViewController: NSViewController {
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
-        observe?.invalidate()
+//        observe?.invalidate()
 	}
 }
 
@@ -206,3 +191,9 @@ extension SidebarViewController: NSTableViewDelegate, NSTableViewDataSource {
 	
 }
 
+extension SidebarViewController: DatabaseChangeObserver {
+    @MainActor
+    func databaseDidChange(notification: DatabaseChangeNotification) async {
+        NotificationCenter.default.post(name: .updateGlobalStat, object: nil, userInfo: ["updateServer": true])
+    }
+}

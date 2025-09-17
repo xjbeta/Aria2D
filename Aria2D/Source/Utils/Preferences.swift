@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Preferences: NSObject {
+final class Preferences: NSObject, Sendable {
 	
 	static let shared = Preferences()
 	
@@ -42,25 +42,20 @@ class Preferences: NSObject {
             Aria2Option.seedTime: "120"]
 	}
 
-    let prefs = UserDefaults.standard
-
 	let keys = PreferenceKeys.self
     
     let defaultAria2cOptionsDic: [Aria2Option: String]
 	
-	private lazy var defaultAria2Servers: Aria2Servers = {
-		let s = Aria2Servers()
-		Preferences.shared.aria2Servers = s
-		return s
-	}()
-	
+    
 	var aria2Servers: Aria2Servers {
 		get {
 			if let data = defaults(.aria2ServersData) as? Data,
 				let aria2Servers = Aria2Servers(data: data) {
 				return aria2Servers
 			} else {
-				return defaultAria2Servers
+                let s = Aria2Servers()
+                Preferences.shared.aria2Servers = s
+                return s
 			}
 		}
 		set {
@@ -172,13 +167,6 @@ class Preferences: NSObject {
 			defaultsSet(newValue, forKey: .autoStartAria2c)
 		}
 	}
-
-	private lazy var defaultAria2cOptions: Aria2cOptions = {
-		let s = Aria2cOptions()
-		Preferences.shared.aria2cOptions = s
-		return s
-	}()
-	
 	
 	var aria2cOptions: Aria2cOptions {
 		get {
@@ -330,6 +318,8 @@ class Preferences: NSObject {
     }
 
 	func checkPlistFile() {
+        let prefs = UserDefaults.standard
+
         // check userdefault plist r/w
 		let key = "checkPlistFile"
 		prefs.set(true, forKey: key)
@@ -355,10 +345,12 @@ class Preferences: NSObject {
 private extension Preferences {
 	
 	func defaults(_ key: PreferenceKeys) -> Any? {
+        let prefs = UserDefaults.standard
 		return prefs.value(forKey: key.rawValue) as Any?
 	}
 	
 	func defaultsSet(_ value: Any, forKey key: PreferenceKeys) {
+        let prefs = UserDefaults.standard
 		prefs.setValue(value, forKey: key.rawValue)
 	}
 }
