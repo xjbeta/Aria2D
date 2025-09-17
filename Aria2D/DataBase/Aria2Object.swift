@@ -13,6 +13,8 @@ import WCDBSwift
 
 @objc(Aria2Object)
 final class Aria2Object: NSObject, TableCodable {
+    
+    static let unknownName = "Unknown"
 
     @objc dynamic var gid: String
     @objc dynamic var status: String
@@ -276,7 +278,7 @@ final class Aria2Object: NSObject, TableCodable {
             name = URL(fileURLWithPath: path).lastPathComponent
         } else {
             #warning("name from uris")
-            name = "unknown"
+            name = Aria2Object.unknownName
         }
         
         useFolderIcon = files.count > 1 || bittorrent?.mode == Aria2Bittorrent.FileMode.multi.rawValue
@@ -293,14 +295,6 @@ final class Aria2Object: NSObject, TableCodable {
             } else {
                 setValue(new, forKey: key)
             }
-        }
-    }
-    
-    @MainActor
-    func updateUnknownTaskName() {
-        guard name == "unknown", status == Status.active.rawValue else { return }
-        Task {
-            let _ = try await Aria2.shared.reloadData([gid])
         }
     }
     

@@ -23,6 +23,10 @@ final class Aria2: NSObject, Sendable {
         try? await Aria2.shared.sortAll()
     }
     
+    let reloadAllForName = Debouncer(duration: 10) {
+        try? await Aria2.shared.reloadAll()
+    }
+    
     let aria2c = Aria2c()
     
     private func reloadAll() async throws {
@@ -138,6 +142,12 @@ final class Aria2: NSObject, Sendable {
             } else if result.status.count > 0 {
                 try DataManager.shared.updateStatus(result.status)
             }
+        }
+        
+        
+        if let c = try? DataManager.shared.getAria2Objects().filter({ $0.name == Aria2Object.unknownName && $0.status != Status.waiting.rawValue }).count,
+           c > 0 {
+            await reloadAllForName.debounce()
         }
     }
 
