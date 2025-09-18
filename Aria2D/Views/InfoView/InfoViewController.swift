@@ -185,10 +185,6 @@ class InfoViewController: NSViewController {
                 return
             }
             
-            tableviewSegue.anchorTableView = optionsTableView
-            tableviewSegue.preferredEdge = .minX
-            tableviewSegue.popoverBehavior = .transient
-            
             guard let option = optionKeys[safe: optionsTableView.selectedRow] else { return }
             vc.gid = gid
             vc.optionValue = options[option.option] ?? ""
@@ -201,6 +197,16 @@ class InfoViewController: NSViewController {
 //                    try await Aria2.shared.updateStatus([self.gid])
                 }
             }
+            
+            let selectedRow = optionsTableView.selectedRow
+            guard selectedRow >= 0 else { return }
+            
+            (tableviewSegue.sourceController as AnyObject)
+                .present(vc,
+                         asPopoverRelativeTo: optionsTableView.rect(ofRow: selectedRow),
+                         of: optionsTableView,
+                         preferredEdge: .minX,
+                         behavior: .transient)
         }
     }
     
