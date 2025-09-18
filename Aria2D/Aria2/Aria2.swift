@@ -145,7 +145,11 @@ final class Aria2: NSObject, Sendable {
         }
         
         
-        if let c = try? DataManager.shared.getAria2Objects().filter({ $0.name == Aria2Object.unknownName && $0.status != Status.waiting.rawValue }).count,
+        if let c = try? DataManager.shared.getAria2Objects().filter({
+            $0.name == Aria2Object.unknownName
+            && $0.status != Status.waiting.rawValue
+            && $0.totalLength > 0
+        }).count,
            c > 0 {
             await reloadAllForName.debounce()
         }
