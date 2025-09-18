@@ -76,6 +76,7 @@
 		01A5350C212871F700E5C88C /* Aria2Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350B212871F700E5C88C /* Aria2Methods.swift */; };
 		01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5350D212872FA00E5C88C /* Aria2OptionTooltip.swift */; };
 		01A5351B2129512000E5C88C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A5351D2129512000E5C88C /* Localizable.strings */; };
+		01AF21542E7AE08B00104645 /* NonePocketScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF21532E7AE08B00104645 /* NonePocketScrollView.swift */; };
 		01B62BF72DF950B00090C3B4 /* EquatableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B62BF62DF950B00090C3B4 /* EquatableExtensions.swift */; };
 		01B914E5224F2E37001A55AD /* Aria2cTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */; };
 		01BC4F951E443A6500417221 /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC4F941E443A6500417221 /* SafeSubscript.swift */; };
@@ -195,6 +196,7 @@
 		01A53518212943F500E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		01A5351C2129512000E5C88C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A5351E2129512200E5C88C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		01AF21532E7AE08B00104645 /* NonePocketScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonePocketScrollView.swift; sourceTree = "<group>"; };
 		01B62BF62DF950B00090C3B4 /* EquatableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableExtensions.swift; sourceTree = "<group>"; };
 		01B914E4224F2E37001A55AD /* Aria2cTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2cTrackerListViewController.swift; sourceTree = "<group>"; };
 		01BC4F941E443A6500417221 /* SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				01DD0D0A1D25012F0042ECEB /* MainSplitView.swift */,
 				010B59171D3CF66600550A43 /* MainMenu.swift */,
 				016C98F81DB1C0A000955C09 /* HUD.swift */,
+				01AF21532E7AE08B00104645 /* NonePocketScrollView.swift */,
 			);
 			path = MainWindow;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				019E3DBA215BBDEE00FDD1F8 /* MainListTableView.swift in Sources */,
 				01A5350E212872FA00E5C88C /* Aria2OptionTooltip.swift in Sources */,
 				01FB89572DE5EA88003DF4E9 /* Aria2File.swift in Sources */,
+				01AF21542E7AE08B00104645 /* NonePocketScrollView.swift in Sources */,
 				011E4D2F21E8BE0100997633 /* Aria2OptionsViewController.swift in Sources */,
 				018E894F1D34FF5B000C71B0 /* DataManager.swift in Sources */,
 				0115D4351E06AD99003EBFCD /* Aria2.swift in Sources */,
