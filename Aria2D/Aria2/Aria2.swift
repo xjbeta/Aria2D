@@ -23,10 +23,6 @@ final class Aria2: NSObject, Sendable {
         try? await Aria2.shared.sortAll()
     }
     
-    let reloadAllForName = Debouncer(duration: 10) {
-        try? await Aria2.shared.reloadAll()
-    }
-    
     let aria2c = Aria2c()
     
     private func reloadAll() async throws {
@@ -171,7 +167,7 @@ final class Aria2: NSObject, Sendable {
             && $0.totalLength > 0
         }).count,
            c > 0 {
-            await reloadAllForName.debounce()
+            try? await Aria2.shared.reloadAll()
         }
     }
 
