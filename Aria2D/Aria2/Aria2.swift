@@ -115,18 +115,33 @@ final class Aria2: NSObject, Sendable {
                               "bittorrent",
                               "dir"]]).object,
                 Aria2WebsocketParams(
+                    method: Aria2Method.tellWaiting,
+                    params: [0, 1000, ["gid", "status"]]).object,
+                Aria2WebsocketParams(
+                    method: Aria2Method.tellStopped,
+                    params: [0, 1000, ["gid", "status"]]).object,
+                Aria2WebsocketParams(
                     method: Aria2Method.getGlobalStat,
                     params: []).object]])
         
         struct ResultObj: Decodable {
             var status: [Aria2Status] = []
             var globalStat: Aria2GlobalStat?
+            var result: [String: String] = [:]
+            
             init(from decoder: Decoder) throws {
                 let unkeyedContainer = try decoder.singleValueContainer()
+                if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
+                    self.globalStat = globalStat
+                    return
+                }
+                
+                if let re = try? unkeyedContainer.decode([[[String: String]]].self).flatMap({ $0 }).first {
+                    result = re
+                }
+                
                 if let stats = try? unkeyedContainer.decode([[Aria2Status]].self) {
                     status = stats.flatMap({ $0 })
-                } else if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
-                    self.globalStat = globalStat
                 }
             }
         }
@@ -143,6 +158,11 @@ final class Aria2: NSObject, Sendable {
                 try DataManager.shared.updateStatus(result.status)
             }
         }
+        
+        let gidList = results.map {
+            $0.result
+        }
+        try DataManager.shared.sortAllObjects(gidList)
         
         
         if let c = try? DataManager.shared.getAria2Objects().filter({
