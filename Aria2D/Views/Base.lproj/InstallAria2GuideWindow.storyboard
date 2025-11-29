@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Icc-JI-qsf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Icc-JI-qsf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24412"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -45,7 +45,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="25" columnSpacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="9k3-bO-VT3">
-                                                    <rect key="frame" x="89" y="40" width="272" height="104"/>
+                                                    <rect key="frame" x="90" y="40" width="270" height="104"/>
                                                     <rows>
                                                         <gridRow yPlacement="fill" id="9aZ-kZ-9bM"/>
                                                         <gridRow yPlacement="fill" id="FBB-uJ-S1e"/>
@@ -68,7 +68,7 @@
                                                         </gridCell>
                                                         <gridCell row="9aZ-kZ-9bM" column="cEK-41-B19" id="iN1-YM-Cem">
                                                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I5D-ut-RfP">
-                                                                <rect key="frame" x="148" y="86" width="124" height="18"/>
+                                                                <rect key="frame" x="148" y="86" width="122" height="18"/>
                                                                 <buttonCell key="cell" type="inline" title="aria2 official website" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wpc-gB-m6Y">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -81,7 +81,7 @@
                                                         <gridCell row="FBB-uJ-S1e" column="uhi-Zl-5Z9" id="dj4-8J-T2m"/>
                                                         <gridCell row="FBB-uJ-S1e" column="cEK-41-B19" id="DFg-ib-THO">
                                                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z9P-FT-2fF">
-                                                                <rect key="frame" x="148" y="43" width="124" height="18"/>
+                                                                <rect key="frame" x="148" y="43" width="122" height="18"/>
                                                                 <buttonCell key="cell" type="inline" title="HomeBrew" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zhv-JJ-JgU">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -94,7 +94,7 @@
                                                         <gridCell row="tl7-Xx-S0f" column="uhi-Zl-5Z9" id="Z94-Bw-GZ6"/>
                                                         <gridCell row="tl7-Xx-S0f" column="cEK-41-B19" id="7lQ-Lh-iJj">
                                                             <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="plT-pE-syj">
-                                                                <rect key="frame" x="148" y="0.0" width="124" height="18"/>
+                                                                <rect key="frame" x="148" y="0.0" width="122" height="18"/>
                                                                 <buttonCell key="cell" type="inline" title="A dmg file" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RBx-6B-pqi">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="smallSystemBold"/>
