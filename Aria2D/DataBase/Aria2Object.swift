@@ -277,8 +277,13 @@ final class Aria2Object: NSObject, TableCodable {
         } else if files.count == 1, let path = files.first?.path, path != "" {
             name = URL(fileURLWithPath: path).lastPathComponent
         } else {
-            #warning("name from uris")
-            name = Aria2Object.unknownName
+            let uris = files.flatMap {
+                $0.uris
+            }.map {
+                $0.uri
+            }
+            
+            name = uris.first?.lastPathComponent.removingPercentEncoding ?? Aria2Object.unknownName
         }
         
         useFolderIcon = files.count > 1 || bittorrent?.mode == Aria2Bittorrent.FileMode.multi.rawValue
