@@ -45,7 +45,7 @@ class MainListViewController: NSViewController {
         if segue.identifier == .showInfoWindow {
             guard let wc = segue.destinationController as? NSWindowController,
                   let vc = wc.contentViewController as? InfoViewController,
-                  let index = mainListTableView.selectedIndexs().first,
+                                    let index = mainListTableView.selectedRowIndexes.first,
                   let objs = arrayController.arrangedObjects as? [Aria2Object],
                   let obj = objs[safe: index] else {
                 return
@@ -101,8 +101,8 @@ extension MainListViewController: NSTableViewDelegate {
         setSelectedIndexsForMainList()
     }
 
-    func selectedObjects() -> [Aria2Object] {
-        let selectedIndexs = mainListTableView.selectedIndexs()
+    func selectedObjects(indexes: IndexSet? = nil) -> [Aria2Object] {
+        let selectedIndexs = indexes ?? mainListTableView.selectedIndexs()
         guard let objs = arrayController.arrangedObjects as? [Aria2Object] else { return [] }
         return objs.enumerated().filter {
             selectedIndexs.contains($0.offset)
@@ -120,7 +120,7 @@ extension MainListViewController: NSTableViewDelegate {
 // MARK: - MenuDelegate
 extension MainListViewController: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
-        setSelectedIndexsForMainList()
+        ViewControllersManager.shared.selectedObjects = selectedObjects(indexes: mainListTableView.clickedOrSelectedIndexes())
     }
 }
 

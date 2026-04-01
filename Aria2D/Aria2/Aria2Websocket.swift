@@ -107,13 +107,40 @@ final class Aria2Websocket: NSObject, Sendable {
     func write(_ dic: [String: Any],
                withID id: String,
                method: String) async throws -> Data {
+        guard isConnected, let socket else {
+            throw webSocketResult.notConnected
+        }
+
         let time = Double(Date().timeIntervalSince1970)
         
-        async let waiting = waitingList.wait(id)
+        let waitingTask = Task<Data, Error> {
+            try await waitingList.wait(id)
+        }
         
-        socket?.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted), completion: nil)
+        socket.write(data: try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted), completion: nil)
         
-        let (data, timeOut) = await waiting
+        // Use a Task group to enforce a 30-second timeout.
+        let data = try await withThrowingTaskGroup(of: Data.self) { group in
+            group.addTask {
+                try await waitingTask.value
+            }
+
+            group.addTask {
+                try await Task.sleep(nanoseconds: 30_000_000_000)
+                await self.waitingList.fail(id, with: webSocketResult.timeOut)
+                throw webSocketResult.timeOut
+            }
+
+            let result = try await group.next()
+            group.cancelAll()
+
+            if let result = result {
+                return result
+            } else {
+                throw webSocketResult.timeOut
+            }
+        }
+        waitingTask.cancel()
         
         // Save log
         if Preferences.shared.developerMode,
@@ -126,15 +153,11 @@ final class Aria2Websocket: NSObject, Sendable {
                 receivedJSON = shortStr
             }
             
-            let log = Aria2Log(date: time, method: method, success: !timeOut, sendJSON: "\(dic)", receivedJSON: receivedJSON)
+            let log = Aria2Log(date: time, method: method, success: true, sendJSON: "\(dic)", receivedJSON: receivedJSON)
             try DataManager.shared.insertLog(log)
         }
-        
-        if !timeOut {
-            return data
-        } else {
-            throw webSocketResult.timeOut
-        }
+
+        return data
     }
     
     
@@ -146,6 +169,7 @@ final class Aria2Websocket: NSObject, Sendable {
 }
 
 enum webSocketResult: Error {
+    case notConnected
     case timeOut
     case receiveError(message: String)
     case somethingError
@@ -315,40 +339,45 @@ extension StringProtocol {
 
 
 actor WaitingList {
-    private var contents: [String: Data] = [:]
-    private var semaphores: [String: DispatchSemaphore] = [:]
+    private var contents: [String: Result<Data, Error>] = [:]
+    private var continuations: [String: CheckedContinuation<Data, Error>] = [:]
     
-    func wait(_ key: String) async -> (value: Data, timeOut: Bool) {
-        if let existingData = contents[key] {
-            remove(key)
-            return (existingData, false)
+    func wait(_ key: String) async throws -> Data {
+        if let result = contents.removeValue(forKey: key) {
+            return try result.get()
         }
-        
-        let success: Bool = await withCheckedContinuation { continuation in
-            let semaphore = DispatchSemaphore(value: 0)
-            semaphores[key] = semaphore
-            
-            DispatchQueue.global().async {
-                let success = semaphore.wait(timeout: .now() + .seconds(30)) == .success
-                continuation.resume(returning: success)
+
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                continuations[key] = continuation
+            }
+        } onCancel: {
+            Task {
+                await self.cancel(key: key)
             }
         }
-        
-        let data = contents[key] ?? Data()
-        remove(key)
-        return (data, !success)
     }
     
     func update(_ key: String, value: Data) {
-        guard semaphores[key] != nil else {
-            return
+        if let continuation = continuations.removeValue(forKey: key) {
+            // Resume a pending waiter immediately.
+            continuation.resume(returning: value)
+        } else {
+            // Otherwise cache data for a future wait call.
+            contents[key] = .success(value)
         }
-        contents[key] = value
-        semaphores[key]?.signal()
     }
     
-    private func remove(_ key: String) {
+    func fail(_ key: String, with error: Error) {
+        if let continuation = continuations.removeValue(forKey: key) {
+            continuation.resume(throwing: error)
+        } else {
+            contents[key] = .failure(error)
+        }
+    }
+
+    func cancel(key: String) {
+        continuations[key] = nil
         contents[key] = nil
-        semaphores[key] = nil
     }
 }

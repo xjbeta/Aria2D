@@ -19,11 +19,25 @@ class MainListTableView: NSTableView {
     override var mouseDownCanMoveWindow: Bool {
         return true
     }
+
+    override func mouseDown(with event: NSEvent) {
+        let point = convert(event.locationInWindow, from: nil)
+
+        if row(at: point) == -1, !selectedRowIndexes.isEmpty {
+            deselectAll(self)
+        }
+
+        super.mouseDown(with: event)
+    }
     
 }
 
 extension NSTableView {
-    func selectedIndexs() -> IndexSet{
+    func selectedIndexs() -> IndexSet {
+        selectedRowIndexes
+    }
+
+    func clickedOrSelectedIndexes() -> IndexSet {
         if clickedRow != -1 {
             if selectedRowIndexes.contains(clickedRow) {
                 return selectedRowIndexes

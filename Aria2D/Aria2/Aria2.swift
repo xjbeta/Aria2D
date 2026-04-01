@@ -23,10 +23,6 @@ final class Aria2: NSObject, Sendable {
         try? await Aria2.shared.sortAll()
     }
     
-    let reloadAllForName = Debouncer(duration: 10) {
-        try? await Aria2.shared.reloadAll()
-    }
-    
     let aria2c = Aria2c()
     
     private func reloadAll() async throws {
@@ -115,23 +111,55 @@ final class Aria2: NSObject, Sendable {
                               "bittorrent",
                               "dir"]]).object,
                 Aria2WebsocketParams(
+                    method: Aria2Method.tellWaiting,
+                    params: [0, 1000, ["gid", "status"]]).object,
+                Aria2WebsocketParams(
+                    method: Aria2Method.tellStopped,
+                    params: [0, 1000, ["gid", "status"]]).object,
+                Aria2WebsocketParams(
                     method: Aria2Method.getGlobalStat,
                     params: []).object]])
         
-        struct ResultObj: Decodable {
-            var status: [Aria2Status] = []
-            var globalStat: Aria2GlobalStat?
-            init(from decoder: Decoder) throws {
-                let unkeyedContainer = try decoder.singleValueContainer()
-                if let stats = try? unkeyedContainer.decode([[Aria2Status]].self) {
-                    status = stats.flatMap({ $0 })
-                } else if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
-                    self.globalStat = globalStat
-                }
-            }
-        }
         struct Result: Decodable {
             let result: [ResultObj]
+            
+            struct Aria2SimpleStatus: Decodable {
+                let gid: String
+                let status: String
+                
+                private enum CodingKeys: String, CodingKey {
+                    case gid,
+                    status
+                }
+                
+                init(from decoder: Decoder) throws {
+                    let values = try decoder.container(keyedBy: CodingKeys.self)
+                    gid = try values.decode(String.self, forKey: .gid)
+                    status = try values.decode(String.self, forKey: .status)
+                }
+            }
+            
+            struct ResultObj: Decodable {
+                var status: [Aria2Status] = []
+                var globalStat: Aria2GlobalStat?
+                var sStatus: [Aria2SimpleStatus] = []
+                
+                init(from decoder: Decoder) throws {
+                    let unkeyedContainer = try decoder.singleValueContainer()
+                    if let globalStat = try? unkeyedContainer.decode([Aria2GlobalStat].self).first {
+                        self.globalStat = globalStat
+                        return
+                    }
+                    
+                    if let stats = try? unkeyedContainer.decode([[Aria2SimpleStatus]].self) {
+                        sStatus = stats.flatMap({ $0 })
+                    }
+                    
+                    if let stats = try? unkeyedContainer.decode([[Aria2Status]].self) {
+                        status = stats.flatMap({ $0 })
+                    }
+                }
+            }
         }
         
         let results = try JSONDecoder().decode(Result.self, from: data).result
@@ -144,6 +172,16 @@ final class Aria2: NSObject, Sendable {
             }
         }
         
+        let list = results.map {
+            $0.sStatus
+        }.flatMap {
+            $0
+        }.map {
+            ["gid": $0.gid, "status": $0.status]
+        }
+        
+        try DataManager.shared.sortAllObjects(list)
+        
         
         if let c = try? DataManager.shared.getAria2Objects().filter({
             $0.name == Aria2Object.unknownName
@@ -151,7 +189,7 @@ final class Aria2: NSObject, Sendable {
             && $0.totalLength > 0
         }).count,
            c > 0 {
-            await reloadAllForName.debounce()
+            try? await Aria2.shared.reloadAll()
         }
     }
 

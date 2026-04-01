@@ -38,7 +38,10 @@ final class Aria2File: NSObject, TableCodable {
     enum SubCodingKeys: String, CodingKey {
         case uris,
         index
-        
+    }
+    
+    enum UriCodingKeys: String, CodingKey {
+        case uris
     }
     
     init(from decoder: Decoder) throws {
@@ -58,11 +61,11 @@ final class Aria2File: NSObject, TableCodable {
             index = Int64(try subValues.decode(String.self, forKey: .index)) ?? -1
             self.id = ""
             selected = try values.decode(String.self, forKey: .selected) == "true"
+            
+            if let values = try? decoder.container(keyedBy: UriCodingKeys.self) {
+                uris = (try? values.decode([Aria2Uri].self, forKey: .uris)) ?? []
+            }
         }
-        
-        
-        // uris = try values.decode([Aria2Uri].self, forKey: .uris)
-//            .map { $0.uri }
     }
     
     static func fid(_ gid: String) -> String {
@@ -81,7 +84,7 @@ final class Aria2File: NSObject, TableCodable {
             guard ![CodingKeys.id.rawValue, CodingKeys.index.rawValue].contains(key) else { return }
             
             let new = file.value(forKey: key)
-            if value(forKey: key) == new {
+            if value(forKey: key).isEqualValue(to: new) {
                 
             } else {
                 setValue(new, forKey: key)
