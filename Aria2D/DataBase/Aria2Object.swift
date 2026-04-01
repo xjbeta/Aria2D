@@ -295,7 +295,7 @@ final class Aria2Object: NSObject, TableCodable {
             let key = $0.name
             let new = obj.value(forKey: key)
             guard key != CodingKeys.gid.rawValue else { return }
-            if value(forKey: key) == new {
+            if value(forKey: key).isEqualValue(to: new) {
                 
             } else {
                 setValue(new, forKey: key)

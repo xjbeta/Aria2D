@@ -8,25 +8,32 @@
 
 import Foundation
 
-extension Equatable {
-    func isEqual(to: Any) -> Bool {
-        self == to as? Self
+private extension Equatable {
+    func isEqual(to value: Any) -> Bool {
+        guard let other = value as? Self else {
+            return false
+        }
+
+        return self == other
     }
 }
 
-func ==<T>(lhs: T?, rhs: T?) -> Bool where T: Any {
-    guard let lhs, let rhs else {
-        return lhs == nil && rhs == nil
+extension Optional where Wrapped == Any {
+    func isEqualValue(to rhs: Any?) -> Bool {
+        guard let lhs = self, let rhs else {
+            return self == nil && rhs == nil
+        }
+        
+        if let isEqual = (lhs as? any Equatable)?.isEqual {
+            return isEqual(rhs)
+        }
+        else if let lhs = lhs as? [Any], let rhs = rhs as? [Any], lhs.count == rhs.count {
+            return lhs.elementsEqual(rhs) { Optional.some($0).isEqualValue(to: $1) }
+        }
+        else if let lhs = lhs as? [AnyHashable: Any], let rhs = rhs as? [AnyHashable: Any], lhs.count == rhs.count {
+            return lhs.allSatisfy { Optional.some($1).isEqualValue(to: rhs[$0]) }
+        }
+
+        return false
     }
-    
-    if let isEqual = (lhs as? any Equatable)?.isEqual {
-        return isEqual(rhs)
-    }
-    else if let lhs = lhs as? [Any], let rhs = rhs as? [Any], lhs.count == rhs.count {
-        return lhs.elementsEqual(rhs, by: ==)
-    }
-    else if let lhs = lhs as? [AnyHashable: Any], let rhs = rhs as? [AnyHashable: Any], lhs.count == rhs.count {
-        return lhs.allSatisfy { $1 == rhs[$0] }
-    }
-    return false
 }

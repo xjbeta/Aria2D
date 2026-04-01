@@ -84,7 +84,7 @@ final class Aria2File: NSObject, TableCodable {
             guard ![CodingKeys.id.rawValue, CodingKeys.index.rawValue].contains(key) else { return }
             
             let new = file.value(forKey: key)
-            if value(forKey: key) == new {
+            if value(forKey: key).isEqualValue(to: new) {
                 
             } else {
                 setValue(new, forKey: key)
