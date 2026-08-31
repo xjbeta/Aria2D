@@ -127,6 +127,8 @@ extension MainListViewController: NSMenuDelegate {
 extension MainListViewController: DatabaseChangeObserver {
     @MainActor
     func databaseDidChange(notification: DatabaseChangeNotification) async {
+        let selectedGids = selectedObjects().compactMap { $0.gid }
+        
         switch notification.changeType {
         case .insert(let ids):
             guard let objs = try? DataManager.shared.getAria2Objects(ids) else {
@@ -143,8 +145,19 @@ extension MainListViewController: DatabaseChangeObserver {
             guard let objs = try? DataManager.shared.getAria2Objects(ids) else { return }
             objs.forEach { obj in
                 guard let index = objects.firstIndex(where: { $0.gid == obj.gid }) else { return }
-                objects[safe: index]?.update(obj)   
+                objects[safe: index]?.update(obj)
             }
         }
+        
+        // rows may move after sort/status changes; restore selection by gid
+        guard !selectedGids.isEmpty else { return }
+        guard let objs = arrayController.arrangedObjects as? [Aria2Object] else { return }
+        var indexes = IndexSet()
+        selectedGids.forEach { gid in
+            if let index = objs.firstIndex(where: { $0.gid == gid }) {
+                indexes.insert(index)
+            }
+        }
+        mainListTableView.selectRowIndexes(indexes, byExtendingSelection: false)
     }
 }
