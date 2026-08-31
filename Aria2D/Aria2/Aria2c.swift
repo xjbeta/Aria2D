@@ -31,7 +31,13 @@ class Aria2c: NSObject {
         return supportPath.appendingPathComponent("aria2c.log").path
     }()
     
-    let aria2cProcessName = "Aria2D_aria2c"
+    let launchAgentLabel = "com.xjbeta.Aria2D.aria2c"
+    
+    lazy var launchAgentPlistURL: URL = {
+        FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/LaunchAgents")
+            .appendingPathComponent("\(launchAgentLabel).plist")
+    }()
     
     var aria2cArgs: [String] {
         get {
@@ -41,8 +47,6 @@ class Aria2c: NSObject {
             guard FileManager.default.fileExists(atPath: aria2cPath),
                   FileManager.default.isExecutableFile(atPath: aria2cPath),
                   FileManager.default.fileExists(atPath: confPath) else {
-                
-//                let t = ""
                 return []
             }
             
@@ -56,19 +60,34 @@ class Aria2c: NSObject {
             args.append("--log-level=notice")
             args.append("--log=\(logPath)")
             
-            args = args.map { s -> String in
-                var str = s
-                if s.contains(" ") {
-                    let i = str.firstIndex(of: "=")!
-                    str.remove(at: i)
-                    str.insert(contentsOf: "='", at: i)
-                    str += "'"
-                }
-                return str
-            }
-            
             return args
         }
+    }
+    
+    func argsDisplay() -> String {
+        var args = aria2cArgs
+        guard args.count > 0 else { return "" }
+        args.insert(Preferences.shared.aria2cOptions.path(for: .aria2c), at: 0)
+        return args.map { s -> String in
+            guard s.contains(" ") else { return s }
+            let parts = s.split(separator: "=", maxSplits: 1).map(String.init)
+            guard parts.count == 2 else { return "\"\(s)\"" }
+            return "\(parts[0])='\(parts[1])'"
+        }.joined(separator: " ")
+    }
+    
+    func writeLaunchAgentPlist(aria2cPath: String, args: [String]) throws {
+        let plist: [String: Any] = [
+            "Label": launchAgentLabel,
+            "ProgramArguments": [aria2cPath] + args,
+            "WorkingDirectory": supportPath.path,
+            "RunAtLoad": true,
+        ]
+        let data = try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: 0)
+        try FileManager.default.createDirectory(at: launchAgentPlistURL.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true,
+                                                attributes: nil)
+        try data.write(to: launchAgentPlistURL, options: .atomic)
     }
     
     func autoStart() async {
@@ -136,51 +155,45 @@ class Aria2c: NSObject {
 	}
 	
 	
-	// aria2c ...... -D
-    // bash -c 'exec -a Aria2D_aria2c aria2c ...... -D'
+	// launchctl bootstrap gui/uid ~/Library/LaunchAgents/com.xjbeta.Aria2D.aria2c.plist
     
     func startAria2(_ test: Bool = false) async {
         Preferences.shared.aria2cOptions.resetLastConf()
         deleteAria2cLogFile()
         
-        var args = aria2cArgs
+        let args = aria2cArgs
         let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
-        args.insert(aria2cPath, at: 0)
-//            args.append("-D")
-        args = ["/bin/bash", "-c", "exec -a \(aria2cProcessName) \(args.joined(separator: " "))"]
+        guard args.count > 0 else { return }
         
-        Process.run(args,
-                    at: .init(fileURLWithPath: supportPath.path),
-                    wait: false)
+        do {
+            try writeLaunchAgentPlist(aria2cPath: aria2cPath, args: args)
+        } catch let error {
+            Log("Write launch agent plist error: \(error)")
+            return
+        }
+        
+        // Ignore errors: bootout fails if the service is not loaded.
+        Process.run(["/bin/launchctl", "bootout", "gui/\(getuid())/\(launchAgentLabel)"], wait: true)
+        Process.run(["/bin/launchctl", "bootstrap", "gui/\(getuid())", launchAgentPlistURL.path], wait: true)
 	}
 	
-    // pgrep -f "path"
+    // launchctl list prints "PID  Status  Label"
     func aria2cPid() async -> [String] {
         await MainActor.run {
-            let outText = Process.run(["/usr/bin/pgrep", "\(aria2cProcessName)"], wait: true).outText
-            return outText?.components(separatedBy: "\n").filter({ $0 != "" }) ?? []
+            let outText = Process.run(["/bin/launchctl", "list", launchAgentLabel], wait: true).outText
+            guard let line = outText?
+                .split(separator: "\n")
+                .map(String.init)
+                .dropFirst(1).first else { return [] }
+            let pid = line.split(separator: "\t").map(String.init).first ?? ""
+            return (pid == "-" || pid.isEmpty) ? [] : [pid]
         }
     }
 	
-	// kill -9 "pid"
+	// launchctl bootout gui/uid/label
     func killAria2c() async {
         deleteAria2cLogFile()
-        let pids = await aria2cPid()
-        
-        for pid in pids {
-            try? await killProcess(pid)
-        }
-	}
-	
-    func killProcess(_ pid: String) async throws {
-        var error: NSDictionary?
-        let descriptor = NSAppleScript(source: "do shell script \"kill -KILL \(pid)\"")?.executeAndReturnError(&error)
-        Preferences.shared.aria2cOptions.resetLastConf()
-        if error != nil {
-            Log(error)
-            Log(descriptor)
-            throw Aria2ProcessError.killProcessError
-        }
+        Process.run(["/bin/launchctl", "bootout", "gui/\(getuid())/\(launchAgentLabel)"], wait: true)
 	}
     
     func deleteAria2cLogFile() {
@@ -192,12 +205,6 @@ class Aria2c: NSObject {
             }
         }
     }
-}
-
-enum Aria2ProcessError: Error {
-    case getPidError
-    case killProcessError
-    case configFileMissed
 }
 
 
