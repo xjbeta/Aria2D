@@ -1,0 +1,88 @@
+name: Archive
+
+on:
+  push:
+    tags:
+    - 1.*
+  workflow_dispatch:
+
+jobs:
+  release-osx:
+    runs-on: xcode-27
+    steps:
+
+      - uses: actions/checkout@v5
+
+      - uses: irgaly/xcode-cache@v1
+        with:
+          key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
+          restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
+
+      - name: Clone AppUpdaterAppcasts
+        run: git clone https://github.com/xjbeta/AppUpdaterAppcasts
+
+      - name: Download Sparkle
+        shell: zsh {0}
+        run: |
+          brew info --json=v2 sparkle | grep -wo "https.*.tar.xz" | wget -qi -
+          mkdir Sparkle
+          tar -xf Sparkle*.tar.xz -C Sparkle
+
+      - uses: apple-actions/import-codesign-certs@v3
+        with:
+          p12-file-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          p12-password: ${{ secrets.P12_PASSWORD }}
+
+      - name: Build Environment Info
+        run: |
+          security find-identity -v -p codesigning
+          xcodebuild -version
+          xcodebuild -showBuildSettings
+          xcodebuild -showsdks
+
+      - name: Resolve SPM
+        run: xcodebuild -resolvePackageDependencies
+
+      - name: Archive
+        run: xcodebuild archive -project Aria2D.xcodeproj -scheme Aria2D -destination 'generic/platform=macOS' -archivePath archive/Aria2D.xcarchive -showBuildTimingSummary -allowProvisioningUpdates
+
+      - name: CodeSign And Package
+        shell: zsh {0}
+        run: |
+          cd archive/Aria2D.xcarchive/Products/Applications/
+          codesign --deep --force --timestamp --sign '${{ secrets.SIGN_NAME }}' *.app
+
+          ditto -c -k --sequesterRsrc --keepParent *.app Aria2D.zip
+          ditto -c -k --sequesterRsrc --keepParent ../../dSYMs dSYMs.zip
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        with:
+          name: archive
+          path: |
+            archive/Aria2D.xcarchive/Products/Applications/Aria2D.zip
+            archive/Aria2D.xcarchive/Products/Applications/dSYMs.zip
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          files: |
+            archive/Aria2D.xcarchive/Products/Applications/Aria2D.zip
+
+      - name: Update Appcast
+        shell: zsh {0}
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cp archive/Aria2D.xcarchive/Products/Applications/Aria2D.zip AppUpdaterAppcasts/Aria2D/
+          Sparkle/bin/generate_appcast AppUpdaterAppcasts/Aria2D -s ${{ secrets.SUPRIVATEEDKEY }}
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          cd AppUpdaterAppcasts
+          git add -A
+          git commit -m "Aria2D"
+          git push https://${{ secrets.PAT }}@github.com/xjbeta/AppUpdaterAppcasts.git
