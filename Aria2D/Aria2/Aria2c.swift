@@ -40,28 +40,28 @@ class Aria2c: NSObject {
     }()
     
     var aria2cArgs: [String] {
-        get {
-            let confPath = Preferences.shared.aria2cOptions.path(for: .aria2cConf)
-            let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
-            
-            guard FileManager.default.fileExists(atPath: aria2cPath),
-                  FileManager.default.isExecutableFile(atPath: aria2cPath),
-                  FileManager.default.fileExists(atPath: confPath) else {
-                return []
-            }
-            
-            var args = ["--conf-path=\(confPath)"]
-            
-            // save session
-            args.append("--input-file=\(sessionPath)")
-            args.append("--save-session=\(sessionPath)")
-            
-            // log
-            args.append("--log-level=notice")
-            args.append("--log=\(logPath)")
-            
-            return args
+        aria2cArgs(aria2cPath: Preferences.shared.aria2cOptions.path(for: .aria2c))
+    }
+    
+    func aria2cArgs(aria2cPath: String) -> [String] {
+        let confPath = Preferences.shared.aria2cOptions.path(for: .aria2cConf)
+        
+        guard FileManager.default.isExecutableFile(atPath: aria2cPath),
+              FileManager.default.fileExists(atPath: confPath) else {
+            return []
         }
+        
+        var args = ["--conf-path=\(confPath)"]
+        
+        // save session
+        args.append("--input-file=\(sessionPath)")
+        args.append("--save-session=\(sessionPath)")
+        
+        // log
+        args.append("--log-level=notice")
+        args.append("--log=\(logPath)")
+        
+        return args
     }
     
     func argsDisplay() -> String {
@@ -118,10 +118,57 @@ class Aria2c: NSObject {
 	}
     
     func aria2cPaths() async -> [String] {
-        await MainActor.run {
-            let outText = Process.run(["/usr/bin/which", "aria2c"], wait: true).outText
-            return outText?.components(separatedBy: "\n").filter({ $0 != "" }) ?? []
+        var paths = [String]()
+        if let p = await zshWhichAria2c() {
+            paths.append(p)
         }
+        let outText = Process.run(["/usr/bin/which", "aria2c"], wait: true).outText
+        paths += outText?.components(separatedBy: "\n").filter({ $0 != "" }) ?? []
+        var seen = Set<String>()
+        return paths.filter { seen.insert($0).inserted }
+    }
+    
+    // use login+interactive zsh to read the user PATH (GUI app PATH lacks Homebrew)
+    private func zshWhichAria2c(timeout: TimeInterval = 5) async -> String? {
+        await withCheckedContinuation { continuation in
+            DispatchQueue.global().async {
+                let process = Process()
+                process.executableURL = URL(fileURLWithPath: "/bin/zsh")
+                process.arguments = ["-lic", "whence -p aria2c 2>/dev/null"]
+                let pipe = Pipe()
+                process.standardOutput = pipe
+                process.standardError = pipe
+                process.launch()
+                
+                // avoid blocking on slow rc files
+                DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
+                    if process.isRunning { process.terminate() }
+                }
+                
+                process.waitUntilExit()
+                
+                let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                let line = String(data: data, encoding: .utf8)?
+                    .split(separator: "\n").map(String.init)
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { !$0.isEmpty }
+                    .last
+                continuation.resume(returning: line)
+            }
+        }
+    }
+
+    // custom path first, then zsh, then default Homebrew locations
+    func resolveAria2cPath() async -> String? {
+        let custom = Preferences.shared.aria2cOptions.path(for: .aria2c)
+        if !custom.isEmpty, FileManager.default.isExecutableFile(atPath: custom) {
+            return custom
+        }
+        if let p = await zshWhichAria2c() {
+            return p
+        }
+        return ["/opt/homebrew/bin/aria2c", "/usr/local/bin/aria2c"]
+            .first(where: { FileManager.default.isExecutableFile(atPath: $0) })
     }
     
     func checkCustomPath() async -> Bool {
@@ -161,8 +208,8 @@ class Aria2c: NSObject {
         Preferences.shared.aria2cOptions.resetLastConf()
         deleteAria2cLogFile()
         
-        let args = aria2cArgs
-        let aria2cPath = Preferences.shared.aria2cOptions.path(for: .aria2c)
+        guard let aria2cPath = await resolveAria2cPath() else { return }
+        let args = aria2cArgs(aria2cPath: aria2cPath)
         guard args.count > 0 else { return }
         
         do {
@@ -177,16 +224,18 @@ class Aria2c: NSObject {
         Process.run(["/bin/launchctl", "bootstrap", "gui/\(getuid())", launchAgentPlistURL.path], wait: true)
 	}
 	
-    // launchctl list prints "PID  Status  Label"
+    // launchctl print prints "pid = 1234" for a running service
     func aria2cPid() async -> [String] {
         await MainActor.run {
-            let outText = Process.run(["/bin/launchctl", "list", launchAgentLabel], wait: true).outText
-            guard let line = outText?
+            let outText = Process.run(["/bin/launchctl", "print", "gui/\(getuid())/\(launchAgentLabel)"], wait: true).outText
+            guard let outText = outText else { return [] }
+            let pid = outText
                 .split(separator: "\n")
-                .map(String.init)
-                .dropFirst(1).first else { return [] }
-            let pid = line.split(separator: "\t").map(String.init).first ?? ""
-            return (pid == "-" || pid.isEmpty) ? [] : [pid]
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                .first(where: { $0.hasPrefix("pid = ") })?
+                .dropFirst("pid = ".count)
+            guard let pid, !pid.isEmpty else { return [] }
+            return [String(pid)]
         }
     }
 	
