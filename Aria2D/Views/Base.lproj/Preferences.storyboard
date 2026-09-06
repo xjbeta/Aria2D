@@ -190,20 +190,42 @@
                                                         <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="KfJ-Rh-zzl">
                                                             <rect key="frame" x="0.0" y="808" width="580" height="68"/>
                                                             <rows>
+                                                                <gridRow yPlacement="center" id="MB7-m0-30r"/>
                                                                 <gridRow id="rBN-AZ-Pmu"/>
                                                                 <gridRow id="X8U-pV-S40"/>
-                                                                <gridRow id="XcJ-pe-2lL"/>
                                                             </rows>
                                                             <columns>
                                                                 <gridColumn width="200" id="iDQ-y8-eAs"/>
                                                                 <gridColumn id="4hX-nU-CIr"/>
                                                             </columns>
                                                             <gridCells>
+                                                                <gridCell row="MB7-m0-30r" column="iDQ-y8-eAs" xPlacement="trailing" id="uku-HB-dF2">
+                                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aFT-rC-tpk">
+                                                                        <rect key="frame" x="155" y="48" width="47" height="16"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Aria2c:" id="WUy-cW-PtV">
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                    </textField>
+                                                                </gridCell>
+                                                                <gridCell row="MB7-m0-30r" column="4hX-nU-CIr" id="Xir-D4-8hE">
+                                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IWX-WM-BTa">
+                                                                        <rect key="frame" x="206" y="44" width="115" height="24"/>
+                                                                        <buttonCell key="cell" type="push" title="Process Status" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i22-gD-QWA">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <segue destination="g0A-d6-g4h" kind="sheet" id="moN-T6-Nrc"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </gridCell>
                                                                 <gridCell row="rBN-AZ-Pmu" column="iDQ-y8-eAs" id="kCu-6d-L06"/>
                                                                 <gridCell row="rBN-AZ-Pmu" column="4hX-nU-CIr" id="qtl-aZ-0zJ">
                                                                     <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="i1f-QI-DbE">
-                                                                        <rect key="frame" x="206" y="52" width="298" height="16"/>
-                                                                        <buttonCell key="cell" type="check" title="Auto start Aria2 server when Aria2D launched" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jf8-bH-Qb6">
+                                                                        <rect key="frame" x="206" y="22" width="298" height="16"/>
+                                                                        <buttonCell key="cell" type="check" title="Auto start Aria2 with Aria2D" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jf8-bH-Qb6">
                                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
@@ -215,26 +237,13 @@
                                                                 <gridCell row="X8U-pV-S40" column="iDQ-y8-eAs" id="VSq-u8-i7J"/>
                                                                 <gridCell row="X8U-pV-S40" column="4hX-nU-CIr" id="0eR-cd-hmO">
                                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ox4-ED-TC9">
-                                                                        <rect key="frame" x="206" y="30" width="291" height="16"/>
-                                                                        <buttonCell key="cell" type="check" title="Auto stop Aria2 server when Aria2D terminal" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8el-oo-BAO">
+                                                                        <rect key="frame" x="206" y="0.0" width="189" height="16"/>
+                                                                        <buttonCell key="cell" type="check" title="Auto stop Aria2 with Aria2D" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8el-oo-BAO">
                                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
                                                                         <connections>
                                                                             <binding destination="xiB-C0-9WI" name="value" keyPath="self.autoStopAria2c" id="jzt-er-SVj"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </gridCell>
-                                                                <gridCell row="XcJ-pe-2lL" column="iDQ-y8-eAs" id="jcs-Ww-9pp"/>
-                                                                <gridCell row="XcJ-pe-2lL" column="4hX-nU-CIr" id="BHn-d1-BJx">
-                                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IWX-WM-BTa">
-                                                                        <rect key="frame" x="206" y="0.0" width="156" height="24"/>
-                                                                        <buttonCell key="cell" type="push" title="Aria2c process status" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i22-gD-QWA">
-                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                            <font key="font" metaFont="system"/>
-                                                                        </buttonCell>
-                                                                        <connections>
-                                                                            <segue destination="g0A-d6-g4h" kind="sheet" id="moN-T6-Nrc"/>
                                                                         </connections>
                                                                     </button>
                                                                 </gridCell>
@@ -877,7 +886,7 @@
                                     <rect key="frame" x="-100" y="-100" width="603" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.086153846153846136" horizontal="NO" id="UbQ-ai-QWx">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="UbQ-ai-QWx">
                                     <rect key="frame" x="603" y="0.0" width="17" height="600"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
