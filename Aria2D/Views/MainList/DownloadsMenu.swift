@@ -10,6 +10,16 @@ import Cocoa
 
 class DownloadsMenu: NSMenu, NSMenuItemValidation {
 
+	// NSMenu initializers are nonisolated; match their isolation explicitly
+	// while the rest of the class stays MainActor-isolated by default.
+	nonisolated override init(title: String) {
+		super.init(title: title)
+	}
+
+	nonisolated required init(coder: NSCoder) {
+		super.init(coder: coder)
+	}
+
 	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		let selectedRow = ViewControllersManager.shared.selectedRow
 		let selectedObjects = ViewControllersManager.shared.selectedObjects

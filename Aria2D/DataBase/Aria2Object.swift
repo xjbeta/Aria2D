@@ -193,7 +193,7 @@ final class Aria2Object: NSObject, TableCodable {
     }
     
     
-    override public class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
+    nonisolated override public class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
         switch key {
         case "hideErrorInfo":
             return Set(["errorCode"])

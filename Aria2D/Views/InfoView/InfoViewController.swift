@@ -34,7 +34,7 @@ class InfoViewController: NSViewController {
                     Int($0.index)
                 }.sorted()
                 var newValue: [Int] = []
-                func addSelectedIndex(_ nodes: [FileNode]) {
+                @MainActor func addSelectedIndex(_ nodes: [FileNode]) {
                     nodes.forEach {
                         if $0.isLeaf {
                             if $0.selected {
