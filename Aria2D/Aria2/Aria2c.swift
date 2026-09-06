@@ -77,11 +77,15 @@ class Aria2c: NSObject {
     }
     
     func writeLaunchAgentPlist(aria2cPath: String, args: [String]) throws {
+        // Raise the fd limit above the launchd default (256) so that RPC
+        // clients piling up connections cannot exhaust the process.
         let plist: [String: Any] = [
             "Label": launchAgentLabel,
             "ProgramArguments": [aria2cPath] + args,
             "WorkingDirectory": supportPath.path,
             "RunAtLoad": true,
+            "SoftResourceLimits": ["NumberOfFiles": 2048],
+            "HardResourceLimits": ["NumberOfFiles": 2048],
         ]
         let data = try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: 0)
         try FileManager.default.createDirectory(at: launchAgentPlistURL.deletingLastPathComponent(),
