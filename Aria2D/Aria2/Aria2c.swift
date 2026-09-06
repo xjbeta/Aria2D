@@ -107,7 +107,7 @@ class Aria2c: NSObject {
             Log("Aria2c did started, do nothing.")
         case 1...:
             Log("More than 1 process, kill all and restart.")
-            await killAria2c()
+            await stopAria2c()
             await startAria2()
         default:
             Log("Unknown aria2c status, do nothing.")
@@ -116,8 +116,8 @@ class Aria2c: NSObject {
     }
     
 	func autoClose() async {
-		guard !Preferences.shared.autoStartAria2c else { return }
-        await killAria2c()
+		guard Preferences.shared.autoStopAria2c || !Preferences.shared.autoStartAria2c else { return }
+        await stopAria2c()
         Log("killed aria2c.")
 	}
     
@@ -244,7 +244,7 @@ class Aria2c: NSObject {
     }
 	
 	// launchctl bootout gui/uid/label
-    func killAria2c() async {
+    func stopAria2c() async {
         deleteAria2cLogFile()
         Process.run(["/bin/launchctl", "bootout", "gui/\(getuid())/\(launchAgentLabel)"], wait: true)
 	}

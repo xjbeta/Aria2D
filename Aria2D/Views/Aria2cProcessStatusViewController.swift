@@ -27,7 +27,7 @@ class Aria2cProcessStatusViewController: NSViewController {
             let pids = await Aria2.shared.aria2c.aria2cPid()
             if pids.count > 0 {
                 action = "Stop"
-                await Aria2.shared.aria2c.killAria2c()
+                await Aria2.shared.aria2c.stopAria2c()
             } else {
                 action = "Start"
                 await Aria2.shared.aria2c.startAria2()

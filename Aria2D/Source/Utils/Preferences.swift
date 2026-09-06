@@ -168,6 +168,16 @@ final class Preferences: NSObject, Sendable {
 		}
 	}
 	
+	// quit app and stop aria2c regardless of autoStartAria2c
+	var autoStopAria2c: Bool {
+		get {
+			return defaults(.autoStopAria2c) as? Bool ?? false
+		}
+		set {
+			defaultsSet(newValue, forKey: .autoStopAria2c)
+		}
+	}
+	
 	var aria2cOptions: Aria2cOptions {
 		get {
 			if let data = defaults(.aria2cOptions) as? Data,

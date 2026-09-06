@@ -21,6 +21,15 @@ class Aria2OptionsViewController: NSViewController, NSMenuDelegate {
         }
     }
     
+    @objc var autoStopAria2c: Bool {
+        get {
+            return Preferences.shared.autoStopAria2c
+        }
+        set {
+            Preferences.shared.autoStopAria2c = newValue
+        }
+    }
+    
     
 // MARK: - Aria2 paths And save interval
 
