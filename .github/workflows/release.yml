@@ -12,6 +12,8 @@ jobs:
     steps:
 
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - uses: irgaly/xcode-cache@v1
         with:
