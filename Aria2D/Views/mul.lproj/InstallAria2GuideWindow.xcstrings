@@ -1,0 +1,204 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "61x-hZ-wWs.title" : {
+      "comment" : "Class = \"NSWindow\"; title = \"Window\"; ObjectID = \"61x-hZ-wWs\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Window"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Window"
+          }
+        }
+      }
+    },
+    "ABW-71-gau.label" : {
+      "comment" : "Class = \"NSTabViewItem\"; label = \"Item 2\"; ObjectID = \"ABW-71-gau\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Item 2"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Item 2"
+          }
+        }
+      }
+    },
+    "bcM-dR-6Di.label" : {
+      "comment" : "Class = \"NSTabViewItem\"; label = \"View\"; ObjectID = \"bcM-dR-6Di\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "View"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View"
+          }
+        }
+      }
+    },
+    "My8-Fh-PJ0.label" : {
+      "comment" : "Class = \"NSTabViewItem\"; label = \"Tab\"; ObjectID = \"My8-Fh-PJ0\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tab"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tab"
+          }
+        }
+      }
+    },
+    "OfZ-E7-XNv.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"brew install aria2\"; ObjectID = \"OfZ-E7-XNv\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "brew install aria2"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "brew install aria2"
+          }
+        }
+      }
+    },
+    "Q35-57-5lN.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Open Terminal\"; ObjectID = \"Q35-57-5lN\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open Terminal"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "打开终端"
+          }
+        }
+      }
+    },
+    "r1O-by-SIF.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Install aria2 with:\"; ObjectID = \"r1O-by-SIF\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Install aria2 with:"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "安装 aria2 的方式："
+          }
+        }
+      }
+    },
+    "RBx-6B-pqi.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"A dmg file\"; ObjectID = \"RBx-6B-pqi\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A dmg file"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "dmg 文件"
+          }
+        }
+      }
+    },
+    "wpc-gB-m6Y.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"aria2 official website\"; ObjectID = \"wpc-gB-m6Y\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "aria2 official website"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "aria2 官方网站"
+          }
+        }
+      }
+    },
+    "wY2-Sq-2uz.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"How to install aria2 with a dmg file?\"; ObjectID = \"wY2-Sq-2uz\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "How to install aria2 with a dmg file?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "如何通过 dmg 文件安装 aria2？"
+          }
+        }
+      }
+    },
+    "Zhv-JJ-JgU.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"HomeBrew\"; ObjectID = \"Zhv-JJ-JgU\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HomeBrew"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HomeBrew"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.3"
+}

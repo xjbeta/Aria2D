@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gny-Ry-EkF">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gny-Ry-EkF">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24412"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25098"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -184,38 +184,35 @@
                                             <rect key="frame" x="0.0" y="-88107" width="620" height="925"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LPP-R0-hRN">
-                                                    <rect key="frame" x="20" y="3" width="580" height="894"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LPP-R0-hRN">
+                                                    <rect key="frame" x="20" y="10" width="580" height="876"/>
                                                     <subviews>
                                                         <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="KfJ-Rh-zzl">
-                                                            <rect key="frame" x="0.0" y="848" width="580" height="46"/>
+                                                            <rect key="frame" x="0.0" y="808" width="580" height="68"/>
                                                             <rows>
+                                                                <gridRow yPlacement="center" id="MB7-m0-30r"/>
                                                                 <gridRow id="rBN-AZ-Pmu"/>
-                                                                <gridRow id="XcJ-pe-2lL"/>
+                                                                <gridRow id="X8U-pV-S40"/>
                                                             </rows>
                                                             <columns>
                                                                 <gridColumn width="200" id="iDQ-y8-eAs"/>
                                                                 <gridColumn id="4hX-nU-CIr"/>
                                                             </columns>
                                                             <gridCells>
-                                                                <gridCell row="rBN-AZ-Pmu" column="iDQ-y8-eAs" id="kCu-6d-L06"/>
-                                                                <gridCell row="rBN-AZ-Pmu" column="4hX-nU-CIr" id="qtl-aZ-0zJ">
-                                                                    <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="i1f-QI-DbE">
-                                                                        <rect key="frame" x="206" y="30" width="298" height="16"/>
-                                                                        <buttonCell key="cell" type="check" title="Auto start Aria2 server when Aria2D launched" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jf8-bH-Qb6">
-                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                            <font key="font" metaFont="system"/>
-                                                                        </buttonCell>
-                                                                        <connections>
-                                                                            <binding destination="xiB-C0-9WI" name="value" keyPath="self.autoStartAria2c" id="ZKN-pb-cDz"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                <gridCell row="MB7-m0-30r" column="iDQ-y8-eAs" xPlacement="trailing" id="uku-HB-dF2">
+                                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aFT-rC-tpk">
+                                                                        <rect key="frame" x="155" y="48" width="47" height="16"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Aria2c:" id="WUy-cW-PtV">
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                    </textField>
                                                                 </gridCell>
-                                                                <gridCell row="XcJ-pe-2lL" column="iDQ-y8-eAs" id="jcs-Ww-9pp"/>
-                                                                <gridCell row="XcJ-pe-2lL" column="4hX-nU-CIr" id="BHn-d1-BJx">
+                                                                <gridCell row="MB7-m0-30r" column="4hX-nU-CIr" id="Xir-D4-8hE">
                                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IWX-WM-BTa">
-                                                                        <rect key="frame" x="206" y="0.0" width="156" height="24"/>
-                                                                        <buttonCell key="cell" type="push" title="Aria2c process status" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i22-gD-QWA">
+                                                                        <rect key="frame" x="206" y="44" width="115" height="24"/>
+                                                                        <buttonCell key="cell" type="push" title="Process Status" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i22-gD-QWA">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
@@ -224,13 +221,39 @@
                                                                         </connections>
                                                                     </button>
                                                                 </gridCell>
+                                                                <gridCell row="rBN-AZ-Pmu" column="iDQ-y8-eAs" id="kCu-6d-L06"/>
+                                                                <gridCell row="rBN-AZ-Pmu" column="4hX-nU-CIr" id="qtl-aZ-0zJ">
+                                                                    <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="i1f-QI-DbE">
+                                                                        <rect key="frame" x="206" y="22" width="298" height="16"/>
+                                                                        <buttonCell key="cell" type="check" title="Auto start Aria2 with Aria2D" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jf8-bH-Qb6">
+                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <binding destination="xiB-C0-9WI" name="value" keyPath="self.autoStartAria2c" id="ZKN-pb-cDz"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </gridCell>
+                                                                <gridCell row="X8U-pV-S40" column="iDQ-y8-eAs" id="VSq-u8-i7J"/>
+                                                                <gridCell row="X8U-pV-S40" column="4hX-nU-CIr" id="0eR-cd-hmO">
+                                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ox4-ED-TC9">
+                                                                        <rect key="frame" x="206" y="0.0" width="189" height="16"/>
+                                                                        <buttonCell key="cell" type="check" title="Auto stop Aria2 with Aria2D" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8el-oo-BAO">
+                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <binding destination="xiB-C0-9WI" name="value" keyPath="self.autoStopAria2c" id="jzt-er-SVj"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </gridCell>
                                                             </gridCells>
                                                         </gridView>
                                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="gmw-d9-tTg">
-                                                            <rect key="frame" x="0.0" y="820" width="580" height="5"/>
+                                                            <rect key="frame" x="0.0" y="785" width="580" height="5"/>
                                                         </box>
                                                         <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="l2f-bD-PGX">
-                                                            <rect key="frame" x="0.0" y="699" width="580" height="98"/>
+                                                            <rect key="frame" x="0.0" y="669" width="580" height="98"/>
                                                             <rows>
                                                                 <gridRow id="Jil-e0-fPg"/>
                                                                 <gridRow id="B1I-bc-s2g"/>
@@ -401,10 +424,10 @@
                                                             </gridCells>
                                                         </gridView>
                                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ihW-Da-PZl">
-                                                            <rect key="frame" x="0.0" y="671" width="580" height="5"/>
+                                                            <rect key="frame" x="0.0" y="646" width="580" height="5"/>
                                                         </box>
                                                         <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="cGV-eY-1WV">
-                                                            <rect key="frame" x="0.0" y="550" width="580" height="98"/>
+                                                            <rect key="frame" x="0.0" y="530" width="580" height="98"/>
                                                             <rows>
                                                                 <gridRow id="rUt-6J-8PH"/>
                                                                 <gridRow id="CHl-TV-MUY"/>
@@ -526,10 +549,10 @@
                                                             </gridCells>
                                                         </gridView>
                                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fHU-Oo-a9r">
-                                                            <rect key="frame" x="0.0" y="522" width="580" height="5"/>
+                                                            <rect key="frame" x="0.0" y="507" width="580" height="5"/>
                                                         </box>
                                                         <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="VZO-mw-aeJ">
-                                                            <rect key="frame" x="0.0" y="327" width="552" height="172"/>
+                                                            <rect key="frame" x="0.0" y="317" width="552" height="172"/>
                                                             <rows>
                                                                 <gridRow id="1fm-nb-1eC"/>
                                                                 <gridRow id="xqc-KY-Tqm"/>
@@ -707,7 +730,7 @@
                                                             </gridCells>
                                                         </gridView>
                                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="m62-4Y-uuE">
-                                                            <rect key="frame" x="0.0" y="299" width="580" height="5"/>
+                                                            <rect key="frame" x="0.0" y="294" width="580" height="5"/>
                                                         </box>
                                                         <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="N5s-Nb-C0h">
                                                             <rect key="frame" x="0.0" y="0.0" width="506" height="276"/>

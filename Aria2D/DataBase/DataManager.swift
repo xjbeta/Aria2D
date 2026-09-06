@@ -181,24 +181,36 @@ final class DataManager: NSObject, Sendable {
     }
     
     func sortAllObjects(_ gidsDic: [[String: String]]) throws {
-        let gids = gidsDic.compactMap({ $0["gid"]})
+        let gids = gidsDic.compactMap({ $0["gid"] })
         try deleteMissingAria2Objects(gids)
         addMissingObjects(gids)
         
+        // only refresh ordering for tasks whose status actually changed,
+        // keeps the table from re-sorting on every poll
+        let current = try aria2ObjectTable.getObjects(
+            where: Aria2Object.Properties.gid.in(gids))
+        var statusDic: [String: String] = [:]
+        current.forEach { statusDic[$0.gid] = $0.status }
+        
+        var changedGids: [String] = []
         try database.run(transaction: { _ in
             try gidsDic.forEach { dic in
                 guard let gid = dic["gid"] else { return }
+                let status = dic["status"] ?? Status.error.rawValue
+                guard statusDic[gid] != status else { return }
+                changedGids.append(gid)
                 try self.aria2ObjectTable.update(on: [
                     Aria2Object.Properties.status,
                     Aria2Object.Properties.sortDate
                 ], with: [
-                    dic["status"] ?? Status.error.rawValue,
+                    status,
                     Double(Date().timeIntervalSince1970)
                 ], where: Aria2Object.Properties.gid == gid)
             }
         })
         
-        notifyObservers(.init(tableName: .aria2Object, changeType: .update(gids)))
+        guard changedGids.count > 0 else { return }
+        notifyObservers(.init(tableName: .aria2Object, changeType: .update(changedGids)))
     }
     
     func updateStatus(_ results: [Aria2Status]) throws {

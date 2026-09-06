@@ -1,0 +1,114 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "228-5s-jr9.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Copyright\"; ObjectID = \"228-5s-jr9\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Copyright"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "版权"
+          }
+        }
+      }
+    },
+    "H8M-jL-hXN.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Version\"; ObjectID = \"H8M-jL-hXN\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版本"
+          }
+        }
+      }
+    },
+    "tLg-En-W6a.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Acknowledgements\"; ObjectID = \"tLg-En-W6a\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Acknowledgements"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "致谢"
+          }
+        }
+      }
+    },
+    "VqN-Te-2Nk.title" : {
+      "comment" : "Class = \"NSBox\"; title = \"Box\"; ObjectID = \"VqN-Te-2Nk\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Box"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Box"
+          }
+        }
+      }
+    },
+    "W9Z-AQ-F4D.title" : {
+      "comment" : "Class = \"NSWindow\"; title = \"About Aria2D\"; ObjectID = \"W9Z-AQ-F4D\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "About Aria2D"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于 Aria2D"
+          }
+        }
+      }
+    },
+    "XX3-0Z-XT8.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Aria2D\"; ObjectID = \"XX3-0Z-XT8\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Aria2D"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aria2D"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.3"
+}

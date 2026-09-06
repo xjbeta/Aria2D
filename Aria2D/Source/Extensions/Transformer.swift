@@ -11,7 +11,7 @@ import JavaScriptCore
 
 // Int <-> NsNumber
 @objc(IntToNumberTransformer)
-class IntToNumberTransformer: ValueTransformer {
+nonisolated class IntToNumberTransformer: ValueTransformer {
 	override func transformedValue(_ value: Any?) -> Any? {
 		if let i = value as? Int {
 			return NSNumber(value: i)
@@ -29,7 +29,7 @@ class IntToNumberTransformer: ValueTransformer {
 }
 
 @objc(StringToNSStringTransformer)
-class StringToNSStringTransformer: ValueTransformer {
+nonisolated class StringToNSStringTransformer: ValueTransformer {
 	override func transformedValue(_ value: Any?) -> Any? {
 		return value as? NSString ?? ""
 	}
@@ -39,7 +39,7 @@ class StringToNSStringTransformer: ValueTransformer {
 }
 
 @objc(Int64ToByteSpeedTransformer)
-class Int64ToByteSpeedTransformer: ValueTransformer {
+nonisolated class Int64ToByteSpeedTransformer: ValueTransformer {
     override func transformedValue(_ value: Any?) -> Any? {
         if let value = value as? Int64 {
             return "\(value.ByteFileFormatter())/s"
@@ -49,7 +49,7 @@ class Int64ToByteSpeedTransformer: ValueTransformer {
 }
 
 @objc(PeerIDDecode)
-class PeerIDDecode: ValueTransformer {
+nonisolated class PeerIDDecode: ValueTransformer {
     override func transformedValue(_ value: Any?) -> Any? {
         if let value = value as? String {
             if let context = JSContext() {
@@ -62,7 +62,7 @@ class PeerIDDecode: ValueTransformer {
 }
 
 @objc(SaveIntervalTransformer)
-class SaveIntervalTransformer: ValueTransformer {
+nonisolated class SaveIntervalTransformer: ValueTransformer {
     override func transformedValue(_ value: Any?) -> Any? {
         guard let value = value as? Int else {
             return ""

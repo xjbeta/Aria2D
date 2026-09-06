@@ -10,8 +10,12 @@ import Cocoa
 
 @MainActor
 class NSTableViewPopoverSegue: NSStoryboardSegue {
-    override func perform() {
+	nonisolated override init(identifier: NSStoryboardSegue.Identifier, source: Any, destination: Any) {
+		super.init(identifier: identifier, source: source, destination: destination)
+	}
 
-    }
+	nonisolated override func perform() {
+
+	}
 	
 }

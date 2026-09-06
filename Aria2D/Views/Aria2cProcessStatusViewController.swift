@@ -27,9 +27,7 @@ class Aria2cProcessStatusViewController: NSViewController {
             let pids = await Aria2.shared.aria2c.aria2cPid()
             if pids.count > 0 {
                 action = "Stop"
-                for pid in pids {
-                    try? await Aria2.shared.aria2c.killProcess(pid)
-                }
+                await Aria2.shared.aria2c.stopAria2c()
             } else {
                 action = "Start"
                 await Aria2.shared.aria2c.startAria2()
@@ -79,10 +77,7 @@ class Aria2cProcessStatusViewController: NSViewController {
     }
     
     func initArgsTextView() {
-        // Args TextView
-        var aria2cArgs = Aria2.shared.aria2c.aria2cArgs
-        aria2cArgs.insert(Preferences.shared.aria2cOptions.path(for: .aria2c), at: 0)
-        argsTextView.string = aria2cArgs.joined(separator: " ")
+        argsTextView.string = Aria2.shared.aria2c.argsDisplay()
     }
     
     func updateLaunchButton() {
